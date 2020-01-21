@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen;
+package ru.stqa.pft.itgen.tests.in_devel;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
