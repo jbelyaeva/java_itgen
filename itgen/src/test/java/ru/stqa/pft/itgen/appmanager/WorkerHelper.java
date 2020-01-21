@@ -20,9 +20,7 @@ public class WorkerHelper extends HelperBase {
     type(By.name("user-lastName"), workerData.getLastname());
     type(By.name("user-email"), workerData.getEmail());
     type(By.name("user-phone"), workerData.getPhone());
-//    click(By.name("role")); //без этого тоже работает
-    new Select(wd.findElement(By.name("role"))).selectByVisibleText(workerData.getRole());
-//    click(By.name("role")); //без этого тоже работает
+    dropDownList(By.name("role"), workerData.getRole());
   }
 
   public void addWorker() {

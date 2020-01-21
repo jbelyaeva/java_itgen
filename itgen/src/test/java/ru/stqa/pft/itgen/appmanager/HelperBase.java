@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
 
@@ -40,5 +42,14 @@ public class HelperBase {
     } catch (NoSuchElementException ex) {
       return false;
     }
+  }
+
+  protected void dropDownList(By locator, String gender) {
+    new Select(wd.findElement(locator)).selectByVisibleText(gender);
+  }
+
+  protected void enterADate(String date) {
+    Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
+    builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
   }
 }

@@ -2,8 +2,6 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.itgen.model.StudentData;
 
 public class StudentHelper extends HelperBase {
@@ -12,7 +10,7 @@ public class StudentHelper extends HelperBase {
     super(wd);
   }
 
-  public void createFamaly() {
+  public void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
@@ -24,16 +22,15 @@ public class StudentHelper extends HelperBase {
     type(By.name("profile-firstName"), studentData.getFirsname());
     type(By.name("profile-lastName"), studentData.getLastname());
     click(By.id("profile-gender"));
-    new Select(wd.findElement(By.id("profile-gender"))).selectByVisibleText(studentData.getGender());
-    Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
-    click(By.name("profile-birthday")); // клик по нужному элементу
-    builder.sendKeys(studentData.getBirthday()).perform(); // исполнить нужную последовательность действий
+    dropDownList(By.id("profile-gender"), studentData.getGender());
+    click(By.name("profile-birthday")); // клик по полю ввода даты
+    enterADate(studentData.getBirthday());
     click(By.name("profile-city"));
-    new Select(wd.findElement(By.id("profile-country"))).selectByVisibleText(studentData.getCountry());
+    dropDownList(By.id("profile-country"), studentData.getCountry());
     click(By.id("profile-country"));
     type(By.name("profile-city"), studentData.getSity());
     click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Страна'])[1]/following::div[1]"));
-    new Select(wd.findElement(By.id("profile-timezone"))).selectByVisibleText(studentData.getTimezone());
+    dropDownList(By.id("profile-timezone"), studentData.getTimezone());
     click(By.id("profile-timezone"));
     type(By.name("profile-contact-phone"), studentData.getPhone());
     type(By.name("profile-contact-skype"), studentData.getSkype());
@@ -47,7 +44,6 @@ public class StudentHelper extends HelperBase {
     type(By.name("profile-contact-ok"), studentData.getOk());
     type(By.name("profile-contact-instagram"), studentData.getInst());
   }
-
   public void submitFamalyCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
   }
