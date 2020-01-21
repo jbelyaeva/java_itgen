@@ -6,7 +6,7 @@ public class StudentData {
   private final String gender;
   private final String birthday;
   private final String country;
-  private final String sity;
+  private final String city;
   private final String timezone;
   private final String phone;
   private final String skype;
@@ -19,13 +19,13 @@ public class StudentData {
   private final String ok;
   private final String inst;
 
-  public StudentData(String firsname, String lastname, String gender, String birthday, String country, String sity, String timezone, String phone, String skype, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst) {
+  public StudentData(String firsname, String lastname, String gender, String birthday, String country, String city, String timezone, String phone, String skype, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst) {
     this.firsname = firsname;
     this.lastname = lastname;
     this.gender = gender;
     this.birthday = birthday;
     this.country = country;
-    this.sity = sity;
+    this.city = city;
     this.timezone = timezone;
     this.phone = phone;
     this.skype = skype;
@@ -59,8 +59,8 @@ public class StudentData {
     return country;
   }
 
-  public String getSity() {
-    return sity;
+  public String getCity() {
+    return city;
   }
 
   public String getTimezone() {

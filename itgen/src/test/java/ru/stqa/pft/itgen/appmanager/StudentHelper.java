@@ -28,7 +28,7 @@ public class StudentHelper extends HelperBase {
     click(By.name("profile-city"));
     dropDownList(By.id("profile-country"), studentData.getCountry());
     click(By.id("profile-country"));
-    type(By.name("profile-city"), studentData.getSity());
+    type(By.name("profile-city"), studentData.getCity());
     click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Страна'])[1]/following::div[1]"));
     dropDownList(By.id("profile-timezone"), studentData.getTimezone());
     click(By.id("profile-timezone"));
@@ -44,6 +44,7 @@ public class StudentHelper extends HelperBase {
     type(By.name("profile-contact-ok"), studentData.getOk());
     type(By.name("profile-contact-instagram"), studentData.getInst());
   }
+
   public void submitFamalyCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
   }
