@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   public WebDriver wd;
 
-  private AdminHelper adminHelper;
+  private StudentHelper studentHelper;
+  private WorkerHelper workerHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private String browser;
@@ -35,9 +36,10 @@ public class ApplicationManager {
 
    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
    wd.get("https://test3.portal.itgen.io/login");
-   adminHelper = new AdminHelper(wd);
-   sessionHelper=new SessionHelper(wd);
+   workerHelper = new WorkerHelper(wd);
+   sessionHelper = new SessionHelper(wd);
    navigationHelper = new NavigationHelper(wd);
+   studentHelper = new StudentHelper(wd);
    sessionHelper.login("admin", "111111");
    }
 
@@ -54,11 +56,15 @@ public class ApplicationManager {
     }
   }
 
-  public AdminHelper getAdminHelper() {
-    return adminHelper;
+  public WorkerHelper getWorkerHelper() {
+    return workerHelper;
   }
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public StudentHelper getStudentHelper() {
+    return studentHelper;
   }
 }

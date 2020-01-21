@@ -1,13 +1,13 @@
 package ru.stqa.pft.itgen.model;
 
-public class AdminData {
+public class WorkerData {
   private final String lastname;
   private final String email;
   private final String phone;
   private final String role;
   private final String firstname;
 
-  public AdminData(String lastname, String email, String phone, String role, String firstname) {
+  public WorkerData(String lastname, String email, String phone, String role, String firstname) {
     this.lastname = lastname;
     this.email = email;
     this.phone = phone;
