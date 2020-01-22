@@ -9,7 +9,7 @@ public class WorkerCreationTests extends TestBase {
   public void testWorkerCreation() throws Exception {
     app.getNavigationHelper().gotoWorker();
     app.getWorkerHelper().addWorker();
-    app.getWorkerHelper().fillAdminForm(new WorkerData("0Иванов", "eee+" + Math.round(Math.random() * 10) + "@mail.ru", "1111111111111", "Администратор", "Иван"));
+    app.getWorkerHelper().fillWorkerForm(new WorkerData("0Иванов", "eee+" + Math.round(Math.random() * 10) + "@mail.ru", "1111111111111", "Администратор", "Иван"));
     app.getWorkerHelper().submitAdminCreation();
   }
 }

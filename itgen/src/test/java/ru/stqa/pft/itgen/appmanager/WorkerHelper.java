@@ -15,7 +15,7 @@ public class WorkerHelper extends HelperBase {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
   }
 
-  public void fillAdminForm(WorkerData workerData) {
+  public void fillWorkerForm(WorkerData workerData) {
     type(By.name("user-firstName"), workerData.getFirstname());
     type(By.name("user-lastName"), workerData.getLastname());
     type(By.name("user-email"), workerData.getEmail());
