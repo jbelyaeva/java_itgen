@@ -1,18 +1,23 @@
 package ru.stqa.pft.itgen.model;
 
 public class WorkerData {
+  private final String firstname;
   private final String lastname;
   private final String email;
   private final String phone;
   private final String role;
-  private final String firstname;
 
-  public WorkerData(String lastname, String email, String phone, String role, String firstname) {
+  public WorkerData(String firstname, String lastname, String email, String phone, String role) {
+
+    this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
     this.phone = phone;
     this.role = role;
-    this.firstname = firstname;
+  }
+
+  public String getFirstname() {
+    return firstname;
   }
 
   public String getLastname() {
@@ -31,7 +36,4 @@ public class WorkerData {
     return role;
   }
 
-  public String getFirstname() {
-    return firstname;
-  }
 }
