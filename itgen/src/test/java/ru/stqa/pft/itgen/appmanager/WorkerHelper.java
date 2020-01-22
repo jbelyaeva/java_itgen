@@ -2,7 +2,6 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 public class WorkerHelper extends HelperBase {
@@ -13,6 +12,7 @@ public class WorkerHelper extends HelperBase {
 
   public void submitAdminCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
+    click(By.linkText("Основное")); // проверка, что покинули страницу создания сотрудника
   }
 
   public void fillWorkerForm(WorkerData workerData) {
@@ -26,4 +26,5 @@ public class WorkerHelper extends HelperBase {
   public void addWorker() {
     click(By.linkText("Добавить сотрудника"));
   }
+
 }

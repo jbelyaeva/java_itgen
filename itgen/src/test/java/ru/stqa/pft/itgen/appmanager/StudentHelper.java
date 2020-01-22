@@ -48,4 +48,5 @@ public class StudentHelper extends HelperBase {
   public void submitFamalyCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
   }
+
 }
