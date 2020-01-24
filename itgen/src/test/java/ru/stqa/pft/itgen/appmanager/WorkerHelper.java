@@ -11,14 +11,11 @@ public class WorkerHelper extends HelperBase {
     super(wd);
   }
 
-  public void submitAdminCreation() {
+  public void submitWorkerCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-//    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a"))); // проверка перехода на др.страницу после нажатия на кнопку
-  }
-
-  private boolean areElementsPresent(By locator) {
-    return wd.findElements(locator).size() > 0;
+    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))); // проверка валидации email
+    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a"))); // проверка перехода на др.страницу после нажатия на кнопку
   }
 
   public void fillWorkerForm(WorkerData workerData) {
