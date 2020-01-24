@@ -28,4 +28,16 @@ public class WorkerHelper extends HelperBase {
     click(By.cssSelector("a.btn.btn-default"));
   }
 
+  public void selectedWorker() {
+    click(By.cssSelector("a.btn-link"));
+  }
+
+  public void deleteWorker() {
+    click(By.xpath("(//button[@type='button'])[2]"));
+  }
+
+  public void assertDeleteSelectedWorker() {
+    click(By.xpath("(//button[@type='button'])[6]"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
 }
