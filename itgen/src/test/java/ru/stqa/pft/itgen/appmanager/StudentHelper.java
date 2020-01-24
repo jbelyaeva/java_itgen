@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.stqa.pft.itgen.model.StudentData;
 
 public class StudentHelper extends HelperBase {
@@ -47,6 +48,7 @@ public class StudentHelper extends HelperBase {
 
   public void submitFamalyCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
 }
