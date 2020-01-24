@@ -60,7 +60,7 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//div[@class='links']//a[3]"));
   }
 
-  public void addParent() {
+  public void addParentInFamily() {
     click(By.cssSelector("div.gena-panel-btn.btn-add-parent > span.glyphicon.glyphicon-plus-sign"));
   }
 
@@ -84,5 +84,9 @@ public class StudentHelper extends HelperBase {
   public void submitParentCreation() {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family-member"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void addParent() {
+    click(By.xpath("//div[@id='__blaze-root']/div/div[2]/main/div/div/div[2]/div/div/button/span"));
   }
 }
