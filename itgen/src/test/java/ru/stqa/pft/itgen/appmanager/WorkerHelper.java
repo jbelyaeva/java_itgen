@@ -13,7 +13,8 @@ public class WorkerHelper extends HelperBase {
 
   public void submitAdminCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a")));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+//    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a"))); // проверка перехода на др.страницу после нажатия на кнопку
   }
 
   private boolean areElementsPresent(By locator) {
