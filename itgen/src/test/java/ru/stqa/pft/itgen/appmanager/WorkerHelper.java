@@ -27,7 +27,7 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void addWorker() {
-    click(By.linkText("Добавить сотрудника"));
+    click(By.cssSelector("a.btn.btn-default"));
   }
 
 }
