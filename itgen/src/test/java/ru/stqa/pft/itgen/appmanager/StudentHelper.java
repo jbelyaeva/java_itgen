@@ -57,7 +57,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void selectedFamily() {
-    click(By.xpath("//a[contains(@href, '/family/JKmDG4jR8J9kY86Rx')]"));
+    click(By.xpath("//div[@class='links']//a[3]"));
   }
 
   public void addParent() {
