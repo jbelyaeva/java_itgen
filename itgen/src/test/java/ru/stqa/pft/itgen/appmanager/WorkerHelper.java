@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 public class WorkerHelper extends HelperBase {
@@ -12,7 +13,11 @@ public class WorkerHelper extends HelperBase {
 
   public void submitAdminCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    click(By.linkText("Основное")); // проверка, что покинули страницу создания сотрудника
+    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a")));
+  }
+
+  private boolean areElementsPresent(By locator) {
+    return wd.findElements(locator).size() > 0;
   }
 
   public void fillWorkerForm(WorkerData workerData) {
