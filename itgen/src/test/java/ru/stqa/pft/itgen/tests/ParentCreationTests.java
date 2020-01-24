@@ -10,7 +10,7 @@ public class ParentCreationTests extends TestBase {
     app.getNavigationHelper().gotoStudents();
     app.getStudentHelper().selectedStudent();
     app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().addParent();
+    app.getStudentHelper().addParentInFamily();
     app.getStudentHelper().fillParentForm(new ParentData("Витя", "Витин", "111111111111", "skype", "009@test.ru", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telegram", "fb", "vk", "ok", "inst"));
     app.getStudentHelper().submitParentCreation();
   }
