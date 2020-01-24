@@ -3,6 +3,7 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
 public class StudentHelper extends HelperBase {
@@ -46,9 +47,42 @@ public class StudentHelper extends HelperBase {
     type(By.name("profile-contact-instagram"), studentData.getInst());
   }
 
-  public void submitFamalyCreation() {
+  public void submitStudentCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
+  public void selectedStudent() {
+    click(By.cssSelector("a.btn-link"));
+  }
+
+  public void selectedFamily() {
+    click(By.xpath("//a[contains(@href, '/family/JKmDG4jR8J9kY86Rx')]"));
+  }
+
+  public void addParent() {
+    click(By.cssSelector("div.gena-panel-btn.btn-add-parent > span.glyphicon.glyphicon-plus-sign"));
+  }
+
+  public void fillParentForm(ParentData parentData) {
+    type(By.name("profile-firstName"), parentData.getFirstName());
+    type(By.name("profile-lastName"), parentData.getLastName());
+    type(By.name("profile-contact-phone"), parentData.getPhone());
+    type(By.name("profile-contact-skype"), parentData.getSkype());
+    type(By.name("profile-contact-email"), parentData.getEmail());
+    type(By.name("profile-contact-c2d"), parentData.getC2d());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.name("profile-contact-viber"), parentData.getViber());
+    type(By.name("profile-contact-whatsapp"), parentData.getWhatsapp());
+    type(By.name("profile-contact-telegram"), parentData.getTelegram());
+    type(By.name("profile-contact-fb"), parentData.getFb());
+    type(By.name("profile-contact-vk"), parentData.getVk());
+    type(By.name("profile-contact-ok"), parentData.getOk());
+    type(By.name("profile-contact-instagram"), parentData.getInst());
+  }
+
+  public void submitParentCreation() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family-member"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
 }
