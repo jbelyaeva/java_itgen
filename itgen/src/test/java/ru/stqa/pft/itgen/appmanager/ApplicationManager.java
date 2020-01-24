@@ -34,7 +34,7 @@ public class ApplicationManager {
      wd = new InternetExplorerDriver();
    }
 
-   wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+   wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
    wd.get("https://test3.portal.itgen.io/login");
    workerHelper = new WorkerHelper(wd);
    sessionHelper = new SessionHelper(wd);
