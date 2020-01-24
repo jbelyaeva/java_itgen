@@ -1,0 +1,11 @@
+    /*ЗДЕСЬ ВСЕ ПОЛЕЗНЫЕ КОМАНДЫ*/
+
+    // проверка валидации email при создании сотрудника
+    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))); // вар.1
+    Assert.assertFalse(isElementPresent(By.cssSelector("span.help-block.help-block-error"))); // вар.2
+
+    // проверка перехода на др.страницу после нажатия на кнопку "создать сотрудника"
+    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a")));
+
+    //генерация случайного значения адреса эл.почты
+    "eee+" + Math.round(Math.random() * 10) + "@gmail.com"
