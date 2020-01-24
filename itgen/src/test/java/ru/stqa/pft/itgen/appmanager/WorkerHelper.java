@@ -14,8 +14,6 @@ public class WorkerHelper extends HelperBase {
   public void submitWorkerCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-//    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))); // проверка валидации email
-//    Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a"))); // проверка перехода на др.страницу после нажатия на кнопку
   }
 
   public void fillWorkerForm(WorkerData workerData) {
