@@ -40,7 +40,7 @@ public class ApplicationManager {
    sessionHelper = new SessionHelper(wd);
    navigationHelper = new NavigationHelper(wd);
    studentHelper = new StudentHelper(wd);
-   sessionHelper.login("admin", "111111");
+   sessionHelper.login("superadmin", "111111");
    }
 
   public void stop() {
