@@ -53,4 +53,8 @@ public class HelperBase {
     Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
     builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
   }
+
+  private boolean areElementsPresent(By locator) {
+    return wd.findElements(locator).size() > 0;
+  }
 }
