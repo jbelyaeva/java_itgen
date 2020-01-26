@@ -1,10 +1,14 @@
 package ru.stqa.pft.itgen.tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
 public class FamilyCreationTests extends TestBase {
+  public WebDriver wd;
 
   @Test
   public void testFamilyCreation() {
@@ -15,7 +19,6 @@ public class FamilyCreationTests extends TestBase {
 
     app.getStudentHelper().addParent();
     app.getStudentHelper().fillParentForm(new ParentData("Витя", "Витин", "111111111111", "skype", "009@test.ru", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telegram", "fb", "vk", "ok", "inst"));
-
     app.getStudentHelper().submitParentCreation();
 
   }

@@ -19,6 +19,12 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
+  protected void clickInActions(By locator) {
+    wd.findElement(locator);
+    Actions builder = new Actions(wd);
+    builder.click().perform();
+  }
+
   protected void type(By locator, String text) {
     click(locator);
     if(text != null) {

@@ -14,6 +14,6 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoStudents() {
-    click(By.xpath("//a[@href='/childs']"));
+    click(By.xpath("//div[@class='left-bar-body']//div[2]"));
   }
 }

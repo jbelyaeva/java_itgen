@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -65,8 +66,8 @@ public class StudentHelper extends HelperBase {
   }
 
   public void fillParentForm(ParentData parentData) {
-    type(By.name("profile-firstName"), parentData.getFirstName());
-    type(By.name("profile-lastName"), parentData.getLastName());
+    type(By.xpath("//li[@class='list-group-item create-family-parent-item']//input[@name='profile-firstName']"), parentData.getFirstName());
+    type(By.xpath("//li[@class='list-group-item create-family-parent-item']//input[@name='profile-lastName']"), parentData.getLastName());
     type(By.name("profile-contact-phone"), parentData.getPhone());
     type(By.name("profile-contact-skype"), parentData.getSkype());
     type(By.name("profile-contact-email"), parentData.getEmail());
@@ -87,6 +88,6 @@ public class StudentHelper extends HelperBase {
   }
 
   public void addParent() {
-    click(By.xpath("//div[@id='__blaze-root']/div/div[2]/main/div/div/div[2]/div/div/button/span"));
-  }
+    clickInActions(By.xpath("//button[@class='close btn-add-parent']"));
+     }
 }
