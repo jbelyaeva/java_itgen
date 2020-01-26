@@ -33,7 +33,7 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void deleteWorker() {
-    click(By.xpath("(//button[@type='button'])[2]"));
+    click(By.xpath("(//button[@type='button'])"));
   }
 
   public void assertDeleteSelectedWorker() {

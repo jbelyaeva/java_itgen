@@ -10,10 +10,14 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void gotoWorker() {
-    click(By.xpath("//a[@href='/admins']"));
+    click(By.xpath("//div[@class='left-bar-body']//div[4]"));
   }
 
   public void gotoStudents() {
     click(By.xpath("//div[@class='left-bar-body']//div[2]"));
+  }
+
+  public void gotoTrainer() {
+    click(By.xpath("//div[@class='left-bar-body']//div[3]"));
   }
 }

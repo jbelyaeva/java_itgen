@@ -1,8 +1,6 @@
 package ru.stqa.pft.itgen.tests;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -10,6 +8,8 @@ import ru.stqa.pft.itgen.model.StudentData;
 public class FamilyCreationTests extends TestBase {
   public WebDriver wd;
 
+
+  //Тест не работает
   @Test
   public void testFamilyCreation() {
     app.getNavigationHelper().gotoStudents();

@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   public WebDriver wd;
 
+  private TrainerHelper trainerHelper;
   private StudentHelper studentHelper;
   private WorkerHelper workerHelper;
   private SessionHelper sessionHelper;
@@ -34,12 +35,13 @@ public class ApplicationManager {
      wd = new InternetExplorerDriver();
    }
 
-   wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+   wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
    wd.get("http://localhost:3000/login");
    workerHelper = new WorkerHelper(wd);
    sessionHelper = new SessionHelper(wd);
    navigationHelper = new NavigationHelper(wd);
    studentHelper = new StudentHelper(wd);
+   trainerHelper = new TrainerHelper(wd);
    sessionHelper.login("superadmin", "111111");
    }
 
@@ -66,5 +68,9 @@ public class ApplicationManager {
 
   public StudentHelper getStudentHelper() {
     return studentHelper;
+  }
+
+  public TrainerHelper getTrainerHelper() {
+    return trainerHelper;
   }
 }
