@@ -45,8 +45,8 @@ public class HelperBase {
     }
   }
 
-  protected void dropDownList(By locator, String gender) {
-    new Select(wd.findElement(locator)).selectByVisibleText(gender);
+  protected void dropDownList(By locator, String text) {
+    new Select(wd.findElement(locator)).selectByVisibleText(text);
   }
 
   protected void enterADate(String date) {

@@ -3,7 +3,8 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.model.WorkerProfileData;
+import ru.stqa.pft.itgen.model.WorkerUserData;
 
 public class WorkerHelper extends HelperBase {
 
@@ -16,12 +17,12 @@ public class WorkerHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void fillWorkerForm(WorkerData workerData) {
-    type(By.name("user-firstName"), workerData.getFirstname());
-    type(By.name("user-lastName"), workerData.getLastname());
-    type(By.name("user-email"), workerData.getEmail());
-    type(By.name("user-phone"), workerData.getPhone());
-    dropDownList(By.name("role"), workerData.getRole());
+  public void fillWorkerForm(WorkerUserData workerUserData) {
+    type(By.name("user-firstName"), workerUserData.getFirstname());
+    type(By.name("user-lastName"), workerUserData.getLastname());
+    type(By.name("user-email"), workerUserData.getEmail());
+    type(By.name("user-phone"), workerUserData.getPhone());
+    dropDownList(By.name("role"), workerUserData.getRole());
   }
 
   public void addWorker() {
@@ -39,5 +40,41 @@ public class WorkerHelper extends HelperBase {
   public void assertDeleteSelectedWorker() {
     click(By.xpath("(//button[@type='button'])[6]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void modifyWorker() {
+    click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+  }
+
+  public void submitWorkerModify() {
+    click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+  }
+
+  public void modifiWorkerForm(WorkerProfileData workerProfileData) {
+    type(By.name("profile-firstName"), workerProfileData.getFirstName());
+    type(By.name("profile-lastName"), workerProfileData.getLastName());
+    click(By.name("profile-startWorkAt"));
+    enterADate(workerProfileData.getStartDay());
+    click(By.name("profile-birthday"));
+    enterADate(workerProfileData.getBirthDay());
+    dropDownList(By.id("profile-gender"), workerProfileData.getGender());
+    click(By.id("profile-gender"));
+    dropDownList(By.id("profile-country"), workerProfileData.getCountry());
+    click(By.id("profile-country"));
+    type(By.name("profile-city"), workerProfileData.getCity());
+    dropDownList(By.id("profile-timezone"), workerProfileData.getTimeZone());
+    click(By.id("profile-timezone"));
+    dropDownList(By.id("profile-locale"), workerProfileData.getLocate());
+    click(By.id("profile-locale"));
+    type(By.name("profile-contact-phone"), workerProfileData.getPhone());
+    type(By.name("profile-contact-skype"), workerProfileData.getSkype());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.name("profile-contact-viber"), workerProfileData.getViber());
+    type(By.name("profile-contact-whatsapp"), workerProfileData.getWhatsapp());
+    type(By.name("profile-contact-telegram"), workerProfileData.getTg());
+    type(By.name("profile-contact-fb"), workerProfileData.getFb());
+    type(By.name("profile-contact-vk"), workerProfileData.getVk());
+    type(By.name("profile-contact-ok"), workerProfileData.getOk());
+    type(By.name("profile-contact-instagram"), workerProfileData.getInst());
   }
 }
