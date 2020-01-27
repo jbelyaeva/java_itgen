@@ -4,12 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class StudentHelper extends HelperBase {
 
@@ -45,29 +43,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getViber());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getViber());
 
-
-    // альтернативные локаторы
-/*
-    type(By.name("profile-firstName"), studentData.getFirsname());
-    type(By.name("profile-lastName"), studentData.getLastname());
-    dropDownList(By.id("profile-gender"), studentData.getGender());
-    enterADate(By.name("profile-birthday"), studentData.getBirthday());
-    dropDownList(By.id("profile-country"), studentData.getCountry());
-    type(By.name("profile-city"), studentData.getCity());
-    dropDownList(By.id("profile-timezone"), studentData.getTimezone());
-    type(By.name("profile-contact-phone"), studentData.getPhone());
-    type(By.name("profile-contact-skype"), studentData.getSkype());
-    type(By.name("profile-contact-c2d"), studentData.getC2d());
-    click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.name("profile-contact-viber"), studentData.getViber());
-    type(By.name("profile-contact-whatsapp"), studentData.getWhatsapp());
-    type(By.name("profile-contact-telegram"), studentData.getTelegram());
-    type(By.name("profile-contact-fb"), studentData.getFb());
-    type(By.name("profile-contact-vk"), studentData.getVk());
-    type(By.name("profile-contact-ok"), studentData.getOk());
-    type(By.name("profile-contact-instagram"), studentData.getInst());
-*/
-
   }
 
   public void fillParentForm(ParentData parentData) {
@@ -88,7 +63,27 @@ public class StudentHelper extends HelperBase {
   }
 
   public void fillFamilyParentForm(ParentData parentData) {
-    type(By.cssSelector("li.list-group-item.create-family-parent-item > div.form-group > input[name=\"profile-firstName\"]"), parentData.getFirstName());
+    Actions actions = new Actions(wd);
+    WebElement element = wd.findElement(By.cssSelector("li.list-group-item.create-family-parent-item > div.form-group > input[name=\"profile-firstName\"]"));
+    actions.moveToElement(element, 1, 1).build().perform();
+    element.click();
+    type(By.xpath("(//input[@name='profile-firstName'])[2]"), parentData.getFirstName());
+    type(By.xpath("(//input[@name='profile-lastName'])[2]"), parentData.getLastName());
+    dropDownList(By.xpath("(//select[@id='profile-country'])[2]"), parentData.getCountry());
+    type(By.xpath("(//input[@name='profile-city'])[2]"), parentData.getCity());
+    dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
+    type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
+    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
+    type(By.name("profile-contact-email"), parentData.getEmail());
+    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
+    click(By.xpath("//div[5]/a"));
+    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
+    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
+    type(By.xpath("(//input[@name='profile-contact-telegram'])[2]"), parentData.getTelegram());
+    type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), parentData.getFb());
+    type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
+    type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
+    type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());
 
   }
 
@@ -138,4 +133,8 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
+  public void submitFamilyCreation() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
 }

@@ -12,4 +12,8 @@
 
     // заполнение даты в поле с маской (вар.№1)
     Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
-    builder.sendKeys("010520").perform(); // исполнить нужную последовательность действий (ввести дату в поле)
+    builder.sendKeys("01.05.20").perform(); // исполнить нужную последовательность действий (ввести дату в поле)
+
+    // Если не получается кликнуть по элементу  -- http://internetka.in.ua/selenium-driver-element-click/
+    Actions actions = new Actions(driver);
+    actions.moveToElement(element, 1, 1).click()).build().perform();

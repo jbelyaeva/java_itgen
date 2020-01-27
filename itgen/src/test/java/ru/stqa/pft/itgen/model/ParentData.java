@@ -3,6 +3,9 @@ package ru.stqa.pft.itgen.model;
 public class ParentData {
   private final String firstName;
   private final String lastName;
+  private String country;
+  private String city;
+  private String timeZone;
   private final String phone;
   private final String skype;
   private final String email;
@@ -15,9 +18,12 @@ public class ParentData {
   private final String ok;
   private final String inst;
 
-  public ParentData(String firstName, String lastName, String phone, String skype, String email, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst) {
+  public ParentData(String firstName, String lastName, String country, String city, String timeZone, String phone, String skype, String email, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst) {
     this.firstName = firstName;
     this.lastName = lastName;
+    this.country = country;
+    this.city = city;
+    this.timeZone = timeZone;
     this.phone = phone;
     this.skype = skype;
     this.email = email;
@@ -37,6 +43,18 @@ public class ParentData {
 
   public String getLastName() {
     return lastName;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getTimeZone() {
+    return timeZone;
   }
 
   public String getPhone() {
@@ -82,4 +100,6 @@ public class ParentData {
   public String getInst() {
     return inst;
   }
+
+
 }

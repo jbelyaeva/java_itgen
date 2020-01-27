@@ -17,9 +17,8 @@ public class FamilyCreationTests extends TestBase {
     app.getStudentHelper().addStudent();
     app.getStudentHelper().addParent();
     app.getStudentHelper().fillStudentForm(new StudentData("Миша", "0Мишин", "Ж", "11112022", "Бангладеш", "Пересвет", "(GMT+05:00) Азия/Ташкент", "111111111111", "skype", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telega", "fb", "vk", "ok", "inst"));
-//    app.getStudentHelper().fillFamilyParentForm(new ParentData("Витя", "Витин", "111111111111", "skype", "009@test.ru", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telegram", "fb", "vk", "ok", "inst"));
-    app.getStudentHelper().fillParentForm(new ParentData("Витя", "Витин", "111111111111", "skype", "009@test.ru", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telegram", "fb", "vk", "ok", "inst"));
-    app.getStudentHelper().submitParentCreation();
+    app.getStudentHelper().fillFamilyParentForm(new ParentData("Витя", "Витин", "Белиз", "Брест", "(GMT-07:00) Америка/Крестон", "84965404336", "skype99", "789@56.hg", "http", "74994031057", "89035569812", "tele", "fb78", "vk001", "ok458", "inst44"));
+    app.getStudentHelper().submitFamilyCreation();
 
   }
 }
