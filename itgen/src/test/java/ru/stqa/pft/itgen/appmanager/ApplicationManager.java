@@ -35,7 +35,7 @@ public class ApplicationManager {
      wd = new InternetExplorerDriver();
    }
 
-   wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+   wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
    wd.get("http://localhost:3000/login");
    workerHelper = new WorkerHelper(wd);
    sessionHelper = new SessionHelper(wd);
