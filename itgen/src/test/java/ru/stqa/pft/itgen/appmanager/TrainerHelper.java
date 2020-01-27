@@ -64,6 +64,7 @@ public class TrainerHelper extends HelperBase {
     click(By.name("skill_15"));
     click(By.name("skill_22"));
     click(By.name("skill_20"));
+    // закрывает выпадающий список с чек-боксами
     Actions builder = new Actions(wd);
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     builder.click().perform();
