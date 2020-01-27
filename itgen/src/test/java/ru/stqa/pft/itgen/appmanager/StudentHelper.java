@@ -23,17 +23,11 @@ public class StudentHelper extends HelperBase {
   public void fillStudentForm(StudentData studentData) {
     type(By.name("profile-firstName"), studentData.getFirsname());
     type(By.name("profile-lastName"), studentData.getLastname());
-    click(By.id("profile-gender"));
     dropDownList(By.id("profile-gender"), studentData.getGender());
-    click(By.name("profile-birthday")); // клик по полю ввода даты
-    enterADate(studentData.getBirthday());
-    click(By.name("profile-city"));
+    enterADate(By.name("profile-birthday"), studentData.getBirthday());
     dropDownList(By.id("profile-country"), studentData.getCountry());
-    click(By.id("profile-country"));
     type(By.name("profile-city"), studentData.getCity());
-    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Страна'])[1]/following::div[1]"));
     dropDownList(By.id("profile-timezone"), studentData.getTimezone());
-    click(By.id("profile-timezone"));
     type(By.name("profile-contact-phone"), studentData.getPhone());
     type(By.name("profile-contact-skype"), studentData.getSkype());
     type(By.name("profile-contact-c2d"), studentData.getC2d());

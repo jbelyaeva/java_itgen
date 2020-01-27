@@ -1,9 +1,6 @@
 package ru.stqa.pft.itgen.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -49,7 +46,10 @@ public class HelperBase {
     new Select(wd.findElement(locator)).selectByVisibleText(text);
   }
 
-  protected void enterADate(String date) {
+  protected void enterADate(By locator, String date) {
+    click(locator);
+    wd.findElement(locator).clear();
+    click(locator);
     Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
     builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
   }

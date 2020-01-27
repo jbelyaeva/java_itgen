@@ -53,19 +53,13 @@ public class WorkerHelper extends HelperBase {
   public void modifiWorkerForm(WorkerProfileData workerProfileData) {
     type(By.name("profile-firstName"), workerProfileData.getFirstName());
     type(By.name("profile-lastName"), workerProfileData.getLastName());
-    click(By.name("profile-startWorkAt"));
-    enterADate(workerProfileData.getStartDay());
-    click(By.name("profile-birthday"));
-    enterADate(workerProfileData.getBirthDay());
+    enterADate(By.name("profile-startWorkAt"), workerProfileData.getStartDay());
+    enterADate(By.name("profile-birthday"), workerProfileData.getBirthDay());
     dropDownList(By.id("profile-gender"), workerProfileData.getGender());
-    click(By.id("profile-gender"));
     dropDownList(By.id("profile-country"), workerProfileData.getCountry());
-    click(By.id("profile-country"));
     type(By.name("profile-city"), workerProfileData.getCity());
     dropDownList(By.id("profile-timezone"), workerProfileData.getTimeZone());
-    click(By.id("profile-timezone"));
     dropDownList(By.id("profile-locale"), workerProfileData.getLocate());
-    click(By.id("profile-locale"));
     type(By.name("profile-contact-phone"), workerProfileData.getPhone());
     type(By.name("profile-contact-skype"), workerProfileData.getSkype());
     click(By.cssSelector("a.btn-link.btn-show"));
