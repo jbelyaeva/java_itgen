@@ -89,6 +89,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void assertDeleteSelectedStudent() {
+    click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -98,6 +99,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void assertDeleteSelectedFamily() {
+    click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }

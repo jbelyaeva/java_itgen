@@ -3,8 +3,7 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import ru.stqa.pft.itgen.model.WorkerProfileData;
-import ru.stqa.pft.itgen.model.WorkerUserData;
+import ru.stqa.pft.itgen.model.WorkerData;
 
 public class WorkerHelper extends HelperBase {
 
@@ -17,12 +16,12 @@ public class WorkerHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void fillWorkerForm(WorkerUserData workerUserData) {
-    type(By.name("user-firstName"), workerUserData.getFirstname());
-    type(By.name("user-lastName"), workerUserData.getLastname());
-    type(By.name("user-email"), workerUserData.getEmail());
-    type(By.name("user-phone"), workerUserData.getPhone());
-    dropDownList(By.name("role"), workerUserData.getRole());
+  public void fillWorkerForm(WorkerData workerData) {
+    type(By.name("user-firstName"), workerData.getFirstName());
+    type(By.name("user-lastName"), workerData.getLastName());
+    type(By.name("user-email"), workerData.getEmail());
+    type(By.name("user-phone"), workerData.getPhone());
+    dropDownList(By.name("role"), workerData.getRole());
   }
 
   public void addWorker() {
@@ -34,11 +33,12 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void deleteWorker() {
-    click(By.xpath("(//button[@type='button'])"));
+    click(By.cssSelector("button.btn.btn-danger.btn-sm.btn-remove-user"));
   }
 
   public void assertDeleteSelectedWorker() {
-    click(By.xpath("(//button[@type='button'])[6]"));
+    click(By.cssSelector("div.modal-header"));
+    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
@@ -50,25 +50,25 @@ public class WorkerHelper extends HelperBase {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
   }
 
-  public void modifiWorkerForm(WorkerProfileData workerProfileData) {
-    type(By.name("profile-firstName"), workerProfileData.getFirstName());
-    type(By.name("profile-lastName"), workerProfileData.getLastName());
-    enterADate(By.name("profile-startWorkAt"), workerProfileData.getStartDay());
-    enterADate(By.name("profile-birthday"), workerProfileData.getBirthDay());
-    dropDownList(By.id("profile-gender"), workerProfileData.getGender());
-    dropDownList(By.id("profile-country"), workerProfileData.getCountry());
-    type(By.name("profile-city"), workerProfileData.getCity());
-    dropDownList(By.id("profile-timezone"), workerProfileData.getTimeZone());
-    dropDownList(By.id("profile-locale"), workerProfileData.getLocate());
-    type(By.name("profile-contact-phone"), workerProfileData.getPhone());
-    type(By.name("profile-contact-skype"), workerProfileData.getSkype());
+  public void modifiWorkerForm(WorkerData workerData) {
+    type(By.name("profile-firstName"), workerData.getFirstName());
+    type(By.name("profile-lastName"), workerData.getLastName());
+    enterADate(By.name("profile-startWorkAt"), workerData.getStartDay());
+    enterADate(By.name("profile-birthday"), workerData.getBirthDay());
+    dropDownList(By.id("profile-gender"), workerData.getGender());
+    dropDownList(By.id("profile-country"), workerData.getCountry());
+    type(By.name("profile-city"), workerData.getCity());
+    dropDownList(By.id("profile-timezone"), workerData.getTimeZone());
+    dropDownList(By.id("profile-locale"), workerData.getLocate());
+    type(By.name("profile-contact-phone"), workerData.getPhone());
+    type(By.name("profile-contact-skype"), workerData.getSkype());
     click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.name("profile-contact-viber"), workerProfileData.getViber());
-    type(By.name("profile-contact-whatsapp"), workerProfileData.getWhatsapp());
-    type(By.name("profile-contact-telegram"), workerProfileData.getTg());
-    type(By.name("profile-contact-fb"), workerProfileData.getFb());
-    type(By.name("profile-contact-vk"), workerProfileData.getVk());
-    type(By.name("profile-contact-ok"), workerProfileData.getOk());
-    type(By.name("profile-contact-instagram"), workerProfileData.getInst());
+    type(By.name("profile-contact-viber"), workerData.getViber());
+    type(By.name("profile-contact-whatsapp"), workerData.getWhatsapp());
+    type(By.name("profile-contact-telegram"), workerData.getTg());
+    type(By.name("profile-contact-fb"), workerData.getFb());
+    type(By.name("profile-contact-vk"), workerData.getVk());
+    type(By.name("profile-contact-ok"), workerData.getOk());
+    type(By.name("profile-contact-instagram"), workerData.getInst());
   }
 }

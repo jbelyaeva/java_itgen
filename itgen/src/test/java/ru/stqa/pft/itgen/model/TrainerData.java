@@ -1,15 +1,17 @@
 package ru.stqa.pft.itgen.model;
 
-public class WorkerProfileData {
+public class TrainerData {
   private final String firstName;
   private final String lastName;
-  private final String startDay;
-  private final String birthDay;
+  private final String startWork;
+  private final String birthday;
   private final String gender;
+  private final String maxSlots;
   private final String country;
-  private final String city;
   private final String timeZone;
   private final String locate;
+  private final String city;
+  private final String payBase;
   private final String phone;
   private final String skype;
   private final String viber;
@@ -19,17 +21,20 @@ public class WorkerProfileData {
   private final String vk;
   private final String ok;
   private final String inst;
+  private final String note;
 
-  public WorkerProfileData(String firstName, String lastName, String startDay, String birthDay, String gender, String country, String city, String timeZone, String locate, String phone, String skype, String viber, String whatsapp, String tg, String fb, String vk, String ok, String inst) {
+  public TrainerData(String firstName, String lastName, String startWork, String birthday, String gender, String maxSlots, String country, String timeZone, String locate, String city, String payBase, String phone, String skype, String viber, String whatsapp, String tg, String fb, String vk, String ok, String inst, String note) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.startDay = startDay;
-    this.birthDay = birthDay;
+    this.startWork = startWork;
+    this.birthday = birthday;
     this.gender = gender;
+    this.maxSlots = maxSlots;
     this.country = country;
-    this.city = city;
     this.timeZone = timeZone;
     this.locate = locate;
+    this.city = city;
+    this.payBase = payBase;
     this.phone = phone;
     this.skype = skype;
     this.viber = viber;
@@ -39,6 +44,7 @@ public class WorkerProfileData {
     this.vk = vk;
     this.ok = ok;
     this.inst = inst;
+    this.note = note;
   }
 
   public String getFirstName() {
@@ -49,24 +55,24 @@ public class WorkerProfileData {
     return lastName;
   }
 
-  public String getStartDay() {
-    return startDay;
+  public String getStartWork() {
+    return startWork;
   }
 
-  public String getBirthDay() {
-    return birthDay;
+  public String getBirthday() {
+    return birthday;
   }
 
   public String getGender() {
     return gender;
   }
 
-  public String getCountry() {
-    return country;
+  public String getMaxSlots() {
+    return maxSlots;
   }
 
-  public String getCity() {
-    return city;
+  public String getCountry() {
+    return country;
   }
 
   public String getTimeZone() {
@@ -75,6 +81,14 @@ public class WorkerProfileData {
 
   public String getLocate() {
     return locate;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getPayBase() {
+    return payBase;
   }
 
   public String getPhone() {
@@ -111,5 +125,9 @@ public class WorkerProfileData {
 
   public String getInst() {
     return inst;
+  }
+
+  public String getNote() {
+    return note;
   }
 }
