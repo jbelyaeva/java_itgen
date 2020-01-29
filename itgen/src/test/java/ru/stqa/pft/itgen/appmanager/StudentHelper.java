@@ -117,7 +117,7 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("(//button[@type='button'])[2]"));
   }
 
-  public void assertDeleteSelectedStudent() {
+  public void assertDeleteSelectedParent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
@@ -127,14 +127,29 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("button.btn.btn-danger.btn-remove-family"));
   }
 
+  public void submitFamilyCreation() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void selectedParent() {
+    click(By.xpath("//div[2]/div[2]/ul/li/div/a"));
+    //click(By.xpath("//a[contains(@href, '/profile/wNJ8LLQafbx659czN')]"));
+  }
+
+  public void deleteParent() {
+    click(By.cssSelector("button.btn.btn-danger.btn-sm.btn-remove-user"));
+  }
+
   public void assertDeleteSelectedFamily() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void submitFamilyCreation() {
-    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+  public void assertDeleteSelectedStudent() {
+    click(By.cssSelector("div.modal-header"));
+    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 }
