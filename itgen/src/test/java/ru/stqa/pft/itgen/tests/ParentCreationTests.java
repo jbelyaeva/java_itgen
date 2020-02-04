@@ -11,7 +11,7 @@ public class ParentCreationTests extends TestBase {
     app.getStudentHelper().selectedStudent();
     app.getStudentHelper().selectedFamily();
     app.getStudentHelper().addParentInFamily();
-    app.getStudentHelper().fillParentForm(new ParentData("Витя", "Витин", null, null, null, "84956669812", "sky", "709@test.ru", "http 123", "89036547810", "89632154578", "tg456", "fb111", "vr008", "ok999", "gghik"));
+    app.getStudentHelper().fillParentForm(new ParentData("Витя", "Витин", null, null, null, null,"84956669812", "sky", "709@test.ru", "http 123", "89036547810", "89632154578", "tg456", "fb111", "vr008", "ok999", "gghik", null, null));
     app.getStudentHelper().submitParentCreation();
   }
 }
