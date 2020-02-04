@@ -48,6 +48,7 @@ public class WorkerHelper extends HelperBase {
 
   public void submitWorkerModify() {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
   public void modifiWorkerForm(WorkerData workerData) {

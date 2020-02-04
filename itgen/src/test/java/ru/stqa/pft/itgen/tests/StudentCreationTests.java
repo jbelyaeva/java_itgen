@@ -10,7 +10,7 @@ public class StudentCreationTests extends TestBase {
     app.getNavigationHelper().gotoStudents();
     app.getStudentHelper().createFamily();
     app.getStudentHelper().addStudent();
-    app.getStudentHelper().fillStudentForm(new StudentData("Миша", "0Мишин", "Ж", "11.11.2022", "Бангладеш", "Пересвет", "(GMT+05:00) Азия/Ташкент", "111111111111", "skype", "https://web.chat2desk.com/chat/my?dialogID=9346556", "111111111111", "111111111111", "telega", "fb", "vk", "ok", "inst"));
+    app.getStudentHelper().fillStudentForm(new StudentData("Миша", "0Мишин", "М", "01.01.1993", "Армения", "Сватково", "(GMT+05:00) Азия/Ташкент", null, null, null, "89035540414", "sk123", "http:/88888", "89629861121", "44444444444", "tg56", "vk555", "ок34", "ok88", "inst569", null, null));
     app.getStudentHelper().submitStudentCreation();
   }
 }

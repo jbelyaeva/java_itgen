@@ -152,4 +152,39 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
+
+  public void modifyStudent() {
+    click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+  }
+
+  public void submitStudentModify() {
+    click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void ModifyStudentForm(StudentData studentData) {
+    type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirsname());
+    type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
+    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
+    dropDownList(By.cssSelector("#profile-gender"), studentData.getGender());
+    dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
+    type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
+    dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
+    dropDownList(By.cssSelector("#profile-locale"), studentData.getLocate());
+    dropDownList(By.cssSelector("#profile-study-lang"), studentData.getStudyLang());
+    dropDownList(By.cssSelector("#profile-duration"), studentData.getDuration());
+    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
+    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), studentData.getSkype());
+    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), studentData.getC2d());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-family-id\"]"), studentData.getFamilyId());
+    type(By.cssSelector("textarea[name=\"profile-note\"]"), studentData.getNote());
+  }
 }
