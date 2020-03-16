@@ -5,6 +5,7 @@ public class StudentData {
   private final String lastname;
   private final String gender;
   private final String birthday;
+  private final String pclevel;
   private final String country;
   private final String city;
   private final String timezone;
@@ -24,11 +25,12 @@ public class StudentData {
   private final String familyId;
   private final String note;
 
-  public StudentData(String firsname, String lastname, String gender, String birthday, String country, String city, String timezone, String locate, String studyLang, String duration, String phone, String skype, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst, String familyId, String note) {
+  public StudentData(String firsname, String lastname, String gender, String birthday, String pclevel, String country, String city, String timezone, String locate, String studyLang, String duration, String phone, String skype, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst, String familyId, String note) {
     this.firsname = firsname;
     this.lastname = lastname;
     this.gender = gender;
     this.birthday = birthday;
+    this.pclevel = pclevel;
     this.country = country;
     this.city = city;
     this.timezone = timezone;
@@ -63,6 +65,10 @@ public class StudentData {
 
   public String getBirthday() {
     return birthday;
+  }
+
+  public String getPclevel() {
+    return pclevel;
   }
 
   public String getCountry() {
