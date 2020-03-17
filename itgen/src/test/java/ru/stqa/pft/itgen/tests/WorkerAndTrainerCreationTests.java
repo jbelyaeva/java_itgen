@@ -1,15 +1,89 @@
 package ru.stqa.pft.itgen.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WorkerAndTrainerCreationTests extends TestBase {
 
-  @Test
-  public void testWorkerCreation() {
+  @DataProvider
+  public Iterator<Object[]> validWorkersFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<WorkerData>.class
+      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validWorkersAdminsFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_admins_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<WorkerData>.class
+      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validWorkersTrainersFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_trainers_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<TrainerData>.class
+      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @Test (dataProvider = "validWorkersFromJson")
+  public void testWorkerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoWorker();
     app.getWorkerHelper().addWorker();
-    app.getWorkerHelper().fillWorkerForm(new WorkerData( "Алёша","Абакумов", "eee+" + Math.round(Math.random() * 100) + "@gmail.com", "Сотрудник", null, null, null, null, null, null, null, "89035550415", null, null, null, null, null, null, null, null));
+    app.getWorkerHelper().fillWorkerForm(worker);
+    app.getWorkerHelper().submitWorkerCreation();
+  }
+
+  @Test (dataProvider = "validWorkersAdminsFromJson")
+  public void testWorkerAdminCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoWorker();
+    app.getWorkerHelper().addWorker();
+    app.getWorkerHelper().fillWorkerForm(worker);
+    app.getWorkerHelper().submitWorkerCreation();
+  }
+
+  @Test (dataProvider = "validWorkersTrainersFromJson")
+  public void testWorkerTrainerCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoWorker();
+    app.getWorkerHelper().addWorker();
+    app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
   }
 }

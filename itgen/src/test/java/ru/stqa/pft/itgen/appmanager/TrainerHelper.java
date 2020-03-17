@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.TrainerData;
@@ -53,24 +54,24 @@ public class TrainerHelper extends HelperBase {
     click(By.name("skill_5"));
     click(By.name("skill_6"));
     click(By.name("skill_7"));
-    click(By.name("skill_16"));
-    click(By.name("skill_8"));
-    click(By.name("skill_9"));
-    click(By.name("skill_10"));
-    click(By.name("skill_11"));
-    click(By.name("skill_12"));
-    click(By.name("skill_13"));
-    click(By.name("skill_14"));
-    click(By.name("skill_18"));
-    click(By.name("skill_15"));
-    click(By.name("skill_22"));
-    click(By.name("skill_20"));
+//    click(By.name("skill_16"));
+//    click(By.name("skill_8"));
+//    click(By.name("skill_9"));
+//    click(By.name("skill_10"));
+//    click(By.name("skill_11"));
+//    click(By.name("skill_12"));
+//    click(By.name("skill_13"));
+//    click(By.name("skill_14"));
+//    click(By.name("skill_18"));
+//    click(By.name("skill_15"));
+//    click(By.name("skill_22"));
+//    click(By.name("skill_20"));
     // закрывает выпадающий список с чек-боксами
     Actions builder = new Actions(wd);
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     builder.click().perform();
     //
-    type(By.name("profile-maxSlots"), trainerData.getMaxSlots());
+    type(By.xpath("//input[@name='profile-maxSlots']"), trainerData.getMaxSlots());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());

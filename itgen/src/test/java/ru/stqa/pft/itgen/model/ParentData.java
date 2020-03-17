@@ -1,46 +1,140 @@
 package ru.stqa.pft.itgen.model;
 
-public class ParentData {
-  private final String firstName;
-  private final String lastName;
-  private final String country;
-  private final String city;
-  private final String timeZone;
-  private final String locate;
-  private final String phone;
-  private final String skype;
-  private final String email;
-  private final String c2d;
-  private final String viber;
-  private final String whatsapp;
-  private final String telegram;
-  private final String fb;
-  private final String vk;
-  private final String ok;
-  private final String inst;
-  private final String familyId;
-  private final String note;
+import com.google.gson.annotations.Expose;
 
-  public ParentData(String firstName, String lastName, String country, String city, String timeZone, String locate, String phone, String skype, String email, String c2d, String viber, String whatsapp, String telegram, String fb, String vk, String ok, String inst, String familyId, String note) {
+public class ParentData {
+  @Expose
+  private String firstName;
+  @Expose
+  private String lastName;
+  @Expose
+  private String country;
+  @Expose
+  private String city;
+  @Expose
+  private String timeZone;
+  @Expose
+  private String locate;
+  @Expose
+  private String phone;
+  @Expose
+  private String skype;
+  @Expose
+  private String email;
+  @Expose
+  private String c2d;
+  @Expose
+  private String viber;
+  @Expose
+  private String whatsapp;
+  @Expose
+  private String telegram;
+  @Expose
+  private String fb;
+  @Expose
+  private String vk;
+  @Expose
+  private String ok;
+  @Expose
+  private String inst;
+  @Expose
+  private String familyId;
+  @Expose
+  private String note;
+
+  public ParentData withFirstName(String firstName) {
     this.firstName = firstName;
+    return this;
+  }
+
+  public ParentData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public ParentData withCountry(String country) {
     this.country = country;
+    return this;
+  }
+
+  public ParentData withCity(String city) {
     this.city = city;
+    return this;
+  }
+
+  public ParentData withTimeZone(String timeZone) {
     this.timeZone = timeZone;
+    return this;
+  }
+
+  public ParentData withLocate(String locate) {
     this.locate = locate;
+    return this;
+  }
+
+  public ParentData withPhone(String phone) {
     this.phone = phone;
+    return this;
+  }
+
+  public ParentData withSkype(String skype) {
     this.skype = skype;
+    return this;
+  }
+
+  public ParentData withEmail(String email) {
     this.email = email;
+    return this;
+  }
+
+  public ParentData withC2d(String c2d) {
     this.c2d = c2d;
+    return this;
+  }
+
+  public ParentData withViber(String viber) {
     this.viber = viber;
+    return this;
+  }
+
+  public ParentData withWhatsapp(String whatsapp) {
     this.whatsapp = whatsapp;
+    return this;
+  }
+
+  public ParentData withTelegram(String telegram) {
     this.telegram = telegram;
+    return this;
+  }
+
+  public ParentData withFb(String fb) {
     this.fb = fb;
+    return this;
+  }
+
+  public ParentData withVk(String vk) {
     this.vk = vk;
+    return this;
+  }
+
+  public ParentData withOk(String ok) {
     this.ok = ok;
+    return this;
+  }
+
+  public ParentData withInst(String inst) {
     this.inst = inst;
+    return this;
+  }
+
+  public ParentData withFamilyId(String familyId) {
     this.familyId = familyId;
+    return this;
+  }
+
+  public ParentData withNote(String note) {
     this.note = note;
+    return this;
   }
 
   public String getFirstName() {
