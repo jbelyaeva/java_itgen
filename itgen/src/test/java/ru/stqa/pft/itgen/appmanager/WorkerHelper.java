@@ -19,7 +19,7 @@ public class WorkerHelper extends HelperBase {
   public void fillWorkerForm(WorkerData workerData) {
     type(By.name("user-firstName"), workerData.getFirstName());
     type(By.name("user-lastName"), workerData.getLastName());
-    type(By.name("user-email"), workerData.getEmail());
+    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 1000) + "@gmail.com");
     type(By.name("user-phone"), workerData.getPhone());
     dropDownList(By.name("role"), workerData.getRole());
   }
