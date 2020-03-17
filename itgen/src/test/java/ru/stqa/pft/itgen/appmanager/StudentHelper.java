@@ -51,7 +51,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), parentData.getPhone());
     type(By.cssSelector("input[name=\"profile-contact-skype\"]"), parentData.getSkype());
-    type(By.cssSelector("input[name=\"profile-contact-email\"]"), parentData.getEmail());
+    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "eee+" + Math.round(Math.random() * 1000) + "@gmail.com");
     type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), parentData.getC2d());
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), parentData.getViber());
@@ -75,7 +75,7 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
     type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
     type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
-    type(By.name("profile-contact-email"), parentData.getEmail());
+    type(By.name("profile-contact-email"), "eee+" + Math.round(Math.random() * 1000) + "@gmail.com");
     type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
     click(By.xpath("//div[5]/a"));
     type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
