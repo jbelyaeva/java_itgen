@@ -1,23 +1,45 @@
 package ru.stqa.pft.itgen.tests;
 
-import org.openqa.selenium.WebDriver;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class FamilyCreationTests extends TestBase {
-  public WebDriver wd;
 
+  @DataProvider
+  public Iterator<Object[]> validStudentsFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>(){}.getType()); // List<StudentData>.class
+      return students.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
 
-  @Test
-  public void testFamilyCreation() {
+  @Test(dataProvider = "validStudentsFromJson")
+  public void testFamilyCreation(StudentData student, ParentData parent) {
     app.getNavigationHelper().gotoStudents();
     app.getStudentHelper().createFamily();
     app.getStudentHelper().addStudent();
     app.getStudentHelper().addParent();
-    app.getStudentHelper().fillStudentForm(new StudentData("Миша", "0Мишин", "М", "01.01.1993", "Только планшет, телефон", "Армения", "Сватково", "(GMT+05:00) Азия/Ташкент", null, null, null, "89035540414", "sk123", "http:/88888", "89629861121", "44444444444", "tg56", "vk555", "ок34", "ok88", "inst569", null, null));
-    app.getStudentHelper().fillFamilyParentForm(new ParentData("Витя", "Витин", "Белиз", "Брест", "(GMT-07:00) Америка/Крестон", null,"84965404336", "skype99", "789@56.hg", "http", "74994031057", "89035569812", "tele", "fb78", "vk001", "ok458", "inst44", null, null));
+    app.getStudentHelper().fillStudentForm(student);
+    app.getStudentHelper().fillFamilyParentForm(parent);
     app.getStudentHelper().submitFamilyCreation();
-
   }
 }

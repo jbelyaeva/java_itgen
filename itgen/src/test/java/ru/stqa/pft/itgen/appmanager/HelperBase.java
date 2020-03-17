@@ -43,15 +43,19 @@ public class HelperBase {
   }
 
   protected void dropDownList(By locator, String text) {
-    new Select(wd.findElement(locator)).selectByVisibleText(text);
+    if(text != null) {
+      new Select(wd.findElement(locator)).selectByVisibleText(text);
+    }
   }
 
   protected void enterADate(By locator, String date) {
-    click(locator);
-    wd.findElement(locator).clear();
-    click(locator);
-    Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
-    builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
+    if(date != null) {
+      click(locator);
+      wd.findElement(locator).clear();
+      click(locator);
+      Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
+      builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
+    }
   }
 
   private boolean areElementsPresent(By locator) {

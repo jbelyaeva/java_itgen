@@ -1,16 +1,42 @@
 package ru.stqa.pft.itgen.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.WorkerData;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class WorkerModificationTests extends TestBase {
 
-  @Test
-  public void testWorkerModification() {
+  @DataProvider
+  public Iterator<Object[]> validWorkersFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_modification.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<WorkerData>.class
+      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @Test (dataProvider = "validWorkersFromJson")
+  public void testWorkerModification(WorkerData worker) {
     app.getNavigationHelper().gotoWorker();
     app.getWorkerHelper().selectedWorker();
     app.getWorkerHelper().modifyWorker();
-    app.getWorkerHelper().modifiWorkerForm(new WorkerData("Петя","Абакумов1", null, null, "15.02.1983", "12.11.2020", "М", "Бахрейн", "Пересвет", "(GMT+05:00) Азия/Ташкент", "Английский", "89015555565", "skype1", "74995051023", "87995557893", "tg1", "fb1", "vk1", "ok1", "inst1"));
+    app.getWorkerHelper().modifiWorkerForm(worker);
     app.getWorkerHelper().submitWorkerModify();
   }
 }

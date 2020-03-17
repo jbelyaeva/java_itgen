@@ -5,7 +5,12 @@ repositories {
 }
 dependencies {
     implementation 'org.testng:testng:7.1.0'
-    compile 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-3'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'org.hamcrest:hamcrest:2.2'
+    implementation 'com.beust:jcommander:1.78'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
 }
 test {
     useTestNG()

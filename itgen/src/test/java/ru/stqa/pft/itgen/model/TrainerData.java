@@ -1,50 +1,154 @@
 package ru.stqa.pft.itgen.model;
 
-public class TrainerData {
-  private final String firstName;
-  private final String lastName;
-  private final String startWork;
-  private final String birthday;
-  private final String gender;
-  private final String maxSlots;
-  private final String country;
-  private final String timeZone;
-  private final String locate;
-  private final String city;
-  private final String payBase;
-  private final String phone;
-  private final String skype;
-  private final String viber;
-  private final String whatsapp;
-  private final String tg;
-  private final String fb;
-  private final String vk;
-  private final String ok;
-  private final String inst;
-  private final String note;
+import com.google.gson.annotations.Expose;
 
-  public TrainerData(String firstName, String lastName, String startWork, String birthday, String gender, String maxSlots, String country, String timeZone, String locate, String city, String payBase, String phone, String skype, String viber, String whatsapp, String tg, String fb, String vk, String ok, String inst, String note) {
+public class TrainerData {
+  @Expose
+  private String firstName;
+  @Expose
+  private String lastName;
+  @Expose
+  private String startWork;
+  @Expose
+  private String birthday;
+  @Expose
+  private String gender;
+  @Expose
+  private String maxSlots;
+  @Expose
+  private String country;
+  @Expose
+  private String timeZone;
+  @Expose
+  private String locate;
+  @Expose
+  private String city;
+  @Expose
+  private String payBase;
+  @Expose
+  private String phone;
+  @Expose
+  private String skype;
+  @Expose
+  private String viber;
+  @Expose
+  private String whatsapp;
+  @Expose
+  private String tg;
+  @Expose
+  private String fb;
+  @Expose
+  private String vk;
+  @Expose
+  private String ok;
+  @Expose
+  private String inst;
+  @Expose
+  private String note;
+
+  public TrainerData withFirstName(String firstName) {
     this.firstName = firstName;
+    return this;
+  }
+
+  public TrainerData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
+  }
+
+  public TrainerData withStartWork(String startWork) {
     this.startWork = startWork;
+    return this;
+  }
+
+  public TrainerData withBirthday(String birthday) {
     this.birthday = birthday;
+    return this;
+  }
+
+  public TrainerData withGender(String gender) {
     this.gender = gender;
+    return this;
+  }
+
+  public TrainerData withMaxSlots(String maxSlots) {
     this.maxSlots = maxSlots;
+    return this;
+  }
+
+  public TrainerData withCountry(String country) {
     this.country = country;
+    return this;
+  }
+
+  public TrainerData withTimeZone(String timeZone) {
     this.timeZone = timeZone;
+    return this;
+  }
+
+  public TrainerData withLocate(String locate) {
     this.locate = locate;
+    return this;
+  }
+
+  public TrainerData withCity(String city) {
     this.city = city;
+    return this;
+  }
+
+  public TrainerData withPayBase(String payBase) {
     this.payBase = payBase;
+    return this;
+  }
+
+  public TrainerData withPhone(String phone) {
     this.phone = phone;
+    return this;
+  }
+
+  public TrainerData withSkype(String skype) {
     this.skype = skype;
+    return this;
+  }
+
+  public TrainerData withViber(String viber) {
     this.viber = viber;
+    return this;
+  }
+
+  public TrainerData withWhatsapp(String whatsapp) {
     this.whatsapp = whatsapp;
+    return this;
+  }
+
+  public TrainerData withTg(String tg) {
     this.tg = tg;
+    return this;
+  }
+
+  public TrainerData withFb(String fb) {
     this.fb = fb;
+    return this;
+  }
+
+  public TrainerData withVk(String vk) {
     this.vk = vk;
+    return this;
+  }
+
+  public TrainerData withOk(String ok) {
     this.ok = ok;
+    return this;
+  }
+
+  public TrainerData withInst(String inst) {
     this.inst = inst;
+    return this;
+  }
+
+  public TrainerData withNote(String note) {
     this.note = note;
+    return this;
   }
 
   public String getFirstName() {

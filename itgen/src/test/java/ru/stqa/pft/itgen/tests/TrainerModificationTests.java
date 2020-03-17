@@ -1,17 +1,43 @@
 package ru.stqa.pft.itgen.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class TrainerModificationTests extends TestBase {
 
-  @Test
-  public void testTrainerModification() {
+  @DataProvider
+  public Iterator<Object[]> validWorkersTrainersFromJson() throws IOException {
+    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_trainers_modification.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>(){}.getType()); // List<TrainerData>.class
+      return trainers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @Test (dataProvider = "validWorkersTrainersFromJson")
+  public void testTrainerModification(TrainerData trainer) {
     app.getNavigationHelper().gotoTrainer();
     app.getTrainerHelper().selectedTrainer();  // выбирает 9-го по списку тренера (его надо предварительно создать!!!)
     app.getTrainerHelper().modifyTrainer();
-    app.getTrainerHelper().modifiTrainerForm(new TrainerData("Ганц25", "Абак896", "01.10.1950", "15.05.1905", "Ж", "3", "Белиз", "(GMT-06:00) Америка/Бойла, Северная Дакота", "Английский", "Сватково", "4", "89115223697", "sk9", "89035489756", "89165587893", "tg56", "fb7", "vk00", "ok78", "inst555", "hello, world!!!"));
+    app.getTrainerHelper().modifiTrainerForm(trainer);
     app.getTrainerHelper().submitTrainerModify();
   }
 }
