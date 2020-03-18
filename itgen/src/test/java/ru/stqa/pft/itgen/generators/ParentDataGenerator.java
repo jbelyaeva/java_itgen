@@ -53,9 +53,9 @@ public class ParentDataGenerator extends TestBase {
   private void saveAsJson(List<ParentData> parents, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(parents);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file);) {
+      writer.write(json);
+    }
   }
 
   private List<ParentData> generateParents(int count) {

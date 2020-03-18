@@ -53,9 +53,9 @@ public class WorkerDataGenerator extends TestBase {
   private void saveAsJson(List<WorkerData> workers, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(workers);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file);) {
+      writer.write(json);
+    }
   }
 
   private List<WorkerData> generateWorkers(int count) {

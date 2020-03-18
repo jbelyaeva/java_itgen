@@ -52,9 +52,9 @@ public class StudentDataGenerator extends TestBase {
   private void saveAsJson(List<StudentData> students, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(students);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file);) {
+      writer.write(json);
+    }
   }
 
   private List<StudentData> generateContacts(int count) {
