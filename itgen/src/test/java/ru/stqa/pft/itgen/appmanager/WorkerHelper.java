@@ -19,7 +19,7 @@ public class WorkerHelper extends HelperBase {
   public void fillWorkerForm(WorkerData workerData) {
     type(By.name("user-firstName"), workerData.getFirstName());
     type(By.name("user-lastName"), workerData.getLastName());
-    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 1000) + "@gmail.com");
+    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), workerData.getPhone());
     dropDownList(By.name("role"), workerData.getRole());
   }
@@ -71,5 +71,9 @@ public class WorkerHelper extends HelperBase {
     type(By.name("profile-contact-vk"), workerData.getVk());
     type(By.name("profile-contact-ok"), workerData.getOk());
     type(By.name("profile-contact-instagram"), workerData.getInst());
+  }
+
+  public int getWorkerCount() {
+    return wd.findElements(By.cssSelector("a.btn-link")).size();
   }
 }

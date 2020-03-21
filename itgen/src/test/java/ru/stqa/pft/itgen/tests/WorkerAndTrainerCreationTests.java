@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -66,24 +67,37 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   @Test (dataProvider = "validWorkersFromJson")
   public void testWorkerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoWorker();
+    int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
+    app.getNavigationHelper().gotoWorker();
+    int after = app.getWorkerHelper().getWorkerCount();
+    Assert.assertEquals(after, before +1);
   }
 
-  @Test (dataProvider = "validWorkersAdminsFromJson")
+  @Test (dataProvider = "validWorkersAdminsFromJson", enabled = false)
   public void testWorkerAdminCreation(WorkerData worker) {
     app.getNavigationHelper().gotoWorker();
+    int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
+    app.getNavigationHelper().gotoWorker();
+    int after = app.getWorkerHelper().getWorkerCount();
+    Assert.assertEquals(after, before +1);
   }
 
   @Test (dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoTrainer();
+    int before = app.getWorkerHelper().getWorkerCount();
     app.getNavigationHelper().gotoWorker();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
+    app.getNavigationHelper().gotoTrainer();
+    int after = app.getTrainerHelper().getTrainerCount();
+    Assert.assertEquals(after, before +1);
   }
 }

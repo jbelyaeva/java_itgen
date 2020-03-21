@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
@@ -32,12 +33,16 @@ public class TrainerModificationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validWorkersTrainersFromJson")
+  @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testTrainerModification(TrainerData trainer) {
     app.getNavigationHelper().gotoTrainer();
+    int before = app.getTrainerHelper().getTrainerCount();
     app.getTrainerHelper().selectedTrainer();  // выбирает 9-го по списку тренера (его надо предварительно создать!!!)
     app.getTrainerHelper().modifyTrainer();
     app.getTrainerHelper().modifiTrainerForm(trainer);
     app.getTrainerHelper().submitTrainerModify();
+    app.getNavigationHelper().gotoTrainer();
+    int after = app.getTrainerHelper().getTrainerCount();
+    Assert.assertEquals(after, before);
   }
 }

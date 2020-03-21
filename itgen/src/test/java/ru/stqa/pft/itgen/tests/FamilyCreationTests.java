@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
@@ -34,14 +35,18 @@ public class FamilyCreationTests extends TestBase {
 
   // в этом тесте не передаются тестовые данные для родителей.
   // пока не знаю как сделать провайдер данных, который может передавать данные разных типов из двух файлов
-  @Test(dataProvider = "validStudentsFromJson")
+  @Test(dataProvider = "validStudentsFromJson", enabled = false)
   public void testFamilyCreation(StudentData student, ParentData parent) {
     app.getNavigationHelper().gotoStudents();
+    int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().createFamily();
     app.getStudentHelper().addStudent();
     app.getStudentHelper().addParent();
     app.getStudentHelper().fillStudentForm(student);
     app.getStudentHelper().fillFamilyParentForm(parent);
     app.getStudentHelper().submitFamilyCreation();
+    app.getNavigationHelper().gotoStudents();
+    int after = app.getStudentHelper().getStudentCount();
+    Assert.assertEquals(after, before +1);
   }
 }
