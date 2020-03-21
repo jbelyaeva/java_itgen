@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -34,9 +35,13 @@ public class StudentModificationTests extends TestBase {
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentModification(StudentData student) {
     app.getNavigationHelper().gotoStudents();
+    int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().selectedStudent();
     app.getStudentHelper().modifyStudent();
     app.getStudentHelper().ModifyStudentForm(student);
     app.getStudentHelper().submitStudentModify();
+    app.getNavigationHelper().gotoStudents();
+    int after = app.getStudentHelper().getStudentCount();
+    Assert.assertEquals(after, before);
   }
 }

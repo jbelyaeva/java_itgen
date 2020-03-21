@@ -93,4 +93,8 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-contact-instagram"), trainerData.getInst());
     type(By.name("profile-note"), trainerData.getNote());
   }
+
+  public int getTrainerCount() {
+    return wd.findElements(By.xpath("//tr/td/a")).size();
+  }
 }
