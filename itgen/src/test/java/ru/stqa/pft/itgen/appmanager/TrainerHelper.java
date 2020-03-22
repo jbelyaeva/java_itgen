@@ -95,6 +95,15 @@ public class TrainerHelper extends HelperBase {
   }
 
   public int getTrainerCount() {
-    return wd.findElements(By.xpath("//tr/td/a")).size();
+    int count = 0;
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    if (!next.equals("disabled")) {
+      while (!next.equals("disabled")) {
+        count = count + wd.findElements(By.cssSelector("a.btn-link")).size();
+        wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
+        next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+      }
+    }
+    return count + wd.findElements(By.cssSelector("a.btn-link")).size();
   }
 }
