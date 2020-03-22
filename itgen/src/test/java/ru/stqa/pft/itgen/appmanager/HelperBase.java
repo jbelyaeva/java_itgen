@@ -2,7 +2,11 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Instant;
 
 public class HelperBase {
 
@@ -64,6 +68,10 @@ public class HelperBase {
 
   protected int countingWithPaginated() {
     int count = 0;
+    // явное ожидание появления элемента
+    WebDriverWait wait = new WebDriverWait (wd, 2);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
+    //
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {

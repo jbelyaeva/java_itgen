@@ -64,7 +64,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validWorkersFromJson")
+  @Test (dataProvider = "validWorkersFromJson", enabled = false)
   public void testWorkerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
@@ -91,7 +91,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   @Test (dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoTrainer();
-    int before = app.getWorkerHelper().getWorkerCount();
+    int before = app.getTrainerHelper().getTrainerCount();
     app.getNavigationHelper().gotoWorker();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
