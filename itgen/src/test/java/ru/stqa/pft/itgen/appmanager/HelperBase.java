@@ -62,7 +62,7 @@ public class HelperBase {
     return wd.findElements(locator).size() > 0;
   }
 
-  public int countingWithPaginated() {
+  protected int countingWithPaginated() {
     int count = 0;
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     if (!next.equals("disabled")) {
