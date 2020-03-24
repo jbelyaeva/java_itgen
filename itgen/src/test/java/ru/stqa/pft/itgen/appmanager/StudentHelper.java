@@ -98,7 +98,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void selectedFamily() {
-    click(By.xpath("//div[@class='links']//a[3]"));
+    click(By.xpath("//a[contains(@href, 'family')]"));
   }
 
   public void addParentInFamily() {
@@ -125,7 +125,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void deleteFamily() {
-    click(By.cssSelector("button.btn.btn-danger.btn-remove-family"));
+    click(By.xpath("//button[contains(@class, 'btn-remove-family')]"));
   }
 
   public void submitFamilyCreation() {
@@ -135,7 +135,7 @@ public class StudentHelper extends HelperBase {
 
   public void selectedParent() {
     click(By.xpath("//div[2]/div[2]/ul/li/div/a"));
-    //click(By.xpath("//a[contains(@href, '/profile/wNJ8LLQafbx659czN')]"));
+
   }
 
   public void deleteParent() {
