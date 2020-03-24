@@ -35,15 +35,15 @@ public class FamilyCreationTests extends TestBase {
 
   // в этом тесте не передаются тестовые данные для родителей.
   // пока не знаю как сделать провайдер данных, который может передавать данные разных типов из двух файлов
-  @Test(dataProvider = "validStudentsFromJson", enabled = false)
-  public void testFamilyCreation(StudentData student, ParentData parent) {
+  @Test(dataProvider = "validStudentsFromJson")
+  public void testFamilyCreation(StudentData student) {
     app.getNavigationHelper().gotoStudents();
     int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().createFamily();
     app.getStudentHelper().addStudent();
     app.getStudentHelper().addParent();
     app.getStudentHelper().fillStudentForm(student);
-    app.getStudentHelper().fillFamilyParentForm(parent);
+    app.getStudentHelper().fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
     app.getStudentHelper().submitFamilyCreation();
     app.getNavigationHelper().gotoStudents();
     int after = app.getStudentHelper().getStudentCount();
