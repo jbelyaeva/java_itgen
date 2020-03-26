@@ -33,7 +33,7 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void deleteWorker() {
-    click(By.cssSelector("button.btn.btn-danger.btn-sm.btn-remove-user"));
+    click(By.xpath("//button[contains(@class,'remove')]"));
   }
 
   public void assertDeleteSelectedWorker() {
@@ -43,11 +43,11 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void modifyWorker() {
-    click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+    click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void submitWorkerModify() {
-    click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+    click(By.cssSelector("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
