@@ -89,7 +89,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void submitStudentCreation() {
-    click(By.xpath("//button[@class='btn btn-primary btn-create-family']"));
+    click(By.xpath("//button[contains(@class,'create')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
@@ -102,11 +102,11 @@ public class StudentHelper extends HelperBase {
   }
 
   public void addParentInFamily() {
-    click(By.cssSelector("div.gena-panel-btn.btn-add-parent > span.glyphicon.glyphicon-plus-sign"));
+    click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
   }
 
   public void submitParentCreation() {
-    click(By.cssSelector("button.btn.btn-primary.btn-create-family-member"));
+    click(By.xpath("//button[contains(@class, 'family')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
@@ -115,7 +115,7 @@ public class StudentHelper extends HelperBase {
      }
 
   public void deleteStudent() {
-    click(By.xpath("(//button[@type='button'])[2]"));
+    click(By.xpath("//button[contains(@class, 'remove')]"));
   }
 
   public void assertDeleteSelectedParent() {
@@ -134,12 +134,11 @@ public class StudentHelper extends HelperBase {
   }
 
   public void selectedParent() {
-    click(By.xpath("//div[2]/div[2]/ul/li/div/a"));
-
+    click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
   }
 
   public void deleteParent() {
-    click(By.cssSelector("button.btn.btn-danger.btn-sm.btn-remove-user"));
+    click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
   public void assertDeleteSelectedFamily() {
@@ -155,11 +154,11 @@ public class StudentHelper extends HelperBase {
   }
 
   public void modifyStudent() {
-    click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+    click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void submitStudentModify() {
-    click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+    click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
@@ -191,7 +190,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void modifyParent() {
-      click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+    click(By.xpath("//span[contains(@class,'pencil')]"));
     }
 
   public void ModifyParentForm(ParentData parentData) {
@@ -217,7 +216,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void submitParentModify() {
-    click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
+    click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 

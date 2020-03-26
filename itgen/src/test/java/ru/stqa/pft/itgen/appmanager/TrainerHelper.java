@@ -14,7 +14,8 @@ public class TrainerHelper extends HelperBase {
 
 
   public void selectedTrainer() {
-    click(By.xpath("//tr[9]/td/a"));
+    //click(By.xpath("//tr[9]/td/a"));
+    click(By.xpath("//a[contains(@href,'profile')]"));
   }
 
   public void deleteTrainer() {
@@ -28,7 +29,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void modifyTrainer() {
-    click(By.cssSelector("span.small.glyphicon.glyphicon-pencil"));
+    click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void submitTrainerModify() {
