@@ -8,6 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class StudentHelper extends HelperBase {
 
@@ -15,7 +18,7 @@ public class StudentHelper extends HelperBase {
     super(wd);
   }
 
-  public void createFamily() {
+  public  void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
@@ -223,4 +226,46 @@ public class StudentHelper extends HelperBase {
   public int getStudentCount() {
    return countingWithPaginated();
   }
+
+
+  //список студентов , умещающихся на одной странице
+  public List<StudentData> getStudentList() {
+    List<StudentData> students= new ArrayList<StudentData>();
+    List<WebElement> elements= wd.findElements(By.cssSelector("a.btn-link"));
+    for (WebElement element:elements){
+      String getId=element.getAttribute("href");
+      String[] getIdSplit=getId.split("/");
+      String id=getIdSplit[4]; //достали id
+      String name= element.getText();
+      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
+      StudentData student= new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      students.add(student);
+    }
+    return students;
+  }
+
+  public String getIdNewStudent(List<StudentData> before, List<StudentData> after) {
+    int a=0;
+    String  getIdAfter="";
+    for (int i=0; i<after.size();i++){
+               getIdAfter=after.get(i).getId();
+
+         for (int j=0; j<before.size();j++){
+               String getIdBefore=before.get(j).getId();
+                    if(getIdAfter.equals(getIdBefore)){ a=1;break;}
+                    else {a=2;}
+         }
+                if (a==2) {break;}
+    }
+    return getIdAfter;
+  }
+  public void createFamily(StudentData student) {
+    createFamily();
+    addStudent();
+    addParent();
+    fillStudentForm(student);
+    fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
+    submitFamilyCreation();
+    }
 }
+
