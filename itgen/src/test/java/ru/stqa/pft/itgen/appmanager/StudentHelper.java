@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -227,12 +229,33 @@ public class StudentHelper extends HelperBase {
    return countingWithPaginated();
   }
 
-
-  //список студентов , умещающихся на одной странице
+  //студенты с пагинацией
   public List<StudentData> getStudentList() {
     List<StudentData> students= new ArrayList<StudentData>();
+
+    WebDriverWait wait = new WebDriverWait (wd, 2);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements= wd.findElements(By.cssSelector("a.btn-link"));
-    for (WebElement element:elements){
+    if (!next.equals("disabled")) {
+      while (!next.equals("disabled")) {
+
+        for (WebElement element:elements){
+          String getId=element.getAttribute("href");
+          String[] getIdSplit=getId.split("/");
+          String id=getIdSplit[4]; //достали id
+          String name= element.getText();
+          String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
+          StudentData student= new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+          students.add(student);
+        }
+        wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
+        elements.removeAll(elements);
+        elements= wd.findElements(By.cssSelector("a.btn-link"));
+        next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+      }
+    }
+      for (WebElement element:elements){
       String getId=element.getAttribute("href");
       String[] getIdSplit=getId.split("/");
       String id=getIdSplit[4]; //достали id
@@ -259,6 +282,7 @@ public class StudentHelper extends HelperBase {
     }
     return getIdAfter;
   }
+
   public void createFamily(StudentData student) {
     createFamily();
     addStudent();
