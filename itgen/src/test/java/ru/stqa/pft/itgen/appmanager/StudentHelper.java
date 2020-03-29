@@ -268,12 +268,12 @@ public class StudentHelper extends HelperBase {
     for (int i = 0; i < after.size(); i++) {
                getIdAfter = after.get(i).getId();
 
-         for (int j = 0; j < before.size(); j++){
+         for (int j = 0; j < before.size(); j++) {
                String getIdBefore = before.get(j).getId();
-                    if(getIdAfter.equals(getIdBefore)){ a = 1;break;}
-                    else {a = 2;}
+                    if (getIdAfter.equals(getIdBefore)) { a = 1; break;}
+                    else { a = 2;}
          }
-                if (a == 2) {break;}
+                if (a == 2) { break;}
     }
     return getIdAfter;
   }
