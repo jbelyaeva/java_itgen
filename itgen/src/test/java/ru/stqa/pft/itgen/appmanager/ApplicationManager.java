@@ -73,4 +73,5 @@ public class ApplicationManager {
   public TrainerHelper getTrainerHelper() {
     return trainerHelper;
   }
+
 }
