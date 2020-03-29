@@ -232,53 +232,48 @@ public class StudentHelper extends HelperBase {
   //студенты с пагинацией
   public List<StudentData> getStudentList() {
     List<StudentData> students= new ArrayList<StudentData>();
-
     WebDriverWait wait = new WebDriverWait (wd, 2);
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements= wd.findElements(By.cssSelector("a.btn-link"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
-
-        for (WebElement element:elements){
-          String getId=element.getAttribute("href");
-          String[] getIdSplit=getId.split("/");
-          String id=getIdSplit[4]; //достали id
-          String name= element.getText();
-          String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-          StudentData student= new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
-          students.add(student);
-        }
+        includeInListBaseWebElement(students, elements);
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         elements.removeAll(elements);
         elements= wd.findElements(By.cssSelector("a.btn-link"));
         next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
       }
     }
-      for (WebElement element:elements){
-      String getId=element.getAttribute("href");
-      String[] getIdSplit=getId.split("/");
-      String id=getIdSplit[4]; //достали id
-      String name= element.getText();
+    includeInListBaseWebElement(students, elements);
+    return students;
+  }
+  //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
+  //, а ФИ cо страницы ui
+  private void includeInListBaseWebElement(List<StudentData> students, List<WebElement> elements) {
+    for (WebElement element : elements) {
+      String getId = element.getAttribute("href");
+      String[] getIdSplit = getId.split("/");
+      String id = getIdSplit[4]; //достали id
+      String name = element.getText();
       String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-      StudentData student= new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      StudentData student = new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
       students.add(student);
     }
-    return students;
   }
 
   public String getIdNewStudent(List<StudentData> before, List<StudentData> after) {
-    int a=0;
-    String  getIdAfter="";
-    for (int i=0; i<after.size();i++){
-               getIdAfter=after.get(i).getId();
+    int a = 0;
+    String  getIdAfter = "";
+    for (int i = 0; i < after.size(); i++) {
+               getIdAfter = after.get(i).getId();
 
-         for (int j=0; j<before.size();j++){
-               String getIdBefore=before.get(j).getId();
-                    if(getIdAfter.equals(getIdBefore)){ a=1;break;}
-                    else {a=2;}
+         for (int j = 0; j < before.size(); j++){
+               String getIdBefore = before.get(j).getId();
+                    if(getIdAfter.equals(getIdBefore)){ a = 1;break;}
+                    else {a = 2;}
          }
-                if (a==2) {break;}
+                if (a == 2) {break;}
     }
     return getIdAfter;
   }

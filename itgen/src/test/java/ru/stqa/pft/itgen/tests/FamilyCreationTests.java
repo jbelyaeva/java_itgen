@@ -38,19 +38,17 @@ public class FamilyCreationTests extends TestBase {
   @Test(dataProvider = "validStudentsFromJson")
   public void testFamilyCreation(StudentData student) {
     app.getNavigationHelper().gotoStudents();
-    List<StudentData> before=app.getStudentHelper().getStudentList();
+    List<StudentData> before = app.getStudentHelper().getStudentList();
 
     app.getStudentHelper().createFamily(student);
 
     app.getNavigationHelper().gotoStudents();
-    List<StudentData> after=app.getStudentHelper().getStudentList();
+    List<StudentData> after = app.getStudentHelper().getStudentList();
     Assert.assertEquals(after.size(), before.size() +1);
 
-    String id=app.getStudentHelper().getIdNewStudent(before,after);//берем id нового ученика
-    StudentData student_add=new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());
+    String id = app.getStudentHelper().getIdNewStudent(before,after);//берем id нового ученика
+    StudentData student_add = new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());
     before.add(student_add);//создаем ученика с найденным id и данными об ученике из файла
     Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
-
   }
-
 }
