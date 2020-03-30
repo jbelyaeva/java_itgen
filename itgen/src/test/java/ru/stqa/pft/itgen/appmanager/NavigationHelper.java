@@ -20,4 +20,8 @@ public class NavigationHelper extends HelperBase {
   public void gotoTrainer() {
     click(By.xpath("//a[contains(@href, '/trainers')]"));
   }
+
+  public void gotoTasks() {
+    click(By.xpath("//a[contains(@href, '/tasks')]"));
+  }
 }

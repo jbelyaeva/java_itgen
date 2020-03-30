@@ -33,6 +33,7 @@ public class ParentCreationTests extends TestBase {
 
   @Test (dataProvider = "validParentsFromJson")
   public void testParentCreation(ParentData parent) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
     app.getStudentHelper().selectedStudent();
     app.getStudentHelper().selectedFamily();

@@ -34,6 +34,7 @@ public class StudentCreationTests extends TestBase {
 
   @Test (dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
     int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().createFamily();

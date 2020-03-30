@@ -7,6 +7,7 @@ public class FamilyDeletionTests extends TestBase {
 
   @Test
   public void testFamilyDeletion() {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
     int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().selectedStudent();

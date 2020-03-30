@@ -34,6 +34,7 @@ public class StudentModificationTests extends TestBase {
 
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentModification(StudentData student) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
     int before = app.getStudentHelper().getStudentCount();
     app.getStudentHelper().selectedStudent();

@@ -66,6 +66,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersFromJson", enabled = false)
   public void testWorkerCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
@@ -78,6 +79,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersAdminsFromJson", enabled = false)
   public void testWorkerAdminCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
@@ -90,6 +92,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(WorkerData worker) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoTrainer();
     int before = app.getTrainerHelper().getTrainerCount();
     app.getNavigationHelper().gotoWorker();
