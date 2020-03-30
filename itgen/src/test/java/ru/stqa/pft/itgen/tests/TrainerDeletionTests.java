@@ -8,6 +8,7 @@ public class TrainerDeletionTests extends TestBase {
 
   @Test (enabled = false)
   public void testTrainerDeletion() {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoTrainer();
     int before = app.getTrainerHelper().getTrainerCount();
     app.getTrainerHelper().selectedTrainer();  // выбирает 9-го по списку тренера (его надо предварительно создать!!!)
