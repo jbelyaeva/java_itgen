@@ -35,10 +35,21 @@ dependencyManagement {
     }
 }
 
-test {
-    useTestNG()
-}
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+task testStudents(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-students.xml'
+    }
+    if(hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
 }
