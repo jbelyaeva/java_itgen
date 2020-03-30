@@ -43,6 +43,21 @@ tasks.withType(JavaCompile) {
 
 /** описание задачи и пробросы системных свойств через сборщик в запускаемую JVM  */
 
+task testFamilies(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-families.xml'
+    }
+    if(hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(hasProperty('verifyUi')) {
+        systemProperty 'verifyUi', "${verifyUi}"
+    }
+}
+
 task testParents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-parents.xml'
