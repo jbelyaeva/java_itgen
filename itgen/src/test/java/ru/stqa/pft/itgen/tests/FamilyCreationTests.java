@@ -37,6 +37,7 @@ public class FamilyCreationTests extends TestBase {
   // пока не знаю как сделать провайдер данных, который может передавать данные разных типов из двух файлов
   @Test(dataProvider = "validStudentsFromJson")
   public void testFamilyCreation(StudentData student) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
     List<StudentData> before = app.getStudentHelper().getStudentList();
 

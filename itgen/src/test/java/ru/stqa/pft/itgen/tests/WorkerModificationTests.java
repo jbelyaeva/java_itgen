@@ -34,6 +34,7 @@ public class WorkerModificationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {
+    app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().selectedWorker();
