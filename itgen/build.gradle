@@ -47,13 +47,13 @@ task testFamilies(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-families.xml'
     }
-    if(hasProperty('browser')) {
+    if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(hasProperty('target')) {
+    if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(hasProperty('verifyUi')) {
+    if(project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
@@ -62,13 +62,13 @@ task testParents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-parents.xml'
     }
-    if(hasProperty('browser')) {
+    if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(hasProperty('target')) {
+    if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(hasProperty('verifyUi')) {
+    if(project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
@@ -77,13 +77,13 @@ task testStudents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-students.xml'
     }
-    if(hasProperty('browser')) {
+    if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(hasProperty('target')) {
+    if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(hasProperty('verifyUi')) {
+    if(project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
@@ -92,13 +92,13 @@ task testTrainers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-trainers.xml'
     }
-    if(hasProperty('browser')) {
+    if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(hasProperty('target')) {
+    if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(hasProperty('verifyUi')) {
+    if(project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
@@ -107,13 +107,13 @@ task testWorkers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-workers.xml'
     }
-    if(hasProperty('browser')) {
+    if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(hasProperty('target')) {
+    if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(hasProperty('verifyUi')) {
+    if(project.hasProperty('verifyUi')) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
