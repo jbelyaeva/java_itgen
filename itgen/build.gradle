@@ -50,6 +50,9 @@ task testFamilies(type: Test) {
     if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
     if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -80,6 +83,9 @@ task testStudents(type: Test) {
     if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
     if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -95,6 +101,9 @@ task testTrainers(type: Test) {
     if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
     if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
@@ -109,6 +118,9 @@ task testWorkers(type: Test) {
     }
     if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
     }
     if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
