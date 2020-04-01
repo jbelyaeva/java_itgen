@@ -15,6 +15,11 @@ targetCompatibility = JavaVersion.VERSION_1_8
 repositories {
     mavenCentral()
 }
+
+configurations {
+    agent
+}
+
 dependencies {
     implementation 'org.testng:testng:7.1.0'
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
@@ -27,6 +32,9 @@ dependencies {
     compile group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
     compile group: 'org.jboss.jbossts', name: 'jbossjta'
     compile group: 'org.hibernate', name: 'hibernate-search-orm'
+
+    agent "org.aspectj:aspectjweaver:1.8.0"
+    compile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0.RC4"
 }
 
 dependencyManagement {
@@ -40,9 +48,9 @@ tasks.withType(JavaCompile) {
 }
 
 
-
 /** описание задачи и пробросы системных свойств через сборщик в запускаемую JVM  */
 
+//
 task testFamilies(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-families.xml'
@@ -60,6 +68,11 @@ task testFamilies(type: Test) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
+
+testFamilies.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
 
 task testParents(type: Test) {
     useTestNG {
@@ -79,6 +92,11 @@ task testParents(type: Test) {
     }
 }
 
+testParents.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
+
 task testStudents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-students.xml'
@@ -96,6 +114,11 @@ task testStudents(type: Test) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
+
+testStudents.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
 
 task testTrainers(type: Test) {
     useTestNG {
@@ -115,6 +138,11 @@ task testTrainers(type: Test) {
     }
 }
 
+testTrainers.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
+
 task testWorkers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-workers.xml'
@@ -132,5 +160,10 @@ task testWorkers(type: Test) {
         systemProperty 'verifyUi', "${verifyUi}"
     }
 }
+
+testWorkers.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
 
 

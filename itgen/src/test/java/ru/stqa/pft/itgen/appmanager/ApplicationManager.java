@@ -46,7 +46,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows")));
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows"))); // platform
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
     wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -88,4 +88,7 @@ public class ApplicationManager {
     return trainerHelper;
   }
 
+  public byte[] takeScreenshot() {
+    return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+  }
 }
