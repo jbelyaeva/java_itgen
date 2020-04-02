@@ -3,8 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/tests/FamilyCreationTests.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/logback.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/resources/testng-contacts.xml" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/resources/testng-groups.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata" charset="windows-1251" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

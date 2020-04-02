@@ -44,7 +44,7 @@ dependencyManagement {
     }
 }
 
-// решение проблемы с
+// СЂРµС€РµРЅРёРµ РїСЂРѕР±Р»РµРјС‹:
 // SLF4J: Class path contains multiple SLF4J bindings
 // log4j:WARN No appenders could be found for logger (org.jboss.logging)
 
@@ -61,8 +61,7 @@ tasks.withType(JavaCompile) {
 
 
 
-/** описание задачи и пробросы системных свойств через сборщик в запускаемую JVM  */
-
+/** РѕРїРёСЃР°РЅРёРµ Р·Р°РґР°С‡Рё Рё РїСЂРѕР±СЂРѕСЃС‹ СЃРёСЃС‚РµРјРЅС‹С… СЃРІРѕР№СЃС‚РІ С‡РµСЂРµР· СЃР±РѕСЂС‰РёРє РІ Р·Р°РїСѓСЃРєР°РµРјСѓСЋ JVM  */
 //
 task testFamilies(type: Test) {
     useTestNG {
