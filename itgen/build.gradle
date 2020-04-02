@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "io.spring.dependency-management" version "1.0.0.RC2"
+    id  'project-report'
 }
 
 group 'test1'
@@ -42,6 +43,17 @@ dependencyManagement {
         mavenBom('org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final')
     }
 }
+
+// решение проблемы с
+// SLF4J: Class path contains multiple SLF4J bindings
+// log4j:WARN No appenders could be found for logger (org.jboss.logging)
+
+configurations.all {
+    exclude (group:"org.slf4j", module: "slf4j-simple")
+    exclude (group:"log4j", module: "log4j")
+}
+
+//
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
