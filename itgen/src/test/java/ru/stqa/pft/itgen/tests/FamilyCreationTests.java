@@ -45,7 +45,7 @@ public class FamilyCreationTests extends TestBase {
 
     app.getNavigationHelper().gotoStudents();
     List<StudentData> after = app.getStudentHelper().getStudentList();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Assert.assertEquals(after.size(), before.size() + 10);
 
     String id = app.getStudentHelper().getIdNewStudent(before,after);//берем id нового ученика
     StudentData student_add = new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());

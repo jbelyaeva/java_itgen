@@ -88,4 +88,7 @@ public class ApplicationManager {
     return trainerHelper;
   }
 
+  public byte[] takeScreenshot() {
+    return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+  }
 }
