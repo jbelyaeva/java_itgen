@@ -47,7 +47,7 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void submitWorkerModify() {
-    click(By.cssSelector("//button[contains(@class,'save')]"));
+    click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
