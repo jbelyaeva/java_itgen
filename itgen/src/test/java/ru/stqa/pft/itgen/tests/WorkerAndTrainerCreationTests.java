@@ -90,7 +90,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     Assert.assertEquals(after, before +1);
   }
 
-  @Test (dataProvider = "validWorkersTrainersFromJson")
+  @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testWorkerTrainerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoTrainer();
