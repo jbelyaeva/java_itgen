@@ -27,6 +27,7 @@ dependencies {
     compile group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
     compile group: 'org.jboss.jbossts', name: 'jbossjta'
     compile group: 'org.hibernate', name: 'hibernate-search-orm'
+   // implementation 'com.vladmihalcea:hibernate-types-52:2.9.7'//использование array как тип данных
 }
 
 dependencyManagement {

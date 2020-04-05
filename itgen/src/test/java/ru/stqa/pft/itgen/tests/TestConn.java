@@ -3,7 +3,8 @@ package ru.stqa.pft.itgen.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.Hike3;
+import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.StudentData1;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +16,7 @@ public class TestConn {
 
   @BeforeMethod
   public static void setUpEntityManagerFactory() {
-    entityManagerFactory = Persistence.createEntityManagerFactory( "hike-Pu" );
+    entityManagerFactory = Persistence.createEntityManagerFactory( "studentData" );
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
     entityManager.getTransaction().commit();
@@ -35,9 +36,9 @@ public class TestConn {
     // Start transaction
     entityManager.getTransaction().begin();
     // Find all the available hikes ordered by difficulty
-    List<Hike3> hikes = entityManager.createQuery( "SELECT h FROM Hike3 h" , Hike3.class ).getResultList();
-    for (Hike3 group : hikes) {
-      System.out.println(group);
+    List<StudentData1> students = entityManager.createQuery( "SELECT n FROM StudentData1 n " , StudentData1.class ).getResultList();
+    for (StudentData1 student : students) {
+      System.out.println(student);
     }
     entityManager.getTransaction().commit();
     entityManager.close();

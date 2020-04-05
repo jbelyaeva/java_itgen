@@ -1,39 +1,50 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class StudentData {
+public class StudentData1 {
 
   @Expose
   @Id
   private String id;
   @Expose
+  @Column(name="firstName")
   private String firstname;
   @Expose
+  @Column(name="lastName")
   private String lastname;
   @Expose
-  private String gender;
+  @Column(name="gender")
+  private Integer gender;
   @Expose
-  private String birthday;
+  @Column(name="birthday")
+  @Temporal(TemporalType.DATE)
+  private java.util.Date birthday;
   @Expose
+  @Column(name="pcLevel")
   private String pclevel;
   @Expose
+  @Column(name="country")
   private String country;
   @Expose
+  @Column(name="city")
   private String city;
   @Expose
+  @Column(name="tz")
   private String timezone;
   @Expose
+  @Column(name="locale")
   private String locate;
   @Expose
-  private String studyLang;
+  @Column(name="langs")
+  private String[] studyLang;/*
   @Expose
   private String duration;
   @Expose
@@ -61,126 +72,126 @@ public class StudentData {
   @Expose
   private String note;
 
-
-  public StudentData withId(String id) {
+*/
+  public StudentData1 withId(String id) {
     this.id = id;
     return this;
   }
-  public StudentData withFirstName(String firstname) {
+  public StudentData1 withFirstName(String firstname) {
     this.firstname = firstname;
     return this;
   }
 
-  public StudentData withLastName(String lastname) {
+  public StudentData1 withLastName(String lastname) {
     this.lastname = lastname;
     return this;
   }
 
-  public StudentData withGender(String gender) {
+  public StudentData1 withGender(Integer gender) {
     this.gender = gender;
     return this;
   }
 
-  public StudentData withBirthday(String birthday) {
+  public StudentData1 withBirthday(java.util.Date birthday) {
     this.birthday = birthday;
     return this;
   }
 
-  public StudentData withPclevel(String pclevel) {
+  public StudentData1 withPclevel(String pclevel) {
     this.pclevel = pclevel;
     return this;
   }
 
-  public StudentData withCountry(String country) {
+  public StudentData1 withCountry(String country) {
     this.country = country;
     return this;
   }
 
-  public StudentData withCity(String city) {
+  public StudentData1 withCity(String city) {
     this.city = city;
     return this;
   }
 
-  public StudentData withTimeZone(String timezone) {
+  public StudentData1 withTimeZone(String timezone) {
     this.timezone = timezone;
     return this;
   }
 
-  public StudentData withLocate(String locate) {
+  public StudentData1 withLocate(String locate) {
     this.locate = locate;
     return this;
   }
 
-  public StudentData withStudyLang(String studyLang) {
+  public StudentData1 withStudyLang(String[] studyLang) {
     this.studyLang = studyLang;
     return this;
   }
-
-  public StudentData withDuration(String duration) {
+/*
+  public StudentData1 withDuration(String duration) {
     this.duration = duration;
     return this;
   }
 
-  public StudentData withPhone(String phone) {
+  public StudentData1 withPhone(String phone) {
     this.phone = phone;
     return this;
   }
 
-  public StudentData withSkype(String skype) {
+  public StudentData1 withSkype(String skype) {
     this.skype = skype;
     return this;
   }
 
-  public StudentData withC2d(String c2d) {
+  public StudentData1 withC2d(String c2d) {
     this.c2d = c2d;
     return this;
   }
 
-  public StudentData withViber(String viber) {
+  public StudentData1 withViber(String viber) {
     this.viber = viber;
     return this;
   }
 
-  public StudentData withWhatsapp(String whatsapp) {
+  public StudentData1 withWhatsapp(String whatsapp) {
     this.whatsapp = whatsapp;
     return this;
   }
 
-  public StudentData withTelegram(String telegram) {
+  public StudentData1 withTelegram(String telegram) {
     this.telegram = telegram;
     return this;
   }
 
-  public StudentData withFb(String fb) {
+  public StudentData1 withFb(String fb) {
     this.fb = fb;
     return this;
   }
 
-  public StudentData withVk(String vk) {
+  public StudentData1 withVk(String vk) {
     this.vk = vk;
     return this;
   }
 
-  public StudentData withOk(String ok) {
+  public StudentData1 withOk(String ok) {
     this.ok = ok;
     return this;
   }
 
-  public StudentData withInst(String inst) {
+  public StudentData1 withInst(String inst) {
     this.inst = inst;
     return this;
   }
 
-  public StudentData withFamilyId(String familyId) {
+  public StudentData1 withFamilyId(String familyId) {
     this.familyId = familyId;
     return this;
   }
 
-  public StudentData withNote(String note) {
+  public StudentData1 withNote(String note) {
     this.note = note;
     return this;
   }
-
+*/
   public String getId() {
     return id;
   }
@@ -192,11 +203,11 @@ public class StudentData {
     return lastname;
   }
 
-  public String getGender() {
+  public Integer getGender() {
     return gender;
   }
 
-  public String getBirthday() {
+  public Date getBirthday() {
     return birthday;
   }
 
@@ -220,68 +231,25 @@ public class StudentData {
     return locate;
   }
 
-  public String getStudyLang() {
+  public String[] getStudyLang() {
     return studyLang;
   }
 
-  public String getDuration() {
-    return duration;
-  }
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public String getSkype() {
-    return skype;
-  }
-
-  public String getC2d() {
-    return c2d;
-  }
-
-  public String getViber() {
-    return viber;
-  }
-
-  public String getWhatsapp() {
-    return whatsapp;
-  }
-
-  public String getTelegram() {
-    return telegram;
-  }
-
-  public String getFb() {
-    return fb;
-  }
-
-  public String getVk() {
-    return vk;
-  }
-
-  public String getOk() {
-    return ok;
-  }
-
-  public String getInst() {
-    return inst;
-  }
-
-  public String getFamilyId() {
-    return familyId;
-  }
-
-  public String getNote() {
-    return note;
-  }
 
   @Override
   public String toString() {
-    return "StudentData{" +
+    return "StudentData1{" +
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", gender='" + gender + '\'' +
+            ", birthday='" + birthday + '\'' +
+            ", pclevel='" + pclevel + '\'' +
+            ", country='" + country + '\'' +
+            ", city='" + city + '\'' +
+            ", timezone='" + timezone + '\'' +
+            ", locate='" + locate + '\'' +
+            ", studyLang='" + studyLang + '\'' +
             '}';
   }
 
@@ -289,7 +257,7 @@ public class StudentData {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    StudentData that = (StudentData) o;
+    StudentData1 that = (StudentData1) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname);
