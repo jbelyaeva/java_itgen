@@ -64,7 +64,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validWorkersFromJson", enabled = false)
+  @Test (dataProvider = "validWorkersFromJson")
   public void testWorkerCreation(WorkerData worker) {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoWorker();
