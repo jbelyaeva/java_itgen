@@ -87,7 +87,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     app.getWorkerHelper().submitWorkerCreation();
     app.getNavigationHelper().gotoWorker();
     int after = app.getWorkerHelper().getWorkerCount();
-    Assert.assertEquals(after, before +1);
+    Assert.assertEquals(after, before + 1);
   }
 
   @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
