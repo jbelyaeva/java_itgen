@@ -7,6 +7,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import java.io.File;
 import java.io.FileReader;
@@ -90,5 +95,15 @@ public class ApplicationManager {
 
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+  }
+
+
+
+  public Screenshot getScreenShert(String locator) {
+    Screenshot actualScreenshot;
+   // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
+    WebDriverWait wait = new WebDriverWait (wd, 5);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
+    return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
   }
 }
