@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/appmanager/ApplicationManager.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/tests/FamilyCreationTests.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/tests/MyTestListener.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/tests/SshotStudents.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/ru/stqa/pft/itgen/tests/StudentModificationTests.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/logback.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/testdata" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/parents_creation.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/parents_modification.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/students_creation.json" charset="UTF-8" />
     <file url="PROJECT" charset="windows-1251" />
   </component>
 </project>

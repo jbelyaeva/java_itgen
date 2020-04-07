@@ -27,24 +27,24 @@ public class SshotStudents  extends TestBase {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
 
-   //уводим курсор в верхний левый угол экрана
+   //СѓРІРѕРґРёРј РєСѓСЂСЃРѕСЂ РІ РІРµСЂС…РЅРёР№ Р»РµРІС‹Р№ СѓРіРѕР» СЌРєСЂР°РЅР°
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
-    //получаем
-    Screenshot actualScreenshot=app.getScreenShert("//body//th[1]");//взять скриншот после появления элемента с локатором
-    //сохраняем
- //   File expectedFile = new File(expected+name+".png"); //закоммитить после создания эталонного снимка
-  //  ImageIO.write(actualScreenshot.getImage(), "png", expectedFile);//закоммитить после создания эталонного снимка
+    //РїРѕР»СѓС‡Р°РµРј
+    Screenshot actualScreenshot=app.getScreenShert("//body//th[1]");//РІР·СЏС‚СЊ СЃРєСЂРёРЅС€РѕС‚ РїРѕСЃР»Рµ РїРѕСЏРІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° СЃ Р»РѕРєР°С‚РѕСЂРѕРј
+    //СЃРѕС…СЂР°РЅСЏРµРј
+ //   File expectedFile = new File(expected+name+".png"); //Р·Р°РєРѕРјРјРёС‚РёС‚СЊ РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ СЌС‚Р°Р»РѕРЅРЅРѕРіРѕ СЃРЅРёРјРєР°
+  //  ImageIO.write(actualScreenshot.getImage(), "png", expectedFile);//Р·Р°РєРѕРјРјРёС‚РёС‚СЊ РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРёСЏ СЌС‚Р°Р»РѕРЅРЅРѕРіРѕ СЃРЅРёРјРєР°
     File actualFile = new File(actual+name+".png");
     ImageIO.write(actualScreenshot.getImage(), "png", actualFile);
 
-    //берем эталонный снимок
+    //Р±РµСЂРµРј СЌС‚Р°Р»РѕРЅРЅС‹Р№ СЃРЅРёРјРѕРє
     Screenshot expectedScreenshot = new Screenshot(ImageIO.read(new File(expected+name+".png")));
 
-    //сравниваем
+    //СЃСЂР°РІРЅРёРІР°РµРј
     ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
 
-    //результат
+    //СЂРµР·СѓР»СЊС‚Р°С‚
     int rez=diff.getDiffSize();
     if (rez!=0){
       File diffFile = new File(markedImages+name+".png");
@@ -52,7 +52,7 @@ public class SshotStudents  extends TestBase {
     }
     Assert.assertEquals(diff.getDiffSize(), 0);
 
-    //добавим результат в Allure
+    //РґРѕР±Р°РІРёРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ Allure
 
     /* AllureAttachments.attachScreen(expectedFile.getAbsolutePath(), "Expected: "+name);
     AllureAttachments.attachScreen(actualFile.getAbsolutePath(), "Actual: "+name);

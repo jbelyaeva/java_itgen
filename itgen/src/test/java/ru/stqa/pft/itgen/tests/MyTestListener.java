@@ -26,7 +26,7 @@ public class MyTestListener implements ITestListener {
   public void onTestFailure(ITestResult result) {
     ApplicationManager app = (ApplicationManager) result.getTestContext().getAttribute("app");
     saveScreenshot(app.takeScreenshot());
-  /*  try {                                       //тоже добавочка для скриншот-тестирования
+  /*  try {                                       //С‚РѕР¶Рµ РґРѕР±Р°РІРѕС‡РєР° РґР»СЏ СЃРєСЂРёРЅС€РѕС‚-С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ
       getScreenShot("students_RU_Chrome.png");
     } catch (IOException e) {
       e.printStackTrace();
@@ -38,7 +38,7 @@ public class MyTestListener implements ITestListener {
     return screenShot;
   }
 
-  //прикладывание аттача для скриншот тестирования
+  //РїСЂРёРєР»Р°РґС‹РІР°РЅРёРµ Р°С‚С‚Р°С‡Р° РґР»СЏ СЃРєСЂРёРЅС€РѕС‚ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ
  /*@Attachment()
   public static byte[] getScreenShot (String resourceName) throws IOException {
     return Files.readAllBytes(Paths.get("./src/test/testsScreenshot/markedImages/", resourceName));
