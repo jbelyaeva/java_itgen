@@ -2,10 +2,10 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
+import org.hibernate.type.ArrayType;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -42,11 +42,34 @@ public class StudentData1 {
   @Expose
   @Column(name="locale")
   private String locate;
- /* @Expose
-  @Column(name="langs")
-  private String[] studyLang;/*
   @Expose
+
+  //@ElementCollection
+ // @Column(name="langs",columnDefinition = "text[]")
+ // @SuppressWarnings("JpaAttributeTypeInspection")
+//  @Convert(converter = ArrayUserType.class)
+ // private List<String> studyLang;
+  //  private ArrayType studyLang;
+
+  @ElementCollection
+  @Column(name="langs")
+  private List<StudyLang> studyLang = new ArrayList<StudyLang>();
+  @Embeddable
+    public class StudyLang {
+    private String value;
+
+    public String getLang() {
+      return value;
+    }
+    public void setLang(String lang) {
+      this.value = value;
+    }
+  }
+
+
+ /* @Expose
   private String duration;
+  /*
   @Expose
   private String phone;
   @Expose
@@ -122,10 +145,15 @@ public class StudentData1 {
     return this;
   }
 
- /* public StudentData1 withStudyLang(String[] studyLang) {
-    this.studyLang = studyLang;
-    return this;
+  public List<StudyLang> getStudyLang() {
+    return studyLang;
   }
+
+  public void setStudyLang(List<StudyLang> studyLang) {
+    this.studyLang = studyLang;
+  }
+
+
 /*
   public StudentData1 withDuration(String duration) {
     this.duration = duration;
@@ -231,7 +259,7 @@ public class StudentData1 {
     return locate;
   }
 
-  /*public String[] getStudyLang() {
+ /* public String[] getStudyLang() {
     return studyLang;
   }*/
 
@@ -242,14 +270,14 @@ public class StudentData1 {
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", gender='" + gender + '\'' +
-            ", birthday='" + birthday + '\'' +
+            ", gender=" + gender +
+            ", birthday=" + birthday +
             ", pclevel='" + pclevel + '\'' +
             ", country='" + country + '\'' +
             ", city='" + city + '\'' +
             ", timezone='" + timezone + '\'' +
             ", locate='" + locate + '\'' +
-          //  ", studyLang='" + studyLang + '\'' +
+            ", studyLang=" + studyLang +
             '}';
   }
 

@@ -20,7 +20,7 @@ public class TestConn {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
     entityManager.getTransaction().commit();
-    // get a new EM to make sure data is actually retrieved from the store and not Hibernate’s internal cache
+    // get a new EM to make sure data is actually retrieved from the store and not Hibernates internal cache
     entityManager.close();
   }
 
