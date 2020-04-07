@@ -29,6 +29,12 @@
     <file url="file://$PROJECT_DIR$/src/test/resources/testdata/parents_creation.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/testdata/parents_modification.json" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/test/resources/testdata/students_creation.json" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/students_modification.json" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/workers_admins_creation.json" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/workers_creation.json" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/workers_modification.json" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/workers_trainers_creation.json" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata/workers_trainers_modification.json" charset="windows-1251" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
