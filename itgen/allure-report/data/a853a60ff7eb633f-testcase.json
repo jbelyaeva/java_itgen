@@ -1,0 +1,35 @@
+{
+  "uid" : "a853a60ff7eb633f",
+  "name" : "testFamilyCreation[StudentData{id='null', firstname='Петя0', lastname='Маслов0'}]",
+  "title" : "Test family creation [StudentData{id='null', firstname='Петя0', lastname='Маслов0'}]",
+  "time" : {
+    "start" : 1586103888008,
+    "stop" : 1586103910352,
+    "duration" : 22344
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 0
+  },
+  "failure" : null,
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "PASSED",
+  "testId" : null,
+  "suite" : {
+    "uid" : "2b33c3b8140885d2",
+    "name" : "Suite1",
+    "title" : "Suite 1"
+  },
+  "steps" : [ ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "suite-name",
+    "value" : "Suite1"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  } ],
+  "parameters" : [ ]
+}

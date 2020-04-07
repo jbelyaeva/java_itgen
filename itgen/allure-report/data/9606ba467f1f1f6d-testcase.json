@@ -1,0 +1,35 @@
+{
+  "uid" : "9606ba467f1f1f6d",
+  "name" : "canSearchUsingJPQLQuery",
+  "title" : "Can search using JPQL query",
+  "time" : {
+    "start" : 1586078763484,
+    "stop" : 1586078763829,
+    "duration" : 345
+  },
+  "summary" : {
+    "attachments" : 0,
+    "steps" : 0
+  },
+  "failure" : null,
+  "description" : null,
+  "severity" : "NORMAL",
+  "status" : "PASSED",
+  "testId" : null,
+  "suite" : {
+    "uid" : "de6a2383e34bafd4",
+    "name" : "Default Suite",
+    "title" : "Default suite"
+  },
+  "steps" : [ ],
+  "attachments" : [ ],
+  "issues" : [ ],
+  "labels" : [ {
+    "name" : "suite-name",
+    "value" : "Default Suite"
+  }, {
+    "name" : "suite-title",
+    "value" : null
+  } ],
+  "parameters" : [ ]
+}

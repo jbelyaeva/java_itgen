@@ -42,7 +42,7 @@ public class StudentData1 {
   @Expose
   @Column(name="locale")
   private String locate;
-  @Expose
+ /* @Expose
   @Column(name="langs")
   private String[] studyLang;/*
   @Expose
@@ -122,7 +122,7 @@ public class StudentData1 {
     return this;
   }
 
-  public StudentData1 withStudyLang(String[] studyLang) {
+ /* public StudentData1 withStudyLang(String[] studyLang) {
     this.studyLang = studyLang;
     return this;
   }
@@ -231,9 +231,9 @@ public class StudentData1 {
     return locate;
   }
 
-  public String[] getStudyLang() {
+  /*public String[] getStudyLang() {
     return studyLang;
-  }
+  }*/
 
 
   @Override
@@ -249,7 +249,7 @@ public class StudentData1 {
             ", city='" + city + '\'' +
             ", timezone='" + timezone + '\'' +
             ", locate='" + locate + '\'' +
-            ", studyLang='" + studyLang + '\'' +
+          //  ", studyLang='" + studyLang + '\'' +
             '}';
   }
 

@@ -1,0 +1,14 @@
+{
+  "testCases" : [ {
+    "uid" : "395f5683703bdb02",
+    "name" : "testSshotStudents",
+    "title" : "Test sshot students",
+    "time" : {
+      "start" : 1586106453572,
+      "stop" : 1586106458868,
+      "duration" : 5296
+    },
+    "severity" : "NORMAL",
+    "status" : "FAILED"
+  } ]
+}
