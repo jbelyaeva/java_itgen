@@ -6,6 +6,7 @@
         <classes>
             <class name="ru.stqa.pft.itgen.tests.FamilyCreationTests" />
             <class name="ru.stqa.pft.itgen.tests.FamilyDeletionTests" />
+         <!--   <class name="ru.stqa.pft.itgen.tests.SshotStudents" />  -->
         </classes>
     </test>
 </suite>
