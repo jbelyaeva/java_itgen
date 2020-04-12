@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.StudentData1;
+import ru.stqa.pft.itgen.model.StudentData2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +52,28 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
 
   }
+/*  public void fillStudentForm1(StudentData1 studentData) {
+    type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
+    type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
+    dropDownList(By.cssSelector("#profile-gender"), studentData.getGender());
+    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
+    dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
+    dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
+    type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
+    dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
+    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getContacts());
+    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), studentData.getSkype());
+    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), studentData.getC2d());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), studentData.getWhatsapp());
+    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
+    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), studentData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
+    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
+    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
+
+  }*/
 
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());

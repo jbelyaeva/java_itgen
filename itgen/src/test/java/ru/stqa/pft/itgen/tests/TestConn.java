@@ -5,6 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.StudentData1;
+import ru.stqa.pft.itgen.model.StudentData2;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

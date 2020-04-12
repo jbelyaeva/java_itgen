@@ -1,9 +1,5 @@
 package ru.stqa.pft.itgen.model;
 
-import com.google.gson.annotations.Expose;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.ArrayType;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -11,71 +7,85 @@ import java.util.*;
 @Table(name = "users")
 public class StudentData1 {
 
-  @Expose
+ // @Expose
   @Id
   private String id;
-  @Expose
+  //@Expose
   @Column(name="firstName")
   private String firstname;
-  @Expose
+ // @Expose
   @Column(name="lastName")
   private String lastname;
-  @Expose
+ // @Expose
   @Column(name="gender")
   private Integer gender;
-  @Expose
+  //@Expose
   @Column(name="birthday")
   @Temporal(TemporalType.DATE)
   private java.util.Date birthday;
-  @Expose
+ // @Expose
   @Column(name="pcLevel")
   private String pclevel;
-  @Expose
+ // @Expose
   @Column(name="country")
   private String country;
-  @Expose
+  //@Expose
   @Column(name="city")
   private String city;
-  @Expose
+  //@Expose
   @Column(name="tz")
   private String timezone;
-  @Expose
+ // @Expose
   @Column(name="locale")
   private String locate;
-  @Expose
-
-  //@ElementCollection
- // @Column(name="langs",columnDefinition = "text[]")
- // @SuppressWarnings("JpaAttributeTypeInspection")
-//  @Convert(converter = ArrayUserType.class)
- // private List<String> studyLang;
-  //  private ArrayType studyLang;
+//  @Expose
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name="[langs]")
+  private List<String> langs = new ArrayList<String>();
+// @Expose
+ @Column(name="duration")
+  private Integer duration;
 
   @ElementCollection
-  @Column(name="langs")
-  private List<StudyLang> studyLang = new ArrayList<StudyLang>();
-  @Embeddable
-    public class StudyLang {
-    private String value;
+  @Column( name = "contacts" )
+  private List<StudentData1.Contacts> contacts = new ArrayList<StudentData1.Contacts>();
+           @Embeddable
+           public static class Contacts {
+           private String type;
+           private String val;
 
-    public String getLang() {
-      return value;
-    }
-    public void setLang(String lang) {
-      this.value = value;
-    }
-  }
+             public String getType() {
+              return type;
+             }
 
+          /*   public static List<Contacts> withType(String type) {
+               this.type = type;
+               return this;
+             }*/
 
- /* @Expose
-  private String duration;
+             public String getVal() {
+               return val;
+             }
+
+             public Contacts withVal(String val) {
+               this.val = val;
+               return this;
+             }
+
+             @Override
+           public String toString() {
+             return "{" +
+              "'" + type + '\'' +
+              "," + val + '\'' +
+              '}';
+           }
+           }
   /*
-  @Expose
-  private String phone;
   @Expose
   private String skype;
   @Expose
   private String c2d;
+
   @Expose
   private String viber;
   @Expose
@@ -145,26 +155,24 @@ public class StudentData1 {
     return this;
   }
 
-  public List<StudyLang> getStudyLang() {
-    return studyLang;
+  public StudentData1 withStudyLang(List<String> studyLang)
+  {
+    this.langs = studyLang;
+    return this;
   }
 
-  public void setStudyLang(List<StudyLang> studyLang) {
-    this.studyLang = studyLang;
-  }
 
-
-/*
-  public StudentData1 withDuration(String duration) {
+  public StudentData1 withDuration(Integer duration) {
     this.duration = duration;
     return this;
   }
 
-  public StudentData1 withPhone(String phone) {
-    this.phone = phone;
+   public StudentData1 withContacts(List<StudentData1.Contacts> contacts) {
+    this.contacts = contacts;
     return this;
-  }
 
+  }
+/*
   public StudentData1 withSkype(String skype) {
     this.skype = skype;
     return this;
@@ -259,10 +267,17 @@ public class StudentData1 {
     return locate;
   }
 
- /* public String[] getStudyLang() {
-    return studyLang;
-  }*/
+  public List<String> getStudyLang() {
+    return langs;
+  }
 
+  public Integer getDuration() {
+    return duration;
+  }
+
+  public List<StudentData1.Contacts> getContacts() {
+    return contacts;
+  }
 
   @Override
   public String toString() {
@@ -277,7 +292,9 @@ public class StudentData1 {
             ", city='" + city + '\'' +
             ", timezone='" + timezone + '\'' +
             ", locate='" + locate + '\'' +
-            ", studyLang=" + studyLang +
+            ", studyLang=" + langs +
+            ", duration='" + duration + '\'' +
+            ", contacts='" + contacts + '\'' +
             '}';
   }
 
@@ -296,3 +313,4 @@ public class StudentData1 {
     return Objects.hash(id, firstname, lastname);
   }
 }
+
