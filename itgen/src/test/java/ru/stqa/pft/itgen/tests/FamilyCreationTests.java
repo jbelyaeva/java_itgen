@@ -2,19 +2,23 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.appmanager.StudentHelper;
-import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
+import javax.management.Query;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FamilyCreationTests extends TestBase {
 
@@ -39,17 +43,20 @@ public class FamilyCreationTests extends TestBase {
   public void testFamilyCreation(StudentData student) {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    List<StudentData> before = app.getStudentHelper().getStudentList();
+    List<StudentData> before = app.students().list();
 
-    app.getStudentHelper().createFamily(student);
+    app.students().createFamily(student);
 
     app.getNavigationHelper().gotoStudents();
-    List<StudentData> after = app.getStudentHelper().getStudentList();
-    Assert.assertEquals(after.size(), before.size() + 1);
-
-    String id = app.getStudentHelper().getIdNewStudent(before,after);//берем id нового ученика
+    List<StudentData> after = app.students().list();
+    Assert.assertEquals(after.size(),before.size()+1);
+ //   assertThat(after.size(), equalTo(before.size() + 1));
+    String id = app.students().getIdNewStudent(before,after);//берем id нового ученика
     StudentData student_add = new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());
     before.add(student_add);//создаем ученика с найденным id и данными об ученике из файла
-    Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
+
+   // Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
+    assertThat(new HashSet<Object>(after), equalTo(new HashSet<Object>(before)));
+
   }
 }

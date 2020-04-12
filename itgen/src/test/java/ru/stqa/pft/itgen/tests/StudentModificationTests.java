@@ -36,13 +36,13 @@ public class StudentModificationTests extends TestBase {
   public void testStudentModification(StudentData student) {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    int before = app.getStudentHelper().getStudentCount();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().modifyStudent();
-    app.getStudentHelper().ModifyStudentForm(student);
-    app.getStudentHelper().submitStudentModify();
+    int before = app.students().getStudentCount();
+    app.students().selectedStudent();
+    app.students().modifyStudent();
+    app.students().ModifyStudentForm(student);
+    app.students().submitStudentModify();
     app.getNavigationHelper().gotoStudents();
-    int after = app.getStudentHelper().getStudentCount();
+    int after = app.students().getStudentCount();
     Assert.assertEquals(after, before);
   }
 }

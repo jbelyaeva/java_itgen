@@ -8,11 +8,11 @@ public class ParentDeletionTests extends TestBase {
   public void testParentDeletion() {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().selectedParent();
-    app.getStudentHelper().deleteParent();
-    app.getStudentHelper().assertDeleteSelectedParent();
+    app.students().selectedStudent();
+    app.students().selectedFamily();
+    app.students().selectedParent();
+    app.students().deleteParent();
+    app.students().assertDeleteSelectedParent();
   }
 
 }

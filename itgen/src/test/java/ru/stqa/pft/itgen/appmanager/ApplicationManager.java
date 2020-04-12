@@ -85,7 +85,7 @@ public class ApplicationManager {
     return navigationHelper;
   }
 
-  public StudentHelper getStudentHelper() {
+  public StudentHelper students() {
     return studentHelper;
   }
 

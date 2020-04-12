@@ -2,14 +2,24 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class StudentData {
   @Expose
+  @Id
+  @Column(name="_id")
   private String id;
   @Expose
+  @Column(name="firstName")
   private String firstname;
   @Expose
+  @Column(name="lastName")
   private String lastname;
   @Expose
   private String gender;
@@ -268,6 +278,7 @@ public class StudentData {
   public String getNote() {
     return note;
   }
+
 
   @Override
   public String toString() {

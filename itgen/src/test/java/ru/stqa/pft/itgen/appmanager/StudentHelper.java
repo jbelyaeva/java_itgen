@@ -230,7 +230,7 @@ public class StudentHelper extends HelperBase {
   }
 
   //студенты с пагинацией
-  public List<StudentData> getStudentList() {
+  public List<StudentData> list() {
     List<StudentData> students= new ArrayList<StudentData>();
     WebDriverWait wait = new WebDriverWait (wd, 2);
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
@@ -248,6 +248,7 @@ public class StudentHelper extends HelperBase {
     includeInListBaseWebElement(students, elements);
     return students;
   }
+
   //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
   //, а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<StudentData> students, List<WebElement> elements) {

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.*;
 import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.StudentData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,10 +34,10 @@ public class ParentCreationTests extends TestBase {
   public void testParentCreation(ParentData parent) {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().addParentInFamily();
-    app.getStudentHelper().fillParentForm(parent);
-    app.getStudentHelper().submitParentCreation();
+    app.students().selectedStudent();
+    app.students().selectedFamily();
+    app.students().addParentInFamily();
+    app.students().fillParentForm(parent);
+    app.students().submitParentCreation();
   }
 }

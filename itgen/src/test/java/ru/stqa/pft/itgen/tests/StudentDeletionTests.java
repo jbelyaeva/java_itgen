@@ -9,12 +9,12 @@ public class StudentDeletionTests extends TestBase {
   public void testStudentDeletion() {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    int before = app.getStudentHelper().getStudentCount();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().deleteStudent();
-    app.getStudentHelper().assertDeleteSelectedStudent();
+    int before = app.students().getStudentCount();
+    app.students().selectedStudent();
+    app.students().deleteStudent();
+    app.students().assertDeleteSelectedStudent();
     app.getNavigationHelper().gotoStudents();
-    int after = app.getStudentHelper().getStudentCount();
+    int after = app.students().getStudentCount();
     Assert.assertEquals(after, before - 1);
   }
 }

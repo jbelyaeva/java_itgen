@@ -9,13 +9,13 @@ public class FamilyDeletionTests extends TestBase {
   public void testFamilyDeletion() {
     app.getNavigationHelper().gotoTasks();
     app.getNavigationHelper().gotoStudents();
-    int before = app.getStudentHelper().getStudentCount();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().deleteFamily();
-    app.getStudentHelper().assertDeleteSelectedFamily();
+    int before = app.students().getStudentCount();
+    app.students().selectedStudent();
+    app.students().selectedFamily();
+    app.students().deleteFamily();
+    app.students().assertDeleteSelectedFamily();
     app.getNavigationHelper().gotoStudents();
-    int after = app.getStudentHelper().getStudentCount();
+    int after = app.students().getStudentCount();
     Assert.assertEquals(after, before - 1);
   }
 }
