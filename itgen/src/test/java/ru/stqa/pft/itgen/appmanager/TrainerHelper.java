@@ -83,11 +83,11 @@ public class TrainerHelper extends HelperBase {
     //
     dropDownList(By.id("profile-pay-base"), trainerData.getPayBase());
     type(By.name("profile-contact-phone"), trainerData.getPhone());
-    type(By.name("profile-contact-skype"), trainerData.getSkype());
-    click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.name("profile-contact-viber"), trainerData.getViber());
-    type(By.name("profile-contact-whatsapp"), trainerData.getWhatsapp());
     type(By.name("profile-contact-telegram"), trainerData.getTg());
+    type(By.name("profile-contact-viber"), trainerData.getViber());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.name("profile-contact-skype"), trainerData.getSkype());
+    type(By.name("profile-contact-whatsapp"), trainerData.getWhatsapp());
     type(By.name("profile-contact-fb"), trainerData.getFb());
     type(By.name("profile-contact-vk"), trainerData.getVk());
     type(By.name("profile-contact-ok"), trainerData.getOk());
