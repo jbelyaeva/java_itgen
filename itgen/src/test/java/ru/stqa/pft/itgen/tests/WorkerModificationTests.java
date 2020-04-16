@@ -34,14 +34,14 @@ public class WorkerModificationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoTasks();
+    app.goTo().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().selectedWorker();
     app.getWorkerHelper().modifyWorker();
     app.getWorkerHelper().modifiWorkerForm(worker);
     app.getWorkerHelper().submitWorkerModify();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoWorker();
     int after = app.getWorkerHelper().getWorkerCount();
     Assert.assertEquals(after, before);
   }

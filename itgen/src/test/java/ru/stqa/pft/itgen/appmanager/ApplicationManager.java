@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import java.io.File;
 import java.io.FileReader;
@@ -30,6 +29,7 @@ public class ApplicationManager {
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private String browser;
+  private DBHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -39,7 +39,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
+    dbHelper=new DBHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -81,11 +81,14 @@ public class ApplicationManager {
     return workerHelper;
   }
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
+  public DBHelper db(){
+    return dbHelper;
+  }
 
-  public StudentHelper getStudentHelper() {
+  public StudentHelper students() {
     return studentHelper;
   }
 

@@ -7,13 +7,13 @@ public class WorkerDeletionTests extends TestBase {
 
   @Test
   public void testWorkerDeletion() {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoTasks();
+    app.goTo().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().selectedWorker();
     app.getWorkerHelper().deleteWorker();
     app.getWorkerHelper().assertDeleteSelectedWorker();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoWorker();
     int after = app.getWorkerHelper().getWorkerCount();
     Assert.assertEquals(after, before - 1);
   }

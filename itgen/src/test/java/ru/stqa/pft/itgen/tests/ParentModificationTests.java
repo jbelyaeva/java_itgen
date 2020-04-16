@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.StudentData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,13 +33,13 @@ public class ParentModificationTests extends TestBase {
 
   @Test (dataProvider = "validParentsFromJson")
   public void testParentModification(ParentData parent) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().selectedParent();
-    app.getStudentHelper().modifyParent();
-    app.getStudentHelper().ModifyParentForm(parent);
-    app.getStudentHelper().submitParentModify();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
+    app.students().selectedStudent();
+    app.students().selectedFamily();
+    app.students().selectedParent();
+    app.students().modifyParent();
+    app.students().ModifyParentForm(parent);
+    app.students().submitParentModify();
   }
 }

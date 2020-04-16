@@ -20,7 +20,7 @@ public class StudentHelper extends HelperBase {
     super(wd);
   }
 
-  public  void createFamily() {
+  public void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
@@ -50,7 +50,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
 
   }
-
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
@@ -79,18 +78,17 @@ public class StudentHelper extends HelperBase {
     type(By.xpath("(//input[@name='profile-city'])[2]"), parentData.getCity());
     dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
     type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
-    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
     type(By.name("profile-contact-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
-    click(By.xpath("//div[5]/a"));
-    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
-    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
     type(By.xpath("(//input[@name='profile-contact-telegram'])[2]"), parentData.getTelegram());
+    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
+    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
+    click(By.xpath("//div[6]/a"));
+    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
+    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
     type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), parentData.getFb());
     type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
     type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
     type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());
-
   }
 
   public void submitStudentCreation() {
@@ -117,7 +115,7 @@ public class StudentHelper extends HelperBase {
 
   public void addParent() {
     click(By.xpath("//button[@class='close btn-add-parent']"));
-     }
+  }
 
   public void deleteStudent() {
     click(By.xpath("//button[contains(@class, 'remove')]"));
@@ -196,7 +194,7 @@ public class StudentHelper extends HelperBase {
 
   public void modifyParent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
-    }
+  }
 
   public void ModifyParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
@@ -226,28 +224,29 @@ public class StudentHelper extends HelperBase {
   }
 
   public int getStudentCount() {
-   return countingWithPaginated();
+    return countingWithPaginated();
   }
 
   //студенты с пагинацией
-  public List<StudentData> getStudentList() {
-    List<StudentData> students= new ArrayList<StudentData>();
-    WebDriverWait wait = new WebDriverWait (wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
+  public List<StudentData> list() {
+    List<StudentData> students = new ArrayList<StudentData>();
+    WebDriverWait wait = new WebDriverWait(wd, 2);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    List<WebElement> elements= wd.findElements(By.cssSelector("a.btn-link"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
         includeInListBaseWebElement(students, elements);
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         elements.removeAll(elements);
-        elements= wd.findElements(By.cssSelector("a.btn-link"));
+        elements = wd.findElements(By.cssSelector("a.btn-link"));
         next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
       }
     }
     includeInListBaseWebElement(students, elements);
     return students;
   }
+
   //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
   //, а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<StudentData> students, List<WebElement> elements) {
@@ -264,16 +263,22 @@ public class StudentHelper extends HelperBase {
 
   public String getIdNewStudent(List<StudentData> before, List<StudentData> after) {
     int a = 0;
-    String  getIdAfter = "";
+    String getIdAfter = "";
     for (int i = 0; i < after.size(); i++) {
-               getIdAfter = after.get(i).getId();
+      getIdAfter = after.get(i).getId();
 
-         for (int j = 0; j < before.size(); j++) {
-               String getIdBefore = before.get(j).getId();
-                    if (getIdAfter.equals(getIdBefore)) { a = 1; break;}
-                    else { a = 2;}
-         }
-                if (a == 2) { break;}
+      for (int j = 0; j < before.size(); j++) {
+        String getIdBefore = before.get(j).getId();
+        if (getIdAfter.equals(getIdBefore)) {
+          a = 1;
+          break;
+        } else {
+          a = 2;
+        }
+      }
+      if (a == 2) {
+        break;
+      }
     }
     return getIdAfter;
   }
@@ -285,6 +290,6 @@ public class StudentHelper extends HelperBase {
     fillStudentForm(student);
     fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
     submitFamilyCreation();
-    }
+  }
 }
 

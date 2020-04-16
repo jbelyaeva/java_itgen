@@ -7,15 +7,15 @@ public class FamilyDeletionTests extends TestBase {
 
   @Test
   public void testFamilyDeletion() {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
-    int before = app.getStudentHelper().getStudentCount();
-    app.getStudentHelper().selectedStudent();
-    app.getStudentHelper().selectedFamily();
-    app.getStudentHelper().deleteFamily();
-    app.getStudentHelper().assertDeleteSelectedFamily();
-    app.getNavigationHelper().gotoStudents();
-    int after = app.getStudentHelper().getStudentCount();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
+    int before = app.students().getStudentCount();
+    app.students().selectedStudent();
+    app.students().selectedFamily();
+    app.students().deleteFamily();
+    app.students().assertDeleteSelectedFamily();
+    app.goTo().gotoStudents();
+    int after = app.students().getStudentCount();
     Assert.assertEquals(after, before - 1);
   }
 }

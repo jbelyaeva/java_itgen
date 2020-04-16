@@ -34,15 +34,15 @@ public class StudentCreationTests extends TestBase {
 
   @Test (dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
-    int before = app.getStudentHelper().getStudentCount();
-    app.getStudentHelper().createFamily();
-    app.getStudentHelper().addStudent();
-    app.getStudentHelper().fillStudentForm(student);
-    app.getStudentHelper().submitStudentCreation();
-    app.getNavigationHelper().gotoStudents();
-    int after = app.getStudentHelper().getStudentCount();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
+    int before = app.students().getStudentCount();
+    app.students().createFamily();
+    app.students().addStudent();
+    app.students().fillStudentForm(student);
+    app.students().submitStudentCreation();
+    app.goTo().gotoStudents();
+    int after = app.students().getStudentCount();
     Assert.assertEquals(after, before +1);
   }
 }

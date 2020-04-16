@@ -2,57 +2,132 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class StudentData {
   @Expose
+  @Id
+  @Column(name="_id")
   private String id;
   @Expose
+  @Column(name="firstName")
   private String firstname;
   @Expose
+  @Column(name="lastName")
   private String lastname;
   @Expose
+  @Transient
   private String gender;
   @Expose
+  @Transient
   private String birthday;
   @Expose
+  @Transient
   private String pclevel;
   @Expose
+  @Transient
   private String country;
   @Expose
+  @Transient
   private String city;
   @Expose
+  @Transient
   private String timezone;
   @Expose
+  @Transient
   private String locate;
   @Expose
+  @Transient
   private String studyLang;
   @Expose
+  @Transient
   private String duration;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column( name = "contacts" )
+  private List<Contacts> contacts = new ArrayList<Contacts>();
+        @Embeddable
+          public static class Contacts {
+          private String type;
+          private String val;
+
+          public void setType(String type) {
+            this.type = type;
+          }
+          public void setVal(String val) {
+            this.val = val;
+          }
+          public String getType() {return type;}
+          public String getVal() {return val;}
+
+          @Override
+                   public String toString() {
+                   return "Contacts{" +
+                   "type='" + type + '\'' +
+                   ", val='" + val + '\'' +
+                   '}';
+                    }
+          }
+
   @Expose
+  @Transient
   private String phone;
   @Expose
+  @Transient
   private String skype;
   @Expose
+  @Transient
   private String c2d;
   @Expose
+  @Transient
   private String viber;
   @Expose
+  @Transient
   private String whatsapp;
   @Expose
+  @Transient
   private String telegram;
   @Expose
+  @Transient
   private String fb;
   @Expose
+  @Transient
   private String vk;
   @Expose
+  @Transient
   private String ok;
   @Expose
+  @Transient
   private String inst;
   @Expose
+  @Transient
   private String familyId;
   @Expose
+  @Transient
   private String note;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name="roles")
+  private List<Roles> roles = new ArrayList<Roles>();
+      @Embeddable
+           static class Roles {
+           private String roles;
+           public void setRoles(String type) {
+               this.roles = type;
+                }
+           public String getRoles() {return roles;}
+
+        @Override
+        public String toString() {
+          return "" +
+                    roles  ;
+        }
+      }
 
 
   public StudentData withId(String id) {
@@ -113,7 +188,10 @@ public class StudentData {
     this.duration = duration;
     return this;
   }
-
+  public StudentData withContacts(List<Contacts> contacts) {
+    this.contacts=contacts;
+    return this;
+  }
   public StudentData withPhone(String phone) {
     this.phone = phone;
     return this;
@@ -174,6 +252,11 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withRoles (List<Roles> roles) {
+    this.roles = roles;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -220,6 +303,8 @@ public class StudentData {
   public String getDuration() {
     return duration;
   }
+
+  public  List<Contacts> getContacts() {return contacts;}
 
   public String getPhone() {
     return phone;
@@ -269,12 +354,19 @@ public class StudentData {
     return note;
   }
 
+  public List<Roles> getRoles() {
+    return roles;
+  }
+
+
   @Override
   public String toString() {
     return "StudentData{" +
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", contacts=" + contacts +
+            ", roles=" + roles +
             '}';
   }
 
@@ -285,11 +377,12 @@ public class StudentData {
     StudentData that = (StudentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(contacts, that.contacts);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
+    return Objects.hash(id, firstname, lastname, contacts);
   }
 }

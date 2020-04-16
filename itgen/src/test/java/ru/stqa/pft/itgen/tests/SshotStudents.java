@@ -2,8 +2,6 @@ package ru.stqa.pft.itgen.tests;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.yandex.qatools.allure.Allure;
-import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
@@ -24,8 +22,8 @@ public class SshotStudents  extends TestBase {
    String markedImages="./src/test/testsScreenshot/markedImages/";
    String name="students_RU_Chrome";
 
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
 
    //уводим курсор в верхний левый угол экрана
     Robot bot = new Robot();
