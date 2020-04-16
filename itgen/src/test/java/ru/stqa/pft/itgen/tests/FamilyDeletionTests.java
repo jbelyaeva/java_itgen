@@ -7,14 +7,14 @@ public class FamilyDeletionTests extends TestBase {
 
   @Test
   public void testFamilyDeletion() {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
     int before = app.students().getStudentCount();
     app.students().selectedStudent();
     app.students().selectedFamily();
     app.students().deleteFamily();
     app.students().assertDeleteSelectedFamily();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoStudents();
     int after = app.students().getStudentCount();
     Assert.assertEquals(after, before - 1);
   }

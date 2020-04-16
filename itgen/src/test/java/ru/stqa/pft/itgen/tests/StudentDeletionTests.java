@@ -7,13 +7,13 @@ public class StudentDeletionTests extends TestBase {
 
   @Test
   public void testStudentDeletion() {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
     int before = app.students().getStudentCount();
     app.students().selectedStudent();
     app.students().deleteStudent();
     app.students().assertDeleteSelectedStudent();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoStudents();
     int after = app.students().getStudentCount();
     Assert.assertEquals(after, before - 1);
   }

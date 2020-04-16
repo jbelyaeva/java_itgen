@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
-import ru.stqa.pft.itgen.model.WorkerData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,14 +34,14 @@ public class TrainerModificationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testTrainerModification(TrainerData trainer) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoTrainer();
+    app.goTo().gotoTasks();
+    app.goTo().gotoTrainer();
     int before = app.getTrainerHelper().getTrainerCount();
     app.getTrainerHelper().selectedTrainer();  // выбирает 9-го по списку тренера (его надо предварительно создать!!!)
     app.getTrainerHelper().modifyTrainer();
     app.getTrainerHelper().modifiTrainerForm(trainer);
     app.getTrainerHelper().submitTrainerModify();
-    app.getNavigationHelper().gotoTrainer();
+    app.goTo().gotoTrainer();
     int after = app.getTrainerHelper().getTrainerCount();
     Assert.assertEquals(after, before);
   }

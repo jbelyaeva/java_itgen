@@ -34,14 +34,14 @@ public class StudentModificationTests extends TestBase {
 
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentModification(StudentData student) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
     int before = app.students().getStudentCount();
     app.students().selectedStudent();
     app.students().modifyStudent();
     app.students().ModifyStudentForm(student);
     app.students().submitStudentModify();
-    app.getNavigationHelper().gotoStudents();
+    app.goTo().gotoStudents();
     int after = app.students().getStudentCount();
     Assert.assertEquals(after, before);
   }

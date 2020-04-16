@@ -5,8 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 import java.io.BufferedReader;
@@ -66,40 +64,40 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersFromJson")
   public void testWorkerCreation(WorkerData worker) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoTasks();
+    app.goTo().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoWorker();
     int after = app.getWorkerHelper().getWorkerCount();
     Assert.assertEquals(after, before +1);
   }
 
   @Test (dataProvider = "validWorkersAdminsFromJson", enabled = false)
   public void testWorkerAdminCreation(WorkerData worker) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoTasks();
+    app.goTo().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoWorker();
     int after = app.getWorkerHelper().getWorkerCount();
     Assert.assertEquals(after, before + 1);
   }
 
   @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testWorkerTrainerCreation(WorkerData worker) {
-    app.getNavigationHelper().gotoTasks();
-    app.getNavigationHelper().gotoTrainer();
+    app.goTo().gotoTasks();
+    app.goTo().gotoTrainer();
     int before = app.getTrainerHelper().getTrainerCount();
-    app.getNavigationHelper().gotoWorker();
+    app.goTo().gotoWorker();
     app.getWorkerHelper().addWorker();
     app.getWorkerHelper().fillWorkerForm(worker);
     app.getWorkerHelper().submitWorkerCreation();
-    app.getNavigationHelper().gotoTrainer();
+    app.goTo().gotoTrainer();
     int after = app.getTrainerHelper().getTrainerCount();
     Assert.assertEquals(after, before +1);
   }
