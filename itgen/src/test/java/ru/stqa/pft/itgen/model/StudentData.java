@@ -104,9 +104,11 @@ public class StudentData {
   @Expose
   @Transient
   private String inst;
-  @Expose
   @Transient
+  @Column(name="familyId")
+  @OneToOne(mappedBy = "families")
   private String familyId;
+
   @Expose
   @Transient
   private String note;
@@ -365,8 +367,6 @@ public class StudentData {
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", contacts=" + contacts +
-            ", roles=" + roles +
             '}';
   }
 
@@ -377,12 +377,11 @@ public class StudentData {
     StudentData that = (StudentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname) &&
-            Objects.equals(contacts, that.contacts);
+            Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname, contacts);
+    return Objects.hash(id, firstname, lastname);
   }
 }

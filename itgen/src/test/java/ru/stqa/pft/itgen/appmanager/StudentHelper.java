@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.Students;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -290,6 +291,40 @@ public class StudentHelper extends HelperBase {
     fillStudentForm(student);
     fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
     submitFamilyCreation();
+  }
+  public void createStudent(StudentData student) {
+    createFamily();
+    addStudent();
+    fillStudentForm(student);
+    submitFamilyCreation();
+  }
+
+  public String getIdNewFamily(String url) {
+    String[] getIdSplit = url.split("/");
+    String id = getIdSplit[4]; //достали id
+    return id;
+  }
+
+    public String getIdNewStudentDB(Students before, Students after) {
+      int a = 0;
+      String getIdAfter = "";
+      for (int i = 0; i < after.size(); i++) {
+        getIdAfter = after.iterator().next().getId();
+
+        for (int j = 0; j < before.size(); j++) {
+          String getIdBefore = before.iterator().next().getId();
+          if (getIdAfter.equals(getIdBefore)) {
+            a = 1;
+            break;
+          } else {
+            a = 2;
+          }
+        }
+        if (a == 2) {
+          break;
+        }
+      }
+      return getIdAfter;
   }
 }
 

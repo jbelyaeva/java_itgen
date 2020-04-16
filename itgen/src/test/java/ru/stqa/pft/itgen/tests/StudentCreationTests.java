@@ -6,14 +6,19 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.Students;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StudentCreationTests extends TestBase {
 
@@ -31,18 +36,36 @@ public class StudentCreationTests extends TestBase {
       return students.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }
   }
-
+ //проверка через UI
   @Test (dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
-    int before = app.students().getStudentCount();
-    app.students().createFamily();
-    app.students().addStudent();
-    app.students().fillStudentForm(student);
-    app.students().submitStudentCreation();
+    List<StudentData> before = app.students().list();
+    app.students().createStudent(student);
     app.goTo().gotoStudents();
-    int after = app.students().getStudentCount();
-    Assert.assertEquals(after, before +1);
+    List<StudentData> after = app.students().list();
+     Assert.assertEquals(after.size(),before.size()+1);
+   // assertThat(new HashSet<Object>(after).size(), equalTo(new HashSet<Object>((before).size()+1)));
+    String id = app.students().getIdNewStudent(before,after);//вычисляем id нового ученика
+    StudentData student_add = new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());
+    before.add(student_add); //создаем ученика с найденным id и данными об ученике из файла с тестовыми данными
+    assertThat(new HashSet<Object>(after), equalTo(new HashSet<Object>(before)));
+
+  }
+
+  //проверка через бд
+  @Test (dataProvider = "validStudentsFromJson")
+  public void testDBStudentCreation(StudentData student) {
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
+    Students before=app.db().students();
+    app.students().createStudent(student);
+    Students after=app.db().students();
+    String id = app.students().getIdNewStudentDB(before,after);//доработать алгоритм!!!!!!
+    assertThat(after.size(), equalTo(before.size()+1));
+    StudentData studentAdd=new StudentData().withId(id).withFirstName(student.getFirstname()).withLastName(student.getLastname());
+   // assertThat(new HashSet<Object>(after), equalTo(new HashSet<Object>(before.withAdded(studentAdd))));
+
   }
 }

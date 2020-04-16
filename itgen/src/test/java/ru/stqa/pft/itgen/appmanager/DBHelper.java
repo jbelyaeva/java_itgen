@@ -1,5 +1,7 @@
 package ru.stqa.pft.itgen.appmanager;
 
+import ru.stqa.pft.itgen.model.Families;
+import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 
@@ -25,6 +27,14 @@ public class DBHelper {
       entityManager.getTransaction().commit();
       entityManager.close();
       return new Students(students);
+  }
+     public Families families() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        List<FamilyData> families = entityManager.createQuery("SELECT f FROM FamilyData f", FamilyData.class ).getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return new Families(families);
   }
     public void dbClose(){
     entityManagerFactory.close();}

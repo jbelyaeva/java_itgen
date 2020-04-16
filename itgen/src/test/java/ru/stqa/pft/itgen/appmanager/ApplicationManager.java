@@ -109,4 +109,7 @@ public class ApplicationManager {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
   }
+  public String getURL(){
+    return wd.getCurrentUrl();
+  }
 }
