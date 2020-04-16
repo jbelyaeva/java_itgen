@@ -19,7 +19,7 @@ public class StudentCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -27,12 +27,13 @@ public class StudentCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>(){}.getType()); // List<StudentData>.class
-      return students.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
+      }.getType()); // List<StudentData>.class
+      return students.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
 
-  @Test (dataProvider = "validStudentsFromJson")
+  @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
@@ -43,6 +44,6 @@ public class StudentCreationTests extends TestBase {
     app.students().submitStudentCreation();
     app.goTo().gotoStudents();
     int after = app.students().getStudentCount();
-    Assert.assertEquals(after, before +1);
+    Assert.assertEquals(after, before + 1);
   }
 }

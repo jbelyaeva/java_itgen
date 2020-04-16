@@ -12,20 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
+
   private static EntityManagerFactory entityManagerFactory;
 
   public DBHelper() {
     entityManagerFactory = Persistence.createEntityManagerFactory("connection");
   }
-    public Students students() {
-      EntityManager entityManager = entityManagerFactory.createEntityManager();
-      entityManager.getTransaction().begin();
-      String query = "{ $query : { roles : 'child'} }";
-      List<StudentData> students = entityManager.createNativeQuery(query, StudentData.class ).getResultList();
-      entityManager.getTransaction().commit();
-      entityManager.close();
-      return new Students(students);
+
+  public Students students() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "{ $query : { roles : 'child'} }";
+    List<StudentData> students = entityManager.createNativeQuery(query, StudentData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Students(students);
   }
-    public void dbClose(){
-    entityManagerFactory.close();}
+
+  public void dbClose() {
+    entityManagerFactory.close();
   }
+}
