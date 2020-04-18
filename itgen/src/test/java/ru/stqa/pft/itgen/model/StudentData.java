@@ -367,7 +367,7 @@ public class StudentData {
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            '}';
+           '}';
   }
 
   @Override
@@ -378,6 +378,7 @@ public class StudentData {
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname);
+
   }
 
   @Override

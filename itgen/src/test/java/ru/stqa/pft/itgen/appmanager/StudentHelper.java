@@ -262,28 +262,6 @@ public class StudentHelper extends HelperBase {
     }
   }
 
-  public String getIdNewStudent(List<StudentData> before, List<StudentData> after) {
-    int a = 0;
-    String getIdAfter = "";
-    for (int i = 0; i < after.size(); i++) {
-      getIdAfter = after.get(i).getId();
-
-      for (int j = 0; j < before.size(); j++) {
-        String getIdBefore = before.get(j).getId();
-        if (getIdAfter.equals(getIdBefore)) {
-          a = 1;
-          break;
-        } else {
-          a = 2;
-        }
-      }
-      if (a == 2) {
-        break;
-      }
-    }
-    return getIdAfter;
-  }
-
   public void createFamily(StudentData student) {
     createFamily();
     addStudent();
@@ -308,12 +286,11 @@ public class StudentHelper extends HelperBase {
     public String getIdNewStudentDB(Students before, Students after) {
       int a = 0;
       String getIdAfter = "";
-      for (int i = 0; i < after.size(); i++) {
-        getIdAfter = after.iterator().next().getId();
-
-        for (int j = 0; j < before.size(); j++) {
-          String getIdBefore = before.iterator().next().getId();
-          if (getIdAfter.equals(getIdBefore)) {
+      for (StudentData student:after){
+            getIdAfter=student.getId();
+        for (StudentData student_before:before) {
+            String getIdBefore=student_before.getId();
+            if (getIdAfter.equals(getIdBefore)) {
             a = 1;
             break;
           } else {
