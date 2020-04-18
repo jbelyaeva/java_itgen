@@ -30,7 +30,7 @@ public class DBHelper {
     entityManager.close();
     return new Students(students);
   }
-<<<<<<< HEAD
+
      public Families families() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -39,12 +39,8 @@ public class DBHelper {
         entityManager.close();
         return new Families(families);
   }
-    public void dbClose(){
-    entityManagerFactory.close();}
-=======
 
   public void dbClose() {
     entityManagerFactory.close();
->>>>>>> master
   }
 }
