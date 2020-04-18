@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id "io.spring.dependency-management" version "1.0.0.RC2"
+//    id "io.spring.dependency-management" version "1.0.0.RC2" // вариант Даша
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
     id  'project-report'
 }
 
@@ -30,10 +31,15 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
 
-    compile group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
-    compile group: 'org.jboss.jbossts', name: 'jbossjta'
-    compile group: 'org.hibernate', name: 'hibernate-search-orm'
+    implementation group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
+    implementation group: 'org.jboss.jbossts', name: 'jbossjta'
+    implementation group: 'org.hibernate', name: 'hibernate-search-orm'
 
+    /*
+    implementation group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
+    implementation group: 'org.jboss.narayana.jta', name: 'narayana-jta'
+    implementation group: 'org.hibernate', name: 'hibernate-search-orm'
+    */
     agent "org.aspectj:aspectjweaver:1.8.0"
     compile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0.RC4"
 
@@ -42,7 +48,9 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final')
+        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final') // вариант Даша
+//        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:5.4.1.Final')
+
     }
 }
 

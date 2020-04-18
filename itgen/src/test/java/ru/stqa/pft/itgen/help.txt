@@ -1,4 +1,4 @@
-    /*ЗДЕСЬ ВСЕ ПОЛЕЗНЫЕ КОМАНДЫ*/
+    /** ЗДЕСЬ ВСЕ ПОЛЕЗНЫЕ КОМАНДЫ **/
 
     // проверка валидации email при создании сотрудника
     Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))); // вар.1
@@ -8,7 +8,7 @@
     Assert.assertTrue(isElementPresent(By.cssSelector("li.active > a")));
 
     //генерация случайного значения адреса эл.почты
-    "eee+" + Math.round(Math.random() * 10) + "@gmail.com"
+    "eee+" + Math.round(Math.random() * 10000) + "@gmail.com"
 
     // заполнение даты в поле с маской (вар.№1)
     Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
@@ -17,3 +17,11 @@
     // Если не получается кликнуть по элементу  -- http://internetka.in.ua/selenium-driver-element-click/
     Actions actions = new Actions(driver);
     actions.moveToElement(element, 1, 1).click()).build().perform();
+
+    // ожидание видимости элемента
+    WebDriverWait wait = new WebDriverWait(driver, 10/*seconds*/);
+    wait.until(visibilityOf(element));
+
+    // ожидание присутствия и видимости элемента
+    WebDriverWait wait = new WebDriverWait(driver, 10/*seconds*/);
+    wait.until(visibilityOfElementLocatedBy(locator));
