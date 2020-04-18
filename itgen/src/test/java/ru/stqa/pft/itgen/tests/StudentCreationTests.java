@@ -34,10 +34,10 @@ public class StudentCreationTests extends TestBase {
       return students.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
-<<<<<<< HEAD
+
   //проверка через бд
   @Test (dataProvider = "validStudentsFromJson")
-  public void testDBStudentCreation(StudentData student) {
+  public void testStudentCreation(StudentData student) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
     Students before=app.db().students();
@@ -49,21 +49,6 @@ public class StudentCreationTests extends TestBase {
     assertThat(new HashSet<Object>(after), equalTo(new HashSet<Object>(before.withAdded(studentAdd))));
    // assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
-=======
-
-  @Test(dataProvider = "validStudentsFromJson")
-  public void testStudentCreation(StudentData student) {
-    app.goTo().gotoTasks();
-    app.goTo().gotoStudents();
-    int before = app.students().getStudentCount();
-    app.students().createFamily();
-    app.students().addStudent();
-    app.students().fillStudentForm(student);
-    app.students().submitStudentCreation();
-    app.goTo().gotoStudents();
-    int after = app.students().getStudentCount();
-    Assert.assertEquals(after, before + 1);
->>>>>>> master
   }
 
 
