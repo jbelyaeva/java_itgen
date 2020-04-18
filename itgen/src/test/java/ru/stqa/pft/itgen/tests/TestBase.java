@@ -6,9 +6,17 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
+import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.Students;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @Listeners(MyTestListener.class)
 public class TestBase {
@@ -43,4 +51,16 @@ public class TestBase {
     return app;
   }
   */
+  public void verifyStudentsListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      app.goTo().gotoStudents();
+      Students dbStudents = app.db().students();
+      List<StudentData> uiStudents = app.students().list();
+      assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents));
+              /*.stream().map((g) -> new StudentData().withId(g.getId())
+              .withFirstName(g.getFirstname())
+              .withLastName(g.getLastname()))
+              .collect(Collectors.toSet())));*/
+    }
+  }
 }
