@@ -21,7 +21,7 @@ public class StudentCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -29,10 +29,12 @@ public class StudentCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>(){}.getType()); // List<StudentData>.class
-      return students.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
+      }.getType()); // List<StudentData>.class
+      return students.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
+<<<<<<< HEAD
   //проверка через бд
   @Test (dataProvider = "validStudentsFromJson")
   public void testDBStudentCreation(StudentData student) {
@@ -47,6 +49,21 @@ public class StudentCreationTests extends TestBase {
     assertThat(new HashSet<Object>(after), equalTo(new HashSet<Object>(before.withAdded(studentAdd))));
    // assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
+=======
+
+  @Test(dataProvider = "validStudentsFromJson")
+  public void testStudentCreation(StudentData student) {
+    app.goTo().gotoTasks();
+    app.goTo().gotoStudents();
+    int before = app.students().getStudentCount();
+    app.students().createFamily();
+    app.students().addStudent();
+    app.students().fillStudentForm(student);
+    app.students().submitStudentCreation();
+    app.goTo().gotoStudents();
+    int after = app.students().getStudentCount();
+    Assert.assertEquals(after, before + 1);
+>>>>>>> master
   }
 
 

@@ -62,11 +62,11 @@ public class WorkerHelper extends HelperBase {
     dropDownList(By.id("profile-timezone"), workerData.getTimeZone());
     dropDownList(By.id("profile-locale"), workerData.getLocate());
     type(By.name("profile-contact-phone"), workerData.getPhone());
-    type(By.name("profile-contact-skype"), workerData.getSkype());
-    click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.name("profile-contact-viber"), workerData.getViber());
-    type(By.name("profile-contact-whatsapp"), workerData.getWhatsapp());
     type(By.name("profile-contact-telegram"), workerData.getTg());
+    type(By.name("profile-contact-viber"), workerData.getViber());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.name("profile-contact-skype"), workerData.getSkype());
+    type(By.name("profile-contact-whatsapp"), workerData.getWhatsapp());
     type(By.name("profile-contact-fb"), workerData.getFb());
     type(By.name("profile-contact-vk"), workerData.getVk());
     type(By.name("profile-contact-ok"), workerData.getOk());
