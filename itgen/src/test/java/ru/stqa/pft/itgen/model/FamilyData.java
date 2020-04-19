@@ -19,26 +19,20 @@ public class FamilyData {
 //  private ParentData parent;
 
 
-  /**
-   * сеттеры
-   */
+  /** сеттеры */
 
   public FamilyData withId(String id) {
     this.id = id;
     return this;
   }
 
-  /**
-   * геттеры
-   */
+  /** геттеры */
 
   public String getId() {
     return id;
   }
 
-  /**
-   * тустринг, хэшкод и иквелс
-   */
+  /** тустринг, хэшкод и иквелс */
 
   @Override
   public String toString() {
