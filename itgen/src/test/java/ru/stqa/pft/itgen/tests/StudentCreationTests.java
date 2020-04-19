@@ -47,8 +47,6 @@ public class StudentCreationTests extends TestBase {
     String id = app.students().getIdNewStudentDB(before,after);
     StudentData studentAdd=student.withId(id);
     assertThat(after, equalTo(before.withAdded(studentAdd)));
-   verifyStudentsListInUI();
+    verifyStudentsListInUI();
   }
-
-
 }
