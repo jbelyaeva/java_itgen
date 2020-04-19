@@ -39,7 +39,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-    dbHelper=new DBHelper();
+    dbHelper = new DBHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -84,7 +84,8 @@ public class ApplicationManager {
   public NavigationHelper goTo() {
     return navigationHelper;
   }
-  public DBHelper db(){
+
+  public DBHelper db() {
     return dbHelper;
   }
 
@@ -101,15 +102,15 @@ public class ApplicationManager {
   }
 
 
-
   public Screenshot getScreenShert(String locator) {
     Screenshot actualScreenshot;
-   // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
-    WebDriverWait wait = new WebDriverWait (wd, 5);
+    // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
+    WebDriverWait wait = new WebDriverWait(wd, 5);
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
   }
-  public String getURL(){
+
+  public String getURL() {
     return wd.getCurrentUrl();
   }
 }
