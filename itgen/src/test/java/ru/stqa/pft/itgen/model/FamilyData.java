@@ -10,17 +10,41 @@ import java.util.*;
 public class FamilyData {
   @Expose
   @Id
-  @Column(name="_id")
- // @OneToOne(mappedBy = "users")
+  @Column(name = "_id")
   private String id;
+
+//  @OneToMany(mappedBy = "FamilyData")
+//  private StudentData student;
+//  @OneToMany(mappedBy = "FamilyData")
+//  private ParentData parent;
+
+
+  /**
+   * сеттеры
+   */
 
   public FamilyData withId(String id) {
     this.id = id;
     return this;
   }
 
+  /**
+   * геттеры
+   */
+
   public String getId() {
     return id;
+  }
+
+  /**
+   * тустринг, хэшкод и иквелс
+   */
+
+  @Override
+  public String toString() {
+    return "FamilyData{" +
+            "id='" + id + '\'' +
+            '}';
   }
 
   @Override
@@ -34,12 +58,5 @@ public class FamilyData {
   @Override
   public int hashCode() {
     return Objects.hash(id);
-  }
-
-  @Override
-  public String toString() {
-    return "FamilyData{" +
-            "id='" + id + '\'' +
-            '}';
   }
 }
