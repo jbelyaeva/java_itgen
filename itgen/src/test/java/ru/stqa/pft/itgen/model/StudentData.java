@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,20 +24,24 @@ public class StudentData {
   @Expose
   @Column(name="gender")
   private Integer gender;
+  @Transient
+  @Column(name="birthday")
+  @Temporal(TemporalType.DATE)
+  private Date birthday;
   @Expose
   @Transient
-  private String birthday;
+  private String birthdayUi;
   @Expose
-  @Transient
+  @Column(name="pcLevel")
   private String pclevel;
   @Expose
-  @Transient
+  @Column(name="country")
   private String country;
   @Expose
-  @Transient
+  @Column(name="city")
   private String city;
   @Expose
-  @Transient
+  @Column(name="tz")
   private String timezone;
   @Expose
   @Transient
@@ -155,8 +160,13 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withBirthday(String birthday) {
+  public StudentData withBirthday(Date birthday) {
     this.birthday = birthday;
+    return this;
+  }
+
+  public StudentData withBirthdayUi(String birthdayUi) {
+    this.birthdayUi = birthdayUi;
     return this;
   }
 
@@ -284,8 +294,12 @@ public class StudentData {
     return gender;
   }
 
-  public String getBirthday() {
+  public Date getBirthday() {
     return birthday;
+  }
+
+  public String getBirthdayUi() {
+    return birthdayUi;
   }
 
   public String getPclevel() {
@@ -381,6 +395,11 @@ public class StudentData {
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", gender=" + gender +
+            ", birthdayUi='" + birthdayUi + '\'' +
+            ", pclevel='" + pclevel + '\'' +
+            ", country='" + country + '\'' +
+            ", city='" + city + '\'' +
+            ", timezone='" + timezone + '\'' +
             '}';
   }
 
@@ -392,11 +411,15 @@ public class StudentData {
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname) &&
-            Objects.equals(gender, that.gender);
+            Objects.equals(gender, that.gender) &&
+            Objects.equals(pclevel, that.pclevel) &&
+            Objects.equals(country, that.country) &&
+            Objects.equals(city, that.city) &&
+            Objects.equals(timezone, that.timezone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname, gender);
+    return Objects.hash(id, firstname, lastname, gender, pclevel, country, city, timezone);
   }
 }

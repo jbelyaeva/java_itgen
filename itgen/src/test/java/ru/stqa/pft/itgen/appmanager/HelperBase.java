@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 public class HelperBase {
@@ -49,7 +50,7 @@ public class HelperBase {
 
   protected void dropDownList(By locator, String text) {
     if(text != null) {
-      new Select(wd.findElement(locator)).selectByVisibleText(text);
+      new Select(wd.findElement(locator)).selectByValue(text);
     }
   }
 

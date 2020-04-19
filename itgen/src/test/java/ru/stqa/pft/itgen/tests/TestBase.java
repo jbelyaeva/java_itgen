@@ -56,11 +56,12 @@ public class TestBase {
       app.goTo().gotoStudents();
       Students dbStudents = app.db().students();
       List<StudentData> uiStudents = app.students().list();
-      assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents));
-              /*.stream().map((g) -> new StudentData().withId(g.getId())
-              .withFirstName(g.getFirstname())
-              .withLastName(g.getLastname()))
-              .collect(Collectors.toSet())));*/
+      assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents
+              .stream().map((s) -> new StudentData()
+                      .withId(s.getId())
+                      .withFirstName(s.getFirstname())
+                      .withLastName(s.getLastname()))
+              .collect(Collectors.toSet())));
     }
   }
 }

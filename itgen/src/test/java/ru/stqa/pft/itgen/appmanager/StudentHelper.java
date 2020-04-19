@@ -12,6 +12,7 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
     dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
-    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
+    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthdayUi());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
     type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
@@ -170,7 +171,7 @@ public class StudentHelper extends HelperBase {
   public void ModifyStudentForm(StudentData studentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
-    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
+    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthdayUi());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
     dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());

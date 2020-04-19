@@ -54,8 +54,8 @@ public class WorkerHelper extends HelperBase {
   public void modifiWorkerForm(WorkerData workerData) {
     type(By.name("profile-firstName"), workerData.getFirstName());
     type(By.name("profile-lastName"), workerData.getLastName());
-    enterADate(By.name("profile-startWorkAt"), workerData.getStartDay());
-    enterADate(By.name("profile-birthday"), workerData.getBirthDay());
+    enterADate(By.name("profile-startWorkAt"), workerData.getStartDayUi());
+    enterADate(By.name("profile-birthday"), workerData.getBirthDayUi());
     dropDownList(By.id("profile-gender"), workerData.getGender());
     dropDownList(By.id("profile-country"), workerData.getCountry());
     type(By.name("profile-city"), workerData.getCity());

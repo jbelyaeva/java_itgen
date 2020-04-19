@@ -32,7 +32,7 @@ public class DbConntctionTest {
 //        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
 
         /* нативный запрос */
-        String query3 = "{ $query : { roles : 'trainer' } }";
+        String query3 = "{ $query : { roles : 'child' } }";
         List<StudentData> result = entityManager.createNativeQuery( query3 , StudentData.class ).getResultList();
 
         entityManager.getTransaction().commit();
