@@ -2,45 +2,83 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Entity
+@Table(name = "users")
 public class ParentData {
   @Expose
+  @Id
+  @Column(name="_id")
+  private String id;
+  @Expose
+  @Column(name="firstName")
   private String firstName;
   @Expose
+  @Column(name="lastName")
   private String lastName;
   @Expose
+  @Column(name="country")
   private String country;
+  @Column(name="city")
   @Expose
   private String city;
+  @Column(name="tz")
   @Expose
   private String timeZone;
   @Expose
+  @Transient
   private String locate;
   @Expose
+  @Transient
   private String phone;
   @Expose
+  @Transient
   private String skype;
   @Expose
+  @Transient
   private String email;
   @Expose
+  @Transient
   private String c2d;
   @Expose
+  @Transient
   private String viber;
   @Expose
+  @Transient
   private String whatsapp;
   @Expose
+  @Transient
   private String telegram;
   @Expose
+  @Transient
   private String fb;
   @Expose
+  @Transient
   private String vk;
   @Expose
+  @Transient
   private String ok;
   @Expose
+  @Transient
   private String inst;
   @Expose
+  @Transient
   private String familyId;
   @Expose
+  @Transient
   private String note;
+
+//  @ManyToOne
+//  private FamilyData family;
+
+  /** сеттеры */
+
+  public ParentData withId(String id) {
+    this.id = id;
+    return this;
+  }
 
   public ParentData withFirstName(String firstName) {
     this.firstName = firstName;
@@ -137,6 +175,12 @@ public class ParentData {
     return this;
   }
 
+  /** геттеры */
+
+  public String getId() {
+    return id;
+  }
+
   public String getFirstName() {
     return firstName;
   }
@@ -211,5 +255,38 @@ public class ParentData {
 
   public String getNote() {
     return note;
+  }
+
+  /**
+   * ту стринг хэшкод и иквелс
+   */
+  @Override
+  public String toString() {
+    return "ParentData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", country='" + country + '\'' +
+            ", city='" + city + '\'' +
+            ", timeZone='" + timeZone + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ParentData that = (ParentData) o;
+    return Objects.equals(id, that.id) &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(country, that.country) &&
+            Objects.equals(city, that.city) &&
+            Objects.equals(timeZone, that.timeZone);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName, country, city, timeZone);
   }
 }

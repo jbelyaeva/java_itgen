@@ -56,7 +56,8 @@ public class StudentData {
   @ElementCollection(fetch = FetchType.EAGER)
   @Column( name = "contacts" )
   private List<Contacts> contacts = new ArrayList<Contacts>();
-        @Embeddable
+
+  @Embeddable
           public static class Contacts {
           private String type;
           private String val;
@@ -111,7 +112,6 @@ public class StudentData {
   private String inst;
   @Transient
   @Column(name="familyId")
-  @OneToOne(mappedBy = "families")
   private String familyId;
 
   @Expose
@@ -136,7 +136,8 @@ public class StudentData {
         }
       }
 
-
+//  @ManyToOne
+//  private FamilyData family;
 
       /** сеттеры */
 
