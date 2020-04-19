@@ -40,8 +40,8 @@ public class TrainerHelper extends HelperBase {
   public void modifiTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
-    enterADate(By.name("profile-startWorkAt"), trainerData.getStartWork());
-    enterADate(By.name("profile-birthday"), trainerData.getBirthday());
+    enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
+    enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList(By.id("profile-gender"), trainerData.getGender());
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));

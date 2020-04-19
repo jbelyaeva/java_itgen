@@ -2,15 +2,28 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+
 public class TrainerData {
   @Expose
   private String firstName;
   @Expose
   private String lastName;
   @Expose
-  private String startWork;
+  @Column(name="startWork")
+  @Temporal(TemporalType.DATE)
+  private Date startWork;
   @Expose
-  private String birthday;
+  private String startWorkUi;
+  @Expose
+  @Column(name="birthday")
+  @Temporal(TemporalType.DATE)
+  private Date birthday;
+  @Expose
+  private String birthdayUi;
   @Expose
   private String gender;
   @Expose
@@ -56,13 +69,23 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withStartWork(String startWork) {
+  public TrainerData withBirthday(Date birthday) {
+    this.birthday = birthday;
+    return this;
+  }
+
+  public TrainerData withBirthdayUi(String birthdayUi) {
+    this.birthdayUi = birthdayUi;
+    return this;
+  }
+
+  public TrainerData withStartWork(Date startWork) {
     this.startWork = startWork;
     return this;
   }
 
-  public TrainerData withBirthday(String birthday) {
-    this.birthday = birthday;
+  public TrainerData withStartWorkUi(String startWorkUi) {
+    this.startWorkUi = startWorkUi;
     return this;
   }
 
@@ -159,12 +182,20 @@ public class TrainerData {
     return lastName;
   }
 
-  public String getStartWork() {
+  public Date getStartWork() {
     return startWork;
   }
 
-  public String getBirthday() {
+  public String getStartWorkUi() {
+    return startWorkUi;
+  }
+
+  public Date getBirthday() {
     return birthday;
+  }
+
+  public String getBirthdayUi() {
+    return birthdayUi;
   }
 
   public String getGender() {

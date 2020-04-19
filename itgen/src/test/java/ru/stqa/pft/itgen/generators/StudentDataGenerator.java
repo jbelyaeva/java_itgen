@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class StudentDataGenerator extends TestBase {
@@ -61,14 +63,15 @@ public class StudentDataGenerator extends TestBase {
     List<StudentData> students = new ArrayList<StudentData>();
     for (int i = 0; i < count; i++) {
       students.add(new StudentData()
-              .withFirstName(String.format("Петя %s", i))
-              .withLastName(String.format("Маслов %s", i))
+              .withFirstName(String.format("Вася-%s", i))
+              .withLastName(String.format("Васин-%s", i))
               .withGender(Integer.valueOf(String.format("2", i)))
-              .withBirthday(String.format("01.01.2001", i))
-              .withPclevel(String.format("Только планшет, телефон", i))
-              .withCountry(String.format("Армения", i))
+//              .withBirthday(String.format("01.01.2001", i))
+              .withBirthdayUi(String.format("01.01.1978", i))
+              .withPclevel(String.format("expert", i))
+              .withCountry(String.format("AL", i))
               .withCity(String.format("Сватково %s", i))
-              .withTimeZone(String.format("(GMT+05:00) Азия/Ташкент", i))
+              .withTimeZone(String.format("Pacific/Honolulu", i))
               .withPhone(String.format("89035540414", i))
               .withSkype(String.format("sk123", i))
               .withC2d(String.format("http:/88888", i))

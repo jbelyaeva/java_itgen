@@ -2,6 +2,11 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+
 public class WorkerData {
   @Expose
   private String firstName;
@@ -12,9 +17,17 @@ public class WorkerData {
   @Expose
   private String role;
   @Expose
-  private String startDay;
+  @Column(name="startDay")
+  @Temporal(TemporalType.DATE)
+  private Date startDay;
   @Expose
-  private String birthDay;
+  private String startDayUi;
+  @Expose
+  @Column(name="birthDay")
+  @Temporal(TemporalType.DATE)
+  private Date birthDay;
+  @Expose
+  private String birthDayUi;
   @Expose
   private String gender;
   @Expose
@@ -64,13 +77,23 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withStartDay(String startDay) {
+  public WorkerData withStartWork(Date startDay) {
     this.startDay = startDay;
     return this;
   }
 
-  public WorkerData withBirthDay(String birthDay) {
+  public WorkerData withStartWorkUi(String startDayUi) {
+    this.startDayUi = startDayUi;
+    return this;
+  }
+
+  public WorkerData withBirthday(Date birthDay) {
     this.birthDay = birthDay;
+    return this;
+  }
+
+  public WorkerData withBirthdayUi(String birthDayUi) {
+    this.birthDayUi = birthDayUi;
     return this;
   }
 
@@ -160,12 +183,20 @@ public class WorkerData {
     return role;
   }
 
-  public String getStartDay() {
+  public Date getStartDay() {
     return startDay;
   }
 
-  public String getBirthDay() {
+  public String getStartDayUi() {
+    return startDayUi;
+  }
+
+  public Date getBirthDay() {
     return birthDay;
+  }
+
+  public String  getBirthDayUi() {
+    return birthDayUi;
   }
 
   public String getGender() {
