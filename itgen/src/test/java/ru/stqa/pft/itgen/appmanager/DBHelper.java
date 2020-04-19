@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
-
-  private static EntityManagerFactory entityManagerFactory;
+  
+  private final EntityManagerFactory entityManagerFactory;
 
   public DBHelper() {
     entityManagerFactory = Persistence.createEntityManagerFactory("connection");
