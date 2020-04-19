@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
-  
+
   private final EntityManagerFactory entityManagerFactory;
 
   public DBHelper() {
