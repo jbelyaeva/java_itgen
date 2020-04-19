@@ -13,10 +13,11 @@ public class FamilyData {
   @Column(name = "_id")
   private String id;
 
-//  @OneToMany(mappedBy = "FamilyData")
-//  private StudentData student;
-//  @OneToMany(mappedBy = "FamilyData")
-//  private ParentData parent;
+//  @OneToMany(mappedBy = "family")
+//  private Set<StudentData> students = new HashSet<>();
+//  @OneToMany(mappedBy = "family")
+//  private Set<ParentData> parents = new HashSet<>();
+
 
 
   /** сеттеры */
