@@ -63,7 +63,7 @@ public class StudentDataGenerator extends TestBase {
       students.add(new StudentData()
               .withFirstName(String.format("Петя %s", i))
               .withLastName(String.format("Маслов %s", i))
-              .withGender(String.format("М", i))
+              .withGender(Integer.valueOf(String.format("2", i)))
               .withBirthday(String.format("01.01.2001", i))
               .withPclevel(String.format("Только планшет, телефон", i))
               .withCountry(String.format("Армения", i))

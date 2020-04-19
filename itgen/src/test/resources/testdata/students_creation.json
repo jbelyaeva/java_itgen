@@ -1,8 +1,8 @@
 [
   {
-    "firstname": "Петя0",
-    "lastname": "Маслов0",
-    "gender": "Ж",
+    "firstname": "Петя 0",
+    "lastname": "Маслов 0",
+    "gender": 2,
     "birthday": "01.01.2001",
     "pclevel": "Только планшет, телефон",
     "country": "Армения",

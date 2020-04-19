@@ -33,7 +33,7 @@ public class StudentHelper extends HelperBase {
   public void fillStudentForm(StudentData studentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
-    dropDownList(By.cssSelector("#profile-gender"), studentData.getGender());
+    dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
     enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
@@ -172,7 +172,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
     enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthday());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
-    dropDownList(By.cssSelector("#profile-gender"), studentData.getGender());
+    dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
     type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());

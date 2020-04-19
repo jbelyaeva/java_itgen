@@ -21,8 +21,8 @@ public class StudentData {
   @Column(name="lastName")
   private String lastname;
   @Expose
-  @Transient
-  private String gender;
+  @Column(name="gender")
+  private Integer gender;
   @Expose
   @Transient
   private String birthday;
@@ -132,10 +132,14 @@ public class StudentData {
       }
 
 
+
+      /** сеттеры */
+
   public StudentData withId(String id) {
     this.id = id;
     return this;
   }
+
   public StudentData withFirstName(String firstname) {
     this.firstname = firstname;
     return this;
@@ -146,7 +150,7 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withGender(String gender) {
+  public StudentData withGender(Integer gender) {
     this.gender = gender;
     return this;
   }
@@ -190,10 +194,12 @@ public class StudentData {
     this.duration = duration;
     return this;
   }
+
   public StudentData withContacts(List<Contacts> contacts) {
     this.contacts=contacts;
     return this;
   }
+
   public StudentData withPhone(String phone) {
     this.phone = phone;
     return this;
@@ -259,9 +265,13 @@ public class StudentData {
     return this;
   }
 
+
+  /** геттеры */
+
   public String getId() {
     return id;
   }
+
   public String getFirstname() {
     return firstname;
   }
@@ -270,7 +280,7 @@ public class StudentData {
     return lastname;
   }
 
-  public String getGender() {
+  public Integer getGender() {
     return gender;
   }
 
@@ -361,13 +371,17 @@ public class StudentData {
   }
 
 
+  /**
+   * хэш код и иквелс
+   */
   @Override
   public String toString() {
     return "StudentData{" +
             "id='" + id + '\'' +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-           '}';
+            ", gender=" + gender +
+            '}';
   }
 
   @Override
@@ -377,12 +391,12 @@ public class StudentData {
     StudentData that = (StudentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(gender, that.gender);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
+    return Objects.hash(id, firstname, lastname, gender);
   }
 }

@@ -53,6 +53,12 @@ public class HelperBase {
     }
   }
 
+  protected void dropDownList_Integer(By locator, Integer parametr) {
+    if(parametr != null) {
+      new Select(wd.findElement(locator)).selectByValue(String.valueOf(parametr));
+    }
+  }
+
   protected void enterADate(By locator, String date) {
     if(date != null) {
       click(locator);
