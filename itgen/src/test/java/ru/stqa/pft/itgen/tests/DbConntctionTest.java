@@ -3,6 +3,7 @@ package ru.stqa.pft.itgen.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
@@ -28,18 +29,18 @@ public class DbConntctionTest {
         /** эти запросы работают с "org.jboss.jbossts:jbossjta" */
 
         /* JP-QL запрос */
-        String query1 = "from StudentData";
+        String query1 = "from FamilyData";
         String query2 = "select h from StudentData h where firstname = 'Настя'";
-//        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
+        List<FamilyData> result = entityManager.createQuery( query1 , FamilyData.class ).getResultList();
 
         /* нативный запрос */
         String query3 = "{ $query : { roles : 'parent' } }";
-        List<ParentData> result = entityManager.createNativeQuery( query3 , ParentData.class ).getResultList();
+//        List<ParentData> result = entityManager.createNativeQuery( query3 , ParentData.class ).getResultList();
 
         entityManager.getTransaction().commit();
         entityManager.close();
 
-        for (ParentData student : result) {
+        for (FamilyData student : result) {
             System.out.println(student);
         }
     }

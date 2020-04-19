@@ -31,16 +31,13 @@ public class DBHelper {
     return new Students(students);
   }
 
-     public Families families() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        List<FamilyData> families = entityManager.createQuery("SELECT f FROM FamilyData f", FamilyData.class ).getResultList();
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return new Families(families);
-  }
-
-  public void dbClose() {
-    entityManagerFactory.close();
+  public Families families() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "from FamilyData";
+    List<FamilyData> families = entityManager.createQuery(query, FamilyData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Families(families);
   }
 }
