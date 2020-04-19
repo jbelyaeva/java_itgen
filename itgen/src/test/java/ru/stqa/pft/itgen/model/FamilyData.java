@@ -13,12 +13,18 @@ public class FamilyData {
   @Column(name = "_id")
   private String id;
 
-//  @OneToMany(mappedBy = "family")
-//  private Set<StudentData> students = new HashSet<>();
-//  @OneToMany(mappedBy = "family")
-//  private Set<ParentData> parents = new HashSet<>();
+  @OneToMany(mappedBy = "family", fetch = FetchType.EAGER)
+  private Set<StudentData> studentsS = new HashSet<>();
+  @OneToMany(mappedBy = "family", fetch = FetchType.EAGER)
+  private Set<ParentData> parentsP = new HashSet<>();
 
+  public Set<StudentData> getStudentsS() {
+    return studentsS;
+  }
 
+  public Set<ParentData> getParentsP() {
+    return parentsP;
+  }
 
   /** сеттеры */
 

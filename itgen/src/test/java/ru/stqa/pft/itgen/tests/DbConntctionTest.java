@@ -40,8 +40,10 @@ public class DbConntctionTest {
         entityManager.getTransaction().commit();
         entityManager.close();
 
-        for (FamilyData student : result) {
-            System.out.println(student);
+        for (FamilyData family : result) {
+            System.out.println(family);
+            System.out.println(family.getStudentsS());
+            System.out.println(family.getParentsP());
         }
     }
 

@@ -3,6 +3,8 @@ package ru.stqa.pft.itgen.model;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -70,8 +72,30 @@ public class ParentData {
   @Transient
   private String note;
 
-//  @ManyToOne
-//  private FamilyData family;
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name="roles")
+  private List<ParentData.Roles> roles = new ArrayList<ParentData.Roles>();
+  @Embeddable
+  static class Roles {
+    private String roles;
+    public void setRoles(String type) {
+      this.roles = type;
+    }
+    public String getRoles() {return roles;}
+
+    @Override
+    public String toString() {
+      return "" +
+              roles  ;
+    }
+  }
+
+  @ManyToOne
+  private FamilyData family;
+
+  public FamilyData getFamily() {
+    return family;
+  }
 
   /** сеттеры */
 
@@ -175,6 +199,11 @@ public class ParentData {
     return this;
   }
 
+  public ParentData withRoles (List<ParentData.Roles> roles) {
+    this.roles = roles;
+    return this;
+  }
+
   /** геттеры */
 
   public String getId() {
@@ -256,6 +285,11 @@ public class ParentData {
   public String getNote() {
     return note;
   }
+
+  public List<ParentData.Roles> getRoles() {
+    return roles;
+  }
+
 
   /**
    * ту стринг хэшкод и иквелс

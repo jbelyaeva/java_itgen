@@ -136,10 +136,14 @@ public class StudentData {
         }
       }
 
-//  @ManyToOne
-//  private FamilyData family;
+  @ManyToOne
+  private FamilyData family;
 
-      /** сеттеры */
+  public FamilyData getFamily() {
+    return family;
+  }
+
+  /** сеттеры */
 
   public StudentData withId(String id) {
     this.id = id;
