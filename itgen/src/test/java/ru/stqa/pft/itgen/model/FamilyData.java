@@ -13,18 +13,22 @@ public class FamilyData {
   @Column(name = "_id")
   private String id;
 
+  /*
   @OneToMany(mappedBy = "family", fetch = FetchType.EAGER)
   private Set<StudentData> studentsS = new HashSet<>();
+
+   public Set<StudentData> getStudentsS() {
+    return studentsS;
+  }
+  */
+  /*
   @OneToMany(mappedBy = "family", fetch = FetchType.EAGER)
   private Set<ParentData> parentsP = new HashSet<>();
 
-  public Set<StudentData> getStudentsS() {
-    return studentsS;
-  }
-
   public Set<ParentData> getParentsP() {
     return parentsP;
-  }
+  */
+
 
   /** сеттеры */
 
@@ -39,8 +43,9 @@ public class FamilyData {
     return id;
   }
 
-  /** тустринг, хэшкод и иквелс */
-
+  /**
+   * тустринг, хэшкод и иквелс
+   */
   @Override
   public String toString() {
     return "FamilyData{" +

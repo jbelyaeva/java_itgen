@@ -29,21 +29,23 @@ public class DbConntctionTest {
         /** эти запросы работают с "org.jboss.jbossts:jbossjta" */
 
         /* JP-QL запрос */
-        String query1 = "from FamilyData";
+        String query1 = "from StudentData";
         String query2 = "select h from StudentData h where firstname = 'Настя'";
-        List<FamilyData> result = entityManager.createQuery( query1 , FamilyData.class ).getResultList();
+//        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
 
         /* нативный запрос */
-        String query3 = "{ $query : { roles : 'parent' } }";
-//        List<ParentData> result = entityManager.createNativeQuery( query3 , ParentData.class ).getResultList();
+        String query3 = "{ $query : { roles : 'child' } }";
+        String query4 = "{ $or : [{ roles : 'child' }, {roles: 'parent'}]}"; // выводит всех учеников и родителей
+        List<StudentData> result = entityManager.createNativeQuery( query4 , StudentData.class ).getResultList();
 
         entityManager.getTransaction().commit();
         entityManager.close();
 
-        for (FamilyData family : result) {
-            System.out.println(family);
-            System.out.println(family.getStudentsS());
-            System.out.println(family.getParentsP());
+        for (StudentData student : result) {
+            System.out.println(student);
+            System.out.println(student.getFamily());
+//            System.out.println(family.getStudentsS());
+//            System.out.println(family.getParentsP());
         }
     }
 

@@ -136,7 +136,18 @@ public class StudentData {
         }
       }
 
+  /*
   @ManyToOne
+  @JoinTable (name = "users", joinColumns = @JoinColumn (name = "familyId"))
+  private FamilyData family;
+
+  public FamilyData getFamily() {
+    return family;
+  }
+   */
+
+  @OneToOne
+  @JoinColumn(name = "familyId")
   private FamilyData family;
 
   public FamilyData getFamily() {
