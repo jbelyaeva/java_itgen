@@ -43,7 +43,7 @@ public class DbConntctionTest {
 
         for (StudentData student : result) {
             System.out.println(student);
-            System.out.println(student.getFamily());
+ //           System.out.println(student.getFamily());
 //            System.out.println(family.getStudentsS());
 //            System.out.println(family.getParentsP());
         }

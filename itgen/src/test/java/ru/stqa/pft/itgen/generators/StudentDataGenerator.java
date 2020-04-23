@@ -72,7 +72,7 @@ public class StudentDataGenerator extends TestBase {
               .withCountry(String.format("AL", i))
               .withCity(String.format("Сватково %s", i))
               .withTimeZone(String.format("Pacific/Honolulu", i))
-              .withPhone(String.format("89035540414", i))
+           /*   .withPhone(String.format("89035540414", i))
               .withSkype(String.format("sk123", i))
               .withC2d(String.format("http:/88888", i))
               .withViber(String.format("4444444444", i))
@@ -80,7 +80,10 @@ public class StudentDataGenerator extends TestBase {
               .withTelegram(String.format("tg45", i)).withFb(String.format("fb99", i))
               .withVk(String.format("vk89", i))
               .withOk(String.format("ok78", i))
-              .withInst(String.format("inst567", i)));
+              .withInst(String.format("inst567", i))
+              */
+              );
+
     }
     return students;
   }

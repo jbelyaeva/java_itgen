@@ -11,10 +11,7 @@ import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class StudentHelper extends HelperBase {
@@ -40,6 +37,19 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
     type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
+
+    wd.findElement(By.cssSelector("input[name=\"profile-contact-phone\"]"))
+            .sendKeys(studentData.getContacts().get(0).getVal());
+    wd.findElement(By.cssSelector("input[name=\"profile-contact-telegram\"]"))
+            .sendKeys(studentData.getContacts().get(1).getVal());
+    wd.findElement(By.cssSelector("input[name=\"profile-contact-viber\"]"))
+            .sendKeys(studentData.getContacts().get(2).getVal());
+
+    /*
+    wd.findElement(By.cssSelector("input[name=\"profile-contact-viber\"]"))
+            .sendKeys((CharSequence) studentData.getContacts().stream().filter(data -> Objects.equals(data, "phone")).findFirst().get());
+    */
+    /*
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
@@ -51,7 +61,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
-
+    */
   }
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
@@ -177,6 +187,7 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
     type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
+    /*
     dropDownList(By.cssSelector("#profile-locale"), studentData.getLocate());
     dropDownList(By.cssSelector("#profile-study-lang"), studentData.getStudyLang());
     dropDownList(By.cssSelector("#profile-duration"), studentData.getDuration());
@@ -193,6 +204,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
     type(By.cssSelector("input[name=\"profile-family-id\"]"), studentData.getFamilyId());
     type(By.cssSelector("textarea[name=\"profile-note\"]"), studentData.getNote());
+     */
   }
 
   public void modifyParent() {
