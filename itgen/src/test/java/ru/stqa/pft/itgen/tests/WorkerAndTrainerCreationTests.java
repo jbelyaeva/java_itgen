@@ -43,7 +43,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<WorkerData>.class
-      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -58,7 +58,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<TrainerData>.class
-      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 

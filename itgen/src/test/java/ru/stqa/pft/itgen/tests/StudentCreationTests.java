@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class StudentCreationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
-      return students.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
+      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
     }
   }
 

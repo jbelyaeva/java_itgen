@@ -28,7 +28,7 @@ public class StudentModificationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>(){}.getType()); // List<StudentData>.class
-      return students.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 

@@ -28,7 +28,7 @@ public class TrainerModificationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>(){}.getType()); // List<TrainerData>.class
-      return trainers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      return trainers.stream().map((t) -> new Object[] {t}).collect(Collectors.toList()).iterator();
     }
   }
 
