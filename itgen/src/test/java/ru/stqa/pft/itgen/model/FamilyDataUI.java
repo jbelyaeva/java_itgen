@@ -2,7 +2,7 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
-public class FamilyDataUi {
+public class FamilyDataUI {
   private String id;
   private String familyId;
 
@@ -80,182 +80,182 @@ public class FamilyDataUi {
 
   /* setters */
 
-  public FamilyDataUi withFamilyId(String familyId) {
+  public FamilyDataUI withFamilyId(String familyId) {
     this.familyId = familyId;
     return this;
   }
 
-  public FamilyDataUi withId(String id) {
+  public FamilyDataUI withId(String id) {
     this.id = id;
     return this;
   }
 
-  public FamilyDataUi withFirstnameStudent(String firstnameStudent) {
+  public FamilyDataUI withFirstnameStudent(String firstnameStudent) {
     this.firstnameStudent = firstnameStudent;
     return this;
   }
 
-  public FamilyDataUi withLastnameStudent(String lastnameStudent) {
+  public FamilyDataUI withLastnameStudent(String lastnameStudent) {
     this.lastnameStudent = lastnameStudent;
     return this;
   }
 
-  public FamilyDataUi withGenderStudent(Integer genderStudent) {
+  public FamilyDataUI withGenderStudent(Integer genderStudent) {
     this.genderStudent = genderStudent;
     return this;
   }
 
-  public FamilyDataUi withBirthdayUiStudent(String birthdayUiStudent) {
+  public FamilyDataUI withBirthdayUiStudent(String birthdayUiStudent) {
     this.birthdayUiStudent = birthdayUiStudent;
     return this;
   }
 
-  public FamilyDataUi withPclevelStudent(String pclevelStudent) {
+  public FamilyDataUI withPclevelStudent(String pclevelStudent) {
     this.pclevelStudent = pclevelStudent;
     return this;
   }
 
-  public FamilyDataUi withCountryStudent(String countryStudent) {
+  public FamilyDataUI withCountryStudent(String countryStudent) {
     this.countryStudent = countryStudent;
     return this;
   }
 
-  public FamilyDataUi withCityStudent(String cityStudent) {
+  public FamilyDataUI withCityStudent(String cityStudent) {
     this.cityStudent = cityStudent;
     return this;
   }
 
-  public FamilyDataUi withTimezoneStudent(String timezoneStudent) {
+  public FamilyDataUI withTimezoneStudent(String timezoneStudent) {
     this.timezoneStudent = timezoneStudent;
     return this;
   }
 
-  public FamilyDataUi withPhoneStudent(String phoneStudent) {
+  public FamilyDataUI withPhoneStudent(String phoneStudent) {
     this.phoneStudent = phoneStudent;
     return this;
   }
 
-  public FamilyDataUi withTelegramStudent(String telegramStudent) {
+  public FamilyDataUI withTelegramStudent(String telegramStudent) {
     this.telegramStudent = telegramStudent;
     return this;
   }
 
-  public FamilyDataUi withViberStudent(String viberStudent) {
+  public FamilyDataUI withViberStudent(String viberStudent) {
     this.viberStudent = viberStudent;
     return this;
   }
 
-  public FamilyDataUi withC2dStudent(String c2dStudent) {
+  public FamilyDataUI withC2dStudent(String c2dStudent) {
     this.c2dStudent = c2dStudent;
     return this;
   }
 
-  public FamilyDataUi withSkypeStudent(String skypeStudent) {
+  public FamilyDataUI withSkypeStudent(String skypeStudent) {
     this.skypeStudent = skypeStudent;
     return this;
   }
 
-  public FamilyDataUi withWhatsappStudent(String whatsappStudent) {
+  public FamilyDataUI withWhatsappStudent(String whatsappStudent) {
     this.whatsappStudent = whatsappStudent;
     return this;
   }
 
-  public FamilyDataUi withFbStudent(String fbStudent) {
+  public FamilyDataUI withFbStudent(String fbStudent) {
     this.fbStudent = fbStudent;
     return this;
   }
 
-  public FamilyDataUi withVkStudent(String vkStudent) {
+  public FamilyDataUI withVkStudent(String vkStudent) {
     this.vkStudent = vkStudent;
     return this;
   }
 
-  public FamilyDataUi withOkStudent(String okStudent) {
+  public FamilyDataUI withOkStudent(String okStudent) {
     this.okStudent = okStudent;
     return this;
   }
 
-  public FamilyDataUi withInstStudent(String instStudent) {
+  public FamilyDataUI withInstStudent(String instStudent) {
     this.instStudent = instStudent;
     return this;
   }
 
-  public FamilyDataUi withFirstnameParent(String firstnameParent) {
+  public FamilyDataUI withFirstnameParent(String firstnameParent) {
     this.firstnameParent = firstnameParent;
     return this;
   }
 
-  public FamilyDataUi withLastnameParent(String lastnameParent) {
+  public FamilyDataUI withLastnameParent(String lastnameParent) {
     this.lastnameParent = lastnameParent;
     return this;
   }
 
-  public FamilyDataUi withCountryParent(String countryParent) {
+  public FamilyDataUI withCountryParent(String countryParent) {
     this.countryParent = countryParent;
     return this;
   }
 
-  public FamilyDataUi withCityParent(String cityParent) {
+  public FamilyDataUI withCityParent(String cityParent) {
     this.cityParent = cityParent;
     return this;
   }
 
-  public FamilyDataUi withTimezoneParent(String timezoneParent) {
+  public FamilyDataUI withTimezoneParent(String timezoneParent) {
     this.timezoneParent = timezoneParent;
     return this;
   }
 
-  public FamilyDataUi withPhoneParent(String phoneParent) {
+  public FamilyDataUI withPhoneParent(String phoneParent) {
     this.phoneParent = phoneParent;
     return this;
   }
 
-  public FamilyDataUi withEmailParent(String emailParent) {
+  public FamilyDataUI withEmailParent(String emailParent) {
     this.emailParent = emailParent;
     return this;
   }
 
-  public FamilyDataUi withTelegramParent(String telegramParent) {
+  public FamilyDataUI withTelegramParent(String telegramParent) {
     this.telegramParent = telegramParent;
     return this;
   }
 
-  public FamilyDataUi withViberParent(String viberParent) {
+  public FamilyDataUI withViberParent(String viberParent) {
     this.viberParent = viberParent;
     return this;
   }
 
-  public FamilyDataUi withC2dParent(String c2dParent) {
+  public FamilyDataUI withC2dParent(String c2dParent) {
     this.c2dParent = c2dParent;
     return this;
   }
 
-  public FamilyDataUi withSkypeParent(String skypeParent) {
+  public FamilyDataUI withSkypeParent(String skypeParent) {
     this.skypeParent = skypeParent;
     return this;
   }
 
-  public FamilyDataUi withWhatsappParent(String whatsappParent) {
+  public FamilyDataUI withWhatsappParent(String whatsappParent) {
     this.whatsappParent = whatsappParent;
     return this;
   }
 
-  public FamilyDataUi withFbParent(String fbParent) {
+  public FamilyDataUI withFbParent(String fbParent) {
     this.fbParent = fbParent;
     return this;
   }
 
-  public FamilyDataUi withVkParent(String vkParent) {
+  public FamilyDataUI withVkParent(String vkParent) {
     this.vkParent = vkParent;
     return this;
   }
 
-  public FamilyDataUi withOkParent(String okParent) {
+  public FamilyDataUI withOkParent(String okParent) {
     this.okParent = okParent;
     return this;
   }
 
-  public FamilyDataUi withInstParent(String instParent) {
+  public FamilyDataUI withInstParent(String instParent) {
     this.instParent = instParent;
     return this;
   }

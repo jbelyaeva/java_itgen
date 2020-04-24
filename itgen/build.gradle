@@ -87,7 +87,7 @@ task testFamilies(type: Test) {
         systemProperty 'target', "${target}"
     }
     if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUi}"
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -110,7 +110,7 @@ task testParents(type: Test) {
         systemProperty 'target', "${target}"
     }
     if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUi}"
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -133,7 +133,7 @@ task testStudents(type: Test) {
         systemProperty 'target', "${target}"
     }
     if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUi}"
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -156,7 +156,7 @@ task testTrainers(type: Test) {
         systemProperty 'target', "${target}"
     }
     if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUi}"
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -179,7 +179,7 @@ task testWorkers(type: Test) {
         systemProperty 'target', "${target}"
     }
     if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUi}"
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 

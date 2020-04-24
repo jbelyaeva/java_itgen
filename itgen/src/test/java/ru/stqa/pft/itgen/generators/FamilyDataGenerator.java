@@ -5,7 +5,7 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.stqa.pft.itgen.model.FamilyDataUi;
+import ru.stqa.pft.itgen.model.FamilyDataUI;
 import ru.stqa.pft.itgen.tests.TestBase;
 
 import java.io.File;
@@ -40,7 +40,7 @@ public class FamilyDataGenerator extends TestBase {
 
   //генерация тестовых данных
   private void run() throws IOException {
-    List<FamilyDataUi> families = generateFamilies(count);
+    List<FamilyDataUI> families = generateFamilies(count);
     if (format.equals("json")) {
       saveAsJson(families, new File(file));
     } else {
@@ -49,7 +49,7 @@ public class FamilyDataGenerator extends TestBase {
   }
 
   //сохранение этих данных в файл
-  private void saveAsJson(List<FamilyDataUi> families, File file) throws IOException {
+  private void saveAsJson(List<FamilyDataUI> families, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(families);
     try (Writer writer = new FileWriter(file);) {
@@ -57,10 +57,10 @@ public class FamilyDataGenerator extends TestBase {
     }
   }
 
-  private List<FamilyDataUi> generateFamilies(int count) {
-    List<FamilyDataUi> families = new ArrayList<FamilyDataUi>();
+  private List<FamilyDataUI> generateFamilies(int count) {
+    List<FamilyDataUI> families = new ArrayList<FamilyDataUI>();
     for (int i = 0; i < count; i++) {
-      families.add(new FamilyDataUi()
+      families.add(new FamilyDataUI()
               // ученик
               .withFirstnameStudent(String.format("Вася-%s", i))
               .withLastnameStudent(String.format("Васин-%s", i))

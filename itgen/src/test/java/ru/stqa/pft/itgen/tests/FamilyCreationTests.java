@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.Families;
-import ru.stqa.pft.itgen.model.FamilyDataUi;
+import ru.stqa.pft.itgen.model.FamilyDataUI;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ public class FamilyCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<FamilyDataUi> families = gson.fromJson(json, new TypeToken<List<FamilyDataUi>>() {
+      List<FamilyDataUI> families = gson.fromJson(json, new TypeToken<List<FamilyDataUI>>() {
       }.getType()); // List<StudentData>.class
       return families.stream().map((f) -> new Object[]{f}).collect(Collectors.toList()).iterator();
     }
@@ -37,7 +37,7 @@ public class FamilyCreationTests extends TestBase {
 
   //в этом тесте проверки только через бд
   @Test(dataProvider = "validFamiliesFromJson")
-  public void testFamilyCreation(FamilyDataUi family) {
+  public void testFamilyCreation(FamilyDataUI family) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
 
