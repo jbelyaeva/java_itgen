@@ -1,16 +1,10 @@
 package ru.stqa.pft.itgen.appmanager;
 
-import ru.stqa.pft.itgen.model.Families;
-import ru.stqa.pft.itgen.model.FamilyData;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.transaction.Transactional;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper {
@@ -40,4 +34,5 @@ public class DBHelper {
     entityManager.close();
     return new Families(families);
   }
+
 }

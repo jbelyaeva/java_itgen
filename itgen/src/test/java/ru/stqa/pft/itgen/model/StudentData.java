@@ -145,16 +145,17 @@ public class StudentData {
     return family;
   }
    */
-
+  /*
   @OneToOne
   @JoinColumn(name = "familyId")
-  private FamilyData family;
+  private FamilyDataUi family;
 
-  public FamilyData getFamily() {
+  public FamilyDataUi getFamily() {
     return family;
   }
+  */
 
-  /** сеттеры */
+  /* setters */
 
   public StudentData withId(String id) {
     this.id = id;
@@ -292,7 +293,7 @@ public class StudentData {
   }
 
 
-  /** геттеры */
+  /* getters */
 
   public String getId() {
     return id;
@@ -401,9 +402,8 @@ public class StudentData {
   }
 
 
-  /**
-   * хэш код и иквелс
-   */
+  /* toString(), hashCode() & equals() */
+
   @Override
   public String toString() {
     return "StudentData{" +

@@ -5,7 +5,6 @@ import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.tests.TestBase;
 

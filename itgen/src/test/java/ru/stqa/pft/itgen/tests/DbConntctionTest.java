@@ -3,54 +3,51 @@ package ru.stqa.pft.itgen.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.FamilyData;
-import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class DbConntctionTest {
-    private static EntityManagerFactory entityManagerFactory;
+  private static EntityManagerFactory entityManagerFactory;
 
-    @BeforeMethod
-    public static void setUpEntityManagerFactory() {
-        entityManagerFactory = Persistence.createEntityManagerFactory( "connection" );
-    }
+  @BeforeMethod
+  public static void setUpEntityManagerFactory() {
+    entityManagerFactory = Persistence.createEntityManagerFactory("connection");
+  }
 
-    @Test
-    public void testDBConnection() throws Exception {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
+  @Test
+  public void testDBConnection() throws Exception {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
 
-        /** эти запросы работают с "org.jboss.jbossts:jbossjta" */
+    /** эти запросы работают с "org.jboss.jbossts:jbossjta" */
 
-        /* JP-QL запрос */
-        String query1 = "from StudentData";
-        String query2 = "select h from StudentData h where firstname = 'Настя'";
+    /* JP-QL запрос */
+    String query1 = "from StudentData";
+    String query2 = "select h from StudentData h where firstname = 'Настя'";
 //        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
 
-        /* нативный запрос */
-        String query3 = "{ $query : { roles : 'child' } }";
-        String query4 = "{ $or : [{ roles : 'child' }, {roles: 'parent'}]}"; // выводит всех учеников и родителей
-        List<StudentData> result = entityManager.createNativeQuery( query4 , StudentData.class ).getResultList();
+    /* нативный запрос */
+    String query3 = "{ $query : { roles : 'child' } }";
+    String query4 = "{ $or : [{ roles : 'child' }, {roles: 'parent'}]}"; // выводит всех учеников и родителей
+    List<StudentData> result = entityManager.createNativeQuery(query4, StudentData.class).getResultList();
 
-        entityManager.getTransaction().commit();
-        entityManager.close();
+    entityManager.getTransaction().commit();
+    entityManager.close();
 
-        for (StudentData student : result) {
-            System.out.println(student);
-            System.out.println(student.getFamily());
+    for (StudentData student : result) {
+      System.out.println(student);
+//            System.out.println(student.getFamily());
 //            System.out.println(family.getStudentsS());
 //            System.out.println(family.getParentsP());
-        }
     }
+  }
 
-    @AfterMethod
-    public static void closeEntityManagerFactory() {
-        entityManagerFactory.close();
-    }
+  @AfterMethod
+  public static void closeEntityManagerFactory() {
+    entityManagerFactory.close();
+  }
 }

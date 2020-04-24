@@ -12,9 +12,7 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class StudentHelper extends HelperBase {
@@ -53,6 +51,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
 
   }
+
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
@@ -272,6 +271,7 @@ public class StudentHelper extends HelperBase {
     fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
     submitFamilyCreation();
   }
+
   public void createStudent(StudentData student) {
     createFamily();
     addStudent();
@@ -285,25 +285,25 @@ public class StudentHelper extends HelperBase {
     return id;
   }
 
-    public String getIdNewStudentDB(Students before, Students after) {
-      int a = 0;
-      String getIdAfter = "";
-      for (StudentData student:after){
-            getIdAfter=student.getId();
-        for (StudentData student_before:before) {
-            String getIdBefore=student_before.getId();
-            if (getIdAfter.equals(getIdBefore)) {
-            a = 1;
-            break;
-          } else {
-            a = 2;
-          }
-        }
-        if (a == 2) {
+  public String getIdNewStudentDB(Students before, Students after) {
+    int a = 0;
+    String getIdAfter = "";
+    for (StudentData student : after) {
+      getIdAfter = student.getId();
+      for (StudentData student_before : before) {
+        String getIdBefore = student_before.getId();
+        if (getIdAfter.equals(getIdBefore)) {
+          a = 1;
           break;
+        } else {
+          a = 2;
         }
       }
-      return getIdAfter;
+      if (a == 2) {
+        break;
+      }
+    }
+    return getIdAfter;
   }
 }
 

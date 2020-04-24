@@ -13,5 +13,5 @@ public class SessionHelper extends HelperBase {
     type(By.name("username"), username);
     type(By.name("password"), password);
     click(By.xpath("//button[@class='btn btn-block btn-primary center-block btn-login']"));
-   }
+  }
 }

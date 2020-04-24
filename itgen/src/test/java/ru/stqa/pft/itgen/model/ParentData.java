@@ -12,21 +12,21 @@ import java.util.Objects;
 public class ParentData {
   @Expose
   @Id
-  @Column(name="_id")
+  @Column(name = "_id")
   private String id;
   @Expose
-  @Column(name="firstName")
+  @Column(name = "firstName")
   private String firstName;
   @Expose
-  @Column(name="lastName")
+  @Column(name = "lastName")
   private String lastName;
   @Expose
-  @Column(name="country")
+  @Column(name = "country")
   private String country;
-  @Column(name="city")
+  @Column(name = "city")
   @Expose
   private String city;
-  @Column(name="tz")
+  @Column(name = "tz")
   @Expose
   private String timeZone;
   @Expose
@@ -73,20 +73,25 @@ public class ParentData {
   private String note;
 
   @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name="roles")
+  @Column(name = "roles")
   private List<ParentData.Roles> roles = new ArrayList<ParentData.Roles>();
+
   @Embeddable
   static class Roles {
     private String roles;
+
     public void setRoles(String type) {
       this.roles = type;
     }
-    public String getRoles() {return roles;}
+
+    public String getRoles() {
+      return roles;
+    }
 
     @Override
     public String toString() {
       return "" +
-              roles  ;
+              roles;
     }
   }
   /*
@@ -97,16 +102,17 @@ public class ParentData {
     return family;
   }
   */
-
+  /*
   @OneToOne
   @JoinColumn(name = "familyId")
-  private FamilyData family;
+  private FamilyDataUi family;
 
-  public FamilyData getFamily() {
+  public FamilyDataUi getFamily() {
     return family;
   }
+  */
 
-  /** сеттеры */
+  /* setters */
 
   public ParentData withId(String id) {
     this.id = id;
@@ -208,12 +214,12 @@ public class ParentData {
     return this;
   }
 
-  public ParentData withRoles (List<ParentData.Roles> roles) {
+  public ParentData withRoles(List<ParentData.Roles> roles) {
     this.roles = roles;
     return this;
   }
 
-  /** геттеры */
+  /* getters */
 
   public String getId() {
     return id;
@@ -300,9 +306,8 @@ public class ParentData {
   }
 
 
-  /**
-   * ту стринг хэшкод и иквелс
-   */
+  /* toString(), hashCode() & equals() */
+
   @Override
   public String toString() {
     return "ParentData{" +

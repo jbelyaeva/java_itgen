@@ -21,11 +21,11 @@ public class Students extends ForwardingSet<StudentData> {
   public Students(Collection<StudentData> students) {
     this.delegate = new HashSet<StudentData>(students);
   }
-  public Students withAdded (StudentData student){//объекта,в который добавлена группа
+
+  public Students withAdded(StudentData student) {//объекта,в который добавлена группа
     Students students = new Students(this);
     students.add(student);
     return students;
-
   }
 
   @Override

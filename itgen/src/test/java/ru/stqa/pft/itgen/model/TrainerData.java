@@ -13,13 +13,13 @@ public class TrainerData {
   @Expose
   private String lastName;
   @Expose
-  @Column(name="startWork")
+  @Column(name = "startWork")
   @Temporal(TemporalType.DATE)
   private Date startWork;
   @Expose
   private String startWorkUi;
   @Expose
-  @Column(name="birthday")
+  @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
   @Expose
@@ -58,6 +58,8 @@ public class TrainerData {
   private String inst;
   @Expose
   private String note;
+
+  /* setters */
 
   public TrainerData withFirstName(String firstName) {
     this.firstName = firstName;
@@ -174,6 +176,8 @@ public class TrainerData {
     return this;
   }
 
+  /* getters */
+
   public String getFirstName() {
     return firstName;
   }
@@ -265,4 +269,7 @@ public class TrainerData {
   public String getNote() {
     return note;
   }
+
+  /* toString(), hashCode() & equals() */
+
 }
