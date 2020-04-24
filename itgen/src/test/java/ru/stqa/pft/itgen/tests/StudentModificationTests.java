@@ -19,7 +19,8 @@ public class StudentModificationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_modification.json")))) {
+    try(BufferedReader reader = new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/students_modification.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
