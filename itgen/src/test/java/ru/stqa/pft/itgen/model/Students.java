@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Students extends ForwardingSet<StudentData> {
-
   private Set<StudentData> delegate;
 
   public Students(Students students) {
@@ -22,7 +21,7 @@ public class Students extends ForwardingSet<StudentData> {
     this.delegate = new HashSet<StudentData>(students);
   }
 
-  public Students withAdded(StudentData student) {//объекта,в который добавлена группа
+  public Students withAdded(StudentData student) { //объект в который добавлена группа
     Students students = new Students(this);
     students.add(student);
     return students;
