@@ -30,7 +30,7 @@ public class FamilyCreationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<FamilyDataUI> families = gson.fromJson(json, new TypeToken<List<FamilyDataUI>>() {
-      }.getType()); // List<StudentData>.class
+      }.getType()); // List<FamilyDataUI>.class
       return families.stream().map((f) -> new Object[]{f}).collect(Collectors.toList()).iterator();
     }
   }
