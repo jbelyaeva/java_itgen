@@ -2,7 +2,6 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,7 +24,7 @@ public class StudentModificationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(
+    try (BufferedReader reader = new BufferedReader(
             new FileReader(new File("src/test/resources/testdata/students_modification.json")))) {
       String json = "";
       String line = reader.readLine();
@@ -34,32 +33,34 @@ public class StudentModificationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>(){}.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
+      }.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
     }
   }
 
   @BeforeMethod
-  public void ensurePreconditions (){
-    if (app.db().students().size()==0) {
+  public void ensurePreconditions() {
+    if (app.db().students().size() == 0) {
       app.goTo().gotoTasks();
       app.goTo().gotoStudents();
-      app.students().createStudent(new StudentData().withFirstName("Маша").withLastName("Машина").withBirthdayUi("01.01.2009")
-              .withPclevel("expert").withCountry("AL"));
+      app.students().createStudent(new StudentData().withFirstName("Р’Р°СЃСЏ").withLastName("РџРµС‚СЂРѕРІ")
+              .withBirthdayUi("01.01.2009").withPclevel("expert").withCountry("AL"));
     }
   }
+
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentModification(StudentData student) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
-    Students before=app.db().students();
+    Students before = app.db().students();
     StudentData modifyStudent = before.iterator().next();
-    app.students().getSelectedStudentById(modifyStudent);//выбираем студента для модификации
+    app.students().getSelectedStudentById(modifyStudent);
     app.students().btnModifyStudent();
     app.students().ModifyStudentForm(student);
     app.students().btnStudentModify();
-    Students after=app.db().students();
-    assertEquals(after.size(),before.size());
+    Students after = app.db().students();
+    assertThat(after.size(), equalTo(before.size()));
     StudentData studentAdd = student.withId(modifyStudent.getId());
     assertThat(after, equalTo(before.without(modifyStudent).withAdded(studentAdd)));
     verifyStudentsListInUI();

@@ -2,7 +2,6 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.Families;
@@ -16,6 +15,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FamilyCreationTests extends TestBase {
 
@@ -44,13 +46,13 @@ public class FamilyCreationTests extends TestBase {
     Families before = app.db().families();
     app.families().createFamily(family);
     Families after = app.db().families();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    assertThat(after.size(), equalTo(before.size() + 1));
 
     String url = app.families().getURL();
     String urlFamily = app.families().getIdFamily(url);
     Students users = app.db().family(urlFamily);
-    Assert.assertEquals(users.size(), 2);
+    assertThat(users.size(), equalTo(2));
 
   }
 
-  }
+}
