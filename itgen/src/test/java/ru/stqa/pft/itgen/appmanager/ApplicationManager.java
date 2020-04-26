@@ -95,7 +95,7 @@ public class ApplicationManager {
     return studentHelper;
   }
 
-  public FamilyHelper getFamilyHelper() {
+  public FamilyHelper families() {
     return familyHelper;
   }
 
@@ -116,7 +116,5 @@ public class ApplicationManager {
     return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
   }
 
-  public String getURL() {
-    return wd.getCurrentUrl();
-  }
+
 }

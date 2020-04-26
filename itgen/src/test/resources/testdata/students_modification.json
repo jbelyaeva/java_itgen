@@ -1,6 +1,25 @@
 [
   {
-    "gender": "М",
-    "birthday": "27.12.1997"
+    "firstname": "Вася-0",
+    "lastname": "Васин-0",
+    "gender": 2,
+    "birthdayUi": "01.01.1910",
+    "pclevel": "expert",
+    "country": "AL",
+    "city": "Сватково 0",
+    "timezone": "Pacific/Honolulu",
+    "locate": "ru",
+    "studyLang": "ru",
+    "duration": "2",
+    "phone": "89035540414",
+    "skype": "sk123",
+    "c2d": "http:/88888",
+    "viber": "4444444444",
+    "whatsapp": "89629861121",
+    "telegram": "tg45",
+    "fb": "fb99",
+    "vk": "vk89",
+    "ok": "ok78",
+    "inst": "inst567"
   }
 ]

@@ -90,4 +90,7 @@ public class HelperBase {
     }
     return count + wd.findElements(By.cssSelector("a.btn-link")).size();
   }
+  public String getURL() {
+    return wd.getCurrentUrl();
+  }
 }

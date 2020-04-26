@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.Families;
 import ru.stqa.pft.itgen.model.FamilyDataUI;
+import ru.stqa.pft.itgen.model.Students;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,21 +41,16 @@ public class FamilyCreationTests extends TestBase {
   public void testFamilyCreation(FamilyDataUI family) {
     app.goTo().gotoTasks();
     app.goTo().gotoStudents();
-
     Families before = app.db().families();
-    app.students().createFamily();
-    app.students().addStudent();
-    app.students().addParent();
-    app.getFamilyHelper().fillFamilyForm(family);
-    app.students().submitFamilyCreation();
-
-    String url = app.getURL();
-    String urlFamily = app.students().getIdNewFamily(url);
+    app.families().createFamily(family);
     Families after = app.db().families();
     Assert.assertEquals(after.size(), before.size() + 1);
 
+    String url = app.families().getURL();
+    String urlFamily = app.families().getIdFamily(url);
+    Students users = app.db().family(urlFamily);
+    Assert.assertEquals(users.size(), 2);
 
-    // есть id семьи. Теперь можно сделать проверку: найти в юзерах студента с этим айди семьи и сравнить с данными из джойсон-файла
-    // и найти родителя с этим айди семьи и сравнить с данными, которые вводились при создании.
   }
-}
+
+  }

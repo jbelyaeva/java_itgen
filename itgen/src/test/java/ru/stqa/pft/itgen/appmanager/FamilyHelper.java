@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 import ru.stqa.pft.itgen.model.FamilyDataUI;
+import ru.stqa.pft.itgen.model.StudentData;
 
 public class FamilyHelper extends HelperBase {
 
@@ -57,4 +59,55 @@ public class FamilyHelper extends HelperBase {
     type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), familyDataUI.getOkParent());
     type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), familyDataUI.getInstParent());
   }
-}
+  public String getIdFamily(String url) {
+    String[] getIdSplit = url.split("/");
+    String id = getIdSplit[4]; //достали id
+    return id;
+  }
+  public void createFamily() {
+    click(By.xpath("//a[@href='/createFamily']"));
+  }
+  public void submitFamilyCreation() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+  public void addStudent() {
+    click(By.xpath("//span[@class='glyphicon glyphicon-plus-sign']"));
+  }
+  public void addParent() {
+    click(By.xpath("//button[@class='close btn-add-parent']"));
+  }
+  public void selectedStudent() {
+    click(By.cssSelector("a.btn-link"));
+  }
+  public void selectedFamily() {
+    click(By.xpath("//a[contains(@href, 'family')]"));
+  }
+  public void deleteFamily() {
+    click(By.xpath("//button[contains(@class, 'btn-remove-family')]"));
+  }
+  public void alertDeleteSelectedFamily() {
+    click(By.cssSelector("div.modal-header"));
+    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+  public void createFamily(FamilyDataUI family) {
+    createFamily();
+    addStudent();
+    addParent();
+    fillFamilyForm(family);
+    submitFamilyCreation();
+  }
+  public String deletionFamily(StudentData deletedStudent) {
+    SelectStudentById(deletedStudent);
+    selectedFamily();
+    String url = getURL();
+    deleteFamily();
+    alertDeleteSelectedFamily();
+    return url;
+  }
+
+  private void SelectStudentById(StudentData deletedStudent) {
+     wd.findElement(By.cssSelector("a[href='/profile/"+deletedStudent.getId()+"'")).click();
+    }
+ }
