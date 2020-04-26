@@ -13,35 +13,35 @@ import java.util.Objects;
 public class StudentData {
   @Expose
   @Id
-  @Column(name="_id")
+  @Column(name = "_id")
   private String id;
   @Expose
-  @Column(name="firstName")
+  @Column(name = "firstName")
   private String firstname;
   @Expose
-  @Column(name="lastName")
+  @Column(name = "lastName")
   private String lastname;
   @Expose
-  @Column(name="gender")
+  @Column(name = "gender")
   private Integer gender;
   @Transient
-  @Column(name="birthday")
+  @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
   @Expose
   @Transient
   private String birthdayUi;
   @Expose
-  @Column(name="pcLevel")
+  @Column(name = "pcLevel")
   private String pclevel;
   @Expose
-  @Column(name="country")
+  @Column(name = "country")
   private String country;
   @Expose
-  @Column(name="city")
+  @Column(name = "city")
   private String city;
   @Expose
-  @Column(name="tz")
+  @Column(name = "tz")
   private String timezone;
   @Expose
   @Transient
@@ -54,31 +54,38 @@ public class StudentData {
   private String duration;
 
   @ElementCollection(fetch = FetchType.EAGER)
-  @Column( name = "contacts" )
+  @Column(name = "contacts")
   private List<Contacts> contacts = new ArrayList<Contacts>();
 
   @Embeddable
-          public static class Contacts {
-          private String type;
-          private String val;
+  public static class Contacts {
+    private String type;
+    private String val;
 
-          public void setType(String type) {
-            this.type = type;
-          }
-          public void setVal(String val) {
-            this.val = val;
-          }
-          public String getType() {return type;}
-          public String getVal() {return val;}
+    public void setType(String type) {
+      this.type = type;
+    }
 
-          @Override
-                   public String toString() {
-                   return "Contacts{" +
-                   "type='" + type + '\'' +
-                   ", val='" + val + '\'' +
-                   '}';
-                    }
-          }
+    public void setVal(String val) {
+      this.val = val;
+    }
+
+    public String getType() {
+      return type;
+    }
+
+    public String getVal() {
+      return val;
+    }
+
+    @Override
+    public String toString() {
+      return "Contacts{" +
+              "type='" + type + '\'' +
+              ", val='" + val + '\'' +
+              '}';
+    }
+  }
 
   @Expose
   @Transient
@@ -111,7 +118,7 @@ public class StudentData {
   @Transient
   private String inst;
   @Transient
-  @Column(name="familyId")
+  @Column(name = "familyId")
   private String familyId;
 
   @Expose
@@ -119,22 +126,27 @@ public class StudentData {
   private String note;
 
   @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name="roles")
+  @Column(name = "roles")
   private List<Roles> roles = new ArrayList<Roles>();
-      @Embeddable
-      public static class Roles {
-           private String roles;
-           public void setRoles(String type) {
-               this.roles = type;
-                }
-           public String getRoles() {return roles;}
 
-        @Override
-        public String toString() {
-          return "" +
-                    roles  ;
-        }
-      }
+  @Embeddable
+  public static class Roles {
+    private String roles;
+
+    public void setRoles(String type) {
+      this.roles = type;
+    }
+
+    public String getRoles() {
+      return roles;
+    }
+
+    @Override
+    public String toString() {
+      return "" +
+              roles;
+    }
+  }
 
   /*
   @ManyToOne
@@ -223,7 +235,7 @@ public class StudentData {
   }
 
   public StudentData withContacts(List<Contacts> contacts) {
-    this.contacts=contacts;
+    this.contacts = contacts;
     return this;
   }
 
@@ -287,7 +299,7 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withRoles (List<Roles> roles) {
+  public StudentData withRoles(List<Roles> roles) {
     this.roles = roles;
     return this;
   }
@@ -347,7 +359,9 @@ public class StudentData {
     return duration;
   }
 
-  public  List<Contacts> getContacts() {return contacts;}
+  public List<Contacts> getContacts() {
+    return contacts;
+  }
 
   public String getPhone() {
     return phone;

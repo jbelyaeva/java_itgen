@@ -45,7 +45,7 @@ public class StudentModificationTests extends TestBase {
       app.goTo().tasks();
       app.goTo().students();
       app.students().createStudent(new StudentData().withFirstName("Вася").withLastName("Петров")
-              .withBirthdayUi("01.01.2009").withPclevel("expert").withCountry("AL"));
+              .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
   }
 
