@@ -13,7 +13,7 @@ public class NavigationHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, '/employees')]"));
   }
 
-  public void gotoStudents() {
+  public void students() {
     click(By.xpath("//a[contains(@href, '/childs')]"));
   }
 
@@ -21,7 +21,7 @@ public class NavigationHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, '/trainers')]"));
   }
 
-  public void gotoTasks() {
+  public void tasks() {
     click(By.xpath("//a[contains(@href, '/tasks')]"));
   }
 }

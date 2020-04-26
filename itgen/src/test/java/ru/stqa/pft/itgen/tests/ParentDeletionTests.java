@@ -6,8 +6,8 @@ public class ParentDeletionTests extends TestBase {
 
   @Test
   public void testParentDeletion() {
-    app.goTo().gotoTasks();
-    app.goTo().gotoStudents();
+    app.goTo().tasks();
+    app.goTo().students();
     app.students().selectedStudent();
     app.students().selectedFamily();
     app.students().selectedParent();

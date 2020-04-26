@@ -7,7 +7,7 @@ public class WorkerDeletionTests extends TestBase {
 
   @Test
   public void testWorkerDeletion() {
-    app.goTo().gotoTasks();
+    app.goTo().tasks();
     app.goTo().gotoWorker();
     int before = app.getWorkerHelper().getWorkerCount();
     app.getWorkerHelper().selectedWorker();

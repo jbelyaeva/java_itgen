@@ -41,8 +41,8 @@ public class FamilyCreationTests extends TestBase {
   //в этом тесте проверки только через бд
   @Test(dataProvider = "validFamiliesFromJson")
   public void testFamilyCreation(FamilyDataUI family) {
-    app.goTo().gotoTasks();
-    app.goTo().gotoStudents();
+    app.goTo().tasks();
+    app.goTo().students();
     Families before = app.db().families();
     app.families().createFamily(family);
     Families after = app.db().families();

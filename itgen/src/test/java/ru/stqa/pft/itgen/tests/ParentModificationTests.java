@@ -33,8 +33,8 @@ public class ParentModificationTests extends TestBase {
 
   @Test (dataProvider = "validParentsFromJson")
   public void testParentModification(ParentData parent) {
-    app.goTo().gotoTasks();
-    app.goTo().gotoStudents();
+    app.goTo().tasks();
+    app.goTo().students();
     app.students().selectedStudent();
     app.students().selectedFamily();
     app.students().selectedParent();

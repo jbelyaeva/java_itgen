@@ -53,7 +53,7 @@ public class TestBase {
   */
   public void verifyStudentsListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
-      app.goTo().gotoStudents();
+      app.goTo().students();
       Students dbStudents = app.db().students();
       List<StudentData> uiStudents = app.students().list();
       assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents

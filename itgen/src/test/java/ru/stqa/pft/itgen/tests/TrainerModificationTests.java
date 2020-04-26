@@ -34,7 +34,7 @@ public class TrainerModificationTests extends TestBase {
 
   @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testTrainerModification(TrainerData trainer) {
-    app.goTo().gotoTasks();
+    app.goTo().tasks();
     app.goTo().gotoTrainer();
     int before = app.getTrainerHelper().getTrainerCount();
     app.getTrainerHelper().selectedTrainer();  // выбирает 9-го по списку тренера (его надо предварительно создать!!!)

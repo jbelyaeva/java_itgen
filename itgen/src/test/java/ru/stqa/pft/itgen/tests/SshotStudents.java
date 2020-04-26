@@ -22,8 +22,8 @@ public class SshotStudents  extends TestBase {
    String markedImages="./src/test/testsScreenshot/markedImages/";
    String name="students_RU_Chrome";
 
-    app.goTo().gotoTasks();
-    app.goTo().gotoStudents();
+    app.goTo().tasks();
+    app.goTo().students();
 
    //уводим курсор в верхний левый угол экрана
     Robot bot = new Robot();
