@@ -122,7 +122,7 @@ public class StudentData {
   @Column(name="roles")
   private List<Roles> roles = new ArrayList<Roles>();
       @Embeddable
-           static class Roles {
+      public static class Roles {
            private String roles;
            public void setRoles(String type) {
                this.roles = type;

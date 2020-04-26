@@ -21,9 +21,7 @@ public class StudentHelper extends HelperBase {
     super(wd);
   }
 
-  public void createFamily() {
-    click(By.xpath("//a[@href='/createFamily']"));
-  }
+
 
   public void addStudent() {
     click(By.xpath("//span[@class='glyphicon glyphicon-plus-sign']"));
@@ -129,14 +127,6 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void deleteFamily() {
-    click(By.xpath("//button[contains(@class, 'btn-remove-family')]"));
-  }
-
-  public void submitFamilyCreation() {
-    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
 
   public void selectedParent() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
@@ -146,11 +136,6 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
-  public void assertDeleteSelectedFamily() {
-    click(By.cssSelector("div.modal-header"));
-    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
 
   public void assertDeleteSelectedStudent() {
     click(By.cssSelector("div.modal-header"));
@@ -158,11 +143,11 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void modifyStudent() {
+  public void btnModifyStudent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void submitStudentModify() {
+  public void btnStudentModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -262,6 +247,13 @@ public class StudentHelper extends HelperBase {
       students.add(student);
     }
   }
+  public void submitFamilyCreation() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+  public void createFamily() {
+    click(By.xpath("//a[@href='/createFamily']"));
+  }
 
   public void createFamily(StudentData student) {
     createFamily();
@@ -277,12 +269,6 @@ public class StudentHelper extends HelperBase {
     addStudent();
     fillStudentForm(student);
     submitFamilyCreation();
-  }
-
-  public String getIdNewFamily(String url) {
-    String[] getIdSplit = url.split("/");
-    String id = getIdSplit[4]; //достали id
-    return id;
   }
 
   public String getIdNewStudentDB(Students before, Students after) {
@@ -305,5 +291,16 @@ public class StudentHelper extends HelperBase {
     }
     return getIdAfter;
   }
+
+  public void deletetionStudent(StudentData deletedStudent) {
+   getSelectedStudentById(deletedStudent);
+   deleteStudent();
+   assertDeleteSelectedStudent();
+  }
+
+  public void getSelectedStudentById(StudentData deletedStudent) {
+    wd.findElement(By.cssSelector("a[href='/profile/"+deletedStudent.getId()+"'")).click();
+  }
+
 }
 
