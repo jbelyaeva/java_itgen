@@ -2,11 +2,12 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.Parents;
 import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +24,8 @@ public class ParentCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validParentsFromJson() throws IOException {
-    try(BufferedReader reader =
-                new BufferedReader(new FileReader(new File("src/test/resources/testdata/parents_creation.json")))) {
+    try (BufferedReader reader =
+                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/parents_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -32,8 +33,9 @@ public class ParentCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<ParentData> parents = gson.fromJson(json, new TypeToken<List<ParentData>>(){}.getType()); // List<ParentData>.class
-      return parents.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
+      List<ParentData> parents = gson.fromJson(json, new TypeToken<List<ParentData>>() {
+      }.getType()); // List<ParentData>.class
+      return parents.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -47,7 +49,7 @@ public class ParentCreationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validParentsFromJson")
+  @Test(dataProvider = "validParentsFromJson")
   public void testParentCreation(ParentData parent) {
     app.goTo().tasks();
     app.goTo().students();
@@ -59,7 +61,7 @@ public class ParentCreationTests extends TestBase {
     String id = app.parents().getIdNewParentDB(before, after);
     ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName());
     assertThat(after, equalTo(before.withAdded(parentAdd)));
-   }
+  }
 
 
 }

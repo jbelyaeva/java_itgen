@@ -327,8 +327,8 @@ public class ParentData {
     ParentData that = (ParentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) ;
-             }
+            Objects.equals(lastName, that.lastName);
+  }
 
   @Override
   public int hashCode() {
