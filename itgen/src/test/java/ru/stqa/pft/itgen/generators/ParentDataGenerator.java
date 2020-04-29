@@ -61,7 +61,7 @@ public class ParentDataGenerator extends TestBase {
    * Инструкция:
    * генератор настроен на создание данных для тестов на модификацию.
    * при генерации данных для тестов на создание необходимо установить значение по умолчанию для следующих полей:
-   * country, city, timeZone, note -- null 
+   * country, city, timeZone, note -- null
    * */
   private List<ParentData> generateParents(int count) {
     List<ParentData> parents = new ArrayList<ParentData>();
