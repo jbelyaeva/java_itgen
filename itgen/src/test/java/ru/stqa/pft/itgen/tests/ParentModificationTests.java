@@ -44,7 +44,7 @@ public class ParentModificationTests extends TestBase {
       app.goTo().tasks();
       app.goTo().students();
       app.families().createFamily(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
-              .withBirthdayUiStudent("01.01.2009").withPclevelStudent("expert").withCountryStudent("AL")
+              .withBirthdayUiStudent("01.01.1987").withPclevelStudent("expert").withCountryStudent("AL")
               .withFirstnameParent("Олег").withLastnameParent("Машин").withCountryParent("AL").withPhoneParent("010101010101"));
     }
   }

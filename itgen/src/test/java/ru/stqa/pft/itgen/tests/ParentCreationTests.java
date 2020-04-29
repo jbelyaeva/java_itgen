@@ -45,7 +45,7 @@ public class ParentCreationTests extends TestBase {
       app.goTo().tasks();
       app.goTo().students();
       app.students().createStudent(new StudentData().withFirstName("Маша").withLastName("Машина")
-              .withBirthdayUi("01.01.2009").withPclevel("expert").withCountry("AL"));
+              .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
     }
   }
 
