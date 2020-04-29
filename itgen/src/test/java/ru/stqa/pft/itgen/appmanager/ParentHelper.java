@@ -2,10 +2,9 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.ParentData;
+import ru.stqa.pft.itgen.model.Parents;
 
 public class ParentHelper extends HelperBase {
 
@@ -13,31 +12,54 @@ public class ParentHelper extends HelperBase {
     super(wd);
   }
 
-
   public void selectedStudent() {
     click(By.cssSelector("a.btn-link"));
   }
-  public void selectedFamily() {
-    click(By.xpath("//a[contains(@href, 'family')]"));
-  }
-  public void addParentInFamily() {
-    click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
-  }
+
   public void selectedParent() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
   }
+
+  public void selectedFamily() {
+    click(By.xpath("//a[contains(@href, 'family')]"));
+  }
+
+  public void addParentInFamily() {
+    click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
+  }
+
   public void deleteParent() {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
+  public void alertDeleteSelectedParent() {
+    click(By.cssSelector("div.modal-header"));
+    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void submitParentModify() {
+    click(By.xpath("//button[contains(@class,'save')]"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void submitParentCreation() {
+    click(By.xpath("//button[contains(@class, 'family')]"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+
+  public void modificationParent() {
+    click(By.xpath("//span[contains(@class,'pencil')]"));
+  }
 
   public void creationParent(ParentData parent) {
-   selectedStudent();
-   selectedFamily();
-   addParentInFamily();
-   fillParentForm(parent);
-   submitParentCreation();
+    selectedStudent();
+    selectedFamily();
+    addParentInFamily();
+    fillParentForm(parent);
+    submitParentCreation();
   }
+
   public String deletionParent() {
     selectedStudent();
     selectedFamily();
@@ -47,6 +69,7 @@ public class ParentHelper extends HelperBase {
     alertDeleteSelectedParent();
     return url;
   }
+
   public String modifyParent(ParentData parent) {
     selectedStudent();
     selectedFamily();
@@ -56,13 +79,6 @@ public class ParentHelper extends HelperBase {
     ModifyParentForm(parent);
     submitParentModify();
     return url;
-  }
-  public void submitParentModify() {
-    click(By.xpath("//button[contains(@class,'save')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
-  public void modificationParent() {
-    click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void ModifyParentForm(ParentData parentData) {
@@ -86,11 +102,7 @@ public class ParentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-family-id\"]"), parentData.getFamilyId());
     type(By.cssSelector("textarea[name=\"profile-note\"]"), parentData.getNote());
   }
-  public void alertDeleteSelectedParent() {
-    click(By.cssSelector("div.modal-header"));
-    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
+
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
@@ -107,10 +119,7 @@ public class ParentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), parentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());
   }
-  public void submitParentCreation() {
-    click(By.xpath("//button[contains(@class, 'family')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
+
   public String getIdNewParentDB(Parents before, Parents after) {
     int a = 0;
     String getIdAfter = "";
@@ -131,4 +140,4 @@ public class ParentHelper extends HelperBase {
     }
     return getIdAfter;
   }
- }
+}
