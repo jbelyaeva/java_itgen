@@ -61,22 +61,24 @@ public class ParentDataGenerator extends TestBase {
     List<ParentData> parents = new ArrayList<ParentData>();
     for (int i = 0; i < count; i++) {
       parents.add(new ParentData()
-              .withFirstName(String.format("Алеша %s", i))
-              .withLastName(String.format("Зайцев %s", i))
-              .withCountry(String.format("Армения", i))
+              .withFirstName(String.format("Витя %s", i))
+              .withLastName(String.format("Васильев %s", i))
+              .withCountry(String.format("RU", i))
               .withCity(String.format("Пересвет %s", i))
-              .withTimeZone(String.format("(GMT+05:00) Азия/Ташкент", i))
-              .withPhone(String.format("89035540414", i))
-              .withSkype(String.format("sk128", i))
+              .withTimeZone(String.format("Pacific/Honolulu", i))
+              .withLocate(String.format("ru", i))
+              .withPhone(String.format("11111111111", i))
+              .withSkype(String.format("sk %s", i))
               .withEmail(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
-              .withC2d(String.format("http:/777", i))
-              .withViber(String.format("4444444444", i))
-              .withWhatsapp(String.format("89629861121", i))
-              .withTelegram(String.format("tg896", i))
-              .withFb(String.format("fb56", i))
-              .withVk(String.format("vk894", i))
-              .withOk(String.format("ok256", i))
-              .withInst(String.format("inst000", i)));
+              .withC2d(String.format("http:/%s", i))
+              .withViber(String.format("22222222222", i))
+              .withWhatsapp(String.format("33333333333", i))
+              .withTelegram(String.format("tg %s", i))
+              .withFb(String.format("fb %s", i))
+              .withVk(String.format("vk %s", i))
+              .withOk(String.format("ok %s", i))
+              .withInst(String.format("inst %s", i))
+              .withNote(String.format("Привет %s", i)));
     }
     return parents;
   }

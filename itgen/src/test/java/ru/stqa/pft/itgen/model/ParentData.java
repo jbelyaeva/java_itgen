@@ -14,62 +14,81 @@ public class ParentData {
   @Id
   @Column(name = "_id")
   private String id;
+
   @Expose
   @Column(name = "firstName")
   private String firstName;
+
   @Expose
   @Column(name = "lastName")
   private String lastName;
+
   @Expose
   @Column(name = "country")
   private String country;
-  @Column(name = "city")
+
   @Expose
+  @Column(name = "city")
   private String city;
+
   @Column(name = "tz")
   @Expose
   private String timeZone;
+
   @Expose
-  @Transient
+  @Column(name = "locale")
   private String locate;
+
   @Expose
   @Transient
   private String phone;
+
   @Expose
   @Transient
   private String skype;
+
   @Expose
   @Transient
   private String email;
+
   @Expose
   @Transient
   private String c2d;
+
   @Expose
   @Transient
   private String viber;
+
   @Expose
   @Transient
   private String whatsapp;
+
   @Expose
   @Transient
   private String telegram;
+
   @Expose
   @Transient
   private String fb;
+
   @Expose
   @Transient
   private String vk;
+
   @Expose
   @Transient
   private String ok;
+
   @Expose
   @Transient
   private String inst;
+
   @Expose
   @Transient
   private String familyId;
+
   @Expose
-  @Transient
+  @Column(name = "note")
   private String note;
 
   @ElementCollection(fetch = FetchType.EAGER)
@@ -317,6 +336,8 @@ public class ParentData {
             ", country='" + country + '\'' +
             ", city='" + city + '\'' +
             ", timeZone='" + timeZone + '\'' +
+            ", locate='" + locate + '\'' +
+            ", note='" + note + '\'' +
             '}';
   }
 
@@ -327,11 +348,16 @@ public class ParentData {
     ParentData that = (ParentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName);
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(country, that.country) &&
+            Objects.equals(city, that.city) &&
+            Objects.equals(timeZone, that.timeZone) &&
+            Objects.equals(locate, that.locate) &&
+            Objects.equals(note, that.note);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(id, firstName, lastName, country, city, timeZone, locate, note);
   }
 }
