@@ -93,4 +93,9 @@ public class HelperBase {
   public String getURL() {
     return wd.getCurrentUrl();
   }
+  public String getId(String url) {
+    String[] getIdSplit = url.split("/");
+    String id = getIdSplit[4]; //достали id
+    return id;
+  }
 }
