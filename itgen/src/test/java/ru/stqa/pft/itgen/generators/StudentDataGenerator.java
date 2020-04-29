@@ -57,6 +57,14 @@ public class StudentDataGenerator extends TestBase {
     }
   }
 
+  /**
+   * Инструкция:
+   * генератор настроен на создание данных для тестов на модификацию.
+   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * studyLang, note -- null
+   * locate -- "ru"
+   * duration -- 2
+   * */
   private List<StudentData> generateContacts(int count) {
     List<StudentData> students = new ArrayList<StudentData>();
     for (int i = 0; i < count; i++) {
