@@ -1,22 +1,26 @@
 [
   {
-    "firstname": "Вася-0",
-    "lastname": "Васин-0",
+    "firstname": "Вася 0",
+    "lastname": "Васин 0",
     "gender": 2,
     "birthdayUi": "01.01.1978",
     "pclevel": "expert",
     "country": "AL",
     "city": "Сватково 0",
     "timezone": "Pacific/Honolulu",
-    "phone": "89035540414",
-    "skype": "sk123",
-    "c2d": "http:/88888",
-    "viber": "4444444444",
-    "whatsapp": "89629861121",
-    "telegram": "tg45",
-    "fb": "fb99",
-    "vk": "vk89",
-    "ok": "ok78",
-    "inst": "inst567"
+    "locate": "ru",
+    "studyLang": null,
+    "duration": 2,
+    "phone": "11111111111",
+    "skype": "sk 0",
+    "c2d": "http:/0",
+    "viber": "22222222222",
+    "whatsapp": "33333333333",
+    "telegram": "tg 0",
+    "fb": "fb 0",
+    "vk": "vk 0",
+    "ok": "ok 0",
+    "inst": "inst 0",
+    "note": null
   }
 ]

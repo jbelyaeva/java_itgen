@@ -15,43 +15,55 @@ public class StudentData {
   @Id
   @Column(name = "_id")
   private String id;
+
   @Expose
   @Column(name = "firstName")
   private String firstname;
+
   @Expose
   @Column(name = "lastName")
   private String lastname;
+
   @Expose
   @Column(name = "gender")
   private Integer gender;
+
   @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
+
   @Expose
   @Transient
   private String birthdayUi;
+
   @Expose
   @Column(name = "pcLevel")
   private String pclevel;
+
   @Expose
   @Column(name = "country")
   private String country;
+
   @Expose
   @Column(name = "city")
   private String city;
+
   @Expose
   @Column(name = "tz")
   private String timezone;
+
   @Expose
-  @Transient
+  @Column(name = "locale")
   private String locate;
+
   @Expose
   @Transient
   private String studyLang;
+
   @Expose
-  @Transient
-  private String duration;
+  @Column(name = "duration")
+  private Integer duration;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @Column(name = "contacts")
@@ -90,39 +102,49 @@ public class StudentData {
   @Expose
   @Transient
   private String phone;
+
   @Expose
   @Transient
   private String skype;
+
   @Expose
   @Transient
   private String c2d;
+
   @Expose
   @Transient
   private String viber;
+
   @Expose
   @Transient
   private String whatsapp;
+
   @Expose
   @Transient
   private String telegram;
+
   @Expose
   @Transient
   private String fb;
+
   @Expose
   @Transient
   private String vk;
+
   @Expose
   @Transient
   private String ok;
+
   @Expose
   @Transient
   private String inst;
+
   @Transient
   @Column(name = "familyId")
   private String familyId;
 
   @Expose
-  @Transient
+  @Column(name = "note")
   private String note;
 
   @ElementCollection(fetch = FetchType.EAGER)
@@ -229,7 +251,7 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withDuration(String duration) {
+  public StudentData withDuration(Integer duration) {
     this.duration = duration;
     return this;
   }
@@ -355,7 +377,7 @@ public class StudentData {
     return studyLang;
   }
 
-  public String getDuration() {
+  public Integer getDuration() {
     return duration;
   }
 
@@ -430,6 +452,9 @@ public class StudentData {
             ", country='" + country + '\'' +
             ", city='" + city + '\'' +
             ", timezone='" + timezone + '\'' +
+            ", locate='" + locate + '\'' +
+            ", note='" + note + '\'' +
+            ", duration='" + duration + '\'' +
             '}';
   }
 
@@ -445,11 +470,14 @@ public class StudentData {
             Objects.equals(pclevel, that.pclevel) &&
             Objects.equals(country, that.country) &&
             Objects.equals(city, that.city) &&
-            Objects.equals(timezone, that.timezone);
+            Objects.equals(timezone, that.timezone) &&
+            Objects.equals(locate, that.locate) &&
+            Objects.equals(duration, that.duration) &&
+            Objects.equals(note, that.note);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname, gender, pclevel, country, city, timezone);
+    return Objects.hash(id, firstname, lastname, gender, pclevel, country, city, timezone, locate, duration, note);
   }
 }

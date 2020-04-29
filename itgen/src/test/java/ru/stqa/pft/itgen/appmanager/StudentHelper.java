@@ -108,7 +108,7 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
     dropDownList(By.cssSelector("#profile-locale"), studentData.getLocate());
     dropDownList(By.cssSelector("#profile-study-lang"), studentData.getStudyLang());
-    dropDownList(By.cssSelector("#profile-duration"), studentData.getDuration());
+    dropDownList_Integer(By.cssSelector("#profile-duration"), studentData.getDuration());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
