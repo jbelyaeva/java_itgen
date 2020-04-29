@@ -47,7 +47,6 @@ public class FamilyCreationTests extends TestBase {
     app.families().createFamily(family);
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() + 1));
-
     String url = app.families().getURL();
     String urlFamily = app.families().getId(url);
     Students users = app.db().family(urlFamily);
