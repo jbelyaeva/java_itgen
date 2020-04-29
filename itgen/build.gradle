@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-//    id "io.spring.dependency-management" version "1.0.0.RC2" // вариант Даша
+//    id "io.spring.dependency-management" version "1.0.0.RC2" // вариант №1
     id "io.spring.dependency-management" version "1.0.9.RELEASE"
     id  'project-report'
 }
@@ -48,7 +48,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final') // вариант Даша
+        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:4.2.0.Final') // вариант №1
 //        mavenBom('org.hibernate.ogm:hibernate-ogm-bom:5.4.1.Final')
 
     }
