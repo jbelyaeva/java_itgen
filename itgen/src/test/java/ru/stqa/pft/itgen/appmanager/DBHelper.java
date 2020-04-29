@@ -34,16 +34,18 @@ public class DBHelper {
     entityManager.close();
     return new Families(families);
   }
+
   //состав семьи
   public Students family(String id) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
-    String query = "{ $or : [{ roles : 'child' }, {roles: 'parent'}], familyId:'"+id+"'}";
+    String query = "{ $or : [{ roles : 'child' }, {roles: 'parent'}], familyId:'" + id + "'}";
     List<StudentData> family = entityManager.createNativeQuery(query, StudentData.class).getResultList();
     entityManager.getTransaction().commit();
     entityManager.close();
     return new Students(family);
   }
+
   public Parents parents() {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();

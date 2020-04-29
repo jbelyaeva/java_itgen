@@ -90,9 +90,11 @@ public class HelperBase {
     }
     return count + wd.findElements(By.cssSelector("a.btn-link")).size();
   }
+
   public String getURL() {
     return wd.getCurrentUrl();
   }
+
   public String getId(String url) {
     String[] getIdSplit = url.split("/");
     String id = getIdSplit[4]; //достали id
