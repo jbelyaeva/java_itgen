@@ -24,7 +24,8 @@ public class ParentModificationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validParentsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/parents_modification.json")))) {
+    try (BufferedReader reader =
+                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/parents_modification.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
