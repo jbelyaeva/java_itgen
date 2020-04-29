@@ -46,11 +46,7 @@ public class TestBase {
   public void logTestStop(Method m) {
     logger.info("Stop test " + m.getName());
   }
-
-  /*public ApplicationManager getApp() {
-    return app;
-  }
-  */
+  
   public void verifyStudentsListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().students();
