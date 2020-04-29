@@ -43,7 +43,7 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.cssSelector("input[name=\"profile-contact-skype\"]"), studentData.getSkype());
     type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), studentData.getWhatsapp());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), studentData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), studentData.getFb());
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
@@ -118,7 +118,7 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.cssSelector("input[name=\"profile-contact-skype\"]"), studentData.getSkype());
     type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), studentData.getWhatsapp());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), studentData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), studentData.getFb());
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
@@ -145,7 +145,7 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//div[6]/a"));
     type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
     type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
-    type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), parentData.getFb());
+    type(By.xpath("(//input[@name='profile-contact-facebook'])[2]"), parentData.getFb());
     type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
     type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
     type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());

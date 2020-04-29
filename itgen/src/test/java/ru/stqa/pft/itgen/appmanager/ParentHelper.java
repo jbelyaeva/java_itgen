@@ -79,7 +79,7 @@ public class ParentHelper extends HelperBase {
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.cssSelector("input[name=\"profile-contact-skype\"]"), parentData.getSkype());
     type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), parentData.getWhatsapp());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), parentData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), parentData.getFb());
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), parentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), parentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());

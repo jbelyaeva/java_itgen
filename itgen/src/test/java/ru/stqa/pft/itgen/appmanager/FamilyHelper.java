@@ -31,7 +31,7 @@ public class FamilyHelper extends HelperBase {
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.cssSelector("input[name=\"profile-contact-skype\"]"), familyDataUI.getSkypeStudent());
     type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), familyDataUI.getWhatsappStudent());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), familyDataUI.getFbStudent());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), familyDataUI.getFbStudent());
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), familyDataUI.getVkStudent());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), familyDataUI.getOkStudent());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), familyDataUI.getInstStudent());
@@ -54,7 +54,7 @@ public class FamilyHelper extends HelperBase {
     click(By.xpath("//div[6]/a"));
     type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), familyDataUI.getSkypeParent());
     type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), familyDataUI.getWhatsappParent());
-    type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), familyDataUI.getFbParent());
+    type(By.xpath("(//input[@name='profile-contact-facebook'])[2]"), familyDataUI.getFbParent());
     type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), familyDataUI.getVkParent());
     type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), familyDataUI.getOkParent());
     type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), familyDataUI.getInstParent());
