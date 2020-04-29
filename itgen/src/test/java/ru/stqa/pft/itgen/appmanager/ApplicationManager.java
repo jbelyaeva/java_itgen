@@ -72,15 +72,6 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
   public WorkerHelper getWorkerHelper() {
     return workerHelper;
   }
@@ -96,6 +87,7 @@ public class ApplicationManager {
   public StudentHelper students() {
     return studentHelper;
   }
+
   public ParentHelper parents() {
     return parentHelper;
   }
@@ -112,7 +104,6 @@ public class ApplicationManager {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
 
-
   public Screenshot getScreenShert(String locator) {
     Screenshot actualScreenshot;
     // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
@@ -120,6 +111,4 @@ public class ApplicationManager {
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
     return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
   }
-
-
 }
