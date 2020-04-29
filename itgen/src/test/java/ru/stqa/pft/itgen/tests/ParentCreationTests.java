@@ -35,7 +35,7 @@ public class ParentCreationTests extends TestBase {
       Gson gson = new Gson();
       List<ParentData> parents = gson.fromJson(json, new TypeToken<List<ParentData>>() {
       }.getType()); // List<ParentData>.class
-      return parents.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
+      return parents.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
     }
   }
 
