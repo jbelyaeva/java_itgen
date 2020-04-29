@@ -26,6 +26,7 @@ public class ApplicationManager {
   private TrainerHelper trainerHelper;
   private StudentHelper studentHelper;
   private FamilyHelper familyHelper;
+  private ParentHelper parentHelper;
   private WorkerHelper workerHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
@@ -61,6 +62,7 @@ public class ApplicationManager {
     sessionHelper = new SessionHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     studentHelper = new StudentHelper(wd);
+    parentHelper = new ParentHelper(wd);
     familyHelper = new FamilyHelper(wd);
     trainerHelper = new TrainerHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
@@ -93,6 +95,9 @@ public class ApplicationManager {
 
   public StudentHelper students() {
     return studentHelper;
+  }
+  public ParentHelper parents() {
+    return parentHelper;
   }
 
   public FamilyHelper families() {

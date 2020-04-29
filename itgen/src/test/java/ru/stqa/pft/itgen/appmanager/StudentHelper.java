@@ -50,46 +50,7 @@ public class StudentHelper extends HelperBase {
 
   }
 
-  public void fillParentForm(ParentData parentData) {
-    type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
-    type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
-    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), parentData.getPhone());
-    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), parentData.getTelegram());
-    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), parentData.getViber());
-    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), parentData.getC2d());
-    click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), parentData.getSkype());
-    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), parentData.getWhatsapp());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), parentData.getFb());
-    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), parentData.getVk());
-    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), parentData.getOk());
-    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());
-  }
 
-  public void fillFamilyParentForm(ParentData parentData) {
-    Actions actions = new Actions(wd);
-    WebElement element = wd.findElement(By.cssSelector("li.list-group-item.create-family-parent-item > div.form-group > input[name=\"profile-firstName\"]"));
-    actions.moveToElement(element, 1, 1).build().perform();
-    element.click();
-    type(By.xpath("(//input[@name='profile-firstName'])[2]"), parentData.getFirstName());
-    type(By.xpath("(//input[@name='profile-lastName'])[2]"), parentData.getLastName());
-    dropDownList(By.xpath("(//select[@id='profile-country'])[2]"), parentData.getCountry());
-    type(By.xpath("(//input[@name='profile-city'])[2]"), parentData.getCity());
-    dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
-    type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
-    type(By.name("profile-contact-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.xpath("(//input[@name='profile-contact-telegram'])[2]"), parentData.getTelegram());
-    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
-    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
-    click(By.xpath("//div[6]/a"));
-    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
-    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
-    type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), parentData.getFb());
-    type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
-    type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
-    type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());
-  }
 
   public void submitStudentCreation() {
     click(By.xpath("//button[contains(@class,'create')]"));
@@ -102,10 +63,6 @@ public class StudentHelper extends HelperBase {
 
   public void selectedFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
-  }
-
-  public void addParentInFamily() {
-    click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
   }
 
   public void submitParentCreation() {
@@ -121,23 +78,13 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class, 'remove')]"));
   }
 
-  public void assertDeleteSelectedParent() {
-    click(By.cssSelector("div.modal-header"));
-    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
-
-
-  public void selectedParent() {
+   public void selectedParent() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
   }
-
-  public void deleteParent() {
-    click(By.xpath("//button[contains(@class,'remove-user')]"));
+  private void SelectStudentById(StudentData deletedStudent) {
+    wd.findElement(By.cssSelector("a[href='/profile/"+deletedStudent.getId()+"'")).click();
   }
-
-
-  public void assertDeleteSelectedStudent() {
+   public void assertDeleteSelectedStudent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
@@ -179,38 +126,32 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("textarea[name=\"profile-note\"]"), studentData.getNote());
   }
 
-  public void modifyParent() {
-    click(By.xpath("//span[contains(@class,'pencil')]"));
+
+  public void fillFamilyParentForm(ParentData parentData) {
+    Actions actions = new Actions(wd);
+    WebElement element = wd.findElement(By.cssSelector("li.list-group-item.create-family-parent-item > div.form-group > input[name=\"profile-firstName\"]"));
+    actions.moveToElement(element, 1, 1).build().perform();
+    element.click();
+    type(By.xpath("(//input[@name='profile-firstName'])[2]"), parentData.getFirstName());
+    type(By.xpath("(//input[@name='profile-lastName'])[2]"), parentData.getLastName());
+    dropDownList(By.xpath("(//select[@id='profile-country'])[2]"), parentData.getCountry());
+    type(By.xpath("(//input[@name='profile-city'])[2]"), parentData.getCity());
+    dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
+    type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
+    type(By.name("profile-contact-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(By.xpath("(//input[@name='profile-contact-telegram'])[2]"), parentData.getTelegram());
+    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
+    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
+    click(By.xpath("//div[6]/a"));
+    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
+    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
+    type(By.xpath("(//input[@name='profile-contact-fb'])[2]"), parentData.getFb());
+    type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
+    type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
+    type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());
   }
 
-  public void ModifyParentForm(ParentData parentData) {
-    type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
-    type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
-    dropDownList(By.cssSelector("#profile-country"), parentData.getCountry());
-    type(By.cssSelector("input[name=\"profile-city\"]"), parentData.getCity());
-    dropDownList(By.cssSelector("#profile-timezone"), parentData.getTimeZone());
-    dropDownList(By.cssSelector("#profile-locale"), parentData.getLocate());
-    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), parentData.getPhone());
-    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), parentData.getTelegram());
-    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), parentData.getViber());
-    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), parentData.getC2d());
-    click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), parentData.getSkype());
-    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), parentData.getWhatsapp());
-    type(By.cssSelector("input[name=\"profile-contact-fb\"]"), parentData.getFb());
-    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), parentData.getVk());
-    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), parentData.getOk());
-    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());
-    type(By.cssSelector("input[name=\"profile-family-id\"]"), parentData.getFamilyId());
-    type(By.cssSelector("textarea[name=\"profile-note\"]"), parentData.getNote());
-  }
-
-  public void submitParentModify() {
-    click(By.xpath("//button[contains(@class,'save')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
-
-  public int getStudentCount() {
+   public int getStudentCount() {
     return countingWithPaginated();
   }
 
@@ -299,6 +240,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void getSelectedStudentById(StudentData deletedStudent) {
+    //наложить условие, если найден элемент, то клик, если нет, то нажать пагинатор и опять найти элемент
     wd.findElement(By.cssSelector("a[href='/profile/"+deletedStudent.getId()+"'")).click();
   }
 

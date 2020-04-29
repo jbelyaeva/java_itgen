@@ -327,14 +327,11 @@ public class ParentData {
     ParentData that = (ParentData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(country, that.country) &&
-            Objects.equals(city, that.city) &&
-            Objects.equals(timeZone, that.timeZone);
-  }
+            Objects.equals(lastName, that.lastName) ;
+             }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, country, city, timeZone);
+    return Objects.hash(id, firstName, lastName);
   }
 }

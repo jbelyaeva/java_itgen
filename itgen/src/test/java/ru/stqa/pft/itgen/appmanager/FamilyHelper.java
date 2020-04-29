@@ -59,11 +59,7 @@ public class FamilyHelper extends HelperBase {
     type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), familyDataUI.getOkParent());
     type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), familyDataUI.getInstParent());
   }
-  public String getIdFamily(String url) {
-    String[] getIdSplit = url.split("/");
-    String id = getIdSplit[4]; //достали id
-    return id;
-  }
+
   public void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
