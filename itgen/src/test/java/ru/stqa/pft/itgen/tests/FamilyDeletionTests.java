@@ -32,8 +32,8 @@ public class FamilyDeletionTests extends TestBase {
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() - 1)); //семьи уменьшились на 1
     // удалились все изеры с этой семьей
-    String urlFamily = app.family().getId(url);
-    Students users = app.db().family(urlFamily);
+    String idFamily = app.family().getId(url);
+    Students users = app.db().family(idFamily);
     assertThat(users.size(), equalTo(0));
   }
 
