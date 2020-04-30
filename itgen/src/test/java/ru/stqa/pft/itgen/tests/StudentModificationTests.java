@@ -44,7 +44,7 @@ public class StudentModificationTests extends TestBase {
     if (app.db().students().size() == 0) {
       app.goTo().tasks();
       app.goTo().students();
-      app.students().createStudent(new StudentData().withFirstName("Вася").withLastName("Петров")
+      app.student().create(new StudentData().withFirstName("Вася").withLastName("Петров")
               .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
   }
@@ -55,10 +55,8 @@ public class StudentModificationTests extends TestBase {
     app.goTo().students();
     Students before = app.db().students();
     StudentData modifyStudent = before.iterator().next();
-    app.students().getSelectedStudentById(modifyStudent);
-    app.students().btnModifyStudent();
-    app.students().ModifyStudentForm(student);
-    app.students().btnStudentModify();
+    app.student().getSelectedStudentById(modifyStudent);
+    app.student().modify(student);
     Students after = app.db().students();
     assertThat(after.size(), equalTo(before.size()));
     StudentData studentAdd = student.withId(modifyStudent.getId());

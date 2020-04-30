@@ -51,7 +51,7 @@ public class TestBase {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().students();
       Students dbStudents = app.db().students();
-      List<StudentData> uiStudents = app.students().list();
+      List<StudentData> uiStudents = app.student().list();
       assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents
               .stream().map((s) -> new StudentData()
                       .withId(s.getId())

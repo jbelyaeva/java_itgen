@@ -65,11 +65,11 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void btnModifyStudent() {
+  public void selectModifyStudent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void btnStudentModify() {
+  public void submitModifyStudent() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -204,11 +204,17 @@ public class StudentHelper extends HelperBase {
     submitFamilyCreation();
   }
 
-  public void createStudent(StudentData student) {
+  public void create(StudentData student) {
     createFamily();
     addStudent();
     fillStudentForm(student);
     submitFamilyCreation();
+  }
+
+  public void modify(StudentData student) {
+    selectModifyStudent();
+    ModifyStudentForm(student);
+    submitModifyStudent();
   }
 
   public String getIdNewStudentDB(Students before, Students after) {
@@ -232,7 +238,7 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
-  public void deletetionStudent(StudentData deletedStudent) {
+  public void delete(StudentData deletedStudent) {
     getSelectedStudentById(deletedStudent);
     deleteStudent();
     assertDeleteSelectedStudent();

@@ -16,7 +16,7 @@ public class ParentDeletionTests extends TestBase {
     if (app.db().families().size() == 0) {
       app.goTo().tasks();
       app.goTo().students();
-      app.families().createFamily(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
+      app.family().create(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
               .withBirthdayUiStudent("01.01.1987").withPclevelStudent("expert").withCountryStudent("AL")
               .withFirstnameParent("Олег").withLastnameParent("Машин").withCountryParent("AL").withPhoneParent("010101010101"));
     }
@@ -27,10 +27,10 @@ public class ParentDeletionTests extends TestBase {
     app.goTo().tasks();
     app.goTo().students();
     Parents before = app.db().parents();
-    String url = app.parents().deletionParent();
+    String url = app.parent().delete();
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() - 1));
-    String idParent = app.parents().getId(url);
+    String idParent = app.parent().getId(url);
     ParentData deletedParent = before.iterator().next().withId(idParent);
     assertThat(after, equalTo(before.without(deletedParent)));
   }

@@ -84,15 +84,15 @@ public class ApplicationManager {
     return dbHelper;
   }
 
-  public StudentHelper students() {
+  public StudentHelper student() {
     return studentHelper;
   }
 
-  public ParentHelper parents() {
+  public ParentHelper parent() {
     return parentHelper;
   }
 
-  public FamilyHelper families() {
+  public FamilyHelper family() {
     return familyHelper;
   }
 

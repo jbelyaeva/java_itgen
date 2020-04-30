@@ -43,11 +43,11 @@ public class FamilyCreationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().students();
     Families before = app.db().families();
-    app.families().createFamily(family);
+    app.family().create(family);
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() + 1));
-    String url = app.families().getURL();
-    String urlFamily = app.families().getId(url);
+    String url = app.family().getURL();
+    String urlFamily = app.family().getId(url);
     Students users = app.db().family(urlFamily);
     assertThat(users.size(), equalTo(2));
   }

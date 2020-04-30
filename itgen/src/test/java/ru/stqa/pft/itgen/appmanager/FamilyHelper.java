@@ -95,7 +95,7 @@ public class FamilyHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void createFamily(FamilyDataUI family) {
+  public void create(FamilyDataUI family) {
     createFamily();
     addStudent();
     addParent();
@@ -103,7 +103,7 @@ public class FamilyHelper extends HelperBase {
     submitFamilyCreation();
   }
 
-  public String deletionFamily(StudentData deletedStudent) {
+  public String delete(StudentData deletedStudent) {
     SelectStudentById(deletedStudent);
     selectedFamily();
     String url = getURL();

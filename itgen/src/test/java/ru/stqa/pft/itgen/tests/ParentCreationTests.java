@@ -44,7 +44,7 @@ public class ParentCreationTests extends TestBase {
     if (app.db().students().size() == 0) {
       app.goTo().tasks();
       app.goTo().students();
-      app.students().createStudent(new StudentData().withFirstName("Маша").withLastName("Машина")
+      app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
     }
   }
@@ -54,11 +54,11 @@ public class ParentCreationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().students();
     Parents before = app.db().parents();
-    app.parents().creationParent(parent);
+    app.parent().create(parent);
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() + 1));
 
-    String id = app.parents().getIdNewParentDB(before, after);
+    String id = app.parent().getIdNewParentDB(before, after);
     ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName());
     assertThat(after, equalTo(before.withAdded(parentAdd)));
   }
