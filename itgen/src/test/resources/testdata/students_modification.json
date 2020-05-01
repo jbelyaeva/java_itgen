@@ -1,12 +1,12 @@
 [
   {
-    "firstname": "Петя 0",
-    "lastname": "Петин 0",
+    "firstname": "РџРµС‚СЏ 0",
+    "lastname": "РџРµС‚РёРЅ 0",
     "gender": 1,
     "birthdayUi": "01.01.1910",
     "pclevel": "advanced",
     "country": "AM",
-    "city": "Сватково 0",
+    "city": "РЎРІР°С‚РєРѕРІРѕ 0",
     "timezone": "America/Adak",
     "locate": "ru",
     "studyLang": "ru",
@@ -21,6 +21,6 @@
     "vk": "vk 1",
     "ok": "ok 1",
     "inst": "inst 1",
-    "note": "Привет 1"
+    "note": "РџСЂРёРІРµС‚ 1"
   }
 ]
