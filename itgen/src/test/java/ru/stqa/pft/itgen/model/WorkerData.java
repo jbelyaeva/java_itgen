@@ -2,33 +2,42 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class WorkerData {
+  @Id
+  @Column(name = "_id")
+  private String id;
   @Expose
+  @Column(name = "firstName")
   private String firstName;
   @Expose
+  @Column(name = "lastName")
   private String lastName;
   @Expose
   private String email;
   @Expose
   private String role;
   @Expose
-  @Column(name = "startDay")
+  @Transient
+  @Column(name = "startWorkAt")
   @Temporal(TemporalType.DATE)
   private Date startDay;
   @Expose
   private String startDayUi;
   @Expose
-  @Column(name = "birthDay")
+  @Transient
+  @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthDay;
   @Expose
   private String birthDayUi;
   @Expose
+  @Transient
   private String gender;
   @Expose
   private String country;
@@ -58,6 +67,10 @@ public class WorkerData {
   private String inst;
 
   /* setters */
+  public WorkerData withId(String id) {
+    this.id = id;
+    return this;
+  }
 
   public WorkerData withFirstName(String firstName) {
     this.firstName = firstName;
@@ -170,6 +183,9 @@ public class WorkerData {
   }
 
   /* getters */
+  public String getId() {
+    return id;
+  }
 
   public String getFirstName() {
     return firstName;
@@ -261,4 +277,27 @@ public class WorkerData {
 
   /* toString(), hashCode() & equals() */
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    WorkerData that = (WorkerData) o;
+    return Objects.equals(id, that.id) &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(lastName, that.lastName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName);
+  }
+
+  @Override
+  public String toString() {
+    return "WorkerData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
 }

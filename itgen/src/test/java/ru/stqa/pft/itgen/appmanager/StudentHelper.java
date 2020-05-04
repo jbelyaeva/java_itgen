@@ -246,8 +246,26 @@ public class StudentHelper extends HelperBase {
   }
 
   public void getSelectedStudentById(StudentData deletedStudent) {
-    //наложить условие, если найден элемент, то клик, если нет, то нажать пагинатор и опять найти элемент
+
     wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+    //находим пагинатор
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+     //есть ли на первой странице наш студент
+    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
+    if (list.size() > 0){
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();}
+    else {
+      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+          break;
+        }
+        else{
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
+      }
+    }
   }
 
 }
