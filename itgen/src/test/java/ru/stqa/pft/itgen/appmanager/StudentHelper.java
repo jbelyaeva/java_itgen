@@ -247,8 +247,7 @@ public class StudentHelper extends HelperBase {
 
   public void getSelectedStudentById(StudentData deletedStudent) {
 
-    wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
-    //находим пагинатор
+     //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
      //есть ли на первой странице наш студент
     List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
