@@ -44,6 +44,7 @@ public class DBHelper {
     entityManager.close();
     return new Students(family);
   }
+
   public Parents parents() {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
@@ -52,6 +53,15 @@ public class DBHelper {
     entityManager.getTransaction().commit();
     entityManager.close();
     return new Parents(parents);
+  }
+  public Workers workers() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "{ $query : { roles : {$nin :['trainer','child','parent']}}}";
+    List<WorkerData> workers = entityManager.createNativeQuery(query, WorkerData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Workers(workers);
   }
 
 }

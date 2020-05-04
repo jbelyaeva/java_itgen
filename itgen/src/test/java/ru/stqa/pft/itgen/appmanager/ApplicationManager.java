@@ -81,7 +81,7 @@ public class ApplicationManager {
     }
   }
 
-  public WorkerHelper getWorkerHelper() {
+  public WorkerHelper workers() {
     return workerHelper;
   }
 

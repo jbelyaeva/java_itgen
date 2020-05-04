@@ -8,6 +8,8 @@ import org.testng.annotations.*;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.model.Workers;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -61,6 +63,19 @@ public class TestBase {
                       .withId(s.getId())
                       .withFirstName(s.getFirstname())
                       .withLastName(s.getLastname()))
+              .collect(Collectors.toSet())));
+    }
+  }
+  public void verifyWorkerListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      app.goTo().gotoWorker();
+      Workers dbWorkers = app.db().workers();
+      List<WorkerData> uiWorkers = app.workers().list();
+      assertThat(new HashSet<Object>(uiWorkers), equalTo(dbWorkers
+              .stream().map((s) -> new WorkerData()
+                      .withId(s.getId())
+                      .withFirstName(s.getFirstName())
+                      .withLastName(s.getLastName()))
               .collect(Collectors.toSet())));
     }
   }

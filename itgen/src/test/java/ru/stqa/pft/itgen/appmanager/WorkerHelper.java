@@ -1,9 +1,17 @@
 package ru.stqa.pft.itgen.appmanager;
 
+import javafx.concurrent.Worker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WorkerHelper extends HelperBase {
 
@@ -36,7 +44,7 @@ public class WorkerHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'remove')]"));
   }
 
-  public void assertDeleteSelectedWorker() {
+  public void alertDeleteSelectedWorker() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
@@ -67,7 +75,7 @@ public class WorkerHelper extends HelperBase {
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.name("profile-contact-skype"), workerData.getSkype());
     type(By.name("profile-contact-whatsapp"), workerData.getWhatsapp());
-    type(By.name("profile-contact-fb"), workerData.getFb());
+    type(By.name("profile-contact-facebook"), workerData.getFb());
     type(By.name("profile-contact-vk"), workerData.getVk());
     type(By.name("profile-contact-ok"), workerData.getOk());
     type(By.name("profile-contact-instagram"), workerData.getInst());
@@ -76,4 +84,83 @@ public class WorkerHelper extends HelperBase {
   public int getWorkerCount() {
     return countingWithPaginated();
   }
+  public String createWorker(WorkerData worker) {
+   addWorker();
+   fillWorkerForm(worker);
+   submitWorkerCreation();
+   String url = getURL();
+   return url;
+   }
+
+  public void createFirstWorker(WorkerData worker) {
+    addWorker();
+    fillWorkerForm(worker);
+    submitWorkerCreation();
+   }
+  public void deletionWorker(WorkerData deletedWorker) {
+   selectedWorkerById(deletedWorker);
+   deleteWorker();
+   alertDeleteSelectedWorker();
+  }
+  public void modificationWorker(WorkerData worker) {
+  modifyWorker();
+  modifiWorkerForm(worker);
+  submitWorkerModify();
+  }
+  public void selectedWorkerById(WorkerData deletedWorker) {
+     //находим пагинатор
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+  //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
+    //есть ли на первой странице наш работник
+    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+    if (list.size() > 0){
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();}
+    else {
+      //если работник не на первой странице, надо нажать пагинатор, пока не найдем
+     while (!next.equals("disabled")) {
+                List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+                if (list_pagin.size() > 0) {
+                   wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
+                   break;
+                 }
+                else{
+                wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
+       }
+        }
+  }
+
+  //студенты с пагинацией
+  public List<WorkerData> list() {
+    List<WorkerData> workers = new ArrayList<WorkerData>();
+    WebDriverWait wait = new WebDriverWait(wd, 2);
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
+    if (!next.equals("disabled")) {
+      while (!next.equals("disabled")) {
+        includeInListBaseWebElement(workers, elements);
+        wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
+        elements.removeAll(elements);
+        elements = wd.findElements(By.cssSelector("a.btn-link"));
+        next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+      }
+    }
+    includeInListBaseWebElement(workers, elements);
+    return workers;
+  }
+
+  //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
+  //, а ФИ cо страницы ui
+  private void includeInListBaseWebElement(List<WorkerData> workers, List<WebElement> elements) {
+    for (WebElement element : elements) {
+      String getId = element.getAttribute("href");
+      String[] getIdSplit = getId.split("/");
+      String id = getIdSplit[4]; //достали id
+      String name = element.getText();
+      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
+      WorkerData worker = new WorkerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      workers.add(worker);
+    }
+  }
+
 }
