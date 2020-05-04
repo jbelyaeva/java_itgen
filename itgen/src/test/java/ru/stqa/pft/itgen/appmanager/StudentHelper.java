@@ -240,6 +240,7 @@ public class StudentHelper extends HelperBase {
 
   public void delete(StudentData deletedStudent) {
     getSelectedStudentById(deletedStudent);
+
     deleteStudent();
     assertDeleteSelectedStudent();
   }
