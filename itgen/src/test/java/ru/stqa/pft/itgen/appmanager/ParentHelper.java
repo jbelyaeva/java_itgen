@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.Parents;
+import ru.stqa.pft.itgen.model.Students;
 
 public class ParentHelper extends HelperBase {
 
@@ -71,6 +72,7 @@ public class ParentHelper extends HelperBase {
   }
 
   public String modify(ParentData parent) {
+
     selectedStudent();
     selectedFamily();
     selectedParent();
