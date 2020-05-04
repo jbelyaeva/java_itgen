@@ -5,9 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.FamilyDataUI;
-import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.Parents;
+import ru.stqa.pft.itgen.model.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,13 +48,34 @@ public class ParentModificationTests extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validParentsFromJson", enabled = false)
+  @Test(dataProvider = "validParentsFromJson")
   public void testParentModification(ParentData parent) {
     app.goTo().tasks();
     app.goTo().students();
-    Parents before = app.db().parents();
-    String url = app.parent().modify(parent);
-    Parents after = app.db().parents();
+    Parents before = null;
+    Parents after = null;
+    String url = "";
+    //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
+    Students students = app.db().students();
+    int a = 1;
+    for (StudentData student : students) {
+      String id = student.getFamilyId();
+      if (app.db().familyСomposition(id).size() == 2) {
+        before = app.db().parents();
+        url = app.parent().modify(parent);
+        break;
+      } else {
+        a = a + 1;
+      }
+    }
+    if (a > 0) {
+      app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+      before = app.db().parents();
+      url = app.parent().modify(parent);
+    }
+    after = app.db().parents();
+
+
     assertThat(after.size(), equalTo(before.size()));
     String idParent = app.parent().getId(url);
     ParentData modifyParent = before.iterator().next().withId(idParent);
@@ -67,8 +86,3 @@ public class ParentModificationTests extends TestBase {
 
 
 }
-
-
-//
-//    StudentData studentAdd = student.withId(modifyStudent.getId());
-//    assertThat(after, equalTo(before.without(modifyStudent).withAdded(studentAdd)));
