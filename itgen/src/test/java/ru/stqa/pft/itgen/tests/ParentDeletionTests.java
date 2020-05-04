@@ -22,7 +22,7 @@ public class ParentDeletionTests extends TestBase {
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void testParentDeletion() {
     app.goTo().tasks();
     app.goTo().students();
