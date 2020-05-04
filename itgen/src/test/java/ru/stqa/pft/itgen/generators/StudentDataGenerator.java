@@ -57,28 +57,40 @@ public class StudentDataGenerator extends TestBase {
     }
   }
 
+  /**
+   * Инструкция:
+   * генератор настроен на создание данных для тестов на модификацию.
+   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * studyLang, note -- null
+   * locate -- "ru"
+   * duration -- 2
+   * */
   private List<StudentData> generateContacts(int count) {
     List<StudentData> students = new ArrayList<StudentData>();
     for (int i = 0; i < count; i++) {
       students.add(new StudentData()
-              .withFirstName(String.format("Вася-%s", i))
-              .withLastName(String.format("Васин-%s", i))
+              .withFirstName(String.format("Вася %s", i))
+              .withLastName(String.format("Васин %s", i))
               .withGender(Integer.valueOf(String.format("2", i)))
-//              .withBirthday(String.format("01.01.2001", i))
               .withBirthdayUi(String.format("01.01.1978", i))
               .withPclevel(String.format("expert", i))
               .withCountry(String.format("AL", i))
               .withCity(String.format("Сватково %s", i))
               .withTimeZone(String.format("Pacific/Honolulu", i))
-              .withPhone(String.format("89035540414", i))
-              .withSkype(String.format("sk123", i))
-              .withC2d(String.format("http:/88888", i))
-              .withViber(String.format("4444444444", i))
-              .withWhatsapp(String.format("89629861121", i))
-              .withTelegram(String.format("tg45", i)).withFb(String.format("fb99", i))
-              .withVk(String.format("vk89", i))
-              .withOk(String.format("ok78", i))
-              .withInst(String.format("inst567", i)));
+              .withLocate(String.format("ru", i))
+              .withStudyLang(String.format("ru", i))
+              .withDuration(Integer.valueOf(String.format("2", i)))
+              .withPhone(String.format("11111111111", i))
+              .withTelegram(String.format("tg %s", i))
+              .withViber(String.format("22222222222", i))
+              .withC2d(String.format("http:/%s", i))
+              .withSkype(String.format("sk %s", i))
+              .withWhatsapp(String.format("33333333333", i))
+              .withFb(String.format("fb %s", i))
+              .withVk(String.format("vk %s", i))
+              .withOk(String.format("ok %s", i))
+              .withInst(String.format("inst %s", i))
+              .withNote(String.format("Привет %s", i)));
     }
     return students;
   }

@@ -44,21 +44,21 @@ public class ParentModificationTests extends TestBase {
     if (app.db().families().size() == 0) {
       app.goTo().tasks();
       app.goTo().students();
-      app.families().createFamily(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
+      app.family().create(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
               .withBirthdayUiStudent("01.01.1987").withPclevelStudent("expert").withCountryStudent("AL")
               .withFirstnameParent("Олег").withLastnameParent("Машин").withCountryParent("AL").withPhoneParent("010101010101"));
     }
   }
 
-  @Test(dataProvider = "validParentsFromJson")
+  @Test(dataProvider = "validParentsFromJson", enabled = false)
   public void testParentModification(ParentData parent) {
     app.goTo().tasks();
     app.goTo().students();
     Parents before = app.db().parents();
-    String url = app.parents().modifyParent(parent);
+    String url = app.parent().modify(parent);
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size()));
-    String idParent = app.parents().getId(url);
+    String idParent = app.parent().getId(url);
     ParentData modifyParent = before.iterator().next().withId(idParent);
     ParentData parentAdd = parent.withId(modifyParent.getId());
     assertThat(after, equalTo(before.without(modifyParent).withAdded(parentAdd)));

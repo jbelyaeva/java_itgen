@@ -63,38 +63,47 @@ public class FamilyHelper extends HelperBase {
   public void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
+
   public void submitFamilyCreation() {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
+
   public void addStudent() {
     click(By.xpath("//span[@class='glyphicon glyphicon-plus-sign']"));
   }
+
   public void addParent() {
     click(By.xpath("//button[@class='close btn-add-parent']"));
   }
+
   public void selectedStudent() {
     click(By.cssSelector("a.btn-link"));
   }
+
   public void selectedFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
+
   public void deleteFamily() {
     click(By.xpath("//button[contains(@class, 'btn-remove-family')]"));
   }
+
   public void alertDeleteSelectedFamily() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
-  public void createFamily(FamilyDataUI family) {
+
+  public void create(FamilyDataUI family) {
     createFamily();
     addStudent();
     addParent();
     fillFamilyForm(family);
     submitFamilyCreation();
   }
-  public String deletionFamily(StudentData deletedStudent) {
+
+  public String delete(StudentData deletedStudent) {
     SelectStudentById(deletedStudent);
     selectedFamily();
     String url = getURL();
@@ -104,6 +113,6 @@ public class FamilyHelper extends HelperBase {
   }
 
   private void SelectStudentById(StudentData deletedStudent) {
-     wd.findElement(By.cssSelector("a[href='/profile/"+deletedStudent.getId()+"'")).click();
-    }
- }
+    wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+  }
+}

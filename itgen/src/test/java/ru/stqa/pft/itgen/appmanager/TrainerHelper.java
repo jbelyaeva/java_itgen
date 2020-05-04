@@ -11,7 +11,6 @@ public class TrainerHelper extends HelperBase {
     super(wd);
   }
 
-
   public void selectedTrainer() {
     //click(By.xpath("//tr[9]/td/a"));
     click(By.xpath("//a[contains(@href,'profile')]"));

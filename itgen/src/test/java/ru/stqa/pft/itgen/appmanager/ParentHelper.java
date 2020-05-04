@@ -52,7 +52,7 @@ public class ParentHelper extends HelperBase {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void creationParent(ParentData parent) {
+  public void create(ParentData parent) {
     selectedStudent();
     selectedFamily();
     addParentInFamily();
@@ -60,7 +60,7 @@ public class ParentHelper extends HelperBase {
     submitParentCreation();
   }
 
-  public String deletionParent() {
+  public String delete() {
     selectedStudent();
     selectedFamily();
     selectedParent();
@@ -70,7 +70,7 @@ public class ParentHelper extends HelperBase {
     return url;
   }
 
-  public String modifyParent(ParentData parent) {
+  public String modify(ParentData parent) {
     selectedStudent();
     selectedFamily();
     selectedParent();

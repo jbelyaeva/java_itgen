@@ -16,7 +16,7 @@ public class FamilyDeletionTests extends TestBase {
     if (app.db().families().size() == 0) {
       app.goTo().tasks();
       app.goTo().students();
-      app.students().createStudent(new StudentData().withFirstName("Маша").withLastName("Машина")
+      app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
   }
@@ -28,12 +28,12 @@ public class FamilyDeletionTests extends TestBase {
     Families before = app.db().families();//для проверки, что семьи уменьшились на 1
     Students listBefore = app.db().students();//выбираем студента для удаления
     StudentData deletedStudent = listBefore.iterator().next();
-    String url = app.families().deletionFamily(deletedStudent);//удаляем выбранного студента
+    String url = app.family().delete(deletedStudent);//удаляем выбранного студента
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() - 1)); //семьи уменьшились на 1
     // удалились все изеры с этой семьей
-    String urlFamily = app.families().getId(url);
-    Students users = app.db().family(urlFamily);
+    String idFamily = app.family().getId(url);
+    Students users = app.db().familyСomposition(idFamily);
     assertThat(users.size(), equalTo(0));
   }
 

@@ -65,11 +65,11 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void btnModifyStudent() {
+  public void selectModifyStudent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void btnStudentModify() {
+  public void submitModifyStudent() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -108,7 +108,7 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
     dropDownList(By.cssSelector("#profile-locale"), studentData.getLocate());
     dropDownList(By.cssSelector("#profile-study-lang"), studentData.getStudyLang());
-    dropDownList(By.cssSelector("#profile-duration"), studentData.getDuration());
+    dropDownList_Integer(By.cssSelector("#profile-duration"), studentData.getDuration());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
@@ -204,11 +204,17 @@ public class StudentHelper extends HelperBase {
     submitFamilyCreation();
   }
 
-  public void createStudent(StudentData student) {
+  public void create(StudentData student) {
     createFamily();
     addStudent();
     fillStudentForm(student);
     submitFamilyCreation();
+  }
+
+  public void modify(StudentData student) {
+    selectModifyStudent();
+    ModifyStudentForm(student);
+    submitModifyStudent();
   }
 
   public String getIdNewStudentDB(Students before, Students after) {
@@ -232,8 +238,9 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
-  public void deletetionStudent(StudentData deletedStudent) {
+  public void delete(StudentData deletedStudent) {
     getSelectedStudentById(deletedStudent);
+
     deleteStudent();
     assertDeleteSelectedStudent();
   }
