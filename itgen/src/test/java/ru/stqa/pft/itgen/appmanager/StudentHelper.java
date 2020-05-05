@@ -3,11 +3,9 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 
@@ -47,12 +45,15 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//button[@class='close btn-add-parent']"));
   }
 
-  public void deleteStudent() {
+  public void btnDeleteStudent() {
     click(By.xpath("//button[contains(@class, 'remove')]"));
   }
 
   public void selectedParent() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
+  }
+  public void btnAddStudentInFamily() {
+    click(By.xpath("//div[contains(@class,'child')]/span[contains(@class,'sign')]"));
   }
 
   private void SelectStudentById(StudentData deletedStudent) {
@@ -83,6 +84,25 @@ public class StudentHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-country"), studentData.getCountry());
     type(By.cssSelector("input[name=\"profile-city\"]"), studentData.getCity());
     dropDownList(By.cssSelector("#profile-timezone"), studentData.getTimezone());
+    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
+    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
+    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), studentData.getC2d());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), studentData.getSkype());
+    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), studentData.getWhatsapp());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), studentData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
+    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
+    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
+
+  }
+  public void fillAddStudentForm(StudentData studentData) {
+    type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
+    type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
+    dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
+    enterADate(By.cssSelector("input[name=\"profile-birthday\"]"), studentData.getBirthdayUi());
+    dropDownList(By.xpath("//select[@id='profile-pc-level']"), studentData.getPclevel());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), studentData.getPhone());
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), studentData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), studentData.getViber());
@@ -166,6 +186,10 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
+  public void btnStudentCreation() {
+    click(By.xpath("//button[contains(@class,'create')]"));
+    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
 
   public void createFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
@@ -217,11 +241,24 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
-  public void delete(StudentData deletedStudent) {
-    getSelectedStudentByStudent(deletedStudent);
-    deleteStudent();
+  public String delete() {
+    String url = getURL();
+    btnDeleteStudent();
     assertDeleteSelectedStudent();
+    return url;
   }
+
+  public void addStudentInFamily () {
+    selectedStudent();
+    selectedFamily();
+    btnAddStudentInFamily();
+    fillAddStudentForm(new StudentData().withFirstName("Маша").withLastName("Машина")
+            .withBirthdayUi("01.01.1999").withPclevel("expert"));
+    btnStudentCreation();
+    selectedStudentAfterCreate();
+
+  }
+
 
   public void getSelectedStudentByStudent(StudentData deletedStudent) {
      //находим пагинатор
