@@ -40,7 +40,7 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().workers().size() == 2) {
+    if (app.db().workers().size() == 1) {
       app.goTo().tasks();
       app.goTo().gotoWorker();
       app.workers().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
