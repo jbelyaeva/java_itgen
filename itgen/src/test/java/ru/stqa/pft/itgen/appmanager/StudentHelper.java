@@ -124,31 +124,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("textarea[name=\"profile-note\"]"), studentData.getNote());
   }
 
-  public void fillFamilyParentForm(ParentData parentData) {
-    Actions actions = new Actions(wd);
-    WebElement element = wd.findElement(By.cssSelector("li.list-group-item.create-family-parent-item > div.form-group > input[name=\"profile-firstName\"]"));
-    actions.moveToElement(element, 1, 1).build().perform();
-    element.click();
-    type(By.xpath("(//input[@name='profile-firstName'])[2]"), parentData.getFirstName());
-    type(By.xpath("(//input[@name='profile-lastName'])[2]"), parentData.getLastName());
-    dropDownList(By.xpath("(//select[@id='profile-country'])[2]"), parentData.getCountry());
-    type(By.xpath("(//input[@name='profile-city'])[2]"), parentData.getCity());
-    dropDownList(By.xpath("(//select[@id='profile-timezone'])[2]"), parentData.getTimeZone());
-    type(By.xpath("(//input[@name='profile-contact-phone'])[2]"), parentData.getPhone());
-    type(By.name("profile-contact-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.xpath("(//input[@name='profile-contact-telegram'])[2]"), parentData.getTelegram());
-    type(By.xpath("(//input[@name='profile-contact-viber'])[2]"), parentData.getViber());
-    type(By.xpath("(//input[@name='profile-contact-c2d'])[2]"), parentData.getC2d());
-    click(By.xpath("//div[6]/a"));
-    type(By.xpath("(//input[@name='profile-contact-skype'])[2]"), parentData.getSkype());
-    type(By.xpath("(//input[@name='profile-contact-whatsapp'])[2]"), parentData.getWhatsapp());
-    type(By.xpath("(//input[@name='profile-contact-facebook'])[2]"), parentData.getFb());
-    type(By.xpath("(//input[@name='profile-contact-vk'])[2]"), parentData.getVk());
-    type(By.xpath("(//input[@name='profile-contact-ok'])[2]"), parentData.getOk());
-    type(By.xpath("(//input[@name='profile-contact-instagram'])[2]"), parentData.getInst());
-  }
-
-  public int getStudentCount() {
+    public int getStudentCount() {
     return countingWithPaginated();
   }
 
@@ -195,20 +171,23 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
-  public void createFamily(StudentData student) {
+   public void create(StudentData student) {
     createFamily();
     addStudent();
-    addParent();
     fillStudentForm(student);
-    fillFamilyParentForm(new ParentData().withFirstName("Костин").withLastName("Петя"));
     submitFamilyCreation();
   }
-
-  public void create(StudentData student) {
+  public String createWithURL(StudentData student) {
     createFamily();
     addStudent();
     fillStudentForm(student);
     submitFamilyCreation();
+    selectedStudentAfterCreate();
+    String url = getURL();
+    return url;
+  }
+  public void selectedStudentAfterCreate() {
+    click(By.xpath("(//div[@class='gena-panel-body'])[1]//a"));
   }
 
   public void modify(StudentData student) {
@@ -239,14 +218,12 @@ public class StudentHelper extends HelperBase {
   }
 
   public void delete(StudentData deletedStudent) {
-    getSelectedStudentById(deletedStudent);
-
+    getSelectedStudentByStudent(deletedStudent);
     deleteStudent();
     assertDeleteSelectedStudent();
   }
 
-  public void getSelectedStudentById(StudentData deletedStudent) {
-
+  public void getSelectedStudentByStudent(StudentData deletedStudent) {
      //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
      //есть ли на первой странице наш студент
@@ -259,6 +236,26 @@ public class StudentHelper extends HelperBase {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+          break;
+        }
+        else{
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
+      }
+    }
+  }
+  public void getSelectedStudentById(String id) {
+    //находим пагинатор
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    //есть ли на первой странице наш студент
+    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+    if (list.size() > 0){
+      wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();}
+    else {
+      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
         }
         else{

@@ -2,11 +2,9 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
 
@@ -22,10 +20,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerModificationTests extends TestBase {
+  public WorkerData modifydWorker;
 
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_modification.json")))) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_modification.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -33,13 +32,15 @@ public class WorkerModificationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<WorkerData>.class
-      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
+      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>() {
+      }.getType()); // List<WorkerData>.class
+      return workers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
     }
   }
+
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().workers().size() == 0) {
+    if (app.db().workers().size() == 2) {
       app.goTo().tasks();
       app.goTo().gotoWorker();
       app.workers().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
@@ -47,12 +48,18 @@ public class WorkerModificationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validWorkersFromJson")
+  @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {
     app.goTo().tasks();
     app.goTo().gotoWorker();
     Workers before = app.db().workers();
-    WorkerData modifydWorker = before.iterator().next();
+    for (WorkerData worker1 : before) {
+      String id = worker1.getId();
+      if ((!id.equals("777")) && (!id.equals("666"))) {
+        modifydWorker = worker1;
+        break;
+      }
+    }
     app.workers().selectedWorkerById(modifydWorker);
     app.workers().modificationWorker(worker);
     Workers after = app.db().workers();

@@ -139,7 +139,7 @@ public class StudentData {
   @Transient
   private String inst;
 
-  @Transient
+
   @Column(name = "familyId")
   private String familyId;
 

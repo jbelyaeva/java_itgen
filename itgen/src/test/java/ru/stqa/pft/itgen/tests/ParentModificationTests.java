@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.appmanager.HelperBase;
 import ru.stqa.pft.itgen.model.*;
 
 import java.io.BufferedReader;
@@ -58,29 +59,37 @@ public class ParentModificationTests extends TestBase {
     //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
     Students students = app.db().students();
     int a = 1;
-    for (StudentData student : students) {
-      String id = student.getFamilyId();
-      if (app.db().familyСomposition(id).size() == 2) {
-        before = app.db().parents();
-        url = app.parent().modify(parent);
+    for (StudentData student : students) { //проходим по всем студентам
+      String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
+      if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
+        app.goTo().students();// переходим в студенты
+        app.student().getSelectedStudentByStudent(student);//выбираем этого студента в списке
+        before = app.db().parents();// запоминаем список родителей До
+        app.parent().selectedFamily();
+        app.parent().selectedParent();//выбираем родителя в этой семье
+        url = app.parent().modify(parent);//модифицируем
+        a=0;
         break;
-      } else {
-        a = a + 1;
       }
     }
-    if (a > 0) {
-      app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
-      before = app.db().parents();
-      url = app.parent().modify(parent);
+    if (a > 0) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
+      url= app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+      before = app.db().parents();// берем список родителй ДО
+      app.parent().modifyNewParent(parent);//модифицируем
     }
     after = app.db().parents();
-
-
     assertThat(after.size(), equalTo(before.size()));
-    String idParent = app.parent().getId(url);
-    ParentData modifyParent = before.iterator().next().withId(idParent);
-    ParentData parentAdd = parent.withId(modifyParent.getId());
-    assertThat(after, equalTo(before.without(modifyParent).withAdded(parentAdd)));
+    String idParent = app.parent().getId(url); //id модифиц родителя
+      for (ParentData parentModify : after) { //найти в списке ДО родителя с таким id
+      if (parentModify.getId().equals(idParent)){
+       ParentData parentAdd = parent.withId(parentModify.getId());
+       assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
+       return;
+      }
+    }
+
+
+
 
   }
 
