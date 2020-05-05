@@ -33,29 +33,34 @@ public class ParentDeletionTests extends TestBase {
     //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
     Students students = app.db().students();
     int a = 1;
-    for (StudentData student : students) {
-      String id = student.getFamilyId();
-      if (app.db().familyСomposition(id).size() == 2) {
-        before = app.db().parents();
-        url = app.parent().delete();
+    for (StudentData student : students) { //проходим по всем студентам
+      String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
+       if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
+        app.goTo().students();// переходим в студенты
+        app.student().getSelectedStudentByStudent(student);//выбираем этого студента в списке
+        before = app.db().parents();// запоминаем список родителей До
+        app.parent().selectedFamily();//выбираем родителя в этой семье
+        url = app.parent().delete();//удаляем
+         a=0;
         break;
-      } else {
-        a = a + 1;
       }
     }
-    if (a > 0) {
-      app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
-      before = app.db().parents();
-      url = app.parent().delete();
+    if (a > 0) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
+      app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+      before = app.db().parents();// берем список родителй ДО
+      url = app.parent().delete();//удаляем , и знаем УРЛ удаленного родителя
     }
     after = app.db().parents();
-
-
     assertThat(after.size(), equalTo(before.size() - 1));
-    String idParent = app.parent().getId(url);
-    ParentData deletedParent = before.iterator().next().withId(idParent);
-    assertThat(after, equalTo(before.without(deletedParent)));
-  }
+
+    String idParent = app.parent().getId(url); //id удаленного родителя
+    for (ParentData parent : before) { //найти в списке ДО родителя с таким id
+      if (parent.getId().equals(idParent)){
+        assertThat(after, equalTo(before.without(parent))); //список После и ДО-этот родитель
+       return;
+      }
+    }
+   }
 
 
 }

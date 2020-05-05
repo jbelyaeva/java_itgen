@@ -19,7 +19,7 @@ public class ParentHelper extends HelperBase {
 
   public void selectedParent() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
-  }
+   }
 
   public void selectedFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
@@ -60,10 +60,25 @@ public class ParentHelper extends HelperBase {
     fillParentForm(parent);
     submitParentCreation();
   }
-
-  public String delete() {
+  public void createForStudent(ParentData parent) {
+  //  selectedStudent();
+    selectedFamily();
+    addParentInFamily();
+    fillParentForm(parent);
+    submitParentCreation();
+  }
+  public String createWithUrl(ParentData parent) {
     selectedStudent();
     selectedFamily();
+    addParentInFamily();
+    fillParentForm(parent);
+    submitParentCreation();
+    selectedParent();
+    String url = getURL();
+    return url;
+  }
+
+  public String delete() {
     selectedParent();
     String url = getURL();
     deleteParent();
@@ -71,16 +86,18 @@ public class ParentHelper extends HelperBase {
     return url;
   }
 
-  public String modify(ParentData parent) {
 
-    selectedStudent();
-    selectedFamily();
-    selectedParent();
+  public void modifyNewParent(ParentData parent) {
+    modificationParent();
+    ModifyParentForm(parent);
+    submitParentModify();
+  }
+  public String modify(ParentData parent) {
     String url = getURL();
     modificationParent();
     ModifyParentForm(parent);
     submitParentModify();
-    return url;
+      return url;
   }
 
   public void ModifyParentForm(ParentData parentData) {

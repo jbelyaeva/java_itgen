@@ -60,29 +60,32 @@ public class ParentCreationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size() + 1));
 
     String id = app.parent().getIdNewParentDB(before, after);
-    ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName()) ;
+    ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName());
     assertThat(after, equalTo(before.withAdded(parentAdd)));
   }
 
 
   private void createParent(ParentData parent) {
     //находим студента без родителя, если такого нет, то создаем такого
-    Students students=app.db().students();
-    int a=1;
-    for(StudentData student:students){
+    String url = "";
+    Students students = app.db().students();
+    int a = 1;
+    for (StudentData student : students) {
       StudentData studentWithoutParent = students.iterator().next();
-      String id=studentWithoutParent.getFamilyId();
-      if (app.db().familyСomposition(id).size()==1){
+      String id = studentWithoutParent.getFamilyId();
+      if (app.db().familyСomposition(id).size() == 1) {
         app.parent().create(parent);
+        a = 0;
         break;
-      }else {a=a+1;}
+      } else {
+        a = a + 1;
+      }
     }
-    if(a>0){
+    if (a > 0) {
       app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
-      app.parent().create(parent);
+      app.student().selectedStudentAfterCreate();
+      app.parent().createForStudent(parent);
     }
   }
-
-
 }
