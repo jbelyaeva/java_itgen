@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.appmanager.HelperBase;
 import ru.stqa.pft.itgen.model.*;
 
 import java.io.BufferedReader;
@@ -68,27 +67,25 @@ public class ParentModificationTests extends TestBase {
         app.parent().selectedFamily();
         app.parent().selectedParent();//выбираем родителя в этой семье
         url = app.parent().modify(parent);//модифицируем
-        a=0;
+        a = 0;
         break;
       }
     }
     if (a > 0) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
-      url= app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+      url = app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
       before = app.db().parents();// берем список родителй ДО
       app.parent().modifyNewParent(parent);//модифицируем
     }
     after = app.db().parents();
     assertThat(after.size(), equalTo(before.size()));
     String idParent = app.parent().getId(url); //id модифиц родителя
-      for (ParentData parentModify : before) { //найти в списке ДО родителя с таким id
-      if (parentModify.getId().equals(idParent)){
-       ParentData parentAdd = parent.withId(parentModify.getId());
-       assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
-       return;
+    for (ParentData parentModify : before) { //найти в списке ДО родителя с таким id
+      if (parentModify.getId().equals(idParent)) {
+        ParentData parentAdd = parent.withId(parentModify.getId());
+        assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
+        return;
       }
     }
-
-
 
 
   }

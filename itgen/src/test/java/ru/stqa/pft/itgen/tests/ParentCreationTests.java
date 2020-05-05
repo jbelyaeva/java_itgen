@@ -60,7 +60,9 @@ public class ParentCreationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size() + 1));
 
     String id = app.parent().getIdNewParentDB(before, after);
-    ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName());
+    ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName())
+            .withCountry(parent.getCountry()).withCity(parent.getCity()).withTimeZone(parent.getTimeZone())
+            .withLocate(parent.getLocate()).withNote(parent.getNote());
     assertThat(after, equalTo(before.withAdded(parentAdd)));
   }
 
