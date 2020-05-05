@@ -80,7 +80,7 @@ public class ParentModificationTests extends TestBase {
     after = app.db().parents();
     assertThat(after.size(), equalTo(before.size()));
     String idParent = app.parent().getId(url); //id модифиц родителя
-      for (ParentData parentModify : after) { //найти в списке ДО родителя с таким id
+      for (ParentData parentModify : before) { //найти в списке ДО родителя с таким id
       if (parentModify.getId().equals(idParent)){
        ParentData parentAdd = parent.withId(parentModify.getId());
        assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
