@@ -83,6 +83,6 @@ public class TestBase {
                       .withFirstName(s.getFirstName())
                       .withLastName(s.getLastName()))
               .collect(Collectors.toSet())));
-    }
+      }
   }
 }

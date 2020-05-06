@@ -60,8 +60,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<TrainerData>.class
-      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
+      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>(){}.getType()); // List<TrainerData>.class
+      return trainers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -93,11 +93,10 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   @Test (dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(TrainerData trainer) {
     app.goTo().tasks();
-    app.goTo().gotoTrainer();
+    app.goTo().gotoWorker();
     Trainers before = app.db().trainers();
     String url=app.trainers().createTrainer(trainer);
     String idTrainer = app.trainers().getId(url);
-    app.goTo().gotoTrainer();
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size() + 1));
     TrainerData trainerAdd = trainer.withId(idTrainer);

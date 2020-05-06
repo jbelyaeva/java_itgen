@@ -36,6 +36,7 @@ public class TrainerData {
   @Transient
   private String gender;
   @Expose
+  @Transient
   private String maxSlots;
   @Expose
   private String country;
@@ -48,6 +49,7 @@ public class TrainerData {
   @Expose
   private String role;
   @Expose
+  @Transient
   private String payBase;
   @Expose
   private String phone;
