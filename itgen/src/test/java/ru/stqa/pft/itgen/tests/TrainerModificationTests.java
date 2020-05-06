@@ -2,14 +2,12 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
 import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,9 +23,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class TrainerModificationTests extends TestBase {
   public TrainerData modifyTrainer;
   int a = 0;
+
   @DataProvider
   public Iterator<Object[]> validWorkersTrainersFromJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_trainers_modification.json")))) {
+    try (BufferedReader reader =
+                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_trainers_modification.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -35,8 +35,9 @@ public class TrainerModificationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>(){}.getType()); // List<TrainerData>.class
-      return trainers.stream().map((t) -> new Object[] {t}).collect(Collectors.toList()).iterator();
+      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>() {
+      }.getType()); // List<TrainerData>.class
+      return trainers.stream().map((t) -> new Object[]{t}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -72,7 +73,7 @@ public class TrainerModificationTests extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validWorkersTrainersFromJson")
+  @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testTrainerModification(TrainerData trainer) {
     app.goTo().tasks();
     app.goTo().gotoTrainer();
