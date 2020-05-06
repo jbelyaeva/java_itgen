@@ -1,5 +1,6 @@
 package ru.stqa.pft.itgen.tests;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.Families;
@@ -36,5 +37,14 @@ public class FamilyDeletionTests extends TestBase {
     Students users = app.db().familyСomposition(idFamily);
     assertThat(users.size(), equalTo(0));
   }
-
+  @AfterMethod
+  public  void cleanFamily(){
+    while (app.db().students().size() != 1) {
+      app.goTo().students();
+      app.family().selectedStudent();
+      app.family().selectedFamily();
+      app.family().deleteFamily();
+      app.family().alertDeleteFamily();
+    }
+  }
 }
