@@ -64,5 +64,14 @@ public class DBHelper {
     entityManager.close();
     return new Workers(workers);
   }
+  public Trainers trainers() {
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "{ $query : { roles : {$nin :['employee','child','parent']}}}";
+    List<TrainerData> trainers = entityManager.createNativeQuery(query, TrainerData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Trainers(trainers);
+  }
 
 }

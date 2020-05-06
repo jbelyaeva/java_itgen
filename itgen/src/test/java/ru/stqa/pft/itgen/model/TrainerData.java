@@ -2,29 +2,38 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class TrainerData {
+  @Id
+  @Column(name = "_id")
+  private String id;
   @Expose
+  @Column(name = "firstName")
   private String firstName;
   @Expose
+  @Column(name = "lastName")
   private String lastName;
   @Expose
+  @Transient
   @Column(name = "startWork")
   @Temporal(TemporalType.DATE)
   private Date startWork;
   @Expose
   private String startWorkUi;
   @Expose
+  @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
   @Expose
   private String birthdayUi;
   @Expose
+  @Transient
   private String gender;
   @Expose
   private String maxSlots;
@@ -36,6 +45,8 @@ public class TrainerData {
   private String locate;
   @Expose
   private String city;
+  @Expose
+  private String role;
   @Expose
   private String payBase;
   @Expose
@@ -60,7 +71,10 @@ public class TrainerData {
   private String note;
 
   /* setters */
-
+  public TrainerData withId(String id) {
+    this.id = id;
+    return this;
+  }
   public TrainerData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
@@ -93,6 +107,10 @@ public class TrainerData {
 
   public TrainerData withGender(String gender) {
     this.gender = gender;
+    return this;
+  }
+  public TrainerData withRole(String role) {
+    this.role = role;
     return this;
   }
 
@@ -177,6 +195,9 @@ public class TrainerData {
   }
 
   /* getters */
+  public String getId() {
+    return id;
+  }
 
   public String getFirstName() {
     return firstName;
@@ -204,6 +225,10 @@ public class TrainerData {
 
   public String getGender() {
     return gender;
+  }
+
+  public String getRole() {
+    return role;
   }
 
   public String getMaxSlots() {
@@ -271,5 +296,28 @@ public class TrainerData {
   }
 
   /* toString(), hashCode() & equals() */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    TrainerData that = (TrainerData) o;
+    return Objects.equals(id, that.id) &&
+            Objects.equals(firstName, that.firstName) &&
+            Objects.equals(lastName, that.lastName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstName, lastName);
+  }
+
+  @Override
+  public String toString() {
+    return "TrainerData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
 
 }

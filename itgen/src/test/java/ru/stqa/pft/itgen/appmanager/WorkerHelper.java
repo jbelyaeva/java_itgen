@@ -129,7 +129,7 @@ public class WorkerHelper extends HelperBase {
         }
   }
 
-  //студенты с пагинацией
+  //работник с пагинацией
   public List<WorkerData> list() {
     List<WorkerData> workers = new ArrayList<WorkerData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
