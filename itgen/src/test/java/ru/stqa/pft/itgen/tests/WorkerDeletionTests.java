@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerDeletionTests extends TestBase {
+  public WorkerData deletedWorker;
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().workers().size() == 0) {
@@ -26,7 +27,14 @@ public class WorkerDeletionTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoWorker();
     Workers before = app.db().workers();
-    WorkerData deletedWorker = before.iterator().next();
+   // WorkerData deletedWorker = before.iterator().next();
+    for (WorkerData worker1 : before) {
+      String id = worker1.getId();
+      if ((!id.equals("777")) && (!id.equals("666"))) {
+        deletedWorker = worker1;
+        break;
+      }
+    }
     app.workers().deletionWorker(deletedWorker);
     Workers after = app.db().workers();
     assertThat(after, equalTo(before.without(deletedWorker)));

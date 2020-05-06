@@ -5,9 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.model.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -62,8 +60,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>(){}.getType()); // List<TrainerData>.class
-      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
+      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>(){}.getType()); // List<TrainerData>.class
+      return trainers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -92,17 +90,17 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     Assert.assertEquals(after, before + 1);
   }
 
-  @Test (dataProvider = "validWorkersTrainersFromJson", enabled = false)
-  public void testWorkerTrainerCreation(WorkerData worker) {
+  @Test (dataProvider = "validWorkersTrainersFromJson")
+  public void testWorkerTrainerCreation(TrainerData trainer) {
     app.goTo().tasks();
-    app.goTo().gotoTrainer();
-    int before = app.getTrainerHelper().getTrainerCount();
     app.goTo().gotoWorker();
-    app.workers().addWorker();
-    app.workers().fillWorkerForm(worker);
-    app.workers().submitWorkerCreation();
-    app.goTo().gotoTrainer();
-    int after = app.getTrainerHelper().getTrainerCount();
-    Assert.assertEquals(after, before +1);
+    Trainers before = app.db().trainers();
+    String url=app.trainers().createTrainer(trainer);
+    String idTrainer = app.trainers().getId(url);
+    Trainers after = app.db().trainers();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    TrainerData trainerAdd = trainer.withId(idTrainer);
+    assertThat(after, equalTo(before.withAdded(trainerAdd)));
+    verifyTrainerListInUI();
   }
 }

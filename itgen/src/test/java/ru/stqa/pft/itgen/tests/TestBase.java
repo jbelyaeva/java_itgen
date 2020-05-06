@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
-import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.model.*;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -74,5 +71,18 @@ public class TestBase {
                       .withLastName(s.getLastName()))
               .collect(Collectors.toSet())));
     }
+  }
+ public void verifyTrainerListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      app.goTo().gotoTrainer();
+      Trainers dbTrainers = app.db().trainers();
+      List<TrainerData> uiTrainers = app.trainers().list();
+      assertThat(new HashSet<Object>(uiTrainers), equalTo(dbTrainers
+              .stream().map((s) -> new TrainerData()
+                      .withId(s.getId())
+                      .withFirstName(s.getFirstName())
+                      .withLastName(s.getLastName()))
+              .collect(Collectors.toSet())));
+      }
   }
 }

@@ -37,8 +37,9 @@ public class FamilyDeletionTests extends TestBase {
     Students users = app.db().familyСomposition(idFamily);
     assertThat(users.size(), equalTo(0));
   }
+
   @AfterMethod
-  public  void cleanFamily(){
+     public  void cleanFamily(){
     while (app.db().students().size() != 1) {
       app.goTo().students();
       app.family().selectedStudent();
