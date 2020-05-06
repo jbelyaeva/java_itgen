@@ -39,8 +39,7 @@ public class FamilyDeletionTests extends TestBase {
   }
 
   @AfterMethod
-  public  void cleanFamily(){
-    Families families=app.db().families();
+     public  void cleanFamily(){
     while (app.db().students().size() != 1) {
       app.goTo().students();
       app.family().selectedStudent();
