@@ -12,11 +12,11 @@ public class ParentHelper extends HelperBase {
     super(wd);
   }
 
-  public void selectedStudent() {
+  public void selectStudent() {
     click(By.cssSelector("a.btn-link"));
   }
 
-  public void selectedParentInFamily() {
+  public void selectParentInFamily() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
    }
 
@@ -53,12 +53,12 @@ public class ParentHelper extends HelperBase {
   }
 
   public void create(ParentData parent) {
-    selectedStudent();
+    selectStudent();
     btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
-    selectedParentInFamily();
+    selectParentInFamily();
   }
   public void createForStudent(ParentData parent) {
     btnSelectFamily();
@@ -67,18 +67,18 @@ public class ParentHelper extends HelperBase {
     submitParentCreation();
   }
   public String createWithUrl(ParentData parent) {
-    selectedStudent();
+    selectStudent();
     btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
-    selectedParentInFamily();
+    selectParentInFamily();
     String url = getURL();
     return url;
   }
 
   public String delete() {
-    selectedParentInFamily();
+    selectParentInFamily();
     String url = getURL();
     btnDeleteParent();
     alertDeleteSelectedParent();
@@ -92,7 +92,7 @@ public class ParentHelper extends HelperBase {
     btnSaveModify();
   }
   public String modify(ParentData parent) {
-    selectedParentInFamily();
+    selectParentInFamily();
     String url = getURL();
     btnModificationParent();
     ModifyParentForm(parent);
