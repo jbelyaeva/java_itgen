@@ -67,8 +67,8 @@ public class ParentDataGenerator extends TestBase {
     List<ParentData> parents = new ArrayList<ParentData>();
     for (int i = 0; i < count; i++) {
       parents.add(new ParentData()
-              .withFirstName(String.format("Витя %s", i))
-              .withLastName(String.format("Васильев %s", i))
+              .withFirstName(String.format("Витя-%s", i))
+              .withLastName(String.format("Васильев-%s", i))
               .withCountry(String.format("RU", i))
               .withCity(String.format("Пересвет %s", i))
               .withTimeZone(String.format("Pacific/Honolulu", i))

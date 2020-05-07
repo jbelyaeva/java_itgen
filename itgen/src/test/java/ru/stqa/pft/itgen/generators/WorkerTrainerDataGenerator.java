@@ -61,8 +61,8 @@ public class WorkerTrainerDataGenerator extends TestBase {
     List<WorkerData> workers = new ArrayList<WorkerData>();
     for (int i = 0; i < count; i++) {
       workers.add(new WorkerData()
-              .withFirstName(String.format("Витя %s", i))
-              .withLastName(String.format("Ухов %s", i))
+              .withFirstName(String.format("Витя-%s", i))
+              .withLastName(String.format("Ухов-%s", i))
               .withEmail(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
               .withPhone(String.format("89032566987", i))
               .withRole(String.format("Тренер", i)));

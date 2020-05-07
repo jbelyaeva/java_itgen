@@ -69,8 +69,8 @@ public class StudentDataGenerator extends TestBase {
     List<StudentData> students = new ArrayList<StudentData>();
     for (int i = 0; i < count; i++) {
       students.add(new StudentData()
-              .withFirstName(String.format("Вася %s", i))
-              .withLastName(String.format("Васин %s", i))
+              .withFirstName(String.format("Вася-%s", i))
+              .withLastName(String.format("Васин-%s", i))
               .withGender(Integer.valueOf(String.format("2", i)))
               .withBirthdayUi(String.format("01.01.1978", i))
               .withPclevel(String.format("expert", i))
