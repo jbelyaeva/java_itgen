@@ -96,7 +96,7 @@ public class WorkerHelper extends HelperBase {
     bntCreation();
    }
   public void deletionWorker(WorkerData deletedWorker) {
-   selectedWorkerById(deletedWorker);
+   selectedWorkerByIdWithoutPaginator(deletedWorker);
    deleteWorker();
    alertDeleteSelectedWorker();
   }
@@ -125,6 +125,12 @@ public class WorkerHelper extends HelperBase {
                 wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
        }
         }
+  }
+  public void selectedWorkerByIdWithoutPaginator(WorkerData deletedWorker) {
+    //находим пагинатор
+    selectListAll();
+    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+    wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
   }
   public void selectListAll()
 

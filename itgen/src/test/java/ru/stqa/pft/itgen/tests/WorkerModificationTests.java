@@ -60,7 +60,7 @@ public class WorkerModificationTests extends TestBase {
         break;
       }
     }
-    app.workers().selectedWorkerById(modifydWorker);
+    app.workers().selectedWorkerByIdWithoutPaginator(modifydWorker);
     app.workers().modificationWorker(worker);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
