@@ -31,13 +31,13 @@ public class ParentDeletionTests extends TestBase {
     boolean a = true;
     for (StudentData student : students) { //проходим по всем студентам
       String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
-       if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
+      if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
         app.goTo().students();// переходим в студенты
         app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
         app.student().bntFamily();
         url = app.parent().delete();//удаляем
-        a=false;
+        a = false;
         break;
       }
     }
@@ -52,12 +52,12 @@ public class ParentDeletionTests extends TestBase {
 
     String idParent = app.parent().getId(url); //id удаленного родителя
     for (ParentData parent : before) { //найти в списке ДО родителя с таким id
-      if (parent.getId().equals(idParent)){
+      if (parent.getId().equals(idParent)) {
         assertThat(after, equalTo(before.without(parent))); //список После и ДО-этот родитель
-       return;
+        return;
       }
     }
-   }
+  }
 
 
 }
