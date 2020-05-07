@@ -18,12 +18,7 @@ public class TrainerHelper extends HelperBase {
     super(wd);
   }
 
-  public void selectedTrainer() {
-    //click(By.xpath("//tr[9]/td/a"));
-    click(By.xpath("//a[contains(@href,'profile')]"));
-  }
-
-  public void deleteTrainer() {
+  public void btnDeleteTrainer() {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
@@ -33,11 +28,11 @@ public class TrainerHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void modifyTrainer() {
+  public void bntModifyTrainer() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void submitTrainerModify() {
+  public void btnSaveModify() {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -103,14 +98,14 @@ public class TrainerHelper extends HelperBase {
   public int getTrainerCount() {
     return countingWithPaginated();
   }
-  public String createTrainer(TrainerData trainer) {
-    addTrainer();
+  public String create(TrainerData trainer) {
+    bntAddTrainer();
     fillTrainerForm(trainer);
-    submitTrainerCreation();
+    bntCreation();
     String url = getURL();
     return url;
   }
-  public void addTrainer() {
+  public void bntAddTrainer() {
     click(By.cssSelector("a.btn.btn-default"));
   }
   public void fillTrainerForm(TrainerData trainerData) {
@@ -120,7 +115,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-phone"), trainerData.getPhone());
     dropDownList(By.name("role"), trainerData.getRole());
   }
-  public void submitTrainerCreation() {
+  public void bntCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -183,13 +178,13 @@ public class TrainerHelper extends HelperBase {
   }
   public void deletionTrainer(TrainerData deletedTrainer) {
     selectedTrainerById(deletedTrainer);
-    deleteTrainer();
+    btnDeleteTrainer();
     alertDeleteSelectedTrainer();
   }
-  public void modificationTrainer(TrainerData trainer) {
-    modifyTrainer();
+  public void modifyTrainer(TrainerData trainer) {
+    bntModifyTrainer();
     modifiTrainerForm(trainer);
-    submitTrainerModify();
+    btnSaveModify();
   }
 
   public void selectedTrainerById(TrainerData deletedTrainer) {

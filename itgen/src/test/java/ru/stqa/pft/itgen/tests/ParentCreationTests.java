@@ -69,21 +69,17 @@ public class ParentCreationTests extends TestBase {
 
   private void createParent(ParentData parent) {
     //находим студента без родителя, если такого нет, то создаем такого
-    String url = "";
     Students students = app.db().students();
-    int a = 1;
-    for (StudentData student : students) {
-      StudentData studentWithoutParent = students.iterator().next();
+    boolean a = true;
+    for (StudentData studentWithoutParent : students) {
       String id = studentWithoutParent.getFamilyId();
       if (app.db().familyСomposition(id).size() == 1) {
         app.parent().create(parent);
-        a = 0;
+        a = false;
         break;
-      } else {
-        a = a + 1;
       }
     }
-    if (a > 0) {
+    if (a) {
       app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
       app.student().selectedStudentAfterCreate();

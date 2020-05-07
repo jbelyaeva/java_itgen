@@ -96,7 +96,7 @@ public class ApplicationManager {
     return familyHelper;
   }
 
-  public TrainerHelper trainers() {
+  public TrainerHelper trainer() {
     return trainerHelper;
   }
 

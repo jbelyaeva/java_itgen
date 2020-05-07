@@ -31,11 +31,11 @@ public class TrainerDeletionTests extends TestBase {
     if (a == 0) {
       app.goTo().tasks();
       app.goTo().gotoWorker();
-      app.trainers().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
+      app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
               .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
-      String url = app.trainers().getURL();
-      String id = app.trainers().getId(url);
+      String url = app.trainer().getURL();
+      String id = app.trainer().getId(url);
       //найти в списке ДО родителя с таким id
       for (TrainerData trainerData : beforeNew)
         if (trainerData.getId().equals(id)) {
@@ -50,7 +50,7 @@ public class TrainerDeletionTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoTrainer();
     Trainers before = app.db().trainers();
-    app.trainers().deletionTrainer(deletedTrainer);
+    app.trainer().deletionTrainer(deletedTrainer);
     Trainers after = app.db().trainers();
     assertThat(after, equalTo(before.without(deletedTrainer)));
     verifyTrainerListInUI();

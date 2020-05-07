@@ -55,7 +55,7 @@ public class StudentModificationTests extends TestBase {
     app.goTo().students();
     Students before = app.db().students();
     StudentData modifyStudent = before.iterator().next();
-    app.student().getSelectedStudentByStudent(modifyStudent);
+    app.student().selectStudentInStudentListUI(modifyStudent);
     app.student().modify(student);
     Students after = app.db().students();
     assertThat(after.size(), equalTo(before.size()));

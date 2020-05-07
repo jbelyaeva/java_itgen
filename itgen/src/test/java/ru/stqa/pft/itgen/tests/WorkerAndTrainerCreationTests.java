@@ -95,8 +95,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoWorker();
     Trainers before = app.db().trainers();
-    String url=app.trainers().createTrainer(trainer);
-    String idTrainer = app.trainers().getId(url);
+    String url=app.trainer().create(trainer);
+    String idTrainer = app.trainer().getId(url);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size() + 1));
     TrainerData trainerAdd = trainer.withId(idTrainer);

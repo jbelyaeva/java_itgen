@@ -32,7 +32,6 @@ public class FamilyDeletionTests extends TestBase {
     String url = app.family().delete(deletedStudent);//удаляем выбранного студента
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() - 1)); //семьи уменьшились на 1
-    // удалились все изеры с этой семьей
     String idFamily = app.family().getId(url);
     Students users = app.db().familyСomposition(idFamily);
     assertThat(users.size(), equalTo(0));
@@ -42,9 +41,9 @@ public class FamilyDeletionTests extends TestBase {
      public  void cleanFamily(){
     while (app.db().students().size() != 1) {
       app.goTo().students();
-      app.family().selectedStudent();
-      app.family().selectedFamily();
-      app.family().deleteFamily();
+      app.student().select();
+      app.student().bntFamily();
+      app.family().bntDeleteFamily();
       app.family().alertDeleteFamily();
     }
   }

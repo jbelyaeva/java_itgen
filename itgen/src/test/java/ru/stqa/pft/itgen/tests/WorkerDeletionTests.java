@@ -27,7 +27,6 @@ public class WorkerDeletionTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoWorker();
     Workers before = app.db().workers();
-   // WorkerData deletedWorker = before.iterator().next();
     for (WorkerData worker1 : before) {
       String id = worker1.getId();
       if ((!id.equals("777")) && (!id.equals("666"))) {

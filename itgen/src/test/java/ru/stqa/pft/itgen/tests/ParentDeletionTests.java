@@ -9,9 +9,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ParentDeletionTests extends TestBase {
 
-  private String url;
-
-
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().families().size() == 0) {
@@ -28,29 +25,29 @@ public class ParentDeletionTests extends TestBase {
     app.goTo().tasks();
     app.goTo().students();
     Parents before = null;
-    Parents after = null;
     String url = "";
     //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
     Students students = app.db().students();
-    int a = 1;
+    boolean a = true;
     for (StudentData student : students) { //проходим по всем студентам
       String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
        if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
         app.goTo().students();// переходим в студенты
-        app.student().getSelectedStudentByStudent(student);//выбираем этого студента в списке
+        app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
-        app.parent().selectedFamily();//выбираем родителя в этой семье
+        app.student().bntFamily();
         url = app.parent().delete();//удаляем
-         a=0;
+        a=false;
         break;
       }
     }
-    if (a > 0) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
-      app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+    if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
+      app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
       before = app.db().parents();// берем список родителй ДО
+      app.student().bntFamily();
       url = app.parent().delete();//удаляем , и знаем УРЛ удаленного родителя
     }
-    after = app.db().parents();
+    Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() - 1));
 
     String idParent = app.parent().getId(url); //id удаленного родителя

@@ -53,10 +53,10 @@ public class WorkerModificationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoWorker();
     Workers before = app.db().workers();
-    for (WorkerData worker1 : before) {
-      String id = worker1.getId();
+    for (WorkerData workerData : before) {
+      String id = workerData.getId();
       if ((!id.equals("777")) && (!id.equals("666"))) {
-        modifydWorker = worker1;
+        modifydWorker = workerData;
         break;
       }
     }
