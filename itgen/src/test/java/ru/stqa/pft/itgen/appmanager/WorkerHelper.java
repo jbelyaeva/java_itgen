@@ -82,81 +82,85 @@ public class WorkerHelper extends HelperBase {
   public int getWorkerCount() {
     return countingWithPaginated();
   }
+
   public String createWorker(WorkerData worker) {
-   btnAddWorker();
-   fillWorkerForm(worker);
-   bntCreation();
-   String url = getURL();
-   return url;
-   }
+    btnAddWorker();
+    fillWorkerForm(worker);
+    bntCreation();
+    String url = getURL();
+    return url;
+  }
 
   public void createFirstWorker(WorkerData worker) {
     btnAddWorker();
     fillWorkerForm(worker);
     bntCreation();
-   }
+  }
+
   public void deletionWorker(WorkerData deletedWorker) {
-   selectedWorkerByIdWithoutPaginator(deletedWorker);
-   deleteWorker();
-   alertDeleteSelectedWorker();
+    selectedWorkerByIdWithoutPaginator(deletedWorker);
+    deleteWorker();
+    alertDeleteSelectedWorker();
   }
+
   public void modificationWorker(WorkerData worker) {
-  modifyWorker();
-  modifiWorkerForm(worker);
-  submitWorkerModify();
+    modifyWorker();
+    modifiWorkerForm(worker);
+    submitWorkerModify();
   }
+
   public void selectedWorkerById(WorkerData deletedWorker) {
-     //находим пагинатор
+    //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-  //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
+    //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
-    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
-    if (list.size() > 0){
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();}
-    else {
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+    if (list.size() > 0) {
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
+    } else {
       //если работник не на первой странице, надо нажать пагинатор, пока не найдем
-     while (!next.equals("disabled")) {
-                List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
-                if (list_pagin.size() > 0) {
-                   wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
-                   break;
-                 }
-                else{
-                wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
-       }
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
+          break;
+        } else {
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
+      }
+    }
   }
+
   public void selectedWorkerByIdWithoutPaginator(WorkerData deletedWorker) {
     //находим пагинатор
     selectListAll();
-    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
     wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
   }
-  public void selectListAll()
 
-  {
+  public void selectListAll() {
     click(By.xpath(" //div[contains(@class,'selectRoot')]"));
     click(By.xpath("//li[contains(@class,'MuiButtonBase')][4]"));
   }
 
   //работник с пагинацией
   public List<WorkerData> list() {
-   // selectListAll();
+    // selectListAll();
     List<WorkerData> workers = new ArrayList<WorkerData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@aria-label,'next')]")));//ждать пока не появится элемент
     String next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-   if (!next.equals("disabled")) {
+    if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
         includeInListBaseWebElement(workers, elements);
         wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).click();
-       elements.removeAll(elements);
+        elements.removeAll(elements);
         elements = wd.findElements(By.cssSelector("a.btn-link"));
         next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
       }
     }
-   includeInListBaseWebElement(workers, elements);
+    includeInListBaseWebElement(workers, elements);
     return workers;
   }
 
