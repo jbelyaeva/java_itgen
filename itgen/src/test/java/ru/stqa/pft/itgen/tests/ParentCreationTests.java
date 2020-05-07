@@ -73,7 +73,7 @@ public class ParentCreationTests extends TestBase {
     boolean a = true;
     for (StudentData studentWithoutParent : students) {
       String id = studentWithoutParent.getFamilyId();
-      if (app.db().familyСomposition(id).size() == 1) {
+      if (app.db().familyComposition(id).size() == 1) {
         app.parent().create(parent);
         a = false;
         break;

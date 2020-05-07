@@ -33,7 +33,7 @@ public class FamilyDeletionTests extends TestBase {
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() - 1)); //семьи уменьшились на 1
     String idFamily = app.family().getId(url);
-    Students users = app.db().familyСomposition(idFamily);
+    Students users = app.db().familyComposition(idFamily);
     assertThat(users.size(), equalTo(0));
   }
 

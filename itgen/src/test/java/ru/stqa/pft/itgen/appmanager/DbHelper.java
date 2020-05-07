@@ -36,7 +36,7 @@ public class DbHelper {
   }
 
   //состав семьи
-  public Students familyСomposition(String id) {
+  public Students familyComposition(String id) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $or : [{ roles : 'child' }, {roles: 'parent'}], familyId:'" + id + "'}";

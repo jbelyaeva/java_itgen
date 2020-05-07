@@ -31,7 +31,7 @@ public class ParentDeletionTests extends TestBase {
     boolean a = true;
     for (StudentData student : students) { //проходим по всем студентам
       String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
-      if (app.db().familyСomposition(idFamily).size() == 2) { //если в семье 2 человека
+      if (app.db().familyComposition(idFamily).size() == 2) { //если в семье 2 человека
         app.goTo().students();// переходим в студенты
         app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
