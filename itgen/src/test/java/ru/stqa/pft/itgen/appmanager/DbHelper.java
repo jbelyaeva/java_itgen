@@ -35,7 +35,6 @@ public class DbHelper {
     return new Families(families);
   }
 
-  //состав семьи
   public Students familyComposition(String id) {
     EntityManager entityManager = entityManagerFactory.createEntityManager();
     entityManager.getTransaction().begin();
