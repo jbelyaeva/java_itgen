@@ -1,9 +1,7 @@
 package ru.stqa.pft.itgen.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
 
@@ -12,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerDeletionTests extends TestBase {
   public WorkerData deletedWorker;
+
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().workers().size() == 0) {

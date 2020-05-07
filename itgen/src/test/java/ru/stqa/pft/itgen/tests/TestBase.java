@@ -59,6 +59,7 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
+
   public void verifyWorkerListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().gotoWorker();
@@ -72,7 +73,8 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
- public void verifyTrainerListInUI() {
+
+  public void verifyTrainerListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().gotoTrainer();
       Trainers dbTrainers = app.db().trainers();
@@ -83,6 +85,6 @@ public class TestBase {
                       .withFirstName(s.getFirstName())
                       .withLastName(s.getLastName()))
               .collect(Collectors.toSet())));
-      }
+    }
   }
 }
