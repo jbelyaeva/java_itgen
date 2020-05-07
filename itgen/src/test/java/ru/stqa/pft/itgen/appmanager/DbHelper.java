@@ -7,11 +7,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class DBHelper {
+public class DbHelper {
 
   private final EntityManagerFactory entityManagerFactory;
 
-  public DBHelper() {
+  public DbHelper() {
     entityManagerFactory = Persistence.createEntityManagerFactory("connection");
   }
 
