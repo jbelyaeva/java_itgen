@@ -15,7 +15,7 @@ public class WorkerDeletionTests extends TestBase {
   public void ensurePreconditions() {
     if (app.db().workers().size() == 0) {
       app.goTo().tasks();
-      app.goTo().gotoWorker();
+      app.goTo().worker();
       app.workers().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
               .withPhone("8962988888888"));
     }
@@ -24,7 +24,7 @@ public class WorkerDeletionTests extends TestBase {
   @Test
   public void testWorkerDeletion() {
     app.goTo().tasks();
-    app.goTo().gotoWorker();
+    app.goTo().worker();
     Workers before = app.db().workers();
     for (WorkerData worker1 : before) {
       String id = worker1.getId();

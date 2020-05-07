@@ -9,7 +9,7 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void gotoWorker() {
+  public void worker() {
     click(By.xpath("//a[contains(@href, '/employees')]"));
   }
 

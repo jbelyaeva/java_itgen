@@ -30,7 +30,7 @@ public class TrainerDeletionTests extends TestBase {
     }
     if (a == 0) {
       app.goTo().tasks();
-      app.goTo().gotoWorker();
+      app.goTo().worker();
       app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
               .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
