@@ -22,7 +22,7 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//span[@class='glyphicon glyphicon-plus-sign']"));
   }
 
-  public void bntFamily() {
+  public void btnFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
 

@@ -42,7 +42,7 @@ public class FamilyDeletionTests extends TestBase {
     while (app.db().students().size() != 1) {
       app.goTo().students();
       app.student().select();
-      app.student().bntFamily();
+      app.student().btnFamily();
       app.family().bntDeleteFamily();
       app.family().alertDeleteFamily();
     }

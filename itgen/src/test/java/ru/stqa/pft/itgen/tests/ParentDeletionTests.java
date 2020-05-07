@@ -35,7 +35,7 @@ public class ParentDeletionTests extends TestBase {
         app.goTo().students();// переходим в студенты
         app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
-        app.student().bntFamily();
+        app.student().btnFamily();
         url = app.parent().delete();//удаляем
         a = false;
         break;
@@ -44,7 +44,7 @@ public class ParentDeletionTests extends TestBase {
     if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
       app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
       before = app.db().parents();// берем список родителй ДО
-      app.student().bntFamily();
+      app.student().btnFamily();
       url = app.parent().delete();//удаляем , и знаем УРЛ удаленного родителя
     }
     Parents after = app.db().parents();

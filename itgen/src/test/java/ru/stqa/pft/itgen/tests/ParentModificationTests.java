@@ -64,14 +64,14 @@ public class ParentModificationTests extends TestBase {
         app.goTo().students();// переходим в студенты
         app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
-        app.student().bntFamily();
+        app.student().btnFamily();
         url = app.parent().modify(parent);//модифицируем родителя
         a = false;
         break;
       }
     }
     if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
-      url = app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
+      url = app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папин").withPhone("000000000"));
       before = app.db().parents();// берем список родителй ДО
       app.parent().modifyNewParent(parent);//модифицируем
     }
