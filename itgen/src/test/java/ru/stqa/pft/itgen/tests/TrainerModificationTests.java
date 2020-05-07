@@ -2,14 +2,12 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
 import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,11 +56,11 @@ public class TrainerModificationTests extends TestBase {
     if (a == 0) {
       app.goTo().tasks();
       app.goTo().gotoWorker();
-      app.trainers().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
+      app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
               .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
-      String url = app.trainers().getURL();
-      String id = app.trainers().getId(url);
+      String url = app.trainer().getURL();
+      String id = app.trainer().getId(url);
       //найти в списке ДО родителя с таким id
       for (TrainerData trainerData : beforeNew)
         if (trainerData.getId().equals(id)) {
@@ -77,8 +75,8 @@ public class TrainerModificationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().gotoTrainer();
     Trainers before = app.db().trainers();
-    app.trainers().selectedTrainerById(modifyTrainer);
-    app.trainers().modificationTrainer(trainer);
+    app.trainer().selectedTrainerById(modifyTrainer);
+    app.trainer().modifyTrainer(trainer);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size()));
     TrainerData trainerAdd = trainer.withId(modifyTrainer.getId());

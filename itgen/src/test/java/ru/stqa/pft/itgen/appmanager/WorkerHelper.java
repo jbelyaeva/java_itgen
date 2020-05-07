@@ -1,13 +1,11 @@
 package ru.stqa.pft.itgen.appmanager;
 
-import javafx.concurrent.Worker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ public class WorkerHelper extends HelperBase {
     super(wd);
   }
 
-  public void submitWorkerCreation() {
+  public void bntCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -32,7 +30,7 @@ public class WorkerHelper extends HelperBase {
     dropDownList(By.name("role"), workerData.getRole());
   }
 
-  public void addWorker() {
+  public void btnAddWorker() {
     click(By.cssSelector("a.btn.btn-default"));
   }
 
@@ -85,17 +83,17 @@ public class WorkerHelper extends HelperBase {
     return countingWithPaginated();
   }
   public String createWorker(WorkerData worker) {
-   addWorker();
+   btnAddWorker();
    fillWorkerForm(worker);
-   submitWorkerCreation();
+   bntCreation();
    String url = getURL();
    return url;
    }
 
   public void createFirstWorker(WorkerData worker) {
-    addWorker();
+    btnAddWorker();
     fillWorkerForm(worker);
-    submitWorkerCreation();
+    bntCreation();
    }
   public void deletionWorker(WorkerData deletedWorker) {
    selectedWorkerById(deletedWorker);

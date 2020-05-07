@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +18,15 @@ public class StudentHelper extends HelperBase {
     super(wd);
   }
 
-  public void addStudent() {
+  public void btnAddStudent() {
     click(By.xpath("//span[@class='glyphicon glyphicon-plus-sign']"));
   }
 
-  public void submitStudentCreation() {
-    click(By.xpath("//button[contains(@class,'create')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  public void bntFamily() {
+    click(By.xpath("//a[contains(@href, 'family')]"));
   }
 
-  public void selectedStudent() {
+  public void select() {
     click(By.cssSelector("a.btn-link"));
   }
 
@@ -36,28 +34,12 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
 
-  public void submitParentCreation() {
-    click(By.xpath("//button[contains(@class, 'family')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
-
-  public void addParent() {
-    click(By.xpath("//button[@class='close btn-add-parent']"));
-  }
-
   public void btnDeleteStudent() {
     click(By.xpath("//button[contains(@class, 'remove')]"));
   }
 
-  public void selectedParent() {
-    click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
-  }
   public void btnAddStudentInFamily() {
     click(By.xpath("//div[contains(@class,'child')]/span[contains(@class,'sign')]"));
-  }
-
-  private void SelectStudentById(StudentData deletedStudent) {
-    wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
   }
 
   public void assertDeleteSelectedStudent() {
@@ -70,7 +52,7 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public void submitModifyStudent() {
+  public void btnSaveModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -182,34 +164,27 @@ public class StudentHelper extends HelperBase {
     }
   }
 
-  public void submitFamilyCreation() {
+  public void btnCreation() {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
+
   public void btnStudentCreation() {
     click(By.xpath("//button[contains(@class,'create')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void createFamily() {
+  public void btnCreateFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
    public void create(StudentData student) {
-    createFamily();
-    addStudent();
+    btnCreateFamily();
+    btnAddStudent();
     fillStudentForm(student);
-    submitFamilyCreation();
+    btnCreation();
   }
-  public String createWithURL(StudentData student) {
-    createFamily();
-    addStudent();
-    fillStudentForm(student);
-    submitFamilyCreation();
-    selectedStudentAfterCreate();
-    String url = getURL();
-    return url;
-  }
+
   public void selectedStudentAfterCreate() {
     click(By.xpath("(//div[@class='gena-panel-body'])[1]//a"));
   }
@@ -217,7 +192,7 @@ public class StudentHelper extends HelperBase {
   public void modify(StudentData student) {
     selectModifyStudent();
     ModifyStudentForm(student);
-    submitModifyStudent();
+    btnSaveModify();
   }
 
   public String getIdNewStudentDB(Students before, Students after) {
@@ -249,7 +224,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void addStudentInFamily () {
-    selectedStudent();
+    select();
     selectedFamily();
     btnAddStudentInFamily();
     fillAddStudentForm(new StudentData().withFirstName("Маша").withLastName("Машина")
@@ -259,8 +234,7 @@ public class StudentHelper extends HelperBase {
 
   }
 
-
-  public void getSelectedStudentByStudent(StudentData deletedStudent) {
+  public void selectStudentInStudentListUI(StudentData deletedStudent) {
      //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
      //есть ли на первой странице наш студент
@@ -273,26 +247,6 @@ public class StudentHelper extends HelperBase {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
-          break;
-        }
-        else{
-          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
-      }
-    }
-  }
-  public void getSelectedStudentById(String id) {
-    //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    //есть ли на первой странице наш студент
-    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
-    if (list.size() > 0){
-      wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();}
-    else {
-      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
-      while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
-        if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
         }
         else{

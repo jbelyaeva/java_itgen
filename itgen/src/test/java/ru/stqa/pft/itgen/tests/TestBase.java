@@ -76,7 +76,7 @@ public class TestBase {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().gotoTrainer();
       Trainers dbTrainers = app.db().trainers();
-      List<TrainerData> uiTrainers = app.trainers().list();
+      List<TrainerData> uiTrainers = app.trainer().list();
       assertThat(new HashSet<Object>(uiTrainers), equalTo(dbTrainers
               .stream().map((s) -> new TrainerData()
                       .withId(s.getId())

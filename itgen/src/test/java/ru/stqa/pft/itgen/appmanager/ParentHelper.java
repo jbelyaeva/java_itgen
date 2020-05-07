@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.Parents;
-import ru.stqa.pft.itgen.model.Students;
 
 public class ParentHelper extends HelperBase {
 
@@ -17,11 +16,11 @@ public class ParentHelper extends HelperBase {
     click(By.cssSelector("a.btn-link"));
   }
 
-  public void selectedParent() {
+  public void selectedParentInFamily() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
    }
 
-  public void selectedFamily() {
+  public void btnSelectFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
 
@@ -29,7 +28,7 @@ public class ParentHelper extends HelperBase {
     click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
   }
 
-  public void deleteParent() {
+  public void btnDeleteParent() {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
@@ -39,7 +38,7 @@ public class ParentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void submitParentModify() {
+  public void btnSaveModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
@@ -49,55 +48,56 @@ public class ParentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
-  public void modificationParent() {
+  public void btnModificationParent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void create(ParentData parent) {
     selectedStudent();
-    selectedFamily();
+    btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
+    selectedParentInFamily();
   }
   public void createForStudent(ParentData parent) {
-  //  selectedStudent();
-    selectedFamily();
+    btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
   }
   public String createWithUrl(ParentData parent) {
     selectedStudent();
-    selectedFamily();
+    btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
-    selectedParent();
+    selectedParentInFamily();
     String url = getURL();
     return url;
   }
 
   public String delete() {
-    selectedParent();
+    selectedParentInFamily();
     String url = getURL();
-    deleteParent();
+    btnDeleteParent();
     alertDeleteSelectedParent();
     return url;
   }
 
 
   public void modifyNewParent(ParentData parent) {
-    modificationParent();
+    btnModificationParent();
     ModifyParentForm(parent);
-    submitParentModify();
+    btnSaveModify();
   }
   public String modify(ParentData parent) {
+    selectedParentInFamily();
     String url = getURL();
-    modificationParent();
+    btnModificationParent();
     ModifyParentForm(parent);
-    submitParentModify();
-      return url;
+    btnSaveModify();
+    return url;
   }
 
   public void ModifyParentForm(ParentData parentData) {
