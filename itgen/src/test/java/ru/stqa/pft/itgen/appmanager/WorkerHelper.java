@@ -126,23 +126,38 @@ public class WorkerHelper extends HelperBase {
        }
         }
   }
+  public void selectListAll()
+
+  {
+    click(By.xpath(" //div[contains(@class,'selectRoot')]"));
+    click(By.xpath("//li[contains(@class,'MuiButtonBase')][4]"));
+  }
 
   //работник с пагинацией
   public List<WorkerData> list() {
+   // selectListAll();
     List<WorkerData> workers = new ArrayList<WorkerData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@aria-label,'next')]")));//ждать пока не появится элемент
+    String next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-    if (!next.equals("disabled")) {
+   if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
         includeInListBaseWebElement(workers, elements);
-        wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
-        elements.removeAll(elements);
+        wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).click();
+       elements.removeAll(elements);
         elements = wd.findElements(By.cssSelector("a.btn-link"));
-        next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+        next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
       }
     }
+   includeInListBaseWebElement(workers, elements);
+    return workers;
+  }
+
+  public List<WorkerData> listWithoutPaginator() {
+    selectListAll();
+    List<WorkerData> workers = new ArrayList<WorkerData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     includeInListBaseWebElement(workers, elements);
     return workers;
   }
