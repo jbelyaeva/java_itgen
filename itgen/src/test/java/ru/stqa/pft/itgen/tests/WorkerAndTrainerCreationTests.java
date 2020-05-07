@@ -76,8 +76,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     app.goTo().tasks();
     app.goTo().worker();
     Workers before = app.db().workers();
-    String url = app.workers().createWorker(worker);
-    String idWorker = app.workers().getId(url);
+    String url = app.worker().createWorker(worker);
+    String idWorker = app.worker().getId(url);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size() + 1));
     WorkerData workerAdd = worker.withId(idWorker);
@@ -90,9 +90,9 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   public void testWorkerAdminCreation(WorkerData worker) {
     app.goTo().tasks();
     app.goTo().worker();
-    int before = app.workers().getWorkerCount();
-    app.workers().createWorker(worker);
-    int after = app.workers().getWorkerCount();
+    int before = app.worker().getWorkerCount();
+    app.worker().createWorker(worker);
+    int after = app.worker().getWorkerCount();
     Assert.assertEquals(after, before + 1);
   }
 

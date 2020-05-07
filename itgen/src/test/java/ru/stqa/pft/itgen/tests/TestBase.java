@@ -64,7 +64,7 @@ public class TestBase {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().worker();
       Workers dbWorkers = app.db().workers();
-      List<WorkerData> uiWorkers = app.workers().listWithoutPaginator();
+      List<WorkerData> uiWorkers = app.worker().listWithoutPaginator();
       assertThat(new HashSet<Object>(uiWorkers), equalTo(dbWorkers
               .stream().map((s) -> new WorkerData()
                       .withId(s.getId())

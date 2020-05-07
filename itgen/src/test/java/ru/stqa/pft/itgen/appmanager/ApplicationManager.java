@@ -72,7 +72,7 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public WorkerHelper workers() {
+  public WorkerHelper worker() {
     return workerHelper;
   }
 

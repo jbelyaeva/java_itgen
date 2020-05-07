@@ -43,7 +43,7 @@ public class WorkerModificationTests extends TestBase {
     if (app.db().workers().size() == 1) {
       app.goTo().tasks();
       app.goTo().worker();
-      app.workers().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
+      app.worker().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
               .withPhone("8962988888888"));
     }
   }
@@ -60,8 +60,8 @@ public class WorkerModificationTests extends TestBase {
         break;
       }
     }
-    app.workers().selectedWorkerByIdWithoutPaginator(modifydWorker);
-    app.workers().modificationWorker(worker);
+    app.worker().selectedWorkerByIdWithoutPaginator(modifydWorker);
+    app.worker().modificationWorker(worker);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());

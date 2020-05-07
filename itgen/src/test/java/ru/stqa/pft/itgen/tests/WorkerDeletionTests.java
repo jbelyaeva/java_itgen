@@ -16,7 +16,7 @@ public class WorkerDeletionTests extends TestBase {
     if (app.db().workers().size() == 0) {
       app.goTo().tasks();
       app.goTo().worker();
-      app.workers().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
+      app.worker().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
               .withPhone("8962988888888"));
     }
   }
@@ -33,7 +33,7 @@ public class WorkerDeletionTests extends TestBase {
         break;
       }
     }
-    app.workers().deletionWorker(deletedWorker);
+    app.worker().deletionWorker(deletedWorker);
     Workers after = app.db().workers();
     assertThat(after, equalTo(before.without(deletedWorker)));
     verifyWorkerListInUI();
