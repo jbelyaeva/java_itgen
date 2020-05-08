@@ -38,8 +38,8 @@ public class FamilyCreationTests extends TestBase {
 
   @Test(dataProvider = "validFamiliesFromJson")
   public void testFamilyCreation(FamilyDataUI family) {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Families before = app.db().families();
     app.family().create(family);
     Families after = app.db().families();

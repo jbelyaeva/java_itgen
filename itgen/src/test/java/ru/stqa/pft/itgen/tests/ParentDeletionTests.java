@@ -12,8 +12,8 @@ public class ParentDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().families().size() == 0) {
-      app.goTo().tasks();
-      app.goTo().students();
+      app.goTo().menuTasks();
+      app.goTo().menuStudents();
       app.family().create(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
               .withBirthdayUiStudent("01.01.1987").withPclevelStudent("expert").withCountryStudent("AL")
               .withFirstnameParent("Олег").withLastnameParent("Машин").withCountryParent("AL").withPhoneParent("010101010101"));
@@ -22,8 +22,8 @@ public class ParentDeletionTests extends TestBase {
 
   @Test
   public void testParentDeletion() {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Parents before = null;
     String url = "";
     //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
@@ -32,7 +32,7 @@ public class ParentDeletionTests extends TestBase {
     for (StudentData student : students) { //проходим по всем студентам
       String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
       if (app.db().familyComposition(idFamily).size() == 2) { //если в семье 2 человека
-        app.goTo().students();// переходим в студенты
+        app.goTo().menuStudents();// переходим в студенты
         app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
         before = app.db().parents();// запоминаем список родителей До
         app.student().btnFamily();

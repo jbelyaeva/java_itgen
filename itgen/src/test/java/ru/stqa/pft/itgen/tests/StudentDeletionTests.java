@@ -13,8 +13,8 @@ public class StudentDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().students().size() == 0) {
-      app.goTo().tasks();
-      app.goTo().students();
+      app.goTo().menuTasks();
+      app.goTo().menuStudents();
       app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
@@ -22,8 +22,8 @@ public class StudentDeletionTests extends TestBase {
 
   @Test
   public void testStudentDeletion() {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     app.student().addStudentInFamily();//добавляем еще одного студента, чтоб при удалении одного из студентов одной семьи
     // не появлялись фантомные записи в таблице family
     Students before = app.db().students();

@@ -73,8 +73,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerCreation(WorkerData worker) {
-    app.goTo().tasks();
-    app.goTo().worker();
+    app.goTo().menuTasks();
+    app.goTo().menuWorkers();
     Workers before = app.db().workers();
     String url = app.worker().createWorker(worker);
     String idWorker = app.worker().getId(url);
@@ -88,8 +88,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersAdminsFromJson", enabled = false)
   public void testWorkerAdminCreation(WorkerData worker) {
-    app.goTo().tasks();
-    app.goTo().worker();
+    app.goTo().menuTasks();
+    app.goTo().menuWorkers();
     int before = app.worker().getWorkerCount();
     app.worker().createWorker(worker);
     int after = app.worker().getWorkerCount();
@@ -98,8 +98,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(TrainerData trainer) {
-    app.goTo().tasks();
-    app.goTo().worker();
+    app.goTo().menuTasks();
+    app.goTo().menuWorkers();
     Trainers before = app.db().trainers();
     String url = app.trainer().create(trainer);
     String idTrainer = app.trainer().getId(url);

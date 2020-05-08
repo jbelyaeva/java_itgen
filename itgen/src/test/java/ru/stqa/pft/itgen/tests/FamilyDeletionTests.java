@@ -15,8 +15,8 @@ public class FamilyDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().families().size() == 0) {
-      app.goTo().tasks();
-      app.goTo().students();
+      app.goTo().menuTasks();
+      app.goTo().menuStudents();
       app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
@@ -24,8 +24,8 @@ public class FamilyDeletionTests extends TestBase {
 
   @Test
   public void testFamilyDeletion() {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Families before = app.db().families();//для проверки, что семьи уменьшились на 1
     Students listBefore = app.db().students();//выбираем студента для удаления
     StudentData deletedStudent = listBefore.iterator().next();
@@ -40,7 +40,7 @@ public class FamilyDeletionTests extends TestBase {
   @AfterMethod
      public  void cleanFamily(){
     while (app.db().students().size() != 1) {
-      app.goTo().students();
+      app.goTo().menuStudents();
       app.student().select();
       app.student().btnFamily();
       app.family().bntDeleteFamily();

@@ -42,8 +42,8 @@ public class StudentModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().students().size() == 0) {
-      app.goTo().tasks();
-      app.goTo().students();
+      app.goTo().menuTasks();
+      app.goTo().menuStudents();
       app.student().create(new StudentData().withFirstName("Вася").withLastName("Петров")
               .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
     }
@@ -51,8 +51,8 @@ public class StudentModificationTests extends TestBase {
 
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentModification(StudentData student) {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Students before = app.db().students();
     StudentData modifyStudent = before.iterator().next();
     app.student().selectStudentInStudentListUI(modifyStudent);

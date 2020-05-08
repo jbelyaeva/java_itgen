@@ -57,8 +57,8 @@ public class TrainerModificationTests extends TestBase {
       }
     }
     if (a == 0) {
-      app.goTo().tasks();
-      app.goTo().worker();
+      app.goTo().menuTasks();
+      app.goTo().menuWorkers();
       app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
               .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
@@ -75,11 +75,11 @@ public class TrainerModificationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testTrainerModification(TrainerData trainer) {
-    app.goTo().tasks();
-    app.goTo().gotoTrainer();
+    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
     app.trainer().selectedTrainerById(modifyTrainer);
-    app.trainer().modifyTrainer(trainer);
+    app.trainer().modify(trainer);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size()));
     TrainerData trainerAdd = trainer.withId(modifyTrainer.getId());

@@ -9,19 +9,19 @@ public class NavigationHelper extends HelperBase {
     super(wd);
   }
 
-  public void worker() {
+  public void menuWorkers() {
     click(By.xpath("//a[contains(@href, '/employees')]"));
   }
 
-  public void students() {
+  public void menuStudents() {
     click(By.xpath("//a[contains(@href, '/childs')]"));
   }
 
-  public void gotoTrainer() {
+  public void menuTrainers() {
     click(By.xpath("//a[contains(@href, '/trainers')]"));
   }
 
-  public void tasks() {
+  public void menuTasks() {
     click(By.xpath("//a[contains(@href, '/tasks')]"));
   }
 }

@@ -181,7 +181,7 @@ public class TrainerHelper extends HelperBase {
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
   }
-  public void modifyTrainer(TrainerData trainer) {
+  public void modify(TrainerData trainer) {
     bntModifyTrainer();
     modifiTrainerForm(trainer);
     btnSaveModify();

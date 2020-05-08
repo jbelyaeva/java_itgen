@@ -29,8 +29,8 @@ public class TrainerDeletionTests extends TestBase {
       }
     }
     if (a == 0) {
-      app.goTo().tasks();
-      app.goTo().worker();
+      app.goTo().menuTasks();
+      app.goTo().menuWorkers();
       app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
               .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
@@ -47,8 +47,8 @@ public class TrainerDeletionTests extends TestBase {
 
   @Test
   public void testTrainerDeletion() {
-    app.goTo().tasks();
-    app.goTo().gotoTrainer();
+    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
     app.trainer().deletionTrainer(deletedTrainer);
     Trainers after = app.db().trainers();

@@ -48,7 +48,7 @@ public class TestBase {
 
   public void verifyStudentsListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
-      app.goTo().students();
+      app.goTo().menuStudents();
       Students dbStudents = app.db().students();
       List<StudentData> uiStudents = app.student().list();
       assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents
@@ -62,7 +62,7 @@ public class TestBase {
 
   public void verifyWorkerListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
-      app.goTo().worker();
+      app.goTo().menuWorkers();
       Workers dbWorkers = app.db().workers();
       List<WorkerData> uiWorkers = app.worker().listWithoutPaginator();
       assertThat(new HashSet<Object>(uiWorkers), equalTo(dbWorkers
@@ -76,7 +76,7 @@ public class TestBase {
 
   public void verifyTrainerListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
-      app.goTo().gotoTrainer();
+      app.goTo().menuTrainers();
       Trainers dbTrainers = app.db().trainers();
       List<TrainerData> uiTrainers = app.trainer().list();
       assertThat(new HashSet<Object>(uiTrainers), equalTo(dbTrainers

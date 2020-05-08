@@ -43,8 +43,8 @@ public class ParentCreationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().students().size() == 0) {
-      app.goTo().tasks();
-      app.goTo().students();
+      app.goTo().menuTasks();
+      app.goTo().menuStudents();
       app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
               .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
     }
@@ -52,8 +52,8 @@ public class ParentCreationTests extends TestBase {
 
   @Test(dataProvider = "validParentsFromJson")
   public void testParentCreation(ParentData parent) {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Parents before = app.db().parents();
     createParent(parent);
     Parents after = app.db().parents();

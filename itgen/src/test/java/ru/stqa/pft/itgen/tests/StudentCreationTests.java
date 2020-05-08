@@ -40,8 +40,8 @@ public class StudentCreationTests extends TestBase {
   //проверка через бд
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
-    app.goTo().tasks();
-    app.goTo().students();
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
     Students before = app.db().students();
     app.student().create(student);
     Students after = app.db().students();

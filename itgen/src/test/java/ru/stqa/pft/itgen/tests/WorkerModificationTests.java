@@ -42,8 +42,8 @@ public class WorkerModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().workers().size() == 1) {
-      app.goTo().tasks();
-      app.goTo().worker();
+      app.goTo().menuTasks();
+      app.goTo().menuWorkers();
       app.worker().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
               .withPhone("8962988888888"));
     }
@@ -51,8 +51,8 @@ public class WorkerModificationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {
-    app.goTo().tasks();
-    app.goTo().worker();
+    app.goTo().menuTasks();
+    app.goTo().menuWorkers();
     Workers before = app.db().workers();
     for (WorkerData workerData : before) {
       String id = workerData.getId();
