@@ -12,67 +12,92 @@ public class TrainerData {
   @Id
   @Column(name = "_id")
   private String id;
+
   @Expose
   @Column(name = "firstName")
   private String firstName;
+
   @Expose
   @Column(name = "lastName")
   private String lastName;
+
   @Expose
   @Transient
   @Column(name = "startWork")
   @Temporal(TemporalType.DATE)
   private Date startWork;
+
   @Expose
   private String startWorkUi;
+
   @Expose
   @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
+
   @Expose
   private String birthdayUi;
+
   @Expose
   @Transient
   private String gender;
+
   @Expose
   @Transient
   private String maxSlots;
+
   @Expose
   private String country;
+
   @Expose
   private String timeZone;
+
   @Expose
   private String locate;
+
   @Expose
   private String city;
+
   @Expose
   private String role;
+
   @Expose
   @Transient
   private String payBase;
+
   @Expose
   private String phone;
+
   @Expose
   private String skype;
+
   @Expose
   private String viber;
+
   @Expose
   private String whatsapp;
+
   @Expose
   private String tg;
+
   @Expose
   private String fb;
+
   @Expose
   private String vk;
+
   @Expose
   private String ok;
+
   @Expose
   private String inst;
+
   @Expose
   private String note;
 
   /* setters */
+
   public TrainerData withId(String id) {
     this.id = id;
     return this;
@@ -197,6 +222,7 @@ public class TrainerData {
   }
 
   /* getters */
+
   public String getId() {
     return id;
   }
@@ -298,6 +324,16 @@ public class TrainerData {
   }
 
   /* toString(), hashCode() & equals() */
+
+  @Override
+  public String toString() {
+    return "TrainerData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -311,15 +347,6 @@ public class TrainerData {
   @Override
   public int hashCode() {
     return Objects.hash(id, firstName, lastName);
-  }
-
-  @Override
-  public String toString() {
-    return "TrainerData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
   }
 
 }
