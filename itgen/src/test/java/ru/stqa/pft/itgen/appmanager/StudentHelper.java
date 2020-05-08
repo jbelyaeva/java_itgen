@@ -30,10 +30,6 @@ public class StudentHelper extends HelperBase {
     click(By.cssSelector("a.btn-link"));
   }
 
-  public void selectedFamily() {
-    click(By.xpath("//a[contains(@href, 'family')]"));
-  }
-
   public void btnDeleteStudent() {
     click(By.xpath("//button[contains(@class, 'remove')]"));
   }
@@ -225,7 +221,7 @@ public class StudentHelper extends HelperBase {
 
   public void addStudentInFamily () {
     select();
-    selectedFamily();
+    btnFamily();
     btnAddStudentInFamily();
     fillAddStudentForm(new StudentData().withFirstName("Маша").withLastName("Машина")
             .withBirthdayUi("01.01.1999").withPclevel("expert"));
