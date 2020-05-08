@@ -56,29 +56,29 @@ public class ParentModificationTests extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-     //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
+     //находим студента c родителем, если такого нет, то создаем студента без родителя
     Students students = app.db().students();
     for (StudentData student : students) { //проходим по всем студентам
-      String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
+      String idFamily = student.getFamilyId(); // у всех по порядку берем FamilyID
       if (app.db().familyComposition(idFamily).size() == 2) { //если в семье 2 человека
-        app.goTo().menuStudents();// переходим в студенты
-        app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
-        before = app.db().parents();// запоминаем список родителей До
+        app.goTo().menuStudents(); // переходим в студенты
+        app.student().selectStudentInStudentListUI(student); //выбираем этого студента в списке
+        before = app.db().parents(); // запоминаем список родителей "до"
         app.student().btnFamily();
-        url = app.parent().modify(parent);//модифицируем родителя
+        url = app.parent().modify(parent); //модифицируем родителя
         a = false;
         break;
       }
     }
     if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
       url = app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папин").withPhone("000000000"));
-      before = app.db().parents();// берем список родителй ДО
-      app.parent().modifyNewParent(parent);//модифицируем
+      before = app.db().parents(); // берем список родителй "до"
+      app.parent().modifyNewParent(parent); //модифицируем
     }
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size()));
-    String idParent = app.parent().getId(url); //id модифиц родителя
-    for (ParentData parentModify : before) { //найти в списке ДО родителя с таким id
+    String idParent = app.parent().getId(url); //id модифицируемого родителя
+    for (ParentData parentModify : before) { //найти в списке "до" родителя с таким id
       if (parentModify.getId().equals(idParent)) {
         ParentData parentAdd = parent.withId(parentModify.getId());
         assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
@@ -86,6 +86,5 @@ public class ParentModificationTests extends TestBase {
       }
     }
   }
-
 
 }

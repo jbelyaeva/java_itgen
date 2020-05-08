@@ -50,7 +50,7 @@ public class TrainerDeletionTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
-    app.trainer().deletionTrainer(deletedTrainer);
+    app.trainer().delete(deletedTrainer);
     Trainers after = app.db().trainers();
     assertThat(after, equalTo(before.without(deletedTrainer)));
     verifyTrainerListInUI();

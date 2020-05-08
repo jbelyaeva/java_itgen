@@ -22,38 +22,39 @@ public class ParentDeletionTests extends TestBase {
 
   @Test
   public void testParentDeletion() {
-    app.goTo().menuTasks();
-    app.goTo().menuStudents();
     Parents before = null;
     String url = "";
-    //находим студента c родителем, если такого нет, то создаем студенту без родителя родителя
-    Students students = app.db().students();
     boolean a = true;
+
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
+    //находим студента c родителем, если такого нет, то создаем студента без родителя
+    Students students = app.db().students();
     for (StudentData student : students) { //проходим по всем студентам
-      String idFamily = student.getFamilyId();// у всех по порядку берем FamilyID
+      String idFamily = student.getFamilyId(); // у всех по порядку берем FamilyID
       if (app.db().familyComposition(idFamily).size() == 2) { //если в семье 2 человека
-        app.goTo().menuStudents();// переходим в студенты
-        app.student().selectStudentInStudentListUI(student);//выбираем этого студента в списке
-        before = app.db().parents();// запоминаем список родителей До
+        app.goTo().menuStudents(); // переходим в студенты
+        app.student().selectStudentInStudentListUI(student); //выбираем этого студента в списке
+        before = app.db().parents(); // запоминаем список родителей "до"
         app.student().btnFamily();
-        url = app.parent().delete();//удаляем
+        url = app.parent().delete(); //удаляем родителя
         a = false;
         break;
       }
     }
     if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
       app.parent().create(new ParentData().withFirstName("Папа").withLastName("Папа").withPhone("000000000"));
-      before = app.db().parents();// берем список родителй ДО
+      before = app.db().parents(); // берем список родителй "до"
       app.student().btnFamily();
-      url = app.parent().delete();//удаляем , и знаем УРЛ удаленного родителя
+      url = app.parent().delete(); //удаляем, и запоминаем URL удаленного родителя
     }
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() - 1));
 
     String idParent = app.parent().getId(url); //id удаленного родителя
-    for (ParentData parent : before) { //найти в списке ДО родителя с таким id
+    for (ParentData parent : before) { //найти в списке "до" родителя с таким id
       if (parent.getId().equals(idParent)) {
-        assertThat(after, equalTo(before.without(parent))); //список После и ДО-этот родитель
+        assertThat(after, equalTo(before.without(parent))); //список "после" и "до" без этого родителя
         return;
       }
     }

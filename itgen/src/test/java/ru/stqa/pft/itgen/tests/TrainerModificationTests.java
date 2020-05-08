@@ -78,7 +78,7 @@ public class TrainerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
-    app.trainer().selectedTrainerById(modifyTrainer);
+    app.trainer().selectTrainerById(modifyTrainer);
     app.trainer().modify(trainer);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size()));

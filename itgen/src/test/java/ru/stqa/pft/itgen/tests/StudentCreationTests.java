@@ -37,7 +37,6 @@ public class StudentCreationTests extends TestBase {
     }
   }
 
-  //проверка через бд
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
     app.goTo().menuTasks();

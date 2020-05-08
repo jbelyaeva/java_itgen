@@ -176,8 +176,8 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
-  public void deletionTrainer(TrainerData deletedTrainer) {
-    selectedTrainerById(deletedTrainer);
+  public void delete(TrainerData deletedTrainer) {
+    selectTrainerById(deletedTrainer);
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
   }
@@ -187,7 +187,7 @@ public class TrainerHelper extends HelperBase {
     btnSaveModify();
   }
 
-  public void selectedTrainerById(TrainerData deletedTrainer) {
+  public void selectTrainerById(TrainerData deletedTrainer) {
     //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));

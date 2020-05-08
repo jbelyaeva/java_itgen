@@ -24,15 +24,14 @@ public class StudentDeletionTests extends TestBase {
   public void testStudentDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    app.student().addStudentInFamily();//добавляем еще одного студента, чтоб при удалении одного из студентов одной семьи
-    // не появлялись фантомные записи в таблице family
+    app.student().addStudentInFamily(); //добавляем еще одного студента, чтоб при удалении одного из студентов одной семьи не появлялись фантомные записи в таблице family
     Students before = app.db().students();
-    String url = app.student().delete();//удаляем выбранного студента
+    String url = app.student().delete();
     Students after = app.db().students();
     String idDeletedStudent = app.student().getId(url);
-    for (StudentData studentDeleted : before) { //найти в списке ДО родителя с таким id
+    for (StudentData studentDeleted : before) { //найти в списке "до" родителя с таким id
       if (studentDeleted.getId().equals(idDeletedStudent)) {
-        assertThat(after, equalTo(before.without(studentDeleted))); //список После и ДО-этот родитель
+        assertThat(after, equalTo(before.without(studentDeleted))); //список "после" и "до"без этого родителя
         return;
       }
     }
