@@ -12,61 +12,84 @@ public class WorkerData {
   @Id
   @Column(name = "_id")
   private String id;
+
   @Expose
   @Column(name = "firstName")
   private String firstName;
+
   @Expose
   @Column(name = "lastName")
   private String lastName;
+
   @Expose
   private String email;
+
   @Expose
   private String role;
+
   @Expose
   @Transient
   @Column(name = "startWorkAt")
   @Temporal(TemporalType.DATE)
   private Date startDay;
+
   @Expose
   private String startDayUi;
+
   @Expose
   @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthDay;
+
   @Expose
   private String birthDayUi;
+
   @Expose
   @Transient
   private String gender;
+
   @Expose
   private String country;
+
   @Expose
   private String city;
+
   @Expose
   private String timeZone;
+
   @Expose
   private String locate;
+
   @Expose
   private String phone;
+
   @Expose
   private String skype;
+
   @Expose
   private String viber;
+
   @Expose
   private String whatsapp;
+
   @Expose
   private String tg;
+
   @Expose
   private String fb;
+
   @Expose
   private String vk;
+
   @Expose
   private String ok;
+
   @Expose
   private String inst;
 
   /* setters */
+
   public WorkerData withId(String id) {
     this.id = id;
     return this;
@@ -183,6 +206,7 @@ public class WorkerData {
   }
 
   /* getters */
+
   public String getId() {
     return id;
   }
@@ -278,6 +302,15 @@ public class WorkerData {
   /* toString(), hashCode() & equals() */
 
   @Override
+  public String toString() {
+    return "WorkerData{" +
+            "id='" + id + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            '}';
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -292,12 +325,4 @@ public class WorkerData {
     return Objects.hash(id, firstName, lastName);
   }
 
-  @Override
-  public String toString() {
-    return "WorkerData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-  }
 }
