@@ -20,7 +20,7 @@ public class StudentDao {
   public void delete(StudentData student) {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
-    entityManager.remove(student);
+    entityManager.remove(entityManager.merge(student));
     entityManager.getTransaction().commit();
     entityManager.close();
   }

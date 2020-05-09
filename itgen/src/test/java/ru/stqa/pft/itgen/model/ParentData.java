@@ -39,6 +39,42 @@ public class ParentData {
   @Column(name = "locale")
   private String locate;
 
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "contacts")
+  private List<ParentData.Contacts> contacts = new ArrayList<ParentData.Contacts>();
+
+  @Embeddable
+  public static class Contacts {
+    private String type;
+    private String val;
+
+    public ParentData.Contacts withType(String type) {
+      this.type = type;
+      return this;
+    }
+
+    public ParentData.Contacts withVal(String val) {
+      this.val = val;
+      return this;
+    }
+
+    public String getType() {
+      return type;
+    }
+
+    public String getVal() {
+      return val;
+    }
+
+    @Override
+    public String toString() {
+      return "Contacts{" +
+              "type='" + type + '\'' +
+              ", val='" + val + '\'' +
+              '}';
+    }
+  }
+
   @Expose
   @Transient
   private String phone;
@@ -83,9 +119,9 @@ public class ParentData {
   @Transient
   private String inst;
 
-  @Expose
-  @Transient
-  private String familyId;
+
+  @Column(name = "familyId")
+   private String familyId;
 
   @Expose
   @Column(name = "note")
@@ -96,11 +132,12 @@ public class ParentData {
   private List<ParentData.Roles> roles = new ArrayList<ParentData.Roles>();
 
   @Embeddable
-  static class Roles {
+  public static class Roles {
     private String roles;
 
-    public void setRoles(String type) {
+    public ParentData.Roles withRoles(String type) {
       this.roles = type;
+      return this;
     }
 
     public String getRoles() {
@@ -165,6 +202,11 @@ public class ParentData {
 
   public ParentData withLocate(String locate) {
     this.locate = locate;
+    return this;
+  }
+
+  public ParentData withContacts(List<ParentData.Contacts> contacts) {
+    this.contacts = contacts;
     return this;
   }
 
@@ -266,6 +308,10 @@ public class ParentData {
 
   public String getLocate() {
     return locate;
+  }
+
+  public List<ParentData.Contacts> getContacts() {
+    return contacts;
   }
 
   public String getPhone() {

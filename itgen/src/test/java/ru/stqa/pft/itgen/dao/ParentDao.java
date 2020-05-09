@@ -21,7 +21,7 @@ public class ParentDao {
   public void delete(ParentData parent) {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
-    entityManager.remove(parent);
+    entityManager.remove(entityManager.merge(parent));
     entityManager.getTransaction().commit();
     entityManager.close();
   }

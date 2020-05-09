@@ -176,13 +176,6 @@ public class StudentHelper extends HelperBase {
             isElementPresent(By.cssSelector(".help-block.help-block-error")) || isElementPresent(By.cssSelector("[id^=alert]")));
   }
 
-  public void btnStudentCreation() {
-    click(By.xpath("//button[contains(@class,'create')]"));
-    Assert.assertTrue(
-            !isElementPresent(By.cssSelector(".help-block.help-block-error")) && !isElementPresent(By.cssSelector("[id^=alert]")));
-  }
-
-
   public void btnCreateFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
@@ -279,6 +272,26 @@ public class StudentHelper extends HelperBase {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+          break;
+        } else {
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
+        }
+      }
+    }
+  }
+  public void selectStudentInListUIById(String id) {
+    //находим пагинатор
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    //есть ли на первой странице наш студент
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+    if (list.size() > 0) {
+      wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
+    } else {
+      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
         } else {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();

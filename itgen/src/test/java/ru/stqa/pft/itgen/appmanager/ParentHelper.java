@@ -53,7 +53,6 @@ public class ParentHelper extends HelperBase {
   }
 
   public void create(ParentData parent) {
-    selectStudent();
     btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);

@@ -14,6 +14,10 @@ public class ParentService {
   public void create(ParentData parent) {
     parentDao.create(parent);
   }
+  public void delete(ParentData parent){
+    parentDao.delete(parent);
+  }
+
   public ParentData findById(String id) {
     return parentDao.findById(id);
   }

@@ -2,18 +2,21 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.Parents;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.services.ParentService;
+import ru.stqa.pft.itgen.services.StudentService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +24,8 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ParentCreationTests extends TestBase {
+public class ParentCreationTests extends TestBase{
+  String id;
 
   @DataProvider
   public Iterator<Object[]> validParentsFromJson() throws IOException {
@@ -42,12 +46,21 @@ public class ParentCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().students().size() == 0) {
-      app.goTo().menuTasks();
-      app.goTo().menuStudents();
-      app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
-              .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
-    }
+      FamilyService familyService = new FamilyService();
+      FamilyData family = new FamilyData().withId("parentCreate").withTrialBonusOff(false).withTierId("txa")
+              .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
+      familyService.create(family);
+      StudentService studentService = new StudentService();
+      StudentData student = new StudentData().withId("forParentCreation").withFirstName("Маша").withLastName("Машина")
+              .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+              .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
+              .withFamilyId("parentCreate").withStudyLang("ru").withLocate("ru")
+              .withBirthday(new Date(1977-10-12)) // придумать конвертор DATE в ISODATE
+              .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
+              .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
+              .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
+      studentService.create(student);
+
   }
 
   @Test(dataProvider = "validParentsFromJson")
@@ -55,11 +68,12 @@ public class ParentCreationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     Parents before = app.db().parents();
-    createParent(parent);
+    app.student().selectStudentInListUIById("forParentCreation");
+    app.parent().create(parent);
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() + 1));
 
-    String id = app.parent().getIdNewParentDB(before, after);
+    id = app.parent().getIdNewParentDB(before, after);
     ParentData parentAdd = parent.withId(id).withFirstName(parent.getFirstName()).withLastName(parent.getLastName())
             .withCountry(parent.getCountry()).withCity(parent.getCity()).withTimeZone(parent.getTimeZone())
             .withLocate(parent.getLocate()).withNote(parent.getNote());
@@ -67,23 +81,17 @@ public class ParentCreationTests extends TestBase {
   }
 
 
-  private void createParent(ParentData parent) {
-    //находим студента без родителя, если такого нет, то создаем такого
-    Students students = app.db().students();
-    boolean a = true;
-    for (StudentData studentWithoutParent : students) {
-      String id = studentWithoutParent.getFamilyId();
-      if (app.db().familyComposition(id).size() == 1) {
-        app.parent().create(parent);
-        a = false;
-        break;
-      }
-    }
-    if (a) {
-      app.student().create(new StudentData().withFirstName("Маша").withLastName("Машина")
-              .withBirthdayUi("01.01.1987").withPclevel("expert").withCountry("AL"));
-      app.student().selectedStudentAfterCreate();
-      app.parent().createForStudent(parent);
-    }
+  @AfterMethod
+  public void clean(){
+    FamilyService familyService = new FamilyService();
+    FamilyData familyClean =familyService.findById("parentCreate");
+    familyService.delete(familyClean);
+    StudentService studentService = new StudentService();
+    StudentData studentClean =studentService.findById("forParentCreation");
+    studentService.delete(studentClean);
+    ParentService parentService = new ParentService();
+    ParentData parentClean =parentService.findById(id);
+    parentService.delete(parentClean);
   }
+
 }
