@@ -50,4 +50,5 @@ public class StudentCreationTests extends TestBase {
     assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
   }
+
 }

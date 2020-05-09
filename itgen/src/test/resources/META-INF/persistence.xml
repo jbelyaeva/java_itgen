@@ -6,7 +6,7 @@
 	version="2.0">
 
 	<!-- Use this for MongoDB -->
-	<persistence-unit name="connection" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="ogm-mongoDB" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
 
 		<properties>

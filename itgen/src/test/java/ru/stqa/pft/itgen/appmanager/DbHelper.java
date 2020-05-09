@@ -3,20 +3,20 @@ package ru.stqa.pft.itgen.appmanager;
 import ru.stqa.pft.itgen.model.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
+
+import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 
 public class DbHelper {
 
-  private final EntityManagerFactory entityManagerFactory;
+ // private final EntityManagerFactory entityManagerFactory;
 
-  public DbHelper() {
+ /* public DbHelper()  {
     entityManagerFactory = Persistence.createEntityManagerFactory("connection");
-  }
+  }*/
 
   public Students students() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $query : { roles : 'child'} }";
     List<StudentData> students = entityManager.createNativeQuery(query, StudentData.class).getResultList();
@@ -26,7 +26,7 @@ public class DbHelper {
   }
 
   public Families families() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "from FamilyData";
     List<FamilyData> families = entityManager.createQuery(query, FamilyData.class).getResultList();
@@ -36,7 +36,7 @@ public class DbHelper {
   }
 
   public Students familyComposition(String id) {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $or : [{ roles : 'child' }, {roles: 'parent'}], familyId:'" + id + "'}";
     List<StudentData> family = entityManager.createNativeQuery(query, StudentData.class).getResultList();
@@ -46,7 +46,7 @@ public class DbHelper {
   }
 
   public Parents parents() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $query : { roles : 'parent'} }";
     List<ParentData> parents = entityManager.createNativeQuery(query, ParentData.class).getResultList();
@@ -56,7 +56,7 @@ public class DbHelper {
   }
 
   public Workers workers() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $query : { roles : {$nin :['trainer','child','parent']}}}";
     List<WorkerData> workers = entityManager.createNativeQuery(query, WorkerData.class).getResultList();
@@ -66,7 +66,7 @@ public class DbHelper {
   }
 
   public Trainers trainers() {
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
+    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     String query = "{ $query : { roles : 'trainer'} }";
     List<TrainerData> trainers = entityManager.createNativeQuery(query, TrainerData.class).getResultList();
