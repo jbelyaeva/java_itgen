@@ -37,14 +37,17 @@ public class FamilyDeletionTests extends TestBase {
     assertThat(users.size(), equalTo(0));
   }
 
-  @AfterMethod
-     public  void cleanFamily(){
-    while (app.db().students().size() != 1) {
-      app.goTo().menuStudents();
-      app.student().select();
-      app.student().btnFamily();
-      app.family().bntDeleteFamily();
-      app.family().alertDeleteFamily();
+
+  @AfterMethod(alwaysRun = true)
+  public void cleanFamily() {
+    if (app.db().students().size() > 0) {
+      while (app.db().students().size() != 0) {
+        app.goTo().menuStudents();
+        app.student().select();
+        app.student().btnFamily();
+        app.family().bntDeleteFamily();
+        app.family().alertDeleteFamily();
+      }
     }
   }
 }

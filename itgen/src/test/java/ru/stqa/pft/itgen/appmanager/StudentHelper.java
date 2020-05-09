@@ -8,7 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.services.StudentService;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -75,6 +79,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
 
   }
+
   public void fillAddStudentForm(StudentData studentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), studentData.getLastname());
@@ -122,7 +127,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("textarea[name=\"profile-note\"]"), studentData.getNote());
   }
 
-    public int getStudentCount() {
+  public int getStudentCount() {
     return countingWithPaginated();
   }
 
@@ -165,20 +170,35 @@ public class StudentHelper extends HelperBase {
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
+  public void btnCreationBad() {
+    click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
+    Assert.assertTrue(
+            isElementPresent(By.cssSelector(".help-block.help-block-error")) || isElementPresent(By.cssSelector("[id^=alert]")));
+  }
+
   public void btnStudentCreation() {
     click(By.xpath("//button[contains(@class,'create')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    Assert.assertTrue(
+            !isElementPresent(By.cssSelector(".help-block.help-block-error")) && !isElementPresent(By.cssSelector("[id^=alert]")));
   }
+
 
   public void btnCreateFamily() {
     click(By.xpath("//a[@href='/createFamily']"));
   }
 
-   public void create(StudentData student) {
+  public void create(StudentData student) {
     btnCreateFamily();
     btnAddStudent();
     fillStudentForm(student);
     btnCreation();
+  }
+
+  public void createBad(StudentData student) {
+    btnCreateFamily();
+    btnAddStudent();
+    fillStudentForm(student);
+    btnCreationBad();
   }
 
   public void selectedStudentAfterCreate() {
@@ -212,41 +232,57 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
-  public String delete() {
+  public StudentData delete() {
     String url = getURL();
+    StudentData saveDeletedStudent = findDeletedStudent(url);
     btnDeleteStudent();
     assertDeleteSelectedStudent();
-    return url;
+    return saveDeletedStudent;
   }
 
-  public void addStudentInFamily () {
+  public StudentData findDeletedStudent(String url) {
+    String idDeletedStudent = getId(url);
+    StudentService studentService = new StudentService();
+    return studentService.findById(idDeletedStudent);
+  }
+
+  public void addStudentInFamily() {
     select();
+    String url = getURL();
+    String id = getId(url);
+    StudentService studentService = new StudentService();
+    StudentData studentFind = studentService.findById(id);
+    StudentData student = new StudentData().withId("1110111").withFirstName("Саша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
+            .withFamilyId(studentFind.getFamilyId()).withStudyLang("ru").withLocate("ru")
+            .withBirthday(new Date(1977 - 10 - 12)) // придумать конвертор DATE в ISODATE
+            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
+            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
+    studentService.create(student);
     btnFamily();
-    btnAddStudentInFamily();
-    fillAddStudentForm(new StudentData().withFirstName("Маша").withLastName("Машина")
-            .withBirthdayUi("01.01.1999").withPclevel("expert"));
-    btnStudentCreation();
     selectedStudentAfterCreate();
 
   }
 
   public void selectStudentInStudentListUI(StudentData deletedStudent) {
-     //находим пагинатор
+    //находим пагинатор
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-     //есть ли на первой странице наш студент
-    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
-    if (list.size() > 0){
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();}
-    else {
+    //есть ли на первой странице наш студент
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
+    if (list.size() > 0) {
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+    } else {
       //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
           break;
+        } else {
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
-        else{
-          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
       }
     }
   }

@@ -12,4 +12,7 @@ public class StudentService {
   public void create(StudentData student) {
     studentDao.create(student);
   }
+  public StudentData findById(String id) {
+    return studentDao.findById(id);
+  }
 }
