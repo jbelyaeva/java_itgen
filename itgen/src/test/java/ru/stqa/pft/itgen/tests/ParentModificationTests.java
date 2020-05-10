@@ -56,7 +56,7 @@ public class ParentModificationTests extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-     //находим студента c родителем, если такого нет, то создаем студента без родителя
+    //находим студента c родителем, если такого нет, то создаем студента без родителя
     Students students = app.db().students();
     for (StudentData student : students) { //проходим по всем студентам
       String idFamily = student.getFamilyId(); // у всех по порядку берем FamilyID

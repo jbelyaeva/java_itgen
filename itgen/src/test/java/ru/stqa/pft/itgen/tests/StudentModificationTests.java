@@ -57,7 +57,7 @@ public class StudentModificationTests extends TestBase {
               .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
               .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
               .withFamilyId("222222").withStudyLang("ru").withLocate("ru")
-              .withBirthday(new Date(1977-10-12)) // придумать конвертор DATE в ISODATE
+              .withBirthday(new Date())
               .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
               .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
               .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));

@@ -1,7 +1,6 @@
 package ru.stqa.pft.itgen.dao;
 
 import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.StudentData;
 
 import javax.persistence.EntityManager;
 
@@ -18,18 +17,18 @@ public class ParentDao {
     return parent;
   }
 
-  public void delete(ParentData parent) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(parent));
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
-
   public void create(ParentData parent) {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     entityManager.persist(parent);
+    entityManager.getTransaction().commit();
+    entityManager.close();
+  }
+
+  public void delete(ParentData parent) {
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
+    entityManager.getTransaction().begin();
+    entityManager.remove(entityManager.merge(parent));
     entityManager.getTransaction().commit();
     entityManager.close();
   }

@@ -17,18 +17,18 @@ public class StudentDao {
     return student;
   }
 
-  public void delete(StudentData student) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(student));
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
-
   public void create(StudentData student) {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
     entityManager.persist(student);
+    entityManager.getTransaction().commit();
+    entityManager.close();
+  }
+
+  public void delete(StudentData student) {
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
+    entityManager.getTransaction().begin();
+    entityManager.remove(entityManager.merge(student));
     entityManager.getTransaction().commit();
     entityManager.close();
   }

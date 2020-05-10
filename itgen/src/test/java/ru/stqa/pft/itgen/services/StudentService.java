@@ -9,11 +9,15 @@ public class StudentService {
   public StudentService() {
   }
 
+  public StudentData findById(String id) {
+    return studentDao.findById(id);
+  }
+
   public void create(StudentData student) {
     studentDao.create(student);
   }
-  public void delete(StudentData student){studentDao.delete(student);}
-  public StudentData findById(String id) {
-    return studentDao.findById(id);
+
+  public void delete(StudentData student) {
+    studentDao.delete(student);
   }
 }

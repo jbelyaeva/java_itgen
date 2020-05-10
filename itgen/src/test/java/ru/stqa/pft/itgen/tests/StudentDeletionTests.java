@@ -10,6 +10,7 @@ import ru.stqa.pft.itgen.services.StudentService;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,7 +30,7 @@ public class StudentDeletionTests extends TestBase {
               .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
               .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
               .withFamilyId("222222").withStudyLang("ru").withLocate("ru")
-              .withBirthday(new Date(1977-10-12)) // придумать конвертор DATE в ISODATE
+              .withBirthday(new Date(1556726891000L))
               .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
               .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
               .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
