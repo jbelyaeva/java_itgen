@@ -77,7 +77,7 @@ public class FamilyHelper extends HelperBase {
     click(By.xpath("//button[@class='close btn-add-parent']"));
   }
 
-  public void bntSelectFamily() {
+  public void bntModifyFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
 
@@ -102,14 +102,17 @@ public class FamilyHelper extends HelperBase {
     fillFamilyForm(family);
     submitFamilyCreation();
   }
-
-  public String delete(StudentData deletedStudent) {
-    SelectStudentById(deletedStudent);
-    bntSelectFamily();
-    String url = getURL();
+  public void select() {
+    click(By.cssSelector("a.btn-link"));
+  }
+  public void btnFamily() {
+    click(By.xpath("//a[contains(@href, 'family')]"));
+  }
+  public void delete() {
+    btnFamily();
+//    bntModifyFamily();
     bntDeleteFamily();
     alertDeleteSelectedFamily();
-    return url;
   }
 
   private void SelectStudentById(StudentData deletedStudent) {

@@ -2,6 +2,7 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -37,6 +38,23 @@ public class StudentCreationTests extends TestBase {
     }
   }
 
+  @DataProvider
+  public Iterator<Object[]> noValidStudentsFromJson() throws IOException {
+    try (BufferedReader reader =
+                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation_bad.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
+      }.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+    }
+  }
+
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
     app.goTo().menuTasks();
@@ -50,4 +68,31 @@ public class StudentCreationTests extends TestBase {
     assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
   }
+
+  @Test(dataProvider = "noValidStudentsFromJson")
+  public void testBadStudentCreation(StudentData student) {
+    app.goTo().menuTasks();
+    app.goTo().menuStudents();
+    Students before = app.db().students();
+    app.student().createBad(student);
+    Students after = app.db().students();
+    assertThat(after.size(), equalTo(before.size()));
+    assertThat(after, equalTo(before));
+  }
+
+
+  @AfterMethod(alwaysRun = true)
+  public void cleanFamily() {
+    if (app.db().students().size() > 0) {
+      while (app.db().students().size() != 0) {
+        app.goTo().menuStudents();
+        app.student().select();
+        app.student().btnFamily();
+        app.family().bntDeleteFamily();
+        app.family().alertDeleteFamily();
+      }
+    }
+  }
+
+
 }

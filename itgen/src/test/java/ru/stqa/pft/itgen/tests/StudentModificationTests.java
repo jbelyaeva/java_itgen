@@ -2,16 +2,23 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.FamilyData;
+import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.services.StudentService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,12 +48,22 @@ public class StudentModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().students().size() == 0) {
-      app.goTo().menuTasks();
-      app.goTo().menuStudents();
-      app.student().create(new StudentData().withFirstName("Вася").withLastName("Петров")
-              .withBirthdayUi("01.01.1999").withPclevel("expert").withCountry("AL"));
-    }
+
+      FamilyService familyService = new FamilyService();
+      FamilyData family = new FamilyData().withId("studentModify").withTrialBonusOff(false).withTierId("txa")
+              .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
+      familyService.create(family);
+
+      StudentService studentService = new StudentService();
+      StudentData student = new StudentData().withId("studentModify").withFirstName("Маша").withLastName("Машина")
+              .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+              .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
+              .withFamilyId("studentModify").withStudyLang("ru").withLocate("ru")
+              .withBirthday(new Date(1556726891000L))
+              .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
+              .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
+              .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
+      studentService.create(student);
   }
 
   @Test(dataProvider = "validStudentsFromJson")
@@ -54,13 +71,29 @@ public class StudentModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     Students before = app.db().students();
-    StudentData modifyStudent = before.iterator().next();
-    app.student().selectStudentInStudentListUI(modifyStudent);
+    app.student().selectStudentInListUIById("studentModify");
     app.student().modify(student);
     Students after = app.db().students();
     assertThat(after.size(), equalTo(before.size()));
-    StudentData studentAdd = student.withId(modifyStudent.getId());
-    assertThat(after, equalTo(before.without(modifyStudent).withAdded(studentAdd)));
-    verifyStudentsListInUI();
+
+    for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
+      if (studentModify.getId().equals("studentModify")) {
+        StudentData studentAdd = student.withId(studentModify.getId());
+        assertThat(after, equalTo(before.without(studentModify).withAdded(studentAdd)));
+        return;
+      }
+    }
+
+   verifyStudentsListInUI();
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    FamilyService familyService = new FamilyService();
+    FamilyData familyClean = familyService.findById("studentModify");
+    familyService.delete(familyClean);
+    StudentService studentService = new StudentService();
+    StudentData studentClean = studentService.findById("studentModify");
+    studentService.delete(studentClean);
   }
 }

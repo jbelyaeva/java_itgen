@@ -3,10 +3,7 @@ package ru.stqa.pft.itgen.model;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -28,7 +25,7 @@ public class StudentData {
   @Column(name = "gender")
   private Integer gender;
 
-  @Transient
+//  @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
@@ -61,6 +58,30 @@ public class StudentData {
   @Transient
   private String studyLang;
 
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "langs")
+  private List<Langs> langs = new ArrayList<Langs>();
+
+  @Embeddable
+  public static class Langs {
+    private String langs;
+
+    public Langs withLangs(String type) {
+      this.langs = type;
+      return this;
+    }
+
+    public String getLangs() {
+      return langs;
+    }
+
+    @Override
+    public String toString() {
+      return "" +
+              langs;
+    }
+  }
+
   @Expose
   @Column(name = "duration")
   private Integer duration;
@@ -74,12 +95,14 @@ public class StudentData {
     private String type;
     private String val;
 
-    public void setType(String type) {
+    public Contacts withType(String type) {
       this.type = type;
+      return this;
     }
 
-    public void setVal(String val) {
+    public Contacts withVal(String val) {
       this.val = val;
+      return this;
     }
 
     public String getType() {
@@ -155,8 +178,9 @@ public class StudentData {
   public static class Roles {
     private String roles;
 
-    public void setRoles(String type) {
+    public Roles withRoles(String type) {
       this.roles = type;
+      return this;
     }
 
     public String getRoles() {
@@ -170,6 +194,31 @@ public class StudentData {
     }
   }
 
+  @Column(name = "status")
+  Status status;
+
+  @Embeddable
+  public static class Status {
+    String state;
+
+    public String getState() {
+      return state;
+    }
+
+    public Status withState(String state) {
+      this.state = state;
+      return this;
+    }
+  }
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public StudentData withStatus(Status status) {
+    this.status = status;
+    return this;
+  }
   /*
   @ManyToOne
   @JoinTable (name = "users", joinColumns = @JoinColumn (name = "familyId"))
@@ -326,6 +375,12 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withLangs(List<Langs> langs) {
+    this.langs = langs;
+    return this;
+  }
+
+
 
   /* getters */
 
@@ -436,6 +491,12 @@ public class StudentData {
   public List<Roles> getRoles() {
     return roles;
   }
+
+  public List<Langs> getLangs() {
+    return langs;
+  }
+
+
 
 
   /* toString(), hashCode() & equals() */
