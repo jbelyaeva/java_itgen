@@ -225,13 +225,10 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
-  public StudentData delete() {
-    String url = getURL();
-    StudentData saveDeletedStudent = findDeletedStudent(url);
+  public void delete() {
     btnDeleteStudent();
     assertDeleteSelectedStudent();
-    return saveDeletedStudent;
-  }
+   }
 
   public StudentData findDeletedStudent(String url) {
     String idDeletedStudent = getId(url);
@@ -239,25 +236,6 @@ public class StudentHelper extends HelperBase {
     return studentService.findById(idDeletedStudent);
   }
 
-  public void addStudentInFamily() {
-    select();
-    String url = getURL();
-    String id = getId(url);
-    StudentService studentService = new StudentService();
-    StudentData studentFind = studentService.findById(id);
-    StudentData student = new StudentData().withId("1110111").withFirstName("Саша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId(studentFind.getFamilyId()).withStudyLang("ru").withLocate("ru")
-            .withBirthday(new Date(1977 - 10 - 12)) // придумать конвертор DATE в ISODATE
-            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
-    studentService.create(student);
-    btnFamily();
-    selectedStudentAfterCreate();
-
-  }
 
   public void selectStudentInStudentListUI(StudentData deletedStudent) {
     //находим пагинатор

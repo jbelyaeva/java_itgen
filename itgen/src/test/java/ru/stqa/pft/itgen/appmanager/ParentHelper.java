@@ -32,6 +32,10 @@ public class ParentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
   }
 
+  public void btnFamily() {
+    click(By.xpath("//a[contains(@href, 'family')]"));
+  }
+
   public void alertDeleteSelectedParent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
@@ -76,13 +80,12 @@ public class ParentHelper extends HelperBase {
     return url;
   }
 
-  public String delete() {
+  public void delete() {
+    btnFamily();
     selectParentInFamily();
-    String url = getURL();
     btnDeleteParent();
     alertDeleteSelectedParent();
-    return url;
-  }
+    }
 
 
   public void modifyNewParent(ParentData parent) {
@@ -90,13 +93,12 @@ public class ParentHelper extends HelperBase {
     ModifyParentForm(parent);
     btnSaveModify();
   }
-  public String modify(ParentData parent) {
+  public void modify(ParentData parent) {
+    btnFamily();
     selectParentInFamily();
-    String url = getURL();
     btnModificationParent();
     ModifyParentForm(parent);
     btnSaveModify();
-    return url;
   }
 
   public void ModifyParentForm(ParentData parentData) {

@@ -2,15 +2,21 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.services.ParentService;
+import ru.stqa.pft.itgen.services.StudentService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,52 +45,62 @@ public class ParentModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().families().size() == 0) {
-      app.goTo().menuTasks();
-      app.goTo().menuStudents();
-      app.family().create(new FamilyDataUI().withFirstnameStudent("Маша").withLastnameStudent("Машина")
-              .withBirthdayUiStudent("01.01.1987").withPclevelStudent("expert").withCountryStudent("AL")
-              .withFirstnameParent("Олег").withLastnameParent("Машин").withCountryParent("AL").withPhoneParent("010101010101"));
-    }
+    FamilyService familyService = new FamilyService();
+    FamilyData family = new FamilyData().withId("parentModify").withTrialBonusOff(false).withTierId("txa")
+            .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
+    familyService.create(family);
+    StudentService studentService = new StudentService();
+    StudentData student = new StudentData().withId("forParentModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
+            .withFamilyId("parentModify").withStudyLang("ru").withLocate("ru")
+            .withBirthday(new Date())
+            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
+            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
+    studentService.create(student);
+    ParentService parentService = new ParentService();
+    ParentData parent = new ParentData().withId("forParModify").withFirstName("Зина").withLastName("Зинина")
+            .withRoles(Collections.singletonList(new ParentData.Roles().withRoles("parent")))
+            .withCountry("AL").withTimeZone("Europe/Minsk")
+            .withFamilyId("parentModify").withLocate("ru")
+            .withContacts(Collections.singletonList(new ParentData.Contacts().withType("phone").withVal("1234567899")));
+    parentService.create(parent);
   }
 
   @Test(dataProvider = "validParentsFromJson")
   public void testParentModification(ParentData parent) {
-    Parents before = null;
-    String url = "";
-    boolean a = true;
-
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    //находим студента c родителем, если такого нет, то создаем студента без родителя
-    Students students = app.db().students();
-    for (StudentData student : students) { //проходим по всем студентам
-      String idFamily = student.getFamilyId(); // у всех по порядку берем FamilyID
-      if (app.db().familyComposition(idFamily).size() == 2) { //если в семье 2 человека
-        app.goTo().menuStudents(); // переходим в студенты
-        app.student().selectStudentInStudentListUI(student); //выбираем этого студента в списке
-        before = app.db().parents(); // запоминаем список родителей "до"
-        app.student().btnFamily();
-        url = app.parent().modify(parent); //модифицируем родителя
-        a = false;
-        break;
-      }
-    }
-    if (a) {  //если у всех студентов нет родителя, то добавляем родителя к первому студенту
-      url = app.parent().createWithUrl(new ParentData().withFirstName("Папа").withLastName("Папин").withPhone("000000000"));
-      before = app.db().parents(); // берем список родителй "до"
-      app.parent().modifyNewParent(parent); //модифицируем
-    }
+    Parents before = app.db().parents();
+    app.student().selectStudentInListUIById("forParentModify");
+    app.parent().modify(parent);
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size()));
-    String idParent = app.parent().getId(url); //id модифицируемого родителя
+
     for (ParentData parentModify : before) { //найти в списке "до" родителя с таким id
-      if (parentModify.getId().equals(idParent)) {
+      if (parentModify.getId().equals("forParModify")) {
         ParentData parentAdd = parent.withId(parentModify.getId());
         assertThat(after, equalTo(before.without(parentModify).withAdded(parentAdd)));
         return;
       }
     }
   }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    FamilyService familyService = new FamilyService();
+    FamilyData familyClean = familyService.findById("parentModify");
+    familyService.delete(familyClean);
+    StudentService studentService = new StudentService();
+    StudentData studentClean = studentService.findById("forParentModify");
+    studentService.delete(studentClean);
+    ParentService parentService = new ParentService();
+    ParentData parentClean = parentService.findById("forParModify");
+    if (parentClean != null) {
+      parentService.delete(parentClean);
+    }
+  }
+
 
 }

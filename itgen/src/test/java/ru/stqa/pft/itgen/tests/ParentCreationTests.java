@@ -84,7 +84,7 @@ public class ParentCreationTests extends TestBase {
   }
 
 
-  @AfterMethod
+  @AfterMethod (alwaysRun = true)
   public void clean() {
     FamilyService familyService = new FamilyService();
     FamilyData familyClean = familyService.findById("parentCreate");
