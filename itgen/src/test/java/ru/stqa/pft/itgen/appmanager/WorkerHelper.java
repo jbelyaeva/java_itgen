@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.services.WorkerService;
 
@@ -20,7 +19,7 @@ public class WorkerHelper extends HelperBase {
 
   public void bntCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void fillWorkerForm(WorkerData workerData) {
@@ -46,21 +45,22 @@ public class WorkerHelper extends HelperBase {
   public void alertDeleteSelectedWorker() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void modifyWorker() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public WorkerData findWorker(String id){
+  public WorkerData findWorker(String id) {
     WorkerService workerService = new WorkerService();
     WorkerData workerClean = workerService.findById(id);
     return workerClean;
   }
+
   public void submitWorkerModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void modifiWorkerForm(WorkerData workerData) {
@@ -109,7 +109,7 @@ public class WorkerHelper extends HelperBase {
     alertDeleteSelectedWorker();
   }
 
-  public void modificationWorker(WorkerData worker,WorkerData modifydWorker) {
+  public void modificationWorker(WorkerData worker, WorkerData modifydWorker) {
     selectedWorkerByIdWithoutPaginator(modifydWorker);
     modifyWorker();
     modifiWorkerForm(worker);

@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.StudentService;
@@ -43,8 +42,7 @@ public class StudentHelper extends HelperBase {
   public void assertDeleteSelectedStudent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            && isElementPresent(By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void selectModifyStudent() {
@@ -53,8 +51,7 @@ public class StudentHelper extends HelperBase {
 
   public void btnSaveModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            && isElementPresent(By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void fillStudentForm(StudentData studentData) {
@@ -167,14 +164,12 @@ public class StudentHelper extends HelperBase {
 
   public void btnCreation() {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
-    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            && isElementPresent(By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void btnCreationBad() {
     click(By.cssSelector("button.btn.btn-primary.btn-create-family"));
-    Assert.assertTrue(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            || isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    thereAreErrorMessages(); // проверка появления сообщения об ошибке
   }
 
   public void btnCreateFamily() {

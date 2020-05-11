@@ -2,7 +2,6 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.Parents;
 
@@ -18,7 +17,7 @@ public class ParentHelper extends HelperBase {
 
   public void selectParentInFamily() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
-   }
+  }
 
   public void btnSelectFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
@@ -39,17 +38,17 @@ public class ParentHelper extends HelperBase {
   public void alertDeleteSelectedParent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void btnSaveModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void submitParentCreation() {
     click(By.xpath("//button[contains(@class, 'family')]"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void btnModificationParent() {
@@ -63,12 +62,14 @@ public class ParentHelper extends HelperBase {
     submitParentCreation();
     selectParentInFamily();
   }
+
   public void createForStudent(ParentData parent) {
     btnSelectFamily();
     addParentInFamily();
     fillParentForm(parent);
     submitParentCreation();
   }
+
   public String createWithUrl(ParentData parent) {
     selectStudent();
     btnSelectFamily();
@@ -85,7 +86,7 @@ public class ParentHelper extends HelperBase {
     selectParentInFamily();
     btnDeleteParent();
     alertDeleteSelectedParent();
-    }
+  }
 
 
   public void modifyNewParent(ParentData parent) {
@@ -93,6 +94,7 @@ public class ParentHelper extends HelperBase {
     ModifyParentForm(parent);
     btnSaveModify();
   }
+
   public void modify(ParentData parent) {
     btnFamily();
     selectParentInFamily();

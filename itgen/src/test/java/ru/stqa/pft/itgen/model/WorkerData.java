@@ -148,6 +148,7 @@ public class WorkerData {
   private String timeZone;
 
   @Expose
+  @Column(name = "locale")
   private String locate;
 
   @ElementCollection(fetch = FetchType.EAGER)

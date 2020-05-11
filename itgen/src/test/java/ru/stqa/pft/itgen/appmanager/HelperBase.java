@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class HelperBase {
 
@@ -91,7 +92,7 @@ public class HelperBase {
     return count + wd.findElements(By.cssSelector("a.btn-link")).size();
   }
 
-  public  String getURL() {
+  public String getURL() {
     return wd.getCurrentUrl();
   }
 
@@ -100,7 +101,18 @@ public class HelperBase {
     String id = getIdSplit[4]; //достали id
     return id;
   }
-  public void refresh(){
+
+  public void refresh() {
     wd.navigate().refresh();
+  }
+
+  protected void noErrorMessage() {
+    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))
+            && isElementPresent(By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
+  }
+
+  protected void thereAreErrorMessages() {
+    Assert.assertTrue(isElementPresent(By.cssSelector(".help-block.help-block-error"))
+            || isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 }

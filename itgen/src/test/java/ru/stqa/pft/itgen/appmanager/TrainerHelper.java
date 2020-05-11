@@ -6,11 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.services.TrainerService;
-import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +25,7 @@ public class TrainerHelper extends HelperBase {
   public void alertDeleteSelectedTrainer() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void bntModifyTrainer() {
@@ -36,14 +34,14 @@ public class TrainerHelper extends HelperBase {
 
   public void btnSaveModify() {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void modifiTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
-  //  enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
+    //  enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
@@ -100,6 +98,7 @@ public class TrainerHelper extends HelperBase {
   public int getTrainerCount() {
     return countingWithPaginated();
   }
+
   public String create(TrainerData trainer) {
     bntAddTrainer();
     fillTrainerForm(trainer);
@@ -107,9 +106,11 @@ public class TrainerHelper extends HelperBase {
     String url = getURL();
     return url;
   }
+
   public void bntAddTrainer() {
     click(By.cssSelector("a.btn.btn-default"));
   }
+
   public void fillTrainerForm(TrainerData trainerData) {
     type(By.name("user-firstName"), trainerData.getFirstName());
     type(By.name("user-lastName"), trainerData.getLastName());
@@ -117,10 +118,12 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-phone"), trainerData.getPhone());
     dropDownList(By.name("role"), trainerData.getRoleUi());
   }
+
   public void bntCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
+
   //работник с пагинацией
   public List<TrainerData> list() {
     List<TrainerData> trainers = new ArrayList<TrainerData>();
@@ -151,22 +154,25 @@ public class TrainerHelper extends HelperBase {
       String id = getIdSplit[4]; //достали id
       String name = element.getText();
       String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-      if (name_surname.length==2){
-      trainer = new TrainerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);}
-      else{
-      trainer = new TrainerData().withId(id).withFirstName(name_surname[0]).withLastName(null);
+      if (name_surname.length == 2) {
+        trainer = new TrainerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      } else {
+        trainer = new TrainerData().withId(id).withFirstName(name_surname[0]).withLastName(null);
       }
       trainers.add(trainer);
     }
   }
+
   public void createFirstTrainer(WorkerData worker) {
     addWorker();
     fillWorkerForm(worker);
     submitWorkerCreation();
   }
+
   public void addWorker() {
     click(By.cssSelector("a.btn.btn-default"));
   }
+
   public void fillWorkerForm(WorkerData workerData) {
     type(By.name("user-firstName"), workerData.getFirstName());
     type(By.name("user-lastName"), workerData.getLastName());
@@ -174,17 +180,19 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-phone"), workerData.getPhone());
     dropDownList(By.name("role"), String.valueOf(workerData.getRoles()));
   }
+
   public void submitWorkerCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
+
   public void delete(TrainerData deletedTrainer) {
     selectTrainerById(deletedTrainer);
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
   }
 
-  public TrainerData findTrainer(String id){
+  public TrainerData findTrainer(String id) {
     TrainerService trainerService = new TrainerService();
     TrainerData trainerClean = trainerService.findById(id);
     return trainerClean;
@@ -201,19 +209,19 @@ public class TrainerHelper extends HelperBase {
     String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
-    List<WebElement> list= wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
-    if (list.size() > 0){
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();}
-    else {
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
+    if (list.size() > 0) {
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
+    } else {
       //если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
           break;
+        } else {
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
-        else{
-          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();}
       }
     }
   }

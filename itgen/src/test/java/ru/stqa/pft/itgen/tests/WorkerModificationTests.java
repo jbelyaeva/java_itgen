@@ -52,7 +52,7 @@ public class WorkerModificationTests extends TestBase {
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withStartWork(new Date(1556726891000L))
-            .withLocate("ru")
+        //    .withLocate("ru")
             .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
             .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
     workerService.create(worker);
