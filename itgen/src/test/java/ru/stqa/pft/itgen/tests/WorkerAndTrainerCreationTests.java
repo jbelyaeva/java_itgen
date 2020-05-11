@@ -3,12 +3,14 @@ package ru.stqa.pft.itgen.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.TrainerData;
-import ru.stqa.pft.itgen.model.Trainers;
-import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TrainerService;
+import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +24,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerAndTrainerCreationTests extends TestBase {
-
+String idWorker;
+String idTrainer;
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
@@ -77,7 +80,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
     String url = app.worker().createWorker(worker);
-    String idWorker = app.worker().getId(url);
+    idWorker = app.worker().getId(url);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size() + 1));
     WorkerData workerAdd = worker.withId(idWorker);
@@ -102,11 +105,24 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     app.goTo().menuWorkers();
     Trainers before = app.db().trainers();
     String url = app.trainer().create(trainer);
-    String idTrainer = app.trainer().getId(url);
+    idTrainer = app.trainer().getId(url);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size() + 1));
     TrainerData trainerAdd = trainer.withId(idTrainer);
     assertThat(after, equalTo(before.withAdded(trainerAdd)));
     verifyTrainerListInUI();
+  }
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    WorkerService workerService = new WorkerService();
+    WorkerData workerClean = workerService.findById("idWorker");
+    if (workerClean != null) {
+    workerService.delete(workerClean);
+    }
+    TrainerService trainerService = new TrainerService();
+    TrainerData trainerClean = trainerService.findById("idTrainer");
+    if (trainerClean != null) {
+    trainerService.delete(trainerClean);
+  }
   }
 }

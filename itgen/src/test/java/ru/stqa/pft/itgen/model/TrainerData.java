@@ -3,7 +3,9 @@ package ru.stqa.pft.itgen.model;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -31,7 +33,6 @@ public class TrainerData {
   private String startWorkUi;
 
   @Expose
-  @Transient
   @Column(name = "birthday")
   @Temporal(TemporalType.DATE)
   private Date birthday;
@@ -39,32 +40,161 @@ public class TrainerData {
   @Expose
   private String birthdayUi;
 
-  @Expose
-  @Transient
-  private String gender;
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "langs")
+  private List<TrainerData.Langs> langs = new ArrayList<TrainerData.Langs>();
+
+  @Embeddable
+  public static class Langs {
+    private String langs;
+
+    public TrainerData.Langs withLangs(String type) {
+      this.langs = type;
+      return this;
+    }
+
+    public String getLangs() {
+      return langs;
+    }
+
+    @Override
+    public String toString() {
+      return "" +
+              langs;
+    }
+  }
 
   @Expose
-  @Transient
-  private String maxSlots;
+  @Column(name = "gender")
+  private Integer gender;
+
+  @Expose
+  @Column(name = "maxSlots")
+  private Integer maxSlots;
 
   @Expose
   private String country;
 
   @Expose
+  @Column(name = "tz")
   private String timeZone;
 
   @Expose
+  @Column(name = "locale")
   private String locate;
 
   @Expose
   private String city;
 
-  @Expose
-  private String role;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "roles")
+  private List<TrainerData.Roles> roles = new ArrayList<TrainerData.Roles>();
+
+  @Embeddable
+  public static class Roles {
+    private String roles;
+
+    public TrainerData.Roles withRoles(String type) {
+      this.roles = type;
+      return this;
+    }
+
+    public String getRoles() {
+      return roles;
+    }
+
+    @Override
+    public String toString() {
+      return "" +
+              roles;
+    }
+  }
+
 
   @Expose
-  @Transient
-  private String payBase;
+  private String roleUi;
+
+
+  @Expose
+  @Column(name = "payBase")
+  private Integer payBase;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "contacts")
+  private List<TrainerData.Contacts> contacts = new ArrayList<TrainerData.Contacts>();
+
+  @Embeddable
+  public static class Contacts {
+    private String type;
+    private String val;
+
+    public TrainerData.Contacts withType(String type) {
+      this.type = type;
+      return this;
+    }
+
+    public TrainerData.Contacts withVal(String val) {
+      this.val = val;
+      return this;
+    }
+
+    public String getType() {
+      return type;
+    }
+
+    public String getVal() {
+      return val;
+    }
+
+    @Override
+    public String toString() {
+      return "Contacts{" +
+              "type='" + type + '\'' +
+              ", val='" + val + '\'' +
+              '}';
+    }
+  }
+
+  @Expose
+  private String emailUI;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  @Column(name = "emails")
+  private List<TrainerData.Emails> emails = new ArrayList<TrainerData.Emails>();
+
+  @Embeddable
+  public static class Emails {
+    private String address;
+    private Boolean verified;
+
+    public TrainerData.Emails withAddress(String address) {
+      this.address = address;
+      return this;
+    }
+
+    public TrainerData.Emails withVerified(Boolean verified) {
+      this.verified = verified;
+      return this;
+    }
+
+    public String getAddress() {
+      return address;
+    }
+
+    public Boolean getVerified() {
+      return verified;
+    }
+
+    @Override
+    public String toString() {
+      return "Emails{" +
+              "address='" + address + '\'' +
+              ", verified='" + verified + '\'' +
+              '}';
+    }
+  }
+
 
   @Expose
   private String phone;
@@ -132,16 +262,28 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withGender(String gender) {
-    this.gender = gender;
-    return this;
-  }
-  public TrainerData withRole(String role) {
-    this.role = role;
+  public TrainerData withLangs(List<TrainerData.Langs> langs) {
+    this.langs = langs;
     return this;
   }
 
-  public TrainerData withMaxSlots(String maxSlots) {
+
+  public TrainerData withGender(Integer gender) {
+    this.gender = gender;
+    return this;
+  }
+
+  public TrainerData withRoles(List<TrainerData.Roles> roles) {
+    this.roles = roles;
+    return this;
+  }
+
+  public TrainerData withRoleUi(String roleUi) {
+    this.roleUi = roleUi;
+    return this;
+  }
+
+  public TrainerData withMaxSlots(Integer maxSlots) {
     this.maxSlots = maxSlots;
     return this;
   }
@@ -166,8 +308,22 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withPayBase(String payBase) {
+  public TrainerData withPayBase(Integer payBase) {
     this.payBase = payBase;
+    return this;
+  }
+  public TrainerData withContacts(List<TrainerData.Contacts> contacts) {
+    this.contacts = contacts;
+    return this;
+  }
+
+  public TrainerData withEmailUI(String emailUI) {
+    this.emailUI = emailUI;
+    return this;
+  }
+
+  public TrainerData withEmails (List<TrainerData.Emails> emails) {
+    this.emails = emails;
     return this;
   }
 
@@ -251,15 +407,24 @@ public class TrainerData {
     return birthdayUi;
   }
 
-  public String getGender() {
+  public List<TrainerData.Langs> getLangs() {
+    return langs;
+  }
+
+  public Integer getGender() {
     return gender;
   }
 
-  public String getRole() {
-    return role;
+  public List<TrainerData.Roles> getRoles() {
+    return roles;
   }
 
-  public String getMaxSlots() {
+  public String getRoleUi() {
+    return roleUi;
+  }
+
+
+  public Integer getMaxSlots() {
     return maxSlots;
   }
 
@@ -279,8 +444,20 @@ public class TrainerData {
     return city;
   }
 
-  public String getPayBase() {
+  public Integer getPayBase() {
     return payBase;
+  }
+
+  public List<TrainerData.Contacts> getContacts() {
+    return contacts;
+  }
+
+  public String getEmailUI() {
+    return emailUI;
+  }
+
+  public List<TrainerData.Emails> getEmails() {
+    return emails;
   }
 
   public String getPhone() {

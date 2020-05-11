@@ -7,6 +7,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +23,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StudentCreationTests extends TestBase {
-
+String id;
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
     try (BufferedReader reader =
@@ -63,7 +66,7 @@ public class StudentCreationTests extends TestBase {
     app.student().create(student);
     Students after = app.db().students();
     assertThat(after.size(), equalTo(before.size() + 1));
-    String id = app.student().getIdNewStudentDB(before, after);
+    id = app.student().getIdNewStudentDB(before, after);
     StudentData studentAdd = student.withId(id);
     assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
@@ -82,16 +85,11 @@ public class StudentCreationTests extends TestBase {
 
 
   @AfterMethod(alwaysRun = true)
-  public void cleanFamily() {
-    if (app.db().students().size() > 0) {
-      while (app.db().students().size() != 0) {
-        app.goTo().menuStudents();
-        app.student().select();
-        app.student().btnFamily();
-        app.family().bntDeleteFamily();
-        app.family().alertDeleteFamily();
-      }
-    }
+  public void clean() {
+    StudentService studentService = new StudentService();
+    StudentData studentClean = studentService.findById("id");
+    if (studentClean != null) {
+      studentService.delete(studentClean);}
   }
 
 

@@ -2,16 +2,20 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,12 +45,17 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().workers().size() == 1) {
-      app.goTo().menuTasks();
-      app.goTo().menuWorkers();
-      app.worker().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
-              .withPhone("8962988888888"));
-    }
+    WorkerService workerService = new WorkerService();
+    WorkerData worker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
+            .withCountry("AL").withTimeZone("Europe/Minsk")
+            .withLocate("ru")
+            .withBirthday(new Date(1556726891000L))
+            .withStartWork(new Date(1556726891000L))
+            .withLocate("ru")
+            .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
+    workerService.create(worker);
   }
 
   @Test(dataProvider = "validWorkersFromJson")
@@ -54,15 +63,8 @@ public class WorkerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    for (WorkerData workerData : before) {
-      String id = workerData.getId();
-      if ((!id.equals("777")) && (!id.equals("666"))) {
-        modifydWorker = workerData;
-        break;
-      }
-    }
-    app.worker().selectedWorkerByIdWithoutPaginator(modifydWorker);
-    app.worker().modificationWorker(worker);
+    modifydWorker = app.worker().findWorker("workerModify");
+    app.worker().modificationWorker(worker,modifydWorker);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());
@@ -70,5 +72,12 @@ public class WorkerModificationTests extends TestBase {
     verifyWorkerListInUI();
   }
 
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    WorkerService workerService = new WorkerService();
+    WorkerData workerClean = workerService.findById("workerModify");
+    if (workerClean != null) {
+      workerService.delete(workerClean);}
+  }
 
 }

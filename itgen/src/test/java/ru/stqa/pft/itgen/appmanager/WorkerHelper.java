@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class WorkerHelper extends HelperBase {
     type(By.name("user-lastName"), workerData.getLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), workerData.getPhone());
-    dropDownList(By.name("role"), workerData.getRole());
+    dropDownList(By.name("role"), workerData.getRoleUi());
   }
 
   public void btnAddWorker() {
@@ -52,6 +53,11 @@ public class WorkerHelper extends HelperBase {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
+  public WorkerData findWorker(String id){
+    WorkerService workerService = new WorkerService();
+    WorkerData workerClean = workerService.findById(id);
+    return workerClean;
+  }
   public void submitWorkerModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
@@ -103,7 +109,8 @@ public class WorkerHelper extends HelperBase {
     alertDeleteSelectedWorker();
   }
 
-  public void modificationWorker(WorkerData worker) {
+  public void modificationWorker(WorkerData worker,WorkerData modifydWorker) {
+    selectedWorkerByIdWithoutPaginator(modifydWorker);
     modifyWorker();
     modifiWorkerForm(worker);
     submitWorkerModify();

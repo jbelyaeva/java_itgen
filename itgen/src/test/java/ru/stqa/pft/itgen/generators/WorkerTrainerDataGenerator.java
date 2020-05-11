@@ -63,9 +63,9 @@ public class WorkerTrainerDataGenerator extends TestBase {
       workers.add(new WorkerData()
               .withFirstName(String.format("Витя-%s", i))
               .withLastName(String.format("Ухов-%s", i))
-              .withEmail(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
+              .withEmailUI(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
               .withPhone(String.format("89032566987", i))
-              .withRole(String.format("Тренер", i)));
+              .withRoleUi(String.format("Тренер", i)));
     }
     return workers;
   }
