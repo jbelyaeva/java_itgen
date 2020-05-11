@@ -170,7 +170,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-lastName"), workerData.getLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), workerData.getPhone());
-    dropDownList(By.name("role"), workerData.getRole());
+    dropDownList(By.name("role"), String.valueOf(workerData.getRoles()));
   }
   public void submitWorkerCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));

@@ -2,7 +2,7 @@
   {
     "firstName": "Вася_0",
     "lastName": "Васечкин_0",
-    "role": "admin",
+    "roleUi": "admin",
     "phone": "89032566987"
   }
 ]

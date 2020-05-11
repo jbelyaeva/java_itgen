@@ -1,9 +1,16 @@
 package ru.stqa.pft.itgen.tests;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.WorkerService;
+
+import java.util.Collections;
+import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,12 +20,16 @@ public class WorkerDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().workers().size() == 0) {
-      app.goTo().menuTasks();
-      app.goTo().menuWorkers();
-      app.worker().createFirstWorker(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("empolyee")
-              .withPhone("8962988888888"));
-    }
+    WorkerService workerService = new WorkerService();
+    WorkerData student = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
+            .withCountry("AL").withTimeZone("Europe/Minsk")
+            .withLocate("ru")
+            .withBirthday(new Date(1556726891000L))
+            .withLangs(Collections.singletonList(new WorkerData.Langs().withLangs("ru")))
+            .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
+    workerService.create(student);
   }
 
   @Test
@@ -26,16 +37,18 @@ public class WorkerDeletionTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    for (WorkerData worker1 : before) {
-      String id = worker1.getId();
-      if ((!id.equals("777")) && (!id.equals("666"))) {
-        deletedWorker = worker1;
-        break;
-      }
-    }
+    deletedWorker = app.worker().findWorker("workerDelete");
     app.worker().deletionWorker(deletedWorker);
     Workers after = app.db().workers();
     assertThat(after, equalTo(before.without(deletedWorker)));
     verifyWorkerListInUI();
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    WorkerService workerService = new WorkerService();
+    WorkerData workerClean = workerService.findById("workerDelete");
+    if (workerClean != null) {
+      workerService.delete(workerClean);}
   }
 }

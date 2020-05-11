@@ -3,6 +3,7 @@
     "firstName": "Вася_0",
     "lastName": "Васечкин_0",
     "gender": 2,
-    "birthDayUi": "01.01.1900"
+    "birthDayUi": "01.01.1900",
+    "locate": "ru"
   }
 ]

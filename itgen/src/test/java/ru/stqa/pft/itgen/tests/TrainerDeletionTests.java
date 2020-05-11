@@ -31,8 +31,8 @@ public class TrainerDeletionTests extends TestBase {
     if (a == 0) {
       app.goTo().menuTasks();
       app.goTo().menuWorkers();
-      app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
-              .withPhone("8962988888888"));
+   //   app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRoles("trainer")
+    //          .withPhone("8962988888888"));
       Trainers beforeNew = app.db().trainers();
       String url = app.trainer().getURL();
       String id = app.trainer().getId(url);

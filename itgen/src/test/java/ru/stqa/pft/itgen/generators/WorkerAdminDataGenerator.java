@@ -63,9 +63,9 @@ public class WorkerAdminDataGenerator extends TestBase {
       workers.add(new WorkerData()
               .withFirstName(String.format("Алеша-%s", i))
               .withLastName(String.format("Зайцев-%s", i))
-              .withEmail(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
+              .withEmailUI(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
               .withPhone(String.format("89032566987", i))
-              .withRole("Администратор"));
+              .withRoleUi("Администратор"));
     }
     return workers;
   }
