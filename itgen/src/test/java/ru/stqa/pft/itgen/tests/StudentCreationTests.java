@@ -87,7 +87,7 @@ String id;
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    StudentData studentClean = studentService.findById("id");
+    StudentData studentClean = studentService.findById(id);
     if (studentClean != null) {
       studentService.delete(studentClean);}
   }
