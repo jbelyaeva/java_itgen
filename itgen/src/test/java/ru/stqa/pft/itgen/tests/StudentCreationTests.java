@@ -79,6 +79,7 @@ String id;
     Students before = app.db().students();
     app.student().createBad(student);
     Students after = app.db().students();
+    id = app.student().getIdNewStudentDB(before, after);
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
   }

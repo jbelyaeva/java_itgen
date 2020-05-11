@@ -62,5 +62,6 @@ public class FamilyDeletionTests extends TestBase {
     if (studentClean != null) {
       studentService.delete(studentClean);
     }
+
   }
 }

@@ -2,11 +2,15 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.Families;
+import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.FamilyDataUI;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.services.FamilyService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -18,7 +22,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FamilyCreationTests extends TestBase {
-
+String idFamily;
   @DataProvider
   public Iterator<Object[]> validFamiliesFromJson() throws IOException {
     try (BufferedReader reader =
@@ -45,9 +49,17 @@ public class FamilyCreationTests extends TestBase {
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() + 1));
     String url = app.family().getURL();
-    String idFamily = app.family().getId(url);
+    idFamily = app.family().getId(url);
     Students users = app.db().familyComposition(idFamily);
     assertThat(users.size(), equalTo(2));
   }
 
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    FamilyService familyService = new FamilyService();
+    FamilyData familyClean = familyService.findById(idFamily);
+    if (familyClean != null) {
+      familyService.delete(familyClean);
+    }
+  }
 }
