@@ -24,8 +24,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerAndTrainerCreationTests extends TestBase {
-String idWorker;
-String idTrainer;
+String idWorker="null";
+String idTrainer="null";
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
@@ -115,12 +115,12 @@ String idTrainer;
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById("idWorker");
+    WorkerData workerClean = workerService.findById(idWorker);
     if (workerClean != null) {
     workerService.delete(workerClean);
     }
     TrainerService trainerService = new TrainerService();
-    TrainerData trainerClean = trainerService.findById("idTrainer");
+    TrainerData trainerClean = trainerService.findById(idTrainer);
     if (trainerClean != null) {
     trainerService.delete(trainerClean);
   }
