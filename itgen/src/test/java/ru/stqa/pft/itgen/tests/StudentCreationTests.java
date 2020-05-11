@@ -5,9 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.services.WorkerService;
 
@@ -90,8 +92,11 @@ String id;
     StudentService studentService = new StudentService();
     StudentData studentClean = studentService.findById(id);
     if (studentClean != null) {
+      FamilyService familyService = new FamilyService();
+      FamilyData familyClean = familyService.findById(studentClean.getFamilyId());
+      familyService.delete(familyClean);
       studentService.delete(studentClean);}
-  }
+     }
 
 
 }
