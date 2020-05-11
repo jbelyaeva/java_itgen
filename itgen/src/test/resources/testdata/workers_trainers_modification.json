@@ -4,6 +4,8 @@
     "lastName": "Ветер_0",
     "roleUi": "trainer",
     "phone": "89032566987",
-    "birthdayUi": "01.01.1983"
+    "birthdayUi": "01.01.1983",
+    "maxSlots": "4",
+    "payBase": "4"
      }
 ]

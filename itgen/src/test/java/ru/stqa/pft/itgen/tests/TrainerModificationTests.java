@@ -55,7 +55,7 @@ public class TrainerModificationTests extends TestBase {
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withGender(2)
-           .withMaxSlots(4)
+            .withMaxSlots(4)
             .withPayBase(5)
             .withLangs(Collections.singletonList(new TrainerData.Langs().withLangs("ru")))
             .withContacts(Collections.singletonList(new TrainerData.Contacts().withType("phone").withVal("1234567899")))

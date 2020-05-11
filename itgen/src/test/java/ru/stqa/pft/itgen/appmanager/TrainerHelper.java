@@ -44,7 +44,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-lastName"), trainerData.getLastName());
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
   //  enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
- //   dropDownList(By.id("profile-gender"), String.valueOf(trainerData.getGender()));
+    dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     click(By.name("skill_1"));
@@ -74,7 +74,7 @@ public class TrainerHelper extends HelperBase {
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     builder.click().perform();
     //
-//    type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
+    type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -83,7 +83,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//input[@value='ru']"));
     click(By.xpath("//input[@value='en']"));
     //
-   // dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
+    dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
     type(By.name("profile-contact-phone"), trainerData.getPhone());
     type(By.name("profile-contact-telegram"), trainerData.getTg());
     type(By.name("profile-contact-viber"), trainerData.getViber());
