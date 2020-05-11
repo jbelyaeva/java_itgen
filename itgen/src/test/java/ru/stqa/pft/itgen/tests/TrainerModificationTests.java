@@ -8,8 +8,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
-import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.model.Workers;
 import ru.stqa.pft.itgen.services.TrainerService;
 
 import java.io.BufferedReader;
@@ -84,6 +82,7 @@ public class TrainerModificationTests extends TestBase {
     TrainerService trainerService = new TrainerService();
     TrainerData trainerClean = trainerService.findById("trainerModify");
     if (trainerClean != null) {
-      trainerService.delete(trainerClean);}
+      trainerService.delete(trainerClean);
+    }
   }
 }

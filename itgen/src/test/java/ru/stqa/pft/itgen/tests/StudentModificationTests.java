@@ -7,7 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
-import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class StudentModificationTests extends TestBase {
 
@@ -49,21 +47,21 @@ public class StudentModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
 
-      FamilyService familyService = new FamilyService();
-      FamilyData family = new FamilyData().withId("studentModify").withTrialBonusOff(false).withTierId("txa")
-              .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
-      familyService.create(family);
+    FamilyService familyService = new FamilyService();
+    FamilyData family = new FamilyData().withId("studentModify").withTrialBonusOff(false).withTierId("txa")
+            .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
+    familyService.create(family);
 
-      StudentService studentService = new StudentService();
-      StudentData student = new StudentData().withId("studentModify").withFirstName("Маша").withLastName("Машина")
-              .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
-              .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-              .withFamilyId("studentModify").withStudyLang("ru").withLocate("ru")
-              .withBirthday(new Date(1556726891000L))
-              .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
-              .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
-              .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
-      studentService.create(student);
+    StudentService studentService = new StudentService();
+    StudentData student = new StudentData().withId("studentModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
+            .withFamilyId("studentModify").withStudyLang("ru").withLocate("ru")
+            .withBirthday(new Date(1556726891000L))
+            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
+            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
+    studentService.create(student);
   }
 
   @Test(dataProvider = "validStudentsFromJson")
@@ -84,7 +82,7 @@ public class StudentModificationTests extends TestBase {
       }
     }
 
-   verifyStudentsListInUI();
+    verifyStudentsListInUI();
   }
 
   @AfterMethod(alwaysRun = true)

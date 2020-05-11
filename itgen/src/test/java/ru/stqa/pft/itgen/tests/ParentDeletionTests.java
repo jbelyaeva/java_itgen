@@ -1,10 +1,12 @@
 package ru.stqa.pft.itgen.tests;
 
-import javafx.scene.Parent;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.FamilyData;
+import ru.stqa.pft.itgen.model.ParentData;
+import ru.stqa.pft.itgen.model.Parents;
+import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.ParentService;
 import ru.stqa.pft.itgen.services.StudentService;

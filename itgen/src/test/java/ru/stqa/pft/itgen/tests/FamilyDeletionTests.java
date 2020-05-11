@@ -40,15 +40,14 @@ public class FamilyDeletionTests extends TestBase {
   public void testFamilyDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Families before = app.db().families();//для проверки, что семьи уменьшились на 1
+    Families before = app.db().families();
     app.student().selectStudentInListUIById("famDeletion");
     app.family().delete();//удаляем выбранного студента
     Families after = app.db().families();
-    assertThat(after.size(), equalTo(before.size() - 1)); //семьи уменьшились на 1
+    assertThat(after.size(), equalTo(before.size() - 1));
     Students users = app.db().familyComposition("famDeletion");
     assertThat(users.size(), equalTo(0));
   }
-
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
@@ -62,6 +61,5 @@ public class FamilyDeletionTests extends TestBase {
     if (studentClean != null) {
       studentService.delete(studentClean);
     }
-
   }
 }

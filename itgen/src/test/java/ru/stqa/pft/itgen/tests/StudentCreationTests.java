@@ -8,10 +8,8 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
-import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
-import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,7 +23,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StudentCreationTests extends TestBase {
-String id;
+  String id;
+
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
     try (BufferedReader reader =
@@ -95,8 +94,7 @@ String id;
       FamilyService familyService = new FamilyService();
       FamilyData familyClean = familyService.findById(studentClean.getFamilyId());
       familyService.delete(familyClean);
-      studentService.delete(studentClean);}
-     }
-
-
+      studentService.delete(studentClean);
+    }
+  }
 }

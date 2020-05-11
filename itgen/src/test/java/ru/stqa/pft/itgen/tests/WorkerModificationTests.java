@@ -64,7 +64,7 @@ public class WorkerModificationTests extends TestBase {
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
     modifydWorker = app.worker().findWorker("workerModify");
-    app.worker().modificationWorker(worker,modifydWorker);
+    app.worker().modificationWorker(worker, modifydWorker);
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());
@@ -77,7 +77,7 @@ public class WorkerModificationTests extends TestBase {
     WorkerService workerService = new WorkerService();
     WorkerData workerClean = workerService.findById("workerModify");
     if (workerClean != null) {
-      workerService.delete(workerClean);}
+      workerService.delete(workerClean);
+    }
   }
-
 }

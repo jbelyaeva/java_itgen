@@ -3,10 +3,8 @@ package ru.stqa.pft.itgen.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
-import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.util.Collections;
@@ -49,6 +47,7 @@ public class WorkerDeletionTests extends TestBase {
     WorkerService workerService = new WorkerService();
     WorkerData workerClean = workerService.findById("workerDelete");
     if (workerClean != null) {
-      workerService.delete(workerClean);}
+      workerService.delete(workerClean);
+    }
   }
 }

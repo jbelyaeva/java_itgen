@@ -6,9 +6,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
-import ru.stqa.pft.itgen.services.FamilyService;
-import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.model.TrainerData;
+import ru.stqa.pft.itgen.model.Trainers;
+import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.model.Workers;
 import ru.stqa.pft.itgen.services.TrainerService;
 import ru.stqa.pft.itgen.services.WorkerService;
 
@@ -24,8 +25,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class WorkerAndTrainerCreationTests extends TestBase {
-String idWorker="null";
-String idTrainer="null";
+  String idWorker = "null";
+  String idTrainer = "null";
+
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
@@ -88,7 +90,6 @@ String idTrainer="null";
     verifyWorkerListInUI();
   }
 
-
   @Test(dataProvider = "validWorkersAdminsFromJson", enabled = false)
   public void testWorkerAdminCreation(WorkerData worker) {
     app.goTo().menuTasks();
@@ -112,17 +113,18 @@ String idTrainer="null";
     assertThat(after, equalTo(before.withAdded(trainerAdd)));
     verifyTrainerListInUI();
   }
+
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
     WorkerData workerClean = workerService.findById(idWorker);
     if (workerClean != null) {
-    workerService.delete(workerClean);
+      workerService.delete(workerClean);
     }
     TrainerService trainerService = new TrainerService();
     TrainerData trainerClean = trainerService.findById(idTrainer);
     if (trainerClean != null) {
-    trainerService.delete(trainerClean);
-  }
+      trainerService.delete(trainerClean);
+    }
   }
 }

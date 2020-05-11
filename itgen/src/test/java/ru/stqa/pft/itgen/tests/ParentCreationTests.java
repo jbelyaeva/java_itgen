@@ -83,7 +83,6 @@ public class ParentCreationTests extends TestBase {
     assertThat(after, equalTo(before.withAdded(parentAdd)));
   }
 
-
   @AfterMethod (alwaysRun = true)
   public void clean() {
     FamilyService familyService = new FamilyService();
@@ -97,5 +96,4 @@ public class ParentCreationTests extends TestBase {
     if (parentClean!=null){
     parentService.delete(parentClean);}
   }
-
 }
