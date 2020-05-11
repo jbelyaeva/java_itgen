@@ -2,17 +2,22 @@ package ru.stqa.pft.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
 import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.services.TrainerService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,34 +48,19 @@ public class TrainerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    Trainers before = app.db().trainers();
-    for (TrainerData trainerData : before) {
-      String id = trainerData.getId();
-      if ((!id.equals("1")) && (!id.equals("2")) && (!id.equals("3")) && (!id.equals("4")) && (!id.equals("5"))
-              && (!id.equals("6")) && (!id.equals("7")) && (!id.equals("8")) && (!id.equals("9")) && (!id.equals("10"))
-              && (!id.equals("11")) && (!id.equals("12")) && (!id.equals("13")) && (!id.equals("14"))
-              && (!id.equals("15")) && (!id.equals("16")) && (!id.equals("17")) && (!id.equals("18"))
-              && (!id.equals("19")) && (!id.equals("20"))) {
-        modifyTrainer = trainerData;
-        a = 1;
-        break;
-      }
-    }
-    if (a == 0) {
-      app.goTo().menuTasks();
-      app.goTo().menuWorkers();
-     // app.trainer().createFirstTrainer(new WorkerData().withFirstName("Маша").withLastName("Машина").withRole("trainer")
-      //        .withPhone("8962988888888"));
-      Trainers beforeNew = app.db().trainers();
-      String url = app.trainer().getURL();
-      String id = app.trainer().getId(url);
-      //найти в списке ДО родителя с таким id
-      for (TrainerData trainerData : beforeNew)
-        if (trainerData.getId().equals(id)) {
-          modifyTrainer = trainerData;
-          return;
-        }
-    }
+    TrainerService trainerService = new TrainerService();
+    TrainerData trainer = new TrainerData().withId("trainerModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Collections.singletonList(new TrainerData.Roles().withRoles("trainer")))
+            .withCountry("AL").withTimeZone("Europe/Minsk")
+            .withLocate("ru")
+            .withBirthday(new Date(1556726891000L))
+            .withGender(2)
+           .withMaxSlots(4)
+            .withPayBase(5)
+            .withLangs(Collections.singletonList(new TrainerData.Langs().withLangs("ru")))
+            .withContacts(Collections.singletonList(new TrainerData.Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new TrainerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
+    trainerService.create(trainer);
   }
 
   @Test(dataProvider = "validWorkersTrainersFromJson")
@@ -78,6 +68,7 @@ public class TrainerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
+    modifyTrainer = app.trainer().findTrainer("trainerModify");
     app.trainer().selectTrainerById(modifyTrainer);
     app.trainer().modify(trainer);
     Trainers after = app.db().trainers();
@@ -85,5 +76,14 @@ public class TrainerModificationTests extends TestBase {
     TrainerData trainerAdd = trainer.withId(modifyTrainer.getId());
     assertThat(after, equalTo(before.without(modifyTrainer).withAdded(trainerAdd)));
     verifyTrainerListInUI();
+
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    TrainerService trainerService = new TrainerService();
+    TrainerData trainerClean = trainerService.findById("trainerModify");
+    if (trainerClean != null) {
+      trainerService.delete(trainerClean);}
   }
 }

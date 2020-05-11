@@ -2,8 +2,8 @@
   {
     "firstName": "Ветрин_0",
     "lastName": "Ветер_0",
-    "role": "trainer",
+    "roleUi": "trainer",
     "phone": "89032566987",
     "birthdayUi": "01.01.1983"
-  }
+     }
 ]

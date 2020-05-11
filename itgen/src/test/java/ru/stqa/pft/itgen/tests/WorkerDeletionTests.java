@@ -21,7 +21,7 @@ public class WorkerDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     WorkerService workerService = new WorkerService();
-    WorkerData student = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
+    WorkerData worker = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
             .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
@@ -29,7 +29,7 @@ public class WorkerDeletionTests extends TestBase {
             .withLangs(Collections.singletonList(new WorkerData.Langs().withLangs("ru")))
             .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
             .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
-    workerService.create(student);
+    workerService.create(worker);
   }
 
   @Test

@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
+import ru.stqa.pft.itgen.services.TrainerService;
+import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +43,8 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
-    enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
-    dropDownList(By.id("profile-gender"), trainerData.getGender());
+  //  enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
+ //   dropDownList(By.id("profile-gender"), String.valueOf(trainerData.getGender()));
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     click(By.name("skill_1"));
@@ -72,7 +74,7 @@ public class TrainerHelper extends HelperBase {
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     builder.click().perform();
     //
-    type(By.xpath("//input[@name='profile-maxSlots']"), trainerData.getMaxSlots());
+//    type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -81,7 +83,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//input[@value='ru']"));
     click(By.xpath("//input[@value='en']"));
     //
-    dropDownList(By.id("profile-pay-base"), trainerData.getPayBase());
+   // dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
     type(By.name("profile-contact-phone"), trainerData.getPhone());
     type(By.name("profile-contact-telegram"), trainerData.getTg());
     type(By.name("profile-contact-viber"), trainerData.getViber());
@@ -113,7 +115,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-lastName"), trainerData.getLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), trainerData.getPhone());
-    dropDownList(By.name("role"), trainerData.getRole());
+    dropDownList(By.name("role"), trainerData.getRoleUi());
   }
   public void bntCreation() {
     click(By.xpath("//button[@class='btn btn-primary btn-create']"));
@@ -181,6 +183,13 @@ public class TrainerHelper extends HelperBase {
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
   }
+
+  public TrainerData findTrainer(String id){
+    TrainerService trainerService = new TrainerService();
+    TrainerData trainerClean = trainerService.findById(id);
+    return trainerClean;
+  }
+
   public void modify(TrainerData trainer) {
     bntModifyTrainer();
     modifiTrainerForm(trainer);

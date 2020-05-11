@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.*;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TrainerService;
 import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
@@ -116,6 +117,12 @@ String idTrainer;
     WorkerService workerService = new WorkerService();
     WorkerData workerClean = workerService.findById("idWorker");
     if (workerClean != null) {
-    workerService.delete(workerClean);}
+    workerService.delete(workerClean);
+    }
+    TrainerService trainerService = new TrainerService();
+    TrainerData trainerClean = trainerService.findById("idTrainer");
+    if (trainerClean != null) {
+    trainerService.delete(trainerClean);
+  }
   }
 }
