@@ -15,7 +15,7 @@ public class DbConntctionTest {
 
   @BeforeMethod
   public static void setUpEntityManagerFactory() {
-    entityManagerFactory = Persistence.createEntityManagerFactory("connection");
+    entityManagerFactory = Persistence.createEntityManagerFactory("ogm-mongoDB");
   }
 
   @Test

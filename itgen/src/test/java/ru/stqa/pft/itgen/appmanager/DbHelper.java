@@ -74,5 +74,14 @@ public class DbHelper {
     entityManager.close();
     return new Trainers(trainers);
   }
+  public Leads leads() {
+    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "from LeadData";
+    List<LeadData> leads = entityManager.createQuery(query, LeadData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Leads(leads);
+  }
 
 }

@@ -28,6 +28,7 @@ public class ApplicationManager {
   private FamilyHelper familyHelper;
   private ParentHelper parentHelper;
   private WorkerHelper workerHelper;
+  private LeadHelper leadHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private String browser;
@@ -65,6 +66,7 @@ public class ApplicationManager {
     parentHelper = new ParentHelper(wd);
     familyHelper = new FamilyHelper(wd);
     trainerHelper = new TrainerHelper(wd);
+    leadHelper=new LeadHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
   }
 
@@ -99,6 +101,8 @@ public class ApplicationManager {
   public TrainerHelper trainer() {
     return trainerHelper;
   }
+
+  public LeadHelper lead(){return leadHelper;}
 
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);

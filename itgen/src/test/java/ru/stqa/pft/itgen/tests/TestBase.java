@@ -87,4 +87,17 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
+  public void verifyLeadsListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      app.goTo().menuLeads();
+      Leads dbLeads = app.db().leads();
+      List<LeadData> uiLeads = app.lead().list();
+      assertThat(new HashSet<Object>(uiLeads), equalTo(dbLeads
+              .stream().map((s) -> new LeadData()
+                      .withId(s.getId())
+                      .withFirstName(s.getFirstname())
+                      .withLastName(s.getLastname()))
+              .collect(Collectors.toSet())));
+    }
+  }
 }
