@@ -56,16 +56,39 @@ public class WorkerDataGenerator extends TestBase {
       writer.write(json);
     }
   }
-
+  /**
+   * Инструкция:
+   * генератор настроен на создание данных для тестов на модификацию.
+   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * gender -- 2,
+   * country -- "BY",
+   * city -- "Минск",
+   * timeZone -- "Europe/Minsk",
+   * locate -- "ru"
+   * */
   private List<WorkerData> generateWorkers(int count) {
     List<WorkerData> workers = new ArrayList<WorkerData>();
     for (int i = 0; i < count; i++) {
       workers.add(new WorkerData()
               .withFirstName(String.format("Алеша-%s", i))
               .withLastName(String.format("Зайцев-%s", i))
-              .withEmailUI(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
-              .withPhone(String.format("89032566987", i))
-             .withRoleUi(String.format("Сотрудник", i)));
+       //       .withRoleUi(String.format("employee", i))  // при создании сотрудника раскоментить
+              .withStartWorkUi(String.format("01.01.1998", i))
+              .withBirthdayUi(String.format("25.03.1979", i))
+              .withGender(Integer.valueOf(String.format("2", i)))
+              .withCountry(String.format("AL", i))
+              .withCity(String.format("Сватково %s", i))
+              .withTimeZone(String.format("Pacific/Honolulu", i))
+              .withLocate(String.format("ru", i))
+              .withPhone(String.format("11111111111", i))
+              .withTelegram(String.format("tg %s", i))
+              .withViber(String.format("22222222222", i))
+              .withSkype(String.format("sk %s", i))
+              .withWhatsapp(String.format("33333333333", i))
+              .withFb(String.format("fb %s", i))
+              .withVk(String.format("vk %s", i))
+              .withOk(String.format("ok %s", i))
+              .withInst(String.format("inst %s", i)));
     }
     return workers;
   }
