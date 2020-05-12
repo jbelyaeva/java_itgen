@@ -187,3 +187,26 @@ testWorkers.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 //
+
+task testLeads(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-leads.xml'
+    }
+    if(project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if(project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+
+testLeads.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
