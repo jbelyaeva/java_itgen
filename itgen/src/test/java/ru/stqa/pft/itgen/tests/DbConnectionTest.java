@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class DbConntctionTest {
+public class DbConnectionTest {
   private static EntityManagerFactory entityManagerFactory;
 
   @BeforeMethod
@@ -28,12 +28,12 @@ public class DbConntctionTest {
     /* JP-QL запрос */
     String query1 = "from StudentData";
     String query2 = "select h from StudentData h where firstname = 'Настя'";
-//        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
+        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
 
     /* нативный запрос */
     String query3 = "{ $query : { roles : 'child' } }";
     String query4 = "{ $or : [{ roles : 'child' }, {roles: 'parent'}]}"; // выводит всех учеников и родителей
-    List<StudentData> result = entityManager.createNativeQuery(query4, StudentData.class).getResultList();
+//    List<StudentData> result = entityManager.createNativeQuery(query4, StudentData.class).getResultList();
 
     entityManager.getTransaction().commit();
     entityManager.close();
