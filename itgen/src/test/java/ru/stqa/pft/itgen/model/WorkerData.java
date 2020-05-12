@@ -3,7 +3,6 @@ package ru.stqa.pft.itgen.model;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -135,8 +134,7 @@ public class WorkerData {
   private String birthDayUi;
 
   @Expose
-  @Transient
-  private String gender;
+  private Integer gender;
 
   @Expose
   private String country;
@@ -145,6 +143,7 @@ public class WorkerData {
   private String city;
 
   @Expose
+  @Column(name = "tz")
   private String timeZone;
 
   @Expose
@@ -200,7 +199,7 @@ public class WorkerData {
   private String whatsapp;
 
   @Expose
-  private String tg;
+  private String telegram;
 
   @Expose
   private String fb;
@@ -276,7 +275,7 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withGender(String gender) {
+  public WorkerData withGender(Integer gender) {
     this.gender = gender;
     return this;
   }
@@ -326,8 +325,8 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withTg(String tg) {
-    this.tg = tg;
+  public WorkerData withTelegram(String telegram) {
+    this.telegram = telegram;
     return this;
   }
 
@@ -401,7 +400,7 @@ public class WorkerData {
     return birthDayUi;
   }
 
-  public String getGender() {
+  public Integer getGender() {
     return gender;
   }
 
@@ -441,8 +440,8 @@ public class WorkerData {
     return whatsapp;
   }
 
-  public String getTg() {
-    return tg;
+  public String getTelegramg() {
+    return telegram;
   }
 
   public String getFb() {
@@ -469,6 +468,13 @@ public class WorkerData {
             "id='" + id + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", startDayUi='" + startDayUi + '\'' +
+            ", birthDayUi='" + birthDayUi + '\'' +
+            ", gender=" + gender +
+            ", country='" + country + '\'' +
+            ", city='" + city + '\'' +
+            ", timeZone='" + timeZone + '\'' +
+            ", locate='" + locate + '\'' +
             '}';
   }
 
@@ -479,12 +485,16 @@ public class WorkerData {
     WorkerData that = (WorkerData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName);
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(gender, that.gender) &&
+            Objects.equals(country, that.country) &&
+            Objects.equals(city, that.city) &&
+            Objects.equals(timeZone, that.timeZone) &&
+            Objects.equals(locate, that.locate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(id, firstName, lastName, gender, country, city, timeZone, locate);
   }
-
 }

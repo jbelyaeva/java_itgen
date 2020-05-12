@@ -2,10 +2,26 @@
   {
     "firstName": "Ветрин_0",
     "lastName": "Ветер_0",
-    "roleUi": "trainer",
-    "phone": "89032566987",
-    "birthdayUi": "01.01.1983",
-    "maxSlots": "4",
-    "payBase": "4"
-     }
+    "startWorkUi": "25.10.1980",
+    "birthdayUi": "16.01.1971",
+    "gender": 2,
+    "maxSlots": 2,
+    "country": "AM",
+    "city": "Раубичи",
+    "timeZone": "America/Lima",
+    "locate": "ru",
+    "payBase": 4,
+    "phone": "89292568795",
+    "skype": "sk 0",
+    "c2d": "http:/0",
+    "viber": "55555555555",
+    "whatsapp": "66666666666",
+    "telegram": "tg 1",
+    "fb": "fb 1",
+    "vk": "vk 1",
+    "ok": "ok 1",
+    "inst": "inst 1",
+    "note": "Привет 777",
+    "info": "Лучший тренер"
+  }
 ]

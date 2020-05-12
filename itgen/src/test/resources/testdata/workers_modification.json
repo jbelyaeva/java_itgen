@@ -2,8 +2,22 @@
   {
     "firstName": "Вася_0",
     "lastName": "Васечкин_0",
-    "gender": 2,
+    "startDayUi": "05.12.1997",
     "birthDayUi": "01.01.1900",
-    "locate": "ru"
+    "gender": 2,
+    "country": "AM",
+    "city": "Сватково 0",
+    "timeZone": "America/Lima",
+    "locate": "ru",
+    "phone": "44444444444",
+    "skype": "sk 0",
+    "c2d": "http:/0",
+    "viber": "55555555555",
+    "whatsapp": "66666666666",
+    "telegram": "tg 1",
+    "fb": "fb 1",
+    "vk": "vk 1",
+    "ok": "ok 1",
+    "inst": "inst 1"
   }
 ]

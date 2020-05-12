@@ -3,6 +3,11 @@
     "firstName": "Вася_0",
     "lastName": "Васечкин_0",
     "roleUi": "employee",
-    "phone": "89032566987"
+    "phone": "89032566987",
+    "gender": 2,
+    "country": "BY",
+    "city": "Минск",
+    "timeZone": "Europe/Minsk",
+    "locate": "ru"
   }
 ]

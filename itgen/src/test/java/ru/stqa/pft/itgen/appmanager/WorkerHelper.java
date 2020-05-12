@@ -68,13 +68,13 @@ public class WorkerHelper extends HelperBase {
     type(By.name("profile-lastName"), workerData.getLastName());
     enterADate(By.name("profile-startWorkAt"), workerData.getStartDayUi());
     enterADate(By.name("profile-birthday"), workerData.getBirthDayUi());
-    dropDownList(By.id("profile-gender"), workerData.getGender());
+    dropDownList_Integer(By.id("profile-gender"), workerData.getGender());
     dropDownList(By.id("profile-country"), workerData.getCountry());
     type(By.name("profile-city"), workerData.getCity());
     dropDownList(By.id("profile-timezone"), workerData.getTimeZone());
     dropDownList(By.id("profile-locale"), workerData.getLocate());
     type(By.name("profile-contact-phone"), workerData.getPhone());
-    type(By.name("profile-contact-telegram"), workerData.getTg());
+    type(By.name("profile-contact-telegram"), workerData.getTelegramg());
     type(By.name("profile-contact-viber"), workerData.getViber());
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.name("profile-contact-skype"), workerData.getSkype());

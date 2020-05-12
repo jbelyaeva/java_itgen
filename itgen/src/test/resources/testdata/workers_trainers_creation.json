@@ -3,6 +3,15 @@
     "firstName": "Ветрин_0",
     "lastName": "Ветер_0",
     "roleUi": "trainer",
-    "phone": "89032566987"
+    "phone": "89032566987",
+    "gender": 2,
+    "maxSlots": 1,
+    "country": "BY",
+    "city": "Минск",
+    "timeZone": "Europe/Minsk",
+    "locate": "ru",
+    "payBase": 5,
+    "note": null,
+    "info": null
   }
 ]

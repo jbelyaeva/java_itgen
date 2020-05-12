@@ -14,10 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -48,10 +45,12 @@ public class TrainerModificationTests extends TestBase {
   public void ensurePreconditions() {
     TrainerService trainerService = new TrainerService();
     TrainerData trainer = new TrainerData().withId("trainerModify").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new TrainerData.Roles().withRoles("trainer")))
+            .withRoles(Arrays.asList(new TrainerData.Roles().withRoles("trainer"), new TrainerData.Roles().withRoles("employee")))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
+            .withStartWork(new Date())
+            .withCreatedAt(new Date())
             .withGender(2)
             .withMaxSlots(4)
             .withPayBase(5)

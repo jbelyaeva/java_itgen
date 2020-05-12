@@ -24,10 +24,14 @@ public class TrainerData {
   private String lastName;
 
   @Expose
-  @Transient
-  @Column(name = "startWork")
+  @Column(name = "startWorkAt")
   @Temporal(TemporalType.DATE)
   private Date startWork;
+
+  @Expose
+  @Column(name = "createdAt")
+  @Temporal(TemporalType.DATE)
+  private Date createdAt;
 
   @Expose
   private String startWorkUi;
@@ -209,7 +213,7 @@ public class TrainerData {
   private String whatsapp;
 
   @Expose
-  private String tg;
+  private String telegram;
 
   @Expose
   private String fb;
@@ -225,6 +229,9 @@ public class TrainerData {
 
   @Expose
   private String note;
+
+  @Expose
+  private String info;
 
   /* setters */
 
@@ -254,6 +261,11 @@ public class TrainerData {
 
   public TrainerData withStartWork(Date startWork) {
     this.startWork = startWork;
+    return this;
+  }
+
+  public TrainerData withCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
@@ -347,8 +359,8 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withTg(String tg) {
-    this.tg = tg;
+  public TrainerData withTelegram(String telegram) {
+    this.telegram = telegram;
     return this;
   }
 
@@ -377,6 +389,11 @@ public class TrainerData {
     return this;
   }
 
+  public TrainerData withInfo(String info) {
+    this.info = info;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -393,6 +410,10 @@ public class TrainerData {
 
   public Date getStartWork() {
     return startWork;
+  }
+
+  public Date getCreatedAt() {
+    return createdAt;
   }
 
   public String getStartWorkUi() {
@@ -476,8 +497,8 @@ public class TrainerData {
     return whatsapp;
   }
 
-  public String getTg() {
-    return tg;
+  public String getTelegram() {
+    return telegram;
   }
 
   public String getFb() {
@@ -500,6 +521,11 @@ public class TrainerData {
     return note;
   }
 
+  public String getInfo() {
+    return info;
+  }
+
+
   /* toString(), hashCode() & equals() */
 
   @Override
@@ -508,6 +534,16 @@ public class TrainerData {
             "id='" + id + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
+            ", birthdayUi='" + birthdayUi + '\'' +
+            ", gender=" + gender +
+            ", maxSlots=" + maxSlots +
+            ", country='" + country + '\'' +
+            ", timeZone='" + timeZone + '\'' +
+            ", locate='" + locate + '\'' +
+            ", city='" + city + '\'' +
+            ", payBase=" + payBase +
+            ", note='" + note + '\'' +
+            ", info='" + info + '\'' +
             '}';
   }
 
@@ -518,12 +554,20 @@ public class TrainerData {
     TrainerData that = (TrainerData) o;
     return Objects.equals(id, that.id) &&
             Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName);
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(gender, that.gender) &&
+            Objects.equals(maxSlots, that.maxSlots) &&
+            Objects.equals(country, that.country) &&
+            Objects.equals(timeZone, that.timeZone) &&
+            Objects.equals(locate, that.locate) &&
+            Objects.equals(city, that.city) &&
+            Objects.equals(payBase, that.payBase) &&
+            Objects.equals(note, that.note) &&
+            Objects.equals(info, that.info);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName);
+    return Objects.hash(id, firstName, lastName, gender, maxSlots, country, timeZone, locate, city, payBase, note, info);
   }
-
 }

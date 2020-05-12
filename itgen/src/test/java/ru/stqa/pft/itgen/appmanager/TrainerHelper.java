@@ -41,7 +41,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
-    //  enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
+    enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
@@ -83,7 +83,7 @@ public class TrainerHelper extends HelperBase {
     //
     dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
     type(By.name("profile-contact-phone"), trainerData.getPhone());
-    type(By.name("profile-contact-telegram"), trainerData.getTg());
+    type(By.name("profile-contact-telegram"), trainerData.getTelegram());
     type(By.name("profile-contact-viber"), trainerData.getViber());
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.name("profile-contact-skype"), trainerData.getSkype());
@@ -93,6 +93,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-contact-ok"), trainerData.getOk());
     type(By.name("profile-contact-instagram"), trainerData.getInst());
     type(By.name("profile-note"), trainerData.getNote());
+    type(By.name("profile-info"), trainerData.getInfo());
   }
 
   public int getTrainerCount() {
