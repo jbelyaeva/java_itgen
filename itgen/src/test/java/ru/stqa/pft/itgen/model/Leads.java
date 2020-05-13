@@ -27,7 +27,7 @@ public class Leads extends ForwardingSet<LeadData> {
     return leads;
   }
 
- public Leads without (LeadData lead){//объекта, из которго удалена группа
+  public Leads without(LeadData lead) {//объекта, из которго удалена группа
     Leads leads = new Leads(this);
     leads.remove(lead);
     return leads;

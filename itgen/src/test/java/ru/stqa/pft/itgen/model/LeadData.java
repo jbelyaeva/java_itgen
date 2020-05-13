@@ -1,12 +1,10 @@
 package ru.stqa.pft.itgen.model;
 
 
-
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -194,7 +192,7 @@ public class LeadData {
     return this;
   }
 
-    public LeadData withSkype(String skype) {
+  public LeadData withSkype(String skype) {
     this.skype = skype;
     return this;
   }
@@ -348,12 +346,12 @@ public class LeadData {
             Objects.equals(firstname, leadData.firstname) &&
             Objects.equals(lastname, leadData.lastname) &&
             Objects.equals(country, leadData.country) &&
-           Objects.equals(timezone, leadData.timezone) &&
-           Objects.equals(locate, leadData.locate);
+            Objects.equals(timezone, leadData.timezone) &&
+            Objects.equals(locate, leadData.locate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname,country,timezone,locate);
+    return Objects.hash(id, firstname, lastname, country, timezone, locate);
   }
 }
