@@ -37,9 +37,9 @@ String id;
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<LeadData> parents = gson.fromJson(json, new TypeToken<List<LeadData>>() {
+      List<LeadData> leads = gson.fromJson(json, new TypeToken<List<LeadData>>() {
       }.getType()); // List<ParentData>.class
-      return parents.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+      return leads.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
     }
   }
 

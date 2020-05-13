@@ -1,0 +1,21 @@
+[
+  {
+    "firstname": "ЛидНовый",
+    "lastname": "Лидов",
+    "roleUi": "child",
+    "country": "RU",
+    "city": "Пересвет",
+    "timezone": "Pacific/Honolulu",
+    "locate": "ru",
+    "phone": "222222222222",
+    "skype": "sk 3",
+    "c2d": "http:/3",
+    "viber": "333333333333333",
+    "whatsapp": "44444444444",
+    "telegram": "tg 5",
+    "fb": "fb 5",
+    "vk": "vk 5",
+    "ok": "ok 5",
+    "inst": "inst 5"
+  }
+  ]
