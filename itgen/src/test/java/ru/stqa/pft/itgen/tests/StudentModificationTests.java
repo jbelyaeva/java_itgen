@@ -73,7 +73,6 @@ public class StudentModificationTests extends TestBase {
     app.student().modify(student);
     Students after = app.db().students();
     assertThat(after.size(), equalTo(before.size()));
-
     for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
       if (studentModify.getId().equals("studentModify")) {
         StudentData studentAdd = student.withId(studentModify.getId());
@@ -81,7 +80,6 @@ public class StudentModificationTests extends TestBase {
         return;
       }
     }
-
     verifyStudentsListInUI();
   }
 

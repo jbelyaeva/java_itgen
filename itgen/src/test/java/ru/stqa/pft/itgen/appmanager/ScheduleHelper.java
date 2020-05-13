@@ -1,6 +1,7 @@
 package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -22,12 +23,18 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//input[@type='checkbox']"));
   }
 
-  public void selectTime() {
-   // click(By.xpath("//div[contains(@class,'select-toggle-btn')]"));
-  //  dropDownList(By.xpath("//div[@class='dropdown-select-item']"),"22:00-00:00");
-  }
+  public void selectTime(String time) {
+    click(By.xpath("//div[contains(@class,'select-toggle-btn')]"));
+    WebElement getTime = wd.findElement(By.xpath("//div[contains(text(),'"+time+"')]"));
+    ((JavascriptExecutor) wd).executeScript("arguments[0].scrollIntoView();", getTime);
+    getTime.click();
+   }
 
-  public void selectTrainer() {
+  public void selectTrainer(String trainer) {
+    click(By.xpath("//*[@id=\"__blaze-root\"]/div[1]/div[2]/main/div/div/div[2]/div[1]/div[4]/div/div"));
+    WebElement getTrainer = wd.findElement(By.xpath("//div[contains(text(),'"+trainer+"')]"));
+    ((JavascriptExecutor) wd).executeScript("arguments[0].scrollIntoView();", getTrainer);
+    getTrainer.click();
   }
 
   public void selectScype() {
@@ -37,11 +44,11 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'btn-primary')]"));
   }
 
-  public void createSchedule(){
+  public void createSchedule(String time, String trainer){
    btnCreateSchedule();
    checkBoxConst();
-   selectTime();
-   selectTrainer();
+   selectTime(time);
+   selectTrainer(trainer);
    selectScype();
    btnCreate();
   }

@@ -16,11 +16,10 @@ public class ScheduleCreationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.db().schedules();
-    app.schedule().createSchedule();
+    app.schedule().createSchedule("22:00 - 00:00","Карина");
     Schedules after = app.db().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));
     idSchedule = app.schedule().getIdNewScheduleDB(before, after);
-
     ScheduleData scheduleAdd =  new ScheduleData().withId(idSchedule);
     assertThat(after, equalTo(before.withAdded(scheduleAdd)));
   }
