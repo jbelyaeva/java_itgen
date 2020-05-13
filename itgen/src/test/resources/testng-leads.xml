@@ -5,6 +5,7 @@
         <classes>
             <class name="ru.stqa.pft.itgen.tests.LeadCreationTest" />
             <class name="ru.stqa.pft.itgen.tests.LeadDeletionTest" />
+            <class name="ru.stqa.pft.itgen.tests.LeadModificationTest" />
         </classes>
     </test>
 </suite>
