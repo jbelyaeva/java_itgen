@@ -8,9 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.LeadData;
 import ru.stqa.pft.itgen.model.Leads;
-import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +25,10 @@ public class LeadHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'create')]"));
   }
 
+  public void btnSaveLead() {
+    click(By.xpath("//button[contains(@class,'save')]"));
+  }
+
   public void btnLotPoint() {
     click(By.xpath("//button[contains(@class,'dropdown')]"));
   }
@@ -38,6 +39,9 @@ public class LeadHelper extends HelperBase {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+  }
+  public void btnPencil(){
+    click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void fillLeadForm(LeadData leadData) {
@@ -61,6 +65,28 @@ public class LeadHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), leadData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), leadData.getInst());
   }
+  public void modifyLeadForm(LeadData leadData) {
+    type(By.cssSelector("input[name=\"profile-firstName\"]"), leadData.getFirstname());
+    type(By.cssSelector("input[name=\"profile-lastName\"]"), leadData.getLastname());
+    dropDownList(By.id("lead-role"), leadData.getRoleUi());
+    dropDownList(By.cssSelector("#profile-country"), leadData.getCountry());
+    type(By.cssSelector("input[name=\"profile-city\"]"), leadData.getCity());
+    dropDownList(By.cssSelector("#profile-timezone"), leadData.getTimezone());
+    dropDownList(By.cssSelector("#profile-locale"), leadData.getLocate());
+    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), leadData.getPhone());
+    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "julja+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), leadData.getTelegram());
+    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), leadData.getViber());
+    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), leadData.getC2d());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), leadData.getSkype());
+    type(By.cssSelector("input[name=\"profile-contact-whatsapp\"]"), leadData.getWhatsapp());
+    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), leadData.getFb());
+    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), leadData.getVk());
+    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), leadData.getOk());
+    type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), leadData.getInst());
+  }
+
 
   public void selectLeadInListUIById(String id) {
       //находим пагинатор
@@ -119,24 +145,26 @@ public class LeadHelper extends HelperBase {
     }
   }
   public String getIdNewLeadDB(Leads before, Leads after) {
-    int a = 0;
+    boolean a = true;
     String getIdAfter = "";
     for (LeadData lead : after) {
       getIdAfter = lead.getId();
       for (LeadData lead_before : before) {
         String getIdBefore = lead_before.getId();
         if (getIdAfter.equals(getIdBefore)) {
-          a = 1;
+          a = false;
           break;
-        } else {
-          a = 2;
         }
       }
-      if (a == 2) {
-        break;
-      }
+      if (a) {break;}
     }
     return getIdAfter;
+  }
+
+  public void modify(LeadData lead) {
+   btnPencil();
+   modifyLeadForm(lead);
+   btnSaveLead();
   }
 
 }

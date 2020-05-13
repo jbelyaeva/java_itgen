@@ -101,8 +101,7 @@ public class HelperBase {
     String id = getIdSplit[4]; //достали id
     return id;
   }
-
-  public void refresh() {
+    public void refresh() {
     wd.navigate().refresh();
   }
 

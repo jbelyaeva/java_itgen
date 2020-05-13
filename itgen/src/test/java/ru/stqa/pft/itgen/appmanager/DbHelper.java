@@ -83,5 +83,13 @@ public class DbHelper {
     entityManager.close();
     return new Leads(leads);
   }
-
+  public Schedules schedules() {
+    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
+    entityManager.getTransaction().begin();
+    String query = "from ScheduleData";
+    List<ScheduleData> schedules = entityManager.createQuery(query, ScheduleData.class).getResultList();
+    entityManager.getTransaction().commit();
+    entityManager.close();
+    return new Schedules(schedules);
+  }
 }
