@@ -7,7 +7,10 @@ import org.testng.ITestContext;
 import org.testng.annotations.*;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
 import ru.stqa.pft.itgen.model.*;
-
+import ru.yandex.qatools.ashot.Screenshot;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -57,6 +60,13 @@ public class TestBase {
                       .withFirstName(s.getFirstname())
                       .withLastName(s.getLastname()))
               .collect(Collectors.toSet())));
+    }
+  }
+
+  public void etalon(String expected, String name, Screenshot actualScreenshot) throws IOException {
+    if (Boolean.getBoolean("etalon")) {
+      File expectedFile = new File(expected + name + ".png"); //закоммитить после создания эталонного снимка
+      ImageIO.write(actualScreenshot.getImage(), "png", expectedFile);//закоммитить после создания эталонного снимка
     }
   }
 
