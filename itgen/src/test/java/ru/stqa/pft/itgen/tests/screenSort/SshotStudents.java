@@ -1,4 +1,5 @@
-package ru.stqa.pft.itgen.tests;
+package ru.stqa.pft.itgen.tests.screenSort;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -8,19 +9,25 @@ import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.tests.TestBase;
+import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Date;
 
 
-public class SshotStudents  extends TestBase {
+public class SshotStudents extends TestBase {
   public WebDriver wd;
+
   @BeforeMethod
   public void ensurePreconditions() {
 
@@ -40,52 +47,25 @@ public class SshotStudents  extends TestBase {
             .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
     studentService.create(student);
   }
+
   @Test
   public void testSshotStudents() throws AWTException, IOException {
 
-   String expected="./src/test/testsScreenshot/expected/";
-   String actual="./src/test/testsScreenshot/actual/";
-   String markedImages="./src/test/testsScreenshot/markedImages/";
-   String name="students_RU_Chrome";
+    String expected = "./src/test/testsScreenshot/expected/";
+    String actual = "./src/test/testsScreenshot/actual/";
+    String markedImages = "./src/test/testsScreenshot/markedImages/";
+    String name = "students_RU_Chrome";
+    String locatorFlag="//body//th[1]";
 
     app.goTo().menuTasks();
     app.goTo().menuStudents();
+    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag);
 
-   //уводим курсор в верхний левый угол экрана
-    Robot bot = new Robot();
-    bot.mouseMove(0, 0);
-    //получаем
-    Screenshot actualScreenshot=app.getScreenShert("//body//th[1]");//взять скриншот после появления элемента с локатором
-    //сохраняем
-    etalon( expected,name,actualScreenshot);
-
-    File actualFile = new File(actual+name+".png");
-    ImageIO.write(actualScreenshot.getImage(), "png", actualFile);
-
-    //берем эталонный снимок
-    Screenshot expectedScreenshot = new Screenshot(ImageIO.read(new File(expected+name+".png")));
-
-    //сравниваем
-    ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
-
-    //результат
-    int rez=diff.getDiffSize();
-    if (rez!=0){
-      File diffFile = new File(markedImages+name+".png");
-      ImageIO.write(diff.getMarkedImage(), "png", diffFile);
-    }
+    //передать имя файла для прикладывания в отчет
     Assert.assertEquals(diff.getDiffSize(), 0);
+  }
 
-    //добавим результат в Allure
-
-  /*   AllureAttachments.attachScreen(expectedFile.getAbsolutePath(), "Marked: "+name);
-    AllureAttachments.attachScreen(actualFile.getAbsolutePath(), "Actual: "+name);*/
-    //AllureAttachments.attachScreen(markedImages, "Differ: "+name);
-    //MyTestListener.getScreenShot(markedImages, "Differ: "+name);
-
-    }
-
-  @AfterMethod(alwaysRun = true)
+   @AfterMethod(alwaysRun = true)
   public void clean() {
     FamilyService familyService = new FamilyService();
     FamilyData familyClean = familyService.findById("studentDelete");

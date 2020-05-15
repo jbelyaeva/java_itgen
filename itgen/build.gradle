@@ -211,9 +211,9 @@ testLeads.doFirst {
 }
 //
 
-task testScreenShorts(type: Test) {
+task testScreenShots(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-screenShorts.xml'
+        suites 'src/test/resources/testng-screenShots.xml'
     }
     if(project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -224,12 +224,13 @@ task testScreenShorts(type: Test) {
     if(project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
+    if(project.hasProperty('etalon')) {
+        systemProperty 'etalon', "${etalon}"
     }
-}
 
-testScreenShorts.doFirst {
+}
+testScreenShots.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
+
 //

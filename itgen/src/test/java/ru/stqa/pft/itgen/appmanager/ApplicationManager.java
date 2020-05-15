@@ -34,6 +34,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private String browser;
   private DbHelper dbHelper;
+  private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
 
   public ApplicationManager(String browser) {
@@ -70,6 +71,7 @@ public class ApplicationManager {
     familyHelper = new FamilyHelper(wd);
     trainerHelper = new TrainerHelper(wd);
     scheduleHelper = new ScheduleHelper(wd);
+    sShotHelper = new SShotHelper(wd);
     leadHelper=new LeadHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
   }
@@ -89,12 +91,17 @@ public class ApplicationManager {
   public DbHelper db() {
     return dbHelper;
   }
+
   public DbHelperStudents dbstudents() {
     return dbHelperStudents;
   }
 
   public StudentHelper student() {
     return studentHelper;
+  }
+
+  public SShotHelper sshot() {
+    return sShotHelper;
   }
 
   public ParentHelper parent() {

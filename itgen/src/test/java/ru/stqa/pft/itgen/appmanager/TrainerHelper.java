@@ -28,6 +28,7 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
+
   public void bntModifyTrainer() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
@@ -35,7 +36,7 @@ public class TrainerHelper extends HelperBase {
   public void btnSaveModify() {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
-  }
+    }
 
   public void modifiTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
