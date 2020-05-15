@@ -78,10 +78,11 @@ public class SshotStudents  extends TestBase {
 
     //добавим результат в Allure
 
-    /* AllureAttachments.attachScreen(expectedFile.getAbsolutePath(), "Expected: "+name);
-    AllureAttachments.attachScreen(actualFile.getAbsolutePath(), "Actual: "+name);
-    AllureAttachments.attachScreen(diffFile.getAbsolutePath(), "Differ: "+name);
-*/
+  /*   AllureAttachments.attachScreen(expectedFile.getAbsolutePath(), "Marked: "+name);
+    AllureAttachments.attachScreen(actualFile.getAbsolutePath(), "Actual: "+name);*/
+    //AllureAttachments.attachScreen(markedImages, "Differ: "+name);
+    //MyTestListener.getScreenShot(markedImages, "Differ: "+name);
+
     }
 
   @AfterMethod(alwaysRun = true)

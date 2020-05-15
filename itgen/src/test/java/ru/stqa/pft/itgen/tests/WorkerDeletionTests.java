@@ -38,6 +38,7 @@ public class WorkerDeletionTests extends TestBase {
     deletedWorker = app.worker().findWorker("workerDelete");
     app.worker().deletionWorker(deletedWorker);
     Workers after = app.db().workers();
+    //assertThat(after.size(),equalTo(before.size()));
     assertThat(after, equalTo(before.without(deletedWorker)));
     verifyWorkerListInUI();
   }

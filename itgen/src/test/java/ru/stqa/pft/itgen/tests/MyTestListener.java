@@ -27,12 +27,12 @@ public class MyTestListener implements ITestListener {
   public void onTestFailure(ITestResult result) {
     ApplicationManager app = (ApplicationManager) result.getTestContext().getAttribute("app");
     saveScreenshot(app.takeScreenshot());
-    //if (resourceName!=""){
-  try {                                       //тоже добавочка для скриншот-тестирования
-      getScreenShot("students_RU_Chrome");
+    try {
+      getScreenShot();
     } catch (IOException e) {
       e.printStackTrace();
-    }}
+    }
+  }
  // }
 
   @Attachment(value = "Page screenshot", type = "image/png")
@@ -41,9 +41,9 @@ public class MyTestListener implements ITestListener {
   }
 
   //прикладывание аттача для скриншот тестирования
- @Attachment()
-  public static byte[] getScreenShot (String resourceName) throws IOException {
-    return Files.readAllBytes(Paths.get("./src/test/testsScreenshot/markedImages/", resourceName));
+ @Attachment(value = "Page screenshot", type = "image/png")
+  public static byte[] getScreenShot () throws IOException {
+  return Files.readAllBytes(Paths.get("C:/Devel/Projects/java_itgen/itgen/src/test/testsScreenshot/markedImages/students_RU_Chrome.png"));
   }
 
   @Override
