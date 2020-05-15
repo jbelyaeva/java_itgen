@@ -7,41 +7,30 @@ import ru.stqa.pft.itgen.appmanager.ApplicationManager;
 import ru.yandex.qatools.allure.Allure;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class MyTestListener implements ITestListener {
+public class MyTestListener extends TestBase implements ITestListener{
+
   @Override
   public void onTestStart(ITestResult result) {
-
   }
 
   @Override
   public void onTestSuccess(ITestResult result) {
-
   }
 
   @Override
   public void onTestFailure(ITestResult result) {
     ApplicationManager app = (ApplicationManager) result.getTestContext().getAttribute("app");
     saveScreenshot(app.takeScreenshot());
-   try {                                       //тоже добавочка для скриншот-тестирования
-      getScreenShot("students_RU_Chrome.png");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   @Attachment(value = "Page screenshot", type = "image/png")
   public byte[] saveScreenshot(byte[] screenShot) {
     return screenShot;
-  }
-
-  //прикладывание аттача для скриншот тестирования
- @Attachment()
-  public static byte[] getScreenShot (String resourceName) throws IOException {
-    return Files.readAllBytes(Paths.get("./src/test/testsScreenshot/markedImages/", resourceName));
   }
 
   @Override

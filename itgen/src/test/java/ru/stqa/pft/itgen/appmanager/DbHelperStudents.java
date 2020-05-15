@@ -7,7 +7,7 @@ import java.util.List;
 
 import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 
-public class DbHelper {
+public class DbHelperStudents {
 
   public Students students() {
     EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
@@ -18,7 +18,7 @@ public class DbHelper {
     entityManager.close();
     return new Students(students);
   }
-
+/*
   public Families families() {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
@@ -38,7 +38,7 @@ public class DbHelper {
     entityManager.close();
     return new Students(family);
   }
-
+*/
   public Parents parents() {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
@@ -49,41 +49,16 @@ public class DbHelper {
     return new Parents(parents);
   }
 
-  public Workers workers() {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
+   public Students studentFiltrPol(int pol) {
+    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
-    String query = "{ $query : { roles : {$nin :['trainer','child','parent']}}}";
-    List<WorkerData> workers = entityManager.createNativeQuery(query, WorkerData.class).getResultList();
+    String query ="{ $and : [{ roles : 'child'}], gender:" + pol + "}";
+    List<StudentData> students = entityManager.createNativeQuery(query, StudentData.class).getResultList();
     entityManager.getTransaction().commit();
     entityManager.close();
-    return new Workers(workers);
+    return new Students(students);
+
+
   }
 
-  public Trainers trainers() {
-    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "{ $query : { roles : 'trainer'} }";
-    List<TrainerData> trainers = entityManager.createNativeQuery(query, TrainerData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    return new Trainers(trainers);
-  }
-  public Leads leads() {
-    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "from LeadData";
-    List<LeadData> leads = entityManager.createQuery(query, LeadData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    return new Leads(leads);
-  }
-  public Schedules schedules() {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "from ScheduleData";
-    List<ScheduleData> schedules = entityManager.createQuery(query, ScheduleData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    return new Schedules(schedules);
-  }
 }

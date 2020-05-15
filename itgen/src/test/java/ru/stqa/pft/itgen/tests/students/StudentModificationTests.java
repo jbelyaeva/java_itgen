@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen.tests;
+package ru.stqa.pft.itgen.tests.students;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -11,6 +11,7 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.tests.TestBase;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -68,15 +69,17 @@ public class StudentModificationTests extends TestBase {
   public void testStudentModification(StudentData student) {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Students before = app.db().students();
+    Students before = app.dbstudents().students();
     app.student().selectStudentInListUIById("studentModify");
     app.student().modify(student);
-    Students after = app.db().students();
+    Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size()));
 
     for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
       if (studentModify.getId().equals("studentModify")) {
         StudentData studentAdd = student.withId(studentModify.getId());
+      //   boolean check=app.student().deepEquals(after,before.without(studentModify).withAdded(studentAdd));
+      //  assertThat(check, equalTo(true));
         assertThat(after, equalTo(before.without(studentModify).withAdded(studentAdd)));
         return;
       }

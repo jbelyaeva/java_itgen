@@ -53,6 +53,16 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'save')]"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
+  public void openFiltr() {
+    click(By.xpath("//button[@class='close']"));
+  }
+  public void changePol(int pol) {
+    dropDownList_Integer(By.xpath("//select[@id='filter-gender']"), pol);
+  }
+
+  public void btnApply() {
+    click(By.xpath("//button[contains(@class,'accept')]"));
+  }
 
   public void fillStudentForm(StudentData studentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), studentData.getFirstname());
@@ -274,6 +284,24 @@ public class StudentHelper extends HelperBase {
       }
     }
   }
+/*
+  public boolean deepEquals(Students after, Students before) {
+     // проверяем размеры коллекций
+    if (after.size() != before.size())
+      return false;
+    // сравниваем каждый i-ый элемент коллекции
+    // с каждым i-ым элементом другой коллекции
+    for (int i = 0; i < room.getStudents().size(); ++i) {
+      // для сравнения студентов можно использовать equals
+      if (!room.getStudents().get(i).equals(
+              this.getStudents().get(i))) {
+        return false;
+      }
+    }
+    // сравниваем остальные поля комнаты
+    return Objects.equals(title, room.title);
+  }
 
+ */
 }
 

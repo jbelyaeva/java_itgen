@@ -1,21 +1,32 @@
-package ru.stqa.pft.itgen.tests;
+package ru.stqa.pft.itgen.tests.screenSort;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
-import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.tests.TestBase;
+import ru.yandex.qatools.allure.annotations.Attachment;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Date;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
-public class StudentDeletionTests extends TestBase {
+public class SshotStudents extends TestBase {
+  public WebDriver wd;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -38,25 +49,23 @@ public class StudentDeletionTests extends TestBase {
   }
 
   @Test
-  public void testStudentDeletion() {
+  public void testSshotStudents() throws AWTException, IOException {
+
+    String expected = "./src/test/testsScreenshot/expected/";
+    String actual = "./src/test/testsScreenshot/actual/";
+    String markedImages = "./src/test/testsScreenshot/markedImages/";
+    String name = "students_RU_Chrome";
+    String locatorFlag="//body//th[1]";
+
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Students before = app.db().students();
-    app.student().selectStudentInListUIById("studentDelete");
-    app.student().delete();
-    Students after = app.db().students();
-    assertThat(after.size(), equalTo(before.size() - 1));
+    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag);
 
-    for (StudentData student : before) { //найти в списке "до" родителя с таким id
-      if (student.getId().equals("studentDelete")) {
-        assertThat(after, equalTo(before.without(student)));
-        return;
-      }
-    }
-    verifyStudentsListInUI();
+    //передать имя файла для прикладывания в отчет
+    Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
-  @AfterMethod(alwaysRun = true)
+   @AfterMethod(alwaysRun = true)
   public void clean() {
     FamilyService familyService = new FamilyService();
     FamilyData familyClean = familyService.findById("studentDelete");

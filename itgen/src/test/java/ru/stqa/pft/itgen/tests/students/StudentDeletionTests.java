@@ -1,26 +1,23 @@
-package ru.stqa.pft.itgen.tests;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
+package ru.stqa.pft.itgen.tests.students;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
-import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import ru.stqa.pft.itgen.tests.TestBase;
+
 import java.util.Collections;
 import java.util.Date;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class SshotStudents  extends TestBase {
-  public WebDriver wd;
+public class StudentDeletionTests extends TestBase {
+
   @BeforeMethod
   public void ensurePreconditions() {
 
@@ -40,49 +37,25 @@ public class SshotStudents  extends TestBase {
             .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
     studentService.create(student);
   }
+
   @Test
-  public void testSshotStudents() throws AWTException, IOException {
-
-   String expected="./src/test/testsScreenshot/expected/";
-   String actual="./src/test/testsScreenshot/actual/";
-   String markedImages="./src/test/testsScreenshot/markedImages/";
-   String name="students_RU_Chrome";
-
+  public void testStudentDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
+    Students before = app.dbstudents().students();
+    app.student().selectStudentInListUIById("studentDelete");
+    app.student().delete();
+    Students after = app.dbstudents().students();
+    assertThat(after.size(), equalTo(before.size() - 1));
 
-   //уводим курсор в верхний левый угол экрана
-    Robot bot = new Robot();
-    bot.mouseMove(0, 0);
-    //получаем
-    Screenshot actualScreenshot=app.getScreenShert("//body//th[1]");//взять скриншот после появления элемента с локатором
-    //сохраняем
-    etalon( expected,name,actualScreenshot);
-
-    File actualFile = new File(actual+name+".png");
-    ImageIO.write(actualScreenshot.getImage(), "png", actualFile);
-
-    //берем эталонный снимок
-    Screenshot expectedScreenshot = new Screenshot(ImageIO.read(new File(expected+name+".png")));
-
-    //сравниваем
-    ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
-
-    //результат
-    int rez=diff.getDiffSize();
-    if (rez!=0){
-      File diffFile = new File(markedImages+name+".png");
-      ImageIO.write(diff.getMarkedImage(), "png", diffFile);
+    for (StudentData student : before) { //найти в списке "до" родителя с таким id
+      if (student.getId().equals("studentDelete")) {
+        assertThat(after, equalTo(before.without(student)));
+        return;
+      }
     }
-    Assert.assertEquals(diff.getDiffSize(), 0);
-
-    //добавим результат в Allure
-
-    /* AllureAttachments.attachScreen(expectedFile.getAbsolutePath(), "Expected: "+name);
-    AllureAttachments.attachScreen(actualFile.getAbsolutePath(), "Actual: "+name);
-    AllureAttachments.attachScreen(diffFile.getAbsolutePath(), "Differ: "+name);
-*/
-    }
+    verifyStudentsListInUI();
+  }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
