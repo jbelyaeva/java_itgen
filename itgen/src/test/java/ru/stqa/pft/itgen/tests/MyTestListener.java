@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MyTestListener implements ITestListener {
+  String resourceName="";
   @Override
   public void onTestStart(ITestResult result) {
 
@@ -26,12 +27,13 @@ public class MyTestListener implements ITestListener {
   public void onTestFailure(ITestResult result) {
     ApplicationManager app = (ApplicationManager) result.getTestContext().getAttribute("app");
     saveScreenshot(app.takeScreenshot());
-   try {                                       //тоже добавочка для скриншот-тестирования
-      getScreenShot("students_RU_Chrome.png");
+    //if (resourceName!=""){
+  try {                                       //тоже добавочка для скриншот-тестирования
+      getScreenShot("students_RU_Chrome");
     } catch (IOException e) {
       e.printStackTrace();
-    }
-  }
+    }}
+ // }
 
   @Attachment(value = "Page screenshot", type = "image/png")
   public byte[] saveScreenshot(byte[] screenShot) {

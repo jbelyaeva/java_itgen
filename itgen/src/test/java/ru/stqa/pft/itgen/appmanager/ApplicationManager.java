@@ -34,6 +34,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private String browser;
   private DbHelper dbHelper;
+  private DbHelperStudents dbHelperStudents;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -44,6 +45,7 @@ public class ApplicationManager {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     dbHelper = new DbHelper();
+    dbHelperStudents = new DbHelperStudents();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -86,6 +88,9 @@ public class ApplicationManager {
 
   public DbHelper db() {
     return dbHelper;
+  }
+  public DbHelperStudents dbstudents() {
+    return dbHelperStudents;
   }
 
   public StudentHelper student() {

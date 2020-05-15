@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen.tests;
+package ru.stqa.pft.itgen.tests.students;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -8,6 +8,7 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.tests.TestBase;
 
 import java.util.Collections;
 import java.util.Date;
@@ -41,10 +42,10 @@ public class StudentDeletionTests extends TestBase {
   public void testStudentDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Students before = app.db().students();
+    Students before = app.dbstudents().students();
     app.student().selectStudentInListUIById("studentDelete");
     app.student().delete();
-    Students after = app.db().students();
+    Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() - 1));
 
     for (StudentData student : before) { //найти в списке "до" родителя с таким id
