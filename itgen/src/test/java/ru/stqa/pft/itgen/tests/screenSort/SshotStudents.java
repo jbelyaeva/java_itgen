@@ -1,5 +1,6 @@
 package ru.stqa.pft.itgen.tests.screenSort;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -23,6 +24,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SshotStudents extends TestBase {
@@ -56,10 +59,13 @@ public class SshotStudents extends TestBase {
     String markedImages = "./src/test/testsScreenshot/markedImages/";
     String name = "students_RU_Chrome";
     String locatorFlag="//body//th[1]";
-
+   // String locatorIgnor="//a[contains(@href, '/tasks')]";
+    Set<By> bySet = new HashSet<>();
+    bySet.add(By.xpath("//a[contains(@href, '/tasks')]"));
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag);
+    String locatorIgnor="";
+    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag, locatorIgnor);
 
     //передать имя файла для прикладывания в отчет
     Assert.assertEquals(diff.getDiffSize(), 0);

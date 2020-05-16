@@ -1,5 +1,6 @@
 package ru.stqa.pft.itgen.tests.screenSort;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -23,6 +24,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SshotFamily extends TestBase {
@@ -57,13 +60,13 @@ public class SshotFamily extends TestBase {
     String markedImages = "./src/test/testsScreenshot/markedImages/";
     String name = "families_RU_Chrome";
     String locatorFlag="//div[@class='header']";
-
-    app.goTo().menuStudents();
+    String locatorIgnor="//span[@class='user-time']";
     app.goTo().refresh();
+    app.goTo().menuStudents();
     app.student().selectStudentInListUIById("studentAshot");
     app.family().btnFamily();
 
-    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag);
+    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag,locatorIgnor);
 
     Assert.assertEquals(diff.getDiffSize(), 0);
   }

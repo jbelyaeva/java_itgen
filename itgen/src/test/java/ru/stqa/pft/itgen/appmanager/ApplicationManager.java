@@ -126,13 +126,4 @@ public class ApplicationManager {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
 
-  public Screenshot getScreenShert(String locator) {
-    Screenshot actualScreenshot;
-    // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
-    WebDriverWait wait = new WebDriverWait(wd, 5);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-    return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
-  }
-
-
-}
+ }

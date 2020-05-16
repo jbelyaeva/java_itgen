@@ -1,6 +1,7 @@
 package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +13,9 @@ import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,7 +24,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static ru.stqa.pft.itgen.tests.TestBase.etalon;
 
@@ -30,11 +36,18 @@ public class SShotHelper extends HelperBase {
     super(wd);
   }
 
-  public ImageDiff getImageDiff(String expected, String actual, String markedImages, String name, String lokatorFlag) throws AWTException, IOException {
+  public ImageDiff getImageDiff(String expected, String actual, String markedImages, String name, String lokatorFlag,String locatorIgnor) throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
     //получаем
-    Screenshot actualScreenshot = getScreenShert(lokatorFlag);//взять скрkиншот после появления элемента с локатором
+    if(locatorIgnor!="") {
+      List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor));
+      for (WebElement element : elementsList) {
+        ((JavascriptExecutor) wd)
+                .executeScript("arguments[0].remove();", element);
+      }
+    }
+    Screenshot actualScreenshot = new AShot().takeScreenshot(wd);;//взять скрkиншот после появления элемента с локатором
     //сохраняем
     etalon(expected, name, actualScreenshot);
 
@@ -63,11 +76,4 @@ public class SShotHelper extends HelperBase {
     return file;
   }
 
-  public Screenshot getScreenShert(String locator) {
-    Screenshot actualScreenshot;
-    // return actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(100)).takeScreenshot(wd);
-    WebDriverWait wait = new WebDriverWait(wd, 5);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locator)));
-    return new AShot().addIgnoredElement(By.xpath("//tbody")).takeScreenshot(wd);
-  }
 }
