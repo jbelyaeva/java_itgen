@@ -71,7 +71,7 @@ public class SShotHelper extends HelperBase {
   }
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
-    String Path = "C:/Devel/Projects/java_itgen/itgen/src/test/testsScreenshot/markedImages/" + ResourseName + ".png";
+    String Path = "./src/test/testsScreenshot/markedImages/" + ResourseName + ".png";
     byte[] file = Files.readAllBytes(Paths.get(Path));
     return file;
   }
