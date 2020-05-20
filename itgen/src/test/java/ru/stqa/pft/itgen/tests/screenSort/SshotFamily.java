@@ -1,7 +1,10 @@
 package ru.stqa.pft.itgen.tests.screenSort;
+/* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,
+   сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
+   со свойством -Detalon=true.
+ */
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,27 +14,14 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
-import ru.yandex.qatools.allure.annotations.Attachment;
-import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import static ru.stqa.pft.itgen.appmanager.ApplicationManager.propertiesAshot;
 
 public class SshotFamily extends TestBase {
-
-  public WebDriver wd;
-  private static String pathToFile = "C:/Devel/Projects/java_itgen/itgen/src/test/resources/testdata/ashot.txt";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -55,19 +45,17 @@ public class SshotFamily extends TestBase {
 
   @Test
   public void testSshotFamilies() throws AWTException, IOException {
-    String expected = "./src/test/testsScreenshot/expected/";
-    String actual = "./src/test/testsScreenshot/actual/";
-    String markedImages = "./src/test/testsScreenshot/markedImages/";
     String name = "families_RU_Chrome";
-    String locatorFlag="//div[@class='header']";
     String locatorIgnor="//span[@class='user-time']";
     app.goTo().refresh();
     app.goTo().menuStudents();
     app.student().selectStudentInListUIById("studentAshot");
     app.family().btnFamily();
 
-    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag,locatorIgnor);
-
+    ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
+            , propertiesAshot.getProperty("actual")
+            , propertiesAshot.getProperty("markedImages")
+            , name,locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

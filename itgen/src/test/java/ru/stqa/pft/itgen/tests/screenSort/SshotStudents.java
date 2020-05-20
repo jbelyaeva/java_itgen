@@ -1,7 +1,9 @@
 package ru.stqa.pft.itgen.tests.screenSort;
+/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,
+   сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
+   со свойством -Detalon=true.
+ */
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,25 +13,14 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
-import ru.yandex.qatools.allure.annotations.Attachment;
-import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
+import static ru.stqa.pft.itgen.appmanager.ApplicationManager.propertiesAshot;
 
-public class SshotStudents extends TestBase {
-  public WebDriver wd;
+public class SshotStudents extends TestBase  {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -53,26 +44,20 @@ public class SshotStudents extends TestBase {
 
   @Test
   public void testSshotStudents() throws AWTException, IOException {
-
-    String expected = "./src/test/testsScreenshot/expected/";
-    String actual = "./src/test/testsScreenshot/actual/";
-    String markedImages = "./src/test/testsScreenshot/markedImages/";
     String name = "students_RU_Chrome";
-    String locatorFlag="//body//th[1]";
-   // String locatorIgnor="//a[contains(@href, '/tasks')]";
-    Set<By> bySet = new HashSet<>();
-    bySet.add(By.xpath("//a[contains(@href, '/tasks')]"));
+    String locatorIgnor="";
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    String locatorIgnor="";
-    ImageDiff diff = app.sshot().getImageDiff(expected, actual, markedImages, name,locatorFlag, locatorIgnor);
 
-    //передать имя файла для прикладывания в отчет
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
+                                            , propertiesAshot.getProperty("actual")
+                                            , propertiesAshot.getProperty("markedImages")
+                                            , name,locatorIgnor);
+   Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
    @AfterMethod(alwaysRun = true)
-  public void clean() {
+   public void clean() {
     FamilyService familyService = new FamilyService();
     FamilyData familyClean = familyService.findById("studentDelete");
     familyService.delete(familyClean);
