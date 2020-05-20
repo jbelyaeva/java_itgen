@@ -104,13 +104,13 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void deletionWorker(WorkerData deletedWorker) {
-    selectedWorkerByIdWithoutPaginator(deletedWorker);
+    selectedWorkerById(deletedWorker);
     deleteWorker();
     alertDeleteSelectedWorker();
   }
 
   public void modificationWorker(WorkerData worker, WorkerData modifydWorker) {
-    selectedWorkerByIdWithoutPaginator(modifydWorker);
+   selectedWorkerById(modifydWorker);
     modifyWorker();
     modifiWorkerForm(worker);
     submitWorkerModify();
@@ -118,7 +118,7 @@ public class WorkerHelper extends HelperBase {
 
   public void selectedWorkerById(WorkerData deletedWorker) {
     //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    String next = wd.findElement(By.xpath("//button[3]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
@@ -138,19 +138,8 @@ public class WorkerHelper extends HelperBase {
     }
   }
 
-  public void selectedWorkerByIdWithoutPaginator(WorkerData deletedWorker) {
-    //находим пагинатор
-    selectListAll();
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
-    wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
-  }
 
-  public void selectListAll() {
-    click(By.xpath(" //div[contains(@class,'selectRoot')]"));
-    click(By.xpath("//li[contains(@class,'MuiButtonBase')][4]"));
-  }
-
-  //работник с пагинацией
+   //работник с пагинацией
   public List<WorkerData> list() {
     // selectListAll();
     List<WorkerData> workers = new ArrayList<WorkerData>();
@@ -171,13 +160,7 @@ public class WorkerHelper extends HelperBase {
     return workers;
   }
 
-  public List<WorkerData> listWithoutPaginator() {
-    selectListAll();
-    List<WorkerData> workers = new ArrayList<WorkerData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-    includeInListBaseWebElement(workers, elements);
-    return workers;
-  }
+
 
   //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
   //, а ФИ cо страницы ui

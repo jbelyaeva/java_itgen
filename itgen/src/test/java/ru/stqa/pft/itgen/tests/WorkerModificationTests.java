@@ -68,7 +68,9 @@ public class WorkerModificationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());
     assertThat(after, equalTo(before.without(modifydWorker).withAdded(workerAdd)));
+    app.goTo().menuWorkers();
     verifyWorkerListInUI();
+
   }
 
   @AfterMethod(alwaysRun = true)

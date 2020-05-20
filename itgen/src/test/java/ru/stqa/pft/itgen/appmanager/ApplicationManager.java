@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   private final Properties properties;
+  public static Properties propertiesAshot;
   public WebDriver wd;
 
   private TrainerHelper trainerHelper;
@@ -40,11 +41,15 @@ public class ApplicationManager {
   public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
+    propertiesAshot = new Properties();
   }
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
+    String targetAshot = System.getProperty("target", "ashot");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    propertiesAshot.load(new FileReader(new File(String.format("src/test/resources/%s.properties", targetAshot))));
+
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
     if ("".equals(properties.getProperty("selenium.server"))) {
@@ -74,6 +79,7 @@ public class ApplicationManager {
     sShotHelper = new SShotHelper(wd);
     leadHelper=new LeadHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+  //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
   }
 
   public void stop() {

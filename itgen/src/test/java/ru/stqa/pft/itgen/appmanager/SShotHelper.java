@@ -36,7 +36,7 @@ public class SShotHelper extends HelperBase {
     super(wd);
   }
 
-  public ImageDiff getImageDiff(String expected, String actual, String markedImages, String name, String lokatorFlag,String locatorIgnor) throws AWTException, IOException {
+  public ImageDiff getImageDiff(String expected, String actual, String markedImages, String name, String locatorIgnor) throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
     //получаем
