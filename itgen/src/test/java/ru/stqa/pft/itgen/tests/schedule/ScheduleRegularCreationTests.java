@@ -1,22 +1,25 @@
-package ru.stqa.pft.itgen.tests;
+package ru.stqa.pft.itgen.tests.schedule;
 
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.ScheduleData;
+import ru.stqa.pft.itgen.model.Schedules;
 import ru.stqa.pft.itgen.services.ScheduleService;
+import ru.stqa.pft.itgen.tests.TestBase;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-
-public class ScheduleCreationTests extends TestBase {
+public class ScheduleRegularCreationTests extends TestBase {
+//Тест на создание постоянного расписания на текущую дату при выборе дефолтного тренера
   String idSchedule;
   @Test
-  public void testScheduleCreation() {
+  public void testScheduleSingleCreation() {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.db().schedules();
-    app.schedule().createSchedule();
+    app.schedule().createRegularSchedule();
     Schedules after = app.db().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));
     idSchedule = app.schedule().getIdNewScheduleDB(before, after);

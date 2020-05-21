@@ -37,7 +37,7 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'btn-primary')]"));
   }
 
-  public void createSchedule(){
+  public void createSingleSchedule(){
    btnCreateSchedule();
    checkBoxConst();
    selectTime();
@@ -45,6 +45,15 @@ public class ScheduleHelper extends HelperBase {
    selectScype();
    btnCreate();
   }
+
+  public void createRegularSchedule(){
+    btnCreateSchedule();
+    selectTime();
+    selectTrainer();
+    selectScype();
+    btnCreate();
+  }
+
   public String getIdNewScheduleDB(Schedules before, Schedules after) {
     int a = 0;
     String getIdAfter = "";
