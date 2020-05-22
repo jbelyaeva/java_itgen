@@ -190,6 +190,7 @@ public class ScheduleHelper extends HelperBase {
     String idSchedule=getId(getURL());
     selectNewTrainer();
     btnAssign();
+    refresh();
     return idSchedule;
   }
   public String assignTrainerAll() {
