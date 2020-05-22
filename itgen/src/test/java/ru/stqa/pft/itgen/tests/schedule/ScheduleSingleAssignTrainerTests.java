@@ -1,5 +1,5 @@
 package ru.stqa.pft.itgen.tests.schedule;
-
+//автотест проверяет назначение другого тренера в разовом расписании
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -11,21 +11,19 @@ import ru.stqa.pft.itgen.tests.TestBase;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ScheduleRegularCreationTests extends TestBase {
-//Тест на создание постоянного расписания на текущую дату при выборе дефолтного тренера
+public class ScheduleSingleAssignTrainerTests extends TestBase {
+
   String idSchedule;
   @Test
-  public void testScheduleRegularCreation() {
+  public void testScheduleSingleAssignTrainer() {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
+    app.schedule().createSingleSchedule(); //заменить транзакцией в предусловии
     Schedules before = app.db().schedules();
-    app.schedule().createRegularSchedule();
+    idSchedule = app.schedule().assignTrainer();
     Schedules after = app.db().schedules();
-    assertThat(after.size(), equalTo(before.size() + 1));
-    idSchedule = app.schedule().getIdNewScheduleDB(before, after);
-
-    ScheduleData scheduleAdd =  new ScheduleData().withId(idSchedule);
-    assertThat(after, equalTo(before.withAdded(scheduleAdd)));
+    assertThat(after.size(), equalTo(before.size()));
+    //проверка, что назначен новый тренер
   }
 
   @AfterMethod(alwaysRun = true)
