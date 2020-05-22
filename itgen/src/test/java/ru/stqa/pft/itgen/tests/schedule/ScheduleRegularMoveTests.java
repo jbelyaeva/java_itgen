@@ -1,6 +1,10 @@
 package ru.stqa.pft.itgen.tests.schedule;
 //автотест проверяет подвижку разового расписания
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ScheduleData;
@@ -28,6 +32,7 @@ public class ScheduleRegularMoveTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
+    app.schedule().showElement();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData scheduleClean = scheduleService.findById(idSchedule);
     if (scheduleClean != null) {

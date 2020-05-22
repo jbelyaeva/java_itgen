@@ -14,7 +14,6 @@ import ru.stqa.pft.itgen.model.*;
 public class ScheduleHelper extends HelperBase {
 
 
-
   public ScheduleHelper(WebDriver wd) {
     super(wd);
   }
@@ -22,7 +21,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void btnCreateSchedule() {
     click(By.xpath("//a[contains(@href,'/createSchoolSchedule')]"));
-   }
+  }
 
   public void checkBoxConst() {
     click(By.xpath("//input[@type='checkbox']"));
@@ -41,19 +40,19 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void writeNote() {
-   type(By.name("block-desc"),"заблокировать расписание");
+    type(By.name("block-desc"), "заблокировать расписание");
   }
 
   private void selectOnAllSchedule() {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
     dynamicElement.click();
-   }
+  }
 
 
   public void selectTime() {
-   // click(By.xpath("//div[contains(@class,'select-toggle-btn')]"));
-  //  dropDownList(By.xpath("//div[@class='dropdown-select-item']"),"22:00-00:00");
+    // click(By.xpath("//div[contains(@class,'select-toggle-btn')]"));
+    //  dropDownList(By.xpath("//div[@class='dropdown-select-item']"),"22:00-00:00");
   }
 
   private void selectSchedule() {
@@ -62,7 +61,7 @@ public class ScheduleHelper extends HelperBase {
 
   public String selectScheduleGetId() {
     click(By.xpath("//div[@class='panel-body'][1]"));
-    String idSchedule=getId(getURL());
+    String idSchedule = getId(getURL());
     return idSchedule;
   }
 
@@ -84,16 +83,16 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[@id='dropdownMenuActions']"));
   }
 
-  public void createSingleSchedule(){
-   btnCreateSchedule();
-   checkBoxConst();
-   selectTime();
-   selectTrainer();
-   selectScype();
-   btnCreate();
+  public void createSingleSchedule() {
+    btnCreateSchedule();
+    checkBoxConst();
+    selectTime();
+    selectTrainer();
+    selectScype();
+    btnCreate();
   }
 
-  public void createRegularSchedule(){
+  public void createRegularSchedule() {
     btnCreateSchedule();
     selectTime();
     selectTrainer();
@@ -122,6 +121,10 @@ public class ScheduleHelper extends HelperBase {
     return getIdAfter;
   }
 
+  public void showElement() {
+ WebElement dynamicElement1 = (new WebDriverWait(wd, 40))
+          .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'create')]")));
+}
   public String move() {
  //будем знать id
  // нужно выбрать именно наше расписание путем анализа атрибута в dome
@@ -131,6 +134,7 @@ public class ScheduleHelper extends HelperBase {
     fillFormMove();
     String idSchedule=getId(getURL());
     btnMove();
+    refresh();
     return idSchedule;
   }
 
@@ -143,6 +147,7 @@ public class ScheduleHelper extends HelperBase {
     selectBlock();
     writeNote();
     btnBlock();
+    refresh();
     return idSchedule;
   }
   public String blockAll() {
@@ -155,6 +160,7 @@ public class ScheduleHelper extends HelperBase {
     selectAllScheduleBlock();
     writeNote();
     btnBlock();
+    refresh();
     return idSchedule;
   }
 
@@ -201,7 +207,7 @@ public class ScheduleHelper extends HelperBase {
 
   private void btnMove() {
     click(By.xpath(" //button[contains(@class,'accept')]"));
-  }
+     }
 
   private void btnBlock() {
     click(By.xpath(" //button[contains(@class,'block')]"));
