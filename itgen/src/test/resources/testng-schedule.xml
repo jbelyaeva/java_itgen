@@ -12,6 +12,7 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCancelTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockTests" />
         </classes>
     </test>
 </suite>
