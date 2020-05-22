@@ -32,8 +32,16 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//a[contains(@class,'change')]"));
   }
 
+  private void selectBlock() {
+    click(By.xpath("//a[contains(@class,'block')]"));
+  }
+
   private void selectAssign() {
     click(By.xpath("//a[contains(@class,'assign')]"));
+  }
+
+  public void writeNote() {
+   type(By.name("block-desc"),"заблокировать расписание");
   }
 
   private void selectOnAllSchedule() {
@@ -125,6 +133,37 @@ public class ScheduleHelper extends HelperBase {
     btnMove();
     return idSchedule;
   }
+
+  public String block() {
+    //будем знать id
+    // нужно выбрать именно наше расписание путем анализа атрибута в dome
+    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+    String idSchedule=getId(getURL());
+    bntPoints();
+    selectBlock();
+    writeNote();
+    btnBlock();
+    return idSchedule;
+  }
+  public String blockAll() {
+    //будем знать id
+    // нужно выбрать именно наше расписание путем анализа атрибута в dome
+    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+    String idSchedule=getId(getURL());
+    bntPoints();
+    selectBlock();
+    selectAllScheduleBlock();
+    writeNote();
+    btnBlock();
+    return idSchedule;
+  }
+
+  private void selectAllScheduleBlock() {
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
+    dynamicElement.click();
+  }
+
   public String cancel() {
     //будем знать id
     // нужно выбрать именно наше расписание путем анализа атрибута в dome
@@ -162,6 +201,10 @@ public class ScheduleHelper extends HelperBase {
 
   private void btnMove() {
     click(By.xpath(" //button[contains(@class,'accept')]"));
+  }
+
+  private void btnBlock() {
+    click(By.xpath(" //button[contains(@class,'block')]"));
   }
 
   private void btnAssign() {

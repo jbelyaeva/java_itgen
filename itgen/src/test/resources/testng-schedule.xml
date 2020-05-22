@@ -7,6 +7,7 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCancelTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleAssignTrainerTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleBlockTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCreationTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCancelTests" />
