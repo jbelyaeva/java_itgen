@@ -30,7 +30,7 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
-
+    implementation 'org.projectlombok:lombok:1.18.12'
     implementation group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
     implementation group: 'org.jboss.jbossts', name: 'jbossjta'
     implementation group: 'org.hibernate', name: 'hibernate-search-orm'
