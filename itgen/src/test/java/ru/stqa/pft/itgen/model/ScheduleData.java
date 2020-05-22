@@ -1,5 +1,6 @@
 package ru.stqa.pft.itgen.model;
 
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -30,7 +31,6 @@ public class ScheduleData {
     private String id;
     @Type(type = "class")
     private List<C> c = new ArrayList<>();
-
     @Embeddable
     public static class C {
       private String id;
@@ -42,14 +42,82 @@ public class ScheduleData {
       private int score;
     }
 
-    @Type(type = "class")
-    @Column(name = "times")
-    private Set<ST> st = new HashSet<>();
+//    @Type(type = "class")
+//    @Column(name = "st")
+    @Embedded
+    private ST st;
 
     @Embeddable
     public static class ST {
-      Double s;
-      Double e;
+      public Double s;
+      public Double e;
+
+      public Double getS() {
+        return s;
+      }
+
+      public void setS(Double s) {
+        this.s = s;
+      }
+
+      public Double getE() {
+        return e;
+      }
+
+      public void setE(Double e) {
+        this.e = e;
+      }
+
+      @Override
+      public String toString() {
+        return "ST{" +
+                "s=" + s +
+                ", e=" + e +
+                '}';
+      }
+    }
+
+    public Double getW() {
+      return w;
+    }
+
+    public void setW(Double w) {
+      this.w = w;
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    public List<C> getC() {
+      return c;
+    }
+
+    public void setC(List<C> c) {
+      this.c = c;
+    }
+
+    public ST getSt() {
+      return st;
+    }
+
+    public Slots withSt(ST st) {
+      this.st = st;
+      return this;
+    }
+
+    @Override
+    public String toString() {
+      return "Slots{" +
+              "w=" + w +
+              ", id='" + id + '\'' +
+              ", c=" + c +
+              ", st=" + st +
+              '}';
     }
   }
 
@@ -72,6 +140,14 @@ public class ScheduleData {
   public static class Times {
     Integer start;
     Integer end;
+
+    @Override
+    public String toString() {
+      return "Times{" +
+              "start=" + start +
+              ", end=" + end +
+              '}';
+    }
   }
 
   @Column(name = "skypeId")

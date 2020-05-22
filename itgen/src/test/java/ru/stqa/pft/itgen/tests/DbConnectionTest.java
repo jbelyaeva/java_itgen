@@ -42,9 +42,9 @@ public class DbConnectionTest {
     for (ScheduleData student : result) {
       System.out.println(student);
 
-          //  System.out.println(student.getVer());
-          //  System.out.println(student.getTimes());
-          //  System.out.println(student.getSlots());
+           System.out.println(student.getVer());
+           System.out.println(student.getTimes());
+            System.out.println(student.getSlots());
 //            System.out.println(family.getStudentsS());
 //            System.out.println(family.getParentsP());
     }
