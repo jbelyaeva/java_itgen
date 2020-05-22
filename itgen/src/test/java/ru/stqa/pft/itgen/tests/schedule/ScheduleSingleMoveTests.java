@@ -1,28 +1,29 @@
-package ru.stqa.pft.itgen.tests;
-
+package ru.stqa.pft.itgen.tests.schedule;
+//автотест проверяет подвижку разового расписания
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.ScheduleData;
+import ru.stqa.pft.itgen.model.Schedules;
 import ru.stqa.pft.itgen.services.ScheduleService;
+import ru.stqa.pft.itgen.tests.TestBase;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+public class ScheduleSingleMoveTests extends TestBase {
 
-public class ScheduleCreationTests extends TestBase {
   String idSchedule;
   @Test
-  public void testScheduleCreation() {
+  public void testScheduleSingleMove() {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
+    app.schedule().createSingleSchedule(); //заменить транзакцией в предусловии
     Schedules before = app.db().schedules();
-    app.schedule().createSchedule();
+    idSchedule = app.schedule().move();
     Schedules after = app.db().schedules();
-    assertThat(after.size(), equalTo(before.size() + 1));
-    idSchedule = app.schedule().getIdNewScheduleDB(before, after);
-
-    ScheduleData scheduleAdd =  new ScheduleData().withId(idSchedule);
-    assertThat(after, equalTo(before.withAdded(scheduleAdd)));
+    assertThat(after.size(), equalTo(before.size()));
+    //проверка, что подвинулось занятие
   }
 
   @AfterMethod(alwaysRun = true)

@@ -1,5 +1,6 @@
 package ru.stqa.pft.itgen.tests;
-
+//Тест на модификацию работника. Для подключения проверки на соответствие ui и бд в конфигурации
+// запуска указываем -DverifyUI=true.
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
@@ -45,17 +46,19 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    WorkerService workerService = new WorkerService();
-    WorkerData worker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
-            .withCountry("AL").withTimeZone("Europe/Minsk")
-            .withLocate("ru")
-            .withBirthday(new Date(1556726891000L))
-            .withStartWork(new Date(1556726891000L))
-            .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
-            .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
+  WorkerService workerService = new WorkerService();
+  WorkerData workerClean = workerService.findById("workerModify");// проверка для стабилизации на случай форс-мажора
+    if (workerClean != null) { workerService.delete(workerClean); }
+  WorkerData worker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
+          .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
+          .withCountry("AL").withTimeZone("Europe/Minsk")
+          .withLocate("ru")
+          .withBirthday(new Date(1556726891000L))
+          .withLangs(Collections.singletonList(new WorkerData.Langs().withLangs("ru")))
+          .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
+          .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
     workerService.create(worker);
-  }
+}
 
   @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {

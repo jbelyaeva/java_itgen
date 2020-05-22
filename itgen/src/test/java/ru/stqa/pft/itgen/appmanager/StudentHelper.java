@@ -211,22 +211,17 @@ public class StudentHelper extends HelperBase {
   }
 
   public String getIdNewStudentDB(Students before, Students after) {
-    int a = 0;
+    boolean a = true;
     String getIdAfter = "";
     for (StudentData student : after) {
       getIdAfter = student.getId();
       for (StudentData student_before : before) {
         String getIdBefore = student_before.getId();
         if (getIdAfter.equals(getIdBefore)) {
-          a = 1;
+          a = false;
           break;
-        } else {
-          a = 2;
-        }
-      }
-      if (a == 2) {
-        break;
-      }
+        } }
+      if (a) {break;}
     }
     return getIdAfter;
   }

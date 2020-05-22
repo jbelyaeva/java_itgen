@@ -3,8 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="ScreenShots">
         <classes>
-           <class name="ru.stqa.pft.itgen.tests.screenSort.SshotStudents" />
+          <class name="ru.stqa.pft.itgen.tests.screenSort.SshotStudents" />
           <class name="ru.stqa.pft.itgen.tests.screenSort.SshotFamily" />
+          <class name="ru.stqa.pft.itgen.tests.screenSort.SshotSchedule" />
         </classes>
     </test>
 </suite>

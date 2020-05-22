@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Schedule">
+        <classes>
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCancelTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleAssignTrainerTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleBlockTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCancelTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockTests" />
+        </classes>
+    </test>
+</suite>

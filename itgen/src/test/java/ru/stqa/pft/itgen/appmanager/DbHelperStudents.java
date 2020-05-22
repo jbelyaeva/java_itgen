@@ -28,7 +28,8 @@ public class DbHelperStudents {
     entityManager.close();
     return new Families(families);
   }
-
+*/
+ /*
   public Students familyComposition(String id) {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
@@ -37,8 +38,8 @@ public class DbHelperStudents {
     entityManager.getTransaction().commit();
     entityManager.close();
     return new Students(family);
-  }
-*/
+  }*/
+
   public Parents parents() {
     EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
     entityManager.getTransaction().begin();
