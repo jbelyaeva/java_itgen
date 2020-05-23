@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
 import ru.stqa.pft.itgen.services.WorkerService;
@@ -84,4 +85,5 @@ public class WorkerModificationTests extends TestBase {
       workerService.delete(workerClean);
     }
   }
-}
+
+ }
