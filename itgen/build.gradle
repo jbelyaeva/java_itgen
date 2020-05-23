@@ -35,6 +35,8 @@ dependencies {
     implementation group: 'org.jboss.jbossts', name: 'jbossjta'
     implementation group: 'org.hibernate', name: 'hibernate-search-orm'
 
+
+
     /*
     implementation group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
     implementation group: 'org.jboss.narayana.jta', name: 'narayana-jta'
@@ -233,4 +235,27 @@ testScreenShots.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 
+//
+
+task testSchedule(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-schedule.xml'
+    }
+    if(project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if(project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+
+}
+testSchedule.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 //

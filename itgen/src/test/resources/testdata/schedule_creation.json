@@ -1,0 +1,35 @@
+[
+  {
+    "_id" : "nxJKeWmACmk5ibYmW",
+    "ver" : 1,
+    "fromDate" : 1589414400000.0,
+    "slots" : [
+      {
+        "w" : 1589414400000.0,
+        "id" : "14",
+        "c" : [
+          {
+            "id" : "DSenXRCdrLwKDYx2e",
+            "type" : 3,
+            "subject" : "1",
+            "s" : "normal",
+            "lang" : "ru",
+            "isTrial" : true,
+            "score" : 3
+          }
+        ],
+        "st" : {
+          "s" : 1589441400000.0,
+          "e" : 1589448600000.0
+        }
+      }
+    ],
+    "finishedSlots" : [],
+    "times" : {
+      "start" : 27000000,
+      "end" : 34200000
+    },
+    "skypeId" : "1",
+    "oneTime" : true
+  }
+]
