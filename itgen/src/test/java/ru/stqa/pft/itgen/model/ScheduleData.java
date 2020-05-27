@@ -1,41 +1,40 @@
 package ru.stqa.pft.itgen.model;
 
-import org.hibernate.annotations.Type;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import ru.stqa.pft.itgen.model.Schedule.Slots;
+import ru.stqa.pft.itgen.model.Schedule.Times;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "schedule")
+@Entity("schedule")
 public class ScheduleData {
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
-  @Column(name = "ver")
+  @Property("ver")
   private Integer ver;
 
-  @Column(name = "fromDate")
+  @Property("fromDate")
   private Double fromDate;
 
-  /**********   Сложное поле Slots (начало)  ********************/
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "slots")
-//  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  //@Property("slots")
+  @Embedded("slots")
   private List<Slots> slots = new ArrayList<Slots>();
-  /**********   Сложное поле Slots (конец)  ********************/
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "finishedSlots")
-  private List<FinishedSlots> finishedSlots = new ArrayList<FinishedSlots>();
+  @Embedded
+  private Times times;
 
-  @Column(name = "times")
-  Times times;
-
-  @Column(name = "skypeId")
+  @Property("skypeId")
   private String skypeId;
+
+  public ScheduleData() {
+  }
 
   public ScheduleData withId(String id) {
     this.id = id;
@@ -54,11 +53,6 @@ public class ScheduleData {
 
   public ScheduleData withSlots(List<Slots> slots) {
     this.slots = slots;
-    return this;
-  }
-
-  public ScheduleData withFinishedSlots(List<FinishedSlots> finishedSlots) {
-    this.finishedSlots = finishedSlots;
     return this;
   }
 
@@ -88,10 +82,6 @@ public class ScheduleData {
     return slots;
   }
 
-  public List<FinishedSlots> getFinishedSlots() {
-    return finishedSlots;
-  }
-
   public Times getTimes() {
     return times;
   }
@@ -107,7 +97,6 @@ public class ScheduleData {
             ", ver=" + ver +
             ", fromDate=" + fromDate +
             ", slots=" + slots +
-            ", finishedSlots=" + finishedSlots +
             ", times=" + times +
             ", skypeId='" + skypeId + '\'' +
             '}';
@@ -118,11 +107,15 @@ public class ScheduleData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ScheduleData that = (ScheduleData) o;
-    return Objects.equals(id, that.id);
+    return Objects.equals(id, that.id) &&
+            Objects.equals(fromDate, that.fromDate) &&
+            Objects.equals(slots, that.slots) &&
+            Objects.equals(times, that.times) &&
+            Objects.equals(skypeId, that.skypeId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, fromDate, slots, times, skypeId);
   }
 }

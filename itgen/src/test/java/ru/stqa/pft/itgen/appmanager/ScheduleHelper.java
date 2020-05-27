@@ -3,21 +3,19 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.ScheduleData;
+import ru.stqa.pft.itgen.model.Schedules;
+
+import java.util.List;
 
 public class ScheduleHelper extends HelperBase {
-
 
   public ScheduleHelper(WebDriver wd) {
     super(wd);
   }
-
 
   public void btnCreateSchedule() {
     click(By.xpath("//a[contains(@href,'/createSchoolSchedule')]"));
@@ -39,8 +37,8 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//a[contains(@class,'assign')]"));
   }
 
-  public void writeNote() {
-    type(By.name("block-desc"), "заблокировать расписание");
+  public void writeNote(String note) {
+    type(By.name("block-desc"), note);
   }
 
   private void selectOnAllSchedule() {
@@ -48,7 +46,6 @@ public class ScheduleHelper extends HelperBase {
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
     dynamicElement.click();
   }
-
 
   public void selectTime() {
     // click(By.xpath("//div[contains(@class,'select-toggle-btn')]"));
@@ -90,6 +87,8 @@ public class ScheduleHelper extends HelperBase {
     selectTrainer();
     selectScype();
     btnCreate();
+    selectSchedule();
+    refresh();
   }
 
   public void createRegularSchedule() {
@@ -98,6 +97,7 @@ public class ScheduleHelper extends HelperBase {
     selectTrainer();
     selectScype();
     btnCreate();
+    refresh();
   }
 
   public String getIdNewScheduleDB(Schedules before, Schedules after) {
@@ -122,46 +122,36 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void showElement() {
- WebElement dynamicElement1 = (new WebDriverWait(wd, 40))
-          .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'create')]")));
-}
-  public String move() {
- //будем знать id
- // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+    WebElement dynamicElement1 = (new WebDriverWait(wd, 40))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'create')]")));
+  }
+
+  public void move(String id) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectMove();
     fillFormMove();
-    String idSchedule=getId(getURL());
     btnMove();
     refresh();
-    return idSchedule;
   }
 
-  public String block() {
-    //будем знать id
-    // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
-    String idSchedule=getId(getURL());
+  public void block(String id, String note) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectBlock();
-    writeNote();
+    writeNote(note);
     btnBlock();
     refresh();
-    return idSchedule;
   }
-  public String blockAll() {
-    //будем знать id
-    // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
-    String idSchedule=getId(getURL());
+
+  public void blockAll(String id, String note) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectBlock();
     selectAllScheduleBlock();
-    writeNote();
+    writeNote(note);
     btnBlock();
     refresh();
-    return idSchedule;
   }
 
   private void selectAllScheduleBlock() {
@@ -170,45 +160,36 @@ public class ScheduleHelper extends HelperBase {
     dynamicElement.click();
   }
 
-  public String cancel() {
-    //будем знать id
-    // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+  public void cancel(String id) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectCancel();
-    String idSchedule=getId(getURL());
     btnCancel();
-    return idSchedule;
+    refresh();
   }
 
-  public String assignTrainer() {
-    //будем знать id
-    // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+  public void assignTrainer(String id) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectAssign();
-    String idSchedule=getId(getURL());
     selectNewTrainer();
     btnAssign();
     refresh();
-    return idSchedule;
   }
-  public String assignTrainerAll() {
-    //будем знать id
-    // нужно выбрать именно наше расписание путем анализа атрибута в dome
-    selectSchedule(); //в локаторе поменять выбор по id а не первое в списке
+
+  public void assignTrainerAll(String id) {
+    selectScheduleInListUIById(id);
     bntPoints();
     selectAssign();
-    String idSchedule=getId(getURL());
     selectOnAllSchedule();
     selectNewTrainer();
     btnAssign();
-    return idSchedule;
+    refresh();
   }
 
   private void btnMove() {
     click(By.xpath(" //button[contains(@class,'accept')]"));
-     }
+  }
 
   private void btnBlock() {
     click(By.xpath(" //button[contains(@class,'block')]"));
@@ -229,6 +210,27 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//select[@id='trainer']//option[@value='18']"));
   }
 
+  public void selectScheduleInListUIById(String id) {
+    //находим пагинатор
+    String next = wd.findElement(By.xpath("//button[contains(@class,'next')]")).getAttribute("class");
+    //есть ли на первой странице наш студент
+    List<WebElement> list = wd.findElements(By.xpath("//a[contains(@href,'" + id + "')]"));
+    if (list.size() > 0) {
+      wd.findElement(By.xpath("//a[contains(@href,'" + id + "')]")).click();
+    } else {
+      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/lesson/" + id + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/lesson/" + id + "'")).click();
+          break;
+        } else {
+          wd.findElement(By.xpath("//button[contains(@class,'next')]")).click();
+        }
+      }
+    }
+  }
+
   private void fillFormMove() {
     //выбор текущей даты в календаре
     WebElement dynamicElement = (new WebDriverWait(wd, 40))
@@ -239,16 +241,16 @@ public class ScheduleHelper extends HelperBase {
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select1 = new Select(Selectbox_times);
     select1.selectByVisibleText("23:00 - 01:00");
-   //выбор тренера
-    WebElement dynamicElement1 = (new WebDriverWait(wd, 10))
+    //выбор тренера
+    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
-    dynamicElement1.click();
+    dynamicElementTrainer.click();
     click(By.xpath("//select[@id='trainer']//option[@value='12']"));
 
     //выбор скайпа
-    WebElement dynamicElement2 = (new WebDriverWait(wd, 10))
+    WebElement dynamicElementSkype = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.id("skype")));
-    dynamicElement2.click();
+    dynamicElementSkype.click();
     click(By.xpath("//select[@id='skype']//option[@value='17']"));
   }
 }

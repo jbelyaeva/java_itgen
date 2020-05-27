@@ -1,10 +1,14 @@
 package ru.stqa.pft.itgen.dao;
 
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.ParentData;
+import ru.stqa.pft.itgen.model.StudentData;
 
 import javax.persistence.EntityManager;
 
 import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
+import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class ParentDao {
 
@@ -17,19 +21,15 @@ public class ParentDao {
     return parent;
   }
 
-  public void create(ParentData parent) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.persist(parent);
-    entityManager.getTransaction().commit();
-    entityManager.close();
+  public void save(ParentData parent) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    datastore.save(parent);
   }
 
-  public void delete(ParentData parent) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(parent));
-    entityManager.getTransaction().commit();
-    entityManager.close();
+  public ParentData findByIdAndDelete(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<ParentData> query = datastore.createQuery(ParentData.class).filter("id", id);
+    ParentData parent = datastore.findAndDelete(query);
+    return parent;
   }
 }

@@ -30,11 +30,13 @@ dependencies {
     implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
-    implementation 'org.projectlombok:lombok:1.18.12'
+   // implementation 'org.projectlombok:lombok:1.18.12'
     implementation group: 'org.hibernate.ogm', name: 'hibernate-ogm-mongodb'
-    implementation group: 'org.jboss.jbossts', name: 'jbossjta'
+   // implementation group: 'org.jboss.jbossts', name: 'jbossjta'
     implementation group: 'org.hibernate', name: 'hibernate-search-orm'
 
+    compile 'dev.morphia.morphia:core:1.5.8'
+    implementation 'org.mongodb:mongo-java-driver:3.12.4'
 
 
     /*
@@ -96,8 +98,8 @@ task testFamilies(type: Test) {
 testFamilies.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testParents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-parents.xml'
@@ -119,8 +121,8 @@ task testParents(type: Test) {
 testParents.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testStudents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-students.xml'
@@ -142,8 +144,8 @@ task testStudents(type: Test) {
 testStudents.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testTrainers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-trainers.xml'
@@ -165,8 +167,8 @@ task testTrainers(type: Test) {
 testTrainers.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testWorkers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-workers.xml'
@@ -188,8 +190,8 @@ task testWorkers(type: Test) {
 testWorkers.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testLeads(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-leads.xml'
@@ -211,8 +213,8 @@ task testLeads(type: Test) {
 testLeads.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testScreenShots(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-screenShots.xml'
@@ -236,7 +238,6 @@ testScreenShots.doFirst {
 }
 
 //
-
 task testSchedule(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-schedule.xml'
@@ -258,4 +259,5 @@ task testSchedule(type: Test) {
 testSchedule.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
+
 //

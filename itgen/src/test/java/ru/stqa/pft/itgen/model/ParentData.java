@@ -1,79 +1,47 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
+import dev.morphia.annotations.Property;
+import ru.stqa.pft.itgen.model.users.Contacts;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "users")
+@dev.morphia.annotations.Entity("users")
 public class ParentData {
   @Expose
-  @Id
-  @Column(name = "_id")
+  @dev.morphia.annotations.Id
+  @Property("_id")
   private String id;
 
   @Expose
-  @Column(name = "firstName")
+  @Property("firstName")
   private String firstName;
 
   @Expose
-  @Column(name = "lastName")
+  @Property("lastName")
   private String lastName;
 
   @Expose
-  @Column(name = "country")
+  @Property("country")
   private String country;
 
   @Expose
-  @Column(name = "city")
+  @Property("city")
   private String city;
 
-  @Column(name = "tz")
+  @Property("tz")
   @Expose
   private String timeZone;
 
   @Expose
-  @Column(name = "locale")
+  @Property("locale")
   private String locate;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "contacts")
-  private List<ParentData.Contacts> contacts = new ArrayList<ParentData.Contacts>();
-
-  @Embeddable
-  public static class Contacts {
-    private String type;
-    private String val;
-
-    public ParentData.Contacts withType(String type) {
-      this.type = type;
-      return this;
-    }
-
-    public ParentData.Contacts withVal(String val) {
-      this.val = val;
-      return this;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    public String getVal() {
-      return val;
-    }
-
-    @Override
-    public String toString() {
-      return "Contacts{" +
-              "type='" + type + '\'' +
-              ", val='" + val + '\'' +
-              '}';
-    }
-  }
+  @Embedded
+  private List<Contacts> contacts = new ArrayList<Contacts>();
 
   @Expose
   @Transient
@@ -120,55 +88,15 @@ public class ParentData {
   private String inst;
 
 
-  @Column(name = "familyId")
+  @Property("familyId")
    private String familyId;
 
   @Expose
-  @Column(name = "note")
+  @Property("note")
   private String note;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "roles")
-  private List<ParentData.Roles> roles = new ArrayList<ParentData.Roles>();
-
-  @Embeddable
-  public static class Roles {
-    private String roles;
-
-    public ParentData.Roles withRoles(String type) {
-      this.roles = type;
-      return this;
-    }
-
-    public String getRoles() {
-      return roles;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              roles;
-    }
-  }
-  /*
-  @ManyToOne
-  private FamilyData family;
-
-  public FamilyData getFamily() {
-    return family;
-  }
-  */
-  /*
-  @OneToOne
-  @JoinColumn(name = "familyId")
-  private FamilyDataUi family;
-
-  public FamilyDataUi getFamily() {
-    return family;
-  }
-  */
-
-  /* setters */
+  @Property("roles")
+  private List<String> roles= new ArrayList<>();
 
   public ParentData withId(String id) {
     this.id = id;
@@ -205,7 +133,7 @@ public class ParentData {
     return this;
   }
 
-  public ParentData withContacts(List<ParentData.Contacts> contacts) {
+  public ParentData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
     return this;
   }
@@ -275,7 +203,7 @@ public class ParentData {
     return this;
   }
 
-  public ParentData withRoles(List<ParentData.Roles> roles) {
+  public ParentData withRoles(List<String> roles) {
     this.roles = roles;
     return this;
   }
@@ -310,7 +238,7 @@ public class ParentData {
     return locate;
   }
 
-  public List<ParentData.Contacts> getContacts() {
+  public List<Contacts> getContacts() {
     return contacts;
   }
 
@@ -366,7 +294,7 @@ public class ParentData {
     return note;
   }
 
-  public List<ParentData.Roles> getRoles() {
+  public List<String> getRoles() {
     return roles;
   }
 

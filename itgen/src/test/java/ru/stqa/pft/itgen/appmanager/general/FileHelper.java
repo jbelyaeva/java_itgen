@@ -1,11 +1,11 @@
-package ru.stqa.pft.itgen.appmanager;
+package ru.stqa.pft.itgen.appmanager.general;
 
 import java.io.*;
 import java.nio.file.Paths;
 
 import static java.nio.file.Files.exists;
 
-public class FileHalper {
+public class FileHelper {
 
   public static void SampleFileWriter(String PATH, String text) {
     //создаём объект File, который привязываем к пути PATH.
@@ -16,8 +16,8 @@ public class FileHalper {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
+
   public static String SampleFileReader(String PATH) {
     File file = new File(PATH);
     //Этот спец. объект для построения строки
@@ -25,7 +25,7 @@ public class FileHalper {
     exists(Paths.get(PATH));
     try {
       //Объект для чтения файла в буфер
-      BufferedReader in = new BufferedReader(new FileReader( file.getAbsoluteFile()));
+      BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()));
       try {
         //В цикле построчно считываем файл
         String s;
@@ -35,17 +35,19 @@ public class FileHalper {
       } finally {
         in.close();
       }
-    } catch(IOException e) {
+    } catch (IOException e) {
       throw new RuntimeException(e);
     }
     //Возвращаем полученный текст с файла
     return sb.toString();
   }
+
   public static void SampleFileCleaner(String PATH) throws FileNotFoundException {
     PrintWriter writer = new PrintWriter(PATH);
     writer.print("");
     writer.close();
   }
+
   public static void deleteAllFilesFolder(String path) {
     for (File myFile : new File(path).listFiles())
       if (myFile.isFile()) myFile.delete();

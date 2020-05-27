@@ -10,6 +10,8 @@ import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.Parents;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.ParentService;
 import ru.stqa.pft.itgen.services.StudentService;
@@ -18,10 +20,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -49,25 +48,24 @@ public class ParentModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("parentModify").withTrialBonusOff(false).withTierId("txa")
-            .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
-    familyService.create(family);
+    FamilyData family = new FamilyData().withId("parentModify").withTrialBonusOff(false).withTierId("txa");
+    familyService.save(family);
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("forParentModify").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
             .withFamilyId("parentModify").withStudyLang("ru").withLocate("ru")
             .withBirthday(new Date())
-            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
-    studentService.create(student);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new Status().withState("noTrial"));
+    studentService.save(student);
     ParentService parentService = new ParentService();
     ParentData parent = new ParentData().withId("forParModify").withFirstName("Зина").withLastName("Зинина")
-            .withRoles(Collections.singletonList(new ParentData.Roles().withRoles("parent")))
+            .withRoles(Arrays.asList("parent"))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withFamilyId("parentModify").withLocate("ru")
-            .withContacts(Collections.singletonList(new ParentData.Contacts().withType("phone").withVal("1234567899")));
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")));
     parentService.create(parent);
   }
 
@@ -92,16 +90,11 @@ public class ParentModificationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    FamilyService familyService = new FamilyService();
-    FamilyData familyClean = familyService.findById("parentModify");
-    familyService.delete(familyClean);
     StudentService studentService = new StudentService();
-    StudentData studentClean = studentService.findById("forParentModify");
-    studentService.delete(studentClean);
+    studentService.findByIdAndDelete("forParentModify");
+    FamilyService familyService = new FamilyService();
+    familyService.findByIdAndDelete("parentModify");
     ParentService parentService = new ParentService();
-    ParentData parentClean = parentService.findById("forParModify");
-    if (parentClean != null) {
-      parentService.delete(parentClean);
-    }
+    parentService.findByIdAndDelete("forParentModify");
   }
 }

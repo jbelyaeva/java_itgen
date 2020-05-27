@@ -7,10 +7,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.qatools.ashot.AShot;
-import ru.yandex.qatools.ashot.Screenshot;
+import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelper;
+import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperSchedule;
+import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperStudents;
+import ru.stqa.pft.itgen.appmanager.general.TimeHelper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -37,6 +37,8 @@ public class ApplicationManager {
   private DbHelper dbHelper;
   private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
+  private DbHelperSchedule dbHelperSchedule;
+  private TimeHelper timeHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -52,6 +54,8 @@ public class ApplicationManager {
 
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
+    dbHelperSchedule = new DbHelperSchedule();
+    timeHelper = new TimeHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -102,6 +106,8 @@ public class ApplicationManager {
     return dbHelperStudents;
   }
 
+  public DbHelperSchedule dbschedules() {return dbHelperSchedule; }
+
   public StudentHelper student() {
     return studentHelper;
   }
@@ -124,6 +130,10 @@ public class ApplicationManager {
 
   public ScheduleHelper schedule() {
     return scheduleHelper;
+  }
+
+  public TimeHelper time() {
+    return timeHelper;
   }
 
   public LeadHelper lead(){return leadHelper;}
