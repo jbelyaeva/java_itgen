@@ -2,26 +2,52 @@ package ru.stqa.pft.itgen.tests.schedule;
 //автотест проверяет подвижку разового расписания
 
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.Schedule.C;
+import ru.stqa.pft.itgen.model.Schedule.ST;
+import ru.stqa.pft.itgen.model.Schedule.Slots;
+import ru.stqa.pft.itgen.model.Schedule.Times;
 import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 import ru.stqa.pft.itgen.services.ScheduleService;
 import ru.stqa.pft.itgen.tests.TestBase;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleSingleMoveTests extends TestBase {
+  ArrayList<C> list = new ArrayList<>();
+  String period = "21:00 - 23:00";
 
-  String idSchedule;
+  @BeforeMethod
+  public void ensurePreconditions() {
+    ScheduleService scheduleService = new ScheduleService();
+    ScheduleData schedule = new ScheduleData()
+            .withId("scheduleSingleMove")
+            .withVer(0)
+            .withFromDate(app.time().time(period))
+            .withSlots(Arrays.asList(new Slots()
+                    .withId("14")
+                    .withW(app.time().time(period))
+                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withC(list)))
+            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
+            .withSkypeId("1");
+    scheduleService.save(schedule);
+
+  }
+
   @Test
   public void testScheduleSingleMove() {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
-    app.schedule().createSingleSchedule(); //заменить транзакцией в предусловии
-    Schedules before = app.db().schedules();
-    idSchedule = app.schedule().move();
-    Schedules after = app.db().schedules();
+    Schedules before = app.dbschedules().schedules();
+    app.schedule().move("scheduleSingleMove");
+    Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что подвинулось занятие
   }
@@ -29,9 +55,7 @@ public class ScheduleSingleMoveTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData scheduleClean = scheduleService.findById(idSchedule);
-    if (scheduleClean != null) {
-      scheduleService.delete(scheduleClean);
-    }
+    scheduleService.findByIdAndDelete("scheduleSingleMove");
   }
+
 }

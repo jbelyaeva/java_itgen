@@ -1,6 +1,7 @@
 package ru.stqa.pft.itgen.services;
 
 import ru.stqa.pft.itgen.dao.StudentDao;
+import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.StudentData;
 
 public class StudentService {
@@ -9,12 +10,12 @@ public class StudentService {
   public StudentService() {
   }
 
-  public StudentData findById(String id) {
-    return studentDao.findById(id);
+  public StudentData findByIdAndDelete(String id) {
+    return studentDao.findByIdAndDelete(id);
   }
 
-  public void create(StudentData student) {
-    studentDao.create(student);
+  public void save(StudentData student) {
+    studentDao.save(student);
   }
 
   public void delete(StudentData student) {

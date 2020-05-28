@@ -9,12 +9,12 @@ public class FamilyService {
   public FamilyService() {
   }
 
-  public FamilyData findById(String id) {
-    return familyDao.findById(id);
+  public FamilyData findByIdAndDelete(String id) {
+    return familyDao.findByIdAndDelete(id);
   }
 
-  public void create(FamilyData family) {
-    familyDao.create(family);
+  public void save(FamilyData family) {
+    familyDao.save(family);
   }
 
   public void delete(FamilyData family) {

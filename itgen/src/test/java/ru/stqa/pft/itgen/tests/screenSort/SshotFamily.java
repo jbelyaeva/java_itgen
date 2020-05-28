@@ -11,12 +11,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import static ru.stqa.pft.itgen.appmanager.ApplicationManager.propertiesAshot;
@@ -27,20 +30,19 @@ public class SshotFamily extends TestBase {
   public void ensurePreconditions() {
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("familyAshot").withTrialBonusOff(false).withTierId("txa")
-            .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
-    familyService.create(family);
+    FamilyData family = new FamilyData().withId("familyAshot").withTrialBonusOff(false).withTierId("txa");
+    familyService.save(family);
 
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("studentAshot").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
             .withFamilyId("familyAshot").withStudyLang("ru").withLocate("ru")
             .withBirthday(new Date(1556726891000L))
-            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
-    studentService.create(student);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new Status().withState("noTrial"));
+    studentService.save(student);
   }
 
   @Test
@@ -61,14 +63,10 @@ public class SshotFamily extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    FamilyService familyService = new FamilyService();
-    FamilyData familyClean = familyService.findById("familyAshot");
-    familyService.delete(familyClean);
     StudentService studentService = new StudentService();
-    StudentData studentClean = studentService.findById("studentAshot");
-    if (studentClean != null) {
-      studentService.delete(studentClean);
-    }
+    studentService.findByIdAndDelete("studentAshot");
+    FamilyService familyService = new FamilyService();
+    familyService.findByIdAndDelete("familyAshot");
 
   }
 }

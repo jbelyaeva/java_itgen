@@ -117,14 +117,8 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById(idWorker);
-    if (workerClean != null) {
-      workerService.delete(workerClean);
-    }
+    workerService.findByIdAndDelete(idWorker);
     TrainerService trainerService = new TrainerService();
-    TrainerData trainerClean = trainerService.findById(idTrainer);
-    if (trainerClean != null) {
-      trainerService.delete(trainerClean);
-    }
-  }
+    trainerService.findByIdAndDelete(idTrainer);
+   }
 }

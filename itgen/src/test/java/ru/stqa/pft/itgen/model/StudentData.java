@@ -1,33 +1,42 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
-
-import javax.persistence.*;
+import dev.morphia.annotations.*;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Transient;
+import ru.stqa.pft.itgen.model.users.*;
 import java.util.*;
 
-@Entity
-@Table(name = "users")
+@dev.morphia.annotations.Entity("users")
 public class StudentData {
-  @Expose
+  //@Expose
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
+  @Transient
+  @Property("username")
+  private String username;
+
+  @Transient
+  @Embedded
+  private List<Skills> skills = new ArrayList<Skills>();
+
   @Expose
-  @Column(name = "firstName")
+  @Property("firstName")
   private String firstname;
 
   @Expose
-  @Column(name = "lastName")
+  @Property("lastName")
   private String lastname;
 
   @Expose
-  @Column(name = "gender")
+  @Property("gender")
   private Integer gender;
 
-//  @Transient
-  @Column(name = "birthday")
-  @Temporal(TemporalType.DATE)
+  @Transient
+  @Property("birthday")
   private Date birthday;
 
   @Expose
@@ -35,92 +44,38 @@ public class StudentData {
   private String birthdayUi;
 
   @Expose
-  @Column(name = "pcLevel")
+  @Property("pcLevel")
   private String pclevel;
 
   @Expose
-  @Column(name = "country")
+  @Property("country")
   private String country;
 
   @Expose
-  @Column(name = "city")
+  @Property("city")
   private String city;
 
   @Expose
-  @Column(name = "tz")
+  @Property("tz")
   private String timezone;
 
   @Expose
-  @Column(name = "locale")
+  @Property("locale")
   private String locate;
 
   @Expose
   @Transient
   private String studyLang;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "langs")
-  private List<Langs> langs = new ArrayList<Langs>();
-
-  @Embeddable
-  public static class Langs {
-    private String langs;
-
-    public Langs withLangs(String type) {
-      this.langs = type;
-      return this;
-    }
-
-    public String getLangs() {
-      return langs;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              langs;
-    }
-  }
+  @Property("langs")
+  private List<String> langs= new ArrayList<>();
 
   @Expose
-  @Column(name = "duration")
+  @Property("duration")
   private Integer duration;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "contacts")
+  @Embedded
   private List<Contacts> contacts = new ArrayList<Contacts>();
-
-  @Embeddable
-  public static class Contacts {
-    private String type;
-    private String val;
-
-    public Contacts withType(String type) {
-      this.type = type;
-      return this;
-    }
-
-    public Contacts withVal(String val) {
-      this.val = val;
-      return this;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    public String getVal() {
-      return val;
-    }
-
-    @Override
-    public String toString() {
-      return "Contacts{" +
-              "type='" + type + '\'' +
-              ", val='" + val + '\'' +
-              '}';
-    }
-  }
 
   @Expose
   @Transient
@@ -162,54 +117,52 @@ public class StudentData {
   @Transient
   private String inst;
 
-
-  @Column(name = "familyId")
+  @Property("familyId")
   private String familyId;
 
   @Expose
-  @Column(name = "note")
+  @Property("note")
   private String note;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "roles")
-  private List<Roles> roles = new ArrayList<Roles>();
+  @Property("roles")
+  private List<String> roles= new ArrayList<>();
 
-  @Embeddable
-  public static class Roles {
-    private String roles;
+  @Embedded
+  private Status status;
 
-    public Roles withRoles(String type) {
-      this.roles = type;
-      return this;
-    }
+  @Transient
+  @Property("startWorkAt")
+  private Date startWorkAt;
 
-    public String getRoles() {
-      return roles;
-    }
+  @Transient
+  @Property("createAt")
+  private Date createAt;
 
-    @Override
-    public String toString() {
-      return "" +
-              roles;
-    }
-  }
+  @Transient
+  @Property("maxSlots")
+  private int maxSlots;
 
-  @Column(name = "status")
-  Status status;
+  @Transient
+  @Property("payBase")
+  private int payBase;
 
-  @Embeddable
-  public static class Status {
-    String state;
+  @Transient
+  @Embedded("services")
+  private Services services;
 
-    public String getState() {
-      return state;
-    }
+  @Transient
+  @Property("lastSeen")
+  private String lastSeen;
 
-    public Status withState(String state) {
-      this.state = state;
-      return this;
-    }
-  }
+  @Transient
+  @Property("lessonCount")
+  private int lessonCount;
+
+  @Transient
+  @Embedded("emails")
+  private List<Emails> emails = new ArrayList<Emails>();
+
+  //getters and setters
 
   public Status getStatus() {
     return status;
@@ -219,26 +172,7 @@ public class StudentData {
     this.status = status;
     return this;
   }
-  /*
-  @ManyToOne
-  @JoinTable (name = "users", joinColumns = @JoinColumn (name = "familyId"))
-  private FamilyData family;
 
-  public FamilyData getFamily() {
-    return family;
-  }
-   */
-  /*
-  @OneToOne
-  @JoinColumn(name = "familyId")
-  private FamilyDataUi family;
-
-  public FamilyDataUi getFamily() {
-    return family;
-  }
-  */
-
-  /* setters */
 
   public StudentData withId(String id) {
     this.id = id;
@@ -370,12 +304,12 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withRoles(List<Roles> roles) {
+  public StudentData withRoles(List<String> roles) {
     this.roles = roles;
     return this;
   }
 
-  public StudentData withLangs(List<Langs> langs) {
+  public StudentData withLangs(List<String> langs) {
     this.langs = langs;
     return this;
   }
@@ -488,11 +422,11 @@ public class StudentData {
     return note;
   }
 
-  public List<Roles> getRoles() {
+  public List<String> getRoles() {
     return roles;
   }
 
-  public List<Langs> getLangs() {
+  public List<String> getLangs() {
     return langs;
   }
 
@@ -527,18 +461,11 @@ public class StudentData {
     return Objects.equals(id, that.id) &&
             Objects.equals(firstname, that.firstname) &&
             Objects.equals(lastname, that.lastname) &&
-            Objects.equals(gender, that.gender) &&
-            Objects.equals(pclevel, that.pclevel) &&
-            Objects.equals(country, that.country) &&
-            Objects.equals(city, that.city) &&
-            Objects.equals(timezone, that.timezone) &&
-            Objects.equals(locate, that.locate) &&
-            Objects.equals(duration, that.duration) &&
-            Objects.equals(note, that.note);
+            Objects.equals(gender, that.gender);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname, gender, pclevel, country, city, timezone, locate, duration, note);
+    return Objects.hash(id, firstname, lastname, gender);
   }
 }

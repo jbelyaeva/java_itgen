@@ -57,13 +57,10 @@ public class FamilyCreationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void cleanFamily() {
     FamilyService familyService = new FamilyService();
-    FamilyData familyClean = familyService.findById(idFamily);
-    if (familyClean != null) {
-      familyService.delete(familyClean);
-    }
+    familyService.findByIdAndDelete(idFamily);
     Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
     StudentService studentService = new StudentService();
-    for (StudentData studentClean : students)
+     for (StudentData studentClean : students)
       studentService.delete(studentClean);
-      }
+       }
   }

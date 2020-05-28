@@ -1,36 +1,29 @@
 package ru.stqa.pft.itgen.dao;
+
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.FamilyData;
+import ru.stqa.pft.itgen.model.ParentData;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 import javax.persistence.EntityManager;
 
 import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
+import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class WorkerDao {
 
-  public WorkerData findById(String id) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    WorkerData worker = entityManager.find( WorkerData.class, id);
-    entityManager.getTransaction().commit();
-    entityManager.close();
+  public void save(WorkerData worker) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    datastore.save(worker);
+  }
+
+  public WorkerData findByIdAndDelete(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<WorkerData> query = datastore.createQuery(WorkerData.class).filter("id", id);
+    WorkerData worker = datastore.findAndDelete(query);
     return worker;
   }
 
-  public void create( WorkerData worker) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.persist(worker);
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
-
-  public void delete( WorkerData worker) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(worker));
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
 }
 

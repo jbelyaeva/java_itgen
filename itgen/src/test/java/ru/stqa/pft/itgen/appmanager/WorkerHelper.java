@@ -52,12 +52,6 @@ public class WorkerHelper extends HelperBase {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
-  public WorkerData findWorker(String id) {
-    WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById(id);
-    return workerClean;
-  }
-
   public void submitWorkerModify() {
     click(By.xpath("//button[contains(@class,'save')]"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
@@ -103,33 +97,33 @@ public class WorkerHelper extends HelperBase {
     bntCreation();
   }
 
-  public void deletionWorker(WorkerData deletedWorker) {
-    selectedWorkerById(deletedWorker);
+  public void deletionWorker(String id) {
+    selectedWorkerById(id);
     deleteWorker();
     alertDeleteSelectedWorker();
   }
 
-  public void modificationWorker(WorkerData worker, WorkerData modifydWorker) {
-   selectedWorkerById(modifydWorker);
+  public void modificationWorker(WorkerData worker, String id) {
+    selectedWorkerById(id);
     modifyWorker();
     modifiWorkerForm(worker);
     submitWorkerModify();
   }
 
-  public void selectedWorkerById(WorkerData deletedWorker) {
+  public void selectedWorkerById(String id) {
     //находим пагинатор
     String next = wd.findElement(By.xpath("//button[3]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
     if (list.size() > 0) {
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
+      wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
       //если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'"));
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
         if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + deletedWorker.getId() + "'")).click();
+          wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
         } else {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
@@ -139,7 +133,7 @@ public class WorkerHelper extends HelperBase {
   }
 
 
-   //работник с пагинацией
+  //работник с пагинацией
   public List<WorkerData> list() {
     // selectListAll();
     List<WorkerData> workers = new ArrayList<WorkerData>();
@@ -159,7 +153,6 @@ public class WorkerHelper extends HelperBase {
     includeInListBaseWebElement(workers, elements);
     return workers;
   }
-
 
 
   //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте

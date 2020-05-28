@@ -25,6 +25,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StudentCreationTests extends TestBase {
   String id;
+  StudentData studentClean;
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
@@ -78,10 +79,10 @@ public class StudentCreationTests extends TestBase {
   public void testBadStudentCreation(StudentData student) {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Students before = app.db().students();
+    Students before = app.dbstudents().students();
     app.student().createBad(student);
-    Students after = app.db().students();
-    id = app.student().getIdNewStudentDB(before, after);
+    Students after = app.dbstudents().students();
+    studentClean=app.student().getNewStudentDB(before, after);
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
   }
@@ -89,13 +90,10 @@ public class StudentCreationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
+    FamilyService familyService = new FamilyService();
+    familyService.findByIdAndDelete(studentClean.getFamilyId());
     StudentService studentService = new StudentService();
-    StudentData studentClean = studentService.findById(id);
-    if (studentClean != null) {
-      FamilyService familyService = new FamilyService();
-      FamilyData familyClean = familyService.findById(studentClean.getFamilyId());
-      familyService.delete(familyClean);
-      studentService.delete(studentClean);
-    }
+    studentService.findByIdAndDelete(id);
+
   }
 }

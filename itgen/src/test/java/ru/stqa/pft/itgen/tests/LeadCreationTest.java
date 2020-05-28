@@ -62,10 +62,7 @@ String id;
   @AfterMethod(alwaysRun = true)
   public void clean() {
     LeadService leadService = new LeadService();
-    LeadData leadClean = leadService.findById(id);
-    if (leadClean != null) {
-      leadService.delete(leadClean);
-    }
-  }
+    leadService.findByIdAndDelete(id);
+   }
 
 }

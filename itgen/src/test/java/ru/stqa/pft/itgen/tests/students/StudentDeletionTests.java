@@ -6,10 +6,13 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
@@ -22,20 +25,19 @@ public class StudentDeletionTests extends TestBase {
   public void ensurePreconditions() {
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("studentDelete").withTrialBonusOff(false).withTierId("txa")
-            .withTierHistory(Collections.singletonList(new FamilyData.TierHistory().withTierHistory("")));
-    familyService.create(family);
+    FamilyData family = new FamilyData().withId("studentDelete").withTrialBonusOff(false).withTierId("txa");
+    familyService.save(family);
 
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("studentDelete").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new StudentData.Roles().withRoles("child")))
+            .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
             .withFamilyId("studentDelete").withStudyLang("ru").withLocate("ru")
             .withBirthday(new Date(1556726891000L))
-            .withLangs(Collections.singletonList(new StudentData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new StudentData.Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new StudentData.Status().withState("noTrial"));
-    studentService.create(student);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2).withStatus(new Status().withState("noTrial"));
+    studentService.save(student);
   }
 
   @Test
@@ -48,7 +50,7 @@ public class StudentDeletionTests extends TestBase {
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() - 1));
 
-    for (StudentData student : before) { //найти в списке "до" родителя с таким id
+    for (StudentData student : before) {
       if (student.getId().equals("studentDelete")) {
         assertThat(after, equalTo(before.without(student)));
         return;
@@ -59,13 +61,9 @@ public class StudentDeletionTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    FamilyService familyService = new FamilyService();
-    FamilyData familyClean = familyService.findById("studentDelete");
-    familyService.delete(familyClean);
     StudentService studentService = new StudentService();
-    StudentData studentClean = studentService.findById("studentDelete");
-    if (studentClean != null) {
-      studentService.delete(studentClean);
-    }
+    studentService.findByIdAndDelete("studentDelete");
+    FamilyService familyService = new FamilyService();
+    familyService.findByIdAndDelete("studentDelete");
   }
 }

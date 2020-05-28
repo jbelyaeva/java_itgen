@@ -1,6 +1,7 @@
 package ru.stqa.pft.itgen.services;
 
 import ru.stqa.pft.itgen.dao.ParentDao;
+import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.ParentData;
 
 public class ParentService {
@@ -14,10 +15,10 @@ public class ParentService {
   }
 
   public void create(ParentData parent) {
-    parentDao.create(parent);
+    parentDao.save(parent);
   }
 
-  public void delete(ParentData parent) {
-    parentDao.delete(parent);
+  public ParentData findByIdAndDelete(String id) {
+    return parentDao.findByIdAndDelete(id);
   }
 }

@@ -1,36 +1,27 @@
 package ru.stqa.pft.itgen.dao;
+
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
 
 import javax.persistence.EntityManager;
 
 import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
+import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class TrainerDao {
 
-  public TrainerData findById(String id) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    TrainerData trainer = entityManager.find( TrainerData.class, id);
-    entityManager.getTransaction().commit();
-    entityManager.close();
+  public void save(TrainerData trainer) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    datastore.save(trainer);
+  }
+
+  public TrainerData findByIdAndDelete(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TrainerData> query = datastore.createQuery(TrainerData.class).filter("id", id);
+    TrainerData trainer = datastore.findAndDelete(query);
     return trainer;
-  }
-
-  public void create( TrainerData trainer) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.persist(trainer);
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
-
-  public void delete( TrainerData trainer) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(trainer));
-    entityManager.getTransaction().commit();
-    entityManager.close();
   }
 }
 

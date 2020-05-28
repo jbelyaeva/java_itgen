@@ -36,7 +36,7 @@ public class TrainerHelper extends HelperBase {
   public void btnSaveModify() {
     click(By.cssSelector("button.btn.btn-primary.btn-save-profile"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
-    }
+  }
 
   public void modifiTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
@@ -192,12 +192,6 @@ public class TrainerHelper extends HelperBase {
     selectTrainerById(deletedTrainer);
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
-  }
-
-  public TrainerData findTrainer(String id) {
-    TrainerService trainerService = new TrainerService();
-    TrainerData trainerClean = trainerService.findById(id);
-    return trainerClean;
   }
 
   public void modify(TrainerData trainer) {

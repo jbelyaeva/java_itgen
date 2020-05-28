@@ -5,8 +5,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 import ru.stqa.pft.itgen.services.TrainerService;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
@@ -20,15 +23,15 @@ public class TrainerDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     TrainerService trainerService = new TrainerService();
-    TrainerData trainer = new TrainerData().withId("trainerDelete").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new TrainerData.Roles().withRoles("trainer")))
+    deletedTrainer = new TrainerData().withId("trainerDelete").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Arrays.asList("trainer", "employee"))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L)).withGender(2)
-            .withLangs(Collections.singletonList(new TrainerData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new TrainerData.Contacts().withType("phone").withVal("1234567899")))
-            .withEmails(Collections.singletonList(new TrainerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
-    trainerService.create(trainer);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
+    trainerService.save(deletedTrainer);
 
   }
 
@@ -37,7 +40,6 @@ public class TrainerDeletionTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
-    deletedTrainer = app.trainer().findTrainer("trainerDelete");
     app.trainer().delete(deletedTrainer);
     Trainers after = app.db().trainers();
     assertThat(after, equalTo(before.without(deletedTrainer)));
@@ -47,9 +49,6 @@ public class TrainerDeletionTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     TrainerService trainerService = new TrainerService();
-    TrainerData trainerClean = trainerService.findById("trainerDelete");
-    if (trainerClean != null) {
-      trainerService.delete(trainerClean);
-    }
+    trainerService.findByIdAndDelete("trainerDelete");
   }
 }

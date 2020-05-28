@@ -1,24 +1,27 @@
 package ru.stqa.pft.itgen.model;
 
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "families")
+@dev.morphia.annotations.Entity("families")
+
 public class FamilyData {
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
-  @Column(name = " isTrialBonusOff")
+  @Property("isTrialBonusOff")
   private Boolean isTrialBonusOff;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "tierHistory")
-  private List<FamilyData.TierHistory> tierHistory = new ArrayList<FamilyData.TierHistory>();
+ // @ElementCollection(fetch = FetchType.EAGER)
+  @Property("tierHistory")
+  private List<String> tierHistory = new ArrayList<String>();
 
-  @Embeddable
+ // @dev.morphia.annotations.Embedded("tierHistory")
   public static class TierHistory {
     private String tierHistory;
 
@@ -32,7 +35,7 @@ public class FamilyData {
     }
   }
 
-  @Column(name = "tierId")
+  @Property("tierId")
   private String tierId;
 
   //сеттеры
@@ -46,7 +49,7 @@ public class FamilyData {
     return this;
   }
 
-  public FamilyData withTierHistory(List<TierHistory> tierHistory) {
+  public FamilyData withTierHistory(List<String> tierHistory) {
     this.tierHistory = tierHistory;
     return this;
   }
@@ -67,7 +70,7 @@ public class FamilyData {
     return isTrialBonusOff;
   }
 
-  public List<TierHistory> getTierHistory() {
+  public List<String> getTierHistory() {
     return tierHistory;
   }
 

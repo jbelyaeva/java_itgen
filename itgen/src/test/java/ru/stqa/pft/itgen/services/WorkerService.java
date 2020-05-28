@@ -12,15 +12,15 @@ public class WorkerService {
   public WorkerService() {
   }
 
-  public WorkerData findById(String id) {
-    return workerDao.findById(id);
+  public WorkerData findByIdAndDelete(String id) {
+    return workerDao.findByIdAndDelete(id);
   }
 
   public void create(WorkerData worker) {
-    workerDao.create(worker);
+    workerDao.save(worker);
   }
 
-  public void delete(WorkerData worker) {
-    workerDao.delete(worker);
-  }
+  //public void delete(WorkerData worker) {
+   // workerDao.delete(worker);
+ // }
 }

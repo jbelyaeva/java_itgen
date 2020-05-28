@@ -226,15 +226,25 @@ public class StudentHelper extends HelperBase {
     return getIdAfter;
   }
 
+  public StudentData getNewStudentDB(Students before, Students after) {
+    boolean a = true;
+    StudentData getIdAfter = null;
+    for (StudentData student : after) {
+      getIdAfter = student;
+      for (StudentData student_before : before) {
+       StudentData getIdBefore = student_before;
+        if (getIdAfter.equals(getIdBefore)) {
+          a = false;
+          break;
+        } }
+      if (a) {break;}
+    }
+    return getIdAfter;
+  }
+
   public void delete() {
     btnDeleteStudent();
     assertDeleteSelectedStudent();
-  }
-
-  public StudentData findDeletedStudent(String url) {
-    String idDeletedStudent = getId(url);
-    StudentService studentService = new StudentService();
-    return studentService.findById(idDeletedStudent);
   }
 
 
