@@ -20,9 +20,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleSingleBlockTests extends TestBase {
-  ArrayList<C> list = new ArrayList();
-  String period="21:00 - 23:00";
-  String note="Заблокировать расписание";
+  ArrayList<C> list = new ArrayList<>();
+  String period = "21:00 - 23:00";
+  String note = "Заблокировать расписание";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -47,10 +47,10 @@ public class ScheduleSingleBlockTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.schedule().block("scheduleSingleBlock",note);
+    app.schedule().block("scheduleSingleBlock", note);
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(before,after);
+    check(before, after);
   }
 
   @AfterMethod(alwaysRun = true)

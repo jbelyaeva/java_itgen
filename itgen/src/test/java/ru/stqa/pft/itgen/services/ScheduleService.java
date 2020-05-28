@@ -20,8 +20,4 @@ public class ScheduleService {
   public void save(ScheduleData schedule) {
     scheduleDao.save(schedule);
   }
-
-  public void delete(ScheduleData schedule) {
-    scheduleDao.delete(schedule);
-  }
-}
+ }

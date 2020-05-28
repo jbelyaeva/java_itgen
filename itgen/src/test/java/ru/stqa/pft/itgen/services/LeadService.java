@@ -16,10 +16,10 @@ public class LeadService {
   }
 
   public void create(LeadData lead) {
-    leadDao.create(lead);
+    leadDao.save(lead);
   }
 
-  public void delete(LeadData lead) {
-    leadDao.delete(lead);
+  public void findByIdAndDelete(String id) {
+    leadDao.findByIdAndDelete(id);
   }
 }

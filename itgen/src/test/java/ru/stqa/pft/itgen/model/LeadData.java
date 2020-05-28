@@ -2,129 +2,57 @@ package ru.stqa.pft.itgen.model;
 
 
 import com.google.gson.annotations.Expose;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import dev.morphia.annotations.Transient;
+import ru.stqa.pft.itgen.model.Schedule.Times;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Status;
+import ru.stqa.pft.itgen.model.users.Utm;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "leads")
+@Entity("leads")
 public class LeadData {
 
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
   @Expose
-  @Column(name = "firstName")
+  @Property("firstName")
   private String firstname;
 
   @Expose
-  @Column(name = "lastName")
+  @Property("lastName")
   private String lastname;
 
   @Expose
-  @Column(name = "country")
+  @Property("country")
   private String country;
 
   @Expose
-  @Column(name = "city")
+  @Property("city")
   private String city;
 
   @Expose
-  @Column(name = "tz")
+  @Property("tz")
   private String timezone;
 
   @Expose
-  @Column(name = "locale")
+  @Property("locale")
   private String locate;
 
-  @Column(name="utm")
-  Utm utm;
-  @Embeddable
-  public static class Utm {
-    private String source;
-    private String medium;
-    private String campaing;
-    private String term;
-    private String content;
+  @Embedded
+  private Utm utm;
 
-    public Utm withSource(String source) {
-      this.source = source;
-      return this;
-    }
-
-    public Utm withMedium(String medium) {
-      this.medium = medium;
-      return this;
-    }
-
-    public Utm withCampaing(String campaing) {
-      this.campaing = campaing;
-      return this;
-    }
-
-    public Utm withTerm(String term) {
-      this.term = term;
-      return this;
-    }
-
-    public Utm withContent(String content) {
-      this.content = content;
-      return this;
-    }
-
-    public String getSource() {
-      return source;
-    }
-    public String getMedium() {
-      return medium;
-    }
-    public String getCampaing() {return campaing;}
-    public String getTerm() {
-      return term;
-    }
-    public String getContent() {
-      return content;
-    }
-  }
-
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "contacts")
+  @Embedded
   private List<Contacts> contacts = new ArrayList<Contacts>();
-
-  @Embeddable
-  public static class Contacts {
-    private String type;
-    private String val;
-
-    public Contacts withType(String type) {
-      this.type = type;
-      return this;
-    }
-
-    public Contacts withVal(String val) {
-      this.val = val;
-      return this;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    public String getVal() {
-      return val;
-    }
-
-    @Override
-    public String toString() {
-      return "Contacts{" +
-              "type='" + type + '\'' +
-              ", val='" + val + '\'' +
-              '}';
-    }
-  }
 
   @Expose
   @Transient
@@ -169,31 +97,10 @@ public class LeadData {
   @Expose
   private String roleUi;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "roles")
-  private List<Roles> roles = new ArrayList<Roles>();
+  @Property("roles")
+  private List<String> roles= new ArrayList<>();
 
-  @Embeddable
-  public static class Roles {
-    private String roles;
-
-    public Roles withRoles(String type) {
-      this.roles = type;
-      return this;
-    }
-
-    public String getRoles() {
-      return roles;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              roles;
-    }
-  }
-
-  @Column(name = "status")
+  @Property("status")
   private String status;
 
   public LeadData withId(String id) {
@@ -291,7 +198,7 @@ public class LeadData {
     return this;
   }
 
-  public LeadData withRoles(List<Roles> roles) {
+  public LeadData withRoles(List<String> roles) {
     this.roles = roles;
     return this;
   }
@@ -315,7 +222,7 @@ public class LeadData {
     return status;
   }
 
-  public List<Roles> getRoles() {
+  public List<String> getRoles() {
     return roles;
   }
 

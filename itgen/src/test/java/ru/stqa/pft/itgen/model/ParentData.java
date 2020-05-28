@@ -1,6 +1,8 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import ru.stqa.pft.itgen.model.users.Contacts;
 
@@ -9,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@dev.morphia.annotations.Entity("users")
+@Entity("users")
 public class ParentData {
   @Expose
-  @dev.morphia.annotations.Id
+  @Id
   @Property("_id")
   private String id;
 

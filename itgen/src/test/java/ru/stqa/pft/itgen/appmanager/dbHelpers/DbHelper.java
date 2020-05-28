@@ -12,60 +12,54 @@ import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactor
 
 public class DbHelper {
 
-   public Families families() {
-     Datastore datastore = morphiaSessionFactoryUtil();
-     Query<FamilyData> query = datastore.createQuery(FamilyData.class);
-     List<FamilyData> family = query.find().toList();
-     return new Families(family);
+  public Families families() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<FamilyData> q = datastore.createQuery(FamilyData.class);
+    List<FamilyData> family = q.find().toList();
+    return new Families(family);
   }
-
 
   public Students familyComposition(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> q = datastore.createQuery(StudentData.class);
-
     q.or(
-            q.criteria("roles").equal("child").and( q.criteria("roles").equal("child")),
-            q.criteria("familyId").equal(id)
-    );
+            (q.and(q.criteria("roles").equal("child"), q.criteria("familyId").equal(id))),
+            q.and(q.criteria("roles").equal("parent"), q.criteria("familyId").equal(id)));
 
     List<StudentData> students = q.find().toList();
     return new Students(students);
   }
 
   public Parents parents() {
-     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<ParentData> query = datastore.createQuery(ParentData.class).filter("roles", "parent");
-    List<ParentData> parents = query.find().toList();
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");
+    List<ParentData> parents = q.find().toList();
     return new Parents(parents);
   }
 
   public Workers workers() {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "{ $query : { roles : {$nin :['trainer','child','parent']}}}";
-    List<WorkerData> workers = entityManager.createNativeQuery(query, WorkerData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<WorkerData> q = datastore.createQuery(WorkerData.class);
+    q.and(
+            q.criteria("roles").notEqual("trainer"),
+            q.criteria("roles").notEqual("child"),
+            q.criteria("roles").notEqual("parent")
+    );
+    List<WorkerData> workers = q.find().toList();
     return new Workers(workers);
   }
 
   public Trainers trainers() {
-    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "{ $query : { roles : 'trainer'} }";
-    List<TrainerData> trainers = entityManager.createNativeQuery(query, TrainerData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TrainerData> q = datastore.createQuery(TrainerData.class).filter("roles", "trainer");
+    List<TrainerData> trainers = q.find().toList();
     return new Trainers(trainers);
   }
+
   public Leads leads() {
-    EntityManager entityManager =hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    String query = "from LeadData";
-    List<LeadData> leads = entityManager.createQuery(query, LeadData.class).getResultList();
-    entityManager.getTransaction().commit();
-    entityManager.close();
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<LeadData> q = datastore.createQuery(LeadData.class);
+    List<LeadData> leads = q.find().toList();
     return new Leads(leads);
   }
 

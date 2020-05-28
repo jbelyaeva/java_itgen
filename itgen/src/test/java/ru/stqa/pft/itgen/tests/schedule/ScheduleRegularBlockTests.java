@@ -22,8 +22,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ScheduleRegularBlockTests extends TestBase {
   ArrayList<C> list = new ArrayList();
   String period="21:00 - 23:00";
-  String note="Заблокировать расписание";
   int week=604800000;
+  String note="заблок";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -62,6 +62,7 @@ public class ScheduleRegularBlockTests extends TestBase {
     scheduleService.save(schedule);
 
   }
+
 
   @Test
   public void testScheduleRegularBlock() {
@@ -121,5 +122,4 @@ public class ScheduleRegularBlockTests extends TestBase {
       }
     }
   }
-
 }

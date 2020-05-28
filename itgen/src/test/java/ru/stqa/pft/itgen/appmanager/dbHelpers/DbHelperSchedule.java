@@ -13,7 +13,7 @@ public class DbHelperSchedule {
   // вся коллекция расписания
   public Schedules schedules() {
     Datastore datastore = morphiaSessionFactoryUtil();
-   Query<ScheduleData> query = datastore.createQuery(ScheduleData.class);
+    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class);
     List<ScheduleData> schedules = query.find().toList();
     return new Schedules(schedules);
   }

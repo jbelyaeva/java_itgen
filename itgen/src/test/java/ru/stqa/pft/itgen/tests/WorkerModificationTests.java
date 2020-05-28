@@ -10,16 +10,15 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 import ru.stqa.pft.itgen.services.WorkerService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -48,17 +47,15 @@ public class WorkerModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
   WorkerService workerService = new WorkerService();
-  WorkerData workerClean = workerService.findById("workerModify");// проверка для стабилизации на случай форс-мажора
-    if (workerClean != null) { workerService.delete(workerClean); }
-  WorkerData worker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
-          .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
+   modifydWorker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
+          .withRoles(Arrays.asList("employee"))
           .withCountry("AL").withTimeZone("Europe/Minsk")
           .withLocate("ru")
           .withBirthday(new Date(1556726891000L))
-          .withLangs(Collections.singletonList(new WorkerData.Langs().withLangs("ru")))
-          .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
-          .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
-    workerService.create(worker);
+          .withLangs(Arrays.asList("ru"))
+          .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+          .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
+    workerService.create(modifydWorker);
 }
 
   @Test(dataProvider = "validWorkersFromJson")
@@ -66,8 +63,7 @@ public class WorkerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    modifydWorker = app.worker().findWorker("workerModify");
-    app.worker().modificationWorker(worker, modifydWorker);
+    app.worker().modificationWorker(worker, "workerModify");
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());
@@ -80,10 +76,7 @@ public class WorkerModificationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById("workerModify");
-    if (workerClean != null) {
-      workerService.delete(workerClean);
-    }
-  }
+    workerService.findByIdAndDelete("workerModify");
+   }
 
  }

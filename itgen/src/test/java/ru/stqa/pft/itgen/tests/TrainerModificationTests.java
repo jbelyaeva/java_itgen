@@ -8,6 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.Trainers;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 import ru.stqa.pft.itgen.services.TrainerService;
 
 import java.io.BufferedReader;
@@ -44,20 +46,20 @@ public class TrainerModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     TrainerService trainerService = new TrainerService();
-    TrainerData trainer = new TrainerData().withId("trainerModify").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList(new TrainerData.Roles().withRoles("trainer"), new TrainerData.Roles().withRoles("employee")))
+    modifyTrainer = new TrainerData().withId("trainerModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Arrays.asList("trainer", "employee"))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
-            .withStartWork(new Date())
+            .withStartWorkAt(new Date())
             .withCreatedAt(new Date())
             .withGender(2)
             .withMaxSlots(4)
             .withPayBase(5)
-            .withLangs(Collections.singletonList(new TrainerData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new TrainerData.Contacts().withType("phone").withVal("1234567899")))
-            .withEmails(Collections.singletonList(new TrainerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
-    trainerService.create(trainer);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
+    trainerService.save(modifyTrainer);
   }
 
   @Test(dataProvider = "validWorkersTrainersFromJson")
@@ -65,7 +67,6 @@ public class TrainerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
-    modifyTrainer = app.trainer().findTrainer("trainerModify");
     app.trainer().selectTrainerById(modifyTrainer);
     app.trainer().modify(trainer);
     Trainers after = app.db().trainers();
@@ -73,15 +74,11 @@ public class TrainerModificationTests extends TestBase {
     TrainerData trainerAdd = trainer.withId(modifyTrainer.getId());
     assertThat(after, equalTo(before.without(modifyTrainer).withAdded(trainerAdd)));
     verifyTrainerListInUI();
-
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     TrainerService trainerService = new TrainerService();
-    TrainerData trainerClean = trainerService.findById("trainerModify");
-    if (trainerClean != null) {
-      trainerService.delete(trainerClean);
+    trainerService.findByIdAndDelete("trainerModify");
     }
-  }
 }

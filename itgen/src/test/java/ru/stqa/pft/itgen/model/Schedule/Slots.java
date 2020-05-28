@@ -63,16 +63,6 @@ public class Slots {
   }
 
   @Override
-  public String toString() {
-    return "Slots{" +
-            "w=" + w +
-            ", id='" + id + '\'' +
-            ", st=" + st +
-            ", c=" + c +
-            '}';
-  }
-
-  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -89,5 +79,19 @@ public class Slots {
   @Override
   public int hashCode() {
     return Objects.hash(w, id, st, c, blocked, blockDesc, cancelled);
+  }
+
+  @Override
+  public String toString() {
+    return "Slots{" +
+            "w=" + w +
+            ", id='" + id + '\'' +
+            ", st=" + st +
+            ", c=" + c +
+            ", blocked=" + blocked +
+            ", blockDesc='" + blockDesc + '\'' +
+            ", cancelled=" + cancelled +
+            ", cancelledAt=" + cancelledAt +
+            '}';
   }
 }

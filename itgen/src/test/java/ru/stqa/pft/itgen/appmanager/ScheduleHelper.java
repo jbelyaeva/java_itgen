@@ -30,15 +30,17 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectBlock() {
-    click(By.xpath("//a[contains(@class,'block')]"));
-  }
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class,'block')]")));
+    dynamicElement.click();
+   }
 
   private void selectAssign() {
     click(By.xpath("//a[contains(@class,'assign')]"));
   }
 
   public void writeNote(String note) {
-    type(By.name("block-desc"), note);
+   type(By.name("block-desc"), note);
   }
 
   private void selectOnAllSchedule() {
@@ -192,8 +194,10 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnBlock() {
-    click(By.xpath(" //button[contains(@class,'block')]"));
-  }
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'block')]")));
+    dynamicElement.click();
+   }
 
   private void btnAssign() {
     click(By.xpath(" //button[contains(@class,'assign')]"));

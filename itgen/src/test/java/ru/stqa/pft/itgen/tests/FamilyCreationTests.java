@@ -60,7 +60,7 @@ public class FamilyCreationTests extends TestBase {
     familyService.findByIdAndDelete(idFamily);
     Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
     StudentService studentService = new StudentService();
-    for (StudentData studentClean : students)
+     for (StudentData studentClean : students)
       studentService.delete(studentClean);
-      }
+       }
   }

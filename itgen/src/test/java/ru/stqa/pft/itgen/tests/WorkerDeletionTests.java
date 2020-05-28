@@ -6,8 +6,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 import ru.stqa.pft.itgen.services.WorkerService;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
@@ -20,17 +23,15 @@ public class WorkerDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById("workerDelete");// проверка для стабилизации на случай форс-мажора
-    if (workerClean != null) { workerService.delete(workerClean); }
-    WorkerData worker = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Collections.singletonList(new WorkerData.Roles().withRoles("employee")))
+    deletedWorker = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Arrays.asList("employee"))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
-            .withLangs(Collections.singletonList(new WorkerData.Langs().withLangs("ru")))
-            .withContacts(Collections.singletonList(new WorkerData.Contacts().withType("phone").withVal("1234567899")))
-            .withEmails(Collections.singletonList(new WorkerData.Emails().withAddress("julja83@list.ru").withVerified(true)));
-    workerService.create(worker);
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
+    workerService.create(deletedWorker);
   }
 
   @Test
@@ -38,8 +39,7 @@ public class WorkerDeletionTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    deletedWorker = app.worker().findWorker("workerDelete");
-    app.worker().deletionWorker(deletedWorker);
+    app.worker().deletionWorker("workerDelete");
     Workers after = app.db().workers();
     assertThat(after.size(),equalTo(before.size()-1));
     assertThat(after, equalTo(before.without(deletedWorker)));
@@ -49,9 +49,6 @@ public class WorkerDeletionTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    WorkerData workerClean = workerService.findById("workerDelete");
-    if (workerClean != null) {
-      workerService.delete(workerClean);
-    }
+    workerService.findByIdAndDelete("workerDelete");
   }
 }

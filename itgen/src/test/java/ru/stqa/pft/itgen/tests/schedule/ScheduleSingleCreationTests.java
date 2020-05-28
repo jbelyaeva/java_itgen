@@ -13,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleSingleCreationTests extends TestBase {
   String idSchedule;
+
   @Test
   public void testScheduleSingleCreation() {
     app.goTo().menuTasks();

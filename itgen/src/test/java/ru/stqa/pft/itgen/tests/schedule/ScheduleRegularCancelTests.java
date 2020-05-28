@@ -79,7 +79,7 @@ public class ScheduleRegularCancelTests extends TestBase {
     scheduleService.findByIdAndDelete("scheduleRegularCancel");
   }
 
-  private void check(Schedules before, Schedules after) {
+  private void check(Schedules after, Schedules before) {
     ScheduleData scheduleAdd = new ScheduleData()
             .withId("scheduleRegularCancel")
             .withVer(0)

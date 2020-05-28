@@ -15,8 +15,6 @@ public class ScheduleDao {
 
   public Schedules schedules() {
     Datastore datastore = morphiaSessionFactoryUtil();
-   /* List<ScheduleData> schedules  = datastore.createQuery(ScheduleData.class)
-            .filter("ver", 3).asList();*/
     Query<ScheduleData> query = datastore.createQuery(ScheduleData.class);
     List<ScheduleData> schedules = query.find().toList();
     return new Schedules(schedules);
@@ -32,18 +30,8 @@ public class ScheduleDao {
 
   public void save(ScheduleData schedule) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    //boolean storeEmpties = datastore.getMapper().getOptions().isStoreEmpties();
     datastore.save(schedule);
   }
 
-
-
-  public void delete(ScheduleData schedule) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    entityManager.remove(entityManager.merge(schedule));
-    entityManager.getTransaction().commit();
-    entityManager.close();
-  }
 }
 

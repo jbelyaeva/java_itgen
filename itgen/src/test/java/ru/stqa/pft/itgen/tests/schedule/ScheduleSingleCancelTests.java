@@ -20,8 +20,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleSingleCancelTests extends TestBase {
-  ArrayList<C> list = new ArrayList();
-  String period="21:00 - 23:00";
+  ArrayList<C> list = new ArrayList<>();
+  String period = "21:00 - 23:00";
 
 
   @BeforeMethod
@@ -44,13 +44,14 @@ public class ScheduleSingleCancelTests extends TestBase {
 
   @Test
   public void testScheduleSingleCancel() {
-   app.goTo().menuTasks();
+    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().cancel("scheduleSingleCancel");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(after,before);
+
+     check(after, before);
   }
 
   @AfterMethod(alwaysRun = true)
@@ -59,7 +60,7 @@ public class ScheduleSingleCancelTests extends TestBase {
     scheduleService.findByIdAndDelete("scheduleSingleCancel");
   }
 
-  private void check(Schedules before, Schedules after) {
+  private void check(Schedules after, Schedules before) {
     ScheduleData scheduleAdd = new ScheduleData()
             .withId("scheduleSingleCancel")
             .withVer(0)
@@ -74,7 +75,7 @@ public class ScheduleSingleCancelTests extends TestBase {
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
       if (scheduleBefore.getId().equals("scheduleSingleCancel")) {
-        Schedules aaa=before.without(scheduleBefore).withAdded(scheduleAdd);
+        Schedules aaa = before.without(scheduleBefore).withAdded(scheduleAdd);
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }

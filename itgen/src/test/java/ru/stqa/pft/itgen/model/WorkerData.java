@@ -1,124 +1,46 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
+import dev.morphia.annotations.*;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "users")
+@Entity("users")
 public class WorkerData {
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
   @Expose
-  @Column(name = "firstName")
+  @Property("firstName")
   private String firstName;
 
   @Expose
-  @Column(name = "lastName")
+  @Property("lastName")
   private String lastName;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "langs")
-  private List<WorkerData.Langs> langs = new ArrayList<WorkerData.Langs>();
-
-  @Embeddable
-  public static class Langs {
-    private String langs;
-
-    public WorkerData.Langs withLangs(String type) {
-      this.langs = type;
-      return this;
-    }
-
-    public String getLangs() {
-      return langs;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              langs;
-    }
-  }
-
+  @Property("langs")
+  private List<String> langs= new ArrayList<>();
 
   @Expose
   private String emailUI;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "emails")
-  private List<WorkerData.Emails> emails = new ArrayList<WorkerData.Emails>();
+  @Embedded("emails")
+  private List<Emails> emails = new ArrayList<Emails>();
 
-  @Embeddable
-  public static class Emails {
-    private String address;
-    private Boolean verified;
+  @Property("roles")
+  private List<String> roles= new ArrayList<>();
 
-    public WorkerData.Emails withAddress(String address) {
-      this.address = address;
-      return this;
-    }
-
-    public WorkerData.Emails withVerified(Boolean verified) {
-      this.verified = verified;
-      return this;
-    }
-
-    public String getAddress() {
-      return address;
-    }
-
-    public Boolean getVerified() {
-      return verified;
-    }
-
-    @Override
-    public String toString() {
-      return "Emails{" +
-              "address='" + address + '\'' +
-              ", verified='" + verified + '\'' +
-              '}';
-    }
-  }
-
-
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "roles")
-  private List<WorkerData.Roles> roles = new ArrayList<WorkerData.Roles>();
-
-  @Embeddable
-  public static class Roles {
-    private String roles;
-
-    public WorkerData.Roles withRoles(String type) {
-      this.roles = type;
-      return this;
-    }
-
-    public String getRoles() {
-      return roles;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              roles;
-    }
-  }
-
-
-  @Expose
+    @Expose
   private String roleUi;
 
   @Expose
-  @Column(name = "startWorkAt")
-  @Temporal(TemporalType.DATE)
+  @Property("startWorkAt")
   private Date startDay;
 
   @Expose
@@ -126,8 +48,7 @@ public class WorkerData {
 
   @Expose
   @Transient
-  @Column(name = "birthday")
-  @Temporal(TemporalType.DATE)
+  @Property("birthday")
   private Date birthDay;
 
   @Expose
@@ -143,48 +64,15 @@ public class WorkerData {
   private String city;
 
   @Expose
-  @Column(name = "tz")
+  @Property("tz")
   private String timeZone;
 
   @Expose
-  @Column(name = "locale")
+  @Property("locale")
   private String locate;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "contacts")
-  private List<WorkerData.Contacts> contacts = new ArrayList<WorkerData.Contacts>();
-
-  @Embeddable
-  public static class Contacts {
-    private String type;
-    private String val;
-
-    public WorkerData.Contacts withType(String type) {
-      this.type = type;
-      return this;
-    }
-
-    public WorkerData.Contacts withVal(String val) {
-      this.val = val;
-      return this;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    public String getVal() {
-      return val;
-    }
-
-    @Override
-    public String toString() {
-      return "Contacts{" +
-              "type='" + type + '\'' +
-              ", val='" + val + '\'' +
-              '}';
-    }
-  }
+  @Embedded
+  private List<Contacts> contacts = new ArrayList<Contacts>();
 
   @Expose
   private String phone;
@@ -230,7 +118,7 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withLangs(List<WorkerData.Langs> langs) {
+  public WorkerData withLangs(List<String> langs) {
     this.langs = langs;
     return this;
   }
@@ -240,12 +128,12 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withEmails(List<WorkerData.Emails> emails) {
+  public WorkerData withEmails(List<Emails> emails) {
     this.emails = emails;
     return this;
   }
 
-  public WorkerData withRoles(List<WorkerData.Roles> roles) {
+  public WorkerData withRoles(List<String> roles) {
     this.roles = roles;
     return this;
   }
@@ -300,7 +188,7 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withContacts(List<WorkerData.Contacts> contacts) {
+  public WorkerData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
     return this;
   }
@@ -364,7 +252,7 @@ public class WorkerData {
     return lastName;
   }
 
-  public List<WorkerData.Langs> getLangs() {
+  public List<String> getLangs() {
     return langs;
   }
 
@@ -372,11 +260,11 @@ public class WorkerData {
     return emailUI;
   }
 
-  public List<WorkerData.Emails> getEmails() {
+  public List<Emails> getEmails() {
     return emails;
   }
 
-  public List<WorkerData.Roles> getRoles() {
+  public List<String> getRoles() {
     return roles;
   }
 
@@ -420,7 +308,7 @@ public class WorkerData {
     return locate;
   }
 
-  public List<WorkerData.Contacts> getContacts() {
+  public List<Contacts> getContacts() {
     return contacts;
   }
 

@@ -9,12 +9,15 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.LeadData;
 import ru.stqa.pft.itgen.model.Leads;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Utm;
 import ru.stqa.pft.itgen.services.LeadService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -45,10 +48,10 @@ public class LeadModificationTest extends TestBase{
   public void ensurePreconditions() {
     LeadService leadService = new LeadService();
     LeadData lead = new LeadData().withId("forLeadModify").withFirstName("Лид").withLastName("Лидов")
-            .withRoles(Collections.singletonList(new LeadData.Roles().withRoles("child")))
+            .withRoles(Arrays.asList("child"))
             .withCountry("AL").withTimeZone("Europe/Minsk").withLocate("ru")
-            .withContacts(Collections.singletonList(new LeadData.Contacts().withType("phone").withVal("1234567899")))
-            .withStatus("new").withUtm(new LeadData.Utm().withSource("site").withMedium("manual"));
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withStatus("new").withUtm(new Utm().withSource("site").withMedium("manual"));
     leadService.create(lead);
   }
 
@@ -76,10 +79,7 @@ public class LeadModificationTest extends TestBase{
   @AfterMethod(alwaysRun = true)
   public void clean() {
     LeadService leadService = new LeadService();
-    LeadData leadClean = leadService.findById("forLeadModify");
-    if (leadClean != null) {
-      leadService.delete(leadClean);
+    leadService.findByIdAndDelete("forLeadModify");
     }
-  }
 
 }

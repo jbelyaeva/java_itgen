@@ -1,204 +1,91 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
+import dev.morphia.annotations.*;
+import ru.stqa.pft.itgen.model.users.Contacts;
+import ru.stqa.pft.itgen.model.users.Emails;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "users")
+@Entity("users")
+
 public class TrainerData {
   @Id
-  @Column(name = "_id")
+  @Property("_id")
   private String id;
 
   @Expose
-  @Column(name = "firstName")
+  @Property("firstName")
   private String firstName;
 
   @Expose
-  @Column(name = "lastName")
+  @Property("lastName")
   private String lastName;
 
   @Expose
-  @Column(name = "startWorkAt")
-  @Temporal(TemporalType.DATE)
-  private Date startWork;
+  @Property("startWorkAt")
+  private Date startWorkAt;
 
   @Expose
-  @Column(name = "createdAt")
-  @Temporal(TemporalType.DATE)
+  @Property("createAt")
   private Date createdAt;
 
   @Expose
   private String startWorkUi;
 
   @Expose
-  @Column(name = "birthday")
-  @Temporal(TemporalType.DATE)
+  @Property("birthday")
   private Date birthday;
 
   @Expose
   private String birthdayUi;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "langs")
-  private List<TrainerData.Langs> langs = new ArrayList<TrainerData.Langs>();
-
-  @Embeddable
-  public static class Langs {
-    private String langs;
-
-    public TrainerData.Langs withLangs(String type) {
-      this.langs = type;
-      return this;
-    }
-
-    public String getLangs() {
-      return langs;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              langs;
-    }
-  }
+  @Property("langs")
+  private List<String> langs= new ArrayList<>();
 
   @Expose
-  @Column(name = "gender")
+  @Property("gender")
   private Integer gender;
 
   @Expose
-  @Column(name = "maxSlots")
+  @Property("maxSlots")
   private Integer maxSlots;
 
   @Expose
   private String country;
 
   @Expose
-  @Column(name = "tz")
+  @Property("tz")
   private String timeZone;
 
   @Expose
-  @Column(name = "locale")
+  @Property("locale")
   private String locate;
 
   @Expose
   private String city;
 
-
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "roles")
-  private List<TrainerData.Roles> roles = new ArrayList<TrainerData.Roles>();
-
-  @Embeddable
-  public static class Roles {
-    private String roles;
-
-    public TrainerData.Roles withRoles(String type) {
-      this.roles = type;
-      return this;
-    }
-
-    public String getRoles() {
-      return roles;
-    }
-
-    @Override
-    public String toString() {
-      return "" +
-              roles;
-    }
-  }
-
+  @Property("roles")
+  private List<String> roles= new ArrayList<>();
 
   @Expose
   private String roleUi;
 
-
   @Expose
-  @Column(name = "payBase")
+  @Property("payBase")
   private Integer payBase;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "contacts")
-  private List<TrainerData.Contacts> contacts = new ArrayList<TrainerData.Contacts>();
-
-  @Embeddable
-  public static class Contacts {
-    private String type;
-    private String val;
-
-    public TrainerData.Contacts withType(String type) {
-      this.type = type;
-      return this;
-    }
-
-    public TrainerData.Contacts withVal(String val) {
-      this.val = val;
-      return this;
-    }
-
-    public String getType() {
-      return type;
-    }
-
-    public String getVal() {
-      return val;
-    }
-
-    @Override
-    public String toString() {
-      return "Contacts{" +
-              "type='" + type + '\'' +
-              ", val='" + val + '\'' +
-              '}';
-    }
-  }
+  @Embedded
+  private List<Contacts> contacts = new ArrayList<Contacts>();
 
   @Expose
   private String emailUI;
 
-  @ElementCollection(fetch = FetchType.EAGER)
-  @Column(name = "emails")
-  private List<TrainerData.Emails> emails = new ArrayList<TrainerData.Emails>();
-
-  @Embeddable
-  public static class Emails {
-    private String address;
-    private Boolean verified;
-
-    public TrainerData.Emails withAddress(String address) {
-      this.address = address;
-      return this;
-    }
-
-    public TrainerData.Emails withVerified(Boolean verified) {
-      this.verified = verified;
-      return this;
-    }
-
-    public String getAddress() {
-      return address;
-    }
-
-    public Boolean getVerified() {
-      return verified;
-    }
-
-    @Override
-    public String toString() {
-      return "Emails{" +
-              "address='" + address + '\'' +
-              ", verified='" + verified + '\'' +
-              '}';
-    }
-  }
-
+  @Embedded("emails")
+  private List<Emails> emails = new ArrayList<Emails>();
 
   @Expose
   private String phone;
@@ -259,8 +146,8 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withStartWork(Date startWork) {
-    this.startWork = startWork;
+  public TrainerData withStartWorkAt(Date startWorkAt) {
+    this.startWorkAt = startWorkAt;
     return this;
   }
 
@@ -274,7 +161,7 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withLangs(List<TrainerData.Langs> langs) {
+  public TrainerData withLangs(List<String> langs) {
     this.langs = langs;
     return this;
   }
@@ -285,7 +172,7 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withRoles(List<TrainerData.Roles> roles) {
+  public TrainerData withRoles(List<String> roles) {
     this.roles = roles;
     return this;
   }
@@ -324,7 +211,7 @@ public class TrainerData {
     this.payBase = payBase;
     return this;
   }
-  public TrainerData withContacts(List<TrainerData.Contacts> contacts) {
+  public TrainerData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
     return this;
   }
@@ -334,7 +221,7 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withEmails (List<TrainerData.Emails> emails) {
+  public TrainerData withEmails (List<Emails> emails) {
     this.emails = emails;
     return this;
   }
@@ -409,7 +296,7 @@ public class TrainerData {
   }
 
   public Date getStartWork() {
-    return startWork;
+    return startWorkAt;
   }
 
   public Date getCreatedAt() {
@@ -428,7 +315,7 @@ public class TrainerData {
     return birthdayUi;
   }
 
-  public List<TrainerData.Langs> getLangs() {
+  public List<String> getLangs() {
     return langs;
   }
 
@@ -436,7 +323,7 @@ public class TrainerData {
     return gender;
   }
 
-  public List<TrainerData.Roles> getRoles() {
+  public List<String> getRoles() {
     return roles;
   }
 
@@ -469,7 +356,7 @@ public class TrainerData {
     return payBase;
   }
 
-  public List<TrainerData.Contacts> getContacts() {
+  public List<Contacts> getContacts() {
     return contacts;
   }
 
@@ -477,7 +364,7 @@ public class TrainerData {
     return emailUI;
   }
 
-  public List<TrainerData.Emails> getEmails() {
+  public List<Emails> getEmails() {
     return emails;
   }
 

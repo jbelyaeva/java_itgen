@@ -12,16 +12,18 @@ public class Emails {
     return address;
   }
 
-  public void setAddress(String address) {
+  public Emails withAddress(String address) {
     this.address = address;
+    return this;
   }
 
   public Boolean getVerified() {
     return verified;
   }
 
-  public void setVerified(Boolean verified) {
+  public Emails withVerified(Boolean verified) {
     this.verified = verified;
+    return this;
   }
 
   @Override

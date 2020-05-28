@@ -11,15 +11,12 @@ public class TrainerService {
   public TrainerService() {
   }
 
-  public TrainerData findById(String id) {
-    return trainerDao.findById(id);
+  public TrainerData findByIdAndDelete(String id) {
+    return trainerDao.findByIdAndDelete(id);
   }
 
-  public void create(TrainerData trainer) {
-    trainerDao.create(trainer);
+  public void save(TrainerData trainer) {
+    trainerDao.save(trainer);
   }
 
-  public void delete(TrainerData trainer) {
-    trainerDao.delete(trainer);
-  }
 }
