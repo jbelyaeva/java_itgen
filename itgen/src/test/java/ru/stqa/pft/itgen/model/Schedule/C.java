@@ -12,6 +12,7 @@ public class C {
   private String s;
   private String lang;
   private Boolean isTrial;
+  private Boolean newSubj;
   private int score;
 
   public C() {
@@ -48,6 +49,11 @@ public class C {
     return this;
   }
 
+  public C withNewSubj(Boolean newSubj) {
+    this.newSubj = newSubj;
+    return this;
+  }
+
   public C withScore(int score) {
     this.score = score;
     return this;
@@ -75,13 +81,13 @@ public class C {
             score == c.score &&
             Objects.equals(id, c.id) &&
             Objects.equals(subject, c.subject) &&
-            Objects.equals(s, c.s) &&
             Objects.equals(lang, c.lang) &&
-            Objects.equals(isTrial, c.isTrial);
+            Objects.equals(isTrial, c.isTrial)&&
+            Objects.equals(newSubj, c.newSubj);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, s, lang, isTrial, score);
+    return Objects.hash(id, type, subject, lang, isTrial,newSubj, score);
   }
 }

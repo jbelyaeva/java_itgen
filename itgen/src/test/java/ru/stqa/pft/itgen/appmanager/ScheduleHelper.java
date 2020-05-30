@@ -3,6 +3,7 @@ package ru.stqa.pft.itgen.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,14 +34,14 @@ public class ScheduleHelper extends HelperBase {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class,'block')]")));
     dynamicElement.click();
-   }
+  }
 
   private void selectAssign() {
     click(By.xpath("//a[contains(@class,'assign')]"));
   }
 
   public void writeNote(String note) {
-   type(By.name("block-desc"), note);
+    type(By.name("block-desc"), note);
   }
 
   private void selectOnAllSchedule() {
@@ -65,7 +66,10 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectCancel() {
-    click(By.xpath("//a[contains(@class,'cancel')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(@class,'cancel')]")));
+    dynamicElement.click();
+
   }
 
   public void selectTrainer() {
@@ -159,6 +163,8 @@ public class ScheduleHelper extends HelperBase {
   private void selectAllScheduleBlock() {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
   }
 
@@ -197,7 +203,7 @@ public class ScheduleHelper extends HelperBase {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'block')]")));
     dynamicElement.click();
-   }
+  }
 
   private void btnAssign() {
     click(By.xpath(" //button[contains(@class,'assign')]"));
@@ -237,24 +243,86 @@ public class ScheduleHelper extends HelperBase {
 
   private void fillFormMove() {
     //выбор текущей даты в календаре
-    WebElement dynamicElement = (new WebDriverWait(wd, 40))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'picker')]")));
+    WebElement dynamicElement = (new WebDriverWait(wd, 5))
+            .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class,'picker')]")));
     dynamicElement.click();
-    click(By.xpath(" //td[contains(@class,'active')]"));
+    //решение на периодическое не открытие календаря
+    if (isElementPresent(By.xpath("//td[contains(@class,'active')]"))) {
+      click(By.xpath(" //td[contains(@class,'active')]"));
+    } else {
+      dynamicElement.click();
+      click(By.xpath(" //td[contains(@class,'active')]"));
+    }
     //выбор времени (крайнее на сегодня)
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select1 = new Select(Selectbox_times);
     select1.selectByVisibleText("23:00 - 01:00");
     //выбор тренера
-    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 10))
+    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 5))
             .until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
     dynamicElementTrainer.click();
     click(By.xpath("//select[@id='trainer']//option[@value='12']"));
-
     //выбор скайпа
-    WebElement dynamicElementSkype = (new WebDriverWait(wd, 10))
+    WebElement dynamicElementSkype = (new WebDriverWait(wd, 5))
             .until(ExpectedConditions.elementToBeClickable(By.id("skype")));
     dynamicElementSkype.click();
     click(By.xpath("//select[@id='skype']//option[@value='17']"));
+  }
+
+  public void recordStudentOnRegular2h(String name, String id) {
+    selectScheduleInListUIById(id);
+    bntRecordSrudent();
+    selectStudent(name);
+    selectResult();
+    selectNo();
+    btnRecord();
+  }
+
+  private void btnRecord() {
+    click(By.xpath("//button[contains(@class,'create')]"));
+  }
+
+  private void selectNo() {
+    click(By.xpath("//button[contains(@class,'change')][2]"));
+  }
+
+  private void selectResult() {
+    click(By.xpath("//span[contains(@class,'result')]"));
+  }
+
+  private void selectStudent(String name) {
+    type(By.id("child-name"), name);
+  }
+
+  private void bntRecordSrudent() {
+    click(By.xpath("//button[contains(@class,'create')]"));
+  }
+
+  public void recordStudentOnRegularFirst1h(String name, String id) {
+    selectScheduleInListUIById(id);
+    bntRecordSrudent();
+    selectStudent(name);
+    selectResult();
+    selectNo();
+    selectFirst();
+    btnRecord();
+  }
+
+  private void selectFirst() {
+    click(By.xpath("//button[contains(@data-itemid,'1')]"));
+  }
+
+  public void recordStudentOnRegularSecond1h(String name, String id) {
+    selectScheduleInListUIById(id);
+    bntRecordSrudent();
+    selectStudent(name);
+    selectResult();
+    selectNo();
+    selectSecond();
+    btnRecord();
+  }
+
+  private void selectSecond() {
+    click(By.xpath("//button[contains(@data-itemid,'1')]"));
   }
 }

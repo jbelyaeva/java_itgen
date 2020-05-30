@@ -4,6 +4,7 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.TaskData;
 import ru.stqa.pft.itgen.model.users.Contacts;
 import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.services.StudentService;
@@ -23,12 +24,12 @@ public class DbMorphiaTest {
 
 
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<StudentData> query = datastore.createQuery(StudentData.class);
-    List<StudentData> students = query.find().toList();
-    for (StudentData student : students) {
+    Query<TaskData> query = datastore.createQuery(TaskData.class);
+    List<TaskData> students = query.find().toList();
+    for (TaskData student : students) {
       System.out.println(student);
     }
-
+/*
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("studentDelete").withFirstName("Маша").withLastName("Машина")
             .withRoles(Arrays.asList("child"))
@@ -38,6 +39,6 @@ public class DbMorphiaTest {
             .withLangs(Arrays.asList("ru"))
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withDuration(2).withStatus(new Status().withState("noTrial"));
-    studentService.save(student);
+    studentService.save(student);*/
   }
 }

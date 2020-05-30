@@ -10,6 +10,10 @@ public class StudentService {
   public StudentService() {
   }
 
+  public StudentData findByIdAndDelete(StudentData student) {
+    return studentDao.findByIdAndDelete(student);
+  }
+
   public StudentData findByIdAndDelete(String id) {
     return studentDao.findByIdAndDelete(id);
   }

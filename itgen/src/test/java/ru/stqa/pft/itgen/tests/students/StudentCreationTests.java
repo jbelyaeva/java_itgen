@@ -10,6 +10,7 @@ import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TaskService;
 import ru.stqa.pft.itgen.tests.TestBase;
 
 import java.io.BufferedReader;
@@ -69,8 +70,8 @@ public class StudentCreationTests extends TestBase {
     app.student().create(student);
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() + 1));
-    id = app.student().getIdNewStudentDB(before, after);
-    StudentData studentAdd = student.withId(id);
+    studentClean = app.student().getNewStudentDB(before, after);
+    StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after, equalTo(before.withAdded(studentAdd)));
       verifyStudentsListInUI();
   }
@@ -90,10 +91,13 @@ public class StudentCreationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete(studentClean.getFamilyId());
-    StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete(id);
-
+    if(studentClean!=(null)) {
+      FamilyService familyService = new FamilyService();
+      familyService.findByIdAndDelete(studentClean.getFamilyId());
+      TaskService taskService = new TaskService();
+      taskService.findByIdAndDelete(studentClean);
+      StudentService studentService = new StudentService();
+      studentService.findByIdAndDelete(studentClean);
+    }
   }
 }

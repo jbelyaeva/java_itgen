@@ -23,11 +23,19 @@ public class StudentDao {
    }
 
 
+  public StudentData findByIdAndDelete(StudentData student) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<StudentData> query = datastore.createQuery(StudentData.class)
+            .filter("id", student.getId());
+    StudentData studentdata = datastore.findAndDelete(query);
+    return studentdata;
+  }
+
   public StudentData findByIdAndDelete(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> query = datastore.createQuery(StudentData.class)
             .filter("id", id);
-    StudentData student = datastore.findAndDelete(query);
-    return student;
+    StudentData studentdata = datastore.findAndDelete(query);
+    return studentdata;
   }
 }
