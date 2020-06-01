@@ -11,6 +11,7 @@ import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ScheduleHelper extends HelperBase {
 
@@ -291,7 +292,9 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectStudent(String name) {
+    wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     type(By.id("child-name"), name);
+
   }
 
   private void bntRecordSrudent() {

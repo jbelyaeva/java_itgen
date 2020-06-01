@@ -88,6 +88,6 @@ public class ParentCreationTests extends TestBase {
     FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("parentCreate");
     ParentService parentService = new ParentService();
-    parentService.findByIdAndDelete("parentCreate");
+    parentService.findByIdAndDelete(id);
   }
 }

@@ -7,7 +7,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.*;
 import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.services.ParentService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TaskService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FamilyCreationTests extends TestBase {
   String idFamily;
+  //StudentData studentClean=null;
 
   @DataProvider
   public Iterator<Object[]> validFamiliesFromJson() throws IOException {
@@ -60,7 +63,11 @@ public class FamilyCreationTests extends TestBase {
     familyService.findByIdAndDelete(idFamily);
     Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
     StudentService studentService = new StudentService();
-     for (StudentData studentClean : students)
-      studentService.delete(studentClean);
-       }
+    TaskService taskService = new TaskService();
+    for (StudentData studentClean: students) {
+      studentService.findByIdAndDelete(studentClean);
+      taskService.findByIdAndDelete(studentClean);
+     }
+  }
+
   }

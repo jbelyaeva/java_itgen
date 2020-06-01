@@ -5,19 +5,17 @@ package ru.stqa.pft.itgen.tests.schedule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.FamilyData;
+import ru.stqa.pft.itgen.model.*;
 import ru.stqa.pft.itgen.model.Schedule.C;
 import ru.stqa.pft.itgen.model.Schedule.ST;
 import ru.stqa.pft.itgen.model.Schedule.Slots;
 import ru.stqa.pft.itgen.model.Schedule.Times;
-import ru.stqa.pft.itgen.model.ScheduleData;
-import ru.stqa.pft.itgen.model.Schedules;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.users.Contacts;
 import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.ScheduleService;
 import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TaskService;
 import ru.stqa.pft.itgen.tests.TestBase;
 
 import java.util.ArrayList;
@@ -70,14 +68,14 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
             .withSkypeId("1");
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("recordStuden").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family = new FamilyData().withId("recordStudent").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("recordStudent").withFirstName("Маша").withLastName("Машина")
             .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("recordStuden").withStudyLang("ru").withLocate("ru")
+            .withFamilyId("recordStudent").withStudyLang("ru").withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
@@ -106,7 +104,12 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("recordStudent");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("recordStuden");
+    familyService.findByIdAndDelete("recordStudent");
+    Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
+    TaskService taskService = new TaskService();
+    for (TaskData taskClean: tasks) {
+      taskService.findByIdAndDelete(taskClean.getId());
+    }
   }
 
   private void check(Schedules before, Schedules after) {
