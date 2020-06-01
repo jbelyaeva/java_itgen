@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 
@@ -270,14 +271,16 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//select[@id='skype']//option[@value='17']"));
   }
 
-  public void recordStudentOnRegular2h(String name, String id) {
+  public void recordStudentOn2h(String name, String id) {
     selectScheduleInListUIById(id);
     bntRecordSrudent();
     selectStudent(name);
-    selectResult();
+   // selectResult();
     selectNo();
     btnRecord();
   }
+
+
 
   private void btnRecord() {
     click(By.xpath("//button[contains(@class,'create')]"));
@@ -287,13 +290,21 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'change')][2]"));
   }
 
-  private void selectResult() {
+ /* private void selectResult() {
     click(By.xpath("//span[contains(@class,'result')]"));
-  }
+  }*/
 
   private void selectStudent(String name) {
-    wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+   // wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     type(By.id("child-name"), name);
+
+    if(isElementPresent(By.xpath("//span[contains(@class,'result')]")))
+    { click(By.xpath("//span[contains(@class,'result')]"));}
+    else{
+      wd.findElement(By.id("child-name")).clear();
+      type(By.id("child-name"), name);
+      click(By.xpath("//span[contains(@class,'result')]"));
+    }
 
   }
 
@@ -301,11 +312,11 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'create')]"));
   }
 
-  public void recordStudentOnRegularFirst1h(String name, String id) {
+  public void recordStudentOnFirst1h(String name, String id) {
     selectScheduleInListUIById(id);
     bntRecordSrudent();
     selectStudent(name);
-    selectResult();
+ //   selectResult();
     selectNo();
     selectFirst();
     btnRecord();
@@ -315,17 +326,17 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@data-itemid,'1')]"));
   }
 
-  public void recordStudentOnRegularSecond1h(String name, String id) {
+  public void recordStudentOnSecond1h(String name, String id) {
     selectScheduleInListUIById(id);
     bntRecordSrudent();
     selectStudent(name);
-    selectResult();
+    //selectResult();
     selectNo();
     selectSecond();
     btnRecord();
   }
 
   private void selectSecond() {
-    click(By.xpath("//button[contains(@data-itemid,'1')]"));
+    click(By.xpath("//button[contains(@data-itemid,'2')]"));
   }
 }

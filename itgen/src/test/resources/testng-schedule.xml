@@ -18,6 +18,9 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegular2hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegularFirst1hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegularSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests" />
         </classes>
     </test>
 </suite>

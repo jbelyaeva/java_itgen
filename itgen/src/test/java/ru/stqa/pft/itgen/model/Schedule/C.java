@@ -78,7 +78,6 @@ public class C {
     if (o == null || getClass() != o.getClass()) return false;
     C c = (C) o;
     return type == c.type &&
-            score == c.score &&
             Objects.equals(id, c.id) &&
             Objects.equals(subject, c.subject) &&
             Objects.equals(lang, c.lang) &&
@@ -88,6 +87,6 @@ public class C {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, lang, isTrial,newSubj, score);
+    return Objects.hash(id, type, subject, lang, isTrial,newSubj);
   }
 }

@@ -90,7 +90,7 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.schedule().recordStudentOnRegularSecond1h(name,"recordStudentOnLesson");
+    app.schedule().recordStudentOnSecond1h(name,"recordStudentOnLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что назначен новый тренер и остальные записи не изменились
