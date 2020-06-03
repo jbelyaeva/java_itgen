@@ -382,4 +382,12 @@ public class ScheduleHelper extends HelperBase {
     }
     return getAfter;
   }
+
+  public void recordStudentOnTrial(String name, String id) {
+    selectScheduleInListUIById(id);
+    bntRecordSrudent();
+    selectStudent(name);
+    btnRecord();
+    refresh();
+  }
 }
