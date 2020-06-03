@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
-import ru.stqa.pft.itgen.services.StudentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +52,11 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'save')]"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
+
   public void openFiltr() {
     click(By.xpath("//button[@class='close']"));
   }
+
   public void changePol(int pol) {
     dropDownList_Integer(By.xpath("//select[@id='filter-gender']"), pol);
   }
@@ -220,8 +221,11 @@ public class StudentHelper extends HelperBase {
         if (getIdAfter.equals(getIdBefore)) {
           a = false;
           break;
-        } }
-      if (a) {break;}
+        }
+      }
+      if (a) {
+        break;
+      }
     }
     return getIdAfter;
   }
@@ -232,12 +236,15 @@ public class StudentHelper extends HelperBase {
     for (StudentData student : after) {
       getIdAfter = student;
       for (StudentData student_before : before) {
-       StudentData getIdBefore = student_before;
+        StudentData getIdBefore = student_before;
         if (getIdAfter.equals(getIdBefore)) {
           a = false;
           break;
-        } }
-      if (a) {break;}
+        }
+      }
+      if (a) {
+        break;
+      }
     }
     return getIdAfter;
   }

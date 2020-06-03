@@ -1,7 +1,6 @@
 package ru.stqa.pft.itgen.model.users;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class LoginTokens {
   private Date when;

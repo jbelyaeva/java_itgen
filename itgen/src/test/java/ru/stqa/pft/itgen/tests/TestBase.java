@@ -8,13 +8,16 @@ import org.testng.annotations.*;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
 import ru.stqa.pft.itgen.model.*;
 import ru.yandex.qatools.ashot.Screenshot;
+
 import javax.imageio.ImageIO;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,12 +33,12 @@ public class TestBase {
   public void setUp(ITestContext context) throws Exception {
     app.init();
     context.setAttribute("app", app);
-   }
+  }
 
   @AfterSuite(alwaysRun = true)
   public void tearDown() throws Exception {
     app.stop();
-   }
+  }
 
   @BeforeMethod
   public void logTestStart(Method m, Object[] p) {
@@ -95,6 +98,7 @@ public class TestBase {
               .collect(Collectors.toSet())));
     }
   }
+
   public void verifyLeadsListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
       app.goTo().menuLeads();

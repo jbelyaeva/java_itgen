@@ -5,9 +5,10 @@ import dev.morphia.annotations.Property;
 import java.util.Objects;
 
 public class D {
-   public String neww;
+  @Property("new")
+  public String neww;
 
-   public D() {
+  public D() {
   }
 
   public D withNeww(String neww) {

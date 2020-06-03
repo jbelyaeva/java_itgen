@@ -57,5 +57,5 @@ public class FamilyDeletionTests extends TestBase {
     studentService.findByIdAndDelete("famDeletion");
     FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("famDeletion");
-    }
+  }
 }

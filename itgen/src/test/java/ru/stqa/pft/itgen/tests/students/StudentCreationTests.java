@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
@@ -73,7 +72,7 @@ public class StudentCreationTests extends TestBase {
     studentClean = app.student().getNewStudentDB(before, after);
     StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after, equalTo(before.withAdded(studentAdd)));
-      verifyStudentsListInUI();
+    verifyStudentsListInUI();
   }
 
   @Test(dataProvider = "noValidStudentsFromJson")
@@ -83,7 +82,7 @@ public class StudentCreationTests extends TestBase {
     Students before = app.dbstudents().students();
     app.student().createBad(student);
     Students after = app.dbstudents().students();
-    studentClean=app.student().getNewStudentDB(before, after);
+    studentClean = app.student().getNewStudentDB(before, after);
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
   }
@@ -91,7 +90,7 @@ public class StudentCreationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    if(studentClean!=(null)) {
+    if (studentClean != (null)) {
       FamilyService familyService = new FamilyService();
       familyService.findByIdAndDelete(studentClean.getFamilyId());
       TaskService taskService = new TaskService();

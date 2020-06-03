@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.stqa.pft.itgen.model.TrainerData;
 import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.services.TrainerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,8 +78,9 @@ public class TrainerHelper extends HelperBase {
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
     dropDownList(By.id("profile-locale"), trainerData.getLocate());
     // выбор языка обучения -- чек-боксы
-    click(By.xpath("//input[@value='ru']"));
-    click(By.xpath("//input[@value='en']"));
+    click(By.xpath("//div[contains(@class,'form-group')][12]//button[@data-toggle='dropdown']"));
+    click(By.xpath("//input[@data-id='ru']"));
+    click(By.xpath("//input[@data-id='en']"));
     //
     dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
     type(By.name("profile-contact-phone"), trainerData.getPhone());

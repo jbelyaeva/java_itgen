@@ -1,7 +1,6 @@
 package ru.stqa.pft.itgen.model.Schedule;
 
 import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.PostLoad;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +51,13 @@ public class Slots {
     return this;
   }
 
-  public Slots withCancelled (Boolean cancelled) {
+  public Slots withCancelled(Boolean cancelled) {
     this.cancelled = cancelled;
     return this;
   }
 
   public Slots withCancelledAt(Double cancelledAt) {
-    this.cancelledAt =cancelledAt;
+    this.cancelledAt = cancelledAt;
     return this;
   }
 

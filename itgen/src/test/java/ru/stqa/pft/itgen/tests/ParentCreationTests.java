@@ -81,7 +81,7 @@ public class ParentCreationTests extends TestBase {
     assertThat(after, equalTo(before.withAdded(parentAdd)));
   }
 
-  @AfterMethod (alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("forParentCreation");

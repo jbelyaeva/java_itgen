@@ -1,13 +1,13 @@
 package ru.stqa.pft.itgen.tests;
 //Тест на модификацию работника. Для подключения проверки на соответствие ui и бд в конфигурации
 // запуска указываем -DverifyUI=true.
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.WorkerData;
 import ru.stqa.pft.itgen.model.Workers;
 import ru.stqa.pft.itgen.model.users.Contacts;
@@ -46,17 +46,17 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-  WorkerService workerService = new WorkerService();
-   modifydWorker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
-          .withRoles(Arrays.asList("employee"))
-          .withCountry("AL").withTimeZone("Europe/Minsk")
-          .withLocate("ru")
-          .withBirthday(new Date(1556726891000L))
-          .withLangs(Arrays.asList("ru"))
-          .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-          .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
+    WorkerService workerService = new WorkerService();
+    modifydWorker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
+            .withRoles(Arrays.asList("employee"))
+            .withCountry("AL").withTimeZone("Europe/Minsk")
+            .withLocate("ru")
+            .withBirthday(new Date(1556726891000L))
+            .withLangs(Arrays.asList("ru"))
+            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
     workerService.create(modifydWorker);
-}
+  }
 
   @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerModification(WorkerData worker) {
@@ -77,6 +77,6 @@ public class WorkerModificationTests extends TestBase {
   public void clean() {
     WorkerService workerService = new WorkerService();
     workerService.findByIdAndDelete("workerModify");
-   }
+  }
 
- }
+}

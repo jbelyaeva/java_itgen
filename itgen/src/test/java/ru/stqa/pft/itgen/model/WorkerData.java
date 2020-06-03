@@ -25,7 +25,7 @@ public class WorkerData {
   private String lastName;
 
   @Property("langs")
-  private List<String> langs= new ArrayList<>();
+  private List<String> langs = new ArrayList<>();
 
   @Expose
   private String emailUI;
@@ -34,9 +34,9 @@ public class WorkerData {
   private List<Emails> emails = new ArrayList<Emails>();
 
   @Property("roles")
-  private List<String> roles= new ArrayList<>();
+  private List<String> roles = new ArrayList<>();
 
-    @Expose
+  @Expose
   private String roleUi;
 
   @Expose

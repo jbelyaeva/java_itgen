@@ -4,6 +4,7 @@ package ru.stqa.pft.itgen.tests.schedule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.general.TimeGeneral;
 import ru.stqa.pft.itgen.model.Schedule.C;
 import ru.stqa.pft.itgen.model.Schedule.ST;
 import ru.stqa.pft.itgen.model.Schedule.Slots;
@@ -26,37 +27,38 @@ public class ScheduleRegularCancelTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule = new ScheduleData()
             .withId("scheduleRegularCancel")
             .withVer(0)
-            .withFromDate(app.time().time(period))
+            .withFromDate(time.time(period))
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(app.time().time(period))
-                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withW(time.time(period))
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week))
-                    .withSt(new ST().withS(app.time().Stime(period + week)).withE(app.time().Etime(period + week)))
+                    .withW(time.time(period) + week)
+                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 2))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 2)).withE(app.time().Etime(period + week * 2)))
+                    .withW(time.time(period) + week * 2)
+                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 3))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 3)).withE(app.time().Etime(period + week * 3)))
+                    .withW(time.time(period) + week * 3)
+                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 4))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 4)).withE(app.time().Etime(period + week * 4)))
+                    .withW(time.time(period) + week * 4)
+                    .withSt(new ST().withS(time.Stime(period) + week * 4).withE(time.Etime(period) + week * 4))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 5))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 5)).withE(app.time().Etime(period + week * 5)))
+                    .withW(time.time(period) + week * 5)
+                    .withSt(new ST().withS(time.Stime(period) + week * 5).withE(time.Etime(period) + week * 5))
                     .withC(list)))
-            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
 
@@ -80,36 +82,37 @@ public class ScheduleRegularCancelTests extends TestBase {
   }
 
   private void check(Schedules after, Schedules before) {
+    TimeGeneral time = new TimeGeneral();
     ScheduleData scheduleAdd = new ScheduleData()
             .withId("scheduleRegularCancel")
             .withVer(0)
-            .withFromDate(app.time().time(period))
+            .withFromDate(time.time(period))
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(app.time().time(period))
-                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withW(time.time(period))
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list).withCancelled(true), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week))
-                    .withSt(new ST().withS(app.time().Stime(period + week)).withE(app.time().Etime(period + week)))
+                    .withW(time.time(period) + week)
+                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 2))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 2)).withE(app.time().Etime(period + week * 2)))
+                    .withW(time.time(period) + week * 2)
+                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 3))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 3)).withE(app.time().Etime(period + week * 3)))
+                    .withW(time.time(period) + week * 3)
+                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 4))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 4)).withE(app.time().Etime(period + week * 4)))
+                    .withW(time.time(period) + week * 4)
+                    .withSt(new ST().withS(time.Stime(period) + week * 4).withE(time.Etime(period) + week * 4))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(app.time().time(period + week * 5))
-                    .withSt(new ST().withS(app.time().Stime(period + week * 5)).withE(app.time().Etime(period + week * 5)))
+                    .withW(time.time(period) + week * 5)
+                    .withSt(new ST().withS(time.Stime(period) + week * 5).withE(time.Etime(period) + week * 5))
                     .withC(list)))
-            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id

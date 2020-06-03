@@ -3,11 +3,7 @@ package ru.stqa.pft.itgen.dao;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.TrainerData;
-import ru.stqa.pft.itgen.model.WorkerData;
 
-import javax.persistence.EntityManager;
-
-import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class TrainerDao {

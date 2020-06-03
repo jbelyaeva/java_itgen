@@ -21,6 +21,7 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule" />
         </classes>
     </test>
 </suite>

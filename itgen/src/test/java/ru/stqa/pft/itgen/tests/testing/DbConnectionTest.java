@@ -3,7 +3,6 @@ package ru.stqa.pft.itgen.tests.testing;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.StudentData;
 
 import javax.persistence.EntityManager;
@@ -29,7 +28,7 @@ public class DbConnectionTest {
     /* JP-QL запрос */
     String query1 = "from StudentData";
     String query2 = "select h from StudentData h where firstname = 'Настя'";
-        List<StudentData> result = entityManager.createQuery( query1 , StudentData.class ).getResultList();
+    List<StudentData> result = entityManager.createQuery(query1, StudentData.class).getResultList();
 
     /* нативный запрос */
     String query3 = "{ $query : { roles : 'child' } }";
@@ -42,9 +41,9 @@ public class DbConnectionTest {
     for (StudentData student : result) {
       System.out.println(student);
 
-         //  System.out.println(student.getVer());
-         //  System.out.println(student.getTimes());
-         //   System.out.println(student.getSlots());
+      //  System.out.println(student.getVer());
+      //  System.out.println(student.getTimes());
+      //   System.out.println(student.getSlots());
 //            System.out.println(family.getStudentsS());
 //            System.out.println(family.getParentsP());
     }

@@ -120,5 +120,5 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     workerService.findByIdAndDelete(idWorker);
     TrainerService trainerService = new TrainerService();
     trainerService.findByIdAndDelete(idTrainer);
-   }
+  }
 }

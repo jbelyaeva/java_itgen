@@ -4,18 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.stqa.pft.itgen.model.WorkerData;
-import ru.stqa.pft.itgen.services.WorkerService;
 import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
-import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategy;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -23,10 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static ru.stqa.pft.itgen.tests.TestBase.etalon;
 
@@ -40,14 +30,15 @@ public class SShotHelper extends HelperBase {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
     //получаем
-    if(locatorIgnor!="") {
+    if (locatorIgnor != "") {
       List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor));
       for (WebElement element : elementsList) {
         ((JavascriptExecutor) wd)
                 .executeScript("arguments[0].remove();", element);
       }
     }
-    Screenshot actualScreenshot = new AShot().takeScreenshot(wd);;//взять скрkиншот после появления элемента с локатором
+    Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
+    ;//взять скрkиншот после появления элемента с локатором
     //сохраняем
     etalon(expected, name, actualScreenshot);
 
@@ -69,6 +60,7 @@ public class SShotHelper extends HelperBase {
     }
     return diff;
   }
+
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
     String Path = "./src/test/testsScreenshot/markedImages/" + ResourseName + ".png";

@@ -1,6 +1,9 @@
 package ru.stqa.pft.itgen.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -10,7 +13,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelper;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperStudents;
-import ru.stqa.pft.itgen.appmanager.general.TimeHelper;
 
 import java.io.File;
 import java.io.FileReader;
@@ -38,9 +40,8 @@ public class ApplicationManager {
   private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
   private DbHelperSchedule dbHelperSchedule;
-  private TimeHelper timeHelper;
 
-  public ApplicationManager(String browser) {
+   public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
     propertiesAshot = new Properties();
@@ -55,7 +56,6 @@ public class ApplicationManager {
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
-    timeHelper = new TimeHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -81,9 +81,9 @@ public class ApplicationManager {
     trainerHelper = new TrainerHelper(wd);
     scheduleHelper = new ScheduleHelper(wd);
     sShotHelper = new SShotHelper(wd);
-    leadHelper=new LeadHelper(wd);
+    leadHelper = new LeadHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-  //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
+    //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
   }
 
   public void stop() {
@@ -106,7 +106,9 @@ public class ApplicationManager {
     return dbHelperStudents;
   }
 
-  public DbHelperSchedule dbschedules() {return dbHelperSchedule; }
+  public DbHelperSchedule dbschedules() {
+    return dbHelperSchedule;
+  }
 
   public StudentHelper student() {
     return studentHelper;
@@ -132,14 +134,12 @@ public class ApplicationManager {
     return scheduleHelper;
   }
 
-  public TimeHelper time() {
-    return timeHelper;
+  public LeadHelper lead() {
+    return leadHelper;
   }
-
-  public LeadHelper lead(){return leadHelper;}
 
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
 
- }
+}

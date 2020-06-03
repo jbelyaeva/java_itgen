@@ -6,7 +6,8 @@ import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import ru.stqa.pft.itgen.model.users.Contacts;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -91,14 +92,14 @@ public class ParentData {
 
 
   @Property("familyId")
-   private String familyId;
+  private String familyId;
 
   @Expose
   @Property("note")
   private String note;
 
   @Property("roles")
-  private List<String> roles= new ArrayList<>();
+  private List<String> roles = new ArrayList<>();
 
   public ParentData withId(String id) {
     this.id = id;

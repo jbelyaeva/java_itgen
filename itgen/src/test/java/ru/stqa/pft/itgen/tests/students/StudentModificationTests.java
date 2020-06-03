@@ -76,8 +76,8 @@ public class StudentModificationTests extends TestBase {
     for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
       if (studentModify.getId().equals("studentModify")) {
         StudentData studentAdd = student.withId(studentModify.getId());
-      //   boolean check=app.student().deepEquals(after,before.without(studentModify).withAdded(studentAdd));
-      //  assertThat(check, equalTo(true));
+        //   boolean check=app.student().deepEquals(after,before.without(studentModify).withAdded(studentAdd));
+        //  assertThat(check, equalTo(true));
         assertThat(after, equalTo(before.without(studentModify).withAdded(studentAdd)));
         return;
       }
@@ -91,6 +91,6 @@ public class StudentModificationTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("studentModify");
     FamilyService familyService = new FamilyService();
-   familyService.findByIdAndDelete("studentModify");
+    familyService.findByIdAndDelete("studentModify");
   }
 }

@@ -1,6 +1,7 @@
 package ru.stqa.pft.itgen.tests;
 //Тест на удаление работника. Для подключения проверки на соответствие ui и бд в конфигурации
 // запуска указываем -DverifyUI=true.
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,7 +42,7 @@ public class WorkerDeletionTests extends TestBase {
     Workers before = app.db().workers();
     app.worker().deletionWorker("workerDelete");
     Workers after = app.db().workers();
-    assertThat(after.size(),equalTo(before.size()-1));
+    assertThat(after.size(), equalTo(before.size() - 1));
     assertThat(after, equalTo(before.without(deletedWorker)));
     verifyWorkerListInUI();
   }

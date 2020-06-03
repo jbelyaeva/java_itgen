@@ -3,7 +3,6 @@ package ru.stqa.pft.itgen.model;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +16,9 @@ public class FamilyData {
   @Property("isTrialBonusOff")
   private Boolean isTrialBonusOff;
 
- // @ElementCollection(fetch = FetchType.EAGER)
   @Property("tierHistory")
   private List<String> tierHistory = new ArrayList<String>();
 
- // @dev.morphia.annotations.Embedded("tierHistory")
   public static class TierHistory {
     private String tierHistory;
 

@@ -1,10 +1,5 @@
 package ru.stqa.pft.itgen.model.users;
 
-import ru.stqa.pft.itgen.model.StudentData;
-
-import javax.persistence.Embeddable;
-
-
 public class Contacts {
   private String type;
   private String val;

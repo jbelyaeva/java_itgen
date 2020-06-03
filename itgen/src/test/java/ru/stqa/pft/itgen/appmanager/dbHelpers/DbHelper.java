@@ -4,10 +4,8 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.*;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class DbHelper {
@@ -63,4 +61,10 @@ public class DbHelper {
     return new Leads(leads);
   }
 
+  public LeadData find(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<LeadData> q = datastore.createQuery(LeadData.class).filter("id", id);
+    LeadData lead = q.find().next();
+    return lead;
+  }
 }

@@ -2,15 +2,15 @@ package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
 import dev.morphia.annotations.*;
-import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Transient;
 import ru.stqa.pft.itgen.model.users.*;
-import java.util.*;
 
-@dev.morphia.annotations.Entity("users")
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+@Entity("users")
 public class StudentData {
-  //@Expose
   @Id
   @Property("_id")
   private String id;
@@ -68,7 +68,7 @@ public class StudentData {
   private String studyLang;
 
   @Property("langs")
-  private List<String> langs= new ArrayList<>();
+  private List<String> langs = new ArrayList<>();
 
   @Expose
   @Property("duration")
@@ -125,7 +125,7 @@ public class StudentData {
   private String note;
 
   @Property("roles")
-  private List<String> roles= new ArrayList<>();
+  private List<String> roles = new ArrayList<>();
 
   @Embedded
   private Status status;
