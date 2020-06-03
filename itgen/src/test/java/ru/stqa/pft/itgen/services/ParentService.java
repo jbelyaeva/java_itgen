@@ -1,7 +1,6 @@
 package ru.stqa.pft.itgen.services;
 
 import ru.stqa.pft.itgen.dao.ParentDao;
-import ru.stqa.pft.itgen.model.FamilyData;
 import ru.stqa.pft.itgen.model.ParentData;
 
 public class ParentService {

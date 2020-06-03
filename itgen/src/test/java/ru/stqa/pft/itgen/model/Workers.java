@@ -27,12 +27,12 @@ public class Workers extends ForwardingSet<WorkerData> {
     return workers;
   }
 
- /* public Workers withFamilyId(String id) {//объекта,в который добавлена группа
-    Workers workers = new Workers(this);
-    WorkerData workerData = workers.iterator().next().withFamilyId(id);
-    return parents;
-  }
-*/
+  /* public Workers withFamilyId(String id) {//объекта,в который добавлена группа
+     Workers workers = new Workers(this);
+     WorkerData workerData = workers.iterator().next().withFamilyId(id);
+     return parents;
+   }
+ */
   public Workers without(WorkerData worker) {//объекта, из которго удалена группа
     Workers workers = new Workers(this);
     workers.remove(worker);

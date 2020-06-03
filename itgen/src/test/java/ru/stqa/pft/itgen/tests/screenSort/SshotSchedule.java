@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.general.TimeGeneral;
 import ru.stqa.pft.itgen.model.Schedule.C;
 import ru.stqa.pft.itgen.model.Schedule.ST;
 import ru.stqa.pft.itgen.model.Schedule.Slots;
@@ -32,17 +33,18 @@ public class SshotSchedule extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule = new ScheduleData()
             .withId("scheduleSingleBlock")
             .withVer(0)
-            .withFromDate(app.time().time(period))
+            .withFromDate(time.time(period))
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(app.time().time(period))
-                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withW(time.time(period))
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list)))
-            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
 

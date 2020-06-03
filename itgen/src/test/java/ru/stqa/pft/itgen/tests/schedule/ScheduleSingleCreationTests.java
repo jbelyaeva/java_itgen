@@ -3,7 +3,7 @@ package ru.stqa.pft.itgen.tests.schedule;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.Schedules;
 import ru.stqa.pft.itgen.services.ScheduleService;
 import ru.stqa.pft.itgen.tests.TestBase;
 

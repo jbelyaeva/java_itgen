@@ -3,7 +3,6 @@ package ru.stqa.pft.itgen.tests.schedule;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 import ru.stqa.pft.itgen.services.ScheduleService;
 import ru.stqa.pft.itgen.tests.TestBase;
@@ -12,8 +11,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleRegularCreationTests extends TestBase {
-//Тест на создание постоянного расписания на текущую дату при выборе дефолтного тренера
+  //Тест на создание постоянного расписания на текущую дату при выборе дефолтного тренера
   String idSchedule;
+
   @Test
   public void testScheduleRegularCreation() {
     app.goTo().menuTasks();
@@ -24,7 +24,7 @@ public class ScheduleRegularCreationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size() + 1));//что список в бд увеличился на 1
     idSchedule = app.schedule().getIdNewScheduleDB(before, after);
     assertThat(app.dbschedules().findByIdList(idSchedule).size(), equalTo(1));// что расписание только 1
-   //может быть можно как то спрогнозировать создаваемое расписание, но там важен момент времени, что
+    //может быть можно как то спрогнозировать создаваемое расписание, но там важен момент времени, что
     //влечет усложнение кода проверок
   }
 

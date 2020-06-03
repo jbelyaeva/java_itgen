@@ -26,13 +26,14 @@ public class Tasks extends ForwardingSet<TaskData> {
     tasks.add(task);
     return tasks;
   }
+
   public Tasks withStudentId(String id) {//объекта,в который добавлена группа
     Tasks tasks = new Tasks(this);
     TaskData taskData = tasks.iterator().next().withLinkUser(id);
     return tasks;
   }
 
-  public Tasks without (TaskData task){//объекта, из которго удалена группа
+  public Tasks without(TaskData task) {//объекта, из которго удалена группа
     Tasks tasks = new Tasks(this);
     tasks.remove(task);
     return tasks;

@@ -5,6 +5,7 @@ package ru.stqa.pft.itgen.tests.schedule;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.general.TimeGeneral;
 import ru.stqa.pft.itgen.model.*;
 import ru.stqa.pft.itgen.model.Schedule.C;
 import ru.stqa.pft.itgen.model.Schedule.ST;
@@ -28,23 +29,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
   ArrayList<C> list = new ArrayList();
-  String period="21:00 - 23:00";
-  String name="Маша Машина";
+  String period = "21:00 - 23:00";
+  String name = "Маша Машина";
 
   @BeforeMethod
   public void ensurePreconditions() {
+    TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule = new ScheduleData()
             .withId("recordOnSchedule")
             .withVer(0)
-            .withFromDate(app.time().time(period))
+            .withFromDate(time.time(period))
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(app.time().time(period))
-                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withW(time.time(period))
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list)))
-            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
-            .withSkypeId("1");
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("recordOnSchedule").withTrialBonusOff(false).withTierId("txa");
@@ -68,7 +70,7 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.schedule().recordStudentOnSecond1h(name,"recordOnSchedule");
+    app.schedule().recordStudentOnSecond1h(name, "recordOnSchedule");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что назначен новый тренер и остальные записи не изменились
@@ -85,24 +87,25 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     familyService.findByIdAndDelete("recordOnSchedule");
     Tasks tasks = app.dbschedules().tasksComposition("recordOnSchedule");
     TaskService taskService = new TaskService();
-    for (TaskData taskClean: tasks) {
-       taskService.findByIdAndDelete(taskClean.getId());
+    for (TaskData taskClean : tasks) {
+      taskService.findByIdAndDelete(taskClean.getId());
     }
-   }
+  }
 
   private void check(Schedules before, Schedules after) {
+    TimeGeneral time = new TimeGeneral();
     ScheduleData scheduleAdd = new ScheduleData()
             .withId("recordOnSchedule")
             .withVer(0)
-            .withFromDate(app.time().time(period))
+            .withFromDate(time.time(period))
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(app.time().time(period))
-                    .withSt(new ST().withS(app.time().Stime(period)).withE(app.time().Etime(period)))
+                    .withW(time.time(period))
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(Arrays.asList(new C().withId("recordOnSchedule").withType(2).withSubject("1")
-                                                .withLang("ru").withNewSubj(true).withS("normal")))))
-            .withTimes(new Times().withStart(app.time().start(period)).withEnd(app.time().finish(period)))
-            .withSkypeId("1");
+                            .withLang("ru").withNewSubj(true).withS("normal")))))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withSkypeId("1").withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
       if (scheduleBefore.getId().equals("recordOnSchedule")) {

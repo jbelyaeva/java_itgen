@@ -80,5 +80,5 @@ public class TrainerModificationTests extends TestBase {
   public void clean() {
     TrainerService trainerService = new TrainerService();
     trainerService.findByIdAndDelete("trainerModify");
-    }
+  }
 }

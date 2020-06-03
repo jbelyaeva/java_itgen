@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen.appmanager.general;
+package ru.stqa.pft.itgen.general;
 
 import java.io.*;
 import java.nio.file.Paths;

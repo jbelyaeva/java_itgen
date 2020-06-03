@@ -1,8 +1,5 @@
 package ru.stqa.pft.itgen.model.Schedule;
 
-import dev.morphia.annotations.PostLoad;
-
-import java.util.HashMap;
 import java.util.Objects;
 
 public class C {
@@ -13,7 +10,8 @@ public class C {
   private String lang;
   private Boolean isTrial;
   private Boolean newSubj;
-  private int score;
+  private int score; //очки внимания
+  private boolean p; //признак постоянного расписания
 
   public C() {
   }
@@ -59,6 +57,11 @@ public class C {
     return this;
   }
 
+  public C withP(boolean p) {
+    this.p = p;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "C{" +
@@ -69,6 +72,7 @@ public class C {
             ", lang='" + lang + '\'' +
             ", isTrial=" + isTrial +
             ", score=" + score +
+            ", p=" + p +
             '}';
   }
 
@@ -81,12 +85,13 @@ public class C {
             Objects.equals(id, c.id) &&
             Objects.equals(subject, c.subject) &&
             Objects.equals(lang, c.lang) &&
-            Objects.equals(isTrial, c.isTrial)&&
-            Objects.equals(newSubj, c.newSubj);
+            Objects.equals(isTrial, c.isTrial) &&
+            Objects.equals(newSubj, c.newSubj) &&
+            Objects.equals(p, c.p);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, lang, isTrial,newSubj);
+    return Objects.hash(id, type, subject, lang, isTrial, newSubj, p);
   }
 }

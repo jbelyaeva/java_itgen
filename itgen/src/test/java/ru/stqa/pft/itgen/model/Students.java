@@ -26,12 +26,14 @@ public class Students extends ForwardingSet<StudentData> {
     students.add(student);
     return students;
   }
+
   public Students withFamilyId(String id) {//объекта,в который добавлена группа
     Students students = new Students(this);
     StudentData studentData = students.iterator().next().withFamilyId(id);
     return students;
   }
-  public Students without (StudentData student){//объекта, из которго удалена группа
+
+  public Students without(StudentData student) {//объекта, из которго удалена группа
     Students students = new Students(this);
     students.remove(student);
     return students;

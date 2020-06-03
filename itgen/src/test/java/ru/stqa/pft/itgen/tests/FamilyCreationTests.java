@@ -5,9 +5,11 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.Families;
+import ru.stqa.pft.itgen.model.FamilyDataUI;
+import ru.stqa.pft.itgen.model.StudentData;
+import ru.stqa.pft.itgen.model.Students;
 import ru.stqa.pft.itgen.services.FamilyService;
-import ru.stqa.pft.itgen.services.ParentService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.services.TaskService;
 
@@ -64,10 +66,10 @@ public class FamilyCreationTests extends TestBase {
     Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
     StudentService studentService = new StudentService();
     TaskService taskService = new TaskService();
-    for (StudentData studentClean: students) {
+    for (StudentData studentClean : students) {
       studentService.findByIdAndDelete(studentClean);
       taskService.findByIdAndDelete(studentClean);
-     }
+    }
   }
 
-  }
+}

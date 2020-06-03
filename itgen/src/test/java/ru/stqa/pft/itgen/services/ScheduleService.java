@@ -9,15 +9,15 @@ public class ScheduleService {
   public ScheduleService() {
   }
 
- /* public ScheduleData findById1(String id) {
-    return scheduleDao.findById(id);
-  }*/
-
   public ScheduleData findByIdAndDelete(String id) {
     return scheduleDao.findByIdAndDelete(id);
+  }
+
+  public void delete(ScheduleData schedule) {
+    scheduleDao.delete(schedule);
   }
 
   public void save(ScheduleData schedule) {
     scheduleDao.save(schedule);
   }
- }
+}

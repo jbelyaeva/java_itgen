@@ -1,11 +1,8 @@
 package ru.stqa.pft.itgen.model.users;
 
-import ru.stqa.pft.itgen.model.StudentData;
-
-import javax.persistence.Embeddable;
 import java.util.Objects;
 
-public  class Status {
+public class Status {
 
   public String state;
 

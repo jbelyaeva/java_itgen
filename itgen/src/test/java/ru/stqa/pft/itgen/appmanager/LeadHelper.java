@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.LeadData;
 import ru.stqa.pft.itgen.model.Leads;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +33,18 @@ public class LeadHelper extends HelperBase {
   public void btnLotPoint() {
     click(By.xpath("//button[contains(@class,'dropdown')]"));
   }
+
   public void btnDeleteLead() {
     click(By.xpath("//a[contains(@class,'remove')]"));
   }
+
   public void assertDeleteSelectedLead() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
-  public void btnPencil(){
+
+  public void btnPencil() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
   }
 
@@ -65,6 +69,7 @@ public class LeadHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), leadData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), leadData.getInst());
   }
+
   public void modifyLeadForm(LeadData leadData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), leadData.getFirstname());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), leadData.getLastname());
@@ -89,24 +94,24 @@ public class LeadHelper extends HelperBase {
 
 
   public void selectLeadInListUIById(String id) {
-      //находим пагинатор
-      String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-      //есть ли на первой странице наш студент
-      List<WebElement> list = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
-      if (list.size() > 0) {
-        wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
-      } else {
-        //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
-        while (!next.equals("disabled")) {
-          List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
-          if (list_pagin.size() > 0) {
-            wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
-            break;
-          } else {
-            wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
-          }
+    //находим пагинатор
+    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    //есть ли на первой странице наш студент
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
+    if (list.size() > 0) {
+      wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
+    } else {
+      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      while (!next.equals("disabled")) {
+        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
+        if (list_pagin.size() > 0) {
+          wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
+          break;
+        } else {
+          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
       }
+    }
   }
 
   public void delete() {
@@ -114,7 +119,8 @@ public class LeadHelper extends HelperBase {
     btnDeleteLead();
     assertDeleteSelectedLead();
   }
-   //работник с пагинацией
+
+  //работник с пагинацией
   public List<LeadData> list() {
     List<LeadData> leads = new ArrayList<LeadData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
@@ -133,6 +139,7 @@ public class LeadHelper extends HelperBase {
     includeInListBaseWebElement(leads, elements);
     return leads;
   }
+
   private void includeInListBaseWebElement(List<LeadData> leads, List<WebElement> elements) {
     for (WebElement element : elements) {
       String getId = element.getAttribute("href");
@@ -144,6 +151,7 @@ public class LeadHelper extends HelperBase {
       leads.add(lead);
     }
   }
+
   public String getIdNewLeadDB(Leads before, Leads after) {
     boolean a = true;
     String getIdAfter = "";
@@ -156,15 +164,22 @@ public class LeadHelper extends HelperBase {
           break;
         }
       }
-      if (a) {break;}
+      if (a) {
+        break;
+      }
     }
     return getIdAfter;
   }
 
   public void modify(LeadData lead) {
-   btnPencil();
-   modifyLeadForm(lead);
-   btnSaveLead();
+    btnPencil();
+    modifyLeadForm(lead);
+    btnSaveLead();
   }
 
+  public void create(LeadData lead) {
+    btnCreateLead();
+    fillLeadForm(lead);
+    btnAddLead();
+  }
 }

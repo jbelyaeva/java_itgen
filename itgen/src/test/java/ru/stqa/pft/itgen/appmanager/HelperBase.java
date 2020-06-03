@@ -18,8 +18,8 @@ public class HelperBase {
     this.wd = wd;
   }
 
-  public HelperBase() {}
-
+  public HelperBase() {
+  }
 
 
   protected void click(By locator) {
@@ -104,7 +104,8 @@ public class HelperBase {
     String id = getIdSplit[4]; //достали id
     return id;
   }
-    public void refresh() {
+
+  public void refresh() {
     wd.navigate().refresh();
   }
 

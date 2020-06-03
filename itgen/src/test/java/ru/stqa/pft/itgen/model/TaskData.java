@@ -4,10 +4,9 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import ru.stqa.pft.itgen.model.Schedule.Slots;
-import ru.stqa.pft.itgen.model.Schedule.Times;
 import ru.stqa.pft.itgen.model.tasks.Activity;
 import ru.stqa.pft.itgen.model.tasks.Comments;
+import ru.stqa.pft.itgen.model.tasks.Lesson;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +29,7 @@ public class TaskData {
   private String status;
 
   @Property("watchers")
-  private List<String> watchers= new ArrayList<>();
+  private List<String> watchers = new ArrayList<>();
 
   @Embedded("comments")
   private List<Comments> comments = new ArrayList<Comments>();
@@ -46,6 +45,9 @@ public class TaskData {
 
   @Property("dueDateSort")
   private Date dueDateSort;
+
+  @Embedded("lesson")
+  private Lesson lesson;
 
   public TaskData() {
   }
@@ -100,6 +102,11 @@ public class TaskData {
     return this;
   }
 
+  public TaskData withLesson(Lesson lesson) {
+    this.lesson = lesson;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -138,6 +145,10 @@ public class TaskData {
 
   public Date getDueDateSort() {
     return dueDateSort;
+  }
+
+  public Lesson getLesson() {
+    return lesson;
   }
 
   @Override

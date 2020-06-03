@@ -3,7 +3,6 @@ package ru.stqa.pft.itgen.dao;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.ParentData;
-import ru.stqa.pft.itgen.model.StudentData;
 
 import javax.persistence.EntityManager;
 

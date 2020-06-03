@@ -1,12 +1,11 @@
 package ru.stqa.pft.itgen.model.users;
 
 import dev.morphia.annotations.Embedded;
-import ru.stqa.pft.itgen.model.Schedule.C;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public  class Services {
+public class Services {
   private String bcrypt;
   @Embedded
   private List<LoginTokens> loginTokens = new ArrayList<LoginTokens>();

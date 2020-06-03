@@ -1,13 +1,11 @@
-package ru.stqa.pft.itgen.appmanager.general;
-
-import ru.stqa.pft.itgen.appmanager.HelperBase;
+package ru.stqa.pft.itgen.general;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-public class TimeHelper extends HelperBase {
+public class TimeGeneral {
 
-  public TimeHelper() {
+  public TimeGeneral() {
     super();
   }
 

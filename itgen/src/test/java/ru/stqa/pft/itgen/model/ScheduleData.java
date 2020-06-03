@@ -23,7 +23,6 @@ public class ScheduleData {
   @Property("fromDate")
   private Double fromDate;
 
-  //@Property("slots")
   @Embedded("slots")
   private List<Slots> slots = new ArrayList<Slots>();
 
@@ -32,6 +31,9 @@ public class ScheduleData {
 
   @Property("skypeId")
   private String skypeId;
+
+  @Property("oneTime")
+  private Boolean oneTime;
 
   public ScheduleData() {
   }
@@ -66,6 +68,11 @@ public class ScheduleData {
     return this;
   }
 
+  public ScheduleData withOneTime(Boolean oneTime) {
+    this.oneTime = oneTime;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -90,6 +97,10 @@ public class ScheduleData {
     return skypeId;
   }
 
+  public Boolean getOneTime() {
+    return oneTime;
+  }
+
   @Override
   public String toString() {
     return "ScheduleData{" +
@@ -111,11 +122,12 @@ public class ScheduleData {
             Objects.equals(fromDate, that.fromDate) &&
             Objects.equals(slots, that.slots) &&
             Objects.equals(times, that.times) &&
-            Objects.equals(skypeId, that.skypeId);
+            Objects.equals(skypeId, that.skypeId) &&
+            Objects.equals(oneTime, that.oneTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromDate, slots, times, skypeId);
+    return Objects.hash(id, fromDate, slots, times, skypeId, oneTime);
   }
 }

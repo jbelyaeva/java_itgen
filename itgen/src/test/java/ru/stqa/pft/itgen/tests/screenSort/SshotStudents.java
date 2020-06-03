@@ -16,13 +16,16 @@ import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 
 import static ru.stqa.pft.itgen.appmanager.ApplicationManager.propertiesAshot;
 
-public class SshotStudents extends TestBase  {
+public class SshotStudents extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -46,23 +49,23 @@ public class SshotStudents extends TestBase  {
   @Test
   public void testSshotStudents() throws AWTException, IOException {
     String name = "students_RU_Chrome";
-    String locatorIgnor="";
+    String locatorIgnor = "";
     app.goTo().menuTasks();
     app.goTo().menuStudents();
 
     ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
-                                            , propertiesAshot.getProperty("actual")
-                                            , propertiesAshot.getProperty("markedImages")
-                                            , name,locatorIgnor);
-   Assert.assertEquals(diff.getDiffSize(), 0);
+            , propertiesAshot.getProperty("actual")
+            , propertiesAshot.getProperty("markedImages")
+            , name, locatorIgnor);
+    Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
-   @AfterMethod(alwaysRun = true)
-   public void clean() {
-     StudentService studentService = new StudentService();
-     studentService.findByIdAndDelete("studentAshot");
-     FamilyService familyService = new FamilyService();
-     familyService.findByIdAndDelete("familyAshot");
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    StudentService studentService = new StudentService();
+    studentService.findByIdAndDelete("studentAshot");
+    FamilyService familyService = new FamilyService();
+    familyService.findByIdAndDelete("familyAshot");
 
   }
 }

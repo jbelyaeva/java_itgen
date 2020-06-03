@@ -17,11 +17,13 @@ import ru.stqa.pft.itgen.services.FamilyService;
 import ru.stqa.pft.itgen.services.StudentService;
 import ru.stqa.pft.itgen.tests.TestBase;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+
 import static ru.stqa.pft.itgen.appmanager.ApplicationManager.propertiesAshot;
 
 public class SshotFamily extends TestBase {
@@ -48,7 +50,7 @@ public class SshotFamily extends TestBase {
   @Test
   public void testSshotFamilies() throws AWTException, IOException {
     String name = "families_RU_Chrome";
-    String locatorIgnor="//span[@class='user-time']";
+    String locatorIgnor = "//span[@class='user-time']";
     app.goTo().refresh();
     app.goTo().menuStudents();
     app.student().selectStudentInListUIById("studentAshot");
@@ -57,7 +59,7 @@ public class SshotFamily extends TestBase {
     ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
             , propertiesAshot.getProperty("actual")
             , propertiesAshot.getProperty("markedImages")
-            , name,locatorIgnor);
+            , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

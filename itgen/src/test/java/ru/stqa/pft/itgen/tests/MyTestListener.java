@@ -4,15 +4,9 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import ru.stqa.pft.itgen.appmanager.ApplicationManager;
-import ru.yandex.qatools.allure.Allure;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-public class MyTestListener extends TestBase implements ITestListener{
+public class MyTestListener extends TestBase implements ITestListener {
 
   @Override
   public void onTestStart(ITestResult result) {

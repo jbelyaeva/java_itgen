@@ -1,6 +1,6 @@
 package ru.stqa.pft.itgen.model.users;
 
-public  class Skills {
+public class Skills {
   private String skills;
 
 

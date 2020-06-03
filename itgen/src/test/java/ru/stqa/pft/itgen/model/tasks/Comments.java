@@ -1,12 +1,6 @@
 package ru.stqa.pft.itgen.model.tasks;
 
-import dev.morphia.annotations.Embedded;
-import ru.stqa.pft.itgen.model.Schedule.C;
-import ru.stqa.pft.itgen.model.Schedule.ST;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 public class Comments {
@@ -15,7 +9,7 @@ public class Comments {
   private String text;
   private Date createAt;
 
-    public Comments() {
+  public Comments() {
   }
 
   public Comments withId(String id) {

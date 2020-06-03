@@ -3,20 +3,17 @@ package ru.stqa.pft.itgen.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.*;
-import ru.stqa.pft.itgen.services.FamilyService;
+import ru.stqa.pft.itgen.model.LeadData;
+import ru.stqa.pft.itgen.model.Leads;
 import ru.stqa.pft.itgen.services.LeadService;
-import ru.stqa.pft.itgen.services.StudentService;
+import ru.stqa.pft.itgen.services.TaskService;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +21,9 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LeadCreationTest extends TestBase{
-String id;
+public class LeadCreationTest extends TestBase {
+  String id;
+  LeadData leadNew=null;
   @DataProvider
   public Iterator<Object[]> validLeadsFromJson() throws IOException {
     try (BufferedReader reader =
@@ -48,14 +46,12 @@ String id;
     app.goTo().menuTasks();
     app.goTo().menuLeads();
     Leads before = app.db().leads();
-    app.lead().btnCreateLead();
-    app.lead().fillLeadForm(lead);
-    app.lead().btnAddLead();
+    app.lead().create(lead);
     Leads after = app.db().leads();
     assertThat(after.size(), equalTo(before.size() + 1));
     id = app.lead().getIdNewLeadDB(before, after);
-    LeadData leadAdd = lead.withId(id);
-    assertThat(after, equalTo(before.withAdded(leadAdd)));
+    leadNew=app.db().find(id);
+    assertThat(after, equalTo(before.withAdded(lead.withId(id))));
     verifyLeadsListInUI();
   }
 
@@ -63,6 +59,8 @@ String id;
   public void clean() {
     LeadService leadService = new LeadService();
     leadService.findByIdAndDelete(id);
-   }
+    TaskService taskService = new TaskService();
+    taskService.findByIdAndDeleteLead(leadNew);
+  }
 
 }

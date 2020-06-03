@@ -90,6 +90,7 @@ public class FamilyHelper extends HelperBase {
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
+
   public void alertDeleteFamily() {
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
@@ -102,12 +103,15 @@ public class FamilyHelper extends HelperBase {
     fillFamilyForm(family);
     submitFamilyCreation();
   }
+
   public void select() {
     click(By.cssSelector("a.btn-link"));
   }
+
   public void btnFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
+
   public void delete() {
     btnFamily();
 //    bntModifyFamily();

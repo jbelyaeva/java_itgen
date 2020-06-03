@@ -2,7 +2,10 @@ package ru.stqa.pft.itgen.appmanager.dbHelpers;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
-import ru.stqa.pft.itgen.model.*;
+import ru.stqa.pft.itgen.model.ScheduleData;
+import ru.stqa.pft.itgen.model.Schedules;
+import ru.stqa.pft.itgen.model.TaskData;
+import ru.stqa.pft.itgen.model.Tasks;
 
 import java.util.List;
 
@@ -37,6 +40,5 @@ public class DbHelperSchedule {
     List<TaskData> tasks = q.find().toList();
     return new Tasks(tasks);
   }
-
 
 }

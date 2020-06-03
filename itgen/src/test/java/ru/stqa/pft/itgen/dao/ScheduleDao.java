@@ -5,10 +5,8 @@ import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class ScheduleDao {
@@ -31,6 +29,11 @@ public class ScheduleDao {
   public void save(ScheduleData schedule) {
     Datastore datastore = morphiaSessionFactoryUtil();
     datastore.save(schedule);
+  }
+
+  public void delete(ScheduleData schedule) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    datastore.delete(schedule);
   }
 
 }

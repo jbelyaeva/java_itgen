@@ -1,7 +1,10 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.*;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
 import ru.stqa.pft.itgen.model.users.Contacts;
 import ru.stqa.pft.itgen.model.users.Emails;
 
@@ -44,7 +47,7 @@ public class TrainerData {
   private String birthdayUi;
 
   @Property("langs")
-  private List<String> langs= new ArrayList<>();
+  private List<String> langs = new ArrayList<>();
 
   @Expose
   @Property("gender")
@@ -69,7 +72,7 @@ public class TrainerData {
   private String city;
 
   @Property("roles")
-  private List<String> roles= new ArrayList<>();
+  private List<String> roles = new ArrayList<>();
 
   @Expose
   private String roleUi;
@@ -126,6 +129,7 @@ public class TrainerData {
     this.id = id;
     return this;
   }
+
   public TrainerData withFirstName(String firstName) {
     this.firstName = firstName;
     return this;
@@ -211,6 +215,7 @@ public class TrainerData {
     this.payBase = payBase;
     return this;
   }
+
   public TrainerData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
     return this;
@@ -221,7 +226,7 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withEmails (List<Emails> emails) {
+  public TrainerData withEmails(List<Emails> emails) {
     this.emails = emails;
     return this;
   }

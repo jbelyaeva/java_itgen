@@ -2,17 +2,10 @@ package ru.stqa.pft.itgen.model;
 
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Property;
-import dev.morphia.annotations.Transient;
-import ru.stqa.pft.itgen.model.Schedule.Times;
+import dev.morphia.annotations.*;
 import ru.stqa.pft.itgen.model.users.Contacts;
-import ru.stqa.pft.itgen.model.users.Status;
 import ru.stqa.pft.itgen.model.users.Utm;
 
-//import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -98,7 +91,7 @@ public class LeadData {
   private String roleUi;
 
   @Property("roles")
-  private List<String> roles= new ArrayList<>();
+  private List<String> roles = new ArrayList<>();
 
   @Property("status")
   private String status;

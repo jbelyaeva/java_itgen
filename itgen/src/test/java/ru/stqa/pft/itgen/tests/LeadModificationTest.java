@@ -8,7 +8,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.itgen.model.LeadData;
 import ru.stqa.pft.itgen.model.Leads;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.users.Contacts;
 import ru.stqa.pft.itgen.model.users.Utm;
 import ru.stqa.pft.itgen.services.LeadService;
@@ -26,7 +25,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class LeadModificationTest extends TestBase{
+public class LeadModificationTest extends TestBase {
   @DataProvider
   public Iterator<Object[]> validLeadsFromJson() throws IOException {
     try (BufferedReader reader = new BufferedReader(
@@ -68,8 +67,8 @@ public class LeadModificationTest extends TestBase{
     for (LeadData leadModify : before) { //найти в списке "до" родителя с таким id
       if (leadModify.getId().equals("forLeadModify")) {
         LeadData leadAdd = lead.withId(leadModify.getId());
-        Leads before1=before.without(leadModify).withAdded(leadAdd);
-        assertThat(after,equalTo(before1));
+        Leads before1 = before.without(leadModify).withAdded(leadAdd);
+        assertThat(after, equalTo(before1));
         return;
       }
     }
@@ -80,6 +79,6 @@ public class LeadModificationTest extends TestBase{
   public void clean() {
     LeadService leadService = new LeadService();
     leadService.findByIdAndDelete("forLeadModify");
-    }
+  }
 
 }

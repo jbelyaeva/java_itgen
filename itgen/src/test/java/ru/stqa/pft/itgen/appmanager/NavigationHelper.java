@@ -24,9 +24,11 @@ public class NavigationHelper extends HelperBase {
   public void menuTasks() {
     click(By.xpath("//a[contains(@href, '/tasks')]"));
   }
+
   public void menuLeads() {
     click(By.xpath("//a[contains(@href, '/leads')]"));
   }
+
   public void menuSchedule() {
     click(By.xpath("//a[contains(@href, '/schoolSchedule')]"));
   }

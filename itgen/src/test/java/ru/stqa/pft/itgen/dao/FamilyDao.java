@@ -3,12 +3,7 @@ package ru.stqa.pft.itgen.dao;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.FamilyData;
-import ru.stqa.pft.itgen.model.ScheduleData;
-import ru.stqa.pft.itgen.model.StudentData;
 
-import javax.persistence.EntityManager;
-
-import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class FamilyDao {
@@ -20,6 +15,7 @@ public class FamilyDao {
     FamilyData family = datastore.findAndDelete(query);
     return family;
   }
+
   public void save(FamilyData family) {
     Datastore datastore = morphiaSessionFactoryUtil();
     datastore.save(family);

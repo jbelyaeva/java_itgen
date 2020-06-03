@@ -27,12 +27,12 @@ public class Trainers extends ForwardingSet<TrainerData> {
     return trainers;
   }
 
- /* public Workers withFamilyId(String id) {//объекта,в который добавлена группа
-    Workers workers = new Workers(this);
-    WorkerData workerData = workers.iterator().next().withFamilyId(id);
-    return parents;
-  }
-*/
+  /* public Workers withFamilyId(String id) {//объекта,в который добавлена группа
+     Workers workers = new Workers(this);
+     WorkerData workerData = workers.iterator().next().withFamilyId(id);
+     return parents;
+   }
+ */
   public Trainers without(TrainerData trainer) {//объекта, из которго удалена группа
     Trainers trainers = new Trainers(this);
     trainers.remove(trainer);

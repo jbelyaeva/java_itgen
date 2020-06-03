@@ -3,15 +3,8 @@ package ru.stqa.pft.itgen.tests.testing;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import org.testng.annotations.Test;
-import ru.stqa.pft.itgen.model.StudentData;
 import ru.stqa.pft.itgen.model.TaskData;
-import ru.stqa.pft.itgen.model.users.Contacts;
-import ru.stqa.pft.itgen.model.users.Status;
-import ru.stqa.pft.itgen.services.StudentService;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
