@@ -192,12 +192,14 @@ public class TrainerHelper extends HelperBase {
     selectTrainerById(deletedTrainer);
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
+    noErrorMessage();
   }
 
   public void modify(TrainerData trainer) {
     bntModifyTrainer();
     modifiTrainerForm(trainer);
     btnSaveModify();
+    noErrorMessage();
   }
 
   public void selectTrainerById(TrainerData deletedTrainer) {

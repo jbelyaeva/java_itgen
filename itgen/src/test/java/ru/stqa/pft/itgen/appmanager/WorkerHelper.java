@@ -86,6 +86,7 @@ public class WorkerHelper extends HelperBase {
     btnAddWorker();
     fillWorkerForm(worker);
     bntCreation();
+    noErrorMessage();
     String url = getURL();
     return url;
   }
@@ -100,6 +101,7 @@ public class WorkerHelper extends HelperBase {
     selectedWorkerById(id);
     deleteWorker();
     alertDeleteSelectedWorker();
+    noErrorMessage();
   }
 
   public void modificationWorker(WorkerData worker, String id) {
@@ -107,6 +109,7 @@ public class WorkerHelper extends HelperBase {
     modifyWorker();
     modifiWorkerForm(worker);
     submitWorkerModify();
+    noErrorMessage();
   }
 
   public void selectedWorkerById(String id) {

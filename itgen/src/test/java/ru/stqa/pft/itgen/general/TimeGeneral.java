@@ -9,7 +9,7 @@ public class TimeGeneral {
     super();
   }
 
-  public Double time(String period) {
+  public Double date() {
     LocalDate date = LocalDate.now();
     long millisLocalDate = date
             .atStartOfDay()
@@ -41,7 +41,7 @@ public class TimeGeneral {
                     .now()
                     .getOffset())
             .toEpochMilli();
-    double eValue = (millisLocalDate + 10800000 + finish(period)) * 1.0; //по 23:00
+    double eValue = (millisLocalDate + 10800000 + finish(period)) * 1.0;
     return eValue;
   }
 
@@ -51,6 +51,9 @@ public class TimeGeneral {
     if (period.equals("21:00 - 23:00")) {
       startValue = 64800000;
     }
+    if (period.equals("18:00 - 20:00")) {
+      startValue = 54000000;
+    }
     return startValue;
   }
 
@@ -58,6 +61,9 @@ public class TimeGeneral {
     int finishValue = 0;
     if (period.equals("21:00 - 23:00")) {
       finishValue = 72000000;
+    }
+    if (period.equals("18:00 - 20:00")) {
+      finishValue =61200000;
     }
     return finishValue;
   }

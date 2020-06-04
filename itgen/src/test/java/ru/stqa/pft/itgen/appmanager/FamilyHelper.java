@@ -102,6 +102,7 @@ public class FamilyHelper extends HelperBase {
     addParent();
     fillFamilyForm(family);
     submitFamilyCreation();
+    noErrorMessage();
   }
 
   public void select() {
@@ -117,6 +118,7 @@ public class FamilyHelper extends HelperBase {
 //    bntModifyFamily();
     bntDeleteFamily();
     alertDeleteSelectedFamily();
+    noErrorMessage();
   }
 
   private void SelectStudentById(StudentData deletedStudent) {
