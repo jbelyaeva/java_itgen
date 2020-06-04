@@ -26,6 +26,7 @@ public class ScheduleRegularMoveTests extends TestBase {
   int week = 604800000;
   Schedules after = null;
   Schedules before = null;
+  String periodMove = "23:00 - 01:00";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -34,30 +35,30 @@ public class ScheduleRegularMoveTests extends TestBase {
     ScheduleData  schedule = new ScheduleData()
             .withId("scheduleRegularMove")
             .withVer(0)
-            .withFromDate(time.time(period))
+            .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(time.time(period))
+                    .withW(time.date())
                     .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(time.time(period) + week)
+                    .withW(time.date() + week)
                     .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(time.time(period) + week * 2)
+                    .withW(time.date() + week * 2)
                     .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(time.time(period) + week * 3)
+                    .withW(time.date() + week * 3)
                     .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(time.time(period) + week * 4)
+                    .withW(time.date() + week * 4)
                     .withSt(new ST().withS(time.Stime(period) + week * 4).withE(time.Etime(period) + week * 4))
                     .withC(list), new Slots()
                     .withId("14")
-                    .withW(time.time(period) + week * 5)
+                    .withW(time.date() + week * 5)
                     .withSt(new ST().withS(time.Stime(period) + week * 5).withE(time.Etime(period) + week * 5))
                     .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -71,7 +72,7 @@ public class ScheduleRegularMoveTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
-    app.schedule().move("scheduleRegularMove");
+    app.schedule().move(periodMove,"scheduleRegularMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()+1));
     //продумать проверку на то, что время в расписании подвинулось верно

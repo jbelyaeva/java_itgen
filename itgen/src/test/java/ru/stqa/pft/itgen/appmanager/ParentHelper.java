@@ -61,6 +61,7 @@ public class ParentHelper extends HelperBase {
     fillParentForm(parent);
     submitParentCreation();
     selectParentInFamily();
+    noErrorMessage();
   }
 
   public void createForStudent(ParentData parent) {
@@ -86,6 +87,7 @@ public class ParentHelper extends HelperBase {
     selectParentInFamily();
     btnDeleteParent();
     alertDeleteSelectedParent();
+    noErrorMessage();
   }
 
 
@@ -101,6 +103,7 @@ public class ParentHelper extends HelperBase {
     btnModificationParent();
     ModifyParentForm(parent);
     btnSaveModify();
+    noErrorMessage();
   }
 
   public void ModifyParentForm(ParentData parentData) {

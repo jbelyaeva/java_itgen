@@ -11,7 +11,8 @@ import ru.stqa.pft.itgen.model.ScheduleData;
 import ru.stqa.pft.itgen.model.Schedules;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 public class ScheduleHelper extends HelperBase {
 
@@ -53,10 +54,6 @@ public class ScheduleHelper extends HelperBase {
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
-   /* click(By.xpath("//input[@value='1']"));
-    click(By.xpath("//input[@value='0']"));
-    click(By.xpath("//input[@value='1']"));*/
-
   }
 
   public void selectTime() {
@@ -102,7 +99,17 @@ public class ScheduleHelper extends HelperBase {
     selectScype();
     btnCreate();
     selectSchedule();
+    noErrorMessage();
     refresh();
+  }
+
+  private void selectData() {
+    click(By.xpath("//div[@class='DayPickerInput']"));
+    //click(By.xpath("//input[@value='05.06.2020']"));
+    click(By.xpath("//input[@value='19.06.2020']"));
+    click(By.xpath("//div[@id='__blaze-root']/div/div[2]/main/div/div/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div[3]/div[4]/div[4]"));
+
+    selectTime();
   }
 
   public void createRegularSchedule() {
@@ -111,7 +118,12 @@ public class ScheduleHelper extends HelperBase {
     selectTrainer();
     selectScype();
     btnCreate();
+    noErrorMessage();
     refresh();
+  }
+
+  public void selectErrorLateData() {
+    click(By.xpath("//div[@class='DayPickerInput']"));
   }
 
   public String getIdNewScheduleDB(Schedules before, Schedules after) {
@@ -140,14 +152,61 @@ public class ScheduleHelper extends HelperBase {
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'create')]")));
   }
 
-  public void move(String id) {
+  public void move(String period, String id) {
     selectScheduleInListUIById(id);
     bntPoints();
     selectMove();
-    fillFormMove();
+    fillFormMove(period);
     btnMove();
-
+    noErrorMessage();
   }
+
+  public void badMoveOccupied(String period, String id) {
+    selectScheduleInListUIById(id);
+    bntPoints();
+    selectMove();
+    fillFormMove(period);
+    btnMoveDisabled();
+    noErrorMessage();
+    refresh();
+  }
+
+  public void checkFindBusyStuden(String idStudent) {
+    WebElement element = wd.findElement(By.xpath("//a[@href='/profile/" + idStudent + "']"));
+    if (element != null) {
+      assertTrue(true);
+    } else {
+      assertTrue(false);
+    }
+  }
+
+  public void badMove(String id) {
+    selectScheduleInListUIById(id);
+    bntPoints();
+    selectMove();
+    fillBadTime();
+    btnMoveDisabled();
+    thereAreErrorMessages();
+    refresh();
+  }
+
+  public void badMoveNotChangeDateTime(String id) {
+    selectScheduleInListUIById(id);
+    bntPoints();
+    selectMove();
+    fillMoveOnlyTrainer();
+    btnMoveDisabled();
+    refresh();
+  }
+
+  private void fillMoveOnlyTrainer() {
+    //выбор тренера
+    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 5))
+            .until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
+    dynamicElementTrainer.click();
+    click(By.xpath("//select[@id='trainer']//option[@value='7']"));
+  }
+
 
   public void block(String id, String note) {
     selectScheduleInListUIById(id);
@@ -155,6 +214,7 @@ public class ScheduleHelper extends HelperBase {
     selectBlock();
     writeNote(note);
     btnBlock();
+    noErrorMessage();
     refresh();
   }
 
@@ -165,6 +225,7 @@ public class ScheduleHelper extends HelperBase {
     selectAllScheduleBlock();
     writeNote(note);
     btnBlock();
+    noErrorMessage();
     refresh();
   }
 
@@ -181,6 +242,7 @@ public class ScheduleHelper extends HelperBase {
     bntPoints();
     selectCancel();
     btnCancel();
+    noErrorMessage();
     refresh();
   }
 
@@ -190,6 +252,7 @@ public class ScheduleHelper extends HelperBase {
     selectAssign();
     selectNewTrainer();
     btnAssign();
+    noErrorMessage();
     refresh();
   }
 
@@ -200,6 +263,7 @@ public class ScheduleHelper extends HelperBase {
     selectOnAllSchedule();
     selectNewTrainer();
     btnAssign();
+    noErrorMessage();
     refresh();
   }
 
@@ -210,6 +274,11 @@ public class ScheduleHelper extends HelperBase {
     actions.moveToElement(dynamicElement).build().perform();
     click(By.xpath(" //button[contains(@class,'accept')]"));
 
+  }
+
+  private void btnMoveDisabled() {
+    String dis = wd.findElement(By.xpath(" //button[contains(@class,'accept')]")).getAttribute("disabled");
+    assert (dis.equals("true"));
   }
 
   private void btnBlock() {
@@ -254,7 +323,7 @@ public class ScheduleHelper extends HelperBase {
     }
   }
 
-  private void fillFormMove() {
+  private void fillFormMove(String period) {
     //выбор текущей даты в календаре
     WebElement dynamicElement = (new WebDriverWait(wd, 5))
             .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class,'picker')]")));
@@ -269,17 +338,25 @@ public class ScheduleHelper extends HelperBase {
     //выбор времени (крайнее на сегодня)
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select1 = new Select(Selectbox_times);
-    select1.selectByVisibleText("23:00 - 01:00");
+    select1.selectByVisibleText(period);
     //выбор тренера
     WebElement dynamicElementTrainer = (new WebDriverWait(wd, 5))
             .until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
     dynamicElementTrainer.click();
     click(By.xpath("//select[@id='trainer']//option[@value='7']"));
     //выбор скайпа
- /*   WebElement dynamicElementSkype = (new WebDriverWait(wd, 5))
+    WebElement dynamicElementSkype = (new WebDriverWait(wd, 5))
             .until(ExpectedConditions.elementToBeClickable(By.id("skype")));
     dynamicElementSkype.click();
-    click(By.xpath("//select[@id='skype']//option[@value='17']"));*/
+    //  click(By.xpath("//select[@id='skype']//option[@value='17']"));*/
+  }
+
+  private void fillBadTime() {
+    WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
+    Select select1 = new Select(Selectbox_times);
+    WebElement dynamicElement = (new WebDriverWait(wd, 5))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//select[contains(@id,'tp')]")));
+    select1.selectByVisibleText("00:00 - 02:00");
   }
 
   public void recordStudentOn2h(String name, String id) {
@@ -288,6 +365,7 @@ public class ScheduleHelper extends HelperBase {
     selectStudent(name);
     selectNo();
     btnRecord();
+    noErrorMessage();
   }
 
 
@@ -322,6 +400,7 @@ public class ScheduleHelper extends HelperBase {
     selectNo();
     selectFirst();
     btnRecord();
+    noErrorMessage();
     refresh();
   }
 
@@ -336,6 +415,7 @@ public class ScheduleHelper extends HelperBase {
     selectNo();
     selectSecond();
     btnRecord();
+    noErrorMessage();
     refresh();
   }
 
@@ -348,6 +428,7 @@ public class ScheduleHelper extends HelperBase {
     clickEmptyArea();
     bntRemove();
     alertDeleteStudent();
+    noErrorMessage();
   }
 
   private void alertDeleteStudent() {
@@ -370,10 +451,10 @@ public class ScheduleHelper extends HelperBase {
     for (ScheduleData schedule : after) {
       getAfter = schedule.getId();
       for (ScheduleData schedule_before : before) {
-       String  getBefore = schedule_before.getId();
+        String getBefore = schedule_before.getId();
         if (!getAfter.equals(getBefore)) {
           a = false;
-       break;
+          break;
         }
       }
       if (!a) {
@@ -388,6 +469,9 @@ public class ScheduleHelper extends HelperBase {
     bntRecordSrudent();
     selectStudent(name);
     btnRecord();
+    noErrorMessage();
     refresh();
   }
+
+
 }

@@ -1,5 +1,5 @@
 package ru.stqa.pft.itgen.tests.schedule;
-//автотест проверяет блокировку разового расписания
+//автотест проверяет подвижку разового расписания
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,17 +20,18 @@ import java.util.Arrays;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ScheduleSingleBlockTests extends TestBase {
+public class ScheduleBadMoveTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
-  String note = "Заблокировать расписание";
+  Schedules after = null;
+  Schedules before = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule = new ScheduleData()
-            .withId("scheduleSingleBlock")
+            .withId("scheduleSingleMove")
             .withVer(0)
             .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
@@ -44,44 +45,31 @@ public class ScheduleSingleBlockTests extends TestBase {
 
   }
 
-  @Test
-  public void testScheduleSingleBlock() {
+  @Test // нельзя подвинуть на время в прошлом
+  public void testBadTimeScheduleSingleMove() {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
-    Schedules before = app.dbschedules().schedules();
-    app.schedule().block("scheduleSingleBlock", note);
-    Schedules after = app.dbschedules().schedules();
+    before = app.dbschedules().schedules();
+    app.schedule().badMove("scheduleSingleMove");
+    after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(before, after);
+  }
+
+  @Test // нельзя подвинуть не поменяв дату и время
+  public void testNoChangeDateTimeScheduleSingleMove() {
+    app.goTo().menuTasks();
+    app.goTo().menuSchedule();
+    before = app.dbschedules().schedules();
+    app.schedule().badMoveNotChangeDateTime("scheduleSingleMove");
+    after = app.dbschedules().schedules();
+    assertThat(after.size(), equalTo(before.size()));
+
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleBlock");
+    scheduleService.findByIdAndDelete("scheduleSingleMove");
   }
-
-  private void check(Schedules before, Schedules after) {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleData scheduleAdd = new ScheduleData()
-            .withId("scheduleSingleBlock")
-            .withVer(0)
-            .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list).withBlocked(true).withBlockDesc(note)))
-            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
-
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
-      if (scheduleBefore.getId().equals("scheduleRegularBlock")) {
-        assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
-        return;
-      }
-    }
-  }
-
 
 }

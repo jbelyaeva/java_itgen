@@ -23,6 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ScheduleSingleMoveTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
+  String periodMove = "23:00 - 01:00";
   Schedules after = null;
   Schedules before = null;
 
@@ -33,10 +34,10 @@ public class ScheduleSingleMoveTests extends TestBase {
     ScheduleData schedule = new ScheduleData()
             .withId("scheduleSingleMove")
             .withVer(0)
-            .withFromDate(time.time(period))
+            .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
-                    .withW(time.time(period))
+                    .withW(time.date())
                     .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                     .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -50,7 +51,7 @@ public class ScheduleSingleMoveTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
-    app.schedule().move("scheduleSingleMove");
+    app.schedule().move(periodMove,"scheduleSingleMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));
     //проверка, что подвинулось занятие

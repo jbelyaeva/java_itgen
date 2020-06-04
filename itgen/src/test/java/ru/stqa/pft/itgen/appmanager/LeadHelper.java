@@ -118,6 +118,7 @@ public class LeadHelper extends HelperBase {
     btnLotPoint();
     btnDeleteLead();
     assertDeleteSelectedLead();
+    noErrorMessage();
   }
 
   //работник с пагинацией
@@ -175,11 +176,13 @@ public class LeadHelper extends HelperBase {
     btnPencil();
     modifyLeadForm(lead);
     btnSaveLead();
+    noErrorMessage();
   }
 
   public void create(LeadData lead) {
     btnCreateLead();
     fillLeadForm(lead);
     btnAddLead();
+    noErrorMessage();
   }
 }
