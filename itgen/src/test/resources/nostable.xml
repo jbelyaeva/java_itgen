@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Schedule">
+        <classes>
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockAllTests" />
+        </classes>
+    </test>
+</suite>

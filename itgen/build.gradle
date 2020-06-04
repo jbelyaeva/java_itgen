@@ -261,3 +261,27 @@ testSchedule.doFirst {
 }
 
 //
+
+task testNostable(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/nostable.xml'
+    }
+    if(project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if(project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+
+}
+testSchedule.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+//
