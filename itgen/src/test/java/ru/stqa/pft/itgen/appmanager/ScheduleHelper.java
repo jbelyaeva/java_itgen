@@ -35,6 +35,9 @@ public class ScheduleHelper extends HelperBase {
   private void selectBlock() {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class,'block')]")));
+    // dynamicElement.click();
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
   }
 
@@ -43,6 +46,9 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void writeNote(String note) {
+    //решение на нестабильный ввод примечания
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.name("block-desc")));
     wd.findElement(By.name("block-desc")).clear();
     type(By.name("block-desc"), note);
   }
