@@ -48,12 +48,12 @@ public class ScheduleSingleMoveTests extends TestBase {
 
   @Test
   public void testScheduleSingleMove() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
     app.schedule().move(periodMove,"scheduleSingleMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));
+    app.goTo().menuTasks();
     //проверка, что подвинулось занятие
   }
 

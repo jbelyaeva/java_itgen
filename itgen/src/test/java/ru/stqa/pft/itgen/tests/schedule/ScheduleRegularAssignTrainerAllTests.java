@@ -67,7 +67,6 @@ public class ScheduleRegularAssignTrainerAllTests extends TestBase {
 
   @Test
   public void testScheduleRegularAssignTrainerOnAll() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().assignTrainerAll("scheduleRegularAssignTrainer");
@@ -75,6 +74,7 @@ public class ScheduleRegularAssignTrainerAllTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

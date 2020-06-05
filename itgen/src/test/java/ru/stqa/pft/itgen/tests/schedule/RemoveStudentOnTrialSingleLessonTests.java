@@ -68,7 +68,6 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
 
   @Test
   public void testRemoveStudentOnTrialSingleLesson() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().removeStudent("recordStudentOnLesson");
@@ -76,6 +75,7 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

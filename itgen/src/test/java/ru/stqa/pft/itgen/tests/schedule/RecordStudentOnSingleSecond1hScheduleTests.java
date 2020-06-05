@@ -67,7 +67,6 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
 
   @Test
   public void testRecordStudentOnSingleSecond1h() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().recordStudentOnSecond1h(name, "recordOnSchedule");
@@ -75,6 +74,7 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

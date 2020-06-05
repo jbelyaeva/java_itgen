@@ -85,9 +85,6 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
 
   @Test
   public void testBadMoveOnOccupiedLesson() {
-    app.goTo().menuTasks();
-    app.goTo().menuSchedule();
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
     app.schedule().badMoveOccupied(periodMove,"badMoveSchedule");
@@ -95,6 +92,7 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     //проверка, что в списке недоступных студентов появился студент из предусловия
     app.schedule().checkFindBusyStuden("badMoveSchedule");
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

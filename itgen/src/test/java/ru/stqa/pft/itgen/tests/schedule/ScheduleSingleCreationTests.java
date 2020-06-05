@@ -16,8 +16,7 @@ public class ScheduleSingleCreationTests extends TestBase {
 
   @Test
   public void testScheduleSingleCreation() {
-    app.goTo().menuTasks();
-    app.goTo().menuSchedule();
+     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().createSingleSchedule();
     Schedules after = app.dbschedules().schedules();
@@ -26,6 +25,7 @@ public class ScheduleSingleCreationTests extends TestBase {
     assertThat(app.dbschedules().findByIdList(idSchedule).size(), equalTo(1));// что расписание только 1
     //может быть можно как то спрогнозировать создаваемое расписание, но там важен момент времени, что
     //влечет усложнение кода проверок
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

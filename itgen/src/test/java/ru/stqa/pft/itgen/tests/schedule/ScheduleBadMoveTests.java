@@ -47,22 +47,22 @@ public class ScheduleBadMoveTests extends TestBase {
 
   @Test // нельзя подвинуть на время в прошлом
   public void testBadTimeScheduleSingleMove() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
     app.schedule().badMove("scheduleSingleMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
+    app.goTo().menuTasks();
   }
 
   @Test // нельзя подвинуть не поменяв дату и время
   public void testNoChangeDateTimeScheduleSingleMove() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
     app.schedule().badMoveNotChangeDateTime("scheduleSingleMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
+    app.goTo().menuTasks();
 
   }
 

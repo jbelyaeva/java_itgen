@@ -46,13 +46,13 @@ public class ScheduleSingleBlockTests extends TestBase {
 
   @Test
   public void testScheduleSingleBlock() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().block("scheduleSingleBlock", note);
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

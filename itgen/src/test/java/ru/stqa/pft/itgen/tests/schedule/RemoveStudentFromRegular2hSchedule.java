@@ -92,13 +92,13 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
 
   @Test
   public void testRemoveStudentFromSingleSchedule() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().removeStudent("removeStudentFromLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

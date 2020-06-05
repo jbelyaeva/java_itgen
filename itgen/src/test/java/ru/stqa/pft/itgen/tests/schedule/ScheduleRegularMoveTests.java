@@ -69,12 +69,12 @@ public class ScheduleRegularMoveTests extends TestBase {
 
   @Test
   public void testScheduleRegularMove() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
     app.schedule().move(periodMove,"scheduleRegularMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()+1));
+    app.goTo().menuTasks();
     //продумать проверку на то, что время в расписании подвинулось верно
   }
 

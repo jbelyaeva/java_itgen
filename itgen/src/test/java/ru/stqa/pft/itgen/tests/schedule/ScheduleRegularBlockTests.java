@@ -66,13 +66,13 @@ public class ScheduleRegularBlockTests extends TestBase {
 
   @Test
   public void testScheduleRegularBlock() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().block("scheduleRegularBlock", note);
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
+    app.goTo().menuTasks();
   }
 
 

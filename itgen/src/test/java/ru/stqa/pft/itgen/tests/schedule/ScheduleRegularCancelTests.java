@@ -66,13 +66,13 @@ public class ScheduleRegularCancelTests extends TestBase {
 
   @Test
   public void testScheduleRegularCancel() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().cancel("scheduleRegularCancel");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(after, before);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

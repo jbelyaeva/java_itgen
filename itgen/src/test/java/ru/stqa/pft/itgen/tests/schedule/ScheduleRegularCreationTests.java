@@ -16,14 +16,14 @@ public class ScheduleRegularCreationTests extends TestBase {
 
   @Test
   public void testScheduleRegularCreation() {
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().createRegularSchedule();
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));//что список в бд увеличился на 1
     idSchedule = app.schedule().getIdNewScheduleDB(before, after);
-    assertThat(app.dbschedules().findByIdList(idSchedule).size(), equalTo(1));// что расписание только 1
+    assertThat(app.dbschedules().findByIdList(idSchedule).size(), equalTo(1));
+    app.goTo().menuTasks();// что расписание только 1
     //может быть можно как то спрогнозировать создаваемое расписание, но там важен момент времени, что
     //влечет усложнение кода проверок
   }
