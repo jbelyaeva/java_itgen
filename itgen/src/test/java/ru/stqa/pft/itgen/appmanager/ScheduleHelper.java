@@ -21,7 +21,9 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void btnCreateSchedule() {
-    click(By.xpath("//a[contains(@href,'/createSchoolSchedule')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href,'/createSchoolSchedule')]")));
+    dynamicElement.click();
   }
 
   public void checkBoxConst() {
