@@ -27,6 +27,8 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialRegularLessonTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialSingleLessonTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
         </classes>
     </test>
 </suite>
