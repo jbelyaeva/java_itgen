@@ -3,12 +3,11 @@
 <suite name="Suite1" verbose="1" >
     <test name="Nostable">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
+
         </classes>
     </test>
 </suite>
