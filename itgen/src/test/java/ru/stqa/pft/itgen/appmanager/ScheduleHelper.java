@@ -270,7 +270,7 @@ public class ScheduleHelper extends HelperBase {
     selectNewTrainer();
     btnAssign();
     noErrorMessage();
-    refresh();
+    //refresh();
   }
 
   private void btnMove() {
