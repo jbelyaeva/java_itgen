@@ -367,7 +367,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void recordStudentOn2h(String name, String id) {
     selectScheduleInListUIById(id);
-    bntRecordSrudent();
+    bntRecordStudent();
     selectStudent(name);
     selectNo();
     btnRecord();
@@ -395,13 +395,13 @@ public class ScheduleHelper extends HelperBase {
     }
   }
 
-  private void bntRecordSrudent() {
+  private void bntRecordStudent() {
     click(By.xpath("//button[contains(@class,'create')]"));
   }
 
   public void recordStudentOnFirst1h(String name, String id) {
     selectScheduleInListUIById(id);
-    bntRecordSrudent();
+    bntRecordStudent();
     selectStudent(name);
     selectNo();
     selectFirst();
@@ -416,7 +416,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void recordStudentOnSecond1h(String name, String id) {
     selectScheduleInListUIById(id);
-    bntRecordSrudent();
+    bntRecordStudent();
     selectStudent(name);
     selectNo();
     selectSecond();
@@ -472,7 +472,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void recordStudentOnTrial(String name, String id) {
     selectScheduleInListUIById(id);
-    bntRecordSrudent();
+    bntRecordStudent();
     selectStudent(name);
     btnRecord();
     noErrorMessage();

@@ -61,6 +61,38 @@ public class Slots {
     return this;
   }
 
+  public Double getW() {
+    return w;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public ST getSt() {
+    return st;
+  }
+
+  public List<C> getC() {
+    return c;
+  }
+
+  public Boolean getBlocked() {
+    return blocked;
+  }
+
+  public String getBlockDesc() {
+    return blockDesc;
+  }
+
+  public Boolean getCancelled() {
+    return cancelled;
+  }
+
+  public Double getCancelledAt() {
+    return cancelledAt;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
