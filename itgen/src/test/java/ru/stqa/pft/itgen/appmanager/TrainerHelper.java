@@ -18,7 +18,9 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void btnDeleteTrainer() {
-    click(By.xpath("//button[contains(@class,'remove-user')]"));
+    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 5))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("t//button[contains(@class,'remove-user')]")));
+    dynamicElementTrainer.click();
   }
 
   public void alertDeleteSelectedTrainer() {

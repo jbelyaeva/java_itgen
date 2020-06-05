@@ -352,11 +352,7 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//select[@id='trainer']//option[@value='7']"));
     //выбор скайпа
     click(By.xpath("//div[contains(@class,'modal-body')]"));
-   /* WebElement dynamicElementSkype = (new WebDriverWait(wd, 5))
-            .until(ExpectedConditions.elementToBeClickable(By.id("skype")));
-    dynamicElementSkype.click();*/
-    //  click(By.xpath("//select[@id='skype']//option[@value='17']"));*/
-  }
+   }
 
   private void fillBadTime() {
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
