@@ -1,13 +1,9 @@
 package ru.stqa.pft.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Property;
+import dev.morphia.annotations.*;
 import ru.stqa.pft.itgen.model.users.Contacts;
 
-import javax.persistence.Embedded;
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

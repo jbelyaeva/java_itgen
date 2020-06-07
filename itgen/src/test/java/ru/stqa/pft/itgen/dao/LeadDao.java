@@ -4,21 +4,9 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import ru.stqa.pft.itgen.model.LeadData;
 
-import javax.persistence.EntityManager;
-
-import static ru.stqa.pft.itgen.connection.HbSessionFactory.hibernateSessionFactoryUtil;
 import static ru.stqa.pft.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class LeadDao {
-
-  public LeadData findById(String id) {
-    EntityManager entityManager = hibernateSessionFactoryUtil().createEntityManager();
-    entityManager.getTransaction().begin();
-    LeadData lead = entityManager.find(LeadData.class, id);
-    entityManager.getTransaction().commit();
-    entityManager.close();
-    return lead;
-  }
 
   public void save(LeadData lead) {
     Datastore datastore = morphiaSessionFactoryUtil();

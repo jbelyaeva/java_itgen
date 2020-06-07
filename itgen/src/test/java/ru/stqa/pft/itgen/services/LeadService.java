@@ -9,10 +9,6 @@ public class LeadService {
   public LeadService() {
   }
 
-  public LeadData findById(String id) {
-    return leadDao.findById(id);
-  }
-
   public void create(LeadData lead) {
     leadDao.save(lead);
   }

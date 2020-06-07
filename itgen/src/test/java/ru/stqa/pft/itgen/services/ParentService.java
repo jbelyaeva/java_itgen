@@ -9,10 +9,6 @@ public class ParentService {
   public ParentService() {
   }
 
-  public ParentData findById(String id) {
-    return parentDao.findById(id);
-  }
-
   public void create(ParentData parent) {
     parentDao.save(parent);
   }
