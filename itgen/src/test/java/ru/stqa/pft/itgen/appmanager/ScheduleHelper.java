@@ -300,7 +300,11 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnCancel() {
-    click(By.xpath(" //button[contains(@class,'cancel')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'cancel')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
   }
 
   private void selectNewTrainer() {
