@@ -155,7 +155,7 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
+    for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("removeStudent")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;

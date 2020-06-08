@@ -72,7 +72,6 @@ public class ScheduleRegularAssignTrainerAllTests extends TestBase {
     app.schedule().assignTrainerAll("scheduleRegularAssignTrainer");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -117,7 +116,7 @@ public class ScheduleRegularAssignTrainerAllTests extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
+    for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("scheduleRegularAssignTrainer")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;

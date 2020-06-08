@@ -379,7 +379,11 @@ public class ScheduleHelper extends HelperBase {
 
 
   private void btnRecord() {
-    click(By.xpath("//button[contains(@class,'create')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'create')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
   }
 
   private void selectNo() {
