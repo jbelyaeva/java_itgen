@@ -95,8 +95,13 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'btn-primary')]"));
   }
 
-  public void bntPoints() {
-    click(By.xpath("//button[@id='dropdownMenuActions']"));
+  public void bntPoints()
+  { WebElement dynamicElement = (new WebDriverWait(wd, 10))
+          .until(ExpectedConditions.elementToBeClickable(By.xpath(" //button[@id='dropdownMenuActions']")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    click(By.xpath(" //button[@id='dropdownMenuActions']"));
+  //  click(By.xpath("//button[@id='dropdownMenuActions']"));
   }
 
   public void createSingleSchedule() {
