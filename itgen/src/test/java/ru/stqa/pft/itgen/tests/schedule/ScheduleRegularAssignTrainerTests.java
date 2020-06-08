@@ -62,7 +62,6 @@ public class ScheduleRegularAssignTrainerTests extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
-
   }
 
   @Test
@@ -72,7 +71,6 @@ public class ScheduleRegularAssignTrainerTests extends TestBase {
     app.schedule().assignTrainer("scheduleRegularAssignTrainer");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }

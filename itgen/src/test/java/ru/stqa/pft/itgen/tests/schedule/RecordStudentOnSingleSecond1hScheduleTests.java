@@ -72,7 +72,7 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     app.schedule().recordStudentOnSecond1h(name, "recordOnSchedule");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
+    //проверка на то, что новая запись записалась в бд верно, и остальные записи не испортились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -107,7 +107,7 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1").withOneTime(true);
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
+    for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordOnSchedule")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;

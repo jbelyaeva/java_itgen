@@ -108,7 +108,7 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
             .withSkypeId("1").withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
-      if (scheduleBefore.getId().equals("scheduleRegularAssignTrainer")) {
+      if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }

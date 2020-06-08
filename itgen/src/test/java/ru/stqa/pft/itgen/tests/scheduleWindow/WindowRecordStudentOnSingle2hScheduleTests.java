@@ -27,7 +27,7 @@ import java.util.Date;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
+public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   ArrayList<C> list = new ArrayList();
   String period = "18:00 - 20:00";
   int week = 604800000;
@@ -36,31 +36,20 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    //Начальные данные: есть ученик и расписание, на которое надо записать этого ученика
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     schedule = new ScheduleData()
-            .withId("recordStudentOnLesson")
+            .withId("recordOnSchedule")
             .withVer(0)
             .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
                     .withW(time.date())
                     .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week)
-                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
-                    .withC(list), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week * 2)
-                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
-                    .withC(list), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week * 3)
-                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("recordStudent").withTrialBonusOff(false).withTierId("txa");
@@ -80,14 +69,12 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
   }
 
   @Test
-
-  public void testWindowRecordStudentOnRegularFirst1h() {
+  public void testWindowRecordStudentOnSingle2h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOnRegularFirst1h(name, schedule.getSlots().get(0).getId());
+    app.windowSchedule().recordStudentOn2hSingle(name,schedule.getSlots().get(0).getId()); //имя ученика для поиска, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -95,7 +82,7 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("recordStudentOnLesson");
+    scheduleService.findByIdAndDelete("recordOnSchedule");
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("recordStudent");
     FamilyService familyService = new FamilyService();
@@ -110,35 +97,20 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
     ScheduleData scheduleAdd = new ScheduleData()
-            .withId("recordStudentOnLesson")
+            .withId("recordOnSchedule")
             .withVer(0)
             .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
-                            .withId("14") //18
-                            .withW(time.date())
-                            .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                            .withC(Arrays.asList(new C().withId("recordStudent").withType(1).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week)
-                            .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
-                            .withC(Arrays.asList(new C().withId("recordStudent").withType(1).withSubject("1")
-                                    .withLang("ru").withP(true))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 2)
-                            .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
-                            .withC(Arrays.asList(new C().withId("recordStudent").withType(1).withSubject("1")
-                                    .withLang("ru").withP(true))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 3)
-                            .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
-                            .withC(Arrays.asList(new C().withId("recordStudent").withType(1).withSubject("1")
-                                    .withLang("ru").withP(true)))))
+                    .withId("14")
+                    .withW(time.date())
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                    .withC(Arrays.asList(new C().withId("recordStudent").withType(3).withSubject("1")
+                            .withLang("ru").withNewSubj(true).withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withSkypeId("1").withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) {
-      if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
+      if (scheduleBefore.getId().equals("recordOnSchedule")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }

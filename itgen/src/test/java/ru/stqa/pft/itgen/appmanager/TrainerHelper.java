@@ -33,7 +33,11 @@ public class TrainerHelper extends HelperBase {
 
 
   public void bntModifyTrainer() {
-    click(By.xpath("//span[contains(@class,'pencil')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'pencil')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
   }
 
   public void btnSaveModify() {

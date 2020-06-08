@@ -62,7 +62,6 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withDuration(2).withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
   @Test
@@ -72,7 +71,6 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
     app.schedule().recordStudentOnTrial(name, "recordStudentOnLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -103,12 +101,12 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
                             .withW(time.date())
                             .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withTrial(true)))))
+                                    .withLang("ru").withTrial(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1").withOneTime(true);
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
-      if (scheduleBefore.getId().equals("scheduleRegularAssignTrainer")) {
+    for (ScheduleData scheduleBefore : before) {
+      if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }

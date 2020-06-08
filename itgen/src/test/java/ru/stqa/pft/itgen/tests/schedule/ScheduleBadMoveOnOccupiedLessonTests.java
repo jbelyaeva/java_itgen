@@ -27,7 +27,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
-  ArrayList<C> list = new ArrayList<>();
   String period = "18:00 - 20:00";
   String periodMove = "21:00 - 23:00";
   Schedules after = null;

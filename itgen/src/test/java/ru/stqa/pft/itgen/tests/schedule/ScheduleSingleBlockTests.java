@@ -76,7 +76,7 @@ public class ScheduleSingleBlockTests extends TestBase {
             .withSkypeId("1").withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
-      if (scheduleBefore.getId().equals("scheduleRegularBlock")) {
+      if (scheduleBefore.getId().equals("scheduleSingleBlock")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }

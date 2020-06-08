@@ -2,13 +2,17 @@ package ru.stqa.pft.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WindowScheduleHalper extends HelperBase{
   public WindowScheduleHalper (WebDriver wd) {
     super(wd);
   }
 
-  public void recordStudentOn2h(String name, String id) {
+  public void recordStudentOn2hRegular(String name, String id) {
     bntRecordOnLesson();
     selectStudent(name);
     selectRegular();
@@ -26,7 +30,12 @@ public class WindowScheduleHalper extends HelperBase{
   }
 
   private void selectRegular() {
-    click(By.xpath("//button[contains(@class,'permanent')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'permanent')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
+  //  click(By.xpath("//button[contains(@class,'permanent')]"));
   }
 
   private void bntRecordOnLesson() {
@@ -46,7 +55,7 @@ public class WindowScheduleHalper extends HelperBase{
 
   }
 
-  public void recordStudentOnFirst1h(String name, String id) {
+  public void recordStudentOnRegularFirst1h(String name, String id) {
     bntRecordOnLesson();
     selectStudent(name);
     selectRegular();
@@ -64,7 +73,7 @@ public class WindowScheduleHalper extends HelperBase{
    click(By.xpath("//select[@id='create-schedule-duration']//option[@value='4']"));
   }
 
-  public void recordStudentOnSecond1h(String name, String id) {
+  public void recordStudentOnRegularSecond1h(String name, String id) {
     bntRecordOnLesson();
     selectStudent(name);
     selectRegular();
@@ -76,5 +85,38 @@ public class WindowScheduleHalper extends HelperBase{
 
   private void selectLesson2h(String id) {
     click(By.xpath("//div[@data-trainer-id='"+id+"' and contains (@data-lesson-duration, '2')]"));
+  }
+
+  public void recordStudentOn2hSingle(String name, String id) {
+    bntRecordOnLesson();
+    selectStudent(name);
+    selectSingle();
+    selectLesson(id);
+    btnRecord();
+    noErrorMessage();
+  }
+
+  private void selectSingle() {
+      click(By.xpath("//button[contains(@class,'onetime')]"));
+  }
+
+  public void recordStudentOnSingleFirst1h(String name, String id) {
+    bntRecordOnLesson();
+    selectStudent(name);
+    selectSingle();
+    selectDuration();
+    selectLesson1h(id);
+    btnRecord();
+    noErrorMessage();
+  }
+
+  public void recordStudentOnSingleSecond1h(String name, String id) {
+    bntRecordOnLesson();
+    selectStudent(name);
+    selectSingle();
+    selectDuration();
+    selectLesson2h(id);
+    btnRecord();
+    noErrorMessage();
   }
 }

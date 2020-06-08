@@ -85,7 +85,7 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
     app.schedule().recordStudentOnSecond1h(name, "recordStudentOnLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
+    //проверка на то, что новая запись записалась в бд верно, и остальные записи не испортились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -116,27 +116,27 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
                             .withW(time.date())
                             .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(2).withSubject("1")
-                                    .withLang("ru").withNewSubj(true))),
+                                    .withLang("ru").withNewSubj(true).withP(true))),
                     new Slots().withId("14")
                             .withW(time.date() + week)
                             .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(2).withSubject("1")
-                                    .withLang("ru").withNewSubj(true))),
+                                    .withLang("ru").withP(true))),
                     new Slots().withId("14")
                             .withW(time.date() + week * 2)
                             .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(2).withSubject("1")
-                                    .withLang("ru").withNewSubj(true))),
+                                    .withLang("ru").withP(true))),
                     new Slots().withId("14")
                             .withW(time.date() + week * 3)
                             .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(2).withSubject("1")
-                                    .withLang("ru").withNewSubj(true)))))
+                                    .withLang("ru").withP(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
     for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
-      if (scheduleBefore.getId().equals("scheduleRegularAssignTrainer")) {
+      if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }
