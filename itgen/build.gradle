@@ -282,8 +282,31 @@ task testNostable(type: Test) {
     }
 
 }
-testSchedule.doFirst {
+testWindowsSchedule.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 
 //
+
+task testSmoke(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-smoke.xml'
+    }
+    if(project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if(project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if(project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if(project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+
+}
+testSmoke.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+

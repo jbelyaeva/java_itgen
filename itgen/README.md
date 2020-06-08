@@ -2,11 +2,12 @@
 
 открываем консоль в папке модуля проекта и выполняем команду:
 
-`gradlew -Pbrowser=chrome -Ptarget=remote -Pplatform=linux clean testFamilies`
+`gradlew -Dfile.encoding=UTF-8 clean testFamilies` - запустится тестовый набор testFamilies по дефолту
+ в хроме на локальной машине
 
 `-Pbrowser` – желаемый браузер
 
-`-Ptarget` – указание файла проперти (см ниже)
+`-Ptarget=local` – запуск на локальной машине
 
 `-Pplatform` – ОС на которой будет запуск
 
@@ -17,6 +18,7 @@
 `-Dfile.encoding=UTF-8`    – чтобы правильно отображалась кириллица из файла json
 
 `testFamilies` – запускаемый тестовый набор
+
 
 **Генерация отчета:**
 
@@ -39,4 +41,6 @@
 <li>testWorkers
 <li>testTrainers
 <li>testSchedule
+<li>testWindowsSchedule
+<li>testSmoke
 <li>testNostable - нестабильные тесты

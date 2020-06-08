@@ -1,0 +1,54 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Smoke">
+        <classes>
+            <class name="ru.stqa.pft.itgen.tests.FamilyCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.FamilyDeletionTests" />
+            <class name="ru.stqa.pft.itgen.tests.students.StudentCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.students.StudentModificationTests" />
+            <class name="ru.stqa.pft.itgen.tests.students.StudentDeletionTests" />
+            <class name="ru.stqa.pft.itgen.tests.students.StudentFiltrPolTests" />
+            <class name="ru.stqa.pft.itgen.tests.ParentCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.ParentModificationTests" />
+            <class name="ru.stqa.pft.itgen.tests.ParentDeletionTests" />
+            <class name="ru.stqa.pft.itgen.tests.LeadCreationTest" />
+            <class name="ru.stqa.pft.itgen.tests.LeadDeletionTest" />
+            <class name="ru.stqa.pft.itgen.tests.LeadModificationTest" />
+            <class name="ru.stqa.pft.itgen.tests.WorkerAndTrainerCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.WorkerModificationTests" />
+            <class name="ru.stqa.pft.itgen.tests.WorkerDeletionTests" />
+            <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" />
+            <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCancelTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleAssignTrainerTests" />
+            <!--  <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" /> -->
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleBlockTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCreationTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCancelTests" />
+            <!--  <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" /> -->
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularBlockAllTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegular2hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegularFirst1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnRegularSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentFromRegular2hSchedule" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordFreeStudentOnTrialSingleLessonTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialRegularLessonTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialSingleLessonTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests" />
+            <!--     <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
+                 <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" /> -->
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests" />
+        </classes>
+    </test>
+</suite>
