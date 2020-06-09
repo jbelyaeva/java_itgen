@@ -212,7 +212,7 @@ public class TrainerHelper extends HelperBase {
 
   public void selectTrainerById(TrainerData deletedTrainer) {
     //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    String next = wd.findElement(By.xpath("//a[@class='btn-next']")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
