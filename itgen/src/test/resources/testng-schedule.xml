@@ -9,7 +9,7 @@
           <!--  <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" /> -->
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleBlockTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCreationTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+          <!--  <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" /> -->
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularCancelTests" />
           <!--  <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" /> -->
