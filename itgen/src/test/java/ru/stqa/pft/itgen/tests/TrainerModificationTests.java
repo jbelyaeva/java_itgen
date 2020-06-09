@@ -64,7 +64,6 @@ public class TrainerModificationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testTrainerModification(TrainerData trainer) {
-    app.goTo().menuTasks();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
     app.trainer().selectTrainerById(modifyTrainer);
@@ -74,6 +73,7 @@ public class TrainerModificationTests extends TestBase {
     TrainerData trainerAdd = trainer.withId(modifyTrainer.getId());
     assertThat(after, equalTo(before.without(modifyTrainer).withAdded(trainerAdd)));
     verifyTrainerListInUI();
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)
