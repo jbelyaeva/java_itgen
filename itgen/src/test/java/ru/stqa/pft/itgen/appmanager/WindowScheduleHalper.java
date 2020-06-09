@@ -43,8 +43,8 @@ public class WindowScheduleHalper extends HelperBase{
   }
 
   private void selectStudent(String name) {
-    type(By.id("child-name"), name);
 
+    type(By.id("child-name"), name);
     if (isElementPresent(By.xpath("//span[contains(@class,'result')]"))) {
       click(By.xpath("//span[contains(@class,'result')]"));
     } else {
@@ -52,7 +52,6 @@ public class WindowScheduleHalper extends HelperBase{
       type(By.id("child-name"), name);
       click(By.xpath("//span[contains(@class,'result')]"));
     }
-
   }
 
   public void recordStudentOnRegularFirst1h(String name, String id) {

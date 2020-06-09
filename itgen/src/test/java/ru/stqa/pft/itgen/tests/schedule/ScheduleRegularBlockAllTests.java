@@ -21,7 +21,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleRegularBlockAllTests extends TestBase {
-  ArrayList<C> list = new ArrayList();
+  ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   int week = 604800000;
   String note = "заблокировать расписание";

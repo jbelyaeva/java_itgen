@@ -28,7 +28,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RecordStudentOnSingle2hScheduleTests extends TestBase {
-  ArrayList<C> list = new ArrayList();
+  ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   String name = "Маша Машина";
 

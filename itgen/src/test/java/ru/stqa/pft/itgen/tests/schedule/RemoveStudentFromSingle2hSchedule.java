@@ -27,7 +27,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RemoveStudentFromSingle2hSchedule extends TestBase {
 
-  ArrayList<C> list = new ArrayList();
+  ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
 
   @BeforeMethod
