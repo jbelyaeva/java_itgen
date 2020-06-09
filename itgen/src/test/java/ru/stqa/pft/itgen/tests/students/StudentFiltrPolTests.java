@@ -51,7 +51,6 @@ public class StudentFiltrPolTests extends TestBase {
 
   @Test
   public void testStudentFiltrPol() {
-    app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.student().openFiltr();
     app.student().changePol(pol);
@@ -64,6 +63,7 @@ public class StudentFiltrPolTests extends TestBase {
                     .withFirstName(s.getFirstname())
                     .withLastName(s.getLastname()))
             .collect(Collectors.toSet())));
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)
