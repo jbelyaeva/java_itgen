@@ -8,6 +8,7 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+            <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" />
         </classes>
     </test>
 </suite>

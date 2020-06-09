@@ -39,7 +39,7 @@ public class ApplicationManager {
   private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
   private DbHelperSchedule dbHelperSchedule;
-  private WindowScheduleHalper windowScheduleHalper;
+  private WindowScheduleHelper windowScheduleHalper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -82,7 +82,7 @@ public class ApplicationManager {
     scheduleHelper = new ScheduleHelper(wd);
     sShotHelper = new SShotHelper(wd);
     leadHelper = new LeadHelper(wd);
-    windowScheduleHalper = new WindowScheduleHalper(wd);
+    windowScheduleHalper = new WindowScheduleHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
   }
@@ -139,7 +139,7 @@ public class ApplicationManager {
     return leadHelper;
   }
 
-  public WindowScheduleHalper windowSchedule() {
+  public WindowScheduleHelper windowSchedule() {
     return windowScheduleHalper;
   }
 

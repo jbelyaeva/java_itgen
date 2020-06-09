@@ -16,7 +16,7 @@ public class ScheduleSingleCreationTests extends TestBase {
 
   @Test
   public void testScheduleSingleCreation() {
-     app.goTo().menuSchedule();
+    app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().createSingleSchedule();
     Schedules after = app.dbschedules().schedules();

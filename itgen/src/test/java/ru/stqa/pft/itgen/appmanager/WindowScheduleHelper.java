@@ -7,8 +7,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WindowScheduleHalper extends HelperBase{
-  public WindowScheduleHalper (WebDriver wd) {
+public class WindowScheduleHelper extends HelperBase{
+  public WindowScheduleHelper(WebDriver wd) {
     super(wd);
   }
 
