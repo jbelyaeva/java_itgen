@@ -118,4 +118,13 @@ public class WindowScheduleHelper extends HelperBase{
     btnRecord();
     noErrorMessage();
   }
+
+  public void recordStudentOnTrial(String name, String id) {
+    bntRecordOnLesson();
+    selectStudent(name);
+    selectLesson(id);
+    btnRecord();
+    noErrorMessage();
+  }
+
 }

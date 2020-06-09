@@ -37,7 +37,7 @@ public class TrainerDeletionTests extends TestBase {
 
   @Test
   public void testTrainerDeletion() {
-    app.goTo().menuTasks();
+    app.goTo().menuSchedule();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
     app.trainer().delete(deletedTrainer);

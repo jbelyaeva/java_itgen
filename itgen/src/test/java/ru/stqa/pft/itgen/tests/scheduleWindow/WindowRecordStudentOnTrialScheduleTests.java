@@ -1,5 +1,6 @@
-package ru.stqa.pft.itgen.tests.schedule;
-//автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
+package ru.stqa.pft.itgen.tests.scheduleWindow;
+//автотест проверяет запись платника на пробное занятие в постоянном расписании
+//проверяет, что переключатель Пробное стоит по дефолту
 //начальные данные: период, id тренера
 
 import org.testng.annotations.AfterMethod;
@@ -27,16 +28,18 @@ import java.util.Date;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class RecordStudentOnTrialSingleLessonTests extends TestBase {
+public class WindowRecordStudentOnTrialScheduleTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();
-  String period = "21:00 - 23:00";
+  String period = "18:00 - 20:00";
+  int week = 604800000;
   String name = "Маша Машина";
+  ScheduleData schedule = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    schedule = new ScheduleData()
             .withId("recordStudentOnLesson")
             .withVer(0)
             .withFromDate(time.date())
@@ -44,9 +47,21 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
                     .withId("14")
                     .withW(time.date())
                     .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                    .withC(list), new Slots()
+                    .withId("14")
+                    .withW(time.date() + week)
+                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
+                    .withC(list), new Slots()
+                    .withId("14")
+                    .withW(time.date() + week * 2)
+                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
+                    .withC(list), new Slots()
+                    .withId("14")
+                    .withW(time.date() + week * 3)
+                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1");
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("recordStudent").withTrialBonusOff(false).withTierId("txa");
@@ -62,13 +77,14 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withDuration(2).withStatus(new Status().withState("noTrial"));
     studentService.save(student);
+
   }
 
   @Test
-  public void testRecordStudentOnTrialSingleLesson() {
+  public void testWindowRecordStudentOnTrial() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.schedule().recordStudentOnTrial(name, "recordStudentOnLesson");
+    app.windowSchedule().recordStudentOnTrial(name,schedule.getSlots().get(0).getId()); //имя ученика, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
@@ -97,13 +113,25 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
             .withVer(0)
             .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
-                            .withId("14") //18
+                            .withId("14")
                             .withW(time.date())
                             .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                             .withC(Arrays.asList(new C().withId("recordStudent").withType(3).withSubject("1")
-                                    .withLang("ru").withTrial(true)))))
+                                    .withLang("ru").withTrial(true))),
+                    new Slots().withId("14")
+                            .withW(time.date() + week)
+                            .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
+                            .withC(list),
+                    new Slots().withId("14")
+                            .withW(time.date() + week * 2)
+                            .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
+                            .withC(list),
+                    new Slots().withId("14")
+                            .withW(time.date() + week * 3)
+                            .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
+                            .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1");
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordStudentOnLesson")) {

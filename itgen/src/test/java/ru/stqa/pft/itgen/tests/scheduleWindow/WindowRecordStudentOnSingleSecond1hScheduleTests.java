@@ -1,6 +1,4 @@
 package ru.stqa.pft.itgen.tests.scheduleWindow;
-//автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
-//начальные данные: период, id тренера
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
