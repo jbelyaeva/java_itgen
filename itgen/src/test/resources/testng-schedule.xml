@@ -24,8 +24,8 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentFromRegular2hSchedule" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RecordFreeStudentOnTrialSingleLessonTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialRegularLessonTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialSingleLessonTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialRegularScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.schedule.RecordStudentOnTrialSingleScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests" />
        <!--     <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" /> -->

@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen.tests.scheduleWindow;
+package ru.stqa.pft.itgen.tests.schedule;
 //автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
 //начальные данные: период, id тренера
 
@@ -27,7 +27,7 @@ import java.util.Date;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class WindowRecordFreeStudentOnTrialSingleLessonTests extends TestBase {
+public class RecordStudentOnTrialSingleScheduleTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   String name = "Маша Машина";
@@ -54,7 +54,7 @@ public class WindowRecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("recordStudent").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("child","donator"))
+            .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
             .withFamilyId("recordStudent").withStudyLang("ru").withLocate("ru")
             .withBirthday(new Date(1556726891000L))
@@ -62,11 +62,10 @@ public class WindowRecordFreeStudentOnTrialSingleLessonTests extends TestBase {
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withDuration(2).withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
   @Test
-  public void testRecordFreeStudentOnTrialSingleLesson() {
+  public void testRecordStudentOnTrialSingleSchedule() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().recordStudentOnTrial(name, "recordStudentOnLesson");
