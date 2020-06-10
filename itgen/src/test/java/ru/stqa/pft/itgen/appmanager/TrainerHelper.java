@@ -212,12 +212,12 @@ public class TrainerHelper extends HelperBase {
 
   public void selectTrainerById(TrainerData deletedTrainer) {
     //находим пагинатор
-    String next = wd.findElement(By.xpath("//a[@class='btn-next']")).getAttribute("class");
+    String next = wd.findElement(By.xpath("//span[contains(text(),'»')]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     //есть ли на первой странице наш работник
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
     if (list.size() > 0) {
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
+        wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
     } else {
       //если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
