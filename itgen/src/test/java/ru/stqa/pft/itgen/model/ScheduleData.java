@@ -4,8 +4,8 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import ru.stqa.pft.itgen.model.Schedule.Slots;
-import ru.stqa.pft.itgen.model.Schedule.Times;
+import ru.stqa.pft.itgen.model.schedule.Slots;
+import ru.stqa.pft.itgen.model.schedule.Times;
 
 import java.util.ArrayList;
 import java.util.List;

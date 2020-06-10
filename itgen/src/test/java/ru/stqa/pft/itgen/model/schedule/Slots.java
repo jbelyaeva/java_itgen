@@ -1,4 +1,4 @@
-package ru.stqa.pft.itgen.model.Schedule;
+package ru.stqa.pft.itgen.model.schedule;
 
 import dev.morphia.annotations.Embedded;
 

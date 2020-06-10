@@ -3,6 +3,7 @@ package ru.stqa.pft.itgen.tests.testing;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import org.testng.annotations.Test;
+import ru.stqa.pft.itgen.model.RequestData;
 import ru.stqa.pft.itgen.model.TaskData;
 
 import java.util.List;
@@ -17,9 +18,9 @@ public class DbMorphiaTest {
 
 
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query = datastore.createQuery(TaskData.class);
-    List<TaskData> students = query.find().toList();
-    for (TaskData student : students) {
+    Query<RequestData> query = datastore.createQuery(RequestData.class);
+    List<RequestData> students = query.find().toList();
+    for (RequestData student : students) {
       System.out.println(student);
     }
 /*

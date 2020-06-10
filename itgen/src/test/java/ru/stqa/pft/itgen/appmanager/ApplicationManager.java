@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelper;
+import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperRequest;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import ru.stqa.pft.itgen.appmanager.dbHelpers.DbHelperStudents;
 
@@ -39,7 +40,9 @@ public class ApplicationManager {
   private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
   private DbHelperSchedule dbHelperSchedule;
+  private DbHelperRequest dbHelperRequest;
   private WindowScheduleHelper windowScheduleHalper;
+  private RequestHelper requestHalper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -56,6 +59,7 @@ public class ApplicationManager {
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
+    dbHelperRequest = new DbHelperRequest();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -83,6 +87,7 @@ public class ApplicationManager {
     sShotHelper = new SShotHelper(wd);
     leadHelper = new LeadHelper(wd);
     windowScheduleHalper = new WindowScheduleHelper(wd);
+    requestHalper = new RequestHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
   }
@@ -109,6 +114,10 @@ public class ApplicationManager {
 
   public DbHelperSchedule dbschedules() {
     return dbHelperSchedule;
+  }
+
+  public DbHelperRequest dbrequest() {
+    return dbHelperRequest;
   }
 
   public StudentHelper student() {
@@ -141,6 +150,10 @@ public class ApplicationManager {
 
   public WindowScheduleHelper windowSchedule() {
     return windowScheduleHalper;
+  }
+
+  public RequestHelper request() {
+    return requestHalper;
   }
 
   public byte[] takeScreenshot() {

@@ -17,13 +17,6 @@ public class DbHelperStudents {
     List<StudentData> students = query.find().toList();
     return new Students(students);
   }
-/*
-  public Parents parents() {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<ParentData> query = datastore.createQuery(ParentData.class).field("roles").equal("parent");
-    List<ParentData> parents = query.find().toList();
-    return new Parents(parents);
-  }*/
 
   public Students studentFiltrPol(int pol) {
     Datastore datastore = morphiaSessionFactoryUtil();
