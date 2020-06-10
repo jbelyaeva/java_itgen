@@ -208,6 +208,7 @@ public class TrainerHelper extends HelperBase {
     modifiTrainerForm(trainer);
     btnSaveModify();
     noErrorMessage();
+    refresh();
   }
 
   public void selectTrainerById(TrainerData deletedTrainer) {
