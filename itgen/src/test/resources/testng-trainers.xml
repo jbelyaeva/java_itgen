@@ -4,7 +4,7 @@
     <test name="Trainers">
         <classes>
          <!--   <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" /> -->
-            <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />
+         <!--   <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />-->
         </classes>
     </test>
 </suite>
