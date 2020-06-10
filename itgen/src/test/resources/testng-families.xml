@@ -3,7 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Families">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.FirstTest" />
+            <class name="ru.stqa.pft.itgen.tests.AFirstTest" />
             <class name="ru.stqa.pft.itgen.tests.FamilyCreationTests" />
             <class name="ru.stqa.pft.itgen.tests.FamilyDeletionTests" />
         </classes>
