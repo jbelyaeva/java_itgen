@@ -9,6 +9,9 @@
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
         </classes>
     </test>
 </suite>

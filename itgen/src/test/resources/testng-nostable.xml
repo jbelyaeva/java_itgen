@@ -10,9 +10,6 @@
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
             <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" />
             <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
         </classes>
     </test>
 </suite>
