@@ -98,7 +98,7 @@ public class FamilyHelper extends HelperBase {
     WebElement dynamicElement1 = (new WebDriverWait(wd, 3))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='modal-content']//button[contains(@class,'danger')]")));
     Actions actions1 = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
+    actions1.moveToElement(dynamicElement).build().perform();
     dynamicElement1.click();
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
