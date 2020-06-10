@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.stqa.pft.itgen.model.FamilyDataUI;
 import ru.stqa.pft.itgen.model.StudentData;
@@ -86,8 +88,18 @@ public class FamilyHelper extends HelperBase {
   }
 
   public void alertDeleteSelectedFamily() {
-    click(By.cssSelector("div.modal-header"));
-    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
+    //подождали, навели курсор, нажали
+    WebElement dynamicElement = (new WebDriverWait(wd, 3))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'remove-family')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
+//подождали, навели курсор, нажали на подтверждение
+    WebElement dynamicElement1 = (new WebDriverWait(wd, 3))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='modal-content']//button[contains(@class,'danger')]")));
+    Actions actions1 = new Actions(wd);
+    actions1.moveToElement(dynamicElement).build().perform();
+    dynamicElement1.click();
     Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 

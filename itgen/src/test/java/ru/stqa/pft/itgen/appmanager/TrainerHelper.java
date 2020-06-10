@@ -212,7 +212,7 @@ public class TrainerHelper extends HelperBase {
 
   public void selectTrainerById(TrainerData deletedTrainer) {
     //находим пагинатор
-    WebElement dynamicElement = (new WebDriverWait(wd, 3))
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class='pagination']//li[2]")));
     String next = dynamicElement.getAttribute("class");
      //есть ли на первой странице наш работник

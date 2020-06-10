@@ -127,4 +127,14 @@ public class WindowScheduleHelper extends HelperBase{
     noErrorMessage();
   }
 
+  public void makeRequestOnTrial2hScratch(String name) {
+    bntRecordOnLesson();
+    selectStudent(name);
+    btnRequest();
+    noErrorMessage();
+  }
+
+  private void btnRequest() {
+    click(By.xpath("//button[contains(@class,'create-request')]"));
+  }
 }
