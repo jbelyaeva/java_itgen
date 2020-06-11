@@ -172,6 +172,7 @@ public class ScheduleHelper extends HelperBase {
     fillFormMove(period);
     btnMove();
     noErrorMessage();
+    refresh();
   }
 
   public void badMoveOccupied(String period, String id) {
