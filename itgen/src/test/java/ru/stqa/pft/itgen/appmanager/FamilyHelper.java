@@ -88,12 +88,7 @@ public class FamilyHelper extends HelperBase {
   }
 
   public void alertDeleteSelectedFamily() {
-    //подождали, навели курсор, нажали
-    WebElement dynamicElement = (new WebDriverWait(wd, 3))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'remove-family')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+   
 //подождали, навели курсор, нажали на подтверждение
     WebElement dynamicElement1 = (new WebDriverWait(wd, 3))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='modal-content']//button[contains(@class,'danger')]")));
