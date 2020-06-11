@@ -19,8 +19,8 @@
             <class name="ru.stqa.pft.itgen.tests.WorkerAndTrainerCreationTests" />
             <class name="ru.stqa.pft.itgen.tests.WorkerModificationTests" />
             <class name="ru.stqa.pft.itgen.tests.WorkerDeletionTests" />
-        <!--    <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" /> -->
-         <!--   <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />-->
+            <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" />
+            <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCreationTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleCancelTests" />
             <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleAssignTrainerTests" />
@@ -56,6 +56,7 @@
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
             <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
+            <class name="ru.stqa.pft.itgen.tests.requests.RequestOnTrial2hScratchTests" />
         </classes>
     </test>
 </suite>
