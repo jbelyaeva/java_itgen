@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Leads">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.LeadCreationTest" />
-            <class name="ru.stqa.pft.itgen.tests.LeadDeletionTest" />
-            <class name="ru.stqa.pft.itgen.tests.LeadModificationTest" />
+            <class name="io.itgen.tests.LeadCreationTest" />
+            <class name="io.itgen.tests.LeadDeletionTest" />
+            <class name="io.itgen.tests.LeadModificationTest" />
         </classes>
     </test>
 </suite>

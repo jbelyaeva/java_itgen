@@ -3,10 +3,10 @@
 <suite name="Suite1" verbose="1" >
     <test name="Students">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.students.StudentCreationTests" />
-            <class name="ru.stqa.pft.itgen.tests.students.StudentModificationTests" />
-            <class name="ru.stqa.pft.itgen.tests.students.StudentDeletionTests" />
-            <class name="ru.stqa.pft.itgen.tests.students.StudentFiltrPolTests" />
+            <class name="io.itgen.tests.students.StudentCreationTests" />
+            <class name="io.itgen.tests.students.StudentModificationTests" />
+            <class name="io.itgen.tests.students.StudentDeletionTests" />
+            <class name="io.itgen.tests.students.StudentFiltrPolTests" />
         </classes>
     </test>
 </suite>

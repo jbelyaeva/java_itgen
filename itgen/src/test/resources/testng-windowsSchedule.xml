@@ -3,15 +3,15 @@
 <suite name="Suite1" verbose="1" >
     <test name="WindowsSchedule">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
-            <class name="ru.stqa.pft.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
         </classes>
     </test>
 </suite>

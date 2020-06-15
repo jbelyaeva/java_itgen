@@ -3,13 +3,13 @@
 <suite name="Suite1" verbose="1" >
     <test name="Nostable">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleSingleMoveTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularMoveTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
-            <class name="ru.stqa.pft.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
-            <class name="ru.stqa.pft.itgen.tests.requests.RequestOnTrial2hScratchTests" />
-
+            <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests" />
+            <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests" />
+            <class name="io.itgen.tests.schedule.ScheduleBadMoveTests" />
+            <class name="io.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
+            <class name="io.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
+            <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests" />
+            <class name="io.itgen.tests.FamilyDeletionTests" />
         </classes>
     </test>
 </suite>

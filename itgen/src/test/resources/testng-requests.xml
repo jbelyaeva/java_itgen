@@ -3,7 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Requests">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.requests.RequestOnTrial2hScratchTests" />
+            <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests" />
         </classes>
     </test>
 </suite>
