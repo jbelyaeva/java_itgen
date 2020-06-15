@@ -3,8 +3,8 @@
 <suite name="Suite1" verbose="1" >
     <test name="Trainers">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.TrainerModificationTests" />
-            <class name="ru.stqa.pft.itgen.tests.TrainerDeletionTests" />
+            <class name="io.itgen.tests.TrainerModificationTests" />
+            <class name="io.itgen.tests.TrainerDeletionTests" />
         </classes>
     </test>
 </suite>

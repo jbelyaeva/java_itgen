@@ -3,9 +3,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Parents">
         <classes>
-            <class name="ru.stqa.pft.itgen.tests.ParentCreationTests" />
-            <class name="ru.stqa.pft.itgen.tests.ParentModificationTests" />
-            <class name="ru.stqa.pft.itgen.tests.ParentDeletionTests" />
+            <class name="io.itgen.tests.ParentCreationTests" />
+            <class name="io.itgen.tests.ParentModificationTests" />
+            <class name="io.itgen.tests.ParentDeletionTests" />
         </classes>
     </test>
 </suite>
