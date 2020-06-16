@@ -3,7 +3,6 @@
 <suite name="Suite1" verbose="1" >
     <test name="Families">
         <classes>
-            <class name="io.itgen.tests.AFirstTest" />
             <class name="io.itgen.tests.FamilyCreationTests" />
             <class name="io.itgen.tests.FamilyDeletionTests" />
         </classes>
