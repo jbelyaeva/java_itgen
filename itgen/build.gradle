@@ -348,6 +348,9 @@ task testFirst(type: Test) {
     if(project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+ testFirst.doFirst {
+        jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    }
 
 }
 

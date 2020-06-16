@@ -18,7 +18,7 @@ public class MFSessionFactory {
     MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 3001), options.build());
     Morphia morphia = new Morphia();
     morphia.getMapper().getOptions().setStoreEmpties(true);
-    morphia.mapPackage("ru.stqa.pft.itgen.model");
+    morphia.mapPackage("io.itgen.model");
     Datastore datastore = morphia.createDatastore(mongoClient, "meteor");
     return datastore;
 
