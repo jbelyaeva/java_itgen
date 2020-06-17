@@ -211,42 +211,25 @@ public class StudentHelper extends HelperBase {
     btnSaveModify();
   }
 
-  public String getIdNewStudentDB(Students before, Students after) {
-    boolean a = true;
-    String getIdAfter = "";
-    for (StudentData student : after) {
-      getIdAfter = student.getId();
-      for (StudentData student_before : before) {
-        String getIdBefore = student_before.getId();
-        if (getIdAfter.equals(getIdBefore)) {
-          a = false;
-          break;
-        }
-      }
-      if (a) {
-        break;
-      }
-    }
-    return getIdAfter;
-  }
 
   public StudentData getNewStudentDB(Students before, Students after) {
     boolean a = true;
-    StudentData getIdAfter = null;
+    StudentData getAfter = null;
     for (StudentData student : after) {
-      getIdAfter = student;
+      getAfter = student;
       for (StudentData student_before : before) {
-        StudentData getIdBefore = student_before;
-        if (getIdAfter.equals(getIdBefore)) {
+        StudentData getBefore = student_before;
+        if (!getAfter.equals(getBefore)) {
           a = false;
           break;
         }
+
       }
-      if (a) {
+      if (!a) {
         break;
       }
     }
-    return getIdAfter;
+    return getAfter;
   }
 
   public void delete() {

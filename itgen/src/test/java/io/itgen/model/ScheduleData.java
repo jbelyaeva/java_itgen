@@ -4,6 +4,7 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
+import io.itgen.model.schedule.FinishedSlots;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
 
@@ -25,6 +26,9 @@ public class ScheduleData {
 
   @Embedded("slots")
   private List<Slots> slots = new ArrayList<Slots>();
+
+  @Embedded("finishedSlots")
+  private List<FinishedSlots> finishedSlots = new ArrayList<FinishedSlots>();
 
   @Embedded
   private Times times;
@@ -55,6 +59,11 @@ public class ScheduleData {
 
   public ScheduleData withSlots(List<Slots> slots) {
     this.slots = slots;
+    return this;
+  }
+
+  public ScheduleData withFinishedSlots(List<FinishedSlots> finishedSlots) {
+    this.finishedSlots = finishedSlots;
     return this;
   }
 

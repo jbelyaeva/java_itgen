@@ -43,6 +43,7 @@ public class ApplicationManager {
   private DbHelperRequest dbHelperRequest;
   private WindowScheduleHelper windowScheduleHalper;
   private RequestHelper requestHalper;
+  private LKParentHelper lkParentHelper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -88,7 +89,8 @@ public class ApplicationManager {
     leadHelper = new LeadHelper(wd);
     windowScheduleHalper = new WindowScheduleHelper(wd);
     requestHalper = new RequestHelper(wd);
-    sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+    lkParentHelper = new LKParentHelper(wd);
+    sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
   }
 
@@ -154,6 +156,10 @@ public class ApplicationManager {
 
   public RequestHelper request() {
     return requestHalper;
+  }
+
+  public LKParentHelper lkParent() {
+    return lkParentHelper;
   }
 
   public byte[] takeScreenshot() {

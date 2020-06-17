@@ -10,6 +10,7 @@
             <class name="io.itgen.tests.schedule.ScheduleRegularAssignTrainerTests" />
             <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests" />
             <class name="io.itgen.tests.FamilyDeletionTests" />
+            <class name="io.itgen.tests.lkParent.RecordOnTrail" />
         </classes>
     </test>
 </suite>

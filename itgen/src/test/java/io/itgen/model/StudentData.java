@@ -18,9 +18,8 @@ public class StudentData {
   @Property("username")
   private String username;
 
-  @Transient
-  @Embedded
-  private List<Skills> skills = new ArrayList<Skills>();
+  @Property("skills")
+  private List<String> skills = new ArrayList<String>();
 
   @Expose
   @Property("firstName")
@@ -34,7 +33,6 @@ public class StudentData {
   @Property("gender")
   private Integer gender;
 
-  @Transient
   @Property("birthday")
   private Date birthday;
 
@@ -313,6 +311,11 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withSkills(List<String> skills) {
+    this.langs = langs;
+    return this;
+  }
+
 
 
   /* getters */
@@ -427,6 +430,10 @@ public class StudentData {
 
   public List<String> getLangs() {
     return langs;
+  }
+
+  public List<String> getSkills() {
+    return skills;
   }
 
 

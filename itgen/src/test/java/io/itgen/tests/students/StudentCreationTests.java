@@ -82,11 +82,10 @@ public class StudentCreationTests extends TestBase {
     Students before = app.dbstudents().students();
     app.student().createBad(student);
     Students after = app.dbstudents().students();
-    studentClean = app.student().getNewStudentDB(before, after);
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
-  }
-
+    studentClean = null;
+   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
