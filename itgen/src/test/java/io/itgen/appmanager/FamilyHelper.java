@@ -131,4 +131,6 @@ public class FamilyHelper extends HelperBase {
   private void SelectStudentById(StudentData deletedStudent) {
     wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
   }
+
+
 }
