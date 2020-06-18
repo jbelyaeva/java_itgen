@@ -26,25 +26,6 @@ import java.util.Date;
 
 public class SshotListStudents extends TestBase {
 
-  @BeforeMethod
-  public void ensurePreconditions() {
-
-    FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("familyAshot").withTrialBonusOff(false).withTierId("txa");
-    familyService.save(family);
-
-    StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("studentAshot").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("studentDelete").withStudyLang("ru").withLocate("ru")
-            .withBirthday(new Date(1556726891000L))
-            .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
-    studentService.save(student);
-  }
-
   @Test
   public void testSshotListStudents() throws AWTException, IOException {
    String name = "Admin_ListStudents_RU_Chrome";
@@ -57,14 +38,5 @@ public class SshotListStudents extends TestBase {
             , ApplicationManager.propertiesAshot.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
-  }
-
-  @AfterMethod(alwaysRun = true)
-  public void clean() {
-    StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("studentAshot");
-    FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("familyAshot");
-
   }
 }
