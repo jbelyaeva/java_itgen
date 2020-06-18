@@ -26,33 +26,14 @@ import java.util.Date;
 
 public class SshotFamily extends TestBase {
 
-  @BeforeMethod
-  public void ensurePreconditions() {
 
-    FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("familyAshot").withTrialBonusOff(false).withTierId("txa");
-    familyService.save(family);
-
-    StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("studentAshot").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("familyAshot").withStudyLang("ru").withLocate("ru")
-            .withBirthday(new Date(1556726891000L))
-            .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
-    studentService.save(student);
-  }
-
-  @Test
+ @Test
   public void testSshotFamilies() throws AWTException, IOException {
    String name = "Admin_Family_RU_Chrome";
     String[] locatorIgnor = new String[1];
     locatorIgnor[0]="//span[@class='user-time']";
-    app.goTo().refresh();
     app.goTo().menuStudents();
-    app.student().selectStudentInListUIById("studentAshot");
+    app.student().selectStudentInListUIById("19");
     app.family().btnFamily();
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.propertiesAshot.getProperty("expected")
@@ -60,14 +41,5 @@ public class SshotFamily extends TestBase {
             , ApplicationManager.propertiesAshot.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
-  }
-
-  @AfterMethod(alwaysRun = true)
-  public void clean() {
-    StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("studentAshot");
-    FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("familyAshot");
-
   }
 }
