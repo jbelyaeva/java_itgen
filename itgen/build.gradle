@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id  'project-report'
+    id 'project-report'
 }
 
 group 'test1'
@@ -44,8 +44,8 @@ dependencies {
 // log4j:WARN No appenders could be found for logger (org.jboss.logging)
 
 configurations.all {
-    exclude (group:"org.slf4j", module: "slf4j-simple")
-    exclude (group:"log4j", module: "log4j")
+    exclude(group: "org.slf4j", module: "slf4j-simple")
+    exclude(group: "log4j", module: "log4j")
 }
 
 //
@@ -61,16 +61,16 @@ task testFamilies(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-families.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -84,16 +84,16 @@ task testParents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-parents.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -107,16 +107,16 @@ task testStudents(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-students.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -130,16 +130,16 @@ task testTrainers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-trainers.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -153,16 +153,16 @@ task testWorkers(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-workers.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -176,16 +176,16 @@ task testLeads(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-leads.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
@@ -199,16 +199,16 @@ task testScreenShots(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-screenShots.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('etalon')) {
+    if (project.hasProperty('etalon')) {
         systemProperty 'etalon', "${etalon}"
     }
 
@@ -222,16 +222,16 @@ task testSchedule(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-schedule.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 
@@ -245,16 +245,16 @@ task testWindowsSchedule(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-windowsSchedule.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 
@@ -268,16 +268,16 @@ task testNostable(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-nostable.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 
@@ -291,16 +291,16 @@ task testRequests(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-requests.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 
@@ -314,16 +314,16 @@ task testSmoke(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-smoke.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 
@@ -336,20 +336,63 @@ task testFirst(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-first.xml'
     }
-    if(project.hasProperty('browser')) {
+    if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
     }
-    if(project.hasProperty('platform')) {
+    if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-    if(project.hasProperty('target')) {
+    if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if(project.hasProperty('verifyUI')) {
+    if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
- testFirst.doFirst {
+    testFirst.doFirst {
         jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    }
+
+    //
+    task testSmokeParent(type: Test) {
+        useTestNG {
+            suites 'src/test/resources/testng-smoke-parent.xml'
+        }
+        if (project.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+        if (project.hasProperty('platform')) {
+            systemProperty 'platform', "${platform}"
+        }
+        if (project.hasProperty('target')) {
+            systemProperty 'target', "${target}"
+        }
+        if (project.hasProperty('verifyUI')) {
+            systemProperty 'verifyUI', "${verifyUI}"
+        }
+        testSmokeParent.doFirst {
+            jvmArgs "-javaagent:${configurations.agent.singleFile}"
+        }
+    }
+    //
+task testNostablePar(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-nostable-par.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    testNostablePar.doFirst {
+        jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    }
     }
 
 }
