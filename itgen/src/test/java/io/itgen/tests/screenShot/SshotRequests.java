@@ -1,16 +1,15 @@
-package io.itgen.tests.screenSort;
+package io.itgen.tests.screenShot;
 
-import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
 import io.itgen.model.requests.Activity;
 import io.itgen.model.requests.Comment;
 import io.itgen.model.requests.Times;
-import io.itgen.model.schedule.C;
-import io.itgen.model.schedule.ST;
-import io.itgen.model.schedule.Slots;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
-import io.itgen.services.*;
+import io.itgen.services.FamilyService;
+import io.itgen.services.RequestService;
+import io.itgen.services.StudentService;
+import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -25,11 +24,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static io.itgen.appmanager.ApplicationManager.propertiesAshot;
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotRequests extends TestBase {
   ArrayList<Comment> listcomment = new ArrayList<>();
-  ArrayList<Activity> listactivity = new ArrayList<>();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -77,9 +75,9 @@ public class SshotRequests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuRequests();
 
-   ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
-            , propertiesAshot.getProperty("actual")
-            , propertiesAshot.getProperty("markedImages")
+   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
+            , properties.getProperty("actual")
+            , properties.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
