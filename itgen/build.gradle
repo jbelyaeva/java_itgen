@@ -348,6 +348,7 @@ task testFirst(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+}
     testFirst.doFirst {
         jvmArgs "-javaagent:${configurations.agent.singleFile}"
     }
@@ -369,10 +370,11 @@ task testFirst(type: Test) {
         if (project.hasProperty('verifyUI')) {
             systemProperty 'verifyUI', "${verifyUI}"
         }
+    }
         testSmokeParent.doFirst {
             jvmArgs "-javaagent:${configurations.agent.singleFile}"
         }
-    }
+
     //
 task testNostablePar(type: Test) {
     useTestNG {
@@ -390,10 +392,32 @@ task testNostablePar(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+}
     testNostablePar.doFirst {
         jvmArgs "-javaagent:${configurations.agent.singleFile}"
     }
-    }
 
+
+//
+task testScreenShotsPar(type: Test) {
+   useTestNG {
+        suites 'src/test/resources/testng-sshotsPar.xml'
+   }
+   if (project.hasProperty('browser')) {
+       systemProperty 'browser', "${browser}"
+   }
+   if (project.hasProperty('platform')) {
+       systemProperty 'platform', "${platform}"
+   }
+   if (project.hasProperty('target')) {
+       systemProperty 'target', "${target}"
+   }
+   if (project.hasProperty('verifyUI')) {
+      systemProperty 'verifyUI', "${verifyUI}"
+   }
 }
+   testScreenShotsPar.doFirst {
+       jvmArgs "-javaagent:${configurations.agent.singleFile}"
+   }
+
 
