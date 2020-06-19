@@ -1,4 +1,4 @@
-package io.itgen.tests.screenSort;
+package io.itgen.tests.screenShot;
 /**
  * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание, делает снимок,
  * сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
@@ -26,12 +26,11 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static io.itgen.appmanager.ApplicationManager.propertiesAshot;
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotLessonWithStudent extends TestBase {
  String period = "21:00 - 23:00";
@@ -82,9 +81,9 @@ public class SshotLessonWithStudent extends TestBase {
     app.schedule().selectScheduleInListUIById("SshotOnLessonWithStudent");
 
 
-    ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
-            , propertiesAshot.getProperty("actual")
-            , propertiesAshot.getProperty("markedImages")
+    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
+            , properties.getProperty("actual")
+            , properties.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }

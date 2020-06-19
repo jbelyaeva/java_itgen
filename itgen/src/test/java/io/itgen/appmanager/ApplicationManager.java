@@ -23,8 +23,8 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-  private final Properties properties;
-  public static Properties propertiesAshot;
+ // private final Properties properties;
+  public static Properties properties;
   public WebDriver wd;
   private TrainerHelper trainerHelper;
   private StudentHelper studentHelper;
@@ -48,15 +48,11 @@ public class ApplicationManager {
    public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
-    propertiesAshot = new Properties();
-  }
+   }
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    String targetAshot = System.getProperty("target", "ashot");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-    propertiesAshot.load(new FileReader(new File(String.format("src/test/resources/%s.properties", targetAshot))));
-
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
@@ -91,8 +87,7 @@ public class ApplicationManager {
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
-    //  SShotHelper.(propertiesAshot.getProperty("expected"), propertiesAshot.getProperty("actual"), propertiesAshot.getProperty("markedImages"));
-  }
+   }
 
   public void stop() {
     wd.quit();

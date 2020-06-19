@@ -28,10 +28,9 @@ public class LKParentHelper extends HelperBase {
     btnSelectScratch();
     selectLesson();
     btnSignUp();
-    btnLogo();
   }
 
-  private void btnLogo() {
+  public void btnLogo() {
     click(By.xpath("//img[@alt='ITGEN.IO']"));
     noErrorMessage();
   }
@@ -41,12 +40,12 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  private void selectLesson() {
+  public void selectLesson() {
     click(By.className("list-of-times"));
     noErrorMessage();
   }
 
-  private void btnSelectScratch() {
+  public void btnSelectScratch() {
     click(By.xpath("//button[@id-qa='btn-1']"));
     noErrorMessage();
   }

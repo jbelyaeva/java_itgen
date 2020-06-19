@@ -1,22 +1,22 @@
-package io.itgen.tests.screenSort;
+package io.itgen.tests.screenShot;
 /**
  * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание, делает снимок,
  * сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
  * со свойством -Detalon=true.
  */
 
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 import io.itgen.general.TimeGeneral;
+import io.itgen.model.ScheduleData;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
-import io.itgen.model.ScheduleData;
 import io.itgen.services.ScheduleService;
 import io.itgen.tests.TestBase;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 import java.awt.*;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static io.itgen.appmanager.ApplicationManager.propertiesAshot;
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotMainSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
@@ -57,9 +57,9 @@ public class SshotMainSchedule extends TestBase {
     String[] locatorIgnor = null;
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
-   ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
-            , propertiesAshot.getProperty("actual")
-            , propertiesAshot.getProperty("markedImages")
+   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
+            , properties.getProperty("actual")
+            , properties.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }

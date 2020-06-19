@@ -1,4 +1,4 @@
-package io.itgen.tests.screenSort;
+package io.itgen.tests.screenShot;
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static io.itgen.appmanager.ApplicationManager.propertiesAshot;
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotWindowSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
@@ -78,9 +78,9 @@ public class SshotWindowSchedule extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     app.windowSchedule().selectStudentForSshot(nameStudent);
-   ImageDiff diff = app.sshot().getImageDiff(propertiesAshot.getProperty("expected")
-            , propertiesAshot.getProperty("actual")
-            , propertiesAshot.getProperty("markedImages")
+   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
+            , properties.getProperty("actual")
+            , properties.getProperty("markedImages")
             , name, locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
