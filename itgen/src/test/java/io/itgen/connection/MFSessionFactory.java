@@ -17,8 +17,8 @@ public class MFSessionFactory {
     MongoClientOptions.Builder options = new MongoClientOptions.Builder();
     //set your connection option here
     options.connectionsPerHost(200); //max pool size
-    MongoClient mongoClient = new MongoClient(new ServerAddress(properties.getProperty("localhost"),
-            Integer.parseInt(properties.getProperty("port"))), options.build());
+    MongoClient mongoClient = new MongoClient(new ServerAddress(properties.getProperty("dbBaseUrl"),
+            Integer.parseInt(properties.getProperty("dbBasePort"))), options.build());
     Morphia morphia = new Morphia();
     morphia.getMapper().getOptions().setStoreEmpties(true);
     morphia.mapPackage("io.itgen.model");
