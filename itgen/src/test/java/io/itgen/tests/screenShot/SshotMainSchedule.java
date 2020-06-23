@@ -54,7 +54,9 @@ public class SshotMainSchedule extends TestBase {
   @Test
   public void testSshotMainSchedule() throws AWTException, IOException {
     String name = "Admin_MainSchedule_RU_Chrome";
-    String[] locatorIgnor = null;
+    String[] locatorIgnor = new String[1];
+    locatorIgnor[0]="//h4";
+
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")

@@ -43,8 +43,9 @@ public class SshotListWorkers extends TestBase {
   @Test
   public void testSshotListWorkers() throws AWTException, IOException {
     String name = "Admin_ListWorkers_RU_Chrome";
-    String[] locatorIgnor = new String[1];
+    String[] locatorIgnor = new String[2];
     locatorIgnor[0]="//tbody//tr//td[4]";
+    locatorIgnor[1]="//tbody//tr//td[3]";
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
 
