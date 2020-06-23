@@ -18,9 +18,11 @@ public class SshotListTrainers extends TestBase {
  @Test
   public void testSshotListTrainers() throws AWTException, IOException {
     String name = "Admin_ListTrainers_RU_Chrome";
-    String[] locatorIgnor = new String[2];
+    String[] locatorIgnor = new String[3];
     locatorIgnor[0]="//tbody//tr//td[5]";
     locatorIgnor[1]="//tbody//tr//td[9]";
+    locatorIgnor[2]="//tbody//tr//td[3]";
+
 
     app.goTo().menuTasks();
     app.goTo().menuTrainers();

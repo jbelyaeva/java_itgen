@@ -6,6 +6,8 @@ import com.mongodb.ServerAddress;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 
+import static io.itgen.appmanager.ApplicationManager.properties;
+
 public class MFSessionFactory {
 
   public MFSessionFactory() {
@@ -15,7 +17,8 @@ public class MFSessionFactory {
     MongoClientOptions.Builder options = new MongoClientOptions.Builder();
     //set your connection option here
     options.connectionsPerHost(200); //max pool size
-    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 3001), options.build());
+    MongoClient mongoClient = new MongoClient(new ServerAddress(properties.getProperty("localhost"),
+            Integer.parseInt(properties.getProperty("port"))), options.build());
     Morphia morphia = new Morphia();
     morphia.getMapper().getOptions().setStoreEmpties(true);
     morphia.mapPackage("io.itgen.model");

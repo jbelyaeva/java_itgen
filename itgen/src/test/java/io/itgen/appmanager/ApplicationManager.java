@@ -19,6 +19,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -90,6 +93,16 @@ public class ApplicationManager {
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+    //проверить, есть ли папки для скриншотов, если нет - создать
+    Path pathActual = Paths.get("./src/test/testsScreenshot/actual");
+    if (!Files.exists(pathActual)) {
+       Files.createDirectory(pathActual);
+    }
+    Path pathMarked = Paths.get("./src/test/testsScreenshot/markedImages");
+    if (!Files.exists(pathMarked)) {
+      Files.createDirectory(pathMarked);
+    }
+
    }
 
   public void stop() {

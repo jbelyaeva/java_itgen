@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static io.itgen.appmanager.ApplicationManager.properties;
 import static io.itgen.tests.TestBase.etalon;
 
 public class SShotHelper extends HelperBase {
@@ -65,7 +66,7 @@ public class SShotHelper extends HelperBase {
 
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
-    String Path = "./src/test/testsScreenshot/markedImages/" + ResourseName + ".png";
+    String Path =properties.getProperty("markedImages") + ResourseName + ".png";
     byte[] file = Files.readAllBytes(Paths.get(Path));
     return file;
   }
