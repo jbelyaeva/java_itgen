@@ -18,7 +18,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuStudents() {
-    click(By.xpath("//a[contains(@href, '/childs')]"));
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, '/childs')]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
   }
 
   public void menuTrainers() {
