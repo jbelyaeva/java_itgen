@@ -4,20 +4,26 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.connection.MFSessionFactory;
 import io.itgen.model.RequestData;
+import io.itgen.model.StudentData;
+import io.itgen.model.TrainerData;
+import io.itgen.tests.TestBase;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
-public class DbMorphiaTest {
+
+public class DbMorphiaTest extends TestBase {
 
   @Test
-  public void testDbMorphia() throws Exception {
+  public void testDbMorphia()   {
+
     Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
-    Query<RequestData> query = datastore.createQuery(RequestData.class);
-    List<RequestData> students = query.find().toList();
-    for (RequestData student : students) {
-      System.out.println(student);
+    Query<TrainerData> q = datastore.createQuery(TrainerData.class).filter("roles", "trainer");
+    List<TrainerData> trainers = q.find().toList();
+    for (TrainerData trainer : trainers) {
+      System.out.println(trainer);
     }
 /*
     StudentService studentService = new StudentService();

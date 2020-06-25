@@ -116,6 +116,7 @@ public class HelperBase {
 
   protected void thereAreErrorMessages() {
     Assert.assertTrue(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            || isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+            || isElementPresent(By.cssSelector("[id^=alert]"))
+            || isElementPresent(By.xpath("//p[contains(@class,'error')]"))); // проверка появления сообщения об ошибке
   }
 }

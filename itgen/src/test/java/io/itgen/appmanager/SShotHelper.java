@@ -1,14 +1,13 @@
 package io.itgen.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -40,8 +39,11 @@ public class SShotHelper extends HelperBase {
       }
     }
   }
-    Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
-    ;//взять скрkиншот после появления элемента с локатором
+
+ //   Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
+    Screenshot actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
+                                             .takeScreenshot(wd);
+    //взять скриншот после появления элемента с локатором
     //сохраняем
     etalon(expected, name, actualScreenshot);
 
@@ -71,4 +73,7 @@ public class SShotHelper extends HelperBase {
     return file;
   }
 
+  public void changeTopBar() {
+    ((JavascriptExecutor)wd).executeScript("$('.top-bar-container').css('position', 'relative');");
+  }
 }

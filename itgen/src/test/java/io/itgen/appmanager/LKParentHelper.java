@@ -4,6 +4,7 @@ import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.model.StudentData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +13,7 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LKParentHelper extends HelperBase {
 
@@ -29,14 +31,16 @@ public class LKParentHelper extends HelperBase {
     btnSelectScratch();
     selectLesson();
     btnSignUp();
-  }
+    }
 
   public void btnLogo() {
-    click(By.xpath("//img[@alt='ITGEN.IO']"));
+    click(By.xpath("//img[contains(@src,'logo')]"));
     noErrorMessage();
   }
 
   private void btnSignUp() {
+    WebDriverWait myWaitVar2 = new WebDriverWait(wd, 3);
+    myWaitVar2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
     click(By.xpath("//button[contains(@id-qa,'signup')]"));
     noErrorMessage();
   }
@@ -52,33 +56,45 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void create(StudentData student) {
-   btnAddNewStudent();
-   fillStudentForm1(student);
+    btnAddNewStudent();
+    fillStudentForm1(student);
+    btnNextFirst();
+    btnNextSecond();
+    }
 
-   btnNextFirst();
-   btnNextSecond();
+  public void createSShotFirstForm(StudentData student) {
+    btnAddNewStudent();
+    fillStudentForm1(student);
+  }
+
+  public void createSShotSecondForm(StudentData student) {
+    btnAddNewStudent();
+    fillStudentForm1(student);
+    btnNextFirst();
   }
 
   private void btnNextSecond() {
-    click(By.className("//button[contains(@class,'button-next')]"));
+    click(By.xpath("//button[contains(@class,'button-next')]"));
   }
 
   public void fillStudentForm1(StudentData studentData) {
-  /*  type(By.xpath("//div[@id-qa='name']//input"), studentData.getFirstname());
-    type(By.xpath("//div[@id-qa='surname']//input"), studentData.getLastname());*/
-  //  click(By.xpath("//button[1]"));
-  //  click(By.xpath("//div[@class='MuiPickersCalendar-week'][4]//p[@class='MuiTypography-root MuiTypography-body2 MuiTypography-colorInherit' and contains(text(),27)]"));
-   // click(By.xpath("//div[contains(@class,'body')]"));
-
-    click(By.xpath("//button[1]"));
-    click(By.xpath("//input[@placeholder='Введите имя ученика']"));
-    //div[contains(@class,'body')]
-    //enterADate(By.xpath("//span[1]"), studentData.getBirthdayUi());
-    /*
-    dropDownList_Integer(By.xpath("//div[@id-qa='gender']//input"), studentData.getGender());
-    dropDownList(By.xpath("//div[@id-qa='language']//input"), "ru");
-    dropDownList(By.xpath("//div[@id-qa='pclevel']//input"), studentData.getPclevel());*/
-
+    type(By.xpath("//input[@id-qa='name']"), studentData.getFirstname());
+    type(By.xpath("//input[@id-qa='surname']"), studentData.getLastname());
+    type(By.xpath("//input[@id-qa='birthday']"), studentData.getBirthdayUi());
+    click(By.xpath("//input[@id-qa='gender']/.."));
+    WebDriverWait myWaitVar = new WebDriverWait(wd, 3);
+    myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getGender() + "']")));
+    click(By.xpath("//li[@data-value='" + studentData.getGender() + "']"));
+    click(By.xpath("//input[@id-qa='lang']/.."));
+    WebDriverWait myWaitVar1 = new WebDriverWait(wd, 3);
+    myWaitVar1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getStudyLang() + "']")));
+    click(By.xpath("//li[@data-value='" + studentData.getStudyLang() + "']"));
+    if (!studentData.getPclevel().equals("")) {
+      click(By.xpath("//input[@id-qa='pcLevel']/.."));
+      WebDriverWait myWaitVar2 = new WebDriverWait(wd, 3);
+      myWaitVar2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getPclevel() + "']")));
+      click(By.xpath("//li[@data-value='" + studentData.getPclevel() + "']"));
+    }
   }
 
   private void btnNextFirst() {
@@ -88,5 +104,22 @@ public class LKParentHelper extends HelperBase {
   private void btnAddNewStudent() {
     click(By.xpath("//a[contains(@href,'addChild')]"));
     noErrorMessage();
+  }
+
+  public void createBad(StudentData student) {
+    btnAddNewStudent();
+    fillStudentForm1(student);
+    btnNextBad();
+    btnLogo();
+  }
+
+  private void btnNextBad() {
+    click(By.className("button-next"));
+    thereAreErrorMessages();
+  }
+
+  public void firstPointWithScroll() {
+    ((JavascriptExecutor) wd).executeScript("window.scrollTo(0, -document.body.scrollHeight);");
+    btnLogo();
   }
 }

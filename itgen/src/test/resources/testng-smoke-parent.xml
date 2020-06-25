@@ -4,6 +4,7 @@
     <test name="SmokeParent">
         <classes>
             <class name="io.itgen.tests.lkParent.RecordOnTrail" />
+            <class name="io.itgen.tests.lkParent.AddNewStudent" />
         </classes>
     </test>
 </suite>

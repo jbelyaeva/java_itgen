@@ -24,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class LeadCreationTest extends TestBase {
   String id;
   LeadData leadNew=null;
-  @DataProvider
+ @DataProvider
   public Iterator<Object[]> validLeadsFromJson() throws IOException {
     try (BufferedReader reader =
                  new BufferedReader(new FileReader(new File("src/test/resources/testdata/leads_creation.json")))) {
@@ -46,7 +46,7 @@ public class LeadCreationTest extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuLeads();
     Leads before = app.db().leads();
-    app.lead().create(lead);
+   app.lead().create(lead);
     Leads after = app.db().leads();
     assertThat(after.size(), equalTo(before.size() + 1));
     id = app.lead().getIdNewLeadDB(before, after);

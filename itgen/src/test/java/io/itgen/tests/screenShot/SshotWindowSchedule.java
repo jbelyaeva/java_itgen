@@ -30,7 +30,7 @@ import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotWindowSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
-  String period = "18:00 - 20:00";
+  String period = "21:00 - 23:00";
   String nameStudent = "Маша Машина";
   ScheduleData schedule = null;
 
@@ -78,6 +78,9 @@ public class SshotWindowSchedule extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     app.windowSchedule().selectStudentForSshot(nameStudent);
+
+    app.sshot().changeTopBar();
+
    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
             , properties.getProperty("actual")
             , properties.getProperty("markedImages")

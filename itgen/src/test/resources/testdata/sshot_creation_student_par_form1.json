@@ -1,0 +1,26 @@
+[
+  {
+    "firstname": "Вася",
+    "lastname": "Васин",
+    "gender": 1,
+    "birthdayUi": "01.01.2010",
+    "pclevel": "expert",
+    "country": "AL",
+    "city": "Сватково 0",
+    "timezone": "Pacific/Honolulu",
+    "locate": "ru",
+    "studyLang": "ru",
+    "duration": 2,
+    "phone": "11111111111",
+    "skype": "sk 0",
+    "c2d": "http:/0",
+    "viber": "22222222222",
+    "whatsapp": "33333333333",
+    "telegram": "tg 0",
+    "fb": "fb 0",
+    "vk": "vk 0",
+    "ok": "ok 0",
+    "inst": "inst 0",
+    "note": null
+  }
+]

@@ -16,11 +16,11 @@ import java.io.IOException;
 public class SshotMain extends TestBase {
 
 
- @Test
+  @Test
   public void testSshotMain() throws AWTException, IOException {
-   app.lkParent().btnLogo();
-   String name = "Parent_Main_RU_Chrome";
-   String[] locatorIgnor = null;
+    String name = "Parent_Main_RU_Chrome";
+    String[] locatorIgnor = new String[1];
+    locatorIgnor[0] = "//div[contains(@id,'MeteorToys')]";
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")
