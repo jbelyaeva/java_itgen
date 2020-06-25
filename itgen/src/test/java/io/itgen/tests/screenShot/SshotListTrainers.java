@@ -26,6 +26,7 @@ public class SshotListTrainers extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
+    app.sshot().changeTopBar();
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")

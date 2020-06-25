@@ -6,6 +6,8 @@ package io.itgen.tests.screenShot;
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.tests.TestBase;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
@@ -15,7 +17,6 @@ import java.io.IOException;
 
 public class SshotFamily extends TestBase {
 
-
  @Test
   public void testSshotFamilies() throws AWTException, IOException {
    String name = "Admin_Family_RU_Chrome";
@@ -24,6 +25,7 @@ public class SshotFamily extends TestBase {
     app.goTo().menuStudents();
     app.student().selectStudentInListUIById("19");
     app.family().btnFamily();
+    app.sshot().changeTopBar();
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")
