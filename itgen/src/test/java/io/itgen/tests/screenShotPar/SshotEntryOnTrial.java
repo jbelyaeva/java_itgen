@@ -68,7 +68,7 @@ public class SshotEntryOnTrial extends TestBase {
 
   @Test
   public void testEntryOnTrial() throws AWTException, IOException {
-    app.lkParent().RecordOnTrailForSShot();
+    app.lkParent().RecordOnTrail();
     String name = "Parent_EntryOnTrial_RU_Chrome";
     String[] locatorIgnor = new String[3];
     locatorIgnor[0] = "//div[@class='lesson']//span[1]";
