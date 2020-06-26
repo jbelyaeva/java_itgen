@@ -68,6 +68,7 @@ public class RecordOnTrail extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     //проверка на то, что новая запись записалась в бд верно, и остальные записи не испортились
     check(before, after);
+    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)

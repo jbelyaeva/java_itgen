@@ -31,7 +31,6 @@ public class LKParentHelper extends HelperBase {
     btnSelectScratch();
     selectLesson();
     btnSignUp();
-    btnLogo();
     }
 
   public void btnLogo() {
