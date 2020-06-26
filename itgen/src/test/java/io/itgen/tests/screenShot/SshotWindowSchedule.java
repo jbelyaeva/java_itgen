@@ -80,6 +80,7 @@ public class SshotWindowSchedule extends TestBase {
     app.windowSchedule().selectStudentForSshot(nameStudent);
 
     app.sshot().changeTopBar();
+    app.sshot().changeTableInWindowSchedule();
 
    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
             , properties.getProperty("actual")

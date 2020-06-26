@@ -31,18 +31,18 @@ public class SShotHelper extends HelperBase {
     bot.mouseMove(0, 0);
     //получаем
     if (locatorIgnor != null) {
-      for (int i = 0; i <= locatorIgnor.length - 1; i++){
+      for (int i = 0; i <= locatorIgnor.length - 1; i++) {
         List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor[i]));
-      for (WebElement element : elementsList) {
-        ((JavascriptExecutor) wd)
-                .executeScript("arguments[0].remove();", element);
+        for (WebElement element : elementsList) {
+          ((JavascriptExecutor) wd)
+                  .executeScript("arguments[0].remove();", element);
+        }
       }
     }
-  }
 
- //   Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
+    //   Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
     Screenshot actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
-                                             .takeScreenshot(wd);
+            .takeScreenshot(wd);
     //взять скриншот после появления элемента с локатором
     //сохраняем
     etalon(expected, name, actualScreenshot);
@@ -68,12 +68,21 @@ public class SShotHelper extends HelperBase {
 
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
-    String Path =properties.getProperty("markedImages") + ResourseName + ".png";
+    String Path = properties.getProperty("markedImages") + ResourseName + ".png";
     byte[] file = Files.readAllBytes(Paths.get(Path));
     return file;
   }
 
   public void changeTopBar() {
-    ((JavascriptExecutor)wd).executeScript("$('.top-bar-container').css('position', 'relative');");
+    ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
+  }
+
+  public void changeTableInWindowSchedule() {
+    for (int i = 1; i < 8; i++) {
+      if (isElementPresent(By.xpath("(//div[@class='cell-heading cell-info'])[1]"))) {
+        WebElement element = wd.findElement(By.xpath("(//div[@class='cell-heading cell-info'])[1]"));
+        ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", element);
+      }
+    }
   }
 }

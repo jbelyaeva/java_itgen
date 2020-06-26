@@ -2,45 +2,57 @@
 
 открываем консоль в папке модуля проекта и выполняем команду:
 
-`gradlew -Dfile.encoding=UTF-8 clean testFamilies` - запустится тестовый набор testFamilies по дефолту
- в хроме на локальной машине
+`gradlew -Pbrowser=chrome -Ptarget=remote -Pplatform=linux clean testFamilies`
 
 `-Pbrowser` – желаемый браузер
 
-`-Ptarget=local` – запуск на локальной машине
+`-Ptarget` – указание файла проперти (см ниже)
 
 `-Pplatform` – ОС на которой будет запуск
 
 `-PverifyUI=true` - запускает дополнительные отключаемые проверки ui
 
-`-Petalon=true` - запускает тестовый набор testScreenShot в режиме получения эталонных снимков
+`-Petalon=true` - запускает тестовые наборы скриншотов в режиме получения эталонных снимков
 
-`-Dfile.encoding=UTF-8`    – чтобы правильно отображалась кириллица из файла json
+`-Pfile.encoding=UTF-8` – для правильного отображения кириллицы из файла json
 
 `testFamilies` – запускаемый тестовый набор
 
+чтобы запустить по дефолту (Windows,Chrome,роль-суперадмин) команда выглядит так:
+ 
+ `gradlew clean testFamilies`
 
-**Генерация отчета:**
+Генерация отчета:
 
-после выполнения теста :
+после выполнения теста выполнить команду:
 
 `C:\Tools\allure-1.4.23\bin\allure generate build\allure-results`
 
 если прописать переменную пути allure=C:\Tools\allure-1.4.23\bin\allure, то команда выглядит так:
 
-`allure generate build\allure-results `
+`allure generate build\allure-results`
 
-вывести отчет на экран
+вывести отчет на экран 
 
+`allure report open`
 
-**Тестовые наборы**
-<li>testFamilies
-<li>testStudents
-<li>testParents
-<li>testLeads
-<li>testWorkers
-<li>testTrainers
-<li>testSchedule
-<li>testWindowsSchedule
-<li>testSmoke
-<li>testNostable - нестабильные тесты
+**Тестовые наборы** 
+
+1.  testFamilies 
+2.  testStudents 
+3.  testParents 
+4.  testLeads 
+5.  testWorkers 
+6.  testTrainers 
+7.  testSchedule 
+8.  testWindowSchedule 
+9.  testRequests 
+10. testSmoke
+11. testSmokeParent
+
+**Значения -Ptarget** 
+
+1. если вообще не указывать -Ptarget, то набор запуститься под суперадмином 
+2. -Ptarget=localPar (для testSmokeParent) - набор запустится под дефолтным родителем. (пока в дефолтную базу
+такой родитель не прописан)
+
