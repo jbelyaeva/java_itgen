@@ -35,10 +35,11 @@ public class SshotListLeads extends TestBase {
   @Test
   public void testSshotListLeads() throws AWTException, IOException {
    String name = "Admin_ListLeads_RU_Chrome";
-    String[] locatorIgnor = new String[3];
-    locatorIgnor[0]="//span[@class='user-time']";
-    locatorIgnor[1]="//span[@class='date']";
-    locatorIgnor[2]="//span[@class='time']";
+    String[] locatorIgnor = {
+            "//span[@class='user-time']",
+            "//span[@class='date']",
+            "//span[@class='time']"
+    };
 
     app.goTo().menuTasks();
     app.goTo().menuLeads();

@@ -70,9 +70,10 @@ public class SshotCourseSelectionForTrial extends TestBase {
   public void testSshotCourseSelectionForTrial() throws AWTException, IOException {
     app.lkParent().btnRecordOnTrail();
     String name = "Parent_CourseSelectionForTrial_RU_Chrome";
-    String[] locatorIgnor = new String[2];
-    locatorIgnor[0] = "//p[@class='user']"; //подобрать локатор, чтоб оставалось имя ребенка
-    locatorIgnor[1] = "//div[contains(@id,'MeteorToys')]";
+    String[] locatorIgnor = {
+            "//p[@class='user']",
+            "//div[contains(@id,'MeteorToys')]"
+    };
 
     app.sshot().changeTopBar();
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
@@ -87,8 +88,10 @@ public class SshotCourseSelectionForTrial extends TestBase {
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("LKOnTrail");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LKOnTrail");
+
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

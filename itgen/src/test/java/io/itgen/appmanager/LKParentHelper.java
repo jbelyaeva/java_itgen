@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -31,7 +32,7 @@ public class LKParentHelper extends HelperBase {
     btnSelectScratch();
     selectLesson();
     btnSignUp();
-    }
+  }
 
   public void btnLogo() {
     click(By.xpath("//img[contains(@src,'logo')]"));
@@ -39,8 +40,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void btnSignUp() {
-    WebDriverWait myWaitVar2 = new WebDriverWait(wd, 3);
-    myWaitVar2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
+    WebDriverWait myWaitVar = new WebDriverWait(wd, 3);
+    myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
     click(By.xpath("//button[contains(@id-qa,'signup')]"));
     noErrorMessage();
   }
@@ -60,7 +61,7 @@ public class LKParentHelper extends HelperBase {
     fillStudentForm1(student);
     btnNextFirst();
     btnNextSecond();
-    }
+  }
 
   public void createSShotFirstForm(StudentData student) {
     btnAddNewStudent();
@@ -77,23 +78,33 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'button-next')]"));
   }
 
+  private ExpectedCondition<WebElement> expectVisible(String locator) {
+    return ExpectedConditions.visibilityOfElementLocated(By.xpath(locator));
+  }
+
   public void fillStudentForm1(StudentData studentData) {
     type(By.xpath("//input[@id-qa='name']"), studentData.getFirstname());
     type(By.xpath("//input[@id-qa='surname']"), studentData.getLastname());
     type(By.xpath("//input[@id-qa='birthday']"), studentData.getBirthdayUi());
+
+    WebDriverWait wait = new WebDriverWait(wd, 3);
+
     click(By.xpath("//input[@id-qa='gender']/.."));
-    WebDriverWait myWaitVar = new WebDriverWait(wd, 3);
-    myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getGender() + "']")));
-    click(By.xpath("//li[@data-value='" + studentData.getGender() + "']"));
+    String gender = "//li[@data-value='" + studentData.getGender() + "']";
+    wait.until(this.expectVisible(gender));
+    click(By.xpath(gender));
+
     click(By.xpath("//input[@id-qa='lang']/.."));
-    WebDriverWait myWaitVar1 = new WebDriverWait(wd, 3);
-    myWaitVar1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getStudyLang() + "']")));
-    click(By.xpath("//li[@data-value='" + studentData.getStudyLang() + "']"));
+    String lang = "//li[@data-value='" + studentData.getStudyLang() + "']";
+    wait.until(this.expectVisible(lang));
+    click(By.xpath(lang));
+
+    //pclevel может быть пустым, т.к. тест параметризован, в тестовых данных встречается вариант с pclaval=""
     if (!studentData.getPclevel().equals("")) {
       click(By.xpath("//input[@id-qa='pcLevel']/.."));
-      WebDriverWait myWaitVar2 = new WebDriverWait(wd, 3);
-      myWaitVar2.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@data-value='" + studentData.getPclevel() + "']")));
-      click(By.xpath("//li[@data-value='" + studentData.getPclevel() + "']"));
+      String pcLevel = "//li[@data-value='" + studentData.getPclevel() + "']";
+      wait.until(this.expectVisible(pcLevel));
+      click(By.xpath(pcLevel));
     }
   }
 
@@ -121,5 +132,48 @@ public class LKParentHelper extends HelperBase {
   public void firstPointWithScroll() {
     ((JavascriptExecutor) wd).executeScript("window.scrollTo(0, -document.body.scrollHeight);");
     btnLogo();
+  }
+
+  public void RecordOnRegular() {
+    btnShowSchedule();
+    btnRecordOnRegular();
+    changeScrollTime();
+    btnNext();
+    selectCheckBox();
+    btnRecord();
+    btnLogo();
+  }
+
+  private void btnRecord() {
+    click(By.xpath("//div[contains(@class,'actions')]//button"));
+    noErrorMessage();
+  }
+
+  private void selectCheckBox() {
+    click(By.xpath("//label[contains(@for,'signup')]"));
+    noErrorMessage();
+  }
+
+  private void btnNext() {
+    click(By.xpath("//button[contains(@class,'next')]"));
+    noErrorMessage();
+  }
+
+  private void changeScrollTime() {
+   type(By.xpath("//input[2]"),"24:00");
+    click(By.xpath("//div[@class='date-filter-container']"));
+    noErrorMessage();
+  }
+
+  private void btnRecordOnRegular() {
+    click(By.xpath("//div[@class='schedule-management']"));
+    noErrorMessage();
+  }
+
+  private void btnShowSchedule() {
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id-qa='show-schedule']")));
+    dynamicElement.click();
+    noErrorMessage();
   }
 }

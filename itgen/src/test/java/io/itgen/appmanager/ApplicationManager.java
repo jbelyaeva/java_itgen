@@ -94,15 +94,14 @@ public class ApplicationManager {
     lkParentHelper = new LKParentHelper(wd);
     sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     //проверить, есть ли папки для скриншотов, если нет - создать
-    Path pathActual = Paths.get("./src/test/testsScreenshot/actual");
-    if (!Files.exists(pathActual)) {
-       Files.createDirectory(pathActual);
+    Path[] requiredDirs = {
+            Paths.get(properties.getProperty("actual")),
+            Paths.get(properties.getProperty("markedImages"))
+    };
+    for (Path dir : requiredDirs) {
+      if (Files.exists(dir)) continue;
+      Files.createDirectory(dir);
     }
-    Path pathMarked = Paths.get("./src/test/testsScreenshot/markedImages");
-    if (!Files.exists(pathMarked)) {
-      Files.createDirectory(pathMarked);
-    }
-
    }
 
   public void stop() {

@@ -70,10 +70,11 @@ public class SshotEntryOnTrial extends TestBase {
   public void testEntryOnTrial() throws AWTException, IOException {
     app.lkParent().RecordOnTrail();
     String name = "Parent_EntryOnTrial_RU_Chrome";
-    String[] locatorIgnor = new String[3];
-    locatorIgnor[0] = "//div[@class='lesson']//span[1]";
-    locatorIgnor[1] = "//div[@class='day']";
-    locatorIgnor[2] = "//div[contains(@id,'MeteorToys')]";
+    String[] locatorIgnor = {
+            "//div[@class='lesson']//span[1]",
+            "//div[@class='day']",
+            "//div[contains(@id,'MeteorToys')]"
+    };
 
     app.sshot().changeTopBar();
 
@@ -90,8 +91,10 @@ public class SshotEntryOnTrial extends TestBase {
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("LKOnTrail");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LKOnTrail");
+
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

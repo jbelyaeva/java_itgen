@@ -40,9 +40,11 @@ public class SshotAddNewStudentFormFirst extends TestBase {
   @Test(dataProvider = "StudentsFromJson")
   public void testAddNewStudentFormFirst(StudentData student) throws AWTException, IOException {
     app.lkParent().createSShotFirstForm(student);
+
     String name = "Parent_AddNewStudentForm1_RU_Chrome";
-    String[] locatorIgnor = new String[1];
-    locatorIgnor[0] = "//div[contains(@id,'MeteorToys')]";
+    String[] locatorIgnor = {
+            "//div[contains(@id,'MeteorToys')]"
+    };
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")

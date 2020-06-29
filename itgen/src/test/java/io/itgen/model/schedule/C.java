@@ -10,7 +10,8 @@ public class C {
   private String lang;
   private Boolean isTrial;
   private Boolean newSubj;
-  private int score; //очки внимания
+  private int score;//очки внимания
+  private int rating;
   private boolean p; //признак постоянного расписания
 
   public C() {
@@ -57,6 +58,11 @@ public class C {
     return this;
   }
 
+  public C withRating(int rating) {
+    this.rating = score;
+    return this;
+  }
+
   public C withP(boolean p) {
     this.p = p;
     return this;
@@ -66,12 +72,10 @@ public class C {
   public String toString() {
     return "C{" +
             "id='" + id + '\'' +
-            ", type=" + type +
             ", subject='" + subject + '\'' +
-            ", s='" + s + '\'' +
             ", lang='" + lang + '\'' +
             ", isTrial=" + isTrial +
-            ", score=" + score +
+            ", newSubj=" + newSubj +
             ", p=" + p +
             '}';
   }
