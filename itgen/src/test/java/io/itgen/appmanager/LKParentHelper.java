@@ -134,18 +134,26 @@ public class LKParentHelper extends HelperBase {
     btnLogo();
   }
 
-  public void RecordOnRegular() {
+  public void recordOnRegular() {
     btnShowSchedule();
-    btnRecordOnRegular();
+    btnRecordOnLesson();
     changeScrollTime();
     btnNext();
     selectCheckBox();
     btnRecord();
-    btnLogo();
-  }
+   }
 
-  private void btnRecord() {
-    click(By.xpath("//div[contains(@class,'actions')]//button"));
+  public void confirmRecordOnRegular() {
+    btnShowSchedule();
+    btnRecordOnLesson();
+    changeScrollTime();
+    btnNext();
+    selectCheckBox();
+   }
+
+  public void btnRecordOnLesson() {
+//    click(By.xpath("//div[contains(@class,'actions')]//button"));
+    click(By.xpath("//div[@class='buttons']"));
     noErrorMessage();
   }
 
@@ -165,15 +173,16 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  private void btnRecordOnRegular() {
-    click(By.xpath("//div[@class='schedule-management']"));
+  public void btnRecord() {
+    click(By.xpath("//div[contains(@class,'actions')]//button"));
     noErrorMessage();
   }
 
-  private void btnShowSchedule() {
+  public void btnShowSchedule() {
     WebElement dynamicElement = (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id-qa='show-schedule']")));
     dynamicElement.click();
     noErrorMessage();
   }
+
 }

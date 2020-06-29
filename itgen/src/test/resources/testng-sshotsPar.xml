@@ -9,6 +9,8 @@
             <class name="io.itgen.tests.screenShotPar.SshotSignUpOnTrial"/>
             <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormFirst"/>
             <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormSecond"/>
+            <class name="io.itgen.tests.screenShotPar.SshotConfirmRecordOnRegular"/>
+            <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnRegular"/>
         </classes>
     </test>
 </suite>

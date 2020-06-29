@@ -85,4 +85,10 @@ public class SShotHelper extends HelperBase {
       }
     }
   }
+
+  public void changeStyleDayOfTheWeek() {
+    By locator = By.xpath("//div[@class='picker-item selected']");
+    WebElement element = wd.findElement(locator);
+    ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'picker-item')", element);
+  }
 }
