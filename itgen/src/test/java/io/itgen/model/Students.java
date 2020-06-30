@@ -21,19 +21,19 @@ public class Students extends ForwardingSet<StudentData> {
     this.delegate = new HashSet<StudentData>(students);
   }
 
-  public Students withAdded(StudentData student) { //объект в который добавлена группа
+  public Students withAdded(StudentData student) {
     Students students = new Students(this);
     students.add(student);
     return students;
   }
 
-  public Students withFamilyId(String id) {//объекта,в который добавлена группа
+  public Students withFamilyId(String id) {
     Students students = new Students(this);
     StudentData studentData = students.iterator().next().withFamilyId(id);
     return students;
   }
 
-  public Students without(StudentData student) {//объекта, из которго удалена группа
+  public Students without(StudentData student) {
     Students students = new Students(this);
     students.remove(student);
     return students;

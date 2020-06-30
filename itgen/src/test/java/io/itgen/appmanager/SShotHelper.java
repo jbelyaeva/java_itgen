@@ -40,7 +40,6 @@ public class SShotHelper extends HelperBase {
       }
     }
 
-    //   Screenshot actualScreenshot = new AShot().takeScreenshot(wd);
     Screenshot actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
             .takeScreenshot(wd);
     //взять скриншот после появления элемента с локатором
@@ -57,14 +56,13 @@ public class SShotHelper extends HelperBase {
     ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
 
     //результат
-    int rez = diff.getDiffSize();
-    if (rez != 0) {
+    if (diff.getDiffSize() != 0) {
       File diffFile = new File(markedImages + name + ".png");
       ImageIO.write(diff.getMarkedImage(), "png", diffFile);
       getScreenShot(name);
     }
     return diff;
-  }
+   }
 
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
@@ -73,16 +71,25 @@ public class SShotHelper extends HelperBase {
     return file;
   }
 
+  //открепляем топ-бар
   public void changeTopBar() {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
   }
 
   public void changeTableInWindowSchedule() {
+    //приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически, скриншоты падают
+    By locator = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
     for (int i = 1; i < 8; i++) {
-      if (isElementPresent(By.xpath("(//div[@class='cell-heading cell-info'])[1]"))) {
-        WebElement element = wd.findElement(By.xpath("(//div[@class='cell-heading cell-info'])[1]"));
+      if (isElementPresent(locator)) {
+        WebElement element = wd.findElement(locator);
         ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", element);
       }
     }
+  }
+
+  public void changeStyleDayOfTheWeek() {
+    By locator = By.xpath("//div[@class='picker-item selected']");
+    WebElement element = wd.findElement(locator);
+    ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'picker-item')", element);
   }
 }

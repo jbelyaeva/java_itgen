@@ -52,6 +52,7 @@ public class SshotLessonWithStudent extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
+
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("SshotOnLessonWithStudent").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
@@ -72,9 +73,10 @@ public class SshotLessonWithStudent extends TestBase {
   @Test
   public void testSshotLessonWithStudent() throws AWTException, IOException {
     String name = "Admin_ScheduleWithStudent_RU_Chrome";
-    String[] locatorIgnor = new String[2];
-    locatorIgnor[0]="//div[@class='text-capitalize'][2]";
-    locatorIgnor[1]="//p";
+    String[] locatorIgnor = {
+            "//div[@class='text-capitalize'][2]",
+            "//p"
+    };
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
@@ -92,10 +94,13 @@ public class SshotLessonWithStudent extends TestBase {
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("SshotOnLessonWithStudent");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("SshotOnLessonWithStudent");
+
     FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("SshotOnLessonWithStudent");
+
     Tasks tasks = app.dbschedules().tasksComposition("SshotOnLessonWithStudent");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

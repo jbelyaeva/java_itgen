@@ -47,6 +47,7 @@ public class ApplicationManager {
   private WindowScheduleHelper windowScheduleHalper;
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
+  private PaymentHelper paymentHelper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -92,17 +93,17 @@ public class ApplicationManager {
     windowScheduleHalper = new WindowScheduleHelper(wd);
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
+    paymentHelper = new PaymentHelper(wd);
     sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     //проверить, есть ли папки для скриншотов, если нет - создать
-    Path pathActual = Paths.get("./src/test/testsScreenshot/actual");
-    if (!Files.exists(pathActual)) {
-       Files.createDirectory(pathActual);
+    Path[] requiredDirs = {
+            Paths.get(properties.getProperty("actual")),
+            Paths.get(properties.getProperty("markedImages"))
+    };
+    for (Path dir : requiredDirs) {
+      if (Files.exists(dir)) continue;
+      Files.createDirectory(dir);
     }
-    Path pathMarked = Paths.get("./src/test/testsScreenshot/markedImages");
-    if (!Files.exists(pathMarked)) {
-      Files.createDirectory(pathMarked);
-    }
-
    }
 
   public void stop() {
@@ -171,6 +172,10 @@ public class ApplicationManager {
 
   public LKParentHelper lkParent() {
     return lkParentHelper;
+  }
+
+  public PaymentHelper payment() {
+    return paymentHelper;
   }
 
   public byte[] takeScreenshot() {

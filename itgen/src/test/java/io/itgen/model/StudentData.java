@@ -3,6 +3,8 @@ package io.itgen.model;
 import com.google.gson.annotations.Expose;
 import dev.morphia.annotations.*;
 import io.itgen.model.users.*;
+import io.itgen.tests.FamilyDeletionTests;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -159,6 +161,18 @@ public class StudentData {
   @Embedded("emails")
   private List<Emails> emails = new ArrayList<Emails>();
 
+  @Property("lastSubjs")
+  private List<String> lastSubjs = new ArrayList<>();
+
+  @Property("usedSubjs")
+  private List<String> usedSubjs = new ArrayList<>();
+
+  @Property("finishedLessonsCount")
+  private int finishedLessonsCount ;
+
+  @Embedded
+  private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
+
   //getters and setters
 
   public Status getStatus() {
@@ -169,7 +183,6 @@ public class StudentData {
     this.status = status;
     return this;
   }
-
 
   public StudentData withId(String id) {
     this.id = id;
@@ -316,7 +329,25 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withLastSubjs(List<String> lastSubjs) {
+    this.lastSubjs = lastSubjs;
+    return this;
+  }
 
+  public StudentData withUsedSubjs(List<String> usedSubjs) {
+    this.usedSubjs = usedSubjs;
+    return this;
+  }
+
+  public StudentData withFinishedLessonsCount(int finishedLessonsCount) {
+    this.finishedLessonsCount= finishedLessonsCount;
+    return this;
+  }
+
+  public StudentData withFinishedLessonsCountBySkill(FinishedLessonsCountBySkill finishedLessonsCpontBySkill) {
+    this.finishedLessonsCountBySkill = finishedLessonsCountBySkill;
+    return this;
+  }
 
   /* getters */
 
@@ -436,8 +467,21 @@ public class StudentData {
     return skills;
   }
 
+  public List<String> getLastSubjs() {
+    return lastSubjs;
+  }
 
+  public List<String> getUsedSubjs() {
+    return usedSubjs;
+  }
 
+  public int getFinishedLessonsCount() {
+    return finishedLessonsCount;
+  }
+
+  public FinishedLessonsCountBySkill getFinishedLessonsCountBySkill() {
+    return finishedLessonsCountBySkill;
+  }
 
   /* toString(), hashCode() & equals() */
 

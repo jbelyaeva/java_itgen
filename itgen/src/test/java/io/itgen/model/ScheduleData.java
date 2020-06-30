@@ -4,6 +4,7 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
+import io.itgen.model.requests.D;
 import io.itgen.model.schedule.FinishedSlots;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
@@ -98,6 +99,10 @@ public class ScheduleData {
     return slots;
   }
 
+  public List<FinishedSlots> getFinishedSlots() {
+    return finishedSlots;
+  }
+
   public Times getTimes() {
     return times;
   }
@@ -114,11 +119,11 @@ public class ScheduleData {
   public String toString() {
     return "ScheduleData{" +
             "id='" + id + '\'' +
-            ", ver=" + ver +
             ", fromDate=" + fromDate +
             ", slots=" + slots +
             ", times=" + times +
             ", skypeId='" + skypeId + '\'' +
+            ", oneTime='" + oneTime + '\'' +
             '}';
   }
 

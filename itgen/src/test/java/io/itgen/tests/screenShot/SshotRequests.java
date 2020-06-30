@@ -86,10 +86,13 @@ public class SshotRequests extends TestBase {
   public void clean() {
     RequestService requestService = new RequestService();
     requestService.findByIdAndDelete("sshotRequests");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("sshotRequests");
+
     FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("sshotRequests");
+
     Tasks tasks = app.dbschedules().tasksComposition("sshotRequests");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

@@ -71,27 +71,34 @@ public class SshotSignUpOnTrial extends TestBase {
     app.lkParent().btnRecordOnTrail();
     app.lkParent().btnSelectScratch();
     app.lkParent().selectLesson();
+
     String name = "Parent_SignUpOnTrial_RU_Chrome";
-    String[] locatorIgnor = new String[4];
-    locatorIgnor[0] = "//p[@class='user']"; //подобрать локатор, чтоб оставалось имя ребенка
-    locatorIgnor[1] = "//span[@class='day-of-month']";
-    locatorIgnor[2] = "//span[@class='month']";
-    locatorIgnor[3] = "//div[contains(@id,'MeteorToys')]";
+    String[] locatorIgnor = {
+            "//p[@class='user']",
+            "//span[@class='day-of-month']",
+            "//span[@class='month']",
+            "//div[contains(@id,'MeteorToys')]"
+    };
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")
             , ApplicationManager.properties.getProperty("markedImages")
             , name, locatorIgnor);
-    Assert.assertEquals(diff.getDiffSize(), 0);
     app.lkParent().btnLogo();
+
+    if (diff.getDiffSize() > 100) { //погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("LKOnTrail");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LKOnTrail");
+
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
