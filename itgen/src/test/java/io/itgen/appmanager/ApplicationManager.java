@@ -47,6 +47,7 @@ public class ApplicationManager {
   private WindowScheduleHelper windowScheduleHalper;
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
+  private PaymentHelper paymentHelper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -92,6 +93,7 @@ public class ApplicationManager {
     windowScheduleHalper = new WindowScheduleHelper(wd);
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
+    paymentHelper = new PaymentHelper(wd);
     sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     //проверить, есть ли папки для скриншотов, если нет - создать
     Path[] requiredDirs = {
@@ -170,6 +172,10 @@ public class ApplicationManager {
 
   public LKParentHelper lkParent() {
     return lkParentHelper;
+  }
+
+  public PaymentHelper payment() {
+    return paymentHelper;
   }
 
   public byte[] takeScreenshot() {

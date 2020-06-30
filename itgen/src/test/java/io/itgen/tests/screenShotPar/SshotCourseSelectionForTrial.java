@@ -69,6 +69,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
   @Test
   public void testSshotCourseSelectionForTrial() throws AWTException, IOException {
     app.lkParent().btnRecordOnTrail();
+
     String name = "Parent_CourseSelectionForTrial_RU_Chrome";
     String[] locatorIgnor = {
             "//p[@class='user']",
@@ -76,12 +77,15 @@ public class SshotCourseSelectionForTrial extends TestBase {
     };
 
     app.sshot().changeTopBar();
+
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")
             , ApplicationManager.properties.getProperty("markedImages")
             , name, locatorIgnor);
-    Assert.assertEquals(diff.getDiffSize(), 0);
     app.lkParent().btnLogo();
+    if (diff.getDiffSize() > 100) { //погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
   }
 
   @AfterMethod(alwaysRun = true)

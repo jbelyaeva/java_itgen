@@ -62,7 +62,7 @@ public class SShotHelper extends HelperBase {
       getScreenShot(name);
     }
     return diff;
-  }
+   }
 
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
@@ -71,6 +71,7 @@ public class SShotHelper extends HelperBase {
     return file;
   }
 
+  //открепляем топ-бар
   public void changeTopBar() {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
   }

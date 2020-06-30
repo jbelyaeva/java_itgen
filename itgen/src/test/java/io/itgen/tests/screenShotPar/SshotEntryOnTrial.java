@@ -69,6 +69,7 @@ public class SshotEntryOnTrial extends TestBase {
   @Test
   public void testEntryOnTrial() throws AWTException, IOException {
     app.lkParent().RecordOnTrail();
+
     String name = "Parent_EntryOnTrial_RU_Chrome";
     String[] locatorIgnor = {
             "//div[@class='lesson']//span[1]",
@@ -82,10 +83,11 @@ public class SshotEntryOnTrial extends TestBase {
             , ApplicationManager.properties.getProperty("actual")
             , ApplicationManager.properties.getProperty("markedImages")
             , name, locatorIgnor);
-    Assert.assertEquals(diff.getDiffSize(), 0);
-
-    app.lkParent().firstPointWithScroll();
-   }
+    app.lkParent().btnLogo();
+    if (diff.getDiffSize() > 100) { //погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
+  }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {

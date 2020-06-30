@@ -27,11 +27,6 @@ public class Schedules extends ForwardingSet<ScheduleData> {
     return schedules;
   }
 
-  /* public Students withFamilyId(String id) {
-     Students students = new Students(this);
-     StudentData studentData = students.iterator().next().withFamilyId(id);
-     return students;
-   }*/
   public Schedules without(ScheduleData schedule) {
     Schedules schedules = new Schedules(this);
     schedules.remove(schedule);

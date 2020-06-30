@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,11 +130,6 @@ public class LKParentHelper extends HelperBase {
     thereAreErrorMessages();
   }
 
-  public void firstPointWithScroll() {
-    ((JavascriptExecutor) wd).executeScript("window.scrollTo(0, -document.body.scrollHeight);");
-    btnLogo();
-  }
-
   public void recordOnRegular() {
     btnShowSchedule();
     btnRecordOnLesson();
@@ -185,4 +181,17 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
+  public void btnSetPassword() {
+    WebElement dynamicElement = (new WebDriverWait(wd, 10))
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='instructions']//button]")));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
+    noErrorMessage();
+  }
+
+  public void waitForLoad() {
+    new WebDriverWait(wd, 10)
+            .until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@src,'logo')]")));
+   }
 }
