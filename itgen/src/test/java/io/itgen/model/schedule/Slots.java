@@ -122,7 +122,6 @@ public class Slots {
             ", blocked=" + blocked +
             ", blockDesc='" + blockDesc + '\'' +
             ", cancelled=" + cancelled +
-            ", cancelledAt=" + cancelledAt +
             '}';
   }
 }

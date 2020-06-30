@@ -51,6 +51,7 @@ public class SshotWindowSchedule extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
+
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("sshotWindowSchedule").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
@@ -72,13 +73,13 @@ public class SshotWindowSchedule extends TestBase {
   @Test
   public void testSshotWindowSchedule() throws AWTException, IOException {
     String name = "Admin_WindowSchedule_RU_Chrome";
-    String[] locatorIgnor = new String[1];
-    locatorIgnor[0]=" //span[contains(@class,'capitalize')]";
+    String[] locatorIgnor = {
+            "//span[contains(@class,'capitalize')]"
+    };
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     app.windowSchedule().selectStudentForSshot(nameStudent);
-
     app.sshot().changeTopBar();
     app.sshot().changeTableInWindowSchedule();
 
@@ -86,18 +87,22 @@ public class SshotWindowSchedule extends TestBase {
             , properties.getProperty("actual")
             , properties.getProperty("markedImages")
             , name, locatorIgnor);
-
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diff.getDiffSize() > 250) { //погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("sshotWindowSchedule");
+
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("sshotWindowSchedule");
+
     FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("sshotWindowSchedule");
+
     Tasks tasks = app.dbschedules().tasksComposition("sshotWindowSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

@@ -8,40 +8,51 @@ public class TimeGeneral {
   public TimeGeneral() {
     super();
   }
+  int  twentyFourHours = 172800000; //86400000;
 
-  public Double date() {
+  private long getMillisLocalDate() {
     LocalDate date = LocalDate.now();
-    long millisLocalDate = date
+    return date
             .atStartOfDay()
             .toInstant(OffsetDateTime
                     .now()
                     .getOffset())
             .toEpochMilli();
+  }
+
+  public Double date() {
+    long millisLocalDate = getMillisLocalDate();
     double time = (millisLocalDate + 10800000) * 1.0; //  текущая дата
     return time;
   }
 
+  public Double dateYesterday() {
+    long millisLocalDate = getMillisLocalDate();
+    double time = (millisLocalDate + 10800000 - twentyFourHours) * 1.0 ; //  вчера
+    return time;
+  }
+
   public Double Stime(String period) {
-    LocalDate date = LocalDate.now();
-    long millisLocalDate = date
-            .atStartOfDay()
-            .toInstant(OffsetDateTime
-                    .now()
-                    .getOffset())
-            .toEpochMilli();
-    double sValue = (millisLocalDate + 10800000 + start(period)) * 1.0; //c 21:00
+    long millisLocalDate = getMillisLocalDate();
+    double sValue = (millisLocalDate + 10800000 + start(period)) * 1.0;
     return sValue;
   }
 
-  public Double Etime(String period) {
-    LocalDate date = LocalDate.now();
-    long millisLocalDate = date
-            .atStartOfDay()
-            .toInstant(OffsetDateTime
-                    .now()
-                    .getOffset())
-            .toEpochMilli();
+ public Double Etime(String period) {
+    long millisLocalDate = getMillisLocalDate();
     double eValue = (millisLocalDate + 10800000 + finish(period)) * 1.0;
+    return eValue;
+  }
+
+  public Double StimeYesterday(String period) {
+    long millisLocalDate = getMillisLocalDate();
+    double sValue = (millisLocalDate + 10800000 + start(period)- twentyFourHours) * 1.0 ;
+    return sValue;
+  }
+
+  public Double EtimeYesterday(String period) {
+    long millisLocalDate = getMillisLocalDate();
+    double eValue = (millisLocalDate + 10800000 + finish(period)- twentyFourHours) * 1.0 ;
     return eValue;
   }
 
@@ -54,6 +65,9 @@ public class TimeGeneral {
     if (period.equals("18:00 - 20:00")) {
       startValue = 54000000;
     }
+    if (period.equals("01:00 - 03:00")) {
+      startValue = 79200000 ;
+    }
     return startValue;
   }
 
@@ -65,6 +79,11 @@ public class TimeGeneral {
     if (period.equals("18:00 - 20:00")) {
       finishValue =61200000;
     }
+    if (period.equals("01:00 - 03:00")) {
+      finishValue =86400000 ;
+    }
     return finishValue;
   }
+
+
 }
