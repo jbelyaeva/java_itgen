@@ -78,10 +78,14 @@ public class SShotHelper extends HelperBase {
   }
 
   public void changeTableInWindowSchedule() {
+    String locatorHeader="(//div[@class='cell-heading cell-info'])[1]";
+    String locatorBody="(//div[@class='create-child-schedule-group-list cell-info'])[1]";
     for (int i = 1; i < 8; i++) {
-      if (isElementPresent(By.xpath("(//div[@class='cell-heading cell-info'])[1]"))) {
-        WebElement element = wd.findElement(By.xpath("(//div[@class='cell-heading cell-info'])[1]"));
-        ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", element);
+      if (isElementPresent(By.xpath(locatorHeader))) {
+        WebElement elementHeader = wd.findElement(By.xpath(locatorHeader));
+        WebElement elementBody = wd.findElement(By.xpath(locatorBody));
+        ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", elementHeader);
+        ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')", elementBody);
       }
     }
   }

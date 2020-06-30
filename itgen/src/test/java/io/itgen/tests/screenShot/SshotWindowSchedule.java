@@ -86,6 +86,7 @@ public class SshotWindowSchedule extends TestBase {
             , properties.getProperty("actual")
             , properties.getProperty("markedImages")
             , name, locatorIgnor);
+
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
