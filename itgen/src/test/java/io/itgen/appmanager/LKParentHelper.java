@@ -41,8 +41,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void btnSignUp() {
-    WebDriverWait myWaitVar = new WebDriverWait(wd, 3);
-    myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
+    WebDriverWait wait = new WebDriverWait(wd, 3);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
     click(By.xpath("//button[contains(@id-qa,'signup')]"));
     noErrorMessage();
   }

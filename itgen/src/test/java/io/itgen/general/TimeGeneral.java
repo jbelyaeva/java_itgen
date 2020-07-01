@@ -8,9 +8,10 @@ public class TimeGeneral {
   public TimeGeneral() {
     super();
   }
-  int  twentyFourHours = 172800000; //86400000;
 
-  private long getMillisLocalDate() {
+  int twentyFourHours = 172800000; //86400000;
+
+  private long getMsLocalTime() {
     LocalDate date = LocalDate.now();
     return date
             .atStartOfDay()
@@ -21,39 +22,33 @@ public class TimeGeneral {
   }
 
   public Double date() {
-    long millisLocalDate = getMillisLocalDate();
-    double time = (millisLocalDate + 10800000) * 1.0; //  текущая дата
-    return time;
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000) * 1.0;
   }
 
   public Double dateYesterday() {
-    long millisLocalDate = getMillisLocalDate();
-    double time = (millisLocalDate + 10800000 - twentyFourHours) * 1.0 ; //  вчера
-    return time;
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 - twentyFourHours) * 1.0;
   }
 
   public Double Stime(String period) {
-    long millisLocalDate = getMillisLocalDate();
-    double sValue = (millisLocalDate + 10800000 + start(period)) * 1.0;
-    return sValue;
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + start(period)) * 1.0;
   }
 
- public Double Etime(String period) {
-    long millisLocalDate = getMillisLocalDate();
-    double eValue = (millisLocalDate + 10800000 + finish(period)) * 1.0;
-    return eValue;
+  public Double Etime(String period) {
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + finish(period)) * 1.0;
   }
 
   public Double StimeYesterday(String period) {
-    long millisLocalDate = getMillisLocalDate();
-    double sValue = (millisLocalDate + 10800000 + start(period)- twentyFourHours) * 1.0 ;
-    return sValue;
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + start(period) - twentyFourHours) * 1.0;
   }
 
   public Double EtimeYesterday(String period) {
-    long millisLocalDate = getMillisLocalDate();
-    double eValue = (millisLocalDate + 10800000 + finish(period)- twentyFourHours) * 1.0 ;
-    return eValue;
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + finish(period) - twentyFourHours) * 1.0;
   }
 
   //продумать остальные периоды т.к. если создаем в 01:00, а сейчас 10.00, то start=0
@@ -66,7 +61,7 @@ public class TimeGeneral {
       startValue = 54000000;
     }
     if (period.equals("01:00 - 03:00")) {
-      startValue = 79200000 ;
+      startValue = 79200000;
     }
     return startValue;
   }
@@ -77,10 +72,10 @@ public class TimeGeneral {
       finishValue = 72000000;
     }
     if (period.equals("18:00 - 20:00")) {
-      finishValue =61200000;
+      finishValue = 61200000;
     }
     if (period.equals("01:00 - 03:00")) {
-      finishValue =86400000 ;
+      finishValue = 86400000;
     }
     return finishValue;
   }
