@@ -117,6 +117,8 @@ public class SshotFiltrRecordOnRegular extends TestBase {
     if (diff.getDiffSize() > 100) { //погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
+
+    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)

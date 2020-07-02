@@ -96,7 +96,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
   public void testFiltrRecordOnRegular() throws AWTException, IOException {
     app.lkParent().GoToFiltrRecordSingle();
 
-    String name = "Parent_FiltrRecordOnRegular_RU_Chrome";
+    String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
     String[] locatorIgnor = {
             "//p[@class='user']",
             "//div[@class='DayPickerInput']//input",
@@ -111,6 +111,8 @@ public class SshotFiltrRecordOnSingle extends TestBase {
     if (diff.getDiffSize() > 100) { //погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
+
+    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)
