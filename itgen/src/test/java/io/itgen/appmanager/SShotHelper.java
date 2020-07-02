@@ -78,11 +78,17 @@ public class SShotHelper extends HelperBase {
 
   public void changeTableInWindowSchedule() {
     //приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически, скриншоты падают
-    By locator = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
+    By locatorHeading = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
+    By locatorGroupList = By.xpath("(//div[@class='create-child-schedule-group-list cell-info'])[1]");
     for (int i = 1; i < 8; i++) {
-      if (isElementPresent(locator)) {
-        WebElement element = wd.findElement(locator);
-        ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", element);
+      if (isElementPresent(locatorHeading)) {
+        WebElement elementHeading = wd.findElement(locatorHeading);
+        WebElement elementGroupList = wd.findElement(locatorGroupList);
+        ((JavascriptExecutor) wd)
+                .executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", elementHeading);
+        ((JavascriptExecutor) wd)
+                .executeScript("arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')", elementGroupList);
+
       }
     }
   }

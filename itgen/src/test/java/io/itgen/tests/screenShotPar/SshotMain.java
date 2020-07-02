@@ -21,6 +21,7 @@ public class SshotMain extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    //контролируем состояние,что семье положен бонус 24ч и нельзя пополнить баланс
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("111").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
