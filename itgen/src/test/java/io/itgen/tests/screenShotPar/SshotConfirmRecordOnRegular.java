@@ -116,8 +116,6 @@ public class SshotConfirmRecordOnRegular extends TestBase {
             "//div[contains(@id,'MeteorToys')]"
     };
 
-    app.sshot().changeStyleDayOfTheWeek();
-
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")
             , ApplicationManager.properties.getProperty("markedImages")
