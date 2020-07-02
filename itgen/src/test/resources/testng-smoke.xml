@@ -3,8 +3,8 @@
 <suite name="Suite1" verbose="1" >
     <test name="Smoke">
         <classes>
-            <class name="io.itgen.tests.FamilyCreationTests" />
             <class name="io.itgen.tests.FamilyDeletionTests" />
+            <class name="io.itgen.tests.FamilyCreationTests" />
             <class name="io.itgen.tests.students.StudentCreationTests" />
             <class name="io.itgen.tests.students.StudentModificationTests" />
             <class name="io.itgen.tests.students.StudentDeletionTests" />
