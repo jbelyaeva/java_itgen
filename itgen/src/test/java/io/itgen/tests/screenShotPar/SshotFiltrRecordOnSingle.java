@@ -93,7 +93,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
   }
 
   @Test
-  public void testFiltrRecordOnRegular() throws AWTException, IOException {
+  public void testFiltrRecordOnSingle() throws AWTException, IOException {
     app.lkParent().GoToFiltrRecordSingle();
 
     String name = "Parent_FiltrRecordOnSingle_RU_Chrome";

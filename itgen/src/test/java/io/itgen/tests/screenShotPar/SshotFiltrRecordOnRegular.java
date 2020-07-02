@@ -102,7 +102,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
   public void testFiltrRecordOnRegular() throws AWTException, IOException {
     app.lkParent().GoToFiltrRecordRegular();
 
-    String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
+    String name = "Parent_FiltrRecordOnRegular_RU_Chrome";
     String[] locatorIgnor = {
             "//p[@class='user']",
             "//div[@class='DayPickerInput']//input",
