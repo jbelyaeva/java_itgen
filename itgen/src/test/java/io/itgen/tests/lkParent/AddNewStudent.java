@@ -66,8 +66,8 @@ public class AddNewStudent extends TestBase {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);
     Students after = app.dbstudents().students();
-    assertThat(after.size(), equalTo(before.size() + 1));
     studentClean = app.student().getNewStudentDB(before, after);
+    assertThat(after.size(), equalTo(before.size() + 1));
     StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after, equalTo(before.withAdded(studentAdd)));
   }
@@ -84,7 +84,7 @@ public class AddNewStudent extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    if (studentClean != (null)) {
+    if (studentClean != null) {
       TaskService taskService = new TaskService();
       taskService.findByIdAndDelete(studentClean);
       StudentService studentService = new StudentService();

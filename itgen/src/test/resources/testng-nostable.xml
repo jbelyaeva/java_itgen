@@ -3,8 +3,8 @@
 <suite name="Suite1" verbose="1" >
     <test name="Nostable">
         <classes>
-            <class name="io.itgen.tests.schedule.ScheduleBadMoveTests" />
             <class name="io.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests" />
+            <class name="io.itgen.tests.schedule.ScheduleBadMoveTests" />
          </classes>
     </test>
 </suite>
