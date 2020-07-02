@@ -322,12 +322,12 @@ public class ScheduleHelper extends HelperBase {
   public void selectScheduleInListUIById(String id) {
     //находим пагинатор
     String next = wd.findElement(By.xpath("//button[contains(@class,'next')]")).getAttribute("class");
-    //есть ли на первой странице наш студент
+    //есть ли на первой странице наше занятие
     List<WebElement> list = wd.findElements(By.xpath("//a[contains(@href,'" + id + "')]"));
     if (list.size() > 0) {
       wd.findElement(By.xpath("//a[contains(@href,'" + id + "')]")).click();
     } else {
-      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      //если занятие не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/lesson/" + id + "'"));
         if (list_pagin.size() > 0) {

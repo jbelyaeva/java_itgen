@@ -101,7 +101,8 @@ public class SshotFiltrRecordOnSingle extends TestBase {
             "//p[@class='user']",
             "//div[@class='DayPickerInput']//input",
             "//span[@class='selected-icon']",
-            "//div[contains(@id,'MeteorToys')]"
+            "//div[contains(@id,'MeteorToys')]",
+            "//div[@class='times-filter']"
     };
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")

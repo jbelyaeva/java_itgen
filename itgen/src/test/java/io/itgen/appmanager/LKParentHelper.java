@@ -197,7 +197,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void changeScrollTime() {
-    type(By.xpath("//input[2]"), "24:00");
+    type(By.xpath("//div[@class='times-filter']//input[2]"), "24:00");
     click(By.xpath("//div[@class='times-filter']")); //щелкнуть на пустое место, чтоб обновился скролл
     noErrorMessage();
   }
