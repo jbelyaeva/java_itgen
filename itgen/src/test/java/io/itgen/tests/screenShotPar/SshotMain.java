@@ -5,8 +5,12 @@ package io.itgen.tests.screenShotPar;
 
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.model.FamilyData;
+import io.itgen.services.FamilyService;
 import io.itgen.tests.TestBase;
+import org.aspectj.lang.annotation.Before;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
@@ -15,6 +19,12 @@ import java.io.IOException;
 
 public class SshotMain extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    FamilyService familyService = new FamilyService();
+    FamilyData family = new FamilyData().withId("111").withTrialBonusOff(false).withTierId("txa");
+    familyService.save(family);
+  }
 
   @Test
   public void testSshotMain() throws AWTException, IOException {
