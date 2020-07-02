@@ -22,12 +22,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-public class SshotFiltrRecordOnRegular extends TestBase {
+public class SshotFiltrRecordOnSingle extends TestBase {
   ArrayList<C> listC = new ArrayList<>();
   ArrayList<Slots> listSlots = new ArrayList<>();
   String periodFinish = "01:00 - 03:00";
   String period = "21:00 - 23:00";
-  int week = 604800000;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -43,40 +42,35 @@ public class SshotFiltrRecordOnRegular extends TestBase {
                     .withId("14")
                     .withW(time.dateYesterday())
                     .withSt(new ST().withS(time.StimeYesterday(periodFinish)).withE(time.EtimeYesterday(periodFinish)))
-                    .withC(Arrays.asList(new C().withId("LkRecordOnRegularSchedule").withType(3).withSubject("1")
-                            .withLang("ru").withTrial(true).withS("finished").withScore(3).withRating(4)))
+                    .withC(Arrays.asList(new C()
+                            .withId("LkRecordOnSingleSchedule")
+                            .withType(3)
+                            .withSubject("1")
+                            .withLang("ru")
+                            .withTrial(true)
+                            .withS("finished")
+                            .withScore(3)
+                            .withRating(4)))
                     .withStartedAt(time.StimeYesterday(periodFinish)).withFinishedAt(time.EtimeYesterday(periodFinish))))
             .withTimes(new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
             .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
     //занятие, на которое нужно записать ученика
     ScheduleData scheduleNew = new ScheduleData()
-            .withId("LkRecordOnRegularSchedule")
+            .withId("LkRecordOnSingleSchedule")
             .withVer(0)
             .withFromDate(time.date())
             .withSlots(Arrays.asList(new Slots()
                     .withId("14")
                     .withW(time.date())
                     .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(listC), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week)
-                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
-                    .withC(listC), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week * 2)
-                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
-                    .withC(listC), new Slots()
-                    .withId("14")
-                    .withW(time.date() + week * 3)
-                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
                     .withC(listC)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(scheduleNew);
     //студент, добавленный в дефолтную семью, которыфй прошел пробное успешно
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("LkRecordOnRegularSchedule").withFirstName("Маша").withLastName("Машина")
+    StudentData student = new StudentData().withId("LkRecordOnSingleSchedule").withFirstName("Маша").withLastName("Машина")
             .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("BL").withTimeZone("Europe/Minsk").withGender(2)
             .withFamilyId("111").withStudyLang("ru").withLocate("ru")
@@ -91,7 +85,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
     studentService.save(student);
     //баланс +1, т.к. за 8 часов нельзя будет записаться через родителя
     PaymentService paymentService = new PaymentService();
-    PaymentData payment = new PaymentData().withId("LkRecordOnRegularSchedule")
+    PaymentData payment = new PaymentData().withId("LkRecordOnSingleSchedule")
             .withCreateAt(new Date())
             .withfId("111").withCreator("666").withVal(1).withT(2).withDesc("корректировка")
             .withApproved(true);
@@ -100,9 +94,9 @@ public class SshotFiltrRecordOnRegular extends TestBase {
 
   @Test
   public void testFiltrRecordOnRegular() throws AWTException, IOException {
-    app.lkParent().GoToFiltrRecordRegular();
+    app.lkParent().GoToFiltrRecordSingle();
 
-    String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
+    String name = "Parent_FiltrRecordOnRegular_RU_Chrome";
     String[] locatorIgnor = {
             "//p[@class='user']",
             "//div[@class='DayPickerInput']//input",
@@ -123,19 +117,19 @@ public class SshotFiltrRecordOnRegular extends TestBase {
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("FinishedSchedule");
-    scheduleService.findByIdAndDelete("LkRecordOnRegularSchedule");
+    scheduleService.findByIdAndDelete("LkRecordOnSingleSchedule");
 
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("111").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("LkRecordOnRegularSchedule");
+    studentService.findByIdAndDelete("LkRecordOnSingleSchedule");
 
     PaymentService paymentService = new PaymentService();
-    paymentService.findByIdAndDelete("LkRecordOnRegularSchedule");
+    paymentService.findByIdAndDelete("LkRecordOnSingleSchedule");
 
-    Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnRegularSchedule");
+    Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnSingleSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDelete(taskClean.getId());

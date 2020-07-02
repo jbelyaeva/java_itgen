@@ -1,7 +1,5 @@
 package io.itgen.appmanager;
 
-import io.itgen.model.LeadData;
-import io.itgen.model.Leads;
 import io.itgen.model.StudentData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,11 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class LKParentHelper extends HelperBase {
 
@@ -137,7 +130,47 @@ public class LKParentHelper extends HelperBase {
     btnNext();
     selectCheckBox();
     btnRecord();
-   }
+  }
+
+  public void recordOnSingle() {
+    btnShowSchedule();
+    btnRecordOnLesson();
+    btnSingleSchedule();
+    changeScrollTime();
+    btnNext();
+    selectCheckBox();
+    btnRecord();
+  }
+
+  public void GoToFiltrRecordSingle() {
+    btnShowSchedule();
+    btnRecordOnLesson();
+    btnSingleSchedule();
+    changeWeeksPaginator();
+    changeStyleDayOfTheWeek();
+  }
+
+  public void changeStyleDayOfTheWeek() {
+    By locator = By.xpath("//div[@class='picker-item selected']");
+    WebElement element = wd.findElement(locator);
+    ((JavascriptExecutor) wd).executeScript("arguments[0].setAttribute('class', 'picker-item')", element);
+  }
+
+  private void changeWeeksPaginator() {
+    for (int i = 1; i < 8; i++) {
+      if (isElementPresent(By.xpath("//div[contains(@class,'picker-item')][" + i + "]"))) {
+        WebElement elementDayWeeks = wd.findElement(By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[1]"));
+        WebElement elementData = wd.findElement(By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[2]"));
+        ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementDayWeeks);
+        ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementData);
+      }
+    }
+  }
+
+  public void btnSingleSchedule() {
+    click(By.xpath("//div[contains(@class,'switcher')]//button[2]"));
+    noErrorMessage();
+  }
 
   public void confirmRecordOnRegular() {
     btnShowSchedule();
@@ -145,10 +178,10 @@ public class LKParentHelper extends HelperBase {
     changeScrollTime();
     btnNext();
     selectCheckBox();
-   }
+    changeStyleDayOfTheWeek();
+  }
 
   public void btnRecordOnLesson() {
-//    click(By.xpath("//div[contains(@class,'actions')]//button"));
     click(By.xpath("//div[@class='buttons']"));
     noErrorMessage();
   }
@@ -164,8 +197,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void changeScrollTime() {
-   type(By.xpath("//input[2]"),"24:00");
-    click(By.xpath("//div[@class='date-filter-container']"));
+    type(By.xpath("//input[2]"), "24:00");
+    click(By.xpath("//div[@class='times-filter']")); //щелкнуть на пустое место, чтоб обновился скролл
     noErrorMessage();
   }
 
@@ -193,5 +226,11 @@ public class LKParentHelper extends HelperBase {
   public void waitForLoad() {
     new WebDriverWait(wd, 10)
             .until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@src,'logo')]")));
-   }
+  }
+
+  public void GoToFiltrRecordRegular() {
+    btnShowSchedule();
+    btnRecordOnLesson();
+    changeStyleDayOfTheWeek();
+  }
 }
