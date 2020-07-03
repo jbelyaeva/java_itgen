@@ -1,7 +1,12 @@
 package io.itgen.general;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class TimeGeneral {
 
@@ -9,8 +14,9 @@ public class TimeGeneral {
     super();
   }
 
-  int twentyFourHours = 172800000; //86400000;
+  int twentyFourHours = 172800000;
 
+  // установка времени на начало дня по UTC
   private long getMsLocalTime() {
     LocalDate date = LocalDate.now();
     return date
@@ -21,24 +27,31 @@ public class TimeGeneral {
             .toEpochMilli();
   }
 
+  public long hours() {
+    long timeUTC = DateTime.now(DateTimeZone.UTC).getMillisOfDay(); //по утс
+    long timeTZ = DateTime.now(DateTimeZone.forID(properties.getProperty("tz"))).getMillisOfDay();  //по чп
+    long diff = timeTZ - timeUTC;
+    return (long) (Math.floor(diff / 1000) * 1000);
+  }
+
   public Double date() {
     long nowTime = getMsLocalTime();
-    return (nowTime + 10800000) * 1.0;
+    return (nowTime + hours()) * 1.0;
   }
 
   public Double dateYesterday() {
     long nowTime = getMsLocalTime();
-    return (nowTime + 10800000 - twentyFourHours) * 1.0;
+    return (nowTime + hours() - twentyFourHours) * 1.0;
   }
 
   public Double Stime(String period) {
     long nowTime = getMsLocalTime();
-    return (nowTime + 10800000 + start(period)) * 1.0;
+    return (nowTime + hours() + start(period)) * 1.0;
   }
 
   public Double Etime(String period) {
     long nowTime = getMsLocalTime();
-    return (nowTime + 10800000 + finish(period)) * 1.0;
+    return (nowTime + hours() + finish(period)) * 1.0;
   }
 
   public Double StimeYesterday(String period) {
