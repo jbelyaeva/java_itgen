@@ -44,6 +44,11 @@ public class TimeGeneral {
     return (nowTime + hours() - twentyFourHours) * 1.0;
   }
 
+  public Double dateTomorrow() {
+    long nowTime = getMsLocalTime();
+    return (nowTime + hours() + twentyFourHours/2) * 1.0;
+  }
+
   public Double Stime(String period) {
     long nowTime = getMsLocalTime();
     return (nowTime + hours() + start(period)) * 1.0;
@@ -62,6 +67,16 @@ public class TimeGeneral {
   public Double EtimeYesterday(String period) {
     long nowTime = getMsLocalTime();
     return (nowTime + 10800000 + finish(period) - twentyFourHours) * 1.0;
+  }
+
+  public Double StimeTomorrow(String period) {
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + start(period) + twentyFourHours/2) * 1.0;
+  }
+
+  public Double EtimeTomorrow(String period) {
+    long nowTime = getMsLocalTime();
+    return (nowTime + 10800000 + finish(period) + twentyFourHours/2) * 1.0;
   }
 
   //продумать остальные периоды т.к. если создаем в 01:00, а сейчас 10.00, то start=0

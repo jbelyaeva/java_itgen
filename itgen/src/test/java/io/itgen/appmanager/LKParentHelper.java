@@ -233,4 +233,31 @@ public class LKParentHelper extends HelperBase {
     btnRecordOnLesson();
     changeStyleDayOfTheWeek();
   }
+
+  public void cancelLessonInSingleSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBox();
+    btnDropdown();
+    btnCancel();
+  }
+
+  private void btnCancel() {
+    click(By.xpath("//div[contains(@class,'buttons-group')]"));
+    noErrorMessage();
+  }
+
+  private void clickCheckBox() {
+    click(By.xpath("//label"));
+  }
+
+  private void btnDropdown() {
+    click(By.xpath("//button[@data-toggle='dropdown']"));
+  }
+
+  private void btnCancelSchedule() {
+    click(By.xpath("//button[@id-qa='cancel']"));
+    noErrorMessage();
+  }
 }
