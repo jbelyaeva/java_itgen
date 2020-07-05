@@ -86,7 +86,7 @@ public class TrainerHelper extends HelperBase {
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
     dropDownList(By.id("profile-locale"), trainerData.getLocate());
     // выбор языка обучения -- чек-боксы
-    click(By.xpath("//div[contains(@class,'form-group')][12]//button[@data-toggle='dropdown']"));
+    click(By.xpath("(//button[contains(@class,dropdown)])[2]"));
     click(By.xpath("//input[@data-id='ru']"));
     click(By.xpath("//input[@data-id='en']"));
     //
