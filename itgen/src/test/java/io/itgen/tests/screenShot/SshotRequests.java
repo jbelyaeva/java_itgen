@@ -47,7 +47,6 @@ public class SshotRequests extends TestBase {
             .withTimes(Arrays.asList(new Times().withMin(1592110800000.0).withMax(1592157600000.0),
                                      new Times().withMin(1592197200000.0).withMax(1592244000000.0),
                                      new Times().withMin(1592283600000.0).withMax(1592330400000.0)));
-
    requestService.save(request);
 
     FamilyService familyService = new FamilyService();

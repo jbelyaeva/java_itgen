@@ -17,7 +17,7 @@ public class SshotListStudents extends TestBase {
 
   @Test
   public void testSshotListStudents() throws AWTException, IOException {
-   String name = "Admin_ListStudents_RU_Chrome";
+    String name = "Admin_ListStudents_RU_Chrome";
     String[] locatorIgnor = null;
     app.goTo().menuTasks();
     app.goTo().menuStudents();

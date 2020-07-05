@@ -59,7 +59,7 @@ public class SshotMainSchedule extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
-   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
+    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
             , properties.getProperty("actual")
             , properties.getProperty("markedImages")
             , name, locatorIgnor);

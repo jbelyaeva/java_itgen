@@ -34,7 +34,7 @@ public class SshotListLeads extends TestBase {
 
   @Test
   public void testSshotListLeads() throws AWTException, IOException {
-   String name = "Admin_ListLeads_RU_Chrome";
+    String name = "Admin_ListLeads_RU_Chrome";
     String[] locatorIgnor = {
             "//span[@class='user-time']",
             "//span[@class='date']",
