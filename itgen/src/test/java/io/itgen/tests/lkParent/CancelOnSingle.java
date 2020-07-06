@@ -92,7 +92,7 @@ public class CancelOnSingle extends TestBase {
   }
 
   @Test()
-  public void testRecordOnSingle() {
+  public void testCancelOnSingle() {
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelLessonInSingleSchedule();
     Schedules after = app.dbschedules().schedules();

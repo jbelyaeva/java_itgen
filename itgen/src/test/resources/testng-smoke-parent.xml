@@ -8,6 +8,7 @@
             <class name="io.itgen.tests.lkParent.RecordOnRegular"/>
             <class name="io.itgen.tests.lkParent.RecordOnSingle"/>
             <class name="io.itgen.tests.lkParent.CancelOnSingle"/>
+            <class name="io.itgen.tests.lkParent.CancelOnRegular"/>
         </classes>
     </test>
 </suite>

@@ -2,6 +2,8 @@ package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
+import io.itgen.appmanager.tranzactionHelper.TranzactionScheduleHelper;
+import io.itgen.appmanager.tranzactionHelper.TranzactionStudentHelper;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -48,6 +50,8 @@ public class ApplicationManager {
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
+  private TranzactionScheduleHelper tranzactionScheduleHelper;
+  private TranzactionStudentHelper tranzactionStudentHelper;
 
    public ApplicationManager(String browser) {
     this.browser = browser;
@@ -61,6 +65,8 @@ public class ApplicationManager {
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
     dbHelperRequest = new DbHelperRequest();
+    tranzactionScheduleHelper = new TranzactionScheduleHelper();
+    tranzactionStudentHelper = new TranzactionStudentHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -176,6 +182,14 @@ public class ApplicationManager {
 
   public PaymentHelper payment() {
     return paymentHelper;
+  }
+
+  public TranzactionScheduleHelper trSchedule() {
+    return tranzactionScheduleHelper;
+  }
+
+  public TranzactionStudentHelper trStudent() {
+    return tranzactionStudentHelper;
   }
 
   public byte[] takeScreenshot() {

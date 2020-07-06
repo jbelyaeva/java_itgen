@@ -243,6 +243,15 @@ public class LKParentHelper extends HelperBase {
     btnCancel();
   }
 
+  public void cancelLessonInRegularSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBoxAll();
+    btnDropdown();
+    btnCancel();
+  }
+
   private void btnCancel() {
     click(By.xpath("//div[contains(@class,'buttons-group')]"));
     noErrorMessage();
@@ -250,6 +259,13 @@ public class LKParentHelper extends HelperBase {
 
   private void clickCheckBox() {
     click(By.xpath("//label"));
+  }
+
+  private void clickCheckBoxAll() {
+    click(By.xpath("(//label)[1]"));
+    click(By.xpath("(//label)[2]"));
+    click(By.xpath("(//label)[3]"));
+    click(By.xpath("(//label)[4]"));
   }
 
   private void btnDropdown() {
@@ -260,4 +276,6 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//button[@id-qa='cancel']"));
     noErrorMessage();
   }
+
+
 }
