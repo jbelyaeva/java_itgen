@@ -38,14 +38,14 @@ public class CancelOnRegular extends TestBase {
     app.trStudent().StudentAddDefoltFamily_FinishTrailLesson(studentService, "LkCancelRegularSchedule",
             "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
 
-    //постоянное занятие, на которое записан ученик
+    //разовое занятие, на которое записан ученик
     app.trSchedule()
             .RegularScheduleTomorrowWithStudent_ScratchRuLesson(time, scheduleService, period, "LkCancelRegularSchedule",
                     "14", "LkCancelRegularSchedule", "1", "ru");
     }
 
   @Test()
-  public void testRecordOnRegular() {
+  public void testCancelOnRegular() {
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelLessonsInRegularSchedule();
     Schedules after = app.dbschedules().schedules();
@@ -77,8 +77,8 @@ public class CancelOnRegular extends TestBase {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     //регулярное занятие на завтра без ученика
-    ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrow(time, scheduleService, period, "LkCancelRegularSchedule",
-            "14");
+    ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrow(time, scheduleService, period,
+            "LkCancelRegularSchedule","14");
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelRegularSchedule")) {

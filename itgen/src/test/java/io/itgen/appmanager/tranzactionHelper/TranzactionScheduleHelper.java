@@ -1,21 +1,12 @@
 package io.itgen.appmanager.tranzactionHelper;
 
-import io.itgen.appmanager.HelperBase;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.ScheduleData;
-import io.itgen.model.StudentData;
 import io.itgen.model.schedule.*;
-import io.itgen.model.users.Contacts;
-import io.itgen.model.users.FinishedLessonsCountBySkill;
-import io.itgen.model.users.Status;
 import io.itgen.services.ScheduleService;
-import io.itgen.services.StudentService;
-import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class TranzactionScheduleHelper  {
 
@@ -67,6 +58,27 @@ public class TranzactionScheduleHelper  {
     scheduleService.save(schedule);
   }
 
+  //Завтра разовое занятие без учеников
+  public ScheduleData SingleScheduleTomorrowWithoutStudent(TimeGeneral time, ScheduleService scheduleService
+          ,String period, String idSchedule, String idTrainer) {
+    ArrayList<C> listC = new ArrayList<>();
+    ArrayList<FinishedSlots> listFSlots = new ArrayList<>();
+    ScheduleData schedule = new ScheduleData()
+            .withId(idSchedule)
+            .withVer(0)
+            .withFromDate(time.dateTomorrow())
+            .withSlots(Arrays.asList(new Slots()
+                    .withId(idTrainer)
+                    .withW(time.dateTomorrow())
+                    .withSt(new ST().withS(time.StimeTomorrow(period)).withE(time.EtimeTomorrow(period)))
+                    .withC(listC)))
+            .withFinishedSlots(listFSlots)
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withSkypeId("1");
+    scheduleService.save(schedule);
+    return  schedule;
+  }
+
   //Завтра постоянное занятие, на которое записан ученик, после первого успешного пробного
   public void RegularScheduleTomorrowWithStudent_ScratchRuLesson(TimeGeneral time, ScheduleService scheduleService
                                                                 ,String period, String idSchedule, String idTrainer,
@@ -105,7 +117,7 @@ public class TranzactionScheduleHelper  {
     scheduleService.save(schedule);
   }
 
-  //завтра занятие без ученика
+  //завтра регулярное занятие без ученика
   public ScheduleData RegularScheduleTomorrow(TimeGeneral time, ScheduleService scheduleService
           ,String period, String idSchedule, String idTrainer) {
     int week = 604800000;

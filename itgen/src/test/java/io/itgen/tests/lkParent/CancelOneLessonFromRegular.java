@@ -1,5 +1,5 @@
 package io.itgen.tests.lkParent;
-// отмена ученику все занятия из постоянного расписания
+// отмена ученику одного занятия из постоянного расписания
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.ScheduleData;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class CancelOneLessonOnRegular extends TestBase {
+public class CancelOneLessonFromRegular extends TestBase {
   String period = "18:00 - 20:00";
 
   @BeforeMethod
@@ -45,7 +45,7 @@ public class CancelOneLessonOnRegular extends TestBase {
     }
 
   @Test()
-  public void testRecordOnRegular() {
+  public void testCancelOneLessonFromRegular() {
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelOneLessonInRegularSchedule();
     Schedules after = app.dbschedules().schedules();
@@ -76,7 +76,7 @@ public class CancelOneLessonOnRegular extends TestBase {
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    //регулярное занятие на завтра без ученика
+    //регулярное расписание на завтра с учеником, первое занятие отменено
     ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrowWithStudentOnFirstLesson(time, scheduleService, period, "LkCancelRegularSchedule",
             "14", "LkCancelRegularSchedule", "1", "ru");
 

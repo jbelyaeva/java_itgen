@@ -14,16 +14,28 @@ public class TimeGeneral {
     super();
   }
 
-  int twentyFourHours = 172800000;
-
   // установка времени на начало дня по UTC
   private long getMsLocalTime() {
     LocalDate date = LocalDate.now();
     return date
             .atStartOfDay()
-            .toInstant(OffsetDateTime
-                    .now()
-                    .getOffset())
+            .toInstant(OffsetDateTime.now().getOffset())
+            .toEpochMilli();
+  }
+
+  private long getMsLocalTimeYesterday() {
+    LocalDate date = LocalDate.now().minusDays(1);
+    return date
+            .atStartOfDay()
+            .toInstant(OffsetDateTime.now().getOffset())
+            .toEpochMilli();
+  }
+
+  private long getMsLocalTimeTomorrow() {
+    LocalDate date = LocalDate.now().plusDays(1);
+    return date
+            .atStartOfDay()
+            .toInstant(OffsetDateTime.now().getOffset())
             .toEpochMilli();
   }
 
@@ -40,13 +52,13 @@ public class TimeGeneral {
   }
 
   public Double dateYesterday() {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() - twentyFourHours) * 1.0;
+    long nowTime = getMsLocalTimeYesterday();
+    return (nowTime + diffTz()) * 1.0;
   }
 
   public Double dateTomorrow() {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() + twentyFourHours/2) * 1.0;
+    long nowTime = getMsLocalTimeTomorrow();
+    return (nowTime + diffTz()) * 1.0;
   }
 
   public Double Stime(String period) {
@@ -60,26 +72,25 @@ public class TimeGeneral {
   }
 
   public Double StimeYesterday(String period) {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() + start(period) - twentyFourHours) * 1.0;
+    long nowTime = getMsLocalTimeYesterday();
+    return (nowTime + diffTz() + start(period)) * 1.0;
   }
 
   public Double EtimeYesterday(String period) {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() + finish(period) - twentyFourHours) * 1.0;
+    long nowTime = getMsLocalTimeYesterday();
+    return (nowTime + diffTz() + finish(period)) * 1.0;
   }
 
   public Double StimeTomorrow(String period) {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() + start(period) + twentyFourHours/2) * 1.0;
+    long nowTime = getMsLocalTimeTomorrow();
+    return (nowTime + diffTz() + start(period)) * 1.0;
   }
 
   public Double EtimeTomorrow(String period) {
-    long nowTime = getMsLocalTime();
-    return (nowTime + diffTz() + finish(period) + twentyFourHours/2) * 1.0;
+    long nowTime = getMsLocalTimeTomorrow();
+    return (nowTime + diffTz() + finish(period)) * 1.0;
   }
 
-  //продумать остальные периоды т.к. если создаем в 01:00, а сейчас 10.00, то start=0
   public int start(String period) {
     int startValue = 0;
     if (period.equals("21:00 - 23:00")) {
