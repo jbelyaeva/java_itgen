@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class CancelOnRegular extends TestBase {
+public class CancelOneLessonOnRegular extends TestBase {
   String period = "18:00 - 20:00";
 
   @BeforeMethod
@@ -47,7 +47,7 @@ public class CancelOnRegular extends TestBase {
   @Test()
   public void testRecordOnRegular() {
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().cancelLessonsInRegularSchedule();
+    app.lkParent().cancelOneLessonInRegularSchedule();
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
@@ -77,8 +77,8 @@ public class CancelOnRegular extends TestBase {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     //регулярное занятие на завтра без ученика
-    ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrow(time, scheduleService, period, "LkCancelRegularSchedule",
-            "14");
+    ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrowWithStudentOnFirstLesson(time, scheduleService, period, "LkCancelRegularSchedule",
+            "14", "LkCancelRegularSchedule", "1", "ru");
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelRegularSchedule")) {

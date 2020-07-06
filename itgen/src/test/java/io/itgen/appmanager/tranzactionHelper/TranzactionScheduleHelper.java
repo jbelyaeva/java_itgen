@@ -137,6 +137,39 @@ public class TranzactionScheduleHelper  {
     return schedule;
   }
 
-
+  //завтра регулярное расписание, но без ученика на первом занятии
+  public ScheduleData RegularScheduleTomorrowWithStudentOnFirstLesson(TimeGeneral time, ScheduleService scheduleService
+          ,String period, String idSchedule, String idTrainer, String idStudent, String idSubject, String lang) {
+    int week = 604800000;
+    ArrayList<C> listC = new ArrayList<>();
+    ScheduleData schedule = new ScheduleData()
+            .withId(idSchedule)
+            .withVer(0)
+            .withFromDate(time.dateTomorrow())
+            .withSlots(Arrays.asList(new Slots()
+                    .withId(idTrainer)
+                    .withW(time.dateTomorrow())
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                    .withC(listC), new Slots()
+                    .withId(idTrainer)
+                    .withW(time.dateTomorrow() + week)
+                    .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
+                    .withC(Arrays.asList(new C().withId(idStudent).withType(3).withSubject(idSubject)
+                            .withLang(lang).withS("normal").withP(true))), new Slots()
+                    .withId(idTrainer)
+                    .withW(time.dateTomorrow() + week * 2)
+                    .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
+                    .withC(Arrays.asList(new C().withId(idStudent).withType(3).withSubject(idSubject)
+                            .withLang(lang).withS("normal").withP(true))), new Slots()
+                    .withId(idTrainer)
+                    .withW(time.dateTomorrow() + week * 3)
+                    .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
+                    .withC(Arrays.asList(new C().withId(idStudent).withType(3).withSubject(idSubject)
+                            .withLang(lang).withS("normal").withP(true)))))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withSkypeId("1");
+    scheduleService.save(schedule);
+    return schedule;
+  }
 
 }

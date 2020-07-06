@@ -243,13 +243,26 @@ public class LKParentHelper extends HelperBase {
     btnCancel();
   }
 
-  public void cancelLessonInRegularSchedule() {
+  public void cancelLessonsInRegularSchedule() {
     btnShowSchedule();
     btnCancelSchedule();
     btnDropdown();
     clickCheckBoxAll();
     btnDropdown();
     btnCancel();
+  }
+
+  public void cancelOneLessonInRegularSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBoxOneLessonInRegular();
+    btnDropdown();
+    btnCancel();
+  }
+
+  private void clickCheckBoxOneLessonInRegular() {
+    click(By.xpath("(//label)[1]"));
   }
 
   private void btnCancel() {
