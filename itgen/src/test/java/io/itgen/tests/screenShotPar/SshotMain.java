@@ -26,9 +26,8 @@ public class SshotMain extends TestBase {
     familyService.save(family);
   }
 
-  @Test
+  @Test // упадет, если заускать через shift все тесты в подпапке.
   public void testSshotMain() throws AWTException, IOException {
-    // упадет, если заускать через shift все тесты в подпапке.
     String name = "Parent_Main_RU_Chrome";
     String[] locatorIgnor = {"//div[contains(@id,'MeteorToys')]"};
 

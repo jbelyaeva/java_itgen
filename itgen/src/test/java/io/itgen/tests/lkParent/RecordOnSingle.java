@@ -1,7 +1,6 @@
 package io.itgen.tests.lkParent;
 // к дефолтному родителю и ученику добавляется еще ученик, которого запишем на разовое и затем
-// удалим этого ученика
-// и расписание в after-методе
+// удалим этого ученика и расписание в after-методе
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;

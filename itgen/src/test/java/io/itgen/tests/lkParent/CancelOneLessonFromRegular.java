@@ -21,28 +21,50 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CancelOneLessonFromRegular extends TestBase {
   String period = "18:00 - 20:00";
 
+  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
+  // 18.00 и который записан на постоянное расписание на завтра в 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-    // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в 18.00 и который
-    // записан на постоянное расписание на завтра в 18.00
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     StudentService studentService = new StudentService();
 
-    //первое пробное занятие, которое завершил ученик с Был
+    // первое пробное занятие, которое завершил ученик с Был
     app.trSchedule()
-            .FinishingYesterdayFirstTrialLesson(time, scheduleService, period, "FinishedSchedule", "14",
-                    "LkCancelRegularSchedule", "1");
+        .FinishingYesterdayFirstTrialLesson(
+            time,
+            scheduleService,
+            period,
+            "FinishedSchedule",
+            "14",
+            "LkCancelRegularSchedule",
+            "1");
 
-    //студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на следующее занятие
-    app.trStudent().StudentAddDefoltFamily_FinishTrailLesson(studentService, "LkCancelRegularSchedule",
-            "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
+    // студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на
+    // следующее занятие
+    app.trStudent()
+        .StudentAddDefoltFamily_FinishTrailLesson(
+            studentService,
+            "LkCancelRegularSchedule",
+            "expert",
+            "BL",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru");
 
-    //постоянное занятие, на которое записан ученик
+    // постоянное занятие, на которое записан ученик
     app.trSchedule()
-            .RegularScheduleTomorrowWithStudent_ScratchRuLesson(time, scheduleService, period, "LkCancelRegularSchedule",
-                    "14", "LkCancelRegularSchedule", "1", "ru");
-    }
+        .RegularScheduleTomorrowWithStudent_ScratchRuLesson(
+            time,
+            scheduleService,
+            period,
+            "LkCancelRegularSchedule",
+            "14",
+            "LkCancelRegularSchedule",
+            "1",
+            "ru");
+  }
 
   @Test()
   public void testCancelOneLessonFromRegular() {
@@ -76,9 +98,18 @@ public class CancelOneLessonFromRegular extends TestBase {
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    //регулярное расписание на завтра с учеником, первое занятие отменено
-    ScheduleData scheduleAdd = app.trSchedule().RegularScheduleTomorrowWithStudentOnFirstLesson(time, scheduleService, period, "LkCancelRegularSchedule",
-            "14", "LkCancelRegularSchedule", "1", "ru");
+    // регулярное расписание на завтра с учеником, первое занятие отменено
+    ScheduleData scheduleAdd =
+        app.trSchedule()
+            .RegularScheduleTomorrowWithStudentOnFirstLesson(
+                time,
+                scheduleService,
+                period,
+                "LkCancelRegularSchedule",
+                "14",
+                "LkCancelRegularSchedule",
+                "1",
+                "ru");
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelRegularSchedule")) {
@@ -87,5 +118,4 @@ public class CancelOneLessonFromRegular extends TestBase {
       }
     }
   }
-
 }

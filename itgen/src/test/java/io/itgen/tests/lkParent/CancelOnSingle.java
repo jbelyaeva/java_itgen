@@ -1,5 +1,5 @@
 package io.itgen.tests.lkParent;
-//отмена разового занятия
+// отмена разового занятия
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.ScheduleData;
@@ -25,26 +25,48 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CancelOnSingle extends TestBase {
   String period = "18:00 - 20:00";
 
+  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
+  // 18.00 и который записан на разовое расписание на завтра в 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-    // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в 18.00 и который
-    // записан на разовое расписание на завтра в 18.00
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     StudentService studentService = new StudentService();
-    //первое пробное занятие, которое завершил ученик с Был
+    // первое пробное занятие, которое завершил ученик с Был
     app.trSchedule()
-            .FinishingYesterdayFirstTrialLesson(time, scheduleService, period, "FinishedSchedule", "14",
-                    "LkCancelLessonInSingleSchedule", "1");
+        .FinishingYesterdayFirstTrialLesson(
+            time,
+            scheduleService,
+            period,
+            "FinishedSchedule",
+            "14",
+            "LkCancelLessonInSingleSchedule",
+            "1");
 
-    //студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на следующее занятие
-    app.trStudent().StudentAddDefoltFamily_FinishTrailLesson(studentService, "LkCancelLessonInSingleSchedule",
-            "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
+    // студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на
+    // следующее занятие
+    app.trStudent()
+        .StudentAddDefoltFamily_FinishTrailLesson(
+            studentService,
+            "LkCancelLessonInSingleSchedule",
+            "expert",
+            "BL",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru");
 
-    //занятие, на которое записан ученик
+    // занятие, на которое записан ученик
     app.trSchedule()
-            .SingleScheduleTomorrowWithStudent_ScratchRuLesson(time, scheduleService, period, "LkCancelLessonInSingleSchedule",
-                    "14", "LkCancelLessonInSingleSchedule", "1", "ru");
+        .SingleScheduleTomorrowWithStudent_ScratchRuLesson(
+            time,
+            scheduleService,
+            period,
+            "LkCancelLessonInSingleSchedule",
+            "14",
+            "LkCancelLessonInSingleSchedule",
+            "1",
+            "ru");
   }
 
   @Test()
@@ -80,8 +102,10 @@ public class CancelOnSingle extends TestBase {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
 
-    ScheduleData scheduleAdd = app.trSchedule().SingleScheduleTomorrowWithoutStudent(time, scheduleService, period, "LkCancelLessonInSingleSchedule",
-            "14");
+    ScheduleData scheduleAdd =
+        app.trSchedule()
+            .SingleScheduleTomorrowWithoutStudent(
+                time, scheduleService, period, "LkCancelLessonInSingleSchedule", "14");
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelLessonInSingleSchedule")) {
@@ -91,5 +115,4 @@ public class CancelOnSingle extends TestBase {
       }
     }
   }
-
 }

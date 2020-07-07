@@ -1,16 +1,14 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.TrainerData;
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.itgen.model.TrainerData;
-import io.itgen.model.WorkerData;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TrainerHelper extends HelperBase {
   public TrainerHelper(WebDriver wd) {
@@ -56,6 +54,7 @@ public class TrainerHelper extends HelperBase {
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
     enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
+
     // выпадающий список с чек-боксами
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     click(By.name("skill_1"));
@@ -68,33 +67,23 @@ public class TrainerHelper extends HelperBase {
     click(By.name("skill_5"));
     click(By.name("skill_6"));
     click(By.name("skill_7"));
-    //    click(By.name("skill_16"));
-    //    click(By.name("skill_8"));
-    //    click(By.name("skill_9"));
-    //    click(By.name("skill_10"));
-    //    click(By.name("skill_11"));
-    //    click(By.name("skill_12"));
-    //    click(By.name("skill_13"));
-    //    click(By.name("skill_14"));
-    //    click(By.name("skill_18"));
-    //    click(By.name("skill_15"));
-    //    click(By.name("skill_22"));
-    //    click(By.name("skill_20"));
+
     // закрывает выпадающий список с чек-боксами
     Actions builder = new Actions(wd);
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     builder.click().perform();
-    //
+
     type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
     dropDownList(By.id("profile-locale"), trainerData.getLocate());
+
     // выбор языка обучения -- чек-боксы
     click(By.xpath("(//button[contains(@class,dropdown)])[2]"));
     click(By.xpath("//input[@data-id='ru']"));
     click(By.xpath("//input[@data-id='en']"));
-    //
+
     dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
     type(By.name("profile-contact-phone"), trainerData.getPhone());
     type(By.name("profile-contact-telegram"), trainerData.getTelegram());
@@ -108,10 +97,6 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-contact-instagram"), trainerData.getInst());
     type(By.name("profile-note"), trainerData.getNote());
     type(By.name("profile-info"), trainerData.getInfo());
-  }
-
-  public int getTrainerCount() {
-    return countingWithPaginated();
   }
 
   public String create(TrainerData trainer) {
@@ -163,8 +148,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   // из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из
-  // ссылки в атрибуте
-  // , а ФИ cо страницы ui
+  // ссылки в атрибуте, а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<TrainerData> trainers, List<WebElement> elements) {
     TrainerData trainer = null;
     for (WebElement element : elements) {
@@ -184,29 +168,6 @@ public class TrainerHelper extends HelperBase {
       }
       trainers.add(trainer);
     }
-  }
-
-  public void createFirstTrainer(WorkerData worker) {
-    addWorker();
-    fillWorkerForm(worker);
-    submitWorkerCreation();
-  }
-
-  public void addWorker() {
-    click(By.cssSelector("a.btn.btn-default"));
-  }
-
-  public void fillWorkerForm(WorkerData workerData) {
-    type(By.name("user-firstName"), workerData.getFirstName());
-    type(By.name("user-lastName"), workerData.getLastName());
-    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.name("user-phone"), workerData.getPhone());
-    dropDownList(By.name("role"), String.valueOf(workerData.getRoles()));
-  }
-
-  public void submitWorkerCreation() {
-    click(By.xpath("//button[@class='btn btn-primary btn-create']"));
-    noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
   public void delete(TrainerData deletedTrainer) {

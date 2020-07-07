@@ -33,6 +33,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
+
     // занятие, которое ученик закончил
     ScheduleData schedule =
         new ScheduleData()
@@ -67,6 +68,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
             .withSkypeId("1")
             .withOneTime(true);
     scheduleService.save(schedule);
+
     // занятие, на которое нужно записать ученика
     ScheduleData scheduleNew =
         new ScheduleData()
@@ -107,6 +109,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(scheduleNew);
+
     // студент, добавленный в дефолтную семью, которыфй прошел пробное успешно
     StudentService studentService = new StudentService();
     StudentData student =
@@ -134,6 +137,7 @@ public class SshotFiltrRecordOnRegular extends TestBase {
             .withFinishedLessonsCount(1)
             .withFinishedLessonsCountBySkill(new FinishedLessonsCountBySkill().withOne(1));
     studentService.save(student);
+
     // баланс +1, т.к. за 8 часов нельзя будет записаться через родителя
     PaymentService paymentService = new PaymentService();
     PaymentData payment =

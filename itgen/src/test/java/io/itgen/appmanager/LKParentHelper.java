@@ -35,8 +35,9 @@ public class LKParentHelper extends HelperBase {
 
   private void btnSignUp() {
     WebDriverWait wait = new WebDriverWait(wd, 3);
-    wait.until(ExpectedConditions
-        .visibilityOfElementLocated(By.xpath("//button[contains(@id-qa,'signup')]")));
+    wait.until(
+        ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//button[contains(@id-qa,'signup')]")));
     click(By.xpath("//button[contains(@id-qa,'signup')]"));
     noErrorMessage();
   }
@@ -94,7 +95,8 @@ public class LKParentHelper extends HelperBase {
     wait.until(this.expectVisible(lang));
     click(By.xpath(lang));
 
-    //pclevel может быть пустым, т.к. тест параметризован, в тестовых данных встречается вариант с pclaval=""
+    // pclevel может быть пустым, т.к. тест параметризован, в тестовых данных встречается вариант с
+    // pclaval=""
     if (!studentData.getPclevel().equals("")) {
       click(By.xpath("//input[@id-qa='pcLevel']/.."));
       String pcLevel = "//li[@data-value='" + studentData.getPclevel() + "']";
@@ -161,10 +163,12 @@ public class LKParentHelper extends HelperBase {
   private void changeWeeksPaginator() {
     for (int i = 1; i < 8; i++) {
       if (isElementPresent(By.xpath("//div[contains(@class,'picker-item')][" + i + "]"))) {
-        WebElement elementDayWeeks = wd.findElement(
-            By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[1]"));
-        WebElement elementData = wd.findElement(
-            By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[2]"));
+        WebElement elementDayWeeks =
+            wd.findElement(
+                By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[1]"));
+        WebElement elementData =
+            wd.findElement(
+                By.xpath("//div[contains(@class,'picker-item')][" + i + "]//div//span[2]"));
         ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementDayWeeks);
         ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementData);
       }
@@ -203,7 +207,8 @@ public class LKParentHelper extends HelperBase {
   private void changeScrollTime() {
     type(By.xpath("//div[@class='times-filter']//input[2]"), "24:00");
     click(
-        By.xpath("//div[@class='times-filter']")); //щелкнуть на пустое место, чтоб обновился скролл
+        By.xpath(
+            "//div[@class='times-filter']")); // щелкнуть на пустое место, чтоб обновился скролл
     noErrorMessage();
   }
 
@@ -213,17 +218,21 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnShowSchedule() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-        .until(
-            ExpectedConditions.elementToBeClickable(By.xpath("//button[@id-qa='show-schedule']")));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[@id-qa='show-schedule']")));
     dynamicElement.click();
     noErrorMessage();
   }
 
   public void btnSetPassword() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-        .until(ExpectedConditions
-            .elementToBeClickable(By.xpath("//div[@class='instructions']//button]")));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//div[@class='instructions']//button]")));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
@@ -282,10 +291,9 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void clickCheckBoxAll() {
-    click(By.xpath("(//label)[1]"));
-    click(By.xpath("(//label)[2]"));
-    click(By.xpath("(//label)[3]"));
-    click(By.xpath("(//label)[4]"));
+    for (int i = 1; i < 5; i++) {
+      click(By.xpath("(//label)[" + i + "]"));
+    }
   }
 
   private void btnDropdown() {
@@ -296,6 +304,4 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//button[@id-qa='cancel']"));
     noErrorMessage();
   }
-
-
 }
