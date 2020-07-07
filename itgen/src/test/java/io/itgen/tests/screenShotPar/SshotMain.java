@@ -1,8 +1,7 @@
 package io.itgen.tests.screenShotPar;
 /* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,
-   сравнивает его с эталонным.
- */
-
+  сравнивает его с эталонным.
+*/
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.model.FamilyData;
@@ -21,7 +20,7 @@ public class SshotMain extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    //контролируем состояние,что семье положен бонус 24ч и нельзя пополнить баланс
+    // контролируем состояние,что семье положен бонус 24ч и нельзя пополнить баланс
     FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("111").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
@@ -29,18 +28,20 @@ public class SshotMain extends TestBase {
 
   @Test
   public void testSshotMain() throws AWTException, IOException {
-    //упадет, если заускать через shift все тесты в подпапке.
+    // упадет, если заускать через shift все тесты в подпапке.
     String name = "Parent_Main_RU_Chrome";
-    String[] locatorIgnor = {
-            "//div[contains(@id,'MeteorToys')]"
-    };
+    String[] locatorIgnor = {"//div[contains(@id,'MeteorToys')]"};
 
-    ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
-            , ApplicationManager.properties.getProperty("actual")
-            , ApplicationManager.properties.getProperty("markedImages")
-            , name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                ApplicationManager.properties.getProperty("expected"),
+                ApplicationManager.properties.getProperty("actual"),
+                ApplicationManager.properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
 
-    if (diff.getDiffSize() > 100) { //погрешность
+    if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }

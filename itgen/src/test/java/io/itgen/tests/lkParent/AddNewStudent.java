@@ -85,11 +85,9 @@ public class AddNewStudent extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     if (studentClean == null) return;
-      TaskService taskService = new TaskService();
-      taskService.findByIdAndDelete(studentClean);
-      StudentService studentService = new StudentService();
-      studentService.findByIdAndDelete(studentClean);
+    TaskService taskService = new TaskService();
+    taskService.findByIdAndDelete(studentClean);
+    StudentService studentService = new StudentService();
+    studentService.findByIdAndDelete(studentClean);
   }
-
-
 }

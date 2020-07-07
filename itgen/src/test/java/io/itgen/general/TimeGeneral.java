@@ -17,26 +17,17 @@ public class TimeGeneral {
   // установка времени на начало дня по UTC
   private long getMsLocalTime() {
     LocalDate date = LocalDate.now();
-    return date
-            .atStartOfDay()
-            .toInstant(OffsetDateTime.now().getOffset())
-            .toEpochMilli();
+    return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }
 
   private long getMsLocalTimeYesterday() {
     LocalDate date = LocalDate.now().minusDays(1);
-    return date
-            .atStartOfDay()
-            .toInstant(OffsetDateTime.now().getOffset())
-            .toEpochMilli();
+    return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }
 
   private long getMsLocalTimeTomorrow() {
     LocalDate date = LocalDate.now().plusDays(1);
-    return date
-            .atStartOfDay()
-            .toInstant(OffsetDateTime.now().getOffset())
-            .toEpochMilli();
+    return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }
 
   public long diffTz() {
@@ -118,6 +109,4 @@ public class TimeGeneral {
     }
     return finishValue;
   }
-
-
 }

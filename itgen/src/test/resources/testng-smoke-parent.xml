@@ -1,15 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="SmokeParent" verbose="1">
-    <test name="SmokeParent">
-        <classes>
-            <class name="io.itgen.tests.lkParent.AddNewStudent"/>
-            <class name="io.itgen.tests.lkParent.RecordOnTrail"/>
-            <class name="io.itgen.tests.lkParent.RecordOnRegular"/>
-            <class name="io.itgen.tests.lkParent.RecordOnSingle"/>
-            <class name="io.itgen.tests.lkParent.CancelOnSingle"/>
-            <class name="io.itgen.tests.lkParent.CancelOnRegular"/>
-            <class name="io.itgen.tests.lkParent.CancelOneLessonFromRegular"/>
-        </classes>
-    </test>
+  <test name="SmokeParent">
+    <classes>
+      <class name="io.itgen.tests.lkParent.AddNewStudent"/>
+      <class name="io.itgen.tests.lkParent.RecordOnTrail"/>
+      <class name="io.itgen.tests.lkParent.RecordOnRegular"/>
+      <class name="io.itgen.tests.lkParent.RecordOnSingle"/>
+      <class name="io.itgen.tests.lkParent.CancelOnSingle"/>
+      <class name="io.itgen.tests.lkParent.CancelOnRegular"/>
+      <class name="io.itgen.tests.lkParent.CancelOneLessonFromRegular"/>
+    </classes>
+  </test>
 </suite>

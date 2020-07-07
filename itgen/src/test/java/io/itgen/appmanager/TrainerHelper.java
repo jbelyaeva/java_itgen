@@ -18,8 +18,11 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void btnDeleteTrainer() {
-    WebElement dynamicElementTrainer = (new WebDriverWait(wd, 5))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'remove-user')]")));
+    WebElement dynamicElementTrainer =
+        (new WebDriverWait(wd, 5))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[contains(@class,'remove-user')]")));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElementTrainer).build().perform();
     dynamicElementTrainer.click();
@@ -31,10 +34,12 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
-
   public void bntModifyTrainer() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(@class,'pencil')]")));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//span[contains(@class,'pencil')]")));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
@@ -63,18 +68,18 @@ public class TrainerHelper extends HelperBase {
     click(By.name("skill_5"));
     click(By.name("skill_6"));
     click(By.name("skill_7"));
-//    click(By.name("skill_16"));
-//    click(By.name("skill_8"));
-//    click(By.name("skill_9"));
-//    click(By.name("skill_10"));
-//    click(By.name("skill_11"));
-//    click(By.name("skill_12"));
-//    click(By.name("skill_13"));
-//    click(By.name("skill_14"));
-//    click(By.name("skill_18"));
-//    click(By.name("skill_15"));
-//    click(By.name("skill_22"));
-//    click(By.name("skill_20"));
+    //    click(By.name("skill_16"));
+    //    click(By.name("skill_8"));
+    //    click(By.name("skill_9"));
+    //    click(By.name("skill_10"));
+    //    click(By.name("skill_11"));
+    //    click(By.name("skill_12"));
+    //    click(By.name("skill_13"));
+    //    click(By.name("skill_14"));
+    //    click(By.name("skill_18"));
+    //    click(By.name("skill_15"));
+    //    click(By.name("skill_22"));
+    //    click(By.name("skill_20"));
     // закрывает выпадающий список с чек-боксами
     Actions builder = new Actions(wd);
     wd.findElement(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
@@ -134,12 +139,15 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
-  //работник с пагинацией
+  // работник с пагинацией
   public List<TrainerData> list() {
     List<TrainerData> trainers = new ArrayList<TrainerData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    wait.until(
+        ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//ul[@class='pagination']//li[2]"))); // ждать пока не появится элемент
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
@@ -154,18 +162,23 @@ public class TrainerHelper extends HelperBase {
     return trainers;
   }
 
-  //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
-  //, а ФИ cо страницы ui
+  // из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из
+  // ссылки в атрибуте
+  // , а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<TrainerData> trainers, List<WebElement> elements) {
     TrainerData trainer = null;
     for (WebElement element : elements) {
       String getId = element.getAttribute("href");
       String[] getIdSplit = getId.split("/");
-      String id = getIdSplit[4]; //достали id
+      String id = getIdSplit[4]; // достали id
       String name = element.getText();
-      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
+      String[] name_surname = name.split("\\s"); // разрезали Имя Фамилия
       if (name_surname.length == 2) {
-        trainer = new TrainerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+        trainer =
+            new TrainerData()
+                .withId(id)
+                .withFirstName(name_surname[1])
+                .withLastName(name_surname[0]);
       } else {
         trainer = new TrainerData().withId(id).withFirstName(name_surname[0]).withLastName(null);
       }
@@ -212,20 +225,26 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void selectTrainerById(TrainerData deletedTrainer) {
-    //находим пагинатор
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//ul[@class='pagination']//li[2]")));
+    // находим пагинатор
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//ul[@class='pagination']//li[2]")));
     String next = dynamicElement.getAttribute("class");
-     //есть ли на первой странице наш работник
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
+    // есть ли на первой странице наш работник
+    List<WebElement> list =
+        wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
     if (list.size() > 0) {
-        wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
+      wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
     } else {
-      //если работник не на первой странице, надо нажать пагинатор, пока не найдем
+      // если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
+        List<WebElement> list_pagin =
+            wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
         if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
+          wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"))
+              .click();
           break;
         } else {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();

@@ -1,18 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1">
-    <test name="ScreenShotsPar">
-        <classes>
-            <class name="io.itgen.tests.screenShotPar.SshotMain"/>
-            <class name="io.itgen.tests.screenShotPar.SshotCourseSelectionForTrial"/>
-            <class name="io.itgen.tests.screenShotPar.SshotEntryOnTrial"/>
-            <class name="io.itgen.tests.screenShotPar.SshotSignUpOnTrial"/>
-            <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormFirst"/>
-            <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormSecond"/>
-            <class name="io.itgen.tests.screenShotPar.SshotConfirmRecordOnRegular"/>
-            <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnRegular"/>
-            <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnSingle"/>
-        </classes>
-    </test>
+  <test name="ScreenShotsPar">
+    <classes>
+      <class name="io.itgen.tests.screenShotPar.SshotMain"/>
+      <class name="io.itgen.tests.screenShotPar.SshotCourseSelectionForTrial"/>
+      <class name="io.itgen.tests.screenShotPar.SshotEntryOnTrial"/>
+      <class name="io.itgen.tests.screenShotPar.SshotSignUpOnTrial"/>
+      <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormFirst"/>
+      <class name="io.itgen.tests.screenShotPar.SshotAddNewStudentFormSecond"/>
+      <class name="io.itgen.tests.screenShotPar.SshotConfirmRecordOnRegular"/>
+      <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnRegular"/>
+      <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnSingle"/>
+    </classes>
+  </test>
 </suite>
 

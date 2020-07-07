@@ -26,43 +26,48 @@ public class SShotHelper extends HelperBase {
     super(wd);
   }
 
-  public ImageDiff getImageDiff(String expected, String actual, String markedImages, String name, String[] locatorIgnor) throws AWTException, IOException {
+  public ImageDiff getImageDiff(
+      String expected, String actual, String markedImages, String name, String[] locatorIgnor)
+      throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
-    //получаем
+    // получаем
     if (locatorIgnor != null) {
       for (int i = 0; i <= locatorIgnor.length - 1; i++) {
         List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor[i]));
         for (WebElement element : elementsList) {
-          ((JavascriptExecutor) wd)
-                  .executeScript("arguments[0].remove();", element);
+          ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", element);
         }
       }
     }
 
-    Screenshot actualScreenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
+    Screenshot actualScreenshot =
+        new AShot()
+            .shootingStrategy(
+                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
             .takeScreenshot(wd);
-    //взять скриншот после появления элемента с локатором
-    //сохраняем
+    // взять скриншот после появления элемента с локатором
+    // сохраняем
     etalon(expected, name, actualScreenshot);
 
     File actualFile = new File(actual + name + ".png");
     ImageIO.write(actualScreenshot.getImage(), "png", actualFile);
 
-    //берем эталонный снимок
-    Screenshot expectedScreenshot = new Screenshot(ImageIO.read(new File(expected + name + ".png")));
+    // берем эталонный снимок
+    Screenshot expectedScreenshot =
+        new Screenshot(ImageIO.read(new File(expected + name + ".png")));
 
-    //сравниваем
+    // сравниваем
     ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
 
-    //результат
+    // результат
     if (diff.getDiffSize() != 0) {
       File diffFile = new File(markedImages + name + ".png");
       ImageIO.write(diff.getMarkedImage(), "png", diffFile);
       getScreenShot(name);
     }
     return diff;
-   }
+  }
 
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
@@ -71,25 +76,29 @@ public class SShotHelper extends HelperBase {
     return file;
   }
 
-  //открепляем топ-бар
+  // открепляем топ-бар
   public void changeTopBar() {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
   }
 
   public void changeTableInWindowSchedule() {
-    //приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически, скриншоты падают
+    // приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически,
+    // скриншоты падают
     By locatorHeading = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
-    By locatorGroupList = By.xpath("(//div[@class='create-child-schedule-group-list cell-info'])[1]");
+    By locatorGroupList =
+        By.xpath("(//div[@class='create-child-schedule-group-list cell-info'])[1]");
     for (int i = 1; i < 8; i++) {
       if (isElementPresent(locatorHeading)) {
         WebElement elementHeading = wd.findElement(locatorHeading);
         WebElement elementGroupList = wd.findElement(locatorGroupList);
         ((JavascriptExecutor) wd)
-                .executeScript("arguments[0].setAttribute('class', 'cell-heading cell-default')", elementHeading);
+            .executeScript(
+                "arguments[0].setAttribute('class', 'cell-heading cell-default')", elementHeading);
         ((JavascriptExecutor) wd)
-                .executeScript("arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')", elementGroupList);
-
+            .executeScript(
+                "arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')",
+                elementGroupList);
       }
     }
   }
- }
+}

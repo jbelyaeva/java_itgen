@@ -32,38 +32,55 @@ public class SshotRequests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     RequestService requestService = new RequestService();
-    RequestData request = new RequestData()
+    RequestData request =
+        new RequestData()
             .withId("sshotRequests")
-            .withCreator("666") //суперадмин создал заявку (может быть привязаться к тому, кто залогинен)
+            .withCreator(
+                "666") // суперадмин создал заявку (может быть привязаться к тому, кто залогинен)
             .withCreatorAt(new Date())
             .withStatus("open")
             .withChildId("sshotRequests")
             .withComment(listcomment)
-            .withActivity(Arrays.asList(new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))
             .withSkill("1")
             .withDuration(2)
             .withPermanent(false)
             .withTrial(false)
-            .withTimes(Arrays.asList(new Times().withMin(1592110800000.0).withMax(1592157600000.0),
-                                     new Times().withMin(1592197200000.0).withMax(1592244000000.0),
-                                     new Times().withMin(1592283600000.0).withMax(1592330400000.0)));
-   requestService.save(request);
+            .withTimes(
+                Arrays.asList(
+                    new Times().withMin(1592110800000.0).withMax(1592157600000.0),
+                    new Times().withMin(1592197200000.0).withMax(1592244000000.0),
+                    new Times().withMin(1592283600000.0).withMax(1592330400000.0)));
+    requestService.save(request);
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("sshotRequests").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("sshotRequests").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("sshotRequests").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("sshotRequests")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("sshotRequests").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("sshotRequests")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
   @Test
@@ -74,10 +91,14 @@ public class SshotRequests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuRequests();
 
-   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
-            , properties.getProperty("actual")
-            , properties.getProperty("markedImages")
-            , name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                properties.getProperty("expected"),
+                properties.getProperty("actual"),
+                properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
@@ -99,4 +120,3 @@ public class SshotRequests extends TestBase {
     }
   }
 }
-

@@ -36,46 +36,58 @@ public class SshotWindowSchedule extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    //Начальные данные: есть ученик и расписание, на которое надо записать этого ученика
+    // Начальные данные: есть ученик и расписание, на которое надо записать этого ученика
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    schedule = new ScheduleData()
+    schedule =
+        new ScheduleData()
             .withId("sshotWindowSchedule")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("sshotWindowSchedule").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("sshotWindowSchedule").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("sshotWindowSchedule").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("sshotWindowSchedule")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("sshotWindowSchedule").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("sshotWindowSchedule")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
-
 
   @Test
   public void testSshotWindowSchedule() throws AWTException, IOException {
     String name = "Admin_WindowSchedule_RU_Chrome";
-    String[] locatorIgnor = {
-            "//span[contains(@class,'capitalize')]"
-    };
+    String[] locatorIgnor = {"//span[contains(@class,'capitalize')]"};
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
@@ -83,11 +95,15 @@ public class SshotWindowSchedule extends TestBase {
     app.sshot().changeTopBar();
     app.sshot().changeTableInWindowSchedule();
 
-   ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
-            , properties.getProperty("actual")
-            , properties.getProperty("markedImages")
-            , name, locatorIgnor);
-    if (diff.getDiffSize() > 250) { //погрешность
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                properties.getProperty("expected"),
+                properties.getProperty("actual"),
+                properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
+    if (diff.getDiffSize() > 250) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }
@@ -110,4 +126,3 @@ public class SshotWindowSchedule extends TestBase {
     }
   }
 }
-
