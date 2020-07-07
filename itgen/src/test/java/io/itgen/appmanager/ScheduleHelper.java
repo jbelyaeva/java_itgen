@@ -108,7 +108,6 @@ public class ScheduleHelper extends HelperBase {
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     click(By.xpath(" //button[@id='dropdownMenuActions']"));
-    //  click(By.xpath("//button[@id='dropdownMenuActions']"));
   }
 
   public void createSingleSchedule() {
@@ -121,17 +120,6 @@ public class ScheduleHelper extends HelperBase {
     selectSchedule();
     noErrorMessage();
     refresh();
-  }
-
-  private void selectData() {
-    click(By.xpath("//div[@class='DayPickerInput']"));
-    // click(By.xpath("//input[@value='05.06.2020']"));
-    click(By.xpath("//input[@value='19.06.2020']"));
-    click(
-        By.xpath(
-            "//div[@id='__blaze-root']/div/div[2]/main/div/div/div[2]/div/div/div/div/div/div/div/div/div[2]/div/div[3]/div[4]/div[4]"));
-
-    selectTime();
   }
 
   public void createRegularSchedule() {
@@ -167,14 +155,6 @@ public class ScheduleHelper extends HelperBase {
       }
     }
     return getIdAfter;
-  }
-
-  public void showElement() {
-    WebElement dynamicElement1 =
-        (new WebDriverWait(wd, 40))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class,'create')]")));
   }
 
   public void move(String period, String id) {
@@ -290,7 +270,6 @@ public class ScheduleHelper extends HelperBase {
     selectNewTrainer();
     btnAssign();
     noErrorMessage();
-    // refresh();
   }
 
   private void btnMove() {
@@ -373,6 +352,7 @@ public class ScheduleHelper extends HelperBase {
                 ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//span[contains(@class,'picker')]")));
     dynamicElement.click();
+
     // решение на периодическое не открытие календаря
     if (isElementPresent(By.xpath("//td[contains(@class,'active')]"))) {
       click(By.xpath(" //td[contains(@class,'active')]"));
@@ -380,27 +360,26 @@ public class ScheduleHelper extends HelperBase {
       dynamicElement.click();
       click(By.xpath(" //td[contains(@class,'active')]"));
     }
+
     // выбор времени (крайнее на сегодня)
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select1 = new Select(Selectbox_times);
     select1.selectByVisibleText(period);
+
     // выбор тренера
     WebElement dynamicElementTrainer =
         (new WebDriverWait(wd, 5)).until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
     dynamicElementTrainer.click();
     click(By.xpath("//select[@id='trainer']//option[@value='7']"));
+
     // выбор скайпа
     click(By.xpath("//div[contains(@class,'modal-body')]"));
   }
 
   private void fillBadTime() {
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
-    Select select1 = new Select(Selectbox_times);
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 5))
-            .until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//select[contains(@id,'tp')]")));
-    select1.selectByVisibleText("00:00 - 02:00");
+    Select select = new Select(Selectbox_times);
+    select.selectByVisibleText("00:00 - 02:00");
   }
 
   public void recordStudentOn2h(String name, String id) {

@@ -31,7 +31,7 @@ public class SShotHelper extends HelperBase {
       throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
-    // получаем
+
     if (locatorIgnor != null) {
       for (int i = 0; i <= locatorIgnor.length - 1; i++) {
         List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor[i]));
@@ -81,9 +81,9 @@ public class SShotHelper extends HelperBase {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
   }
 
+  // приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически,
+  // скриншоты падают
   public void changeTableInWindowSchedule() {
-    // приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически,
-    // скриншоты падают
     By locatorHeading = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
     By locatorGroupList =
         By.xpath("(//div[@class='create-child-schedule-group-list cell-info'])[1]");

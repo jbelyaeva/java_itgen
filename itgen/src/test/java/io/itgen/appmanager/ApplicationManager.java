@@ -28,7 +28,6 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
- // private final Properties properties;
   public static Properties properties;
   public WebDriver wd;
   private TrainerHelper trainerHelper;
@@ -53,14 +52,15 @@ public class ApplicationManager {
   private TranzactionScheduleHelper tranzactionScheduleHelper;
   private TranzactionStudentHelper tranzactionStudentHelper;
 
-   public ApplicationManager(String browser) {
+  public ApplicationManager(String browser) {
     this.browser = browser;
     properties = new Properties();
-   }
+  }
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    properties.load(
+        new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     dbHelper = new DbHelper();
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
@@ -78,10 +78,10 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-        capabilities.setVersion("83");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
-        capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows")));
+      capabilities.setVersion("83");
+      capabilities.setCapability("enableVNC", true);
+      capabilities.setCapability("enableVideo", false);
+      capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows")));
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }
     wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -100,17 +100,17 @@ public class ApplicationManager {
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
-    sessionHelper.login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
-    //проверить, есть ли папки для скриншотов, если нет - создать
+    sessionHelper.login(
+        properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+    // проверить, есть ли папки для скриншотов, если нет - создать
     Path[] requiredDirs = {
-            Paths.get(properties.getProperty("actual")),
-            Paths.get(properties.getProperty("markedImages"))
+      Paths.get(properties.getProperty("actual")), Paths.get(properties.getProperty("markedImages"))
     };
     for (Path dir : requiredDirs) {
       if (Files.exists(dir)) continue;
       Files.createDirectory(dir);
     }
-   }
+  }
 
   public void stop() {
     wd.quit();
@@ -195,5 +195,4 @@ public class ApplicationManager {
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
-
 }
