@@ -19,7 +19,7 @@ public class SshotFamily extends TestBase {
 
  @Test
   public void testSshotFamilies() throws AWTException, IOException {
-   String name = "Admin_Family_RU_Chrome";
+    String name = "Admin_Family_RU_Chrome";
     String[] locatorIgnor = new String[1];
     locatorIgnor[0]="//span[@class='user-time']";
     app.goTo().menuStudents();

@@ -233,4 +233,62 @@ public class LKParentHelper extends HelperBase {
     btnRecordOnLesson();
     changeStyleDayOfTheWeek();
   }
+
+  public void cancelLessonInSingleSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBox();
+    btnDropdown();
+    btnCancel();
+  }
+
+  public void cancelLessonsInRegularSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBoxAll();
+    btnDropdown();
+    btnCancel();
+  }
+
+  public void cancelOneLessonInRegularSchedule() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBoxOneLessonInRegular();
+    btnDropdown();
+    btnCancel();
+  }
+
+  private void clickCheckBoxOneLessonInRegular() {
+    click(By.xpath("(//label)[1]"));
+  }
+
+  private void btnCancel() {
+    click(By.xpath("//div[contains(@class,'buttons-group')]"));
+    noErrorMessage();
+  }
+
+  private void clickCheckBox() {
+    click(By.xpath("//label"));
+  }
+
+  private void clickCheckBoxAll() {
+    click(By.xpath("(//label)[1]"));
+    click(By.xpath("(//label)[2]"));
+    click(By.xpath("(//label)[3]"));
+    click(By.xpath("(//label)[4]"));
+  }
+
+  private void btnDropdown() {
+    click(By.xpath("//button[@data-toggle='dropdown']"));
+  }
+
+  private void btnCancelSchedule() {
+    click(By.xpath("//button[@id-qa='cancel']"));
+    noErrorMessage();
+  }
+
+
 }
