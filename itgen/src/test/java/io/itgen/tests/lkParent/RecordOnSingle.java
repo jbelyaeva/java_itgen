@@ -36,6 +36,7 @@ public class RecordOnSingle extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
+
     //занятие, которое ученик закончил
     ScheduleData schedule = new ScheduleData()
             .withId("FinishedSchedule")
@@ -59,6 +60,7 @@ public class RecordOnSingle extends TestBase {
             .withTimes(new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
             .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
+
     //занятие, на которое нужно записать ученика
     ScheduleData scheduleNew = new ScheduleData()
             .withId("LkRecordOnSingleSchedule")
@@ -72,6 +74,7 @@ public class RecordOnSingle extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(scheduleNew);
+
     //студент, добавленный в дефолтную семью, которыфй прошел пробное успешно
     StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("LkRecordOnSingleSchedule").withFirstName("Маша").withLastName("Машина")
@@ -87,6 +90,7 @@ public class RecordOnSingle extends TestBase {
             .withFinishedLessonsCount(1)
             .withFinishedLessonsCountBySkill(new FinishedLessonsCountBySkill().withOne(1));
     studentService.save(student);
+
     //баланс +1, т.к. за 8 часов нельзя будет записаться через родителя
     PaymentService paymentService = new PaymentService();
     PaymentData payment = new PaymentData().withId("LkRecordOnSingleSchedule")
@@ -102,7 +106,6 @@ public class RecordOnSingle extends TestBase {
     app.lkParent().recordOnSingle();
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка на то, что новая запись записалась в бд верно, и остальные записи не испортились
     check(before, after);
     app.lkParent().btnLogo();
   }
