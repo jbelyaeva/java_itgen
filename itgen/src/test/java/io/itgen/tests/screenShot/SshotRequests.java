@@ -11,6 +11,9 @@ import io.itgen.services.RequestService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -86,7 +89,7 @@ public class SshotRequests extends TestBase {
   @Test
   public void testSshotRequests() throws AWTException, IOException {
     String name = "Admin_Requests_RU_Chrome";
-    String[] locatorIgnor = null;
+    Set<By> locatorIgnor = new HashSet<>();
 
     app.goTo().menuTasks();
     app.goTo().menuRequests();

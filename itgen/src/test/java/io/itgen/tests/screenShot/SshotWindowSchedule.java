@@ -13,6 +13,9 @@ import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -87,7 +90,8 @@ public class SshotWindowSchedule extends TestBase {
   @Test
   public void testSshotWindowSchedule() throws AWTException, IOException {
     String name = "Admin_WindowSchedule_RU_Chrome";
-    String[] locatorIgnor = {"//span[contains(@class,'capitalize')]"};
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//span[contains(@class,'capitalize')]"));
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();

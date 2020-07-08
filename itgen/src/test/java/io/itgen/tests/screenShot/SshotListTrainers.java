@@ -6,6 +6,9 @@ package io.itgen.tests.screenShot;
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
@@ -18,13 +21,11 @@ public class SshotListTrainers extends TestBase {
   @Test
   public void testSshotListTrainers() throws AWTException, IOException {
     String name = "Admin_ListTrainers_RU_Chrome";
-    String[] locatorIgnor = {
-            "//table//tr[9]//td[9]",
-            "//tbody//tr//td[5]",
-            "//tbody//tr//td[9]",
-            "//tbody//tr//td[3]"
-
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//table//tr[9]//td[9]"));
+    locatorIgnor.add(By.xpath("//tbody//tr//td[5]"));
+    locatorIgnor.add(By.xpath("//tbody//tr//td[9]"));
+    locatorIgnor.add(By.xpath("//tbody//tr//td[3]"));
 
     app.goTo().menuTasks();
     app.goTo().menuTrainers();

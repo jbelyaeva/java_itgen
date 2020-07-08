@@ -1,24 +1,28 @@
 package io.itgen.appmanager;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
+import static io.itgen.appmanager.ApplicationManager.properties;
+import static io.itgen.tests.TestBase.etalon;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Set;
+import javax.imageio.ImageIO;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.coordinates.Coords;
+import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-
-import static io.itgen.appmanager.ApplicationManager.properties;
-import static io.itgen.tests.TestBase.etalon;
 
 public class SShotHelper extends HelperBase {
 
@@ -27,27 +31,21 @@ public class SShotHelper extends HelperBase {
   }
 
   public ImageDiff getImageDiff(
-      String expected, String actual, String markedImages, String name, String[] locatorIgnor)
+      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor)
       throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
 
-    if (locatorIgnor != null) {
-      for (int i = 0; i <= locatorIgnor.length - 1; i++) {
-        List<WebElement> elementsList = wd.findElements(By.xpath(locatorIgnor[i]));
-        for (WebElement element : elementsList) {
-          ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", element);
-        }
-      }
-    }
-
     Screenshot actualScreenshot =
         new AShot()
+            .coordsProvider(new WebDriverCoordsProvider())
+            .ignoredElements(locatorIgnor)
             .shootingStrategy(
                 ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 100))
             .takeScreenshot(wd);
+    Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();
+
     // взять скриншот после появления элемента с локатором
-    // сохраняем
     etalon(expected, name, actualScreenshot);
 
     File actualFile = new File(actual + name + ".png");
@@ -56,6 +54,7 @@ public class SShotHelper extends HelperBase {
     // берем эталонный снимок
     Screenshot expectedScreenshot =
         new Screenshot(ImageIO.read(new File(expected + name + ".png")));
+    expectedScreenshot.setIgnoredAreas(ignoredCoords);
 
     // сравниваем
     ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);

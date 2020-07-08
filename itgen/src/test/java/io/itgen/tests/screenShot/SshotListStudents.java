@@ -6,6 +6,9 @@ package io.itgen.tests.screenShot;
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
@@ -18,7 +21,7 @@ public class SshotListStudents extends TestBase {
   @Test
   public void testSshotListStudents() throws AWTException, IOException {
     String name = "Admin_ListStudents_RU_Chrome";
-    String[] locatorIgnor = null;
+    Set<By> locatorIgnor = new HashSet<>();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
 

@@ -1,9 +1,11 @@
 package io.itgen.tests.screenShot;
 /**
- * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание, делает снимок,
- * сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
- * со свойством -Detalon=true.
+ * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание,
+ * делает снимок, сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка
+ * запускаем конфигурацию запуска со свойством -Detalon=true.
  */
+
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.ScheduleData;
@@ -13,18 +15,18 @@ import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
 import io.itgen.services.ScheduleService;
 import io.itgen.tests.TestBase;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotMainSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
@@ -34,35 +36,39 @@ public class SshotMainSchedule extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("scheduleSingleBlock")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
-
   }
-
 
   @Test
   public void testSshotMainSchedule() throws AWTException, IOException {
     String name = "Admin_MainSchedule_RU_Chrome";
-    String[] locatorIgnor = {
-            "//h4"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//h4"));
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
-    ImageDiff diff = app.sshot().getImageDiff(properties.getProperty("expected")
-            , properties.getProperty("actual")
-            , properties.getProperty("markedImages")
-            , name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                properties.getProperty("expected"),
+                properties.getProperty("actual"),
+                properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
@@ -72,4 +78,3 @@ public class SshotMainSchedule extends TestBase {
     scheduleService.findByIdAndDelete("scheduleSingleBlock");
   }
 }
-

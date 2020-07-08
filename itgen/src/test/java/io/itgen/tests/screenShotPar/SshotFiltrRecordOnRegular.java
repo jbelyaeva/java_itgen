@@ -3,12 +3,11 @@ package io.itgen.tests.screenShotPar;
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
-import io.itgen.model.schedule.*;
-import io.itgen.model.users.Contacts;
-import io.itgen.model.users.FinishedLessonsCountBySkill;
-import io.itgen.model.users.Status;
 import io.itgen.services.*;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,10 +16,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class SshotFiltrRecordOnRegular extends TestBase {
 
@@ -63,12 +58,10 @@ public class SshotFiltrRecordOnRegular extends TestBase {
     app.lkParent().GoToFiltrRecordRegular();
 
     String name = "Parent_FiltrRecordOnRegular_RU_Chrome";
-    String[] locatorIgnor = {
-      "//p[@class='user']",
-      "//span[@class='selected-icon']",
-      "//div[@class='DayPickerInput']//input",
-      "//div[contains(@id,'MeteorToys')]"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//p[@class='user']"));
+    locatorIgnor.add(By.xpath("//div[@class='DayPickerInput']//input"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     ImageDiff diff =
         app.sshot()
