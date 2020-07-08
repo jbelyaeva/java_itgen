@@ -138,7 +138,7 @@ public class LKParentHelper extends HelperBase {
 
   private void btnTomorrowForRegular() {
     // находим активный элемент и берем следующий сестринский вниз по дереву
-    String locator = "//div[@class='picker-item selected']//following-sibling::div";
+    String locator = "//div[@class='picker-item selected']/following-sibling::div";
     if (isElementPresent(By.xpath(locator))) {
       click(By.xpath(locator));
     } else {

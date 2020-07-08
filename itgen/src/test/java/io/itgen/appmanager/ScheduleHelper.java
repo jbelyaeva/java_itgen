@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -379,6 +380,9 @@ public class ScheduleHelper extends HelperBase {
   private void fillBadTime() {
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select = new Select(Selectbox_times);
+
+    WebDriverWait wait = new WebDriverWait(wd, 3);
+    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option")));
     select.selectByVisibleText("00:00 - 02:00");
   }
 
