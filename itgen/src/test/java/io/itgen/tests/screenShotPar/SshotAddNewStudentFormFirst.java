@@ -5,6 +5,9 @@ import com.google.gson.reflect.TypeToken;
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.model.StudentData;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -42,9 +45,7 @@ public class SshotAddNewStudentFormFirst extends TestBase {
     app.lkParent().createSShotFirstForm(student);
 
     String name = "Parent_AddNewStudentForm1_RU_Chrome";
-    String[] locatorIgnor = {
-            "//div[contains(@id,'MeteorToys')]"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")

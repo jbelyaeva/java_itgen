@@ -10,6 +10,9 @@ import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -57,13 +60,12 @@ public class SshotFiltrRecordOnSingle extends TestBase {
     app.lkParent().GoToFiltrRecordSingle();
 
     String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
-    String[] locatorIgnor = {
-      "//p[@class='user']",
-      "//div[@class='DayPickerInput']//input",
-      "//span[@class='selected-icon']",
-      "//span[@class='month']",
-      "//div[contains(@id,'MeteorToys')]"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//p[@class='user']"));
+    locatorIgnor.add(By.xpath("//div[@class='DayPickerInput']//input"));
+    locatorIgnor.add(By.xpath("//span[@class='month']"));
+    locatorIgnor.add(By.xpath("//div[contains(@class,'btn-group')]"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     ImageDiff diff =
         app.sshot()

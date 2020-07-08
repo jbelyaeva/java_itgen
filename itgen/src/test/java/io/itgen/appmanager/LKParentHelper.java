@@ -168,15 +168,16 @@ public class LKParentHelper extends HelperBase {
     btnSingleSchedule();
     btnTomorrowForSingle();
     changeScrollTime();
-    changeWeeksPaginator();
-    changeStyleDayOfTheWeek();
   }
 
   public void changeStyleDayOfTheWeek() {
-    By locator = By.xpath("//div[@class='picker-item selected']");
-    WebElement element = wd.findElement(locator);
+    By locatorPicker = By.xpath("//div[@class='picker-item selected']");
+    WebElement elementPicker = wd.findElement(locatorPicker);
     ((JavascriptExecutor) wd)
-        .executeScript("arguments[0].setAttribute('class', 'picker-item')", element);
+        .executeScript("arguments[0].setAttribute('class', 'picker-item')", elementPicker);
+    By locatorSelectedIcon = By.xpath("//span[@class='selected-icon']");
+    WebElement elementSelectedIcon = wd.findElement(locatorSelectedIcon);
+    ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementSelectedIcon);
   }
 
   private void changeWeeksPaginator() {

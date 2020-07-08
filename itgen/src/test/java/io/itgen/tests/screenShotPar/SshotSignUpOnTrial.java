@@ -2,17 +2,15 @@ package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.StudentData;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
-import io.itgen.model.schedule.*;
-import io.itgen.model.users.Contacts;
-import io.itgen.model.users.Status;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,10 +19,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class SshotSignUpOnTrial extends TestBase {
   String period = "18:00 - 20:00";
@@ -54,12 +48,11 @@ public class SshotSignUpOnTrial extends TestBase {
     app.lkParent().selectLesson();
 
     String name = "Parent_SignUpOnTrial_RU_Chrome";
-    String[] locatorIgnor = {
-            "//p[@class='user']",
-            "//span[@class='day-of-month']",
-            "//span[@class='month']",
-            "//div[contains(@id,'MeteorToys')]"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//p[@class='user']"));
+    locatorIgnor.add(By.xpath("//span[@class='day-of-month']"));
+    locatorIgnor.add(By.xpath("//span[@class='month']"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")

@@ -9,6 +9,9 @@ import io.itgen.model.LeadData;
 import io.itgen.model.users.Contacts;
 import io.itgen.services.LeadService;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -42,9 +45,10 @@ public class SshotListLeads extends TestBase {
   @Test
   public void testSshotListLeads() throws AWTException, IOException {
     String name = "Admin_ListLeads_RU_Chrome";
-    String[] locatorIgnor = {
-      "//span[@class='user-time']", "//span[@class='date']", "//span[@class='time']"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//span[@class='user-time']"));
+    locatorIgnor.add(By.xpath("//span[@class='date']"));
+    locatorIgnor.add(By.xpath("//span[@class='time']"));
 
     app.goTo().menuTasks();
     app.goTo().menuLeads();

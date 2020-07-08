@@ -1,36 +1,40 @@
 package io.itgen.tests.screenShot;
 /* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,
-   сравнивает его с эталонным.
- */
-
+  сравнивает его с эталонным.
+*/
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.tests.TestBase;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
-import java.awt.*;
-import java.io.IOException;
-
 public class SshotFamily extends TestBase {
 
- @Test
+  @Test
   public void testSshotFamilies() throws AWTException, IOException {
     String name = "Admin_Family_RU_Chrome";
-    String[] locatorIgnor = new String[1];
-    locatorIgnor[0]="//span[@class='user-time']";
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//span[@class='user-time']"));
+
     app.goTo().menuStudents();
     app.student().selectStudentInListUIById("19");
     app.family().btnFamily();
     app.sshot().changeTopBar();
 
-    ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
-            , ApplicationManager.properties.getProperty("actual")
-            , ApplicationManager.properties.getProperty("markedImages")
-            , name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                ApplicationManager.properties.getProperty("expected"),
+                ApplicationManager.properties.getProperty("actual"),
+                ApplicationManager.properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 }

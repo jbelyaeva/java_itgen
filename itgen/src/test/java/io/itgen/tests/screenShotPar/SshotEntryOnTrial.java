@@ -6,17 +6,15 @@ package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.StudentData;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
-import io.itgen.model.schedule.*;
-import io.itgen.model.users.Contacts;
-import io.itgen.model.users.Status;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.util.HashSet;
+import java.util.Set;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -25,10 +23,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class SshotEntryOnTrial extends TestBase {
   String period = "18:00 - 20:00";
@@ -56,11 +50,10 @@ public class SshotEntryOnTrial extends TestBase {
     app.lkParent().RecordOnTrail();
 
     String name = "Parent_EntryOnTrial_RU_Chrome";
-    String[] locatorIgnor = {
-            "//div[@class='lesson']//span[1]",
-            "//div[@class='day']",
-            "//div[contains(@id,'MeteorToys')]"
-    };
+    Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//div[@class='lesson']//span[1]"));
+    locatorIgnor.add(By.xpath("//div[@class='day']"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     app.sshot().changeTopBar();
 
