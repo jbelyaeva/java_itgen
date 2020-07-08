@@ -30,8 +30,8 @@ public class CancelOneLessonFromRegular extends TestBase {
     StudentService studentService = new StudentService();
 
     // первое пробное занятие, которое завершил ученик с Был
-    app.trSchedule()
-        .FinishingYesterdayFirstTrialLesson(
+    app.trScheduleYesterday()
+        .FinishingFirstTrialLesson(
             time,
             scheduleService,
             period,
@@ -43,7 +43,7 @@ public class CancelOneLessonFromRegular extends TestBase {
     // студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на
     // следующее занятие
     app.trStudent()
-        .StudentAddDefoltFamily_FinishTrailLesson(
+        .StudentAddDefaultFamily_FinishedTrailLesson_RecordSingle(
             studentService,
             "LkCancelRegularSchedule",
             "expert",
@@ -54,8 +54,8 @@ public class CancelOneLessonFromRegular extends TestBase {
             "ru");
 
     // постоянное занятие, на которое записан ученик
-    app.trSchedule()
-        .RegularScheduleTomorrowWithStudent_ScratchRuLesson(
+    app.trScheduleTomorrow()
+        .RegularScheduleWithOneStudent(
             time,
             scheduleService,
             period,
@@ -85,9 +85,6 @@ public class CancelOneLessonFromRegular extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LkCancelRegularSchedule");
 
-    PaymentService paymentService = new PaymentService();
-    paymentService.findByIdAndDelete("LkCancelRegularSchedule");
-
     Tasks tasks = app.dbschedules().tasksComposition("LkCancelRegularSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
@@ -98,19 +95,20 @@ public class CancelOneLessonFromRegular extends TestBase {
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    // регулярное расписание на завтра с учеником, первое занятие отменено
-    ScheduleData scheduleAdd =
-        app.trSchedule()
-            .RegularScheduleTomorrowWithStudentOnFirstLesson(
-                time,
-                scheduleService,
-                period,
-                "LkCancelRegularSchedule",
-                "14",
-                "LkCancelRegularSchedule",
-                "1",
-                "ru");
 
+    // регулярное расписание на завтра с учеником, первое занятие отменено
+    app.trScheduleTomorrow()
+        .RegularScheduleWithoutStudentOnFirstLesson(
+            time,
+            scheduleService,
+            period,
+            "LkCancelRegularSchedule",
+            "14",
+            "LkCancelRegularSchedule",
+            "1",
+            "ru");
+
+    ScheduleData scheduleAdd = scheduleService.findById("LkCancelRegularSchedule");
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelRegularSchedule")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));

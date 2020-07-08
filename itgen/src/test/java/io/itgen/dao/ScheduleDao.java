@@ -6,6 +6,7 @@ import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
@@ -24,6 +25,11 @@ public class ScheduleDao {
             .filter("id", id);
     ScheduleData schedule = datastore.findAndDelete(query);
     return schedule;
+  }
+
+  public ScheduleData findById(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    return datastore.find(ScheduleData.class).field("id").equal(id).first();
   }
 
   public void save(ScheduleData schedule) {

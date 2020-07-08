@@ -31,39 +31,24 @@ import java.util.Collections;
 import java.util.Date;
 
 public class SshotEntryOnTrial extends TestBase {
-  ArrayList<C> list = new ArrayList<>();
-  ArrayList<FinishedSlots> listF = new ArrayList<>();
-  String period = "21:00 - 23:00";
+  String period = "18:00 - 20:00";
 
+  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик
+  // и разовое расписание на завтра в 18.00, на которое нужно записать добавленного ученика
   @BeforeMethod
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
-            .withId("LKOnTrail")
-            .withVer(0)
-            .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
-            .withFinishedSlots(listF)
-            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
-    scheduleService.save(schedule);
 
+    // разовое занятие без учеников
+    ScheduleService scheduleService = new ScheduleService();
+    app.trScheduleTomorrow()
+        .SingleScheduleWithoutStudent(time, scheduleService, period, "LKOnTrail", "14");
+
+    // студент, добавленный в дефолтную семь, без пробного
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("LKOnTrail").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("111").withStudyLang("ru").withLocate("ru")
-            .withBirthday(new Date(1263502800L))
-            .withLangs(Arrays.asList("ru"))
-            .withSkills(Arrays.asList("1"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
-    studentService.save(student);
+    app.trStudent()
+        .StudentAddDefaultFamily(
+            studentService, "LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
   @Test

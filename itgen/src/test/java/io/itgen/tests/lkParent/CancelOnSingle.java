@@ -6,8 +6,6 @@ import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
-import io.itgen.model.schedule.C;
-import io.itgen.model.schedule.FinishedSlots;
 import io.itgen.services.PaymentService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
@@ -16,8 +14,6 @@ import io.itgen.tests.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -33,8 +29,8 @@ public class CancelOnSingle extends TestBase {
     ScheduleService scheduleService = new ScheduleService();
     StudentService studentService = new StudentService();
     // первое пробное занятие, которое завершил ученик с Был
-    app.trSchedule()
-        .FinishingYesterdayFirstTrialLesson(
+    app.trScheduleYesterday()
+        .FinishingFirstTrialLesson(
             time,
             scheduleService,
             period,
@@ -46,7 +42,7 @@ public class CancelOnSingle extends TestBase {
     // студент, добавленный в дефолтную семью, который прошел пробное успешно и записанный на
     // следующее занятие
     app.trStudent()
-        .StudentAddDefoltFamily_FinishTrailLesson(
+        .StudentAddDefaultFamily_FinishedTrailLesson_RecordSingle(
             studentService,
             "LkCancelLessonInSingleSchedule",
             "expert",
@@ -57,8 +53,8 @@ public class CancelOnSingle extends TestBase {
             "ru");
 
     // занятие, на которое записан ученик
-    app.trSchedule()
-        .SingleScheduleTomorrowWithStudent_ScratchRuLesson(
+    app.trScheduleTomorrow()
+        .SingleScheduleWithOneStudent(
             time,
             scheduleService,
             period,
@@ -88,9 +84,6 @@ public class CancelOnSingle extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LkCancelLessonInSingleSchedule");
 
-    PaymentService paymentService = new PaymentService();
-    paymentService.findByIdAndDelete("LkCancelLessonInSingleSchedule");
-
     Tasks tasks = app.dbschedules().tasksComposition("LkCancelLessonInSingleSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
@@ -102,11 +95,11 @@ public class CancelOnSingle extends TestBase {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
 
-    ScheduleData scheduleAdd =
-        app.trSchedule()
-            .SingleScheduleTomorrowWithoutStudent(
-                time, scheduleService, period, "LkCancelLessonInSingleSchedule", "14");
+    app.trScheduleTomorrow()
+        .SingleScheduleWithoutStudent(
+            time, scheduleService, period, "LkCancelLessonInSingleSchedule", "14");
 
+    ScheduleData scheduleAdd = scheduleService.findById("LkCancelLessonInSingleSchedule");
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelLessonInSingleSchedule")) {
         Schedules befor11 = (before.without(scheduleBefore).withAdded(scheduleAdd));
