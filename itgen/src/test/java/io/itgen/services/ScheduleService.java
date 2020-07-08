@@ -20,4 +20,8 @@ public class ScheduleService {
   public void save(ScheduleData schedule) {
     scheduleDao.save(schedule);
   }
+
+  public ScheduleData findById (String id) {
+    return scheduleDao.findById(id);
+  }
 }

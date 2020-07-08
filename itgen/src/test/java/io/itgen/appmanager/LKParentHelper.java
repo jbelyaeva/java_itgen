@@ -129,26 +129,45 @@ public class LKParentHelper extends HelperBase {
   public void recordOnRegular() {
     btnShowSchedule();
     btnRecordOnLesson();
+    btnTomorrowForRegular();
     changeScrollTime();
     btnNext();
     selectCheckBox();
     btnRecord();
+  }
+
+  private void btnTomorrowForRegular() {
+    // находим активный элемент и берем следующий сестринский вниз по дереву
+    String locator = "//div[@class='picker-item selected']//following-sibling::div";
+    if (isElementPresent(By.xpath(locator))) {
+      click(By.xpath(locator));
+    } else {
+      click(By.xpath("//div[@class='picker-item selected']"));
+    }
   }
 
   public void recordOnSingle() {
     btnShowSchedule();
     btnRecordOnLesson();
     btnSingleSchedule();
+    btnTomorrowForSingle();
     changeScrollTime();
     btnNext();
     selectCheckBox();
     btnRecord();
   }
 
+  private void btnTomorrowForSingle() {
+    // находим активный элемент и берем следующий сестринский вниз по дереву
+    click(By.xpath("//div[@class='picker-item selected']/following-sibling::div"));
+  }
+
   public void GoToFiltrRecordSingle() {
     btnShowSchedule();
     btnRecordOnLesson();
     btnSingleSchedule();
+    btnTomorrowForSingle();
+    changeScrollTime();
     changeWeeksPaginator();
     changeStyleDayOfTheWeek();
   }
@@ -183,6 +202,7 @@ public class LKParentHelper extends HelperBase {
   public void confirmRecordOnRegular() {
     btnShowSchedule();
     btnRecordOnLesson();
+    btnTomorrowForRegular();
     changeScrollTime();
     btnNext();
     selectCheckBox();
@@ -205,6 +225,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void changeScrollTime() {
+    type(By.xpath("//div[@class='times-filter']//input[1]"), "00:00");
     type(By.xpath("//div[@class='times-filter']//input[2]"), "24:00");
     click(
         By.xpath(
@@ -247,6 +268,8 @@ public class LKParentHelper extends HelperBase {
   public void GoToFiltrRecordRegular() {
     btnShowSchedule();
     btnRecordOnLesson();
+    btnTomorrowForRegular();
+    changeScrollTime();
     changeStyleDayOfTheWeek();
   }
 

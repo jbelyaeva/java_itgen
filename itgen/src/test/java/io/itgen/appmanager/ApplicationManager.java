@@ -2,8 +2,10 @@ package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
-import io.itgen.appmanager.tranzactionHelper.TranzactionScheduleHelper;
+import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTodayHelper;
+import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTomorrowHelper;
 import io.itgen.appmanager.tranzactionHelper.TranzactionStudentHelper;
+import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleYesterdayHelper;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -49,7 +51,9 @@ public class ApplicationManager {
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
-  private TranzactionScheduleHelper tranzactionScheduleHelper;
+  private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
+  private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
+  private TrScheduleTodayHelper trScheduleTodayHelper;
   private TranzactionStudentHelper tranzactionStudentHelper;
 
   public ApplicationManager(String browser) {
@@ -65,7 +69,9 @@ public class ApplicationManager {
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
     dbHelperRequest = new DbHelperRequest();
-    tranzactionScheduleHelper = new TranzactionScheduleHelper();
+    trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
+    trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
+    trScheduleTodayHelper = new TrScheduleTodayHelper();
     tranzactionStudentHelper = new TranzactionStudentHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -184,8 +190,16 @@ public class ApplicationManager {
     return paymentHelper;
   }
 
-  public TranzactionScheduleHelper trSchedule() {
-    return tranzactionScheduleHelper;
+  public TrScheduleTomorrowHelper trScheduleTomorrow() {
+    return trScheduleTomorrowHelper;
+  }
+
+  public TrScheduleYesterdayHelper trScheduleYesterday() {
+    return trScheduleYesterdayHelper;
+  }
+
+  public TrScheduleTodayHelper trScheduleToday() {
+    return trScheduleTodayHelper;
   }
 
   public TranzactionStudentHelper trStudent() {
