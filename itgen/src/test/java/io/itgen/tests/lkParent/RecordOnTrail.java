@@ -3,7 +3,6 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.itgen.general.TimeGeneral;
 import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
 import io.itgen.model.TaskData;
@@ -17,25 +16,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RecordOnTrail extends TestBase {
-
+  TaskService taskService = new TaskService();
+  ScheduleService scheduleService = new ScheduleService();
+  StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик
   // и разовое расписание на завтра в 18.00, на которое нужно записать добавленного ученика
   @BeforeMethod
   public void ensurePreconditions() {
-    TimeGeneral time = new TimeGeneral();
+    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "LKOnTrail", "14");
 
-    // разовое занятие без учеников
-    ScheduleService scheduleService = new ScheduleService();
-    app.trScheduleTomorrow()
-        .SingleScheduleWithoutStudent(time, scheduleService, period, "LKOnTrail", "14");
-
-    // студент, добавленный в дефолтную семь, без пробного
-    StudentService studentService = new StudentService();
     app.trStudent()
-        .StudentAddDefaultFamily(
-            studentService, "LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
+        .StudentAddDefaultFamily("LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
   @Test()
@@ -50,24 +43,19 @@ public class RecordOnTrail extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("LKOnTrail");
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LKOnTrail");
+
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
-    TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDelete(taskClean.getId());
     }
   }
 
   private void check(Schedules before, Schedules after) {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
-
     app.trScheduleTomorrow()
         .SingleScheduleWithOneStudentRecordOnTrail(
-            time, scheduleService, period, "LKOnTrail", "14", "LKOnTrail", "1", "ru");
+            period, "LKOnTrail", "14", "LKOnTrail", "1", "ru");
 
     ScheduleData scheduleAdd = scheduleService.findById("LKOnTrail");
     for (ScheduleData scheduleBefore : before) {

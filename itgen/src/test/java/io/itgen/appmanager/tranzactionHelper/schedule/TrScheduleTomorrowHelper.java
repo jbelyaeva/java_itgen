@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TrScheduleTomorrowHelper {
+  private final TimeGeneral time = new TimeGeneral();
+  private final ScheduleService scheduleService = new ScheduleService();
 
   // Завтра разовое занятие, на которое записан ученик, после первого успешного пробного
   public void SingleScheduleWithOneStudent(
-      TimeGeneral time,
-      ScheduleService scheduleService,
       String period,
       String idSchedule,
       String idTrainer,
@@ -47,13 +47,12 @@ public class TrScheduleTomorrowHelper {
                                     .withS("normal")
                                     .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
   }
 
   public void SingleScheduleWithOneStudentRecordOnTrail(
-      TimeGeneral time,
-      ScheduleService scheduleService,
       String period,
       String idSchedule,
       String idTrainer,
@@ -91,12 +90,8 @@ public class TrScheduleTomorrowHelper {
   }
 
   // Завтра разовое занятие без учеников
-  public void SingleScheduleWithoutStudent(
-      TimeGeneral time,
-      ScheduleService scheduleService,
-      String period,
-      String idSchedule,
-      String idTrainer) {
+  public void SingleScheduleWithoutStudent(String period, String idSchedule, String idTrainer) {
+
     ArrayList<C> listC = new ArrayList<>();
     ArrayList<FinishedSlots> listFSlots = new ArrayList<>();
     ScheduleData schedule =
@@ -116,17 +111,14 @@ public class TrScheduleTomorrowHelper {
                         .withC(listC)))
             .withFinishedSlots(listFSlots)
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
   }
 
   // завтра регулярное занятие без ученика
-  public void RegularScheduleWithoutStudents(
-      TimeGeneral time,
-      ScheduleService scheduleService,
-      String period,
-      String idSchedule,
-      String idTrainer) {
+  public void RegularScheduleWithoutStudents(String period, String idSchedule, String idTrainer) {
+
     int week = 604800000;
     ArrayList<C> listC = new ArrayList<>();
     ScheduleData schedule =
@@ -175,8 +167,6 @@ public class TrScheduleTomorrowHelper {
 
   // завтра регулярное расписание, но без ученика на первом занятии
   public void RegularScheduleWithoutStudentOnFirstLesson(
-      TimeGeneral time,
-      ScheduleService scheduleService,
       String period,
       String idSchedule,
       String idTrainer,
@@ -255,8 +245,6 @@ public class TrScheduleTomorrowHelper {
 
   // завтра регулярное расписание с учеником на всех занятиях
   public void RegularScheduleWithOneStudent(
-      TimeGeneral time,
-      ScheduleService scheduleService,
       String period,
       String idSchedule,
       String idTrainer,
