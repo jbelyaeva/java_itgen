@@ -57,7 +57,6 @@ public class LKParentHelper extends HelperBase {
     fillStudentForm1(student);
     btnNextFirst();
     btnNextSecond();
-    btnLogo();
   }
 
   public void createSShotFirstForm(StudentData student) {
