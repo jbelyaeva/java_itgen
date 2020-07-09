@@ -70,7 +70,7 @@ public class RequestOnTrial2hScratchTests extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("makeRequest");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
     RequestService requestService = new RequestService();
     requestService.findByIdAndDelete(idNewRequest);

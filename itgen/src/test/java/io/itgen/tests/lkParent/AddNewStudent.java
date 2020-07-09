@@ -25,6 +25,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddNewStudent extends TestBase {
+  TaskService taskService = new TaskService();
+  StudentService studentService = new StudentService();
   StudentData studentClean;
 
   @DataProvider
@@ -91,9 +93,7 @@ public class AddNewStudent extends TestBase {
   public void clean() {
     if (studentClean == null) return;
 
-    TaskService taskService = new TaskService();
-    taskService.findByIdAndDelete(studentClean);
-    StudentService studentService = new StudentService();
+    taskService.findByIdAndDeleteTask(studentClean);
     studentService.findByIdAndDelete(studentClean);
   }
 }

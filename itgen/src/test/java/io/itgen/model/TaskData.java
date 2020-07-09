@@ -40,6 +40,9 @@ public class TaskData {
   @Property("linkUser")
   private String linkUser;
 
+  @Property("leadUser")
+  private String linkLead;
+
   @Property("dueDate")
   private Date dueDate;
 
@@ -92,6 +95,11 @@ public class TaskData {
     return this;
   }
 
+  public TaskData withLinkLead(String linkLead) {
+    this.linkLead = linkLead;
+    return this;
+  }
+
   public TaskData withDueDate(Date dueDate) {
     this.dueDate = dueDate;
     return this;
@@ -137,6 +145,10 @@ public class TaskData {
 
   public String getLinkUser() {
     return linkUser;
+  }
+
+  public String getLinkLead() {
+    return linkLead;
   }
 
   public Date getDueDate() {

@@ -119,7 +119,7 @@ public class SshotRequests extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("sshotRequests");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 }

@@ -78,7 +78,7 @@ public class SshotEntryOnTrial extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 }

@@ -93,7 +93,7 @@ public class StudentCreationTests extends TestBase {
       FamilyService familyService = new FamilyService();
       familyService.findByIdAndDelete(studentClean.getFamilyId());
       TaskService taskService = new TaskService();
-      taskService.findByIdAndDelete(studentClean);
+      taskService.findByIdAndDeleteTask(studentClean);
       StudentService studentService = new StudentService();
       studentService.findByIdAndDelete(studentClean);
     }

@@ -6,7 +6,6 @@ import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
-import io.itgen.services.PaymentService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
@@ -88,7 +87,7 @@ public class CancelOnRegular extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("LkCancelRegularSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 

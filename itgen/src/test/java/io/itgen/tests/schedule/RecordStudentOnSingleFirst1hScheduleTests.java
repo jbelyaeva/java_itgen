@@ -87,7 +87,7 @@ public class RecordStudentOnSingleFirst1hScheduleTests extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("recordOnSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 

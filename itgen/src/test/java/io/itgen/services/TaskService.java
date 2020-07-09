@@ -8,20 +8,21 @@ import io.itgen.model.StudentData;
 public class TaskService {
   private TaskDao taskDao = new TaskDao();
 
-  public TaskService() {
+  public TaskService() {}
+
+  public TaskData findByIdAndDeleteTask(String id) {
+    return taskDao.findByIdAndDeleteTask(id);
   }
 
-  public TaskData findByIdAndDelete(String id) {
-    return taskDao.findByIdAndDelete(id);
+  public TaskData findByIdAndDeleteTask(StudentData student) {
+    return taskDao.findByIdAndDeleteTask(student);
   }
 
-  public TaskData findByIdAndDelete(StudentData student) {
-    return taskDao.findByIdAndDelete(student);
+  public TaskData findByIdAndDeleteTask(LeadData leadNew) {
+    return taskDao.findByIdAndDeleteTask(leadNew);
   }
 
   public void save(TaskData task) {
     taskDao.save(task);
   }
-
-  public TaskData findByIdAndDeleteLead(LeadData leadNew) {return taskDao.findByIdAndDeleteLead(leadNew); }
 }

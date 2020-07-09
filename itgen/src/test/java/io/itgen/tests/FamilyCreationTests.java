@@ -67,7 +67,7 @@ public class FamilyCreationTests extends TestBase {
     TaskService taskService = new TaskService();
     for (StudentData studentClean : students) {
       studentService.findByIdAndDelete(studentClean);
-      taskService.findByIdAndDelete(studentClean);
+      taskService.findByIdAndDeleteTask(studentClean);
     }
   }
 

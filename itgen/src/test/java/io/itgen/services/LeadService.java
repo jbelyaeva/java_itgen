@@ -2,12 +2,13 @@ package io.itgen.services;
 
 import io.itgen.dao.LeadDao;
 import io.itgen.model.LeadData;
+import io.itgen.model.StudentData;
+import io.itgen.model.TaskData;
 
 public class LeadService {
   private LeadDao leadDao = new LeadDao();
 
-  public LeadService() {
-  }
+  public LeadService() {}
 
   public void create(LeadData lead) {
     leadDao.save(lead);
@@ -15,5 +16,9 @@ public class LeadService {
 
   public void findByIdAndDelete(String id) {
     leadDao.findByIdAndDelete(id);
+  }
+
+  public LeadData findByIdAndDelete(LeadData lead) {
+    return leadDao.findByIdAndDelete(lead);
   }
 }

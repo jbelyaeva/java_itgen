@@ -2,6 +2,8 @@ package io.itgen.appmanager;
 
 import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
+import io.itgen.model.StudentData;
+import io.itgen.model.Students;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -152,24 +154,14 @@ public class LeadHelper extends HelperBase {
       leads.add(lead);
     }
   }
-
-  public String getIdNewLeadDB(Leads before, Leads after) {
-    boolean a = true;
-    String getIdAfter = "";
-    for (LeadData lead : after) {
-      getIdAfter = lead.getId();
-      for (LeadData lead_before : before) {
-        String getIdBefore = lead_before.getId();
-        if (getIdAfter.equals(getIdBefore)) {
-          a = false;
-          break;
-        }
-      }
-      if (a) {
-        break;
-      }
+  public LeadData getNewLeadDB(Leads before, Leads after) {
+    LeadData leadNew=null;
+    for (LeadData leadListAfter : after) {
+      if (!before.contains(leadListAfter)) {
+        leadNew=leadListAfter;
+        break;}
     }
-    return getIdAfter;
+    return leadNew;
   }
 
   public void modify(LeadData lead) {

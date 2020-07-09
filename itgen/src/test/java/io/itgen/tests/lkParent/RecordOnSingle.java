@@ -80,7 +80,7 @@ public class RecordOnSingle extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnSingleSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 

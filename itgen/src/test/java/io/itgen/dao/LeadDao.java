@@ -2,7 +2,9 @@ package io.itgen.dao;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
+import io.itgen.connection.MFSessionFactory;
 import io.itgen.model.LeadData;
+import io.itgen.model.StudentData;
 
 import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
@@ -18,5 +20,13 @@ public class LeadDao {
     Query<LeadData> query = datastore.createQuery(LeadData.class).filter("id", id);
     LeadData lead = datastore.findAndDelete(query);
     return lead;
+  }
+
+  public LeadData findByIdAndDelete(LeadData lead) {
+    Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
+    Query<LeadData> query = datastore.createQuery(LeadData.class)
+        .filter("id", lead.getId());
+    LeadData leadData = datastore.findAndDelete(query);
+    return leadData;
   }
 }

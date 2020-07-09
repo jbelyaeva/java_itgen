@@ -99,7 +99,7 @@ public class WindowRecordStudentOnRegular2hScheduleTests extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 

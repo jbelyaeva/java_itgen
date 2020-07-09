@@ -15,22 +15,22 @@ public class TaskDao {
     datastore.save(task);
   }
 
-  public TaskData findByIdAndDelete(String id) {
+  public TaskData findByIdAndDeleteTask(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class).filter("id", id);
     TaskData task = datastore.findAndDelete(query);
     return task;
   }
 
-  public TaskData findByIdAndDelete(StudentData student) {
+  public TaskData findByIdAndDeleteTask(StudentData student) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkUser", student.getId());
     TaskData task = datastore.findAndDelete(query);
     return task;
   }
-  public TaskData findByIdAndDeleteLead (LeadData lead) {
+  public TaskData findByIdAndDeleteTask(LeadData lead) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkUser", lead.getId());
+    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkLead", lead.getId());
     TaskData task = datastore.findAndDelete(query);
     return task;
   }

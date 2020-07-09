@@ -85,7 +85,7 @@ public class RemoveStudentFromSingle2hSchedule extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("removeStudent");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDelete(taskClean.getId());
+      taskService.findByIdAndDeleteTask(taskClean.getId());
     }
   }
 
