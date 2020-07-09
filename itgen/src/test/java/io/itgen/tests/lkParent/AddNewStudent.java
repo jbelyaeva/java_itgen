@@ -29,6 +29,7 @@ public class AddNewStudent extends TestBase {
   StudentService studentService = new StudentService();
   StudentData studentClean;
 
+
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
     try (BufferedReader reader =

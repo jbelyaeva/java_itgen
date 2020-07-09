@@ -1,10 +1,14 @@
 package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.general.TimeGeneral;
-import io.itgen.model.*;
-import io.itgen.services.*;
+import io.itgen.model.TaskData;
+import io.itgen.model.Tasks;
+import io.itgen.services.ScheduleService;
+import io.itgen.services.StudentService;
+import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.awt.AWTException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
@@ -14,43 +18,23 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
-import java.awt.*;
-import java.io.IOException;
-
 public class SshotFiltrRecordOnRegular extends TestBase {
-
+  TaskService taskService = new TaskService();
+  ScheduleService scheduleService = new ScheduleService();
+  StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
   // 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
-
-    // первое пробное занятие, которое вчера завершил ученик с Был
     app.trScheduleYesterday()
         .FinishingFirstTrialLesson(
-            time,
-            scheduleService,
-            period,
-            "FinishedSchedule",
-            "14",
-            "LkRecordOnRegularSchedule",
-            "1");
+            period, "FinishedSchedule", "14", "LkRecordOnRegularSchedule", "1");
 
-    // студент, добавленный в дефолтную семью, который прошел пробное успешно
-    StudentService studentService = new StudentService();
     app.trStudent()
         .StudentAddDefaultFamily_AfterTrial(
-            studentService,
-            "LkRecordOnRegularSchedule",
-            "expert",
-            "BL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru");
+            "LkRecordOnRegularSchedule", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
   @Test
@@ -80,18 +64,10 @@ public class SshotFiltrRecordOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("FinishedSchedule");
-
-    FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("111").withTrialBonusOff(false).withTierId("txa");
-    familyService.save(family);
-
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LkRecordOnRegularSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnRegularSchedule");
-    TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDeleteTask(taskClean.getId());
     }

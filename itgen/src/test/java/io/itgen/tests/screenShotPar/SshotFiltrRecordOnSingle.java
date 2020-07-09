@@ -1,7 +1,6 @@
 package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.general.TimeGeneral;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
 import io.itgen.services.ScheduleService;
@@ -20,39 +19,22 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotFiltrRecordOnSingle extends TestBase {
-
+  TaskService taskService = new TaskService();
+  ScheduleService scheduleService = new ScheduleService();
+  StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
   // 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
-
-    // первое пробное занятие, которое вчера завершил ученик с Был
     app.trScheduleYesterday()
         .FinishingFirstTrialLesson(
-            time,
-            scheduleService,
-            period,
-            "FinishedSchedule",
-            "14",
-            "LkRecordOnSingleSchedule",
-            "1");
+            period, "FinishedSchedule", "14", "LkRecordOnSingleSchedule", "1");
 
-    // студент, добавленный в дефолтную семью, который прошел пробное успешно
-    StudentService studentService = new StudentService();
     app.trStudent()
         .StudentAddDefaultFamily_AfterTrial(
-            studentService,
-            "LkRecordOnSingleSchedule",
-            "expert",
-            "BL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru");
+            "LkRecordOnSingleSchedule", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
   @Test
@@ -84,14 +66,10 @@ public class SshotFiltrRecordOnSingle extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("FinishedSchedule");
-
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LkRecordOnSingleSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnSingleSchedule");
-    TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDeleteTask(taskClean.getId());
     }

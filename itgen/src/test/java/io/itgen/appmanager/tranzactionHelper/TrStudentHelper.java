@@ -10,12 +10,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-public class TranzactionStudentHelper {
+public class TrStudentHelper {
+
+  private final StudentService studentService = new StudentService();
 
   // добавленный в дефолтную семью студент (русский, в скиллах Scratch, телефон), после прохождения
   // пробного и записанный на др занятие
   public void StudentAddDefaultFamily_FinishedTrailLesson_RecordSingle(
-      StudentService studentService,
       String idStudent,
       String pclevel,
       String country,
@@ -53,7 +54,6 @@ public class TranzactionStudentHelper {
   // добавленный в дефолтную семью студент(русский, в скиллах Scratch, телефон), после прохождения
   // пробного
   public void StudentAddDefaultFamily_AfterTrial(
-      StudentService studentService,
       String idStudent,
       String pclevel,
       String country,
@@ -91,7 +91,6 @@ public class TranzactionStudentHelper {
 
   // добавленный в дефолтную семью студент(русский, в скиллах Scratch, телефон)
   public void StudentAddDefaultFamily(
-      StudentService studentService,
       String idStudent,
       String pclevel,
       String country,

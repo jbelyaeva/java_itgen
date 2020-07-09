@@ -6,6 +6,8 @@ import io.itgen.model.Tasks;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+import java.awt.AWTException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
@@ -15,20 +17,15 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
-import java.awt.*;
-import java.io.IOException;
-
 public class SshotCourseSelectionForTrial extends TestBase {
+  TaskService taskService = new TaskService();
+  StudentService studentService = new StudentService();
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик
   @BeforeMethod
   public void ensurePreconditions() {
-
-    // студент, добавленный в дефолтную семью, который прошел пробное успешно
-    StudentService studentService = new StudentService();
     app.trStudent()
-        .StudentAddDefaultFamily(
-            studentService, "LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
+        .StudentAddDefaultFamily("LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
   @Test
@@ -41,7 +38,6 @@ public class SshotCourseSelectionForTrial extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     app.sshot().changeTopBar();
-
 
     ImageDiff diff =
         app.sshot()
@@ -59,11 +55,9 @@ public class SshotCourseSelectionForTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("LKOnTrail");
 
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
-    TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDeleteTask(taskClean.getId());
     }
