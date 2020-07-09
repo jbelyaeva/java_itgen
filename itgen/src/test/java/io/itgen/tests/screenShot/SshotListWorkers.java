@@ -59,6 +59,7 @@ public class SshotListWorkers extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
+    app.worker().waitForLoadH2();
 
     ImageDiff diff =
         app.sshot()

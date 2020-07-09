@@ -261,7 +261,7 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void waitForLoad() {
+  public void waitForLoadLogo() {
     new WebDriverWait(wd, 10)
         .until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@src,'logo')]")));
   }

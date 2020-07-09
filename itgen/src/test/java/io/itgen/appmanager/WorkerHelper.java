@@ -21,6 +21,11 @@ public class WorkerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
+  public void waitForLoadH2() {
+    new WebDriverWait(wd, 10)
+        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2")));
+  }
+
   public void fillWorkerForm(WorkerData workerData) {
     type(By.name("user-firstName"), workerData.getFirstName());
     type(By.name("user-lastName"), workerData.getLastName());
