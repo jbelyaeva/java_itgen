@@ -42,6 +42,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
 
     app.sshot().changeTopBar();
 
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

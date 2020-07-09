@@ -21,7 +21,7 @@ public class WorkerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
-  public void waitForLoadH2() {
+  public void waitForLoadHeader() {
     new WebDriverWait(wd, 10)
         .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2")));
   }

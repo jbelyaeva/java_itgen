@@ -52,6 +52,7 @@ public class SshotListLeads extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuLeads();
+    app.lead().waitForLoadHeader();
 
     ImageDiff diff =
         app.sshot()

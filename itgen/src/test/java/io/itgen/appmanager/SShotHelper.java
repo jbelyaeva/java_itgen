@@ -110,6 +110,6 @@ public class SShotHelper extends HelperBase {
           ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", element);
         }
       }
-  }
+    }
   }
 }

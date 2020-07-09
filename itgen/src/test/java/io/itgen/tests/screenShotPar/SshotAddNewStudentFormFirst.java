@@ -53,7 +53,7 @@ public class SshotAddNewStudentFormFirst extends TestBase {
             , name, locatorIgnor);
 
     app.lkParent().btnLogo();
-    if (diff.getDiffSize() > 100) { //погрешность
+    if (diff.getDiffSize() > 500) { //погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
 

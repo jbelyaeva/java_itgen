@@ -185,4 +185,9 @@ public class LeadHelper extends HelperBase {
     btnAddLead();
     noErrorMessage();
   }
+
+  public void waitForLoadHeader() {
+    new WebDriverWait(wd, 10)
+        .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2")));
+  }
 }
