@@ -4,7 +4,7 @@ import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTodayHelper;
 import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTomorrowHelper;
-import io.itgen.appmanager.tranzactionHelper.TranzactionStudentHelper;
+import io.itgen.appmanager.tranzactionHelper.TrStudentHelper;
 import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleYesterdayHelper;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
@@ -54,7 +54,7 @@ public class ApplicationManager {
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
-  private TranzactionStudentHelper tranzactionStudentHelper;
+  private TrStudentHelper tranzactionStudentHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -72,7 +72,7 @@ public class ApplicationManager {
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
-    tranzactionStudentHelper = new TranzactionStudentHelper();
+    tranzactionStudentHelper = new TrStudentHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -202,7 +202,7 @@ public class ApplicationManager {
     return trScheduleTodayHelper;
   }
 
-  public TranzactionStudentHelper trStudent() {
+  public TrStudentHelper trStudent() {
     return tranzactionStudentHelper;
   }
 

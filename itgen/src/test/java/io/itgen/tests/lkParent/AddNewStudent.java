@@ -25,7 +25,9 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddNewStudent extends TestBase {
-  StudentData studentClean;
+  private StudentData studentClean;
+  private final TaskService taskService = new TaskService();
+  private final StudentService studentService = new StudentService();
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
@@ -91,9 +93,7 @@ public class AddNewStudent extends TestBase {
   public void clean() {
     if (studentClean == null) return;
 
-    TaskService taskService = new TaskService();
     taskService.findByIdAndDelete(studentClean);
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete(studentClean);
   }
 }

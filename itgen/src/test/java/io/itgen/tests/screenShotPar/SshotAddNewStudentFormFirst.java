@@ -26,7 +26,9 @@ public class SshotAddNewStudentFormFirst extends TestBase {
   @DataProvider
   public Iterator<Object[]> StudentsFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/sshot_creation_student_par_form1.json")))) {
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/sshot_creation_student_par_form1.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -34,9 +36,9 @@ public class SshotAddNewStudentFormFirst extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      java.util.List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      java.util.List<StudentData> students =
+          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -47,17 +49,18 @@ public class SshotAddNewStudentFormFirst extends TestBase {
     String name = "Parent_AddNewStudentForm1_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
 
-    ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
-            , ApplicationManager.properties.getProperty("actual")
-            , ApplicationManager.properties.getProperty("markedImages")
-            , name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                ApplicationManager.properties.getProperty("expected"),
+                ApplicationManager.properties.getProperty("actual"),
+                ApplicationManager.properties.getProperty("markedImages"),
+                name,
+                locatorIgnor);
 
     app.lkParent().btnLogo();
-    if (diff.getDiffSize() > 500) { //погрешность
+    if (diff.getDiffSize() > 500) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
-
   }
-
-
 }

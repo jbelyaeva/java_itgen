@@ -11,13 +11,11 @@ import io.itgen.services.ScheduleService;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class TrScheduleYesterdayHelper {
-
+  private final TimeGeneral time = new TimeGeneral();
+  private final ScheduleService scheduleService = new ScheduleService();
   // вчера завершенное первое пробное занятие (ученик русский)
   public void FinishingFirstTrialLesson(
-      TimeGeneral time,
-      ScheduleService scheduleService,
       String periodFinish,
       String idSchedule,
       String idTrainer,
