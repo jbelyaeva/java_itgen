@@ -10,7 +10,7 @@ import io.itgen.model.Students;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.testng.annotations.BeforeMethod;
 
 public class StudentHelper extends HelperBase {
 
@@ -85,7 +85,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
-
   }
 
   public void fillAddStudentForm(StudentData studentData) {
@@ -105,7 +104,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), studentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), studentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), studentData.getInst());
-
   }
 
   public void ModifyStudentForm(StudentData studentData) {
@@ -139,12 +137,15 @@ public class StudentHelper extends HelperBase {
     return countingWithPaginated();
   }
 
-  //студенты с пагинацией
+  // студенты с пагинацией
   public List<StudentData> list() {
     List<StudentData> students = new ArrayList<StudentData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    wait.until(
+        ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//ul[@class='pagination']//li[2]"))); // ждать пока не появится элемент
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
@@ -159,16 +160,17 @@ public class StudentHelper extends HelperBase {
     return students;
   }
 
-  //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
-  //, а ФИ cо страницы ui
+  // из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из
+  // ссылки в атрибуте, а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<StudentData> students, List<WebElement> elements) {
     for (WebElement element : elements) {
       String getId = element.getAttribute("href");
       String[] getIdSplit = getId.split("/");
-      String id = getIdSplit[4]; //достали id
+      String id = getIdSplit[4]; // достали id
       String name = element.getText();
-      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-      StudentData student = new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      String[] name_surname = name.split("\\s"); // разрезали Имя Фамилия
+      StudentData student =
+          new StudentData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
       students.add(student);
     }
   }
@@ -211,25 +213,14 @@ public class StudentHelper extends HelperBase {
     btnSaveModify();
   }
 
-
   public StudentData getNewStudentDB(Students before, Students after) {
-    boolean a = true;
-    StudentData getAfter = null;
-    for (StudentData student : after) {
-      getAfter = student;
-      for (StudentData student_before : before) {
-        StudentData getBefore = student_before;
-        if (!getAfter.equals(getBefore)) {
-          a = false;
-          break;
-        }
-
-      }
-      if (!a) {
-        break;
-      }
+    StudentData studentNew=null;
+    for (StudentData studentListAfter : after) {
+      if (!before.contains(studentListAfter)) {
+        studentNew=studentListAfter;
+        break;}
     }
-    return getAfter;
+    return studentNew;
   }
 
   public void delete() {
@@ -237,20 +228,23 @@ public class StudentHelper extends HelperBase {
     assertDeleteSelectedStudent();
   }
 
-
   public void selectStudentInStudentListUI(StudentData deletedStudent) {
-    //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    //есть ли на первой странице наш студент
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
+    // находим пагинатор
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    // есть ли на первой странице наш студент
+    List<WebElement> list =
+        wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
     if (list.size() > 0) {
       wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
     } else {
-      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      // если студентк не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
+        List<WebElement> list_pagin =
+            wd.findElements(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"));
         if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
+          wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'"))
+              .click();
           break;
         } else {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
@@ -260,16 +254,18 @@ public class StudentHelper extends HelperBase {
   }
 
   public void selectStudentInListUIById(String id) {
-    //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    //есть ли на первой странице наш студент
+    // находим пагинатор
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    // есть ли на первой странице наш студент
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
     if (list.size() > 0) {
       wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
-      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      // если студентк не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+        List<WebElement> list_pagin =
+            wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
@@ -279,24 +275,5 @@ public class StudentHelper extends HelperBase {
       }
     }
   }
-/*
-  public boolean deepEquals(Students after, Students before) {
-     // проверяем размеры коллекций
-    if (after.size() != before.size())
-      return false;
-    // сравниваем каждый i-ый элемент коллекции
-    // с каждым i-ым элементом другой коллекции
-    for (int i = 0; i < room.getStudents().size(); ++i) {
-      // для сравнения студентов можно использовать equals
-      if (!room.getStudents().get(i).equals(
-              this.getStudents().get(i))) {
-        return false;
-      }
-    }
-    // сравниваем остальные поля комнаты
-    return Objects.equals(title, room.title);
-  }
 
- */
 }
-

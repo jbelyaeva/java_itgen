@@ -1,6 +1,6 @@
 package io.itgen.tests.lkParent;
-// к дефолтному родителю и ученику добавляется еще ученик, которого запишем на пробное и затем удалим этого ученика
-//и расписание в after-методе
+// к дефолтному родителю и ученику добавляется еще ученик, которого запишем на пробное и затем
+// удалим этого ученика и расписание в after-методе
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -30,7 +30,8 @@ public class AddNewStudent extends TestBase {
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -38,16 +39,19 @@ public class AddNewStudent extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students =
+          gson.fromJson(
+              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
   @DataProvider
   public Iterator<Object[]> noValidStudentsFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_par_creation_bad.json")))) {
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/students_par_creation_bad.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -55,9 +59,10 @@ public class AddNewStudent extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students =
+          gson.fromJson(
+              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -85,6 +90,7 @@ public class AddNewStudent extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     if (studentClean == null) return;
+
     TaskService taskService = new TaskService();
     taskService.findByIdAndDelete(studentClean);
     StudentService studentService = new StudentService();
