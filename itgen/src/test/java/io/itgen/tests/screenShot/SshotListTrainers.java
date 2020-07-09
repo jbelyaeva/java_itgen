@@ -23,13 +23,18 @@ public class SshotListTrainers extends TestBase {
     String name = "Admin_ListTrainers_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//table//tr[9]//td[9]"));
-    locatorIgnor.add(By.xpath("//tbody//tr//td[5]"));
     locatorIgnor.add(By.xpath("//tbody//tr//td[9]"));
     locatorIgnor.add(By.xpath("//tbody//tr//td[3]"));
+
+    String[] deleteElements={
+        " //thead//tr//th[5]",
+        "//tbody//tr//td[5]"
+    };
 
     app.goTo().menuTasks();
     app.goTo().menuTrainers();
     app.sshot().changeTopBar();
+    app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
             , ApplicationManager.properties.getProperty("actual")

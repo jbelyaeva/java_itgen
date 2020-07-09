@@ -13,12 +13,12 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotMain extends TestBase {
 
-
   @Test // упадет, если заускать через shift все тесты в подпапке.
   public void testSshotMain() throws AWTException, IOException {
     String name = "Parent_Main_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-   app.lkParent().waitForLoad();
+    app.lkParent().btnClickHistory();
+    app.sshot().changeTopBar();
 
     ImageDiff diff =
         app.sshot()

@@ -104,9 +104,14 @@ public class SshotLessonWithStudent extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
     locatorIgnor.add(By.xpath("//p"));
 
+    String[] deleteElements={
+        "//p[contains(@class,'start-info')]"
+    };
+
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
     app.schedule().selectScheduleInListUIById("SshotOnLessonWithStudent");
+    app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =
         app.sshot()

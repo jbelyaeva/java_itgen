@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Set;
 import javax.imageio.ImageIO;
 import org.openqa.selenium.By;
@@ -99,5 +100,16 @@ public class SShotHelper extends HelperBase {
                 elementGroupList);
       }
     }
+  }
+
+  public void deleteElements(String[] deleteElements) {
+    if (deleteElements != null) {
+      for (int i = 0; i <= deleteElements.length - 1; i++) {
+        List<WebElement> elementsList = wd.findElements(By.xpath(deleteElements[i]));
+        for (WebElement element : elementsList) {
+          ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", element);
+        }
+      }
+  }
   }
 }

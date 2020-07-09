@@ -328,4 +328,8 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//button[@id-qa='cancel']"));
     noErrorMessage();
   }
+
+  public void btnClickHistory() {
+    click(By.xpath("//div[contains(@class,'btn-toggle')]"));
+  }
 }
