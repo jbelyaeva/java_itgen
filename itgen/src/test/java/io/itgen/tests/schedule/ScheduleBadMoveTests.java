@@ -55,7 +55,8 @@ public class ScheduleBadMoveTests extends TestBase {
     app.goTo().menuTasks();
   }
 
-  @Test // нельзя подвинуть не поменяв дату и время
+  @Test (alwaysRun = true)
+  // нельзя подвинуть не поменяв дату и время
   public void testNoChangeDateTimeScheduleSingleMove() {
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();

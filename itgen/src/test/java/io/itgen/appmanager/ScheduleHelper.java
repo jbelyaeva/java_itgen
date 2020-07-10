@@ -1,19 +1,17 @@
 package io.itgen.appmanager;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-
-import static org.testng.AssertJUnit.assertTrue;
 
 public class ScheduleHelper extends HelperBase {
 
@@ -378,12 +376,10 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void fillBadTime() {
-    WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
-    Select select = new Select(Selectbox_times);
-
-    WebDriverWait wait = new WebDriverWait(wd, 3);
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option")));
-    select.selectByVisibleText("00:00 - 02:00");
+    wd.findElement(By.xpath("//div[@class='modal-body']")).click();
+    wd.findElement(By.id("tp")).click();
+    new Select(wd.findElement(By.id("tp"))).selectByVisibleText("02:30 - 04:30");
+    wd.findElement(By.id("tp")).click();
   }
 
   public void recordStudentOn2h(String name, String id) {
@@ -508,7 +504,6 @@ public class ScheduleHelper extends HelperBase {
 
   public void waitForLoadTextCenterOnMainSchedule() {
     new WebDriverWait(wd, 10)
-          .until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[@class='text-center']")));
-
+        .until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[@class='text-center']")));
   }
 }
