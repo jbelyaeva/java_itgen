@@ -23,7 +23,7 @@ public class SshotFamily extends TestBase {
     locatorIgnor.add(By.xpath("//span[@class='user-time']"));
 
     app.goTo().menuStudents();
-    app.student().selectStudentInListUIById("19");
+    app.student().selectStudentInListUIById("21"); 
     app.family().btnFamily();
     app.sshot().changeTopBar();
 
