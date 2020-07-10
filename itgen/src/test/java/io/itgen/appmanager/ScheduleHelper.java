@@ -505,4 +505,10 @@ public class ScheduleHelper extends HelperBase {
     noErrorMessage();
     refresh();
   }
+
+  public void waitForLoadTextCenterOnMainSchedule() {
+    new WebDriverWait(wd, 10)
+          .until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[@class='text-center']")));
+
+  }
 }

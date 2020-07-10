@@ -61,6 +61,7 @@ public class SshotMainSchedule extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuSchedule();
+    app.schedule().waitForLoadTextCenterOnMainSchedule();
     ImageDiff diff =
         app.sshot()
             .getImageDiff(
