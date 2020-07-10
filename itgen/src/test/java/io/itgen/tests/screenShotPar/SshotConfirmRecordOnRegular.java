@@ -67,7 +67,7 @@ public class SshotConfirmRecordOnRegular extends TestBase {
     app.lkParent().btnRecord();
     app.lkParent().btnLogo();
 
-    if (diff.getDiffSize() > 100) { // погрешность
+    if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }
