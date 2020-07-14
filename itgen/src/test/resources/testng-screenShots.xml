@@ -3,8 +3,8 @@
 <suite name="Suite1" verbose="1">
   <test name="ScreenShots">
     <classes>
-      <class name="io.itgen.tests.screenShot.SshotListStudents"/>
       <class name="io.itgen.tests.screenShot.SshotFamily"/>
+      <class name="io.itgen.tests.screenShot.SshotListStudents"/>
       <class name="io.itgen.tests.screenShot.SshotMainSchedule"/>
       <class name="io.itgen.tests.screenShot.SshotLessonWithStudent"/>
       <class name="io.itgen.tests.screenShot.SshotListLeads"/>

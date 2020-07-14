@@ -345,6 +345,7 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//div[contains(@class,'btn-toggle')]"));
   }
 
+
   public void goHrefActiveLK(String token) {
     wd.get("http://localhost:3000/enrollAccount/" + token + "?locale=ru");
   }
@@ -362,5 +363,9 @@ public class LKParentHelper extends HelperBase {
     goHrefActiveLK(token);
     inputPassword("111111");
     btnSave();
+
+  public void clickByFullArea() {
+    click(By.xpath("//div[@class='course-selection-page']"));
+
   }
 }

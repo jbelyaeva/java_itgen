@@ -38,6 +38,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     app.sshot().changeTopBar();
+    app.lkParent().clickByFullArea();
 
     ImageDiff diff =
         app.sshot()
