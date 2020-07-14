@@ -75,7 +75,7 @@ public class TrainerModificationTests extends TestBase {
     trainerService.save(modifyTrainer);
   }
 
-  @Test(dataProvider = "validWorkersTrainersFromJson")
+  @Test(dataProvider = "validWorkersTrainersFromJson", enabled = false)
   public void testTrainerModification(TrainerData trainer) {
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
