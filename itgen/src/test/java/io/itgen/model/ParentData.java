@@ -1,9 +1,14 @@
 package io.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.*;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
-
+import io.itgen.model.users.Emails;
+import io.itgen.model.users.Services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,6 +46,9 @@ public class ParentData {
 
   @Embedded
   private List<Contacts> contacts = new ArrayList<Contacts>();
+
+  @Embedded
+  private List<Emails> emails = new ArrayList<Emails>();
 
   @Expose
   @Transient
@@ -86,7 +94,6 @@ public class ParentData {
   @Transient
   private String inst;
 
-
   @Property("familyId")
   private String familyId;
 
@@ -96,6 +103,9 @@ public class ParentData {
 
   @Property("roles")
   private List<String> roles = new ArrayList<>();
+
+  @Embedded("services")
+  private Services services;
 
   public ParentData withId(String id) {
     this.id = id;
@@ -134,6 +144,11 @@ public class ParentData {
 
   public ParentData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
+    return this;
+  }
+
+  public ParentData withEmails(List<Emails> emails) {
+    this.emails = emails;
     return this;
   }
 
@@ -207,6 +222,11 @@ public class ParentData {
     return this;
   }
 
+  public ParentData withServices(Services services) {
+    this.services = services;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -239,6 +259,10 @@ public class ParentData {
 
   public List<Contacts> getContacts() {
     return contacts;
+  }
+
+  public List<Emails> getEmails() {
+    return emails;
   }
 
   public String getPhone() {
@@ -297,6 +321,9 @@ public class ParentData {
     return roles;
   }
 
+  public Services getServices() {
+    return services;
+  }
 
   /* toString(), hashCode() & equals() */
 
@@ -311,6 +338,7 @@ public class ParentData {
             ", timeZone='" + timeZone + '\'' +
             ", locate='" + locate + '\'' +
             ", note='" + note + '\'' +
+            ", services='" + services + '\'' +
             '}';
   }
 

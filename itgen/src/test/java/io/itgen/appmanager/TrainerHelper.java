@@ -74,6 +74,7 @@ public class TrainerHelper extends HelperBase {
     builder.click().perform();
 
     type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
+    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());

@@ -1,5 +1,8 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.Families;
+import io.itgen.model.FamilyData;
+import io.itgen.model.Students;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -132,5 +135,15 @@ public class FamilyHelper extends HelperBase {
     wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
   }
 
+  public FamilyData getNewFamilyDB(Families before, Families after) {
+    FamilyData familyNew = null;
+    for (FamilyData familyListAfter : after) {
+      if (!before.contains(familyListAfter)) {
+        familyNew = familyListAfter;
+        break;
+      }
+    }
+    return familyNew;
+  }
 
 }

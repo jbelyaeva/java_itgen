@@ -1,5 +1,7 @@
 package io.itgen.dao;
 
+import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
+
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.connection.MFSessionFactory;
@@ -19,17 +21,21 @@ public class StudentDao {
 
   public StudentData findByIdAndDelete(StudentData student) {
     Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
-    Query<StudentData> query = datastore.createQuery(StudentData.class)
-            .filter("id", student.getId());
+    Query<StudentData> query =
+        datastore.createQuery(StudentData.class).filter("id", student.getId());
     StudentData studentdata = datastore.findAndDelete(query);
     return studentdata;
   }
 
   public StudentData findByIdAndDelete(String id) {
     Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
-    Query<StudentData> query = datastore.createQuery(StudentData.class)
-            .filter("id", id);
+    Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", id);
     StudentData studentdata = datastore.findAndDelete(query);
     return studentdata;
+  }
+
+  public StudentData findById(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    return datastore.find(StudentData.class).field("id").equal(id).first();
   }
 }

@@ -1,5 +1,7 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.StudentData;
+import io.itgen.model.Students;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import io.itgen.model.ParentData;
@@ -164,5 +166,16 @@ public class ParentHelper extends HelperBase {
       }
     }
     return getIdAfter;
+  }
+
+  public ParentData getNewParentDB(Parents before, Parents after) {
+    ParentData parentNew = null;
+    for (ParentData parentListAfter : after) {
+      if (!before.contains(parentListAfter)) {
+        parentNew = parentListAfter;
+        break;
+      }
+    }
+    return parentNew;
   }
 }

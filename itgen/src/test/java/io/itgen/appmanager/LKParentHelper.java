@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LKParentHelper extends HelperBase {
 
+  private ApplicationManager app;
+
   public LKParentHelper(WebDriver wd) {
     super(wd);
   }
@@ -266,6 +268,16 @@ public class LKParentHelper extends HelperBase {
         .until(ExpectedConditions.elementToBeClickable(By.xpath("//img[contains(@src,'logo')]")));
   }
 
+  public void selfRegistration(StudentData student) {
+    fillStudentForm1(student);
+    btnNextFirst();
+    btnNextSecond();
+  }
+
+  public void goHref() {
+    wd.get("localhost:3000/registerFromLead?leadId=selfRegistration");
+  }
+
   public void GoToFiltrRecordRegular() {
     btnShowSchedule();
     btnRecordOnLesson();
@@ -333,7 +345,27 @@ public class LKParentHelper extends HelperBase {
     click(By.xpath("//div[contains(@class,'btn-toggle')]"));
   }
 
+
+  public void goHrefActiveLK(String token) {
+    wd.get("http://localhost:3000/enrollAccount/" + token + "?locale=ru");
+  }
+
+  public void inputPassword(String password) {
+    type(By.xpath("//input[@autocomplete='new-password']"), password);
+  }
+
+  public void btnSave() {
+    click(By.xpath("//button[1]"));
+    noErrorMessage();
+  }
+
+  public void activation(String token) {
+    goHrefActiveLK(token);
+    inputPassword("111111");
+    btnSave();
+
   public void clickByFullArea() {
     click(By.xpath("//div[@class='course-selection-page']"));
+
   }
 }

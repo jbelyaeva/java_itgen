@@ -22,6 +22,7 @@
     "ok": "ok 1",
     "inst": "inst 1",
     "note": "Привет 777",
-    "info": "Лучший тренер"
+    "info": "Лучший тренер",
+    "workloadLevel": "medium"
   }
 ]

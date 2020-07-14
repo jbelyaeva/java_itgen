@@ -1,11 +1,24 @@
 package io.itgen.appmanager;
 
+import io.itgen.appmanager.dbHelpers.DbHelper;
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
-import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTodayHelper;
-import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTomorrowHelper;
-import io.itgen.appmanager.tranzactionHelper.TrStudentHelper;
-import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleYesterdayHelper;
+import io.itgen.appmanager.dbHelpers.DbHelperStudents;
+import io.itgen.appmanager.transactionHelper.TrLeadHelper;
+import io.itgen.appmanager.transactionHelper.TrParentHelper;
+import io.itgen.appmanager.transactionHelper.TrStudentHelper;
+import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
+import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
+import io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,18 +29,6 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import io.itgen.appmanager.dbHelpers.DbHelper;
-import io.itgen.appmanager.dbHelpers.DbHelperStudents;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
   public static Properties properties;
@@ -54,7 +55,9 @@ public class ApplicationManager {
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
-  private TrStudentHelper tranzactionStudentHelper;
+  private TrStudentHelper transactionStudentHelper;
+  private TrLeadHelper transactionLeadHelper;
+  private TrParentHelper transactionParentHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -72,7 +75,9 @@ public class ApplicationManager {
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
-    tranzactionStudentHelper = new TrStudentHelper();
+    transactionStudentHelper = new TrStudentHelper();
+    transactionLeadHelper = new TrLeadHelper();
+    transactionParentHelper = new TrParentHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -203,7 +208,15 @@ public class ApplicationManager {
   }
 
   public TrStudentHelper trStudent() {
-    return tranzactionStudentHelper;
+    return transactionStudentHelper;
+  }
+
+  public TrLeadHelper trLead() {
+    return transactionLeadHelper;
+  }
+
+  public TrParentHelper trParent() {
+    return transactionParentHelper;
   }
 
   public byte[] takeScreenshot() {
