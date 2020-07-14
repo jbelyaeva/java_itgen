@@ -25,25 +25,44 @@ public class ParentDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("parentDeletion").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("parentDeletion").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("forParentDeletion").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("forParentDeletion")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("parentDeletion").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("parentDeletion")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date())
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
     ParentService parentService = new ParentService();
-    ParentData parent = new ParentData().withId("forParDeletion").withFirstName("Зина").withLastName("Зинина")
+    ParentData parent =
+        new ParentData()
+            .withId("forParDeletion")
+            .withFirstName("Зина")
+            .withLastName("Зинина")
             .withRoles(Arrays.asList("parent"))
-            .withCountry("AL").withTimeZone("Europe/Minsk")
-            .withFamilyId("parentDeletion").withLocate("ru")
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")));
-    parentService.create(parent);
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withFamilyId("parentDeletion")
+            .withLocate("ru")
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")));
+    parentService.save(parent);
   }
 
   @Test
@@ -56,7 +75,7 @@ public class ParentDeletionTests extends TestBase {
     Parents after = app.db().parents();
     assertThat(after.size(), equalTo(before.size() - 1));
 
-    for (ParentData parent : before) { //найти в списке "до" родителя с таким id
+    for (ParentData parent : before) { // найти в списке "до" родителя с таким id
       if (parent.getId().equals("forParDeletion")) {
         assertThat(after, equalTo(before.without(parent)));
         return;

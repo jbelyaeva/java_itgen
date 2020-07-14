@@ -1,4 +1,4 @@
-package io.itgen.appmanager.tranzactionHelper.schedule;
+package io.itgen.appmanager.transactionHelper.schedule;
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.services.ScheduleService;

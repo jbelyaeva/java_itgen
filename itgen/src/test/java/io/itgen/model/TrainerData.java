@@ -123,6 +123,9 @@ public class TrainerData {
   @Expose
   private String info;
 
+  @Property("workloadLevel")
+  private String workloadLevel;
+
   /* setters */
 
   public TrainerData withId(String id) {
@@ -286,6 +289,11 @@ public class TrainerData {
     return this;
   }
 
+  public TrainerData withWorkloadLevel(String workloadLevel) {
+    this.workloadLevel = workloadLevel;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -417,6 +425,10 @@ public class TrainerData {
     return info;
   }
 
+  public String getWorkloadLevel() {
+    return workloadLevel;
+  }
+
 
   /* toString(), hashCode() & equals() */
 
@@ -436,6 +448,7 @@ public class TrainerData {
             ", payBase=" + payBase +
             ", note='" + note + '\'' +
             ", info='" + info + '\'' +
+            ", workloadLevel='" + workloadLevel + '\'' +
             '}';
   }
 
@@ -455,11 +468,12 @@ public class TrainerData {
             Objects.equals(city, that.city) &&
             Objects.equals(payBase, that.payBase) &&
             Objects.equals(note, that.note) &&
+            Objects.equals(workloadLevel, that.workloadLevel) &&
             Objects.equals(info, that.info);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, gender, maxSlots, country, timeZone, locate, city, payBase, note, info);
+    return Objects.hash(id, firstName, lastName, gender, maxSlots, country, timeZone, locate, city, payBase, note, workloadLevel, info);
   }
 }

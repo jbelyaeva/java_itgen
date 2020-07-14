@@ -6,8 +6,7 @@ import io.itgen.model.StudentData;
 public class StudentService {
   private StudentDao studentDao = new StudentDao();
 
-  public StudentService() {
-  }
+  public StudentService() {}
 
   public StudentData findByIdAndDelete(StudentData student) {
     return studentDao.findByIdAndDelete(student);
@@ -23,5 +22,9 @@ public class StudentService {
 
   public void delete(StudentData student) {
     studentDao.delete(student);
+  }
+
+  public StudentData findById(String id) {
+    return studentDao.findById(id);
   }
 }

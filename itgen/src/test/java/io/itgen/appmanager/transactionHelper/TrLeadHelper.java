@@ -1,16 +1,10 @@
-package io.itgen.appmanager.tranzactionHelper;
+package io.itgen.appmanager.transactionHelper;
 
 import io.itgen.model.LeadData;
-import io.itgen.model.StudentData;
 import io.itgen.model.users.Contacts;
-import io.itgen.model.users.FinishedLessonsCountBySkill;
-import io.itgen.model.users.Status;
 import io.itgen.model.users.Utm;
 import io.itgen.services.LeadService;
-import io.itgen.services.StudentService;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class TrLeadHelper {
 

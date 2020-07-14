@@ -1,6 +1,15 @@
 package io.itgen.tests.selfRegistration;
-/*кейс: Нужно добавить родителя лида под админом, взять его id, вставить в ссылку, заполнить форму, получить письмо
- * активировать его, разлогиниться из-под родителя*/
+/*кейс:
+1. Нужно добавить родителя лида под админом
+2. Взять его id
+3. Вставить в ссылку на саморегистрацию
+4. Заполнить форму
+5. должно отправится письмо на активацию - но т.к. локально получить письмо нельзя, то мокаем это и переходим
+по созданной ссылке на активацию
+6. Придумать пароль
+7. Попасть в ЛК родителя
+8. Провести проверки
+ */
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -9,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.itgen.model.Families;
 import io.itgen.model.FamilyData;
+import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.model.ParentData;
 import io.itgen.model.Parents;
@@ -17,7 +27,7 @@ import io.itgen.model.Students;
 import io.itgen.services.FamilyService;
 import io.itgen.services.LeadService;
 import io.itgen.services.ParentService;
-import io.itgen.services.ScheduleService;
+import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import java.io.BufferedReader;
@@ -27,7 +37,6 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.mail.MessagingException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -36,9 +45,9 @@ import org.testng.annotations.Test;
 public class SelfRegistration extends TestBase {
   LeadService leadService = new LeadService();
   TaskService taskService = new TaskService();
-  ScheduleService scheduleService = new ScheduleService();
   ParentService parentService = new ParentService();
   FamilyService familyService = new FamilyService();
+  StudentService studentService = new StudentService();
 
   StudentData studentClean = null;
   ParentData parentClean = null;
@@ -82,10 +91,10 @@ public class SelfRegistration extends TestBase {
   }
 
   @Test(dataProvider = "validLeadsFromJson")
-  public void testSelfRegistration(StudentData student)
-      throws MessagingException, InterruptedException {
+  public void testSelfRegistration(StudentData student) throws InterruptedException {
 
     app.student().logout();
+
     Leads leadsBefore = app.db().leads();
     Students studentsBefore = app.dbstudents().students();
     Parents parentsBefore = app.db().parents();
@@ -94,7 +103,7 @@ public class SelfRegistration extends TestBase {
     app.lkParent().goHref();
     app.lkParent().selfRegistration(student);
 
-    Thread.sleep(3000);//необходимо, т.к. не успевает сформироваться токен в бд
+    Thread.sleep(3000); // необходимо, т.к. не успевает сформироваться токен в бд
 
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();
@@ -109,20 +118,90 @@ public class SelfRegistration extends TestBase {
     parentClean = app.parent().getNewParentDB(parentsBefore, parentsAfter);
     familyClean = app.family().getNewFamilyDB(familyBefore, familyAfter);
 
-    // LeadData leadAdd = lead.withId(leadClean.getId());
     assertThat(leadsAfter.size(), equalTo(leadsBefore.size()));
     assertThat(studentsAfter.size(), equalTo(studentsBefore.size() + 1));
     assertThat(parentsAfter.size(), equalTo(parentsBefore.size() + 1));
     assertThat(familyAfter.size(), equalTo(familyBefore.size() + 1));
-    //  assertThat(after, equalTo(before.withAdded(leadAdd)));
+    checkStudent(studentsBefore, studentsAfter, student);
+    checkParent(parentsBefore, parentsAfter);
+    checkLead(leadsBefore, leadsAfter);
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     leadService.findByIdAndDelete(leadService.findById("selfRegistration"));
-    taskService.drop();
-    scheduleService.findByIdAndDelete(studentClean.getId());
+    studentService.findByIdAndDelete(studentClean.getId());
     parentService.findByIdAndDelete(parentClean.getId());
     familyService.findByIdAndDelete(familyClean.getId());
+    taskService.drop();
+  }
+
+  private void checkStudent(Students before, Students after, StudentData student) {
+    app.trStudent()
+        .newStudent(
+            studentClean.getId(),
+            student.getFirstname(),
+            student.getLastname(),
+            "expert",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            familyClean.getId());
+    StudentData studentAdd = studentService.findById(studentClean.getId());
+    for (StudentData studentBefore : before) {
+      if (studentBefore.getId().equals(studentClean.getId())) {
+        assertThat(after, equalTo(before.without(studentBefore).withAdded(studentAdd)));
+        return;
+      }
+    }
+  }
+
+  private void checkParent(Parents before, Parents after) {
+    app.trParent()
+        .newParent(
+            parentClean.getId(),
+            "Лид",
+            "Лидов",
+            "BY",
+            "Europe/Minsk",
+            "ru",
+            familyClean.getId(),
+            "123456789",
+            "mail@list.ru",
+            true);
+    ParentData parentAdd = parentService.findById(parentClean.getId());
+    for (ParentData parentBefore : before) {
+      if (parentBefore.getId().equals(parentClean.getId())) {
+        assertThat(after, equalTo(before.without(parentBefore).withAdded(parentAdd)));
+        return;
+      }
+    }
+  }
+
+  private void checkLead(Leads before, Leads after) {
+    app.trLead()
+        .leadParent(
+            "selfRegistration",
+            "Лид",
+            "Лидов",
+            "parent",
+            "BY",
+            "Europe/Minsk",
+            "ru",
+            "+7859561122",
+            "mail@list.ru",
+            "success",
+            "site",
+            "manual");
+
+    LeadData leadAdd = leadService.findById("selfRegistration");
+    for (LeadData leadBefore : before) {
+      if (leadBefore.getId().equals("selfRegistration")) {
+        assertThat(after, equalTo(before.without(leadBefore).withAdded(leadAdd)));
+        return;
+      }
+    }
   }
 }

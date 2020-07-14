@@ -7,6 +7,7 @@ import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
+import io.itgen.model.users.Emails;
 import io.itgen.model.users.Services;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,9 @@ public class ParentData {
 
   @Embedded
   private List<Contacts> contacts = new ArrayList<Contacts>();
+
+  @Embedded
+  private List<Emails> emails = new ArrayList<Emails>();
 
   @Expose
   @Transient
@@ -140,6 +144,11 @@ public class ParentData {
 
   public ParentData withContacts(List<Contacts> contacts) {
     this.contacts = contacts;
+    return this;
+  }
+
+  public ParentData withEmails(List<Emails> emails) {
+    this.emails = emails;
     return this;
   }
 
@@ -250,6 +259,10 @@ public class ParentData {
 
   public List<Contacts> getContacts() {
     return contacts;
+  }
+
+  public List<Emails> getEmails() {
+    return emails;
   }
 
   public String getPhone() {
