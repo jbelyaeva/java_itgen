@@ -2,6 +2,7 @@ package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
+import io.itgen.appmanager.tranzactionHelper.TrLeadHelper;
 import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTodayHelper;
 import io.itgen.appmanager.tranzactionHelper.schedule.TrScheduleTomorrowHelper;
 import io.itgen.appmanager.tranzactionHelper.TrStudentHelper;
@@ -55,6 +56,7 @@ public class ApplicationManager {
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
   private TrStudentHelper tranzactionStudentHelper;
+  private TrLeadHelper tranzactionLeadHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -73,6 +75,7 @@ public class ApplicationManager {
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
     tranzactionStudentHelper = new TrStudentHelper();
+    tranzactionLeadHelper = new TrLeadHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -206,7 +209,12 @@ public class ApplicationManager {
     return tranzactionStudentHelper;
   }
 
+  public TrLeadHelper trLead() {
+    return tranzactionLeadHelper;
+  }
+
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
-}
+
+ }

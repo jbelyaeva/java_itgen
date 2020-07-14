@@ -22,6 +22,10 @@ public class TaskService {
     return taskDao.findByIdAndDeleteTask(leadNew);
   }
 
+  public void drop() {
+    taskDao.drop();
+  }
+
   public void save(TaskData task) {
     taskDao.save(task);
   }

@@ -1,16 +1,14 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.StudentData;
+import io.itgen.model.Students;
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.itgen.model.StudentData;
-import io.itgen.model.Students;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.testng.annotations.BeforeMethod;
 
 public class StudentHelper extends HelperBase {
 
@@ -214,11 +212,12 @@ public class StudentHelper extends HelperBase {
   }
 
   public StudentData getNewStudentDB(Students before, Students after) {
-    StudentData studentNew=null;
+    StudentData studentNew = null;
     for (StudentData studentListAfter : after) {
       if (!before.contains(studentListAfter)) {
-        studentNew=studentListAfter;
-        break;}
+        studentNew = studentListAfter;
+        break;
+      }
     }
     return studentNew;
   }
@@ -237,7 +236,7 @@ public class StudentHelper extends HelperBase {
     if (list.size() > 0) {
       wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
-      // если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      // если студент не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin =
             wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
@@ -250,5 +249,12 @@ public class StudentHelper extends HelperBase {
       }
     }
   }
+
+
+  public void logout() {
+    click(By.xpath("//div[@class='arrow']"));
+    click(By.xpath("//ul[contains(@class,'list')]/li[4]"));
+  }
+
 
 }

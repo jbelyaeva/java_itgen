@@ -1,5 +1,6 @@
 package io.itgen.dao;
 
+import com.mongodb.WriteResult;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.model.LeadData;
@@ -33,6 +34,13 @@ public class TaskDao {
     Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkLead", lead.getId());
     TaskData task = datastore.findAndDelete(query);
     return task;
+  }
+
+  public void drop () {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TaskData> query = datastore.createQuery(TaskData.class);
+    WriteResult task = datastore.delete(query);
+
   }
 
 }

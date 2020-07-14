@@ -40,7 +40,7 @@ public class CancelOnRegular extends TestBase {
             period, "LkCancelRegularSchedule", "14", "LkCancelRegularSchedule", "1", "ru");
   }
 
-  @Test()
+  @Test
   public void testCancelOnRegular() {
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelLessonsInRegularSchedule();

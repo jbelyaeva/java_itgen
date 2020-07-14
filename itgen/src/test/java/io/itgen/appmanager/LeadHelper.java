@@ -43,7 +43,8 @@ public class LeadHelper extends HelperBase {
   public void assertDeleteSelectedLead() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    Assert.assertFalse(isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
+    Assert.assertFalse(
+        isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }
 
   public void btnPencil() {
@@ -59,7 +60,9 @@ public class LeadHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-timezone"), leadData.getTimezone());
     dropDownList(By.cssSelector("#profile-locale"), leadData.getLocate());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), leadData.getPhone());
-    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "julja+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(
+        By.cssSelector("input[name=\"profile-contact-email\"]"),
+        "julja+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), leadData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), leadData.getViber());
     type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), leadData.getC2d());
@@ -81,7 +84,9 @@ public class LeadHelper extends HelperBase {
     dropDownList(By.cssSelector("#profile-timezone"), leadData.getTimezone());
     dropDownList(By.cssSelector("#profile-locale"), leadData.getLocate());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), leadData.getPhone());
-    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "julja+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(
+        By.cssSelector("input[name=\"profile-contact-email\"]"),
+        "julja+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), leadData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), leadData.getViber());
     type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), leadData.getC2d());
@@ -94,16 +99,16 @@ public class LeadHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), leadData.getInst());
   }
 
-
   public void selectLeadInListUIById(String id) {
-    //находим пагинатор
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    //есть ли на первой странице наш студент
+    // находим пагинатор
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    // есть ли на первой странице наш студент
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
     if (list.size() > 0) {
       wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
     } else {
-      //если студентк не на первой странице, надо нажать пагинатор, пока не найдем
+      // если студентк не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
         if (list_pagin.size() > 0) {
@@ -123,12 +128,15 @@ public class LeadHelper extends HelperBase {
     noErrorMessage();
   }
 
-  //работник с пагинацией
+  // работник с пагинацией
   public List<LeadData> list() {
     List<LeadData> leads = new ArrayList<LeadData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));//ждать пока не появится элемент
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    wait.until(
+        ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//ul[@class='pagination']//li[2]"))); // ждать пока не появится элемент
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.xpath("//a[contains(@href,'/leads/')]"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
@@ -147,19 +155,22 @@ public class LeadHelper extends HelperBase {
     for (WebElement element : elements) {
       String getId = element.getAttribute("href");
       String[] getIdSplit = getId.split("/");
-      String id = getIdSplit[4]; //достали id
+      String id = getIdSplit[4]; // достали id
       String name = element.getText();
-      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-      LeadData lead = new LeadData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      String[] name_surname = name.split("\\s"); // разрезали Имя Фамилия
+      LeadData lead =
+          new LeadData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
       leads.add(lead);
     }
   }
+
   public LeadData getNewLeadDB(Leads before, Leads after) {
-    LeadData leadNew=null;
+    LeadData leadNew = null;
     for (LeadData leadListAfter : after) {
       if (!before.contains(leadListAfter)) {
-        leadNew=leadListAfter;
-        break;}
+        leadNew = leadListAfter;
+        break;
+      }
     }
     return leadNew;
   }

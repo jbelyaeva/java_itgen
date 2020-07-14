@@ -29,6 +29,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'joda-time:joda-time:2.10.6'
+    compile group: 'commons-net', name: 'commons-net', version: '3.6'
+    compile 'ru.lanwen.verbalregex:java-verbal-expressions:1.4'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
+    compile 'org.subethamail:subethasmtp:3.1.7'
 
     compile 'dev.morphia.morphia:core:1.5.8'
     implementation 'org.mongodb:mongo-java-driver:3.12.4'
@@ -39,7 +43,6 @@ dependencies {
     implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
 
 }
-
 
 // решение проблемы:
 // SLF4J: Class path contains multiple SLF4J bindings

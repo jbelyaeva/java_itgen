@@ -1,9 +1,13 @@
 package io.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.*;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
-
+import io.itgen.model.users.Services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -86,7 +90,6 @@ public class ParentData {
   @Transient
   private String inst;
 
-
   @Property("familyId")
   private String familyId;
 
@@ -96,6 +99,9 @@ public class ParentData {
 
   @Property("roles")
   private List<String> roles = new ArrayList<>();
+
+  @Embedded("services")
+  private Services services;
 
   public ParentData withId(String id) {
     this.id = id;
@@ -207,6 +213,11 @@ public class ParentData {
     return this;
   }
 
+  public ParentData withServices(Services services) {
+    this.services = services;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -297,6 +308,9 @@ public class ParentData {
     return roles;
   }
 
+  public Services getServices() {
+    return services;
+  }
 
   /* toString(), hashCode() & equals() */
 
@@ -311,6 +325,7 @@ public class ParentData {
             ", timeZone='" + timeZone + '\'' +
             ", locate='" + locate + '\'' +
             ", note='" + note + '\'' +
+            ", services='" + services + '\'' +
             '}';
   }
 
