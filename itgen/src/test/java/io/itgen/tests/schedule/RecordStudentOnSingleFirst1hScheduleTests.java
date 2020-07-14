@@ -28,14 +28,18 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RecordStudentOnSingleFirst1hScheduleTests extends TestBase {
+  ScheduleService scheduleService = new ScheduleService();
+  StudentService studentService = new StudentService();
+  FamilyService familyService = new FamilyService();
+  TaskService taskService = new TaskService();
+  TimeGeneral time = new TimeGeneral();
+
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   String name = "Маша Машина";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule = new ScheduleData()
             .withId("recordOnSchedule")
             .withVer(0)
@@ -48,11 +52,9 @@ public class RecordStudentOnSingleFirst1hScheduleTests extends TestBase {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1").withOneTime(true);
     scheduleService.save(schedule);
-    FamilyService familyService = new FamilyService();
     FamilyData family = new FamilyData().withId("recordOnSchedule").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
-    StudentService studentService = new StudentService();
     StudentData student = new StudentData().withId("recordOnSchedule").withFirstName("Маша").withLastName("Машина")
             .withRoles(Arrays.asList("child"))
             .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
@@ -78,11 +80,8 @@ public class RecordStudentOnSingleFirst1hScheduleTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    ScheduleService scheduleService = new ScheduleService();
     scheduleService.findByIdAndDelete("recordOnSchedule");
-    StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("recordOnSchedule");
-    FamilyService familyService = new FamilyService();
     familyService.findByIdAndDelete("recordOnSchedule");
     Tasks tasks = app.dbschedules().tasksComposition("recordOnSchedule");
     TaskService taskService = new TaskService();
@@ -92,7 +91,6 @@ public class RecordStudentOnSingleFirst1hScheduleTests extends TestBase {
   }
 
   private void check(Schedules before, Schedules after) {
-    TimeGeneral time = new TimeGeneral();
     ScheduleData scheduleAdd = new ScheduleData()
             .withId("recordOnSchedule")
             .withVer(0)

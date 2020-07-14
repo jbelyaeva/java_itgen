@@ -1,6 +1,7 @@
 package io.itgen.tests.schedule;
-//автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
-//начальные данные: период, id тренера
+// автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и
+// на все
+// начальные данные: период, id тренера
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
@@ -28,41 +29,59 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
+  ScheduleService scheduleService = new ScheduleService();
+  StudentService studentService = new StudentService();
+  FamilyService familyService = new FamilyService();
+  TaskService taskService = new TaskService();
+  TimeGeneral time = new TimeGeneral();
+
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   String name = "Маша Машина";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    TimeGeneral time = new TimeGeneral();
-    ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("recordStudentOnLesson")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
-    FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("recordStudent").withTrialBonusOff(false).withTierId("txa");
+
+    FamilyData family =
+        new FamilyData().withId("recordStudent").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
-    StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("recordStudent").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("child","donator"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("recordStudent").withStudyLang("ru").withLocate("ru")
+    StudentData student =
+        new StudentData()
+            .withId("recordStudent")
+            .withFirstName("Маша")
+            .withLastName("Машина")
+            .withRoles(Arrays.asList("child", "donator"))
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("recordStudent")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
   @Test
@@ -78,14 +97,10 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("recordStudentOnLesson");
-    StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("recordStudent");
-    FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("recordStudent");
+        scheduleService.findByIdAndDelete("recordStudentOnLesson");
+       studentService.findByIdAndDelete("recordStudent");
+       familyService.findByIdAndDelete("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
-    TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDeleteTask(taskClean.getId());
     }
@@ -93,18 +108,28 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
-    ScheduleData scheduleAdd = new ScheduleData()
+    ScheduleData scheduleAdd =
+        new ScheduleData()
             .withId("recordStudentOnLesson")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                            .withId("14") //18
-                            .withW(time.date())
-                            .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                            .withC(Arrays.asList(new C().withId("recordStudent").withType(3).withSubject("1")
-                                    .withLang("ru").withTrial(true)))))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14") // 18
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("recordStudent")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withTrial(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
@@ -113,6 +138,4 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
       }
     }
   }
-
 }
-

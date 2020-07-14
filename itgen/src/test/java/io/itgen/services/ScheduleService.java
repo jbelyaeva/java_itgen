@@ -6,8 +6,7 @@ import io.itgen.model.ScheduleData;
 public class ScheduleService {
   private ScheduleDao scheduleDao = new ScheduleDao();
 
-  public ScheduleService() {
-  }
+  public ScheduleService() {}
 
   public ScheduleData findByIdAndDelete(String id) {
     return scheduleDao.findByIdAndDelete(id);
@@ -21,7 +20,11 @@ public class ScheduleService {
     scheduleDao.save(schedule);
   }
 
-  public ScheduleData findById (String id) {
+  public ScheduleData findById(String id) {
     return scheduleDao.findById(id);
+  }
+
+  public void drop() {
+    scheduleDao.drop();
   }
 }

@@ -1,14 +1,12 @@
 package io.itgen.dao;
 
+import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
+
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
-
 import java.util.List;
-import org.bson.types.ObjectId;
-
-import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class ScheduleDao {
 
@@ -21,8 +19,7 @@ public class ScheduleDao {
 
   public ScheduleData findByIdAndDelete(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class)
-            .filter("id", id);
+    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class).filter("id", id);
     ScheduleData schedule = datastore.findAndDelete(query);
     return schedule;
   }
@@ -42,5 +39,9 @@ public class ScheduleDao {
     datastore.delete(schedule);
   }
 
+  public void drop() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class);
+    datastore.delete(query);
+  }
 }
-

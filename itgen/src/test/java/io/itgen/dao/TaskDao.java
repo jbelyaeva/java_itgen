@@ -39,8 +39,7 @@ public class TaskDao {
   public void drop () {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class);
-    WriteResult task = datastore.delete(query);
-
+    datastore.delete(query);
   }
 
 }
