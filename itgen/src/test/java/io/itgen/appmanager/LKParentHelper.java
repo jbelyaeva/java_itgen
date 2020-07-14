@@ -332,4 +332,8 @@ public class LKParentHelper extends HelperBase {
   public void btnClickHistory() {
     click(By.xpath("//div[contains(@class,'btn-toggle')]"));
   }
+
+  public void clickByFullArea() {
+    click(By.xpath("//div[@class='course-selection-page']"));
+  }
 }
