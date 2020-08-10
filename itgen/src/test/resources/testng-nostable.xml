@@ -6,6 +6,7 @@
       <class name="io.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests"/>
       <class name="io.itgen.tests.schedule.ScheduleBadMoveTests"/>
       <class name="io.itgen.tests.FamilyDeletionTests"/>
+      <class name="io.itgen.tests.screenShot.SshotFamily"/>
     </classes>
   </test>
 </suite>
