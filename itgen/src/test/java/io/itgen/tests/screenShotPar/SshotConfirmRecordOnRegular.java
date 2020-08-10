@@ -53,8 +53,13 @@ public class SshotConfirmRecordOnRegular extends TestBase {
     locatorIgnor.add(By.xpath("//p[@class='user']"));
     locatorIgnor.add(By.xpath("//div[@class='DayPickerInput']//input"));
     locatorIgnor.add(By.xpath("//span[@class='selected-icon']"));
-    locatorIgnor.add(By.xpath("//strong"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+
+    String[] deleteElements={
+        "//strong"
+    };
+
+    app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =
         app.sshot()

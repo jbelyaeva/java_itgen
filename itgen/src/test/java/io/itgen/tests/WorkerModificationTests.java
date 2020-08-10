@@ -4,6 +4,7 @@ package io.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.TimeGeneral;
 import io.itgen.model.users.Contacts;
 import io.itgen.services.WorkerService;
 import org.testng.annotations.AfterMethod;
@@ -47,10 +48,13 @@ public class WorkerModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     WorkerService workerService = new WorkerService();
+    TimeGeneral time = new TimeGeneral();
     modifydWorker = new WorkerData().withId("workerModify").withFirstName("Маша").withLastName("Машина")
             .withRoles(Arrays.asList("employee"))
             .withCountry("AL").withTimeZone("Europe/Minsk")
             .withLocate("ru")
+            .withGender(2)
+            .withStartDay(new Date())
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
             .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
