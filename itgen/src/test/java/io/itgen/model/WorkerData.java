@@ -143,7 +143,7 @@ public class WorkerData {
     return this;
   }
 
-  public WorkerData withStartWork(Date startDay) {
+  public WorkerData withStartDay(Date startDay) {
     this.startDay = startDay;
     return this;
   }

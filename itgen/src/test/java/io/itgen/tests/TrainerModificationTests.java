@@ -64,7 +64,7 @@ public class TrainerModificationTests extends TestBase {
             .withCreatedAt(new Date())
             .withGender(2)
             .withMaxSlots(4)
-            .withPayBase(5)
+            .withPayBase(5.5)
             .withLangs(Arrays.asList("ru"))
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
@@ -75,7 +75,7 @@ public class TrainerModificationTests extends TestBase {
     trainerService.save(modifyTrainer);
   }
 
-  @Test(dataProvider = "validWorkersTrainersFromJson", enabled = false)
+  @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testTrainerModification(TrainerData trainer) {
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();

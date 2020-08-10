@@ -79,7 +79,7 @@ public class TrainerData {
 
   @Expose
   @Property("payBase")
-  private Integer payBase;
+  private Double payBase;
 
   @Embedded
   private List<Contacts> contacts = new ArrayList<Contacts>();
@@ -214,7 +214,7 @@ public class TrainerData {
     return this;
   }
 
-  public TrainerData withPayBase(Integer payBase) {
+  public TrainerData withPayBase(Double payBase) {
     this.payBase = payBase;
     return this;
   }
@@ -365,7 +365,7 @@ public class TrainerData {
     return city;
   }
 
-  public Integer getPayBase() {
+  public Double getPayBase() {
     return payBase;
   }
 

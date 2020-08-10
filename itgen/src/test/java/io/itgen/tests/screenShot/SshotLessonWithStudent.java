@@ -105,7 +105,8 @@ public class SshotLessonWithStudent extends TestBase {
     locatorIgnor.add(By.xpath("//p"));
 
     String[] deleteElements={
-        "//p[contains(@class,'start-info')]"
+        "//p[contains(@class,'start-info')]",
+        "//div[@class='text-capitalize'][2]"
     };
 
     app.goTo().menuTasks();
