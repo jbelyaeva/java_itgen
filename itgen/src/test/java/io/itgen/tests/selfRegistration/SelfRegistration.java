@@ -132,7 +132,7 @@ public class SelfRegistration extends TestBase {
     leadService.findByIdAndDelete(leadService.findById("selfRegistration"));
     studentService.findByIdAndDelete(studentClean.getId());
     parentService.findByIdAndDelete(parentClean.getId());
-    familyService.findByIdAndDelete(familyClean.getId());
+    if (!familyClean.getId().equals("111")) familyService.findByIdAndDelete(familyClean.getId());
     taskService.drop();
   }
 
