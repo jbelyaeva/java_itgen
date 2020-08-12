@@ -4,6 +4,7 @@ import io.itgen.appmanager.dbHelpers.DbHelper;
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import io.itgen.appmanager.dbHelpers.DbHelperStudents;
+import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
 import io.itgen.appmanager.transactionHelper.TrParentHelper;
 import io.itgen.appmanager.transactionHelper.TrStudentHelper;
@@ -58,6 +59,7 @@ public class ApplicationManager {
   private TrStudentHelper transactionStudentHelper;
   private TrLeadHelper transactionLeadHelper;
   private TrParentHelper transactionParentHelper;
+  private TrFamilyHelper transactionFamilyHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -78,6 +80,7 @@ public class ApplicationManager {
     transactionStudentHelper = new TrStudentHelper();
     transactionLeadHelper = new TrLeadHelper();
     transactionParentHelper = new TrParentHelper();
+    transactionFamilyHelper = new TrFamilyHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -217,6 +220,10 @@ public class ApplicationManager {
 
   public TrParentHelper trParent() {
     return transactionParentHelper;
+  }
+
+  public TrFamilyHelper trFamily() {
+    return transactionFamilyHelper;
   }
 
   public byte[] takeScreenshot() {

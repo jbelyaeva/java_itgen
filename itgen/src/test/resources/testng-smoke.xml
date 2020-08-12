@@ -58,6 +58,7 @@
       <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests"/>
       <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests"/>
       <class name="io.itgen.tests.selfRegistration.SelfRegistration"/>
+      <class name="io.itgen.tests.payment.PaymentByAdmin"/>
     </classes>
   </test>
 </suite>
