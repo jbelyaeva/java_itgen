@@ -48,12 +48,10 @@ public class PaymentByAdmin extends TestBase {
   public void testPaymentByAdmin() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    app.student().paymentAdmin("paymentAdminChild");
-   //мокать ответ с сервера, что платеж прошел
-    //должен пополниться баланс семьи
-    //проверка, что пополнился
-    
-  //  assertThat(app.student().findPictureSuccessPay(), equalTo(true)); разкоментить, когда будут права
+    app.payment().paymentAdmin("paymentAdminChild");
+    //  assertThat(app.student().findPictureSuccessPay(), equalTo(true)); разкоментить, когда будут
+    // права
+    // добавить проверку на пополнение баланса, когда будут права
 
   }
 

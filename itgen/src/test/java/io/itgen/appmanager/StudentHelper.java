@@ -256,44 +256,5 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//ul[contains(@class,'list')]/li[4]"));
   }
 
-  public void btnPay() {
-    click(By.xpath("//a[contains(@href,'/pay/')]"));
-  }
 
-  public void btnPay4Lessons() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//div[@class='family-product-item'][1]//a")));
-    dynamicElement.click();
-  }
-
-  public void fillTestCard() {
-    type(By.id("request_credit_card_number_1"), "4200");
-    type(By.id("request_credit_card_number_2"), "0000");
-    type(By.id("request_credit_card_number_3"), "0000");
-    type(By.id("request_credit_card_number_4"), "0000");
-    type(By.id("request_credit_card_exp_month"), "01");
-    type(By.id("request_credit_card_exp_year"), "25");
-    type(By.xpath("//input[contains(@placeholder,'IVAN')]"), "IVAN IVANOV");
-    type(By.xpath("//input[contains(@placeholder,'CVC')]"), "123");
-    type(By.xpath("//input[contains(@type,'email')]"), "julja@list.ru");
-    click(By.xpath("//input[contains(@name,'commit')]"));
-  }
-
-  public void paymentAdmin(String id) {
-    selectStudentInListUIById(id);
-    btnFamily();
-    btnPay();
-    btnPay4Lessons();
-    fillTestCard();
-  }
-
-  public Boolean findPictureSuccessPay(){
-    wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-    if (isElementPresent(By.xpath("//img[contains(@alt,'Success')]"))) return true;
-
-    return false;
-  }
 }

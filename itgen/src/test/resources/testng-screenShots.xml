@@ -11,6 +11,8 @@
       <class name="io.itgen.tests.screenShot.SshotListTrainers"/>
       <class name="io.itgen.tests.screenShot.SshotListWorkers"/>
       <class name="io.itgen.tests.screenShot.SshotWindowSchedule"/>
+      <class name="io.itgen.tests.screenShot.SshotPayByAdminCard"/>
+      <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
     </classes>
   </test>
 </suite>
