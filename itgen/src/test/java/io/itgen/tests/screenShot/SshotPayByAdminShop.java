@@ -25,6 +25,7 @@ public class SshotPayByAdminShop extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdminShop("21");
+    app.sshot().changeTopBar();
 
     ImageDiff diff =
         app.sshot()
