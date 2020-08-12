@@ -23,7 +23,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 public class SshotPayByAdminShop extends TestBase {
 
   @Test
-  public void testSshotListStudents() throws AWTException, IOException {
+  public void testSshotPayByAdminShop() throws AWTException, IOException {
     String name = "Admin_PayShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
 
