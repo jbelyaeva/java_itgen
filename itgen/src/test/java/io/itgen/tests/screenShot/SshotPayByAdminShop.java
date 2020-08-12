@@ -5,9 +5,6 @@ package io.itgen.tests.screenShot;
 */
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.services.FamilyService;
-import io.itgen.services.ParentService;
-import io.itgen.services.StudentService;
 import io.itgen.tests.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -15,8 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
@@ -40,6 +35,6 @@ public class SshotPayByAdminShop extends TestBase {
                 name,
                 locatorIgnor);
     Assert.assertEquals(diff.getDiffSize(), 0);
+    app.payment().goToBack("paymentAdmin");
   }
-
 }

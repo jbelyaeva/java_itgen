@@ -75,4 +75,7 @@ public class PaymentHelper extends HelperBase {
     fillTestCard();
     }
 
+  public void goToBack(String id) {
+    wd.get("http://localhost:3000/family/"+id+"");
+  }
 }
