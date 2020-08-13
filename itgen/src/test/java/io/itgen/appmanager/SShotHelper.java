@@ -42,7 +42,7 @@ public class SShotHelper extends HelperBase {
             .coordsProvider(new WebDriverCoordsProvider())
             .ignoredElements(locatorIgnor)
             .shootingStrategy(
-                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 150))
+                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 350))
             .takeScreenshot(wd);
     Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();
 

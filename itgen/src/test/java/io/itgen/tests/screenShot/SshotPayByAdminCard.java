@@ -35,7 +35,7 @@ public class SshotPayByAdminCard extends TestBase {
                 name,
                 locatorIgnor);
 
-    if (diff.getDiffSize() > 20) {
+    if (diff.getDiffSize() > 25) {
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
     app.payment().goToBack("paymentAdmin");
