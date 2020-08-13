@@ -116,7 +116,7 @@ public class SelfRegistration extends TestBase {
 
     studentClean = app.student().getNewStudentDB(studentsBefore, studentsAfter);
     parentClean = app.parent().getNewParentDB(parentsBefore, parentsAfter);
-    familyClean = app.family().getNewFamilyDB(familyAfter);
+    familyClean = app.db().lastFamily();
 
     assertThat(leadsAfter.size(), equalTo(leadsBefore.size()));
     assertThat(studentsAfter.size(), equalTo(studentsBefore.size() + 1));

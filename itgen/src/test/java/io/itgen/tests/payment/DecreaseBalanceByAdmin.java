@@ -19,6 +19,7 @@ public class DecreaseBalanceByAdmin extends TestBase {
   PaymentService paymentService = new PaymentService();
   FamilyService familyService = new FamilyService();
   StudentService studentService = new StudentService();
+  PaymentData paymentNew = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -57,7 +58,7 @@ public class DecreaseBalanceByAdmin extends TestBase {
     Payments before = app.db().payments("decreaseAdmin");
     app.payment().decreaseAdmin("decreaseAdminChild", "-1");
     Payments after = app.db().payments("decreaseAdmin");
-    PaymentData paymentNew = app.payment().getNewPaymentDB(before, after);
+    paymentNew = app.payment().getNewPaymentDB(before, after);
     checkDB(after, paymentNew.getId());
   }
 
@@ -66,6 +67,7 @@ public class DecreaseBalanceByAdmin extends TestBase {
     familyService.findByIdAndDelete("decreaseAdmin");
     studentService.findByIdAndDelete("decreaseAdminChild");
     parentService.findByIdAndDelete("decreaseAdminParent");
+    paymentService.findByIdAndDelete(paymentNew.getId());
   }
 
   private void checkDB(Payments after, String id) {

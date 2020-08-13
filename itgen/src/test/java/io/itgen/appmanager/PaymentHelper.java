@@ -82,7 +82,7 @@ public class PaymentHelper extends HelperBase {
 
   public void goToBack(String id) {
     wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-    wd.get("http://localhost:3000/family/" + id + "");
+    wd.get("http://localhost:3000/family/" + id);
   }
 
   public void goToShopByParent() {

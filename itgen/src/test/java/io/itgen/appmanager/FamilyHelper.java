@@ -2,7 +2,11 @@ package io.itgen.appmanager;
 
 import io.itgen.model.Families;
 import io.itgen.model.FamilyData;
+import io.itgen.model.PaymentData;
+import io.itgen.model.Payments;
 import io.itgen.model.Students;
+import io.itgen.model.schedule.ST;
+import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -157,7 +161,9 @@ public class FamilyHelper extends HelperBase {
   }
 
   public FamilyData getNewFamilyDB(Families after) {
-    FamilyData familyNew = after.iterator().next();
-    return familyNew;
+
+   return after.iterator().next();
   }
+
+
 }

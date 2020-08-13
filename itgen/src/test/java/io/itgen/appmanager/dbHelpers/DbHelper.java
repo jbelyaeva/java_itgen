@@ -29,6 +29,15 @@ public class DbHelper {
     return new Families(family);
   }
 
+  public FamilyData lastFamily() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<FamilyData> q = datastore.createQuery(FamilyData.class);
+    long count=q.count();
+    List<FamilyData> family = q.find().toList();
+    FamilyData lastFamily = family.get(Math.toIntExact(count - 1));
+    return lastFamily;
+  }
+
   public Students familyComposition(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> q = datastore.createQuery(StudentData.class);
