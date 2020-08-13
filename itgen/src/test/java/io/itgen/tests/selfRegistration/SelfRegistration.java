@@ -114,8 +114,8 @@ public class SelfRegistration extends TestBase {
     Parents parentsAfter = app.db().parents();
     Families familyAfter = app.db().families();
 
-    studentClean = app.student().getNewStudentDB(studentsBefore, studentsAfter);
-    parentClean = app.parent().getNewParentDB(parentsBefore, parentsAfter);
+    studentClean = app.dbstudents().lastStudent();
+    parentClean = app.db().lastParent();
     familyClean = app.db().lastFamily();
 
     assertThat(leadsAfter.size(), equalTo(leadsBefore.size()));
@@ -132,7 +132,7 @@ public class SelfRegistration extends TestBase {
     leadService.findByIdAndDelete(leadService.findById("selfRegistration"));
     studentService.findByIdAndDelete(studentClean.getId());
     parentService.findByIdAndDelete(parentClean.getId());
-    if (!familyClean.getId().equals("111")) familyService.findByIdAndDelete(familyClean.getId());
+    familyService.findByIdAndDelete(familyClean.getId());
     taskService.drop();
   }
 

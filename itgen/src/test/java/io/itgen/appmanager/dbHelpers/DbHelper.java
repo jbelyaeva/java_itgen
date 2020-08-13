@@ -38,6 +38,15 @@ public class DbHelper {
     return lastFamily;
   }
 
+  public ParentData lastParent() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");;
+    long count=q.count();
+    List<ParentData> parent= q.find().toList();
+    ParentData lastParent = parent.get(Math.toIntExact(count - 1));
+    return lastParent;
+  }
+
   public Students familyComposition(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> q = datastore.createQuery(StudentData.class);
