@@ -10,6 +10,8 @@
       <class name="io.itgen.tests.lkParent.CancelOnSingle"/>
       <class name="io.itgen.tests.lkParent.CancelOnRegular"/>
       <class name="io.itgen.tests.lkParent.CancelOneLessonFromRegular"/>
+      <class name="io.itgen.tests.payment.PaymentByGuest"/>
+      <class name="io.itgen.tests.payment.PaymentByParent"/>
     </classes>
   </test>
 </suite>

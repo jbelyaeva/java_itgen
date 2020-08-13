@@ -10,6 +10,8 @@ import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.model.ParentData;
 import io.itgen.model.Parents;
+import io.itgen.model.PaymentData;
+import io.itgen.model.Payments;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import io.itgen.model.TrainerData;
@@ -87,5 +89,12 @@ public class DbHelper {
     Query<LeadData> q = datastore.createQuery(LeadData.class).filter("id", id);
     LeadData lead = q.find().next();
     return lead;
+  }
+
+  public Payments payments(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<PaymentData> q = datastore.createQuery(PaymentData.class).filter("fId", id);
+    List<PaymentData> payments = q.find().toList();
+    return new Payments(payments);
   }
 }

@@ -7,6 +7,7 @@ import io.itgen.appmanager.dbHelpers.DbHelperStudents;
 import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
 import io.itgen.appmanager.transactionHelper.TrParentHelper;
+import io.itgen.appmanager.transactionHelper.TrPaymentHelper;
 import io.itgen.appmanager.transactionHelper.TrStudentHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
@@ -59,6 +60,7 @@ public class ApplicationManager {
   private TrStudentHelper transactionStudentHelper;
   private TrLeadHelper transactionLeadHelper;
   private TrParentHelper transactionParentHelper;
+  private TrPaymentHelper transactionPaymentHelper;
   private TrFamilyHelper transactionFamilyHelper;
 
   public ApplicationManager(String browser) {
@@ -80,6 +82,7 @@ public class ApplicationManager {
     transactionStudentHelper = new TrStudentHelper();
     transactionLeadHelper = new TrLeadHelper();
     transactionParentHelper = new TrParentHelper();
+    transactionPaymentHelper = new TrPaymentHelper();
     transactionFamilyHelper = new TrFamilyHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -140,6 +143,10 @@ public class ApplicationManager {
 
   public DbHelper db() {
     return dbHelper;
+  }
+
+  public SessionHelper session() {
+    return sessionHelper;
   }
 
   public DbHelperStudents dbstudents() {
@@ -220,6 +227,10 @@ public class ApplicationManager {
 
   public TrParentHelper trParent() {
     return transactionParentHelper;
+  }
+
+  public TrPaymentHelper trPayment() {
+    return transactionPaymentHelper;
   }
 
   public TrFamilyHelper trFamily() {

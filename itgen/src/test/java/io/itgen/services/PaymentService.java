@@ -2,6 +2,7 @@ package io.itgen.services;
 
 import io.itgen.dao.PaymentDao;
 import io.itgen.model.PaymentData;
+import io.itgen.model.ScheduleData;
 import io.itgen.model.StudentData;
 
 public class PaymentService {
@@ -22,4 +23,7 @@ public class PaymentService {
     paymentDao.save(payment);
   }
 
+  public PaymentData findById(String id) {
+    return paymentDao.findById(id);
+  }
 }
