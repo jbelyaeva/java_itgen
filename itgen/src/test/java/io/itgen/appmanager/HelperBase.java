@@ -119,4 +119,17 @@ public class HelperBase {
             || isElementPresent(By.cssSelector("[id^=alert]"))
             || isElementPresent(By.xpath("//p[contains(@class,'error')]"))); // проверка появления сообщения об ошибке
   }
+
+  public void logout() {
+    click(By.xpath("//div[@class='head']"));
+    click(By.xpath("(//ul[contains(@class,'Menu')])[2]//li[4]"));
+  }
+
+  public void goByHref(String Url) {
+    wd.get(Url);
+  }
+
+  public String getTextElement(String locator) {
+    return wd.findElement(By.xpath(locator)).getText();
+  }
 }

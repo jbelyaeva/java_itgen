@@ -23,10 +23,10 @@ public class PaymentData {
   private String creator;
 
   @Property("val")
-  private int val ;
+  private int val;
 
   @Property("t")
-  private int t ;
+  private int t;
 
   @Property("desc")
   private String desc;
@@ -34,10 +34,12 @@ public class PaymentData {
   @Property("approved")
   private Boolean approved;
 
-  public PaymentData() {
-  }
+  @Property("money")
+  private int money;
 
-  //setters
+  public PaymentData() {}
+
+  // setters
 
   public PaymentData withId(String id) {
     this.id = id;
@@ -78,7 +80,12 @@ public class PaymentData {
     this.approved = approved;
     return this;
   }
-  //getters
+
+  public PaymentData withMoney(int money) {
+    this.money = money;
+    return this;
+  }
+  // getters
 
   public String getId() {
     return id;
@@ -112,35 +119,51 @@ public class PaymentData {
     return approved;
   }
 
+  public int getMoney() {
+    return money;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     PaymentData payments = (PaymentData) o;
-    return val == payments.val &&
-            t == payments.t &&
-            Objects.equals(id, payments.id) &&
-            Objects.equals(fId, payments.fId) &&
-            Objects.equals(creator, payments.creator) &&
-            Objects.equals(desc, payments.desc) &&
-            Objects.equals(approved, payments.approved);
+    return val == payments.val
+        && t == payments.t
+        && Objects.equals(id, payments.id)
+        && Objects.equals(fId, payments.fId)
+        && Objects.equals(creator, payments.creator)
+        && Objects.equals(desc, payments.desc)
+        && Objects.equals(approved, payments.approved)
+        && Objects.equals(money, payments.money);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fId, creator, val, t, desc, approved);
+    return Objects.hash(id, fId, creator, val, t, desc, approved, money);
   }
 
   @Override
   public String toString() {
-    return "Payments{" +
-            "id='" + id + '\'' +
-            ", fId='" + fId + '\'' +
-            ", creator='" + creator + '\'' +
-            ", val=" + val +
-            ", t=" + t +
-            ", desc='" + desc + '\'' +
-            ", approved=" + approved +
-            '}';
+    return "Payments{"
+        + "id='"
+        + id
+        + '\''
+        + ", fId='"
+        + fId
+        + '\''
+        + ", creator='"
+        + creator
+        + '\''
+        + ", val="
+        + val
+        + ", t="
+        + t
+        + ", desc='"
+        + desc
+        + '\''
+        + ", approved="
+        + approved
+        + '}';
   }
 }
