@@ -54,6 +54,7 @@ public class ApplicationManager {
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
+  private MaterialHelper materialHelper;
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
@@ -117,6 +118,7 @@ public class ApplicationManager {
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
+    materialHelper = new MaterialHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
@@ -203,6 +205,10 @@ public class ApplicationManager {
 
   public PaymentHelper payment() {
     return paymentHelper;
+  }
+
+  public MaterialHelper material() {
+    return materialHelper;
   }
 
   public TrScheduleTomorrowHelper trScheduleTomorrow() {

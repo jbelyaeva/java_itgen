@@ -47,4 +47,6 @@ public class NavigationHelper extends HelperBase {
   public void menuRequests() { click(By.xpath("//a[contains(@href, '/requests')]"));
   }
 
- }
+  public void menuMaterials() { click(By.xpath("//a[contains(@href, '/materials')]"));
+  }
+}
