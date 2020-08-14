@@ -25,7 +25,7 @@ public class PaymentHelper extends HelperBase {
 
   public void btnPay4Lessons() {
     WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
+        (new WebDriverWait(wd, 20))
             .until(
                 ExpectedConditions.elementToBeClickable(
                     By.xpath("//div[@class='family-product-item'][1]//a")));
