@@ -20,7 +20,7 @@ public class SshotMain extends TestBase {
     app.lkParent().btnClickHistory();
     app.sshot().changeTopBar();
 
-    ImageDiff diff =
+    ImageDiff diffFirst =
         app.sshot()
             .getImageDiff(
                 ApplicationManager.properties.getProperty("expected"),
@@ -28,9 +28,18 @@ public class SshotMain extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor);
-
-    if (diff.getDiffSize() > 100) { // погрешность
-      Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diffFirst.getDiffSize() > 0) {
+      ImageDiff diffSecond =
+          app.sshot()
+              .getImageDiff(
+                  ApplicationManager.properties.getProperty("expected"),
+                  ApplicationManager.properties.getProperty("actual"),
+                  ApplicationManager.properties.getProperty("markedImages"),
+                  name,
+                  locatorIgnor);
+      Assert.assertEquals(diffSecond.getDiffSize(), 0);
+    } else {
+      Assert.assertEquals(diffFirst.getDiffSize(), 0);
     }
   }
 }
