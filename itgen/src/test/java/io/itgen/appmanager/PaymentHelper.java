@@ -33,6 +33,11 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void fillTestCard() {
+     new WebDriverWait(wd, 10)
+         .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.id("request_credit_card_number_1")));
+    type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_2"), "0000");
     type(By.id("request_credit_card_number_3"), "0000");
