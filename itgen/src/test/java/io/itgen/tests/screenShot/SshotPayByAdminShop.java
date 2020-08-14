@@ -27,7 +27,7 @@ public class SshotPayByAdminShop extends TestBase {
     app.payment().paymentAdminShop("21");
     app.sshot().changeTopBar();
 
-    ImageDiff diff =
+    ImageDiff diffFirst =
         app.sshot()
             .getImageDiff(
                 ApplicationManager.properties.getProperty("expected"),
@@ -35,7 +35,19 @@ public class SshotPayByAdminShop extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor);
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diffFirst.getDiffSize() > 0) {
+      ImageDiff diffSecond =
+          app.sshot()
+              .getImageDiff(
+                  ApplicationManager.properties.getProperty("expected"),
+                  ApplicationManager.properties.getProperty("actual"),
+                  ApplicationManager.properties.getProperty("markedImages"),
+                  name,
+                  locatorIgnor);
+      Assert.assertEquals(diffSecond.getDiffSize(), 0);
+    } else {
+      Assert.assertEquals(diffFirst.getDiffSize(), 0);
+    }
     app.payment().goToBack("paymentAdmin");
   }
 }
