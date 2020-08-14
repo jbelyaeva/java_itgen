@@ -30,13 +30,12 @@ public class PaymentHelper extends HelperBase {
                 ExpectedConditions.elementToBeClickable(
                     By.xpath("//div[@class='family-product-item'][1]//a")));
     dynamicElement.click();
+    noErrorMessage();
   }
 
   public void fillTestCard() {
-     new WebDriverWait(wd, 10)
-         .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.id("request_credit_card_number_1")));
+    new WebDriverWait(wd, 10)
+        .until(ExpectedConditions.elementToBeClickable(By.id("request_credit_card_number_1")));
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_2"), "0000");
@@ -93,6 +92,7 @@ public class PaymentHelper extends HelperBase {
   public void goToShopByParent() {
     btnPay();
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
+    noErrorMessage();
   }
 
   public String getHrefOnPaymentForGuest() {
@@ -143,6 +143,7 @@ public class PaymentHelper extends HelperBase {
 
   private void btnConfirm() {
     click(By.xpath("//button[contains(@class,'change')]"));
+    noErrorMessage();
   }
 
   private void fillForm(String lessons, String text) {
@@ -158,6 +159,7 @@ public class PaymentHelper extends HelperBase {
 
   private void btnPencil() {
     click(By.xpath("//div[contains(@class,'balance')]//span[contains(@class,'pencil')]"));
+    noErrorMessage();
   }
 
   public PaymentData getNewPaymentDB(Payments before, Payments after) {

@@ -1,5 +1,7 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.PaymentData;
+import io.itgen.model.Payments;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import org.openqa.selenium.By;
@@ -15,26 +17,32 @@ public class ParentHelper extends HelperBase {
 
   public void selectStudent() {
     click(By.cssSelector("a.btn-link"));
+    noErrorMessage();
   }
 
   public void selectParentInFamily() {
     click(By.xpath("(//div[@class='gena-panel-body'])[2]//a"));
+    noErrorMessage();
   }
 
   public void btnSelectFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
+    noErrorMessage();
   }
 
   public void addParentInFamily() {
     click(By.xpath("//div[contains(@class, 'add-parent')]/span"));
+    noErrorMessage();
   }
 
   public void btnDeleteParent() {
     click(By.xpath("//button[contains(@class,'remove-user')]"));
+    noErrorMessage();
   }
 
   public void btnFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
+    noErrorMessage();
   }
 
   public void alertDeleteSelectedParent() {
@@ -55,6 +63,7 @@ public class ParentHelper extends HelperBase {
 
   public void btnModificationParent() {
     click(By.xpath("//span[contains(@class,'pencil')]"));
+    noErrorMessage();
   }
 
   public void create(ParentData parent) {
@@ -92,7 +101,6 @@ public class ParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-
   public void modifyNewParent(ParentData parent) {
     btnModificationParent();
     ModifyParentForm(parent);
@@ -128,13 +136,16 @@ public class ParentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());
     type(By.cssSelector("input[name=\"profile-family-id\"]"), parentData.getFamilyId());
     type(By.cssSelector("textarea[name=\"profile-note\"]"), parentData.getNote());
+    noErrorMessage();
   }
 
   public void fillParentForm(ParentData parentData) {
     type(By.cssSelector("input[name=\"profile-firstName\"]"), parentData.getFirstName());
     type(By.cssSelector("input[name=\"profile-lastName\"]"), parentData.getLastName());
     type(By.cssSelector("input[name=\"profile-contact-phone\"]"), parentData.getPhone());
-    type(By.cssSelector("input[name=\"profile-contact-email\"]"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(
+        By.cssSelector("input[name=\"profile-contact-email\"]"),
+        "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.cssSelector("input[name=\"profile-contact-telegram\"]"), parentData.getTelegram());
     type(By.cssSelector("input[name=\"profile-contact-viber\"]"), parentData.getViber());
     type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), parentData.getC2d());
@@ -145,27 +156,11 @@ public class ParentHelper extends HelperBase {
     type(By.cssSelector("input[name=\"profile-contact-vk\"]"), parentData.getVk());
     type(By.cssSelector("input[name=\"profile-contact-ok\"]"), parentData.getOk());
     type(By.cssSelector("input[name=\"profile-contact-instagram\"]"), parentData.getInst());
+    noErrorMessage();
   }
 
   public String getIdNewParentDB(Parents before, Parents after) {
-    int a = 0;
-    String getIdAfter = "";
-    for (ParentData parent : after) {
-      getIdAfter = parent.getId();
-      for (ParentData parent_before : before) {
-        String getIdBefore = parent_before.getId();
-        if (getIdAfter.equals(getIdBefore)) {
-          a = 1;
-          break;
-        } else {
-          a = 2;
-        }
-      }
-      if (a == 2) {
-        break;
-      }
-    }
-    return getIdAfter;
+    return getNewParentDB(before, after).getId();
   }
 
   public ParentData getNewParentDB(Parents before, Parents after) {

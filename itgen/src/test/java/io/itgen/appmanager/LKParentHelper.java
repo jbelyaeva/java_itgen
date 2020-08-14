@@ -146,6 +146,7 @@ public class LKParentHelper extends HelperBase {
     } else {
       click(By.xpath("//div[@class='picker-item selected']"));
     }
+    noErrorMessage();
   }
 
   public void recordOnSingle() {
@@ -329,6 +330,7 @@ public class LKParentHelper extends HelperBase {
   private void clickCheckBoxAll() {
     for (int i = 1; i < 5; i++) {
       click(By.xpath("(//label)[" + i + "]"));
+      noErrorMessage();
     }
   }
 
@@ -343,14 +345,17 @@ public class LKParentHelper extends HelperBase {
 
   public void btnClickHistory() {
     click(By.xpath("//div[contains(@class,'btn-toggle')]"));
+    noErrorMessage();
   }
 
   public void goHrefActiveLK(String token) {
     wd.get("http://localhost:3000/enrollAccount/" + token + "?locale=ru");
+    noErrorMessage();
   }
 
   public void inputPassword(String password) {
     type(By.xpath("//input[@autocomplete='new-password']"), password);
+    noErrorMessage();
   }
 
   public void btnSave() {
