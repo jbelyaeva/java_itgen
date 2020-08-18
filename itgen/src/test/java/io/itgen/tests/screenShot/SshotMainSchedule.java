@@ -4,7 +4,6 @@ package io.itgen.tests.screenShot;
  * делает снимок, сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка
  * запускаем конфигурацию запуска со свойством -Detalon=true.
  */
-
 import static io.itgen.appmanager.ApplicationManager.properties;
 
 import io.itgen.general.TimeGeneral;
@@ -69,7 +68,8 @@ public class SshotMainSchedule extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

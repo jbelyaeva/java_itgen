@@ -55,9 +55,7 @@ public class SshotConfirmRecordOnRegular extends TestBase {
     locatorIgnor.add(By.xpath("//span[@class='selected-icon']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
-    String[] deleteElements={
-        "//strong"
-    };
+    String[] deleteElements = {"//strong"};
 
     app.sshot().deleteElements(deleteElements);
 
@@ -68,7 +66,8 @@ public class SshotConfirmRecordOnRegular extends TestBase {
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     app.lkParent().btnRecord();
     app.lkParent().btnLogo();
 

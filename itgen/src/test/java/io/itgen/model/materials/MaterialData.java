@@ -52,6 +52,9 @@ public class MaterialData {
   @Embedded("activity")
   private List<Activity> activity = new ArrayList<Activity>();
 
+  @Property("linkedMaterials")
+  private List<String> linkedMaterials = new ArrayList<String>();
+
   @Property("originality")
   private String originality;
 
@@ -121,6 +124,11 @@ public class MaterialData {
 
   public MaterialData withMaterialLink(String materialLink) {
     this.materialLink = materialLink;
+    return this;
+  }
+
+  public MaterialData withLimkedMaterials(List<String> materialLink) {
+    this.linkedMaterials = linkedMaterials;
     return this;
   }
 

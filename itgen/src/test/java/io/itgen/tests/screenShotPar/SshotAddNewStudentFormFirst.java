@@ -56,7 +56,8 @@ public class SshotAddNewStudentFormFirst extends TestBase {
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
 
     app.lkParent().btnLogo();
     if (diff.getDiffSize() > 500) { // погрешность

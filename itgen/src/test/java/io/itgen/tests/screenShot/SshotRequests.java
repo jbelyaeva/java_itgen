@@ -101,7 +101,8 @@ public class SshotRequests extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

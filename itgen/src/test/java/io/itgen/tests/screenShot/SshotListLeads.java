@@ -61,7 +61,8 @@ public class SshotListLeads extends TestBase {
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

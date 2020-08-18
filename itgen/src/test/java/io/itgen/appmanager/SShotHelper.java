@@ -32,7 +32,7 @@ public class SShotHelper extends HelperBase {
   }
 
   public ImageDiff getImageDiff(
-      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor)
+      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor, float dpr)
       throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
@@ -42,7 +42,7 @@ public class SShotHelper extends HelperBase {
             .coordsProvider(new WebDriverCoordsProvider())
             .ignoredElements(locatorIgnor)
             .shootingStrategy(
-                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 350))
+                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), 350))
             .takeScreenshot(wd);
     Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();
 

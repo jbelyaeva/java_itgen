@@ -42,9 +42,24 @@ public class MaterialHelper extends HelperBase {
   }
 
   public void addNewMaterial(MaterialData material) {
-    addNewBranch();
     tabInProgress();
     fillForm(material);
     btnSend();
+  }
+
+  public void addNewMaterialBad(MaterialData material) {
+    tabInProgress();
+    fillForm(material);
+    btnSendBad();
+  }
+
+  private void btnSendBad() {
+    click(By.xpath("//button[contains(@class,'send')]"));
+    thereAreErrorMessages();
+  }
+
+  public void openBranch() {
+    click(By.xpath("//span[@data-branch]"));
+    noErrorMessage();
   }
 }

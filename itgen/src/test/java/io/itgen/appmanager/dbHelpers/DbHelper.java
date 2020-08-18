@@ -18,6 +18,9 @@ import io.itgen.model.TrainerData;
 import io.itgen.model.Trainers;
 import io.itgen.model.WorkerData;
 import io.itgen.model.Workers;
+import io.itgen.model.materials.MaterialBranchData;
+import io.itgen.model.materials.MaterialData;
+import io.itgen.services.MaterialBranchService;
 import java.util.List;
 
 public class DbHelper {
