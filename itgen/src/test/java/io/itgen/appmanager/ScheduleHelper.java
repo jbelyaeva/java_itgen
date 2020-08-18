@@ -95,7 +95,7 @@ public class ScheduleHelper extends HelperBase {
   public void selectScype() {}
 
   public void btnCreate() {
-    click(By.xpath("//button[contains(@class,'btn-primary')]"));
+    click(By.xpath("//div[contains(@class,'footer')]//button"));
   }
 
   public void bntPoints() {
