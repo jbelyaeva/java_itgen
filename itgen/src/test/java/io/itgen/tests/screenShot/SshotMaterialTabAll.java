@@ -64,7 +64,7 @@ public class SshotMaterialTabAll extends TestBase {
                 properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.98f);
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

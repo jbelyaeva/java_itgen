@@ -75,7 +75,7 @@ public class SshotMaterialTabInProcess extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor, 1.98f);
+                locatorIgnor, 1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
