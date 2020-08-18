@@ -1,11 +1,13 @@
 package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelper;
+import io.itgen.appmanager.dbHelpers.DbHelperMaterials;
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import io.itgen.appmanager.dbHelpers.DbHelperStudents;
 import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
+import io.itgen.appmanager.transactionHelper.TrMaterialHelper;
 import io.itgen.appmanager.transactionHelper.TrParentHelper;
 import io.itgen.appmanager.transactionHelper.TrPaymentHelper;
 import io.itgen.appmanager.transactionHelper.TrStudentHelper;
@@ -50,10 +52,12 @@ public class ApplicationManager {
   private DbHelperStudents dbHelperStudents;
   private DbHelperSchedule dbHelperSchedule;
   private DbHelperRequest dbHelperRequest;
+  private DbHelperMaterials dbHelperMaterials;
   private WindowScheduleHelper windowScheduleHalper;
   private RequestHelper requestHalper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
+  private MaterialHelper materialHelper;
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
@@ -62,6 +66,7 @@ public class ApplicationManager {
   private TrParentHelper transactionParentHelper;
   private TrPaymentHelper transactionPaymentHelper;
   private TrFamilyHelper transactionFamilyHelper;
+  private TrMaterialHelper transactionMaterialHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -76,6 +81,7 @@ public class ApplicationManager {
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
     dbHelperRequest = new DbHelperRequest();
+    dbHelperMaterials = new DbHelperMaterials();
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
@@ -84,6 +90,7 @@ public class ApplicationManager {
     transactionParentHelper = new TrParentHelper();
     transactionPaymentHelper = new TrPaymentHelper();
     transactionFamilyHelper = new TrFamilyHelper();
+    transactionMaterialHelper = new TrMaterialHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -117,6 +124,7 @@ public class ApplicationManager {
     requestHalper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
+    materialHelper = new MaterialHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
@@ -159,6 +167,10 @@ public class ApplicationManager {
 
   public DbHelperRequest dbrequest() {
     return dbHelperRequest;
+  }
+
+  public DbHelperMaterials dbmaterial() {
+    return dbHelperMaterials;
   }
 
   public StudentHelper student() {
@@ -205,6 +217,10 @@ public class ApplicationManager {
     return paymentHelper;
   }
 
+  public MaterialHelper material() {
+    return materialHelper;
+  }
+
   public TrScheduleTomorrowHelper trScheduleTomorrow() {
     return trScheduleTomorrowHelper;
   }
@@ -235,6 +251,10 @@ public class ApplicationManager {
 
   public TrFamilyHelper trFamily() {
     return transactionFamilyHelper;
+  }
+
+  public TrMaterialHelper trMaterial() {
+    return transactionMaterialHelper;
   }
 
   public byte[] takeScreenshot() {

@@ -33,7 +33,8 @@ public class SshotPayByAdminCard extends TestBase {
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
 
     if (diff.getDiffSize() > 25) {
       Assert.assertEquals(diff.getDiffSize(), 0);

@@ -104,9 +104,8 @@ public class SshotLessonWithStudent extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
     locatorIgnor.add(By.xpath("//p"));
 
-    String[] deleteElements={
-        "//p[contains(@class,'start-info')]",
-        "//div[@class='text-capitalize'][2]"
+    String[] deleteElements = {
+      "//p[contains(@class,'start-info')]", "//div[@class='text-capitalize'][2]"
     };
 
     app.goTo().menuTasks();
@@ -121,7 +120,8 @@ public class SshotLessonWithStudent extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
   }
 

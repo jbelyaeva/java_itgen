@@ -48,7 +48,8 @@ public class SshotPayByParentShopRU extends TestBase {
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     if (diffFirst.getDiffSize() > 0) {
       ImageDiff diffSecond =
           app.sshot()
@@ -57,7 +58,8 @@ public class SshotPayByParentShopRU extends TestBase {
                   ApplicationManager.properties.getProperty("actual"),
                   ApplicationManager.properties.getProperty("markedImages"),
                   name,
-                  locatorIgnor);
+                  locatorIgnor,
+                  1.25f);
       Assert.assertEquals(diffSecond.getDiffSize(), 0);
     } else {
       Assert.assertEquals(diffFirst.getDiffSize(), 0);

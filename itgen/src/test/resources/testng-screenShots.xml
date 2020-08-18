@@ -13,6 +13,8 @@
       <class name="io.itgen.tests.screenShot.SshotWindowSchedule"/>
       <class name="io.itgen.tests.screenShot.SshotPayByAdminCard"/>
       <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
+      <class name="io.itgen.tests.screenShot.SshotMaterialTabInProcess"/>
+      <class name="io.itgen.tests.screenShot.SshotMaterialTabAll"/>
     </classes>
   </test>
 </suite>

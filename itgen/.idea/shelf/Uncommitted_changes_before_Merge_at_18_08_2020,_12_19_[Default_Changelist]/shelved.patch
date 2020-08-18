@@ -1,0 +1,1496 @@
+Index: src/test/java/io/itgen/appmanager/SShotHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.appmanager;\n\nimport static io.itgen.appmanager.ApplicationManager.properties;\nimport static io.itgen.tests.TestBase.etalon;\n\nimport java.awt.AWTException;\nimport java.awt.Robot;\nimport java.io.File;\nimport java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\nimport java.util.List;\nimport java.util.Set;\nimport javax.imageio.ImageIO;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.JavascriptExecutor;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport ru.yandex.qatools.allure.annotations.Attachment;\nimport ru.yandex.qatools.ashot.AShot;\nimport ru.yandex.qatools.ashot.Screenshot;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\nimport ru.yandex.qatools.ashot.comparison.ImageDiffer;\nimport ru.yandex.qatools.ashot.coordinates.Coords;\nimport ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;\nimport ru.yandex.qatools.ashot.shooting.ShootingStrategies;\n\npublic class SShotHelper extends HelperBase {\n\n  public SShotHelper(WebDriver wd) {\n    super(wd);\n  }\n\n  public ImageDiff getImageDiff(\n      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor)\n      throws AWTException, IOException {\n    Robot bot = new Robot();\n    bot.mouseMove(0, 0);\n\n    Screenshot actualScreenshot =\n        new AShot()\n            .coordsProvider(new WebDriverCoordsProvider())\n            .ignoredElements(locatorIgnor)\n            .shootingStrategy(\n                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 350))\n            .takeScreenshot(wd);\n    Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();\n\n    // взять скриншот после появления элемента с локатором\n    etalon(expected, name, actualScreenshot);\n\n    File actualFile = new File(actual + name + \".png\");\n    ImageIO.write(actualScreenshot.getImage(), \"png\", actualFile);\n\n    // берем эталонный снимок\n    Screenshot expectedScreenshot =\n        new Screenshot(ImageIO.read(new File(expected + name + \".png\")));\n    expectedScreenshot.setIgnoredAreas(ignoredCoords);\n\n    // сравниваем\n    ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);\n\n    // результат\n    if (diff.getDiffSize() != 0) {\n      File diffFile = new File(markedImages + name + \".png\");\n      ImageIO.write(diff.getMarkedImage(), \"png\", diffFile);\n      getScreenShot(name);\n    }\n    return diff;\n  }\n\n  @Attachment()\n  public static byte[] getScreenShot(String ResourseName) throws IOException {\n    String Path = properties.getProperty(\"markedImages\") + ResourseName + \".png\";\n    byte[] file = Files.readAllBytes(Paths.get(Path));\n    return file;\n  }\n\n  // открепляем топ-бар\n  public void changeTopBar() {\n    ((JavascriptExecutor) wd).executeScript(\"$('.top-bar-container').css('position', 'relative');\");\n  }\n\n  // приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически,\n  // скриншоты падают\n  public void changeTableInWindowSchedule() {\n    By locatorHeading = By.xpath(\"(//div[@class='cell-heading cell-info'])[1]\");\n    By locatorGroupList =\n        By.xpath(\"(//div[@class='create-child-schedule-group-list cell-info'])[1]\");\n    for (int i = 1; i < 8; i++) {\n      if (isElementPresent(locatorHeading)) {\n        WebElement elementHeading = wd.findElement(locatorHeading);\n        WebElement elementGroupList = wd.findElement(locatorGroupList);\n        ((JavascriptExecutor) wd)\n            .executeScript(\n                \"arguments[0].setAttribute('class', 'cell-heading cell-default')\", elementHeading);\n        ((JavascriptExecutor) wd)\n            .executeScript(\n                \"arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')\",\n                elementGroupList);\n      }\n    }\n  }\n\n  public void deleteElements(String[] deleteElements) {\n    if (deleteElements != null) {\n      for (int i = 0; i <= deleteElements.length - 1; i++) {\n        List<WebElement> elementsList = wd.findElements(By.xpath(deleteElements[i]));\n        for (WebElement element : elementsList) {\n          ((JavascriptExecutor) wd).executeScript(\"arguments[0].remove();\", element);\n        }\n      }\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/SShotHelper.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/appmanager/SShotHelper.java	(date 1597741162197)
+@@ -32,7 +32,7 @@
+   }
+ 
+   public ImageDiff getImageDiff(
+-      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor)
++      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor, float dpr)
+       throws AWTException, IOException {
+     Robot bot = new Robot();
+     bot.mouseMove(0, 0);
+@@ -42,7 +42,7 @@
+             .coordsProvider(new WebDriverCoordsProvider())
+             .ignoredElements(locatorIgnor)
+             .shootingStrategy(
+-                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 350))
++                ShootingStrategies.viewportPasting(ShootingStrategies.scaling(dpr), 350))
+             .takeScreenshot(wd);
+     Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();
+ 
+Index: src/test/java/io/itgen/appmanager/MaterialHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.appmanager;\n\nimport io.itgen.model.materials.MaterialData;\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.WebDriver;\n\npublic class MaterialHelper extends HelperBase {\n\n  public MaterialHelper(WebDriver wd) {\n    super(wd);\n  }\n\n  public void tabInProgress() {\n    click(By.xpath(\"//a[@href='#inProgress']\"));\n    noErrorMessage();\n  }\n\n  public void fillForm(MaterialData materialData) {\n    dropDownList(By.id(\"material-originality\"), materialData.getOriginality());\n    dropDownList(By.id(\"material-lang\"), materialData.getLang());\n    dropDownList(By.id(\"material-skill\"), materialData.getSkill());\n    type(By.name(\"material-title\"), materialData.getTitle());\n    dropDownList(By.id(\"material-type\"), materialData.getType());\n    type(By.name(\"material-materialLink\"), materialData.getMaterialLink());\n    type(By.name(\"material-sourceLink\"), materialData.getSourceLink());\n    type(By.name(\"material-projectLink\"), materialData.getProjectLink());\n    type(By.name(\"material-desc\"), materialData.getDesc());\n    dropDownList(By.id(\"material-level\"), materialData.getLevel());\n  }\n\n  public void btnSend() {\n    click(By.xpath(\"//button[contains(@class,'send')]\"));\n    noErrorMessage();\n  }\n\n  public void addNewBranch() {\n    click(By.xpath(\"//button[contains(@class,'dropdown')]\"));\n    noErrorMessage();\n    click(By.xpath(\"//a[contains(@class,'add-branch')]\"));\n    noErrorMessage();\n    click(By.xpath(\"//div[contains(@class,'branch')]\"));\n  }\n\n  public void addNewMaterial(MaterialData material) {\n    addNewBranch();\n    tabInProgress();\n    fillForm(material);\n    btnSend();\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/MaterialHelper.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/appmanager/MaterialHelper.java	(date 1597742196441)
+@@ -42,9 +42,24 @@
+   }
+ 
+   public void addNewMaterial(MaterialData material) {
+-    addNewBranch();
+     tabInProgress();
+     fillForm(material);
+     btnSend();
+   }
++
++  public void addNewMaterialBad(MaterialData material) {
++    tabInProgress();
++    fillForm(material);
++    btnSendBad();
++  }
++
++  private void btnSendBad() {
++    click(By.xpath("//button[contains(@class,'send')]"));
++    thereAreErrorMessages();
++  }
++
++  public void openBranch() {
++    click(By.xpath("//span[@data-branch]"));
++    noErrorMessage();
++  }
+ }
+Index: src/test/resources/testng-smoke.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE suite SYSTEM \"https://testng.org/testng-1.0.dtd\" >\n\n<suite name=\"Suite1\" verbose=\"1\">\n  <test name=\"Smoke\">\n    <classes>\n      <!--  <class name=\"io.itgen.tests.FamilyDeletionTests\" /> -->\n      <class name=\"io.itgen.tests.FamilyCreationTests\"/>\n      <class name=\"io.itgen.tests.students.StudentCreationTests\"/>\n      <class name=\"io.itgen.tests.students.StudentModificationTests\"/>\n      <class name=\"io.itgen.tests.students.StudentDeletionTests\"/>\n      <class name=\"io.itgen.tests.students.StudentFiltrPolTests\"/>\n      <class name=\"io.itgen.tests.ParentCreationTests\"/>\n      <class name=\"io.itgen.tests.ParentModificationTests\"/>\n      <class name=\"io.itgen.tests.ParentDeletionTests\"/>\n      <class name=\"io.itgen.tests.LeadCreationTest\"/>\n      <class name=\"io.itgen.tests.LeadDeletionTest\"/>\n      <class name=\"io.itgen.tests.LeadModificationTest\"/>\n      <class name=\"io.itgen.tests.WorkerAndTrainerCreationTests\"/>\n      <class name=\"io.itgen.tests.WorkerModificationTests\"/>\n      <class name=\"io.itgen.tests.WorkerDeletionTests\"/>\n      <class name=\"io.itgen.tests.TrainerModificationTests\"/>\n      <class name=\"io.itgen.tests.TrainerDeletionTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleSingleCreationTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleSingleCancelTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleSingleAssignTrainerTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleSingleBlockTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularCreationTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularAssignTrainerTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularCancelTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleSingleMoveTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularMoveTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularBlockTests\"/>\n      <class name=\"io.itgen.tests.schedule.ScheduleRegularBlockAllTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnRegular2hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnRegularFirst1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnRegularSecond1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule\"/>\n      <class name=\"io.itgen.tests.schedule.RemoveStudentFromRegular2hSchedule\"/>\n      <class name=\"io.itgen.tests.schedule.RecordFreeStudentOnTrialSingleLessonTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnTrialRegularScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RecordStudentOnTrialSingleScheduleTests\"/>\n      <class name=\"io.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests\"/>\n      <!--     <class name=\"ScheduleBadMoveTests\" />\n           <class name=\"ScheduleBadMoveOnOccupiedLessonTests\" /> -->\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests\"/>\n      <class\n        name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests\"/>\n      <class name=\"io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests\"/>\n      <class name=\"io.itgen.tests.requests.RequestOnTrial2hScratchTests\"/>\n      <class name=\"io.itgen.tests.payment.PaymentByAdmin\"/>\n      <class name=\"io.itgen.tests.payment.IncreaseBalanceByAdmin\"/>\n      <class name=\"io.itgen.tests.payment.DecreaseBalanceByAdmin\"/>\n      <class name=\"io.itgen.tests.selfRegistration.SelfRegistration\"/>\n      </classes>\n  </test>\n</suite>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/resources/testng-smoke.xml	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/resources/testng-smoke.xml	(date 1597738938778)
+@@ -60,6 +60,8 @@
+       <class name="io.itgen.tests.payment.PaymentByAdmin"/>
+       <class name="io.itgen.tests.payment.IncreaseBalanceByAdmin"/>
+       <class name="io.itgen.tests.payment.DecreaseBalanceByAdmin"/>
++      <class name="io.itgen.tests.materials.CreateMaterial"/>
++      <class name="io.itgen.tests.materials.CreateMaterialBad"/>
+       <class name="io.itgen.tests.selfRegistration.SelfRegistration"/>
+       </classes>
+   </test>
+Index: src/test/java/io/itgen/tests/materials/CreateMaterial.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.materials;\n\nimport com.google.gson.Gson;\nimport com.google.gson.reflect.TypeToken;\nimport io.itgen.model.materials.MaterialData;\nimport io.itgen.services.FamilyService;\nimport io.itgen.services.ParentService;\nimport io.itgen.services.StudentService;\nimport io.itgen.tests.TestBase;\nimport java.io.BufferedReader;\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.Iterator;\nimport java.util.List;\nimport java.util.stream.Collectors;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.DataProvider;\nimport org.testng.annotations.Test;\n//надо навесить проверку на созданный материал\n//протестить форму\n//решить вопрос с веткой\n\npublic class CreateMaterial extends TestBase {\n\n  @DataProvider\n  public Iterator<Object[]> validMaterialFromJson() throws IOException {\n    try (BufferedReader reader =\n        new BufferedReader(\n            new FileReader(new File(\"src/test/resources/testdata/material_creation.json\")))) {\n      String json = \"\";\n      String line = reader.readLine();\n      while (line != null) {\n        json += line;\n        line = reader.readLine();\n      }\n      Gson gson = new Gson();\n      List<MaterialData> materials =\n          gson.fromJson(json, new TypeToken<List<MaterialData>>() {}.getType());\n      return materials.stream()\n          .map((s) -> new Object[] {s})\n          .collect(Collectors.toList())\n          .iterator();\n    }\n  }\n\n  @Test(dataProvider = \"validMaterialFromJson\")\n  public void testCreateMaterial(MaterialData material) {\n    app.goTo().menuTasks();\n    app.goTo().menuMaterials();\n    app.material().addNewMaterial(material);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/materials/CreateMaterial.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/materials/CreateMaterial.java	(date 1597740386402)
+@@ -1,11 +1,18 @@
+ package io.itgen.tests.materials;
++/* Кейс: создать материал под админом, заполнив форму валидными значеням, предворительно создав
++ * ветку при помощи транзакции. Проверить, что материал корректно записался в бд, нет
++ * сообщений об ошибках, протестить форму валидными значениями*/
++
++import static org.hamcrest.CoreMatchers.equalTo;
++import static org.hamcrest.MatcherAssert.assertThat;
+ 
+ import com.google.gson.Gson;
+ import com.google.gson.reflect.TypeToken;
++import io.itgen.model.materials.MaterialBranchData;
+ import io.itgen.model.materials.MaterialData;
+-import io.itgen.services.FamilyService;
+-import io.itgen.services.ParentService;
+-import io.itgen.services.StudentService;
++import io.itgen.model.materials.Materials;
++import io.itgen.services.MaterialBranchService;
++import io.itgen.services.MaterialService;
+ import io.itgen.tests.TestBase;
+ import java.io.BufferedReader;
+ import java.io.File;
+@@ -15,14 +22,22 @@
+ import java.util.List;
+ import java.util.stream.Collectors;
+ import org.testng.annotations.AfterMethod;
++import org.testng.annotations.BeforeMethod;
+ import org.testng.annotations.DataProvider;
+ import org.testng.annotations.Test;
+-//надо навесить проверку на созданный материал
+-//протестить форму
+-//решить вопрос с веткой
+ 
+ public class CreateMaterial extends TestBase {
+ 
++  MaterialData materialClean = null;
++  MaterialBranchData materialBranchClean = null;
++  MaterialService materialService = new MaterialService();
++  MaterialBranchService materialBranchService = new MaterialBranchService();
++
++  @BeforeMethod
++  public void ensurePreconditions() {
++    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
++  }
++
+   @DataProvider
+   public Iterator<Object[]> validMaterialFromJson() throws IOException {
+     try (BufferedReader reader =
+@@ -49,10 +64,43 @@
+     app.goTo().menuTasks();
+     app.goTo().menuMaterials();
+     app.material().addNewMaterial(material);
++    Materials materialAfter = app.dbmaterial().materials();
++    materialClean = app.dbmaterial().lastMaterial();
++    check(materialAfter, materialClean.getId(), material);
++  }
++
++  private void check(Materials after, String id, MaterialData material) {
++    app.trMaterial()
++        .newMaterial(
++            id,
++            "666",
++            material.getTitle().trim(),
++            "checking",
++            material.getSkill(),
++            "CreateNewMaterial",
++            material.getType(),
++            material.getLevel(),
++            material.getLang(),
++            material.getOriginality(),
++            material.getMaterialLink(),
++            material.getProjectLink(),
++            material.getSourceLink(),
++            material.getDesc().trim());
++
++    MaterialData materialAdd = materialService.findById(id);
++
++    for (MaterialData materialAfter : after) {
++      if (materialAfter.getId().equals(id)) {
++        assertThat(after, equalTo(after.without(materialAfter).withAdded(materialAdd)));
++        return;
++      }
++    }
+   }
+ 
+   @AfterMethod(alwaysRun = true)
+   public void clean() {
+-
++    materialService.findByIdAndDelete(materialClean.getId());
++    materialBranchClean = app.dbmaterial().lastBranchMaterial();
++    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
+   }
+ }
+Index: src/test/resources/testng-screenShots.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!DOCTYPE suite SYSTEM \"https://testng.org/testng-1.0.dtd\" >\n\n<suite name=\"Suite1\" verbose=\"1\">\n  <test name=\"ScreenShots\">\n    <classes>\n     <!-- <class name=\"io.itgen.tests.screenShot.SshotFamily\"/> -->\n      <class name=\"io.itgen.tests.screenShot.SshotListStudents\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotMainSchedule\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotLessonWithStudent\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotListLeads\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotListTrainers\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotListWorkers\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotWindowSchedule\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotPayByAdminCard\"/>\n      <class name=\"io.itgen.tests.screenShot.SshotPayByAdminShop\"/>\n    </classes>\n  </test>\n</suite>\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/resources/testng-screenShots.xml	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/resources/testng-screenShots.xml	(date 1597742343657)
+@@ -13,6 +13,8 @@
+       <class name="io.itgen.tests.screenShot.SshotWindowSchedule"/>
+       <class name="io.itgen.tests.screenShot.SshotPayByAdminCard"/>
+       <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
++      <class name="io.itgen.tests.screenShot.SshotMaterialTabInProcess"/>
++      <class name="io.itgen.tests.screenShot.SshotMaterialTabAll"/>
+     </classes>
+   </test>
+ </suite>
+Index: src/test/java/io/itgen/appmanager/dbHelpers/DbHelperMaterials.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/dbHelpers/DbHelperMaterials.java	(date 1597662917434)
++++ src/test/java/io/itgen/appmanager/dbHelpers/DbHelperMaterials.java	(date 1597662917434)
+@@ -0,0 +1,39 @@
++package io.itgen.appmanager.dbHelpers;
++
++import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
++
++import dev.morphia.Datastore;
++import dev.morphia.query.Query;
++import io.itgen.model.LeadData;
++import io.itgen.model.Leads;
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.model.materials.Materials;
++import java.util.List;
++
++public class DbHelperMaterials {
++  public MaterialData lastMaterial() {
++    Datastore datastore = morphiaSessionFactoryUtil();
++    Query<MaterialData> q = datastore.createQuery(MaterialData.class);
++    long count=q.count();
++    List<MaterialData> material= q.find().toList();
++    MaterialData lastMaterial = material.get(Math.toIntExact(count - 1));
++    return lastMaterial;
++  }
++
++  public MaterialBranchData lastBranchMaterial() {
++    Datastore datastore = morphiaSessionFactoryUtil();
++    Query<MaterialBranchData> q = datastore.createQuery(MaterialBranchData.class);
++    long count=q.count();
++    List<MaterialBranchData> branch= q.find().toList();
++    MaterialBranchData lastMaterialBranch = branch.get(Math.toIntExact(count - 1));
++    return lastMaterialBranch;
++  }
++
++  public Materials materials() {
++    Datastore datastore = morphiaSessionFactoryUtil();
++    Query<MaterialData> q = datastore.createQuery(MaterialData.class);
++    List<MaterialData> materials = q.find().toList();
++    return new Materials(materials);
++  }
++}
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnRegular.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotFiltrRecordOnRegular extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в\n  // 18.00\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleYesterday()\n        .FinishingFirstTrialLesson(\n            period, \"FinishedSchedule\", \"14\", \"LkRecordOnRegularSchedule\", \"1\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily_AfterTrial(\n            \"LkRecordOnRegularSchedule\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testFiltrRecordOnRegular() throws AWTException, IOException {\n    app.lkParent().GoToFiltrRecordRegular();\n\n    String name = \"Parent_FiltrRecordOnRegular_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//p[@class='user']\"));\n    locatorIgnor.add(By.xpath(\"//div[@class='DayPickerInput']//input\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n\n    app.lkParent().btnLogo();\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"FinishedSchedule\");\n    studentService.findByIdAndDelete(\"LkRecordOnRegularSchedule\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LkRecordOnRegularSchedule\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnRegular.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnRegular.java	(date 1597741457055)
+@@ -54,7 +54,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diff.getDiffSize() > 100) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+     }
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormFirst.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport com.google.gson.Gson;\nimport com.google.gson.reflect.TypeToken;\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.StudentData;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.DataProvider;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.BufferedReader;\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.Iterator;\nimport java.util.List;\nimport java.util.stream.Collectors;\n\npublic class SshotAddNewStudentFormFirst extends TestBase {\n  @DataProvider\n  public Iterator<Object[]> StudentsFromJson() throws IOException {\n    try (BufferedReader reader =\n        new BufferedReader(\n            new FileReader(\n                new File(\"src/test/resources/testdata/sshot_creation_student_par_form1.json\")))) {\n      String json = \"\";\n      String line = reader.readLine();\n      while (line != null) {\n        json += line;\n        line = reader.readLine();\n      }\n      Gson gson = new Gson();\n      java.util.List<StudentData> students =\n          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());\n      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();\n    }\n  }\n\n  @Test(dataProvider = \"StudentsFromJson\")\n  public void testAddNewStudentFormFirst(StudentData student) throws AWTException, IOException {\n    app.lkParent().createSShotFirstForm(student);\n\n    String name = \"Parent_AddNewStudentForm1_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n\n    app.lkParent().btnLogo();\n    if (diff.getDiffSize() > 500) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormFirst.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormFirst.java	(date 1597741353772)
+@@ -56,7 +56,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+ 
+     app.lkParent().btnLogo();
+     if (diff.getDiffSize() > 500) { // погрешность
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotEntryOnTrial.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n/* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,\n  сравнивает его с эталонным.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotEntryOnTrial extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик\n  // и разовое расписание на завтра в 18.00, на которое нужно записать добавленного ученика на\n  // пробное\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, \"LKOnTrail\", \"14\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily(\"LKOnTrail\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testEntryOnTrial() throws AWTException, IOException {\n    app.lkParent().RecordOnTrail();\n\n    String name = \"Parent_EntryOnTrial_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//div[@class='lesson']//span[1]\"));\n    locatorIgnor.add(By.xpath(\"//div[@class='day']\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    app.sshot().changeTopBar();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    app.lkParent().btnLogo();\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"LKOnTrail\");\n    studentService.findByIdAndDelete(\"LKOnTrail\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LKOnTrail\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotEntryOnTrial.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotEntryOnTrial.java	(date 1597741344620)
+@@ -57,7 +57,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     app.lkParent().btnLogo();
+     if (diff.getDiffSize() > 100) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotCourseSelectionForTrial.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotCourseSelectionForTrial extends TestBase {\n  TaskService taskService = new TaskService();\n  StudentService studentService = new StudentService();\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trStudent()\n        .StudentAddDefaultFamily(\"LKOnTrail\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testSshotCourseSelectionForTrial() throws AWTException, IOException {\n    app.lkParent().btnRecordOnTrail();\n\n    String name = \"Parent_CourseSelectionForTrial_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//p[@class='user']\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    app.sshot().changeTopBar();\n    app.lkParent().clickByFullArea();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    app.lkParent().btnLogo();\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    studentService.findByIdAndDelete(\"LKOnTrail\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LKOnTrail\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotCourseSelectionForTrial.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotCourseSelectionForTrial.java	(date 1597741430819)
+@@ -47,7 +47,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     app.lkParent().btnLogo();
+     if (diff.getDiffSize() > 100) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+Index: src/test/resources/testdata/material_creation.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[\n  {\n    \"originality\": \"original\",\n    \"lang\": \"ru\",\n    \"skill\": \"1\",\n    \"title\": \"Жуки\",\n    \"type\": \"video\",\n    \"materialLink\": \"https://docs.google.com\",\n    \"sourceLink\": \"https://docs.google.com\",\n    \"projectLink\": \"https://docs.google.com\",\n    \"desc\": \"Развивает внимательность\",\n    \"level\": \"easy\"\n  }\n]
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/resources/testdata/material_creation.json	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/resources/testdata/material_creation.json	(date 1597736116508)
+@@ -10,5 +10,104 @@
+     "projectLink": "https://docs.google.com",
+     "desc": "Развивает внимательность",
+     "level": "easy"
++  },
++
++  {
++    "originality": "original",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Cat",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жуки",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жуки",
++    "type": "video",
++    "materialLink": "кошка.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "    7777777777",
++    "type": "video",
++    "materialLink": "кошка.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "    №%%:,.;;((;.,:",
++    "type": "video",
++    "materialLink": "кошка.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жук",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "    Развивает внимательность    ",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жук",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "null",
++    "level": "easy"
++  },
++  {
++    "originality": "adaptation",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жук",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "null",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
+   }
++
++
+ ]
+\ No newline at end of file
+Index: src/test/java/io/itgen/model/materials/MaterialData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.model.materials;\n\nimport dev.morphia.annotations.Embedded;\nimport dev.morphia.annotations.Entity;\nimport dev.morphia.annotations.Id;\nimport dev.morphia.annotations.Property;\nimport io.itgen.model.tasks.Activity;\nimport java.util.ArrayList;\nimport java.util.Date;\nimport java.util.List;\nimport java.util.Objects;\n\n@Entity(\"materials\")\npublic class MaterialData {\n  @Id\n  @Property(\"_id\")\n  private String id;\n\n  @Property(\"createAt\")\n  private Date createAt;\n\n  @Property(\"creator\")\n  private String creator;\n\n  @Property(\"title\")\n  private String title;\n\n  @Property(\"status\")\n  private String status;\n\n  @Property(\"skill\")\n  private String skill;\n\n  @Property(\"branch\")\n  private String branch;\n\n  @Property(\"type\")\n  private String type;\n\n  @Property(\"lang\")\n  private String lang;\n\n  @Property(\"materialLink\")\n  private String materialLink;\n\n  @Property(\"tags\")\n  private List<String> tags = new ArrayList<>();\n\n  @Property(\"comments\")\n  private List<String> comments = new ArrayList<>();\n\n  @Embedded(\"activity\")\n  private List<Activity> activity = new ArrayList<Activity>();\n\n  @Property(\"originality\")\n  private String originality;\n\n  @Property(\"level\")\n  private String level;\n\n  @Property(\"sourceLink\")\n  private String sourceLink;\n\n  @Property(\"projectLink\")\n  private String projectLink;\n\n  @Property(\"desc\")\n  private String desc;\n\n  @Property(\"verifier\")\n  private String verifier;\n\n  public MaterialData() {}\n\n  // setters\n\n  public MaterialData withId(String id) {\n    this.id = id;\n    return this;\n  }\n\n  public MaterialData withCreateAt(Date createAt) {\n    this.createAt = createAt;\n    return this;\n  }\n\n  public MaterialData withCreator(String creator) {\n    this.creator = creator;\n    return this;\n  }\n\n  public MaterialData withTitle(String title) {\n    this.title = title;\n    return this;\n  }\n\n  public MaterialData withStatus(String status) {\n    this.status = status;\n    return this;\n  }\n\n  public MaterialData withSkill(String skill) {\n    this.skill = skill;\n    return this;\n  }\n\n  public MaterialData withBranch(String branch) {\n    this.branch = branch;\n    return this;\n  }\n\n  public MaterialData withType(String type) {\n    this.type = type;\n    return this;\n  }\n\n  public MaterialData withLang(String lang) {\n    this.lang = lang;\n    return this;\n  }\n\n  public MaterialData withMaterialLink(String materialLink) {\n    this.materialLink = materialLink;\n    return this;\n  }\n\n  public MaterialData withTags(List<String> tags) {\n    this.tags = tags;\n    return this;\n  }\n\n  public MaterialData withComments(List<String> comments) {\n    this.comments = comments;\n    return this;\n  }\n\n  public MaterialData withActivity(List<Activity> activity) {\n    this.activity = activity;\n    return this;\n  }\n\n  public MaterialData withOriginality(String originality) {\n    this.originality = originality;\n    return this;\n  }\n\n  public MaterialData withLevel(String level) {\n    this.level = level;\n    return this;\n  }\n\n  public MaterialData withSourceLink(String sourceLink) {\n    this.sourceLink = sourceLink;\n    return this;\n  }\n\n  public MaterialData withProjectLink(String projectLink) {\n    this.projectLink = projectLink;\n    return this;\n  }\n\n  public MaterialData withDesc(String desc) {\n    this.desc = desc;\n    return this;\n  }\n\n  public MaterialData withVerifier(String verifier) {\n    this.verifier = verifier;\n    return this;\n  }\n\n  //getters\n\n  public String getId() {\n    return id;\n  }\n\n  public Date getCreateAt() {\n    return createAt;\n  }\n\n  public String getCreator() {\n    return creator;\n  }\n\n  public String getTitle() {\n    return title;\n  }\n\n  public String getStatus() {\n    return status;\n  }\n\n  public String getSkill() {\n    return skill;\n  }\n\n  public String getBranch() {\n    return branch;\n  }\n\n  public String getType() {\n    return type;\n  }\n\n  public String getLang() {\n    return lang;\n  }\n\n  public String getMaterialLink() {\n    return materialLink;\n  }\n\n  public List<String> getTags() {\n    return tags;\n  }\n\n  public List<String> getComments() {\n    return comments;\n  }\n\n  public List<Activity> getActivity() {\n    return activity;\n  }\n\n  public String getOriginality() {\n    return originality;\n  }\n\n  public String getLevel() {\n    return level;\n  }\n\n  public String getSourceLink() {\n    return sourceLink;\n  }\n\n  public String getProjectLink() {\n    return projectLink;\n  }\n\n  public String getDesc() {\n    return desc;\n  }\n\n  public String getVerifier() {\n    return verifier;\n  }\n\n  @Override\n  public boolean equals(Object o) {\n    if (this == o) {\n      return true;\n    }\n    if (o == null || getClass() != o.getClass()) {\n      return false;\n    }\n    MaterialData that = (MaterialData) o;\n    return Objects.equals(id, that.id) &&\n        Objects.equals(creator, that.creator) &&\n        Objects.equals(title, that.title) &&\n        Objects.equals(status, that.status) &&\n        Objects.equals(skill, that.skill) &&\n        Objects.equals(branch, that.branch) &&\n        Objects.equals(type, that.type) &&\n        Objects.equals(lang, that.lang) &&\n        Objects.equals(materialLink, that.materialLink) &&\n        Objects.equals(tags, that.tags) &&\n        Objects.equals(comments, that.comments) &&\n        Objects.equals(activity, that.activity) &&\n        Objects.equals(originality, that.originality) &&\n        Objects.equals(level, that.level) &&\n        Objects.equals(sourceLink, that.sourceLink) &&\n        Objects.equals(projectLink, that.projectLink) &&\n        Objects.equals(desc, that.desc) &&\n        Objects.equals(verifier, that.verifier);\n  }\n\n  @Override\n  public int hashCode() {\n    return Objects\n        .hash(id, creator, title, status, skill, branch, type, lang, materialLink, tags, comments,\n            activity, originality, level, sourceLink, projectLink, desc, verifier);\n  }\n\n  @Override\n  public String toString() {\n    return \"MaterialData{\" +\n        \"id='\" + id + '\\'' +\n        \", createAt=\" + createAt +\n        \", creator='\" + creator + '\\'' +\n        \", title='\" + title + '\\'' +\n        \", status='\" + status + '\\'' +\n        \", skill='\" + skill + '\\'' +\n        \", branch='\" + branch + '\\'' +\n        \", type='\" + type + '\\'' +\n        \", lang='\" + lang + '\\'' +\n        \", materialLink='\" + materialLink + '\\'' +\n        \", tags=\" + tags +\n        \", comments=\" + comments +\n        \", activity=\" + activity +\n        \", originality='\" + originality + '\\'' +\n        \", level='\" + level + '\\'' +\n        \", sourceLink='\" + sourceLink + '\\'' +\n        \", projectLink='\" + projectLink + '\\'' +\n        \", desc='\" + desc + '\\'' +\n        \", verifier='\" + verifier + '\\'' +\n        '}';\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/model/materials/MaterialData.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/model/materials/MaterialData.java	(date 1597666934700)
+@@ -52,6 +52,9 @@
+   @Embedded("activity")
+   private List<Activity> activity = new ArrayList<Activity>();
+ 
++  @Property("linkedMaterials")
++  private List<String> linkedMaterials = new ArrayList<String>();
++
+   @Property("originality")
+   private String originality;
+ 
+@@ -123,6 +126,11 @@
+     this.materialLink = materialLink;
+     return this;
+   }
++
++  public MaterialData withLimkedMaterials(List<String> materialLink) {
++    this.linkedMaterials = linkedMaterials;
++    return this;
++  }
+ 
+   public MaterialData withTags(List<String> tags) {
+     this.tags = tags;
+Index: src/test/java/io/itgen/tests/materials/CreateMaterialBad.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/materials/CreateMaterialBad.java	(date 1597740386406)
++++ src/test/java/io/itgen/tests/materials/CreateMaterialBad.java	(date 1597740386406)
+@@ -0,0 +1,88 @@
++package io.itgen.tests.materials;
++/* Кейс: проверить, что материал не создается при невалидных значениях формы, отследить всплывающе
++ * предупреждения*/
++
++import static org.hamcrest.CoreMatchers.equalTo;
++import static org.hamcrest.MatcherAssert.assertThat;
++
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.model.materials.Materials;
++import io.itgen.services.MaterialBranchService;
++import io.itgen.tests.TestBase;
++import java.io.BufferedReader;
++import java.io.File;
++import java.io.FileReader;
++import java.io.IOException;
++import java.util.Iterator;
++import java.util.List;
++import java.util.stream.Collectors;
++import org.testng.annotations.BeforeMethod;
++import org.testng.annotations.DataProvider;
++import org.testng.annotations.Test;
++
++public class CreateMaterialBad extends TestBase {
++  MaterialBranchData materialBranchClean = null;
++  MaterialBranchService materialBranchService = new MaterialBranchService();
++
++  @BeforeMethod
++  public void ensurePreconditions() {
++    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
++  }
++
++  @DataProvider
++  public Iterator<Object[]> noValidMaterialFromJson() throws IOException {
++    try (BufferedReader reader =
++        new BufferedReader(
++            new FileReader(new File("src/test/resources/testdata/material_creation_bad.json")))) {
++      String json = "";
++      String line = reader.readLine();
++      while (line != null) {
++        json += line;
++        line = reader.readLine();
++      }
++      Gson gson = new Gson();
++      List<MaterialData> materials =
++          gson.fromJson(json, new TypeToken<List<MaterialData>>() {}.getType());
++      return materials.stream()
++          .map((s) -> new Object[] {s})
++          .collect(Collectors.toList())
++          .iterator();
++    }
++  }
++
++  @Test(dataProvider = "noValidMaterialFromJson")
++  public void testCreateMaterialBad(MaterialData material) {
++    app.goTo().menuTasks();
++    app.goTo().menuMaterials();
++    Materials materialBefore = app.dbmaterial().materials();
++    app.material().addNewMaterialBad(material);
++    Materials materialAfter = app.dbmaterial().materials();
++    assertThat(materialBefore.size(), equalTo(materialAfter.size()));
++  }
++
++  @Test
++  public void testCreateMaterialNoBranch() {
++    app.goTo().menuTasks();
++    app.goTo().menuMaterials();
++    Materials materialBefore = app.dbmaterial().materials();
++
++    materialBranchClean = app.dbmaterial().lastBranchMaterial();
++    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
++    MaterialData material =
++        new MaterialData()
++            .withOriginality("original")
++            .withLang("ru")
++            .withSkill("1")
++            .withTitle("Жук")
++            .withType("video")
++            .withMaterialLink("https://docs.google.com")
++            .withLevel("easy");
++
++    app.material().addNewMaterialBad(material);
++    Materials materialAfter = app.dbmaterial().materials();
++    assertThat(materialBefore.size(), equalTo(materialAfter.size()));
++  }
++}
+Index: src/test/resources/testdata/material_creation_bad.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/resources/testdata/material_creation_bad.json	(date 1597737569034)
++++ src/test/resources/testdata/material_creation_bad.json	(date 1597737569034)
+@@ -0,0 +1,26 @@
++[
++  {
++    "originality": "original",
++    "lang": "ru",
++    "skill": "1",
++    "title": "",
++    "type": "video",
++    "materialLink": "https://docs.google.com",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  },
++  {
++    "originality": "original",
++    "lang": "ru",
++    "skill": "1",
++    "title": "Жук",
++    "type": "video",
++    "materialLink": "",
++    "sourceLink": "https://docs.google.com",
++    "projectLink": "https://docs.google.com",
++    "desc": "Развивает внимательность",
++    "level": "easy"
++  }
++]
+\ No newline at end of file
+Index: src/test/java/io/itgen/appmanager/dbHelpers/DbHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.appmanager.dbHelpers;\n\nimport static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;\n\nimport dev.morphia.Datastore;\nimport dev.morphia.query.Query;\nimport io.itgen.model.Families;\nimport io.itgen.model.FamilyData;\nimport io.itgen.model.LeadData;\nimport io.itgen.model.Leads;\nimport io.itgen.model.ParentData;\nimport io.itgen.model.Parents;\nimport io.itgen.model.PaymentData;\nimport io.itgen.model.Payments;\nimport io.itgen.model.StudentData;\nimport io.itgen.model.Students;\nimport io.itgen.model.TrainerData;\nimport io.itgen.model.Trainers;\nimport io.itgen.model.WorkerData;\nimport io.itgen.model.Workers;\nimport java.util.List;\n\npublic class DbHelper {\n\n  public Families families() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<FamilyData> q = datastore.createQuery(FamilyData.class);\n    List<FamilyData> family = q.find().toList();\n    return new Families(family);\n  }\n\n  public FamilyData lastFamily() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<FamilyData> q = datastore.createQuery(FamilyData.class);\n    long count=q.count();\n    List<FamilyData> family = q.find().toList();\n    FamilyData lastFamily = family.get(Math.toIntExact(count - 1));\n    return lastFamily;\n  }\n\n  public ParentData lastParent() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<ParentData> q = datastore.createQuery(ParentData.class).filter(\"roles\", \"parent\");;\n    long count=q.count();\n    List<ParentData> parent= q.find().toList();\n    ParentData lastParent = parent.get(Math.toIntExact(count - 1));\n    return lastParent;\n  }\n\n  public Students familyComposition(String id) {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<StudentData> q = datastore.createQuery(StudentData.class);\n    q.or(\n        (q.and(q.criteria(\"roles\").equal(\"child\"), q.criteria(\"familyId\").equal(id))),\n        q.and(q.criteria(\"roles\").equal(\"parent\"), q.criteria(\"familyId\").equal(id)));\n\n    List<StudentData> students = q.find().toList();\n    return new Students(students);\n  }\n\n  public Parents parents() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<ParentData> q = datastore.createQuery(ParentData.class).filter(\"roles\", \"parent\");\n    List<ParentData> parents = q.find().toList();\n    return new Parents(parents);\n  }\n\n  public ParentData getTokenParent(String name, String surname, String role) {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<ParentData> q = datastore.createQuery(ParentData.class);\n\n    q.and(\n        q.criteria(\"roles\").equal(role),\n        q.criteria(\"firstName\").equal(name),\n        q.criteria(\"lastName\").equal(surname));\n    List<ParentData> parents = q.find().toList();\n    return q.find().next();\n  }\n\n  public Workers workers() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<WorkerData> q = datastore.createQuery(WorkerData.class);\n    q.and(\n        q.criteria(\"roles\").notEqual(\"trainer\"),\n        q.criteria(\"roles\").notEqual(\"child\"),\n        q.criteria(\"roles\").notEqual(\"parent\"));\n    List<WorkerData> workers = q.find().toList();\n    return new Workers(workers);\n  }\n\n  public Trainers trainers() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<TrainerData> q = datastore.createQuery(TrainerData.class).filter(\"roles\", \"trainer\");\n    List<TrainerData> trainers = q.find().toList();\n    return new Trainers(trainers);\n  }\n\n  public Leads leads() {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<LeadData> q = datastore.createQuery(LeadData.class);\n    List<LeadData> leads = q.find().toList();\n    return new Leads(leads);\n  }\n\n  public LeadData find(String id) {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<LeadData> q = datastore.createQuery(LeadData.class).filter(\"id\", id);\n    LeadData lead = q.find().next();\n    return lead;\n  }\n\n  public Payments payments(String id) {\n    Datastore datastore = morphiaSessionFactoryUtil();\n    Query<PaymentData> q = datastore.createQuery(PaymentData.class).filter(\"fId\", id);\n    List<PaymentData> payments = q.find().toList();\n    return new Payments(payments);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/dbHelpers/DbHelper.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/appmanager/dbHelpers/DbHelper.java	(date 1597662917427)
+@@ -18,6 +18,9 @@
+ import io.itgen.model.Trainers;
+ import io.itgen.model.WorkerData;
+ import io.itgen.model.Workers;
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.services.MaterialBranchService;
+ import java.util.List;
+ 
+ public class DbHelper {
+Index: src/test/java/io/itgen/tests/screenShot/SshotListTrainers.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n   сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n   со свойством -Detalon=true.\n */\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\n\npublic class SshotListTrainers extends TestBase {\n\n  @Test\n  public void testSshotListTrainers() throws AWTException, IOException {\n    String name = \"Admin_ListTrainers_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//table//tr[9]//td[9]\"));\n    locatorIgnor.add(By.xpath(\"//tbody//tr//td[9]\"));\n    locatorIgnor.add(By.xpath(\"//tbody//tr//td[3]\"));\n\n    String[] deleteElements={\n        \" //thead//tr//th[5]\",\n        \"//tbody//tr//td[5]\"\n    };\n\n    app.goTo().menuTasks();\n    app.goTo().menuTrainers();\n    app.sshot().changeTopBar();\n    app.sshot().deleteElements(deleteElements);\n\n    ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty(\"expected\")\n            , ApplicationManager.properties.getProperty(\"actual\")\n            , ApplicationManager.properties.getProperty(\"markedImages\")\n            , name, locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotListTrainers.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotListTrainers.java	(date 1597741250295)
+@@ -1,8 +1,8 @@
+ package io.itgen.tests.screenShot;
+ /* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,
+-   сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
+-   со свойством -Detalon=true.
+- */
++  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска
++  со свойством -Detalon=true.
++*/
+ 
+ import io.itgen.appmanager.ApplicationManager;
+ import io.itgen.tests.TestBase;
+@@ -26,21 +26,22 @@
+     locatorIgnor.add(By.xpath("//tbody//tr//td[9]"));
+     locatorIgnor.add(By.xpath("//tbody//tr//td[3]"));
+ 
+-    String[] deleteElements={
+-        " //thead//tr//th[5]",
+-        "//tbody//tr//td[5]"
+-    };
++    String[] deleteElements = {" //thead//tr//th[5]", "//tbody//tr//td[5]"};
+ 
+     app.goTo().menuTasks();
+     app.goTo().menuTrainers();
+     app.sshot().changeTopBar();
+     app.sshot().deleteElements(deleteElements);
+ 
+-    ImageDiff diff = app.sshot().getImageDiff(ApplicationManager.properties.getProperty("expected")
+-            , ApplicationManager.properties.getProperty("actual")
+-            , ApplicationManager.properties.getProperty("markedImages")
+-            , name, locatorIgnor);
++    ImageDiff diff =
++        app.sshot()
++            .getImageDiff(
++                ApplicationManager.properties.getProperty("expected"),
++                ApplicationManager.properties.getProperty("actual"),
++                ApplicationManager.properties.getProperty("markedImages"),
++                name,
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+-
+ }
+Index: src/test/java/io/itgen/tests/screenShot/SshotMaterialTabInProcess.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotMaterialTabInProcess.java	(date 1597741761522)
++++ src/test/java/io/itgen/tests/screenShot/SshotMaterialTabInProcess.java	(date 1597741761522)
+@@ -0,0 +1,89 @@
++package io.itgen.tests.screenShot;
++
++import static io.itgen.appmanager.ApplicationManager.properties;
++import static org.hamcrest.CoreMatchers.equalTo;
++import static org.hamcrest.MatcherAssert.assertThat;
++
++import com.google.gson.Gson;
++import com.google.gson.reflect.TypeToken;
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.model.materials.Materials;
++import io.itgen.services.MaterialBranchService;
++import io.itgen.services.MaterialService;
++import io.itgen.tests.TestBase;
++import java.awt.AWTException;
++import java.io.BufferedReader;
++import java.io.File;
++import java.io.FileReader;
++import java.io.IOException;
++import java.util.HashSet;
++import java.util.Iterator;
++import java.util.List;
++import java.util.Set;
++import java.util.stream.Collectors;
++import org.openqa.selenium.By;
++import org.testng.Assert;
++import org.testng.annotations.AfterMethod;
++import org.testng.annotations.BeforeMethod;
++import org.testng.annotations.DataProvider;
++import org.testng.annotations.Test;
++import ru.yandex.qatools.ashot.comparison.ImageDiff;
++
++
++public class SshotMaterialTabInProcess extends TestBase {
++  MaterialBranchData materialBranchClean = null;
++  MaterialBranchService materialBranchService = new MaterialBranchService();
++  MaterialData materialClean = null;
++  MaterialService materialService = new MaterialService();
++
++  @BeforeMethod
++  public void ensurePreconditions() {
++    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
++    app.trMaterial()
++        .newMaterial(
++            "MaterialTabInProcess",
++            "666",
++            "Жуки",
++            "checking",
++            "1",
++            "CreateNewMaterial",
++            "video",
++            "easy",
++            "ru",
++            "adaptation",
++            "https://docs.google.com",
++            "https://docs.google.com",
++            "https://docs.google.com",
++            "Развивает внимательность");
++  }
++
++  @Test()
++  public void testMaterialTabInProcess() throws AWTException, IOException {
++    app.goTo().menuTasks();
++    app.goTo().menuMaterials();
++    app.material().tabInProgress();
++
++    String name = "Admin_MaterialTabInProgress_RU_Chrome";
++    Set<By> locatorIgnor = new HashSet<>();
++    app.sshot().changeTopBar();
++
++    ImageDiff diff =
++        app.sshot()
++            .getImageDiff(
++                properties.getProperty("expected"),
++                properties.getProperty("actual"),
++                properties.getProperty("markedImages"),
++                name,
++                locatorIgnor, 1.98f);
++    Assert.assertEquals(diff.getDiffSize(), 0);
++  }
++
++  @AfterMethod(alwaysRun = true)
++  public void clean() {
++    materialClean = app.dbmaterial().lastMaterial();
++    materialService.findByIdAndDelete(materialClean.getId());
++    materialBranchClean = app.dbmaterial().lastBranchMaterial();
++    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
++  }
++}
+Index: src/test/java/io/itgen/model/tasks/D.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.model.tasks;\n\nimport dev.morphia.annotations.Property;\n\nimport java.util.Objects;\n\npublic class D {\n  @Property(\"new\")\n  public String neww;\n\n  public D() {\n  }\n\n  public D withNeww(String neww) {\n    this.neww = neww;\n    return this;\n  }\n\n  @Override\n  public String toString() {\n    return \"D{\" +\n            \"neww=\" + neww +\n            '}';\n  }\n\n  @Override\n  public boolean equals(Object o) {\n    if (this == o) return true;\n    if (o == null || getClass() != o.getClass()) return false;\n    D d = (D) o;\n    return Objects.equals(neww, d.neww);\n  }\n\n  @Override\n  public int hashCode() {\n    return Objects.hash(neww);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/model/tasks/D.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/model/tasks/D.java	(date 1597666305457)
+@@ -8,6 +8,8 @@
+   @Property("new")
+   public String neww;
+ 
++  @Property("old")
++  public String old;
+   public D() {
+   }
+ 
+@@ -16,23 +18,34 @@
+     return this;
+   }
+ 
++  public D withOld(String old) {
++    this.old = old;
++    return this;
++  }
++
+   @Override
+   public String toString() {
+     return "D{" +
+             "neww=" + neww +
++            "old=" + old +
+             '}';
+   }
+ 
+   @Override
+   public boolean equals(Object o) {
+-    if (this == o) return true;
+-    if (o == null || getClass() != o.getClass()) return false;
++    if (this == o) {
++      return true;
++    }
++    if (o == null || getClass() != o.getClass()) {
++      return false;
++    }
+     D d = (D) o;
+-    return Objects.equals(neww, d.neww);
++    return Objects.equals(neww, d.neww) &&
++        Objects.equals(old, d.old);
+   }
+ 
+   @Override
+   public int hashCode() {
+-    return Objects.hash(neww);
++    return Objects.hash(neww, old);
+   }
+ }
+Index: src/test/java/io/itgen/tests/selfRegistration/SelfRegistration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.selfRegistration;\n/*кейс:\n1. Нужно добавить родителя лида под админом\n2. Взять его id\n3. Вставить в ссылку на саморегистрацию\n4. Заполнить форму\n5. должно отправится письмо на активацию - но т.к. локально получить письмо нельзя, то мокаем это и переходим\nпо созданной ссылке на активацию\n6. Придумать пароль\n7. Попасть в ЛК родителя\n8. Провести проверки\n */\n\nimport static org.hamcrest.CoreMatchers.equalTo;\nimport static org.hamcrest.MatcherAssert.assertThat;\n\nimport com.google.gson.Gson;\nimport com.google.gson.reflect.TypeToken;\nimport io.itgen.model.Families;\nimport io.itgen.model.FamilyData;\nimport io.itgen.model.LeadData;\nimport io.itgen.model.Leads;\nimport io.itgen.model.ParentData;\nimport io.itgen.model.Parents;\nimport io.itgen.model.StudentData;\nimport io.itgen.model.Students;\nimport io.itgen.services.FamilyService;\nimport io.itgen.services.LeadService;\nimport io.itgen.services.ParentService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.io.BufferedReader;\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.Iterator;\nimport java.util.List;\nimport java.util.stream.Collectors;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.DataProvider;\nimport org.testng.annotations.Test;\n\npublic class SelfRegistration extends TestBase {\n  LeadService leadService = new LeadService();\n  TaskService taskService = new TaskService();\n  ParentService parentService = new ParentService();\n  FamilyService familyService = new FamilyService();\n  StudentService studentService = new StudentService();\n\n  StudentData studentClean = null;\n  ParentData parentClean = null;\n  FamilyData familyClean = null;\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n\n    app.trLead()\n        .leadParent(\n            \"selfRegistration\",\n            \"Лид\",\n            \"Лидов\",\n            \"parent\",\n            \"BY\",\n            \"Europe/Minsk\",\n            \"ru\",\n            \"+7859561122\",\n            \"mail@list.ru\",\n            \"new\",\n            \"site\",\n            \"manual\");\n  }\n\n  @DataProvider\n  public Iterator<Object[]> validLeadsFromJson() throws IOException {\n    try (BufferedReader reader =\n        new BufferedReader(\n            new FileReader(new File(\"src/test/resources/testdata/self_registration.json\")))) {\n      String json = \"\";\n      String line = reader.readLine();\n      while (line != null) {\n        json += line;\n        line = reader.readLine();\n      }\n      Gson gson = new Gson();\n      List<StudentData> students =\n          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());\n      return students.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();\n    }\n  }\n\n  @Test(dataProvider = \"validLeadsFromJson\")\n  public void testSelfRegistration(StudentData student) throws InterruptedException {\n\n    app.student().logout();\n\n    Leads leadsBefore = app.db().leads();\n    Students studentsBefore = app.dbstudents().students();\n    Parents parentsBefore = app.db().parents();\n    Families familyBefore = app.db().families();\n\n    app.lkParent().goHref();\n    app.lkParent().selfRegistration(student);\n\n    Thread.sleep(3000); // необходимо, т.к. не успевает сформироваться токен в бд\n\n    ParentData parent = app.db().getTokenParent(\"Лид\", \"Лидов\", \"parent\");\n    String token = parent.getServices().getPassword().getReset().getToken();\n    app.lkParent().activation(token);\n\n    Leads leadsAfter = app.db().leads();\n    Students studentsAfter = app.dbstudents().students();\n    Parents parentsAfter = app.db().parents();\n    Families familyAfter = app.db().families();\n\n    studentClean = app.dbstudents().lastStudent();\n    parentClean = app.db().lastParent();\n    familyClean = app.db().lastFamily();\n\n    assertThat(leadsAfter.size(), equalTo(leadsBefore.size()));\n    assertThat(studentsAfter.size(), equalTo(studentsBefore.size() + 1));\n    assertThat(parentsAfter.size(), equalTo(parentsBefore.size() + 1));\n    assertThat(familyAfter.size(), equalTo(familyBefore.size() + 1));\n    checkStudent(studentsBefore, studentsAfter, student);\n    checkParent(parentsBefore, parentsAfter);\n    checkLead(leadsBefore, leadsAfter);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    leadService.findByIdAndDelete(leadService.findById(\"selfRegistration\"));\n    studentService.findByIdAndDelete(studentClean.getId());\n    parentService.findByIdAndDelete(parentClean.getId());\n    familyService.findByIdAndDelete(familyClean.getId());\n    taskService.drop();\n  }\n\n  private void checkStudent(Students before, Students after, StudentData student) {\n    app.trStudent()\n        .newStudent(\n            studentClean.getId(),\n            student.getFirstname(),\n            student.getLastname(),\n            \"expert\",\n            \"BY\",\n            \"Europe/Minsk\",\n            2,\n            \"ru\",\n            \"ru\",\n            familyClean.getId());\n    StudentData studentAdd = studentService.findById(studentClean.getId());\n    for (StudentData studentBefore : before) {\n      if (studentBefore.getId().equals(studentClean.getId())) {\n        assertThat(after, equalTo(before.without(studentBefore).withAdded(studentAdd)));\n        return;\n      }\n    }\n  }\n\n  private void checkParent(Parents before, Parents after) {\n    app.trParent()\n        .newParent(\n            parentClean.getId(),\n            \"Лид\",\n            \"Лидов\",\n            \"BY\",\n            \"Europe/Minsk\",\n            \"ru\",\n            familyClean.getId(),\n            \"123456789\",\n            \"mail@list.ru\",\n            true);\n    ParentData parentAdd = parentService.findById(parentClean.getId());\n    for (ParentData parentBefore : before) {\n      if (parentBefore.getId().equals(parentClean.getId())) {\n        assertThat(after, equalTo(before.without(parentBefore).withAdded(parentAdd)));\n        return;\n      }\n    }\n  }\n\n  private void checkLead(Leads before, Leads after) {\n    app.trLead()\n        .leadParent(\n            \"selfRegistration\",\n            \"Лид\",\n            \"Лидов\",\n            \"parent\",\n            \"BY\",\n            \"Europe/Minsk\",\n            \"ru\",\n            \"+7859561122\",\n            \"mail@list.ru\",\n            \"success\",\n            \"site\",\n            \"manual\");\n\n    LeadData leadAdd = leadService.findById(\"selfRegistration\");\n    for (LeadData leadBefore : before) {\n      if (leadBefore.getId().equals(\"selfRegistration\")) {\n        assertThat(after, equalTo(before.without(leadBefore).withAdded(leadAdd)));\n        return;\n      }\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/selfRegistration/SelfRegistration.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/selfRegistration/SelfRegistration.java	(date 1597660771972)
+@@ -114,10 +114,6 @@
+     Parents parentsAfter = app.db().parents();
+     Families familyAfter = app.db().families();
+ 
+-    studentClean = app.dbstudents().lastStudent();
+-    parentClean = app.db().lastParent();
+-    familyClean = app.db().lastFamily();
+-
+     assertThat(leadsAfter.size(), equalTo(leadsBefore.size()));
+     assertThat(studentsAfter.size(), equalTo(studentsBefore.size() + 1));
+     assertThat(parentsAfter.size(), equalTo(parentsBefore.size() + 1));
+@@ -129,6 +125,10 @@
+ 
+   @AfterMethod(alwaysRun = true)
+   public void clean() {
++    studentClean = app.dbstudents().lastStudent();
++    parentClean = app.db().lastParent();
++    familyClean = app.db().lastFamily();
++
+     leadService.findByIdAndDelete(leadService.findById("selfRegistration"));
+     studentService.findByIdAndDelete(studentClean.getId());
+     parentService.findByIdAndDelete(parentClean.getId());
+Index: .idea/codeStyles/codeStyleConfig.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"ProjectCodeStyleConfiguration\">\n  <state>\n    <option name=\"PREFERRED_PROJECT_CODE_STYLE\" value=\"GoogleStyle copy\" />\n  </state>\n</component>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/codeStyles/codeStyleConfig.xml	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ .idea/codeStyles/codeStyleConfig.xml	(date 1597662035558)
+@@ -1,5 +1,5 @@
+ <component name="ProjectCodeStyleConfiguration">
+   <state>
+-    <option name="PREFERRED_PROJECT_CODE_STYLE" value="GoogleStyle copy" />
++    <option name="PREFERRED_PROJECT_CODE_STYLE" value="GoogleStyle copy1" />
+   </state>
+ </component>
+\ No newline at end of file
+Index: src/test/java/io/itgen/tests/screenShot/SshotRequests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n\nimport io.itgen.model.*;\nimport io.itgen.model.requests.Activity;\nimport io.itgen.model.requests.Comment;\nimport io.itgen.model.requests.Times;\nimport io.itgen.model.users.Contacts;\nimport io.itgen.model.users.Status;\nimport io.itgen.services.FamilyService;\nimport io.itgen.services.RequestService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Date;\n\nimport static io.itgen.appmanager.ApplicationManager.properties;\n\npublic class SshotRequests extends TestBase {\n  ArrayList<Comment> listcomment = new ArrayList<>();\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    RequestService requestService = new RequestService();\n    RequestData request =\n        new RequestData()\n            .withId(\"sshotRequests\")\n            .withCreator(\n                \"666\") // суперадмин создал заявку (может быть привязаться к тому, кто залогинен)\n            .withCreatorAt(new Date())\n            .withStatus(\"open\")\n            .withChildId(\"sshotRequests\")\n            .withComment(listcomment)\n            .withActivity(\n                Arrays.asList(\n                    new Activity().withUId(\"666\").withTs(new Date()).withT(\"requestCreated\")))\n            .withSkill(\"1\")\n            .withDuration(2)\n            .withPermanent(false)\n            .withTrial(false)\n            .withTimes(\n                Arrays.asList(\n                    new Times().withMin(1592110800000.0).withMax(1592157600000.0),\n                    new Times().withMin(1592197200000.0).withMax(1592244000000.0),\n                    new Times().withMin(1592283600000.0).withMax(1592330400000.0)));\n    requestService.save(request);\n\n    FamilyService familyService = new FamilyService();\n    FamilyData family =\n        new FamilyData().withId(\"sshotRequests\").withTrialBonusOff(false).withTierId(\"txa\");\n    familyService.save(family);\n\n    StudentService studentService = new StudentService();\n    StudentData student =\n        new StudentData()\n            .withId(\"sshotRequests\")\n            .withFirstName(\"Маша\")\n            .withLastName(\"Машина\")\n            .withRoles(Arrays.asList(\"child\"))\n            .withPclevel(\"expert\")\n            .withCountry(\"AL\")\n            .withTimeZone(\"Europe/Minsk\")\n            .withGender(2)\n            .withFamilyId(\"sshotRequests\")\n            .withStudyLang(\"ru\")\n            .withLocate(\"ru\")\n            .withBirthday(new Date(1556726891000L))\n            .withLangs(Arrays.asList(\"ru\"))\n            .withContacts(\n                Collections.singletonList(new Contacts().withType(\"phone\").withVal(\"1234567899\")))\n            .withDuration(2)\n            .withStatus(new Status().withState(\"noTrial\"));\n    studentService.save(student);\n  }\n\n  @Test\n  public void testSshotRequests() throws AWTException, IOException {\n    String name = \"Admin_Requests_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n\n    app.goTo().menuTasks();\n    app.goTo().menuRequests();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                properties.getProperty(\"expected\"),\n                properties.getProperty(\"actual\"),\n                properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    RequestService requestService = new RequestService();\n    requestService.findByIdAndDelete(\"sshotRequests\");\n\n    StudentService studentService = new StudentService();\n    studentService.findByIdAndDelete(\"sshotRequests\");\n\n    FamilyService familyService = new FamilyService();\n    familyService.findByIdAndDelete(\"sshotRequests\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"sshotRequests\");\n    TaskService taskService = new TaskService();\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotRequests.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotRequests.java	(date 1597741263507)
+@@ -101,7 +101,8 @@
+                 properties.getProperty("actual"),
+                 properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ 
+Index: src/test/java/io/itgen/tests/screenShot/SshotLessonWithStudent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/**\n * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание,\n * делает снимок, сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка\n * запускаем конфигурацию запуска со свойством -Detalon=true.\n */\nimport io.itgen.general.TimeGeneral;\nimport io.itgen.model.*;\nimport io.itgen.model.schedule.C;\nimport io.itgen.model.schedule.ST;\nimport io.itgen.model.schedule.Slots;\nimport io.itgen.model.schedule.Times;\nimport io.itgen.model.users.Contacts;\nimport io.itgen.model.users.Status;\nimport io.itgen.services.FamilyService;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Date;\n\nimport static io.itgen.appmanager.ApplicationManager.properties;\n\npublic class SshotLessonWithStudent extends TestBase {\n  String period = \"21:00 - 23:00\";\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    TimeGeneral time = new TimeGeneral();\n    ScheduleService scheduleService = new ScheduleService();\n    ScheduleData schedule =\n        new ScheduleData()\n            .withId(\"SshotOnLessonWithStudent\")\n            .withVer(0)\n            .withFromDate(time.date())\n            .withSlots(\n                Arrays.asList(\n                    new Slots()\n                        .withId(\"14\")\n                        .withW(time.date())\n                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))\n                        .withC(\n                            Arrays.asList(\n                                new C()\n                                    .withId(\"SshotOnLessonWithStudent\")\n                                    .withType(1)\n                                    .withSubject(\"1\")\n                                    .withLang(\"ru\")\n                                    .withNewSubj(true)\n                                    .withS(\"normal\")))))\n            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))\n            .withSkypeId(\"1\")\n            .withOneTime(true);\n    scheduleService.save(schedule);\n\n    FamilyService familyService = new FamilyService();\n    FamilyData family =\n        new FamilyData()\n            .withId(\"SshotOnLessonWithStudent\")\n            .withTrialBonusOff(false)\n            .withTierId(\"txa\");\n    familyService.save(family);\n\n    StudentService studentService = new StudentService();\n    StudentData student =\n        new StudentData()\n            .withId(\"SshotOnLessonWithStudent\")\n            .withFirstName(\"Маша\")\n            .withLastName(\"Машина\")\n            .withRoles(Arrays.asList(\"child\"))\n            .withPclevel(\"expert\")\n            .withCountry(\"AL\")\n            .withTimeZone(\"Europe/Minsk\")\n            .withGender(2)\n            .withFamilyId(\"SshotOnLessonWithStudent\")\n            .withStudyLang(\"ru\")\n            .withLocate(\"ru\")\n            .withBirthday(new Date(1556726891000L))\n            .withLangs(Arrays.asList(\"ru\"))\n            .withContacts(\n                Collections.singletonList(new Contacts().withType(\"phone\").withVal(\"1234567899\")))\n            .withDuration(2)\n            .withStatus(new Status().withState(\"noTrial\"));\n    studentService.save(student);\n  }\n\n  @Test\n  public void testSshotLessonWithStudent() throws AWTException, IOException {\n    String name = \"Admin_ScheduleWithStudent_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//div[@class='text-capitalize'][2]\"));\n    locatorIgnor.add(By.xpath(\"//p\"));\n\n    String[] deleteElements={\n        \"//p[contains(@class,'start-info')]\",\n        \"//div[@class='text-capitalize'][2]\"\n    };\n\n    app.goTo().menuTasks();\n    app.goTo().menuSchedule();\n    app.schedule().selectScheduleInListUIById(\"SshotOnLessonWithStudent\");\n    app.sshot().deleteElements(deleteElements);\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                properties.getProperty(\"expected\"),\n                properties.getProperty(\"actual\"),\n                properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    ScheduleService scheduleService = new ScheduleService();\n    scheduleService.findByIdAndDelete(\"SshotOnLessonWithStudent\");\n\n    StudentService studentService = new StudentService();\n    studentService.findByIdAndDelete(\"SshotOnLessonWithStudent\");\n\n    FamilyService familyService = new FamilyService();\n    familyService.findByIdAndDelete(\"SshotOnLessonWithStudent\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"SshotOnLessonWithStudent\");\n    TaskService taskService = new TaskService();\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotLessonWithStudent.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotLessonWithStudent.java	(date 1597741319694)
+@@ -104,9 +104,8 @@
+     locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
+     locatorIgnor.add(By.xpath("//p"));
+ 
+-    String[] deleteElements={
+-        "//p[contains(@class,'start-info')]",
+-        "//div[@class='text-capitalize'][2]"
++    String[] deleteElements = {
++      "//p[contains(@class,'start-info')]", "//div[@class='text-capitalize'][2]"
+     };
+ 
+     app.goTo().menuTasks();
+@@ -121,7 +120,8 @@
+                 properties.getProperty("actual"),
+                 properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ 
+Index: src/test/java/io/itgen/tests/screenShot/SshotFamily.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,\n  сравнивает его с эталонным.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotFamily extends TestBase {\n\n  @Test\n  public void testSshotFamilies() throws AWTException, IOException {\n    String name = \"Admin_Family_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//span[@class='user-time']\"));\n\n    app.goTo().menuStudents();\n    app.student().selectStudentInListUIById(\"21\");\n    app.family().btnFamily();\n    app.sshot().changeTopBar();\n\n    ImageDiff diffFirst =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diffFirst.getDiffSize() > 0) {\n      ImageDiff diffSecond =\n          app.sshot()\n              .getImageDiff(\n                  ApplicationManager.properties.getProperty(\"expected\"),\n                  ApplicationManager.properties.getProperty(\"actual\"),\n                  ApplicationManager.properties.getProperty(\"markedImages\"),\n                  name,\n                  locatorIgnor);\n      Assert.assertEquals(diffSecond.getDiffSize(), 0);\n    } else {\n      Assert.assertEquals(diffFirst.getDiffSize(), 0);\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotFamily.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotFamily.java	(date 1597741293742)
+@@ -34,7 +34,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diffFirst.getDiffSize() > 0) {
+       ImageDiff diffSecond =
+           app.sshot()
+@@ -43,7 +44,8 @@
+                   ApplicationManager.properties.getProperty("actual"),
+                   ApplicationManager.properties.getProperty("markedImages"),
+                   name,
+-                  locatorIgnor);
++                  locatorIgnor,
++                  1.25f);
+       Assert.assertEquals(diffSecond.getDiffSize(), 0);
+     } else {
+       Assert.assertEquals(diffFirst.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShot/SshotWindowSchedule.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n\nimport io.itgen.general.TimeGeneral;\nimport io.itgen.model.*;\nimport io.itgen.model.schedule.C;\nimport io.itgen.model.schedule.ST;\nimport io.itgen.model.schedule.Slots;\nimport io.itgen.model.schedule.Times;\nimport io.itgen.model.users.Contacts;\nimport io.itgen.model.users.Status;\nimport io.itgen.services.FamilyService;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Date;\n\nimport static io.itgen.appmanager.ApplicationManager.properties;\n\npublic class SshotWindowSchedule extends TestBase {\n  ArrayList<C> list = new ArrayList<>();\n  String period = \"21:00 - 23:00\";\n  String nameStudent = \"Маша Машина\";\n  ScheduleData schedule = null;\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    // Начальные данные: есть ученик и расписание, на которое надо записать этого ученика\n    TimeGeneral time = new TimeGeneral();\n    ScheduleService scheduleService = new ScheduleService();\n    schedule =\n        new ScheduleData()\n            .withId(\"sshotWindowSchedule\")\n            .withVer(0)\n            .withFromDate(time.date())\n            .withSlots(\n                Arrays.asList(\n                    new Slots()\n                        .withId(\"14\")\n                        .withW(time.date())\n                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))\n                        .withC(list)))\n            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))\n            .withSkypeId(\"1\")\n            .withOneTime(true);\n    scheduleService.save(schedule);\n\n    FamilyService familyService = new FamilyService();\n    FamilyData family =\n        new FamilyData().withId(\"sshotWindowSchedule\").withTrialBonusOff(false).withTierId(\"txa\");\n    familyService.save(family);\n\n    StudentService studentService = new StudentService();\n    StudentData student =\n        new StudentData()\n            .withId(\"sshotWindowSchedule\")\n            .withFirstName(\"Маша\")\n            .withLastName(\"Машина\")\n            .withRoles(Arrays.asList(\"child\"))\n            .withPclevel(\"expert\")\n            .withCountry(\"AL\")\n            .withTimeZone(\"Europe/Minsk\")\n            .withGender(2)\n            .withFamilyId(\"sshotWindowSchedule\")\n            .withStudyLang(\"ru\")\n            .withLocate(\"ru\")\n            .withBirthday(new Date(1556726891000L))\n            .withLangs(Arrays.asList(\"ru\"))\n            .withContacts(\n                Collections.singletonList(new Contacts().withType(\"phone\").withVal(\"1234567899\")))\n            .withDuration(2)\n            .withStatus(new Status().withState(\"noTrial\"));\n    studentService.save(student);\n  }\n\n  @Test\n  public void testSshotWindowSchedule() throws AWTException, IOException {\n    String name = \"Admin_WindowSchedule_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//span[contains(@class,'capitalize')]\"));\n\n    app.goTo().menuTasks();\n    app.goTo().menuSchedule();\n    app.windowSchedule().selectStudentForSshot(nameStudent);\n    app.sshot().changeTopBar();\n    app.sshot().changeTableInWindowSchedule();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                properties.getProperty(\"expected\"),\n                properties.getProperty(\"actual\"),\n                properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diff.getDiffSize() > 500) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    ScheduleService scheduleService = new ScheduleService();\n    scheduleService.findByIdAndDelete(\"sshotWindowSchedule\");\n\n    StudentService studentService = new StudentService();\n    studentService.findByIdAndDelete(\"sshotWindowSchedule\");\n\n    FamilyService familyService = new FamilyService();\n    familyService.findByIdAndDelete(\"sshotWindowSchedule\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"sshotWindowSchedule\");\n    TaskService taskService = new TaskService();\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotWindowSchedule.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotWindowSchedule.java	(date 1597741330162)
+@@ -106,7 +106,8 @@
+                 properties.getProperty("actual"),
+                 properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diff.getDiffSize() > 500) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+     }
+Index: src/test/java/io/itgen/tests/screenShot/SshotPayByAdminShop.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n  со свойством -Detalon=true.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotPayByAdminShop extends TestBase {\n\n  @Test\n  public void testSshotPayByAdminShop() throws AWTException, IOException {\n    String name = \"Admin_PayShop_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n\n    app.goTo().menuTasks();\n    app.goTo().menuStudents();\n    app.payment().paymentAdminShop(\"21\");\n    app.sshot().changeTopBar();\n\n    ImageDiff diffFirst =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diffFirst.getDiffSize() > 0) {\n      ImageDiff diffSecond =\n          app.sshot()\n              .getImageDiff(\n                  ApplicationManager.properties.getProperty(\"expected\"),\n                  ApplicationManager.properties.getProperty(\"actual\"),\n                  ApplicationManager.properties.getProperty(\"markedImages\"),\n                  name,\n                  locatorIgnor);\n      Assert.assertEquals(diffSecond.getDiffSize(), 0);\n    } else {\n      Assert.assertEquals(diffFirst.getDiffSize(), 0);\n    }\n    app.payment().goToBack(\"paymentAdmin\");\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotPayByAdminShop.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotPayByAdminShop.java	(date 1597741308376)
+@@ -34,7 +34,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diffFirst.getDiffSize() > 0) {
+       ImageDiff diffSecond =
+           app.sshot()
+@@ -43,7 +44,8 @@
+                   ApplicationManager.properties.getProperty("actual"),
+                   ApplicationManager.properties.getProperty("markedImages"),
+                   name,
+-                  locatorIgnor);
++                  locatorIgnor,
++                  1.25f);
+       Assert.assertEquals(diffSecond.getDiffSize(), 0);
+     } else {
+       Assert.assertEquals(diffFirst.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShot/SshotMainSchedule.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/**\n * Скриншот страницы с расписанием. База изначально должна быть пустая. Тест создает расписание,\n * делает снимок, сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка\n * запускаем конфигурацию запуска со свойством -Detalon=true.\n */\n\nimport static io.itgen.appmanager.ApplicationManager.properties;\n\nimport io.itgen.general.TimeGeneral;\nimport io.itgen.model.ScheduleData;\nimport io.itgen.model.schedule.C;\nimport io.itgen.model.schedule.ST;\nimport io.itgen.model.schedule.Slots;\nimport io.itgen.model.schedule.Times;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotMainSchedule extends TestBase {\n  ArrayList<C> list = new ArrayList<>();\n  String period = \"21:00 - 23:00\";\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    TimeGeneral time = new TimeGeneral();\n    ScheduleService scheduleService = new ScheduleService();\n    ScheduleData schedule =\n        new ScheduleData()\n            .withId(\"scheduleSingleBlock\")\n            .withVer(0)\n            .withFromDate(time.date())\n            .withSlots(\n                Arrays.asList(\n                    new Slots()\n                        .withId(\"14\")\n                        .withW(time.date())\n                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))\n                        .withC(list)))\n            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))\n            .withSkypeId(\"1\");\n    scheduleService.save(schedule);\n  }\n\n  @Test\n  public void testSshotMainSchedule() throws AWTException, IOException {\n    String name = \"Admin_MainSchedule_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//h4\"));\n\n    app.goTo().menuTasks();\n    app.goTo().menuSchedule();\n    app.schedule().waitForLoadTextCenterOnMainSchedule();\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                properties.getProperty(\"expected\"),\n                properties.getProperty(\"actual\"),\n                properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    ScheduleService scheduleService = new ScheduleService();\n    scheduleService.findByIdAndDelete(\"scheduleSingleBlock\");\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotMainSchedule.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotMainSchedule.java	(date 1597741226981)
+@@ -4,7 +4,6 @@
+  * делает снимок, сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка
+  * запускаем конфигурацию запуска со свойством -Detalon=true.
+  */
+-
+ import static io.itgen.appmanager.ApplicationManager.properties;
+ 
+ import io.itgen.general.TimeGeneral;
+@@ -69,7 +68,8 @@
+                 properties.getProperty("actual"),
+                 properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ 
+Index: src/test/java/io/itgen/tests/screenShot/SshotMaterialTabAll.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotMaterialTabAll.java	(date 1597742343655)
++++ src/test/java/io/itgen/tests/screenShot/SshotMaterialTabAll.java	(date 1597742343655)
+@@ -0,0 +1,78 @@
++package io.itgen.tests.screenShot;
++
++import static io.itgen.appmanager.ApplicationManager.properties;
++
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.services.MaterialBranchService;
++import io.itgen.services.MaterialService;
++import io.itgen.tests.TestBase;
++import java.awt.AWTException;
++import java.io.IOException;
++import java.util.HashSet;
++import java.util.Set;
++import org.openqa.selenium.By;
++import org.testng.Assert;
++import org.testng.annotations.AfterMethod;
++import org.testng.annotations.BeforeMethod;
++import org.testng.annotations.Test;
++import ru.yandex.qatools.ashot.comparison.ImageDiff;
++
++public class SshotMaterialTabAll extends TestBase {
++
++  MaterialBranchData materialBranchClean = null;
++  MaterialBranchService materialBranchService = new MaterialBranchService();
++  MaterialData materialClean = null;
++  MaterialService materialService = new MaterialService();
++
++  @BeforeMethod
++  public void ensurePreconditions() {
++    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
++    app.trMaterial()
++        .newMaterial(
++            "MaterialTabAll",
++            "666",
++            "Жуки",
++            "published",
++            "1",
++            "CreateNewMaterial",
++            "video",
++            "easy",
++            "ru",
++            "adaptation",
++            "https://docs.google.com",
++            "https://docs.google.com",
++            "https://docs.google.com",
++            "Развивает внимательность");
++  }
++
++  @Test()
++  public void testMaterialTabAll() throws AWTException, IOException {
++    app.goTo().menuTasks();
++    app.goTo().menuMaterials();
++    app.material().openBranch();
++
++    String name = "Admin_MaterialTabAll_RU_Chrome";
++    Set<By> locatorIgnor = new HashSet<>();
++    app.sshot().changeTopBar();
++
++    ImageDiff diff =
++        app.sshot()
++            .getImageDiff(
++                properties.getProperty("expected"),
++                properties.getProperty("actual"),
++                properties.getProperty("markedImages"),
++                name,
++                locatorIgnor,
++                1.98f);
++    Assert.assertEquals(diff.getDiffSize(), 0);
++  }
++
++  @AfterMethod(alwaysRun = true)
++  public void clean() {
++    materialClean = app.dbmaterial().lastMaterial();
++    materialService.findByIdAndDelete(materialClean.getId());
++    materialBranchClean = app.dbmaterial().lastBranchMaterial();
++    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
++  }
++}
+Index: src/test/java/io/itgen/tests/screenShot/SshotListWorkers.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n  со свойством -Detalon=true.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.WorkerData;\nimport io.itgen.model.users.Contacts;\nimport io.itgen.model.users.Emails;\nimport io.itgen.services.WorkerService;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.Date;\n\npublic class SshotListWorkers extends TestBase {\n  public WorkerData deletedWorker;\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    WorkerService workerService = new WorkerService();\n    deletedWorker =\n        new WorkerData()\n            .withId(\"sshotListWorker\")\n            .withFirstName(\"Маша\")\n            .withLastName(\"Машина\")\n            .withRoles(Arrays.asList(\"employee\"))\n            .withCountry(\"AL\")\n            .withTimeZone(\"Europe/Minsk\")\n            .withLocate(\"ru\")\n            .withBirthday(new Date(1556726891000L))\n            .withLangs(Arrays.asList(\"ru\"))\n            .withContacts(\n                Collections.singletonList(new Contacts().withType(\"phone\").withVal(\"1234567899\")))\n            .withEmails(\n                Collections.singletonList(\n                    new Emails().withAddress(\"julja83@list.ru\").withVerified(true)));\n    workerService.create(deletedWorker);\n  }\n\n  @Test\n  public void testSshotListWorkers() throws AWTException, IOException {\n    String name = \"Admin_ListWorkers_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//tbody//tr//td[4]\"));\n    locatorIgnor.add(By.xpath(\"//tbody//tr//td[3]\"));\n\n    app.goTo().menuTasks();\n    app.goTo().menuWorkers();\n    app.worker().waitForLoadHeader();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    WorkerService workerService = new WorkerService();\n    workerService.findByIdAndDelete(\"sshotListWorker\");\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotListWorkers.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotListWorkers.java	(date 1597741212067)
+@@ -68,7 +68,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ 
+Index: src/test/java/io/itgen/tests/screenShot/SshotPayByAdminCard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n  со свойством -Detalon=true.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotPayByAdminCard extends TestBase {\n\n  @Test\n  public void testSshotPayByAdminCard() throws AWTException, IOException {\n    String name = \"Admin_PayCard_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n\n    app.goTo().menuTasks();\n    app.goTo().menuStudents();\n    app.payment().paymentAdminCard(\"21\");\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n\n    if (diff.getDiffSize() > 25) {\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n    app.payment().goToBack(\"paymentAdmin\");\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotPayByAdminCard.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotPayByAdminCard.java	(date 1597741277368)
+@@ -33,7 +33,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+ 
+     if (diff.getDiffSize() > 25) {
+       Assert.assertEquals(diff.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShot/SshotListLeads.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n  со свойством -Detalon=true.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.LeadData;\nimport io.itgen.model.users.Contacts;\nimport io.itgen.services.LeadService;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\nimport java.util.Collections;\n\npublic class SshotListLeads extends TestBase {\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    LeadService leadService = new LeadService();\n    LeadData lead =\n        new LeadData()\n            .withId(\"SshotLeads\")\n            .withFirstName(\"Лид\")\n            .withLastName(\"Лидов\")\n            .withRoles(Collections.singletonList(\"child\"))\n            .withCountry(\"AL\")\n            .withTimeZone(\"Europe/Minsk\")\n            .withLocate(\"ru\")\n            .withContacts(\n                Collections.singletonList(new Contacts().withType(\"phone\").withVal(\"1234567899\")))\n            .withStatus(\"new\");\n    leadService.create(lead);\n  }\n\n  @Test\n  public void testSshotListLeads() throws AWTException, IOException {\n    String name = \"Admin_ListLeads_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//span[@class='user-time']\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='date']\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='time']\"));\n\n    app.goTo().menuTasks();\n    app.goTo().menuLeads();\n    app.lead().waitForLoadHeader();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    LeadService leadService = new LeadService();\n    leadService.findByIdAndDelete(\"SshotLeads\");\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotListLeads.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotListLeads.java	(date 1597741238560)
+@@ -61,7 +61,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ 
+Index: src/test/java/io/itgen/tests/screenShot/SshotListStudents.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShot;\n/* Скриншот страницы с учениками. База изначально должна быть пустая. Тест создает ученика, делает снимок,\n  сравнивает его с эталонным. Для запуска в режиме снятия эталонного снимка запускаем конфигурацию запуска\n  со свойством -Detalon=true.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.IOException;\n\npublic class SshotListStudents extends TestBase {\n\n  @Test\n  public void testSshotListStudents() throws AWTException, IOException {\n    String name = \"Admin_ListStudents_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    app.goTo().menuTasks();\n    app.goTo().menuStudents();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    Assert.assertEquals(diff.getDiffSize(), 0);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShot/SshotListStudents.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShot/SshotListStudents.java	(date 1597741193099)
+@@ -32,7 +32,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     Assert.assertEquals(diff.getDiffSize(), 0);
+   }
+ }
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotSignUpOnTrial.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotSignUpOnTrial extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик\n  // и разовое расписание на завтра в 18.00, на которое нужно записать добавленного ученика на\n  // пробное\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, \"LKOnTrail\", \"14\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily(\"LKOnTrail\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testSignUpOnTrial() throws AWTException, IOException {\n    app.lkParent().btnRecordOnTrail();\n    app.lkParent().btnSelectScratch();\n    app.lkParent().selectLesson();\n\n    String name = \"Parent_SignUpOnTrial_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//p[@class='user']\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='day-of-month']\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='month']\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    app.lkParent().btnLogo();\n\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"LKOnTrail\");\n    studentService.findByIdAndDelete(\"LKOnTrail\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LKOnTrail\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotSignUpOnTrial.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotSignUpOnTrial.java	(date 1597741378958)
+@@ -55,7 +55,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     app.lkParent().btnLogo();
+ 
+     if (diff.getDiffSize() > 100) { // погрешность
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotPayByParentShopRU.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotPayByParentShopRU extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleYesterday()\n        .FinishingFirstTrialLesson(period, \"FinishedSchedule\", \"14\", \"paymantByGuest\", \"1\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily_AfterTrial(\n            \"paymantByGuest\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testSshotPayByParentShopRU() throws AWTException, IOException {\n    String name = \"Parent_PayByParentShop_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    app.payment().goToShopByParent();\n    app.sshot().changeTopBar();\n\n    ImageDiff diffFirst =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diffFirst.getDiffSize() > 0) {\n      ImageDiff diffSecond =\n          app.sshot()\n              .getImageDiff(\n                  ApplicationManager.properties.getProperty(\"expected\"),\n                  ApplicationManager.properties.getProperty(\"actual\"),\n                  ApplicationManager.properties.getProperty(\"markedImages\"),\n                  name,\n                  locatorIgnor);\n      Assert.assertEquals(diffSecond.getDiffSize(), 0);\n    } else {\n      Assert.assertEquals(diffFirst.getDiffSize(), 0);\n    }\n    app.payment().goToBack(\"111\");\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"FinishedSchedule\");\n    studentService.findByIdAndDelete(\"paymantByGuest\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"paymantByGuest\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotPayByParentShopRU.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotPayByParentShopRU.java	(date 1597741368316)
+@@ -48,7 +48,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diffFirst.getDiffSize() > 0) {
+       ImageDiff diffSecond =
+           app.sshot()
+@@ -57,7 +58,8 @@
+                   ApplicationManager.properties.getProperty("actual"),
+                   ApplicationManager.properties.getProperty("markedImages"),
+                   name,
+-                  locatorIgnor);
++                  locatorIgnor,
++                  1.25f);
+       Assert.assertEquals(diffSecond.getDiffSize(), 0);
+     } else {
+       Assert.assertEquals(diffFirst.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnSingle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotFiltrRecordOnSingle extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в\n  // 18.00\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleYesterday()\n        .FinishingFirstTrialLesson(\n            period, \"FinishedSchedule\", \"14\", \"LkRecordOnSingleSchedule\", \"1\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily_AfterTrial(\n            \"LkRecordOnSingleSchedule\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n  }\n\n  @Test\n  public void testFiltrRecordOnSingle() throws AWTException, IOException {\n    app.lkParent().GoToFiltrRecordSingle();\n\n    String name = \"Parent_FiltrRecordOnSingle_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//p[@class='user']\"));\n    locatorIgnor.add(By.xpath(\"//div[@class='DayPickerInput']//input\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='month']\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@class,'btn-group')]\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n\n    app.lkParent().btnLogo();\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"FinishedSchedule\");\n    studentService.findByIdAndDelete(\"LkRecordOnSingleSchedule\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LkRecordOnSingleSchedule\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnSingle.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotFiltrRecordOnSingle.java	(date 1597741446701)
+@@ -56,7 +56,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diff.getDiffSize() > 100) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+     }
+Index: src/test/java/io/itgen/appmanager/ApplicationManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.appmanager;\n\nimport io.itgen.appmanager.dbHelpers.DbHelper;\nimport io.itgen.appmanager.dbHelpers.DbHelperRequest;\nimport io.itgen.appmanager.dbHelpers.DbHelperSchedule;\nimport io.itgen.appmanager.dbHelpers.DbHelperStudents;\nimport io.itgen.appmanager.transactionHelper.TrFamilyHelper;\nimport io.itgen.appmanager.transactionHelper.TrLeadHelper;\nimport io.itgen.appmanager.transactionHelper.TrParentHelper;\nimport io.itgen.appmanager.transactionHelper.TrPaymentHelper;\nimport io.itgen.appmanager.transactionHelper.TrStudentHelper;\nimport io.itgen.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;\nimport io.itgen.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;\nimport io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.net.URL;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.Paths;\nimport java.util.Properties;\nimport java.util.concurrent.TimeUnit;\nimport org.openqa.selenium.OutputType;\nimport org.openqa.selenium.Platform;\nimport org.openqa.selenium.TakesScreenshot;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.chrome.ChromeDriver;\nimport org.openqa.selenium.firefox.FirefoxDriver;\nimport org.openqa.selenium.ie.InternetExplorerDriver;\nimport org.openqa.selenium.remote.BrowserType;\nimport org.openqa.selenium.remote.DesiredCapabilities;\nimport org.openqa.selenium.remote.RemoteWebDriver;\n\npublic class ApplicationManager {\n  public static Properties properties;\n  public WebDriver wd;\n  private TrainerHelper trainerHelper;\n  private StudentHelper studentHelper;\n  private FamilyHelper familyHelper;\n  private ParentHelper parentHelper;\n  private WorkerHelper workerHelper;\n  private LeadHelper leadHelper;\n  private ScheduleHelper scheduleHelper;\n  private SessionHelper sessionHelper;\n  private NavigationHelper navigationHelper;\n  private String browser;\n  private DbHelper dbHelper;\n  private SShotHelper sShotHelper;\n  private DbHelperStudents dbHelperStudents;\n  private DbHelperSchedule dbHelperSchedule;\n  private DbHelperRequest dbHelperRequest;\n  private WindowScheduleHelper windowScheduleHalper;\n  private RequestHelper requestHalper;\n  private LKParentHelper lkParentHelper;\n  private PaymentHelper paymentHelper;\n  private MaterialHelper materialHelper;\n  private TrScheduleTomorrowHelper trScheduleTomorrowHelper;\n  private TrScheduleYesterdayHelper trScheduleYesterdayHelper;\n  private TrScheduleTodayHelper trScheduleTodayHelper;\n  private TrStudentHelper transactionStudentHelper;\n  private TrLeadHelper transactionLeadHelper;\n  private TrParentHelper transactionParentHelper;\n  private TrPaymentHelper transactionPaymentHelper;\n  private TrFamilyHelper transactionFamilyHelper;\n\n  public ApplicationManager(String browser) {\n    this.browser = browser;\n    properties = new Properties();\n  }\n\n  public void init() throws IOException {\n    String target = System.getProperty(\"target\", \"local\");\n    properties.load(\n        new FileReader(new File(String.format(\"src/test/resources/%s.properties\", target))));\n    dbHelper = new DbHelper();\n    dbHelperStudents = new DbHelperStudents();\n    dbHelperSchedule = new DbHelperSchedule();\n    dbHelperRequest = new DbHelperRequest();\n    trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();\n    trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();\n    trScheduleTodayHelper = new TrScheduleTodayHelper();\n    transactionStudentHelper = new TrStudentHelper();\n    transactionLeadHelper = new TrLeadHelper();\n    transactionParentHelper = new TrParentHelper();\n    transactionPaymentHelper = new TrPaymentHelper();\n    transactionFamilyHelper = new TrFamilyHelper();\n    if (\"\".equals(properties.getProperty(\"selenium.server\"))) {\n      if (browser.equals(BrowserType.FIREFOX)) {\n        wd = new FirefoxDriver();\n      } else if (browser.equals(BrowserType.CHROME)) {\n        wd = new ChromeDriver();\n      } else if (browser.equals(BrowserType.IE)) {\n        wd = new InternetExplorerDriver();\n      }\n    } else {\n      DesiredCapabilities capabilities = new DesiredCapabilities();\n      capabilities.setBrowserName(browser);\n      capabilities.setVersion(\"83\");\n      capabilities.setCapability(\"enableVNC\", true);\n      capabilities.setCapability(\"enableVideo\", false);\n      capabilities.setPlatform(Platform.fromString(System.getProperty(\"platform\", \"windows\")));\n      wd = new RemoteWebDriver(new URL(properties.getProperty(\"selenium.server\")), capabilities);\n    }\n    wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);\n    wd.get(properties.getProperty(\"web.baseUrl\"));\n    workerHelper = new WorkerHelper(wd);\n    sessionHelper = new SessionHelper(wd);\n    navigationHelper = new NavigationHelper(wd);\n    studentHelper = new StudentHelper(wd);\n    parentHelper = new ParentHelper(wd);\n    familyHelper = new FamilyHelper(wd);\n    trainerHelper = new TrainerHelper(wd);\n    scheduleHelper = new ScheduleHelper(wd);\n    sShotHelper = new SShotHelper(wd);\n    leadHelper = new LeadHelper(wd);\n    windowScheduleHalper = new WindowScheduleHelper(wd);\n    requestHalper = new RequestHelper(wd);\n    lkParentHelper = new LKParentHelper(wd);\n    paymentHelper = new PaymentHelper(wd);\n    materialHelper = new MaterialHelper(wd);\n    sessionHelper.login(\n        properties.getProperty(\"web.Login\"), properties.getProperty(\"web.Password\"));\n    // проверить, есть ли папки для скриншотов, если нет - создать\n    Path[] requiredDirs = {\n      Paths.get(properties.getProperty(\"actual\")), Paths.get(properties.getProperty(\"markedImages\"))\n    };\n    for (Path dir : requiredDirs) {\n      if (Files.exists(dir)) continue;\n      Files.createDirectory(dir);\n    }\n  }\n\n  public void stop() {\n    wd.quit();\n  }\n\n  public WorkerHelper worker() {\n    return workerHelper;\n  }\n\n  public NavigationHelper goTo() {\n    return navigationHelper;\n  }\n\n  public DbHelper db() {\n    return dbHelper;\n  }\n\n  public SessionHelper session() {\n    return sessionHelper;\n  }\n\n  public DbHelperStudents dbstudents() {\n    return dbHelperStudents;\n  }\n\n  public DbHelperSchedule dbschedules() {\n    return dbHelperSchedule;\n  }\n\n  public DbHelperRequest dbrequest() {\n    return dbHelperRequest;\n  }\n\n  public StudentHelper student() {\n    return studentHelper;\n  }\n\n  public SShotHelper sshot() {\n    return sShotHelper;\n  }\n\n  public ParentHelper parent() {\n    return parentHelper;\n  }\n\n  public FamilyHelper family() {\n    return familyHelper;\n  }\n\n  public TrainerHelper trainer() {\n    return trainerHelper;\n  }\n\n  public ScheduleHelper schedule() {\n    return scheduleHelper;\n  }\n\n  public LeadHelper lead() {\n    return leadHelper;\n  }\n\n  public WindowScheduleHelper windowSchedule() {\n    return windowScheduleHalper;\n  }\n\n  public RequestHelper request() {\n    return requestHalper;\n  }\n\n  public LKParentHelper lkParent() {\n    return lkParentHelper;\n  }\n\n  public PaymentHelper payment() {\n    return paymentHelper;\n  }\n\n  public MaterialHelper material() {\n    return materialHelper;\n  }\n\n  public TrScheduleTomorrowHelper trScheduleTomorrow() {\n    return trScheduleTomorrowHelper;\n  }\n\n  public TrScheduleYesterdayHelper trScheduleYesterday() {\n    return trScheduleYesterdayHelper;\n  }\n\n  public TrScheduleTodayHelper trScheduleToday() {\n    return trScheduleTodayHelper;\n  }\n\n  public TrStudentHelper trStudent() {\n    return transactionStudentHelper;\n  }\n\n  public TrLeadHelper trLead() {\n    return transactionLeadHelper;\n  }\n\n  public TrParentHelper trParent() {\n    return transactionParentHelper;\n  }\n\n  public TrPaymentHelper trPayment() {\n    return transactionPaymentHelper;\n  }\n\n  public TrFamilyHelper trFamily() {\n    return transactionFamilyHelper;\n  }\n\n  public byte[] takeScreenshot() {\n    return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/ApplicationManager.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/appmanager/ApplicationManager.java	(date 1597662917441)
+@@ -1,11 +1,13 @@
+ package io.itgen.appmanager;
+ 
+ import io.itgen.appmanager.dbHelpers.DbHelper;
++import io.itgen.appmanager.dbHelpers.DbHelperMaterials;
+ import io.itgen.appmanager.dbHelpers.DbHelperRequest;
+ import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
+ import io.itgen.appmanager.dbHelpers.DbHelperStudents;
+ import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
+ import io.itgen.appmanager.transactionHelper.TrLeadHelper;
++import io.itgen.appmanager.transactionHelper.TrMaterialHelper;
+ import io.itgen.appmanager.transactionHelper.TrParentHelper;
+ import io.itgen.appmanager.transactionHelper.TrPaymentHelper;
+ import io.itgen.appmanager.transactionHelper.TrStudentHelper;
+@@ -50,6 +52,7 @@
+   private DbHelperStudents dbHelperStudents;
+   private DbHelperSchedule dbHelperSchedule;
+   private DbHelperRequest dbHelperRequest;
++  private DbHelperMaterials dbHelperMaterials;
+   private WindowScheduleHelper windowScheduleHalper;
+   private RequestHelper requestHalper;
+   private LKParentHelper lkParentHelper;
+@@ -63,6 +66,7 @@
+   private TrParentHelper transactionParentHelper;
+   private TrPaymentHelper transactionPaymentHelper;
+   private TrFamilyHelper transactionFamilyHelper;
++  private TrMaterialHelper transactionMaterialHelper;
+ 
+   public ApplicationManager(String browser) {
+     this.browser = browser;
+@@ -77,6 +81,7 @@
+     dbHelperStudents = new DbHelperStudents();
+     dbHelperSchedule = new DbHelperSchedule();
+     dbHelperRequest = new DbHelperRequest();
++    dbHelperMaterials = new DbHelperMaterials();
+     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
+     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
+     trScheduleTodayHelper = new TrScheduleTodayHelper();
+@@ -85,6 +90,7 @@
+     transactionParentHelper = new TrParentHelper();
+     transactionPaymentHelper = new TrPaymentHelper();
+     transactionFamilyHelper = new TrFamilyHelper();
++    transactionMaterialHelper = new TrMaterialHelper();
+     if ("".equals(properties.getProperty("selenium.server"))) {
+       if (browser.equals(BrowserType.FIREFOX)) {
+         wd = new FirefoxDriver();
+@@ -163,6 +169,10 @@
+     return dbHelperRequest;
+   }
+ 
++  public DbHelperMaterials dbmaterial() {
++    return dbHelperMaterials;
++  }
++
+   public StudentHelper student() {
+     return studentHelper;
+   }
+@@ -243,6 +253,10 @@
+     return transactionFamilyHelper;
+   }
+ 
++  public TrMaterialHelper trMaterial() {
++    return transactionMaterialHelper;
++  }
++
+   public byte[] takeScreenshot() {
+     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
+   }
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormSecond.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport com.google.gson.Gson;\nimport com.google.gson.reflect.TypeToken;\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.model.StudentData;\nimport io.itgen.tests.TestBase;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.DataProvider;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\nimport java.awt.*;\nimport java.io.BufferedReader;\nimport java.io.File;\nimport java.io.FileReader;\nimport java.io.IOException;\nimport java.util.Iterator;\nimport java.util.List;\nimport java.util.stream.Collectors;\n\npublic class SshotAddNewStudentFormSecond extends TestBase {\n  @DataProvider\n  public Iterator<Object[]> StudentsFromJson() throws IOException {\n    try (BufferedReader reader =\n        new BufferedReader(\n            new FileReader(\n                new File(\"src/test/resources/testdata/sshot_creation_student_par_form1.json\")))) {\n      String json = \"\";\n      String line = reader.readLine();\n      while (line != null) {\n        json += line;\n        line = reader.readLine();\n      }\n      Gson gson = new Gson();\n      List<StudentData> students =\n          gson.fromJson(\n              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class\n      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();\n    }\n  }\n\n  @Test(dataProvider = \"StudentsFromJson\")\n  public void testAddNewStudentFormSecond(StudentData student) throws AWTException, IOException {\n    app.lkParent().createSShotSecondForm(student);\n\n    String name = \"Parent_AddNewStudentForm2_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    app.lkParent().btnLogo();\n    if (diff.getDiffSize() > 100) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormSecond.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotAddNewStudentFormSecond.java	(date 1597741468456)
+@@ -57,7 +57,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     app.lkParent().btnLogo();
+     if (diff.getDiffSize() > 100) { // погрешность
+       Assert.assertEquals(diff.getDiffSize(), 0);
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotMain extends TestBase {\n\n  @Test // упадет, если заускать через shift все тесты в подпапке.\n  public void testSshotMain() throws AWTException, IOException {\n    String name = \"Parent_Main_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    app.lkParent().btnClickHistory();\n    app.sshot().changeTopBar();\n\n    ImageDiff diffFirst =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    if (diffFirst.getDiffSize() > 0) {\n      ImageDiff diffSecond =\n          app.sshot()\n              .getImageDiff(\n                  ApplicationManager.properties.getProperty(\"expected\"),\n                  ApplicationManager.properties.getProperty(\"actual\"),\n                  ApplicationManager.properties.getProperty(\"markedImages\"),\n                  name,\n                  locatorIgnor);\n      Assert.assertEquals(diffSecond.getDiffSize(), 0);\n    } else {\n      Assert.assertEquals(diffFirst.getDiffSize(), 0);\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotMain.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotMain.java	(date 1597741397878)
+@@ -27,7 +27,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     if (diffFirst.getDiffSize() > 0) {
+       ImageDiff diffSecond =
+           app.sshot()
+@@ -36,7 +37,8 @@
+                   ApplicationManager.properties.getProperty("actual"),
+                   ApplicationManager.properties.getProperty("markedImages"),
+                   name,
+-                  locatorIgnor);
++                  locatorIgnor,
++                  1.25f);
+       Assert.assertEquals(diffSecond.getDiffSize(), 0);
+     } else {
+       Assert.assertEquals(diffFirst.getDiffSize(), 0);
+Index: src/test/java/io/itgen/appmanager/transactionHelper/TrMaterialHelper.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/appmanager/transactionHelper/TrMaterialHelper.java	(date 1597723893570)
++++ src/test/java/io/itgen/appmanager/transactionHelper/TrMaterialHelper.java	(date 1597723893570)
+@@ -0,0 +1,76 @@
++package io.itgen.appmanager.transactionHelper;
++
++import io.itgen.model.materials.Branches;
++import io.itgen.model.materials.MaterialBranchData;
++import io.itgen.model.materials.MaterialData;
++import io.itgen.model.tasks.Activity;
++import io.itgen.model.tasks.D;
++import io.itgen.services.MaterialBranchService;
++import io.itgen.services.MaterialService;
++import java.time.LocalDate;
++import java.time.LocalTime;
++import java.util.ArrayList;
++import java.util.Arrays;
++import java.util.Date;
++
++public class TrMaterialHelper {
++  ArrayList<String> list = new ArrayList();
++  ArrayList<String> tags = new ArrayList();
++  ArrayList<String> comments = new ArrayList();
++  ArrayList<String> linkedMaterials = new ArrayList();
++  ArrayList<Activity> activity = new ArrayList();
++  private final MaterialBranchService materialBranchService = new MaterialBranchService();
++  private final MaterialService materialService = new MaterialService();
++
++  public void newMaterialBranch(String idRecord, String idMaterialBranch, String name) {
++    MaterialBranchData materialBranch =
++        new MaterialBranchData()
++            .withId(idRecord)
++            .withBranches(
++                Arrays.asList(
++                    new Branches()
++                        .withId(idMaterialBranch)
++                        .withName(name)
++                        .withMaterialsOrder(list)));
++    materialBranchService.save(materialBranch);
++  }
++
++  public void newMaterial(
++      String idMaterial,
++      String creator,
++      String title,
++      String status,
++      String skill,
++      String idBranch,
++      String type,
++      String level,
++      String lang,
++      String originality,
++      String materialLink,
++      String projectLink,
++      String sourceLink,
++      String desc) {
++    MaterialData material =
++        new MaterialData()
++            .withId(idMaterial)
++            .withCreateAt(new Date())
++            .withCreator(creator)
++            .withTitle(title)
++            .withStatus(status)
++            .withSkill(skill)
++            .withBranch(idBranch)
++            .withType(type)
++            .withLevel(level)
++            .withLang(lang)
++            .withOriginality(originality)
++            .withMaterialLink(materialLink)
++            .withProjectLink(projectLink)
++            .withSourceLink(sourceLink)
++            .withTags(tags)
++            .withLimkedMaterials(linkedMaterials)
++            .withComments(comments)
++            .withDesc(desc)
++            .withActivity(activity);
++    materialService.save(material);
++  }
++}
+Index: src/test/java/io/itgen/tests/screenShotPar/SshotConfirmRecordOnRegular.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package io.itgen.tests.screenShotPar;\n/* Скриншот страницы семьи. База изначально должна быть пустая. Тест создает семью, делает снимок,\n  сравнивает его с эталонным.\n*/\n\nimport io.itgen.appmanager.ApplicationManager;\nimport io.itgen.general.TimeGeneral;\nimport io.itgen.model.TaskData;\nimport io.itgen.model.Tasks;\nimport io.itgen.services.ScheduleService;\nimport io.itgen.services.StudentService;\nimport io.itgen.services.TaskService;\nimport io.itgen.tests.TestBase;\nimport java.awt.AWTException;\nimport java.io.IOException;\nimport java.util.HashSet;\nimport java.util.Set;\nimport org.openqa.selenium.By;\nimport org.testng.Assert;\nimport org.testng.annotations.AfterMethod;\nimport org.testng.annotations.BeforeMethod;\nimport org.testng.annotations.Test;\nimport ru.yandex.qatools.ashot.comparison.ImageDiff;\n\npublic class SshotConfirmRecordOnRegular extends TestBase {\n  TaskService taskService = new TaskService();\n  ScheduleService scheduleService = new ScheduleService();\n  StudentService studentService = new StudentService();\n  String period = \"18:00 - 20:00\";\n\n  // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в\n  // 18.00 и постоянное расписание на завтра в 18.00, на которое нужно записать ученика\n  @BeforeMethod\n  public void ensurePreconditions() {\n    app.trScheduleYesterday()\n        .FinishingFirstTrialLesson(\n            period, \"FinishedSchedule\", \"14\", \"LkRecordOnRegularSchedule\", \"1\");\n\n    app.trStudent()\n        .StudentAddDefaultFamily_AfterTrial(\n            \"LkRecordOnRegularSchedule\", \"expert\", \"BL\", \"Europe/Minsk\", 2, \"ru\", \"ru\");\n\n    app.trScheduleTomorrow()\n        .RegularScheduleWithoutStudents(period, \"LkRecordOnRegularSchedule\", \"14\");\n  }\n\n  @Test\n  public void testConfirmRecordOnRegular() throws AWTException, IOException {\n    app.lkParent().confirmRecordOnRegular();\n\n    String name = \"Parent_ConfirmRecordOnRegular_RU_Chrome\";\n    Set<By> locatorIgnor = new HashSet<>();\n    locatorIgnor.add(By.xpath(\"//p[@class='user']\"));\n    locatorIgnor.add(By.xpath(\"//div[@class='DayPickerInput']//input\"));\n    locatorIgnor.add(By.xpath(\"//span[@class='selected-icon']\"));\n    locatorIgnor.add(By.xpath(\"//div[contains(@id,'MeteorToys')]\"));\n\n    String[] deleteElements={\n        \"//strong\"\n    };\n\n    app.sshot().deleteElements(deleteElements);\n\n    ImageDiff diff =\n        app.sshot()\n            .getImageDiff(\n                ApplicationManager.properties.getProperty(\"expected\"),\n                ApplicationManager.properties.getProperty(\"actual\"),\n                ApplicationManager.properties.getProperty(\"markedImages\"),\n                name,\n                locatorIgnor);\n    app.lkParent().btnRecord();\n    app.lkParent().btnLogo();\n\n    if (diff.getDiffSize() > 200) { // погрешность\n      Assert.assertEquals(diff.getDiffSize(), 0);\n    }\n  }\n\n  @AfterMethod(alwaysRun = true)\n  public void clean() {\n    scheduleService.findByIdAndDelete(\"FinishedSchedule\");\n    scheduleService.findByIdAndDelete(\"LkRecordOnRegularSchedule\");\n    studentService.findByIdAndDelete(\"LkRecordOnRegularSchedule\");\n\n    Tasks tasks = app.dbschedules().tasksComposition(\"LkRecordOnRegularSchedule\");\n    for (TaskData taskClean : tasks) {\n      taskService.findByIdAndDeleteTask(taskClean.getId());\n    }\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/io/itgen/tests/screenShotPar/SshotConfirmRecordOnRegular.java	(revision e51aeea4223ea62901510c6cd1faee2ff57acf9a)
++++ src/test/java/io/itgen/tests/screenShotPar/SshotConfirmRecordOnRegular.java	(date 1597741409954)
+@@ -55,9 +55,7 @@
+     locatorIgnor.add(By.xpath("//span[@class='selected-icon']"));
+     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+ 
+-    String[] deleteElements={
+-        "//strong"
+-    };
++    String[] deleteElements = {"//strong"};
+ 
+     app.sshot().deleteElements(deleteElements);
+ 
+@@ -68,7 +66,8 @@
+                 ApplicationManager.properties.getProperty("actual"),
+                 ApplicationManager.properties.getProperty("markedImages"),
+                 name,
+-                locatorIgnor);
++                locatorIgnor,
++                1.25f);
+     app.lkParent().btnRecord();
+     app.lkParent().btnLogo();
+ 

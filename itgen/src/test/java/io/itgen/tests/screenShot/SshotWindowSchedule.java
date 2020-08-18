@@ -106,7 +106,8 @@ public class SshotWindowSchedule extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor);
+                locatorIgnor,
+                1.25f);
     if (diff.getDiffSize() > 500) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
