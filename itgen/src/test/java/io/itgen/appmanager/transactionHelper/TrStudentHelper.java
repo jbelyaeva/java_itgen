@@ -155,4 +155,39 @@ public class TrStudentHelper {
             .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
   }
+
+  public void newStudentFree(
+      String idStudent,
+      String name,
+      String surname,
+      String pclevel,
+      String country,
+      String tz,
+      int gender,
+      String studyLang,
+      String locate,
+      String idFamily) {
+
+    StudentData student =
+        new StudentData()
+            .withId(idStudent)
+            .withFirstName(name)
+            .withLastName(surname)
+            .withRoles(Arrays.asList("child","donator"))
+            .withPclevel(pclevel)
+            .withCountry(country)
+            .withTimeZone(tz)
+            .withGender(gender)
+            .withFamilyId(idFamily)
+            .withStudyLang(studyLang)
+            .withLocate(locate)
+            .withBirthday(new Date(1263502800L))
+            .withLangs(Arrays.asList("ru"))
+            .withSkills(Arrays.asList("1"))
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
+    studentService.save(student);
+  }
 }

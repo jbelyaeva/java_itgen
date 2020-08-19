@@ -10,7 +10,7 @@
             <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests" />
             <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests" />
             <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
-            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialScheduleTests" />
+            <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests" />
             <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
         </classes>
     </test>

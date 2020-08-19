@@ -2,7 +2,7 @@ package io.itgen.tests.lkParent;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import io.itgen.general.TimeGeneral;
+
 import io.itgen.model.ScheduleData;
 import io.itgen.model.Schedules;
 import io.itgen.model.TaskData;
@@ -63,7 +63,7 @@ public class RecordOnRegular extends TestBase {
   private void check(Schedules before, Schedules after) {
     // завтра регулярное занятие, на которое записали ученика
     app.trScheduleTomorrow()
-        .RegularScheduleWithOneStudent(
+        .RegularScheduleWithOneOldStudent(
             period, "LkRecordOnRegularSchedule", "14", "LkRecordOnRegularSchedule", "1", "ru");
 
     ScheduleData scheduleAdd = scheduleService.findById("LkRecordOnRegularSchedule");

@@ -36,7 +36,7 @@ public class CancelOnRegular extends TestBase {
             "LkCancelRegularSchedule", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
 
     app.trScheduleTomorrow()
-        .RegularScheduleWithOneStudent(
+        .RegularScheduleWithOneOldStudent(
             period, "LkCancelRegularSchedule", "14", "LkCancelRegularSchedule", "1", "ru");
   }
 
