@@ -129,7 +129,7 @@ public class HelperBase {
     wd.get(Url);
   }
 
-  public String getTextElement(String locator) {
+  public String getText(String locator) {
     return wd.findElement(By.xpath(locator)).getText();
   }
 }

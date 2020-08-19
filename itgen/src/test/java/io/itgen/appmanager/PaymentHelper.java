@@ -54,10 +54,10 @@ public class PaymentHelper extends HelperBase {
     btnPay();
     btnPay4Lessons();
     fillTestCard();
-    btnBay();
+    btnBuy();
   }
 
-  private void btnBay() {
+  private void btnBuy() {
     click(By.xpath("//input[contains(@name,'commit')]"));
   }
 
@@ -103,7 +103,7 @@ public class PaymentHelper extends HelperBase {
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     btnPay4Lessons();
     fillTestCard();
-    btnBay();
+    btnBuy();
     wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
   }
 
@@ -116,7 +116,7 @@ public class PaymentHelper extends HelperBase {
   public void paymentByParent() {
     btnPay4Lessons();
     fillTestCard();
-    btnBay();
+    btnBuy();
     WebElement dynamicElement =
         (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
@@ -136,7 +136,7 @@ public class PaymentHelper extends HelperBase {
 
   private String getBalance() {
     refresh();
-    String balance = getTextElement("//div[@class='first']//span");
+    String balance = getText("//div[@class='first']//span");
     String[] text = balance.split(" ");
     return text[0];
   }
@@ -181,7 +181,7 @@ public class PaymentHelper extends HelperBase {
     fillForm(lessons, "Уменьшение баланса на ");
     btnConfirm();
     Integer after = Integer.valueOf(getBalance());
-    // проверка, что баланс увеличился на 1 через ui
+    // проверка, что баланс уменьшился на 1 через ui
     assertThat(after, equalTo(before - 1));
   }
 }

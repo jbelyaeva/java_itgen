@@ -2,6 +2,9 @@ package io.itgen.tests.lkParent;
 // к дефолтному родителю и ученику добавляется еще ученик, которого запишем на пробное и затем
 // удалим этого ученика и расписание в after-методе
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.itgen.model.StudentData;
@@ -9,10 +12,6 @@ import io.itgen.model.Students;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,15 +19,14 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class AddNewStudent extends TestBase {
   TaskService taskService = new TaskService();
   StudentService studentService = new StudentService();
   StudentData studentClean;
-
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
@@ -73,11 +71,14 @@ public class AddNewStudent extends TestBase {
   public void testAddNewStudent(StudentData student) {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);
-    Students after = app.dbstudents().students();
     studentClean = app.dbstudents().lastStudent();
-    //попробовать еще раз найти нужного студента (стабилизация)
-    if(studentClean.getId().equals("21")) studentClean = app.dbstudents().lastStudent();
+    // попробовать еще раз создать нужного студента (стабилизация)
+    if (studentClean.getId().equals("21")) {
+      app.lkParent().create(student);
+      studentClean = app.dbstudents().lastStudent();
+    }
 
+    Students after = app.dbstudents().students();
     StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(studentAdd)));

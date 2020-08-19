@@ -53,8 +53,8 @@ public class ApplicationManager {
   private DbHelperSchedule dbHelperSchedule;
   private DbHelperRequest dbHelperRequest;
   private DbHelperMaterials dbHelperMaterials;
-  private WindowScheduleHelper windowScheduleHalper;
-  private RequestHelper requestHalper;
+  private WindowScheduleHelper windowScheduleHelper;
+  private RequestHelper requestHelper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
   private MaterialHelper materialHelper;
@@ -120,8 +120,8 @@ public class ApplicationManager {
     scheduleHelper = new ScheduleHelper(wd);
     sShotHelper = new SShotHelper(wd);
     leadHelper = new LeadHelper(wd);
-    windowScheduleHalper = new WindowScheduleHelper(wd);
-    requestHalper = new RequestHelper(wd);
+    windowScheduleHelper = new WindowScheduleHelper(wd);
+    requestHelper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
     materialHelper = new MaterialHelper(wd);
@@ -202,11 +202,11 @@ public class ApplicationManager {
   }
 
   public WindowScheduleHelper windowSchedule() {
-    return windowScheduleHalper;
+    return windowScheduleHelper;
   }
 
   public RequestHelper request() {
-    return requestHalper;
+    return requestHelper;
   }
 
   public LKParentHelper lkParent() {

@@ -145,25 +145,16 @@ public class PaymentData {
 
   @Override
   public String toString() {
-    return "Payments{"
-        + "id='"
-        + id
-        + '\''
-        + ", fId='"
-        + fId
-        + '\''
-        + ", creator='"
-        + creator
-        + '\''
-        + ", val="
-        + val
-        + ", t="
-        + t
-        + ", desc='"
-        + desc
-        + '\''
-        + ", approved="
-        + approved
-        + '}';
+    return "PaymentData{" +
+        "id='" + id + '\'' +
+        ", createAt=" + createAt +
+        ", fId='" + fId + '\'' +
+        ", creator='" + creator + '\'' +
+        ", val=" + val +
+        ", t=" + t +
+        ", desc='" + desc + '\'' +
+        ", approved=" + approved +
+        ", money=" + money +
+        '}';
   }
 }

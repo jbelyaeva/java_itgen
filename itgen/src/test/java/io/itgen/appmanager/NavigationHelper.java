@@ -18,20 +18,25 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuStudents() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, '/childs')]")));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[contains(@href, '/childs')]")));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
   }
 
   public void menuTrainers() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, '/trainers')]")));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//a[contains(@href, '/trainers')]")));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
-
   }
 
   public void menuTasks() {
@@ -42,11 +47,15 @@ public class NavigationHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, '/leads')]"));
   }
 
-  public void menuSchedule() { click(By.xpath("//a[contains(@href, '/schoolSchedule')]"));
-  }
-  public void menuRequests() { click(By.xpath("//a[contains(@href, '/requests')]"));
+  public void menuSchedule() {
+    click(By.xpath("//a[contains(@href, '/schoolSchedule')]"));
   }
 
-  public void menuMaterials() { click(By.xpath("//a[contains(@href, '/materials')]"));
+  public void menuRequests() {
+    click(By.xpath("//a[contains(@href, '/requests')]"));
+  }
+
+  public void menuMaterials() {
+    click(By.xpath("//a[contains(@href, '/materials')]"));
   }
 }

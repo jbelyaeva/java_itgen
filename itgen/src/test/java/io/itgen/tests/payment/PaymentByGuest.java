@@ -1,7 +1,6 @@
 package io.itgen.tests.payment;
 
 import static io.itgen.appmanager.ApplicationManager.properties;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -11,8 +10,6 @@ import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
-import org.openqa.selenium.By.ByClassName;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -40,7 +37,7 @@ public class PaymentByGuest extends TestBase {
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();
 
-    String text = app.goTo().getTextElement("(//p[contains(@class,'static')])[2]//span");
+    String text = app.goTo().getText("(//p[contains(@class,'static')])[2]//span");
     assertEquals("Дефолтный Ро******", text);
 
     app.payment().paymentByGuest();

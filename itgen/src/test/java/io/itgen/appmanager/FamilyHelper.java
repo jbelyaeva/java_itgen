@@ -161,7 +161,6 @@ public class FamilyHelper extends HelperBase {
   }
 
   public FamilyData getNewFamilyDB(Families after) {
-
    return after.iterator().next();
   }
 
