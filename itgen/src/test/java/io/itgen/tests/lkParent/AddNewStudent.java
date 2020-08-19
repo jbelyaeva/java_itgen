@@ -75,6 +75,9 @@ public class AddNewStudent extends TestBase {
     app.lkParent().create(student);
     Students after = app.dbstudents().students();
     studentClean = app.dbstudents().lastStudent();
+    //попробовать еще раз найти нужного студента (стабилизация)
+    if(studentClean.getId().equals("21")) studentClean = app.dbstudents().lastStudent();
+    
     StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(studentAdd)));

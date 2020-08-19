@@ -1,4 +1,7 @@
 package io.itgen.tests.scheduleWindow;
+// автотест проверяет запись платника на пробное занятие в постоянном расписании
+// проверяет, что переключатель Пробное стоит по дефолту
+// начальные данные: период, id тренера
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,7 +19,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class WindowRecordStudentOnSingleFirst1hScheduleTests extends TestBase {
+public class WindowRecordStudentOnTrialInRegularScheduleTests extends TestBase {
   String period = "18:00 - 20:00";
   String name = "Маша Машина";
   ScheduleService scheduleService = new ScheduleService();
@@ -26,7 +29,8 @@ public class WindowRecordStudentOnSingleFirst1hScheduleTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "recordOnSchedule", "14");
+    app.trScheduleTomorrow().RegularScheduleWithoutStudents(period, "recordStudentOnLesson", "14");
+
     app.trFamily().newFamily("recordStudent", false, "txa");
 
     app.trStudent()
@@ -44,20 +48,19 @@ public class WindowRecordStudentOnSingleFirst1hScheduleTests extends TestBase {
   }
 
   @Test
-  public void testWindowRecordStudentOnRegularFirst1h() {
+  public void testWindowRecordStudentOnTrial() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOnSingleFirst1h(name, "14");
+    app.windowSchedule().recordStudentOnTrial(name, "14"); // имя ученика, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    // проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("recordOnSchedule");
+    scheduleService.findByIdAndDelete("recordStudentOnLesson");
     studentService.findByIdAndDelete("recordStudent");
     familyService.findByIdAndDelete("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
@@ -68,11 +71,12 @@ public class WindowRecordStudentOnSingleFirst1hScheduleTests extends TestBase {
 
   private void check(Schedules before, Schedules after) {
     app.trScheduleTomorrow()
-        .CombinationWithOneStudentOnSingleScredule_1(
-            period, "recordOnSchedule", "14", "recordStudent", "1", "ru");
-    ScheduleData scheduleAdd = scheduleService.findById("recordOnSchedule");
+        .CombinationWithOneStudentOnRegularScredule_1(
+            period, "recordStudentOnLesson", "14", "recordStudent", "1", "ru");
+    ScheduleData scheduleAdd = scheduleService.findById("recordStudentOnLesson");
+
     for (ScheduleData scheduleBefore : before) {
-      if (scheduleBefore.getId().equals("recordOnSchedule")) {
+      if (scheduleBefore.getId().equals("recordStudentOnLesson")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }
