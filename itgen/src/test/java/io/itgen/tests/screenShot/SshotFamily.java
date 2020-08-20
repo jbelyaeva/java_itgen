@@ -16,6 +16,16 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotFamily extends TestBase {
 
+  private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
+    return app.sshot()
+        .getImageDiff(
+            ApplicationManager.properties.getProperty("expected"),
+            ApplicationManager.properties.getProperty("actual"),
+            ApplicationManager.properties.getProperty("markedImages"),
+            name,
+            locatorIgnor,1.25f);
+  }
+
   @Test
   public void testSshotFamilies() throws AWTException, IOException {
     String name = "Admin_Family_RU_Chrome";
@@ -27,28 +37,11 @@ public class SshotFamily extends TestBase {
     app.family().btnFamily();
     app.sshot().changeTopBar();
 
-    ImageDiff diffFirst =
-        app.sshot()
-            .getImageDiff(
-                ApplicationManager.properties.getProperty("expected"),
-                ApplicationManager.properties.getProperty("actual"),
-                ApplicationManager.properties.getProperty("markedImages"),
-                name,
-                locatorIgnor,
-                1.25f);
-    if (diffFirst.getDiffSize() > 0) {
-      ImageDiff diffSecond =
-          app.sshot()
-              .getImageDiff(
-                  ApplicationManager.properties.getProperty("expected"),
-                  ApplicationManager.properties.getProperty("actual"),
-                  ApplicationManager.properties.getProperty("markedImages"),
-                  name,
-                  locatorIgnor,
-                  1.25f);
-      Assert.assertEquals(diffSecond.getDiffSize(), 0);
-    } else {
-      Assert.assertEquals(diffFirst.getDiffSize(), 0);
+    ImageDiff diff = this.getDiff(name, locatorIgnor);
+    if (diff.getDiffSize() > 0) {
+      diff = this.getDiff(name, locatorIgnor);
     }
+
+    Assert.assertEquals(diff.getDiffSize(), 0);
   }
 }
