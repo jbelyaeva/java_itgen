@@ -91,7 +91,7 @@ public class StudentCreationTests extends TestBase {
   public void clean() {
     if (studentClean != (null)) {
       FamilyService familyService = new FamilyService();
-      familyService.findByIdAndDelete(studentClean.getFamilyId());
+      familyService.DeleteById(studentClean.getFamilyId());
       TaskService taskService = new TaskService();
       taskService.findByIdAndDeleteTask(studentClean);
       StudentService studentService = new StudentService();

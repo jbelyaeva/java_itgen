@@ -134,7 +134,7 @@ public class SshotLessonWithStudent extends TestBase {
     studentService.findByIdAndDelete("SshotOnLessonWithStudent");
 
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("SshotOnLessonWithStudent");
+    familyService.DeleteById("SshotOnLessonWithStudent");
 
     Tasks tasks = app.dbschedules().tasksComposition("SshotOnLessonWithStudent");
     TaskService taskService = new TaskService();

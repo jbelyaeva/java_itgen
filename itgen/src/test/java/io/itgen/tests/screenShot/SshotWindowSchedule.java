@@ -122,7 +122,7 @@ public class SshotWindowSchedule extends TestBase {
     studentService.findByIdAndDelete("sshotWindowSchedule");
 
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("sshotWindowSchedule");
+    familyService.DeleteById("sshotWindowSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("sshotWindowSchedule");
     TaskService taskService = new TaskService();

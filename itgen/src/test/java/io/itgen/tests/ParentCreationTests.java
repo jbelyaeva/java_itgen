@@ -86,8 +86,8 @@ public class ParentCreationTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("forParentCreation");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("parentCreate");
+    familyService.DeleteById("parentCreate");
     ParentService parentService = new ParentService();
-    parentService.findByIdAndDelete(id);
+    parentService.DeleteById(id);
   }
 }

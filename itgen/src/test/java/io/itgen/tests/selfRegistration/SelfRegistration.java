@@ -129,10 +129,10 @@ public class SelfRegistration extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    leadService.findByIdAndDelete(leadService.findById("selfRegistration"));
+    leadService.DeleteById(leadService.findById("selfRegistration"));
     studentService.findByIdAndDelete(studentClean.getId());
-    parentService.findByIdAndDelete(parentClean.getId());
-    familyService.findByIdAndDelete(familyClean.getId());
+    parentService.DeleteById(parentClean.getId());
+    familyService.DeleteById(familyClean.getId());
     taskService.drop();
   }
 

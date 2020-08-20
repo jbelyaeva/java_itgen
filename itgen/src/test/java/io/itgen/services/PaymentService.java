@@ -11,7 +11,7 @@ public class PaymentService {
   public PaymentService() {
   }
 
-  public PaymentData findByIdAndDelete(String id) {
+  public PaymentData DeleteById(String id) {
     return paymentDao.findByIdAndDelete(id);
   }
 

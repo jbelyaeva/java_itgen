@@ -129,7 +129,7 @@ public class RecordStudentOnRegularFirst1hScheduleTests extends TestBase {
   public void clean() {
     scheduleService.findByIdAndDelete("recordStudentOnLesson");
     studentService.findByIdAndDelete("recordStudent");
-    familyService.findByIdAndDelete("recordStudent");
+    familyService.DeleteById("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     for (TaskData taskClean : tasks) {
       taskService.findByIdAndDeleteTask(taskClean.getId());

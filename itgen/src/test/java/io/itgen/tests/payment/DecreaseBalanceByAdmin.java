@@ -64,10 +64,10 @@ public class DecreaseBalanceByAdmin extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    familyService.findByIdAndDelete("decreaseAdmin");
+    familyService.DeleteById("decreaseAdmin");
     studentService.findByIdAndDelete("decreaseAdminChild");
-    parentService.findByIdAndDelete("decreaseAdminParent");
-    paymentService.findByIdAndDelete(paymentNew.getId());
+    parentService.DeleteById("decreaseAdminParent");
+    paymentService.DeleteById(paymentNew.getId());
   }
 
   private void checkDB(Payments after, String id) {

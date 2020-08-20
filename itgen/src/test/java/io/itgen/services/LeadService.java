@@ -15,11 +15,11 @@ public class LeadService {
     leadDao.save(lead);
   }
 
-  public void findByIdAndDelete(String id) {
+  public void DeleteById(String id) {
     leadDao.findByIdAndDelete(id);
   }
 
-  public LeadData findByIdAndDelete(LeadData lead) {
+  public LeadData DeleteById(LeadData lead) {
     return leadDao.findByIdAndDelete(lead);
   }
 

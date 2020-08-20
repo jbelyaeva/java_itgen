@@ -12,7 +12,7 @@ public class ParentService {
     parentDao.save(parent);
   }
 
-  public ParentData findByIdAndDelete(String id) {
+  public ParentData DeleteById(String id) {
     return parentDao.findByIdAndDelete(id);
   }
 

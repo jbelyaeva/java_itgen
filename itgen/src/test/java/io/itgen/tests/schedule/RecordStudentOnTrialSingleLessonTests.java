@@ -82,7 +82,7 @@ public class RecordStudentOnTrialSingleLessonTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("recordStudent");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("recordStudent");
+    familyService.DeleteById("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

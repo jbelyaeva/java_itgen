@@ -99,8 +99,8 @@ public class CreateMaterial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    materialService.findByIdAndDelete(materialClean.getId());
+    materialService.DeleteById(materialClean.getId());
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
+    materialBranchService.DeleteById(materialBranchClean.getId());
   }
 }

@@ -64,6 +64,6 @@ public class StudentDeletionTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("studentDelete");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("studentDelete");
+    familyService.DeleteById("studentDelete");
   }
 }

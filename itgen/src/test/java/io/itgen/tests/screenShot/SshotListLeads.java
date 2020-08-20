@@ -69,6 +69,6 @@ public class SshotListLeads extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     LeadService leadService = new LeadService();
-    leadService.findByIdAndDelete("SshotLeads");
+    leadService.DeleteById("SshotLeads");
   }
 }

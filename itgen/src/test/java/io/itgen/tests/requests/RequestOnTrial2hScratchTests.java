@@ -66,7 +66,7 @@ public class RequestOnTrial2hScratchTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("makeRequest");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("makeRequest");
+    familyService.DeleteById("makeRequest");
     Tasks tasks = app.dbschedules().tasksComposition("makeRequest");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {

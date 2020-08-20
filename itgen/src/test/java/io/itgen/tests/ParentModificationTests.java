@@ -117,8 +117,8 @@ public class ParentModificationTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("forParentModify");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("parentModify");
+    familyService.DeleteById("parentModify");
     ParentService parentService = new ParentService();
-    parentService.findByIdAndDelete("forParModify");
+    parentService.DeleteById("forParModify");
   }
 }

@@ -74,8 +74,8 @@ public class SshotMaterialTabAll extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     materialClean = app.dbmaterial().lastMaterial();
-    materialService.findByIdAndDelete(materialClean.getId());
+    materialService.DeleteById(materialClean.getId());
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
+    materialBranchService.DeleteById(materialBranchClean.getId());
   }
 }

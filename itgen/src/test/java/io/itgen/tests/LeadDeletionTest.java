@@ -49,7 +49,7 @@ public class LeadDeletionTest extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     LeadService leadService = new LeadService();
-    leadService.findByIdAndDelete("forLeadDeletion");
+    leadService.DeleteById("forLeadDeletion");
   }
 
 }

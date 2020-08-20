@@ -115,7 +115,7 @@ public class SshotRequests extends TestBase {
     studentService.findByIdAndDelete("sshotRequests");
 
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("sshotRequests");
+    familyService.DeleteById("sshotRequests");
 
     Tasks tasks = app.dbschedules().tasksComposition("sshotRequests");
     TaskService taskService = new TaskService();

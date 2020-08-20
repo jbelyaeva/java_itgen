@@ -9,7 +9,7 @@ public class MaterialBranchService {
   public MaterialBranchService() {
   }
 
-  public MaterialBranchData findByIdAndDelete(String id) {
+  public MaterialBranchData DeleteById(String id) {
     return materialBranchDao.findByIdAndDelete(id);
   }
 

@@ -103,7 +103,7 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("badMoveSchedule");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("badMoveSchedule");
+    familyService.DeleteById("badMoveSchedule");
   }
 
 }

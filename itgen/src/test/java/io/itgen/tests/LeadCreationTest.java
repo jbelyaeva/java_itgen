@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
-import io.itgen.model.StudentData;
 import io.itgen.services.LeadService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
@@ -60,7 +59,7 @@ public class LeadCreationTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    leadService.findByIdAndDelete(leadClean);
+    leadService.DeleteById(leadClean);
     taskService.findByIdAndDeleteTask(leadClean);
   }
 }

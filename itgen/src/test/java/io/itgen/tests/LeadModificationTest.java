@@ -78,7 +78,7 @@ public class LeadModificationTest extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     LeadService leadService = new LeadService();
-    leadService.findByIdAndDelete("forLeadModify");
+    leadService.DeleteById("forLeadModify");
   }
 
 }

@@ -9,7 +9,7 @@ public class MaterialService {
   public MaterialService() {
   }
 
-  public MaterialData findByIdAndDelete(String id) {
+  public MaterialData DeleteById(String id) {
     return materialDao.findByIdAndDelete(id);
   }
 

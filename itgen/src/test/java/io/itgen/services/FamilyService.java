@@ -9,7 +9,7 @@ public class FamilyService {
   public FamilyService() {
   }
 
-  public FamilyData findByIdAndDelete(String id) {
+  public FamilyData DeleteById(String id) {
     return familyDao.findByIdAndDelete(id);
   }
 

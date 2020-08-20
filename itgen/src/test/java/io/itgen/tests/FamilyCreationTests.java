@@ -61,7 +61,7 @@ public class FamilyCreationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void cleanFamily() {
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete(idFamily);
+    familyService.DeleteById(idFamily);
     Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
     StudentService studentService = new StudentService();
     TaskService taskService = new TaskService();

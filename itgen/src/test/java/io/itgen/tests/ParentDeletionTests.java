@@ -68,8 +68,8 @@ public class ParentDeletionTests extends TestBase {
     StudentService studentService = new StudentService();
     studentService.findByIdAndDelete("forParentDeletion");
     FamilyService familyService = new FamilyService();
-    familyService.findByIdAndDelete("parentDeletion");
+    familyService.DeleteById("parentDeletion");
     ParentService parentService = new ParentService();
-    parentService.findByIdAndDelete("forParDeletion");
+    parentService.DeleteById("forParDeletion");
   }
 }

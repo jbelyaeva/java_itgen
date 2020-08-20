@@ -70,7 +70,7 @@ public class CreateMaterialBad extends TestBase {
     Materials materialBefore = app.dbmaterial().materials();
 
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialBranchService.findByIdAndDelete(materialBranchClean.getId());
+    materialBranchService.DeleteById(materialBranchClean.getId());
     MaterialData material =
         new MaterialData()
             .withOriginality("original")

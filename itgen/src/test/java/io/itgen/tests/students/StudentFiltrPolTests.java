@@ -72,6 +72,6 @@ public class StudentFiltrPolTests extends TestBase {
     FamilyService familyService = new FamilyService();
     studentService.findByIdAndDelete("studentFiltrPol1");
     studentService.findByIdAndDelete("studentFiltrPol2");
-    familyService.findByIdAndDelete("studentFiltr");
+    familyService.DeleteById("studentFiltr");
   }
 }
