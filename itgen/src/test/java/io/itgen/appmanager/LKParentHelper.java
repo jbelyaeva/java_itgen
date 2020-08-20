@@ -199,7 +199,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnSingleSchedule() {
-    click(By.xpath("//div[contains(@class,'switcher')]//button[2]"));
+    click(By.xpath("(//div[@class='info'])[2]"));
     noErrorMessage();
   }
 

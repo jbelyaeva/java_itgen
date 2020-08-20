@@ -35,7 +35,7 @@ public class PaymentHelper extends HelperBase {
 
   public void fillTestCard() {
     if (!isElementPresent(By.id("request_credit_card_number_1"))) btnPay4Lessons();
-    
+
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_2"), "0000");
