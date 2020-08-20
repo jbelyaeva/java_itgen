@@ -425,4 +425,69 @@ task testScreenShotsPar(type: Test) {
        jvmArgs "-javaagent:${configurations.agent.singleFile}"
    }
 
+//
+task testMaterials(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-materials.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+testMaterials.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+//
+task testLkParent(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-lkParent.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+testLkParent.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+task testPayments(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-payments.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+}
+testPayments.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
 

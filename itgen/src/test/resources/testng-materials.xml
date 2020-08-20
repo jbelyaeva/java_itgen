@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Materials" verbose="1" >
+    <test name="Materials">
+        <classes>
+            <class name="io.itgen.tests.materials.CreateMaterial" />
+            <class name="io.itgen.tests.materials.CreateMaterialBad" />
+        </classes>
+    </test>
+</suite>

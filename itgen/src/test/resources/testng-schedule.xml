@@ -3,32 +3,32 @@
 <suite name="Suite1" verbose="1" >
     <test name="Schedule">
         <classes>
-            <class name="io.itgen.tests.schedule.ScheduleSingleCreationTests" />
-            <class name="io.itgen.tests.schedule.ScheduleSingleCancelTests" />
-            <class name="io.itgen.tests.schedule.ScheduleSingleAssignTrainerTests" />
-          <!--  <class name="ScheduleSingleMoveTests" /> -->
-            <class name="io.itgen.tests.schedule.ScheduleSingleBlockTests" />
-            <class name="io.itgen.tests.schedule.ScheduleRegularCreationTests" />
-          <!--  <class name="ScheduleRegularAssignTrainerTests" /> -->
-            <class name="io.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests" />
-            <class name="io.itgen.tests.schedule.ScheduleRegularCancelTests" />
-          <!--  <class name="ScheduleRegularMoveTests" /> -->
-            <class name="io.itgen.tests.schedule.ScheduleRegularBlockTests" />
-            <class name="io.itgen.tests.schedule.ScheduleRegularBlockAllTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnRegular2hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnRegularFirst1hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnRegularSecond1hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests" />
-            <class name="io.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule" />
-            <class name="io.itgen.tests.schedule.RemoveStudentFromRegular2hSchedule" />
-            <class name="io.itgen.tests.schedule.RecordFreeStudentOnTrialSingleLessonTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnTrialRegularScheduleTests" />
-            <class name="io.itgen.tests.schedule.RecordStudentOnTrialSingleScheduleTests" />
-            <class name="io.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests" />
-       <!--     <class name="ScheduleBadMoveTests" />
-            <class name="ScheduleBadMoveOnOccupiedLessonTests" /> -->
+            <class name="io.itgen.tests.schedule.ScheduleSingleCreationTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleSingleCancelTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleSingleAssignTrainerTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleSingleBlockTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularCreationTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularAssignTrainerAllTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularAssignTrainerTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularCancelTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularBlockTests"/>
+            <class name="io.itgen.tests.schedule.ScheduleRegularBlockAllTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnRegular2hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnRegularFirst1hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnRegularSecond1hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnSingle2hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnSingleFirst1hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnSingleSecond1hScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RemoveStudentFromSingle2hSchedule"/>
+            <class name="io.itgen.tests.schedule.RemoveStudentFromRegular2hSchedule"/>
+            <class name="io.itgen.tests.schedule.RecordFreeStudentOnTrialSingleLessonTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnTrialRegularScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RecordStudentOnTrialSingleScheduleTests"/>
+            <class name="io.itgen.tests.schedule.RemoveStudentOnTrialSingleLessonTests"/>
+            <!--     <class name="ScheduleBadMoveTests" />
+                 <class name="ScheduleBadMoveOnOccupiedLessonTests" /> -->
         </classes>
     </test>
 </suite>
