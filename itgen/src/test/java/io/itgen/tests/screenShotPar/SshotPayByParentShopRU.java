@@ -64,7 +64,7 @@ public class SshotPayByParentShopRU extends TestBase {
     } else {
       Assert.assertEquals(diffFirst.getDiffSize(), 0);
     }
-    app.payment().goToBack("111");
+    app.payment().goToFamily("111");
   }
 
   @AfterMethod(alwaysRun = true)

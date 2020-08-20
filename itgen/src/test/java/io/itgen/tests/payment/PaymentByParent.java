@@ -1,6 +1,5 @@
 package io.itgen.tests.payment;
 
-import static io.itgen.appmanager.ApplicationManager.properties;
 import static org.testng.AssertJUnit.assertEquals;
 
 import io.itgen.model.TaskData;
@@ -39,7 +38,7 @@ public class PaymentByParent extends TestBase {
     // права
     // добавить проверку на пополнение баланса, когда будут права, а затем вернуть баланс в 0
     //  app.payment().goToBack("paymentAdmin");
-    app.payment().goToBack("111");
+    app.payment().goToFamily("111");
   }
 
   @AfterMethod(alwaysRun = true)

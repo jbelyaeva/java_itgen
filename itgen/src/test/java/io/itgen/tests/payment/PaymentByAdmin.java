@@ -52,7 +52,7 @@ public class PaymentByAdmin extends TestBase {
     //  assertThat(app.student().findPictureSuccessPay(), equalTo(true)); разкоментить, когда будут
     // права
     // добавить проверку на пополнение баланса, когда будут права
-    app.payment().goToBack("paymentAdmin");
+    app.payment().goToFamily("paymentAdmin");
   }
 
   @AfterMethod(alwaysRun = true)

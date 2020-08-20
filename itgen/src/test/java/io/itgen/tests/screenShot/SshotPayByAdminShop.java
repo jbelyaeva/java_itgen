@@ -50,6 +50,6 @@ public class SshotPayByAdminShop extends TestBase {
     } else {
       Assert.assertEquals(diffFirst.getDiffSize(), 0);
     }
-    app.payment().goToBack("paymentAdmin");
+    app.payment().goToFamily("paymentAdmin");
   }
 }

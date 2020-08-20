@@ -34,8 +34,8 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void fillTestCard() {
-    new WebDriverWait(wd, 10)
-        .until(ExpectedConditions.elementToBeClickable(By.id("request_credit_card_number_1")));
+    if (!isElementPresent(By.id("request_credit_card_number_1"))) btnPay4Lessons();
+    
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_1"), "4200");
     type(By.id("request_credit_card_number_2"), "0000");
@@ -84,7 +84,7 @@ public class PaymentHelper extends HelperBase {
     fillTestCard();
   }
 
-  public void goToBack(String id) {
+  public void goToFamily(String id) {
     wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     wd.get("http://localhost:3000/family/" + id);
   }
