@@ -50,10 +50,12 @@
 12. testMaterials
 13. testPayments
 14. testSmoke
+14. testNostable
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
 14. testSmokeParent
-15. testLkPar
+15. testLkParent
+16. testNostableParent
 
 **Значения -Ptarget** 
 

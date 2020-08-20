@@ -381,7 +381,7 @@ task testFirst(type: Test) {
         }
 
     //
-task testNostablePar(type: Test) {
+task testNostableParent(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-nostable-par.xml'
     }
@@ -398,7 +398,7 @@ task testNostablePar(type: Test) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
 }
-    testNostablePar.doFirst {
+    testNostableParent.doFirst {
         jvmArgs "-javaagent:${configurations.agent.singleFile}"
     }
 
