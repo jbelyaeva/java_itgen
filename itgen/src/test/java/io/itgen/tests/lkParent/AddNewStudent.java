@@ -71,16 +71,10 @@ public class AddNewStudent extends TestBase {
   public void testAddNewStudent(StudentData student) {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);
-    studentClean = app.dbstudents().lastStudent();
-    // попробовать еще раз создать нужного студента (стабилизация)
-    if (studentClean.getId().equals("21")) {
-      app.lkParent().create(student);
-      studentClean = app.dbstudents().lastStudent();
-    }
-
     Students after = app.dbstudents().students();
-    StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after.size(), equalTo(before.size() + 1));
+    studentClean = app.dbstudents().lastStudent();
+    StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after, equalTo(before.withAdded(studentAdd)));
   }
 
