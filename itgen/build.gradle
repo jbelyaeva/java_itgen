@@ -383,7 +383,7 @@ task testFirst(type: Test) {
     //
 task testNostableParent(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-nostable-par.xml'
+        suites 'src/test/resources/testng-nostable_par.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -450,7 +450,7 @@ testMaterials.doFirst {
 //
 task testLkParent(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-lkParent.xml'
+        suites 'src/test/resources/testng-lkPar.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"

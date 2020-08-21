@@ -54,6 +54,7 @@ public class SshotConfirmRecordOnRegular extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='DayPickerInput']//input"));
     locatorIgnor.add(By.xpath("//span[@class='selected-icon']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+    locatorIgnor.add(By.xpath("//div[@class='permanent']"));
 
     String[] deleteElements = {"//strong"};
 
