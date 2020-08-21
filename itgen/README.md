@@ -47,15 +47,15 @@
 7.  testSchedule 
 8.  testWindowSchedule 
 9.  testRequests 
-12. testMaterials
-13. testPayments
-14. testSmoke
-14. testNostable
+10. testMaterials
+11. testPayments
+12. testSmoke
+13. testNostable
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
-14. testSmokeParent
-15. testLkParent
-16. testNostableParent
+11. testSmokeParent
+12. testLkParent
+13. testNostableParent
 
 **Значения -Ptarget** 
 

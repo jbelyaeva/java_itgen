@@ -6,28 +6,28 @@ import java.util.Objects;
 
 public class D {
   @Property("new")
-  public String neww;
+  public String newData;
 
   @Property("old")
-  public String old;
+  public String oldData;
   public D() {
   }
 
-  public D withNeww(String neww) {
-    this.neww = neww;
+  public D withNewData(String newData) {
+    this.newData = newData;
     return this;
   }
 
-  public D withOld(String old) {
-    this.old = old;
+  public D withOldData(String oldData) {
+    this.oldData = oldData;
     return this;
   }
 
   @Override
   public String toString() {
     return "D{" +
-            "neww=" + neww +
-            "old=" + old +
+            "newData=" + newData +
+            "oldData=" + oldData +
             '}';
   }
 
@@ -40,12 +40,12 @@ public class D {
       return false;
     }
     D d = (D) o;
-    return Objects.equals(neww, d.neww) &&
-        Objects.equals(old, d.old);
+    return Objects.equals(newData, d.newData) &&
+        Objects.equals(oldData, d.oldData);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(neww, old);
+    return Objects.hash(newData, oldData);
   }
 }
