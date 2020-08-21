@@ -68,9 +68,10 @@ public class AddNewStudent extends TestBase {
   }
 
   @Test(dataProvider = "validStudentsFromJson")
-  public void testAddNewStudent(StudentData student) {
+  public void testAddNewStudent(StudentData student) throws InterruptedException {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);
+    Thread.sleep(3000);
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() + 1));
     studentClean = app.dbstudents().lastStudent();
