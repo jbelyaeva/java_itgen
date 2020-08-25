@@ -92,6 +92,6 @@ public class TrainerModificationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     TrainerService trainerService = new TrainerService();
-    trainerService.findByIdAndDelete("trainerModify");
+    trainerService.DeleteById("trainerModify");
   }
 }

@@ -76,6 +76,6 @@ public class SshotMainSchedule extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleBlock");
+    scheduleService.DeleteById("scheduleSingleBlock");
   }
 }

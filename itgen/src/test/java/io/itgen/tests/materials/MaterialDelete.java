@@ -70,8 +70,7 @@ public class MaterialDelete extends TestBase {
             "https://docs.google.com",
             "https://docs.google.com",
             "Развивает внимательность",
-            "666",
-            true);
+            "666");
 
     MaterialData materialAdd = materialService.findById("MaterialTakeOnCheck");
 

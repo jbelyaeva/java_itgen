@@ -70,7 +70,7 @@ public class ScheduleBadMoveTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleMove");
+    scheduleService.DeleteById("scheduleSingleMove");
   }
 
 }

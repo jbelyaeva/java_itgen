@@ -57,11 +57,11 @@ public class SshotCourseSelectionForTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    studentService.findByIdAndDelete("LKOnTrail");
+    studentService.DeleteById("LKOnTrail");
 
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

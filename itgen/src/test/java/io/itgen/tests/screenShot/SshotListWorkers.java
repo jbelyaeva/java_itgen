@@ -76,6 +76,6 @@ public class SshotListWorkers extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    workerService.findByIdAndDelete("sshotListWorker");
+    workerService.DeleteById("sshotListWorker");
   }
 }

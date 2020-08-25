@@ -65,7 +65,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     familyService.DeleteById("increaseAdmin");
-    studentService.findByIdAndDelete("increaseAdminChild");
+    studentService.DeleteById("increaseAdminChild");
     parentService.DeleteById("increaseAdminParent");
     paymentService.DeleteById(paymentNew.getId());
   }

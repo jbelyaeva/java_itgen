@@ -115,7 +115,7 @@ public class ParentModificationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("forParentModify");
+    studentService.DeleteById("forParentModify");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("parentModify");
     ParentService parentService = new ParentService();

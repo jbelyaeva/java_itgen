@@ -108,8 +108,9 @@ public class TrMaterialHelper {
             .withLimkedMaterials(linkedMaterials)
             .withComments(comments)
             .withDesc(desc)
-            .withActivity(Arrays
-                .asList(new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
             .withVerifier(verifier);
     materialService.save(material);
   }
@@ -129,8 +130,7 @@ public class TrMaterialHelper {
       String projectLink,
       String sourceLink,
       String desc,
-      String verifier,
-      Boolean removed) {
+      String verifier) {
     MaterialData material =
         new MaterialData()
             .withId(idMaterial)
@@ -151,8 +151,9 @@ public class TrMaterialHelper {
             .withLimkedMaterials(linkedMaterials)
             .withComments(comments)
             .withDesc(desc)
-            .withActivity(Arrays
-                .asList(new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
             .withVerifier(verifier)
             .withRemoved(true);
     materialService.save(material);

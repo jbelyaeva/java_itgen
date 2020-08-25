@@ -98,10 +98,10 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("badMoveSchedule");
-    scheduleService.findByIdAndDelete("scheduleOccupied");
+    scheduleService.DeleteById("badMoveSchedule");
+    scheduleService.DeleteById("scheduleOccupied");
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("badMoveSchedule");
+    studentService.DeleteById("badMoveSchedule");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("badMoveSchedule");
   }

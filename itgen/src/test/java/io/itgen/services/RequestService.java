@@ -9,7 +9,7 @@ public class RequestService {
   public RequestService() {
   }
 
-  public RequestData findByIdAndDelete(String id) {
+  public RequestData DeleteById(String id) {
     return requestDao.findByIdAndDelete(id);
   }
 

@@ -58,7 +58,7 @@ public class ScheduleSingleBlockTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleBlock");
+    scheduleService.DeleteById("scheduleSingleBlock");
   }
 
   private void check(Schedules before, Schedules after) {

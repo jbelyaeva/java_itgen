@@ -109,10 +109,10 @@ public class SshotRequests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     RequestService requestService = new RequestService();
-    requestService.findByIdAndDelete("sshotRequests");
+    requestService.DeleteById("sshotRequests");
 
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("sshotRequests");
+    studentService.DeleteById("sshotRequests");
 
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("sshotRequests");
@@ -120,7 +120,7 @@ public class SshotRequests extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("sshotRequests");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

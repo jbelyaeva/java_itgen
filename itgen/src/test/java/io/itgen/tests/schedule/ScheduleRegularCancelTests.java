@@ -78,7 +78,7 @@ public class ScheduleRegularCancelTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleRegularCancel");
+    scheduleService.DeleteById("scheduleRegularCancel");
   }
 
   private void check(Schedules after, Schedules before) {
