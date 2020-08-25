@@ -33,12 +33,11 @@ public class MaterialHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void addNewBranch() {
+  public void addNewBranch(String name) {
     click(By.xpath("//button[contains(@class,'dropdown')]"));
     noErrorMessage();
     click(By.xpath("//a[contains(@class,'add-branch')]"));
     noErrorMessage();
-    click(By.xpath("//div[contains(@class,'branch')]"));
   }
 
   public void addNewMaterial(MaterialData material) {
@@ -60,6 +59,38 @@ public class MaterialHelper extends HelperBase {
 
   public void openBranch() {
     click(By.xpath("//span[@data-branch]"));
+    noErrorMessage();
+  }
+
+  public void TakeOnCheck() {
+    tabInProgress();
+    btnTakeForReview();
+  }
+
+  private void btnTakeForReview() {
+    click(By.xpath("//button[contains(@class,'take-for-review')]"));
+    noErrorMessage();
+  }
+
+  public void deleteMaterial() {
+    tabInProgress();
+    selectMaterial();
+    btnDelete();
+    alertDeleteSelectedParent();
+  }
+
+  private void alertDeleteSelectedParent() {
+    click(By.cssSelector("div.modal-header"));
+    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
+    noErrorMessage();
+  }
+
+  private void btnDelete() {
+    click(By.xpath("//span[contains(@class,'remove')]"));
+  }
+
+  private void selectMaterial() {
+    click(By.xpath("//ul[contains(@class,'stacked')]//li[2]"));
     noErrorMessage();
   }
 }

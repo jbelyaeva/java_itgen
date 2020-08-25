@@ -27,7 +27,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CreateMaterial extends TestBase {
-
   MaterialData materialClean = null;
   MaterialBranchData materialBranchClean = null;
   MaterialService materialService = new MaterialService();

@@ -1,13 +1,6 @@
 package io.itgen.appmanager;
 
-import io.itgen.model.Families;
-import io.itgen.model.FamilyData;
-import io.itgen.model.PaymentData;
-import io.itgen.model.Payments;
-import io.itgen.model.Students;
-import io.itgen.model.schedule.ST;
-import java.util.ArrayList;
-import java.util.List;
+import io.itgen.model.FamilyDataUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,8 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import io.itgen.model.FamilyDataUI;
-import io.itgen.model.StudentData;
 
 public class FamilyHelper extends HelperBase {
 
@@ -25,32 +16,35 @@ public class FamilyHelper extends HelperBase {
   }
 
   public void fillFamilyForm(FamilyDataUI familyDataUI) {
-    // заполнение формы ученика
-    type(By.cssSelector("input[name=\"profile-firstName\"]"), familyDataUI.getFirstnameStudent());
-    type(By.cssSelector("input[name=\"profile-lastName\"]"), familyDataUI.getLastnameStudent());
+
+    if(isElementPresent(By.name("profile-firstName"))){
+    type(By.name("profile-firstName"), familyDataUI.getFirstnameStudent());}
+    else refresh();
+
+    type(By.name("profile-lastName"), familyDataUI.getLastnameStudent());
     dropDownList_Integer(By.cssSelector("#profile-gender"), familyDataUI.getGenderStudent());
     enterADate(
-        By.cssSelector("input[name=\"profile-birthday\"]"), familyDataUI.getBirthdayUiStudent());
+        By.name("profile-birthday"), familyDataUI.getBirthdayUiStudent());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), familyDataUI.getPclevelStudent());
     dropDownList(By.cssSelector("#profile-country"), familyDataUI.getCountryStudent());
-    type(By.cssSelector("input[name=\"profile-city\"]"), familyDataUI.getCityStudent());
+    type(By.name("profile-city"), familyDataUI.getCityStudent());
     dropDownList(By.cssSelector("#profile-timezone"), familyDataUI.getTimezoneStudent());
-    type(By.cssSelector("input[name=\"profile-contact-phone\"]"), familyDataUI.getPhoneStudent());
+    type(By.name("profile-contact-phone"), familyDataUI.getPhoneStudent());
     type(
-        By.cssSelector("input[name=\"profile-contact-telegram\"]"),
+        By.name("profile-contact-telegram"),
         familyDataUI.getTelegramStudent());
-    type(By.cssSelector("input[name=\"profile-contact-viber\"]"), familyDataUI.getViberStudent());
-    type(By.cssSelector("input[name=\"profile-contact-c2d\"]"), familyDataUI.getC2dStudent());
+    type(By.name("profile-contact-viber"), familyDataUI.getViberStudent());
+    type(By.name("profile-contact-c2d"), familyDataUI.getC2dStudent());
     click(By.cssSelector("a.btn-link.btn-show"));
-    type(By.cssSelector("input[name=\"profile-contact-skype\"]"), familyDataUI.getSkypeStudent());
+    type(By.name("profile-contact-skype"), familyDataUI.getSkypeStudent());
     type(
-        By.cssSelector("input[name=\"profile-contact-whatsapp\"]"),
+        By.name("profile-contact-whatsapp"),
         familyDataUI.getWhatsappStudent());
-    type(By.cssSelector("input[name=\"profile-contact-facebook\"]"), familyDataUI.getFbStudent());
-    type(By.cssSelector("input[name=\"profile-contact-vk\"]"), familyDataUI.getVkStudent());
-    type(By.cssSelector("input[name=\"profile-contact-ok\"]"), familyDataUI.getOkStudent());
+    type(By.name("profile-contact-facebook"), familyDataUI.getFbStudent());
+    type(By.name("profile-contact-vk"), familyDataUI.getVkStudent());
+    type(By.name("profile-contact-ok"), familyDataUI.getOkStudent());
     type(
-        By.cssSelector("input[name=\"profile-contact-instagram\"]"), familyDataUI.getInstStudent());
+        By.name("profile-contact-instagram"), familyDataUI.getInstStudent());
     // заполнение формы родителя
     Actions actions = new Actions(wd);
     WebElement element =
@@ -141,10 +135,6 @@ public class FamilyHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void select() {
-    click(By.cssSelector("a.btn-link"));
-  }
-
   public void btnFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
   }
@@ -155,14 +145,4 @@ public class FamilyHelper extends HelperBase {
     alertDeleteSelectedFamily();
     noErrorMessage();
   }
-
-  private void SelectStudentById(StudentData deletedStudent) {
-    wd.findElement(By.cssSelector("a[href='/profile/" + deletedStudent.getId() + "'")).click();
-  }
-
-  public FamilyData getNewFamilyDB(Families after) {
-   return after.iterator().next();
-  }
-
-
 }

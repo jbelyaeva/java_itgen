@@ -78,6 +78,9 @@ task testFamilies(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 }
 
 testFamilies.doFirst {
@@ -100,6 +103,9 @@ task testParents(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
 
@@ -124,6 +130,9 @@ task testStudents(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 }
 
 testStudents.doFirst {
@@ -146,6 +155,9 @@ task testTrainers(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
 
@@ -170,6 +182,9 @@ task testWorkers(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 }
 
 testWorkers.doFirst {
@@ -192,6 +207,9 @@ task testLeads(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
 
@@ -216,6 +234,9 @@ task testScreenShots(type: Test) {
     if (project.hasProperty('etalon')) {
         systemProperty 'etalon', "${etalon}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 
 }
 testScreenShots.doFirst {
@@ -238,6 +259,9 @@ task testSchedule(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 
 }
@@ -262,9 +286,12 @@ task testWindowsSchedule(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 
 }
-testSchedule.doFirst {
+testWindowsSchedule.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 //
@@ -285,9 +312,12 @@ task testNostable(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 
 }
-testWindowsSchedule.doFirst {
+testNostable.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 
@@ -307,6 +337,9 @@ task testRequests(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 
 }
@@ -331,6 +364,9 @@ task testSmoke(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 
 }
 testSmoke.doFirst {
@@ -352,6 +388,9 @@ task testFirst(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
     testFirst.doFirst {
@@ -375,6 +414,9 @@ task testFirst(type: Test) {
         if (project.hasProperty('verifyUI')) {
             systemProperty 'verifyUI', "${verifyUI}"
         }
+        if (project.hasProperty('videoName')) {
+            systemProperty 'videoName', "${videoName}"
+        }
     }
         testSmokeParent.doFirst {
             jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -396,6 +438,9 @@ task testNostableParent(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
     testNostableParent.doFirst {
@@ -420,6 +465,9 @@ task testScreenShotsPar(type: Test) {
    if (project.hasProperty('verifyUI')) {
       systemProperty 'verifyUI', "${verifyUI}"
    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 }
    testScreenShotsPar.doFirst {
        jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -442,6 +490,9 @@ task testMaterials(type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
     }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
 }
 testMaterials.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -450,7 +501,7 @@ testMaterials.doFirst {
 //
 task testLkParent(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-lkPar.xml'
+        suites 'src/test/resources/testng-lkParent.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -463,6 +514,9 @@ task testLkParent(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
 testLkParent.doFirst {
@@ -484,6 +538,9 @@ task testPayments(type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
     }
 }
 testPayments.doFirst {

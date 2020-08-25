@@ -205,7 +205,6 @@ public class TrScheduleTomorrowHelper {
 
   // Завтра разовое занятие без учеников
   public void SingleScheduleWithoutStudent(String period, String idSchedule, String idTrainer) {
-
     ArrayList<C> listC = new ArrayList<>();
     ArrayList<FinishedSlots> listFSlots = new ArrayList<>();
     ScheduleData schedule =
@@ -352,7 +351,6 @@ public class TrScheduleTomorrowHelper {
       String lang) {
 
     int week = 604800000;
-    ArrayList<C> listC = new ArrayList<>();
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)

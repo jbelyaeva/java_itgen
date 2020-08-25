@@ -71,7 +71,7 @@ public class AddNewStudent extends TestBase {
   public void testAddNewStudent(StudentData student) throws InterruptedException {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);
-    Thread.sleep(3000);
+    Thread.sleep(3000); // необходимо, т.к. не успевает сохраниться студент в бд
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() + 1));
     studentClean = app.dbstudents().lastStudent();
