@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Activity {
-  private String uld;
+  private String uId;
   private Date ts;
   private String t;
   @Embedded
@@ -15,8 +15,8 @@ public class Activity {
   public Activity() {
   }
 
-  public Activity withUld(String uld) {
-    this.uld = uld;
+  public Activity withUId(String uId) {
+    this.uId = uId;
     return this;
   }
 
@@ -35,8 +35,8 @@ public class Activity {
     return this;
   }
 
-  public String getUld() {
-    return uld;
+  public String getUId() {
+    return uId;
   }
 
   public Date getTs() {
@@ -54,7 +54,7 @@ public class Activity {
   @Override
   public String toString() {
     return "Activity{" +
-            "uld='" + uld + '\'' +
+            "uId='" + uId + '\'' +
             ", ts=" + ts +
             ", t='" + t + '\'' +
             ", d=" + d +
@@ -66,13 +66,12 @@ public class Activity {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Activity activity = (Activity) o;
-    return Objects.equals(uld, activity.uld) &&
-            Objects.equals(ts, activity.ts) &&
+    return Objects.equals(uId, activity.uId) &&
             Objects.equals(t, activity.t);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(uld, ts, t);
+    return Objects.hash(uId, t);
   }
 }

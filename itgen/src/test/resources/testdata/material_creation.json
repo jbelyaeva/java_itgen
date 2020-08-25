@@ -11,19 +11,6 @@
     "desc": "Развивает внимательность",
     "level": "easy"
   },
-
-  {
-    "originality": "original",
-    "lang": "ru",
-    "skill": "1",
-    "title": "Cat",
-    "type": "video",
-    "materialLink": "https://docs.google.com",
-    "sourceLink": "https://docs.google.com",
-    "projectLink": "https://docs.google.com",
-    "desc": "Развивает внимательность",
-    "level": "easy"
-  },
   {
     "originality": "adaptation",
     "lang": "ru",
@@ -64,30 +51,6 @@
     "originality": "adaptation",
     "lang": "ru",
     "skill": "1",
-    "title": "    №%%:,.;;((;.,:",
-    "type": "video",
-    "materialLink": "кошка.google.com",
-    "sourceLink": "https://docs.google.com",
-    "projectLink": "https://docs.google.com",
-    "desc": "Развивает внимательность",
-    "level": "easy"
-  },
-  {
-    "originality": "adaptation",
-    "lang": "ru",
-    "skill": "1",
-    "title": "Жук",
-    "type": "video",
-    "materialLink": "https://docs.google.com",
-    "sourceLink": "https://docs.google.com",
-    "projectLink": "https://docs.google.com",
-    "desc": "    Развивает внимательность    ",
-    "level": "easy"
-  },
-  {
-    "originality": "adaptation",
-    "lang": "ru",
-    "skill": "1",
     "title": "Жук",
     "type": "video",
     "materialLink": "https://docs.google.com",
@@ -108,6 +71,4 @@
     "desc": "Развивает внимательность",
     "level": "easy"
   }
-
-
 ]

@@ -7,6 +7,7 @@ import dev.morphia.query.Query;
 import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.model.materials.MaterialBranchData;
+import io.itgen.model.materials.MaterialBranchs;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
 import java.util.List;
@@ -35,5 +36,12 @@ public class DbHelperMaterials {
     Query<MaterialData> q = datastore.createQuery(MaterialData.class);
     List<MaterialData> materials = q.find().toList();
     return new Materials(materials);
+  }
+
+  public MaterialBranchs materialBranchs() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<MaterialBranchData> q = datastore.createQuery(MaterialBranchData.class);
+    List<MaterialBranchData> materialBranchs = q.find().toList();
+    return new MaterialBranchs(materialBranchs);
   }
 }

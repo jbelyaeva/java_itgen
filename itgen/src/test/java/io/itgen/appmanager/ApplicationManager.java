@@ -104,7 +104,8 @@ public class ApplicationManager {
       capabilities.setBrowserName(browser);
       capabilities.setVersion("83");
       capabilities.setCapability("enableVNC", true);
-      capabilities.setCapability("enableVideo", false);
+      capabilities.setCapability("enableVideo", true);
+      capabilities.setCapability("videoName", System.getProperty("videoName", "selenoid.mp4"));
       capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows")));
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
     }

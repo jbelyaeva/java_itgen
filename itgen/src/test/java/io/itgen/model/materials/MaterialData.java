@@ -50,7 +50,7 @@ public class MaterialData {
   private List<String> comments = new ArrayList<>();
 
   @Embedded("activity")
-  private List<Activity> activity = new ArrayList<Activity>();
+  private List<Activity> activity = new ArrayList<>();
 
   @Property("linkedMaterials")
   private List<String> linkedMaterials = new ArrayList<String>();
@@ -72,6 +72,9 @@ public class MaterialData {
 
   @Property("verifier")
   private String verifier;
+
+  @Property("removed")
+  private Boolean removed;
 
   public MaterialData() {}
 
@@ -176,7 +179,10 @@ public class MaterialData {
     this.verifier = verifier;
     return this;
   }
-
+  public MaterialData withRemoved(Boolean removed) {
+    this.removed = removed;
+    return this;
+  }
   //getters
 
   public String getId() {

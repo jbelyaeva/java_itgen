@@ -53,9 +53,17 @@
 13. testNostable
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
-11. testSmokeParent
-12. testLkParent
-13. testNostableParent
+1. testSmokeParent
+2. testLkParent
+3. testNostableParent
+
+Запускаем автоматически ночью:
+1. testSmoke
+2. testSmokeParent
+3. testNostable
+4. testNostableParent
+
+
 
 **Значения -Ptarget** 
 

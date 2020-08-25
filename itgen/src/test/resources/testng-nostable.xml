@@ -8,6 +8,11 @@
       <class name="io.itgen.tests.FamilyDeletionTests"/>
       <class name="io.itgen.tests.screenShot.SshotFamily"/>
       <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
+      <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests"/>
+      <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests"/>
+      <class name="io.itgen.tests.materials.MaterialAddNewBranch"/>
+      <class name="io.itgen.tests.materials.MaterialTakeForReview"/>
+      <class name="io.itgen.tests.materials.MaterialDelete"/>
     </classes>
   </test>
 </suite>

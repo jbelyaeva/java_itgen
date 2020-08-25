@@ -26,7 +26,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FamilyCreationTests extends TestBase {
   String idFamily;
-  //StudentData studentClean=null;
 
   @DataProvider
   public Iterator<Object[]> validFamiliesFromJson() throws IOException {
@@ -40,7 +39,7 @@ public class FamilyCreationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<FamilyDataUI> families = gson.fromJson(json, new TypeToken<List<FamilyDataUI>>() {
-      }.getType()); // List<FamilyDataUI>.class
+      }.getType());
       return families.stream().map((f) -> new Object[]{f}).collect(Collectors.toList()).iterator();
     }
   }
@@ -62,7 +61,7 @@ public class FamilyCreationTests extends TestBase {
   public void cleanFamily() {
     FamilyService familyService = new FamilyService();
     familyService.DeleteById(idFamily);
-    Students students = app.db().familyComposition(idFamily); //в данном случае в списрок Students попадут ученики и родители
+    Students students = app.db().familyComposition(idFamily); //в данном случае в список Students попадут ученики и родители
     StudentService studentService = new StudentService();
     TaskService taskService = new TaskService();
     for (StudentData studentClean : students) {
