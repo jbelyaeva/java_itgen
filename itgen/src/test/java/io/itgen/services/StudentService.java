@@ -8,11 +8,11 @@ public class StudentService {
 
   public StudentService() {}
 
-  public StudentData findByIdAndDelete(StudentData student) {
+  public StudentData DeleteById(StudentData student) {
     return studentDao.findByIdAndDelete(student);
   }
 
-  public StudentData findByIdAndDelete(String id) {
+  public StudentData DeleteById(String id) {
     return studentDao.findByIdAndDelete(id);
   }
 

@@ -57,7 +57,7 @@ public class ScheduleSingleCancelTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleCancel");
+    scheduleService.DeleteById("scheduleSingleCancel");
   }
 
   private void check(Schedules after, Schedules before) {

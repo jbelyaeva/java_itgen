@@ -56,13 +56,13 @@ public class CancelOnSingle extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    scheduleService.findByIdAndDelete("LkCancelLessonInSingleSchedule");
-    studentService.findByIdAndDelete("LkCancelLessonInSingleSchedule");
+    scheduleService.DeleteById("FinishedSchedule");
+    scheduleService.DeleteById("LkCancelLessonInSingleSchedule");
+    studentService.DeleteById("LkCancelLessonInSingleSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkCancelLessonInSingleSchedule");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 

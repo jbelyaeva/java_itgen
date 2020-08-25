@@ -64,16 +64,16 @@ public class RequestOnTrial2hScratchTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("makeRequest");
+    studentService.DeleteById("makeRequest");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("makeRequest");
     Tasks tasks = app.dbschedules().tasksComposition("makeRequest");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
     RequestService requestService = new RequestService();
-    requestService.findByIdAndDelete(idNewRequest);
+    requestService.DeleteById(idNewRequest);
 
   }
 

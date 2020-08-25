@@ -79,7 +79,7 @@ public class ScheduleRegularAssignTrainerAllTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleRegularAssignTrainer");
+    scheduleService.DeleteById("scheduleRegularAssignTrainer");
   }
 
   private void check(Schedules before, Schedules after) {

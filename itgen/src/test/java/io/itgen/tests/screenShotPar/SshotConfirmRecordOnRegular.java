@@ -4,7 +4,6 @@ package io.itgen.tests.screenShotPar;
 */
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.general.TimeGeneral;
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
 import io.itgen.services.ScheduleService;
@@ -79,13 +78,13 @@ public class SshotConfirmRecordOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    scheduleService.findByIdAndDelete("LkRecordOnRegularSchedule");
-    studentService.findByIdAndDelete("LkRecordOnRegularSchedule");
+    scheduleService.DeleteById("FinishedSchedule");
+    scheduleService.DeleteById("LkRecordOnRegularSchedule");
+    studentService.DeleteById("LkRecordOnRegularSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnRegularSchedule");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

@@ -66,12 +66,12 @@ public class SshotSignUpOnTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("LKOnTrail");
-    studentService.findByIdAndDelete("LKOnTrail");
+    scheduleService.DeleteById("LKOnTrail");
+    studentService.DeleteById("LKOnTrail");
 
     Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

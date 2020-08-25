@@ -53,12 +53,12 @@ public class PaymentByGuest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    studentService.findByIdAndDelete("paymantByGuest");
+    scheduleService.DeleteById("FinishedSchedule");
+    studentService.DeleteById("paymantByGuest");
 
     Tasks tasks = app.dbschedules().tasksComposition("paymantByGuest");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

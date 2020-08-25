@@ -93,7 +93,7 @@ public class AddNewStudent extends TestBase {
   public void clean() {
     if (studentClean == null) return;
 
-    taskService.findByIdAndDeleteTask(studentClean);
-    studentService.findByIdAndDelete(studentClean);
+    taskService.DeleteById(studentClean);
+    studentService.DeleteById(studentClean);
   }
 }

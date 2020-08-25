@@ -89,7 +89,7 @@ public class StudentModificationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("studentModify");
+    studentService.DeleteById("studentModify");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("studentModify");
   }

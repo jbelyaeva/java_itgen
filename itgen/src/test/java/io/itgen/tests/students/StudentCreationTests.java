@@ -93,9 +93,9 @@ public class StudentCreationTests extends TestBase {
       FamilyService familyService = new FamilyService();
       familyService.DeleteById(studentClean.getFamilyId());
       TaskService taskService = new TaskService();
-      taskService.findByIdAndDeleteTask(studentClean);
+      taskService.DeleteById(studentClean);
       StudentService studentService = new StudentService();
-      studentService.findByIdAndDelete(studentClean);
+      studentService.DeleteById(studentClean);
     }
   }
 }

@@ -66,7 +66,7 @@ public class ParentDeletionTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("forParentDeletion");
+    studentService.DeleteById("forParentDeletion");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("parentDeletion");
     ParentService parentService = new ParentService();

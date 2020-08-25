@@ -60,6 +60,6 @@ public class LeadCreationTest extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     leadService.DeleteById(leadClean);
-    taskService.findByIdAndDeleteTask(leadClean);
+    taskService.DeleteById(leadClean);
   }
 }

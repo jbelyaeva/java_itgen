@@ -62,8 +62,8 @@ public class ScheduleSingleMoveTests extends TestBase {
     //при перемещении расписания: старое архивируется и создается новое
     String newSchedule = app.schedule().getNewScheduleDB(before, after);
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete(newSchedule);
-    scheduleService.findByIdAndDelete("scheduleSingleMove");
+    scheduleService.DeleteById(newSchedule);
+    scheduleService.DeleteById("scheduleSingleMove");
   }
 
 }

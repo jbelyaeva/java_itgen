@@ -50,6 +50,6 @@ public class WorkerDeletionTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    workerService.findByIdAndDelete("workerDelete");
+    workerService.DeleteById("workerDelete");
   }
 }

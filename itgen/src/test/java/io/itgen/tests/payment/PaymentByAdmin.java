@@ -58,7 +58,7 @@ public class PaymentByAdmin extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     familyService.DeleteById("paymentAdmin");
-    studentService.findByIdAndDelete("paymentAdminChild");
+    studentService.DeleteById("paymentAdminChild");
     parentService.DeleteById("paymentAdminParent");
   }
 }

@@ -8,7 +8,7 @@ public class ScheduleService {
 
   public ScheduleService() {}
 
-  public ScheduleData findByIdAndDelete(String id) {
+  public ScheduleData DeleteById(String id) {
     return scheduleDao.findByIdAndDelete(id);
   }
 

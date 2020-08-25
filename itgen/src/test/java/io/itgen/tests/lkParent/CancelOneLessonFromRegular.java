@@ -52,13 +52,13 @@ public class CancelOneLessonFromRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    scheduleService.findByIdAndDelete("LkCancelRegularSchedule");
-    studentService.findByIdAndDelete("LkCancelRegularSchedule");
+    scheduleService.DeleteById("FinishedSchedule");
+    scheduleService.DeleteById("LkCancelRegularSchedule");
+    studentService.DeleteById("LkCancelRegularSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkCancelRegularSchedule");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 
