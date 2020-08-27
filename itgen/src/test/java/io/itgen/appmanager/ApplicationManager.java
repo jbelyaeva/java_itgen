@@ -17,12 +17,14 @@ import io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
@@ -108,6 +110,7 @@ public class ApplicationManager {
       capabilities.setCapability("videoName", System.getProperty("videoName", "selenoid.mp4"));
       capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "windows")));
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+      wd.manage().window().setSize(new Dimension(1920, 1080));
     }
     wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));

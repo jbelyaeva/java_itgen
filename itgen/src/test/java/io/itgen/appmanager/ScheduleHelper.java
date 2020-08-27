@@ -121,6 +121,15 @@ public class ScheduleHelper extends HelperBase {
     refresh();
   }
 
+  public void createSingleScheduleTest() {
+    btnCreateSchedule();
+    checkBoxConst();
+    selectTime();
+    selectTrainer();
+    selectScype();
+    btnCreate();
+  }
+
   public void createRegularSchedule() {
     btnCreateSchedule();
     selectTime();

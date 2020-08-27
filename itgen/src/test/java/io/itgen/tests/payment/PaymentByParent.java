@@ -30,7 +30,7 @@ public class PaymentByParent extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test
+  @Test (enabled = false)
   public void testPaymentByParent() {
     app.payment().goToShopByParent();
     app.payment().paymentByParent();

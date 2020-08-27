@@ -27,6 +27,8 @@ public class WindowRecordFreeStudentOnRegular2hScheduleTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    scheduleService.drop();
+
     app.trScheduleTomorrow().RegularScheduleWithoutStudents(period, "recordStudentOnLesson", "14");
 
     app.trFamily().newFamily("recordStudent", false, "txa");

@@ -54,7 +54,7 @@ public class PaymentHelper extends HelperBase {
     btnPay();
     btnPay4Lessons();
     fillTestCard();
-    btnBuy();
+    //btnBuy(); нужно решение с внешним апи
   }
 
   private void btnBuy() {
@@ -103,7 +103,7 @@ public class PaymentHelper extends HelperBase {
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     btnPay4Lessons();
     fillTestCard();
-    btnBuy();
+  //  btnBuy(); нужно решение по взаимодействию с внешним апи
     wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
   }
 
@@ -116,7 +116,7 @@ public class PaymentHelper extends HelperBase {
   public void paymentByParent() {
     btnPay4Lessons();
     fillTestCard();
-    btnBuy();
+    //  btnBuy(); нужно решение по взаимодействию с внешним апи
     WebElement dynamicElement =
         (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));

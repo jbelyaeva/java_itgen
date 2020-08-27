@@ -53,7 +53,7 @@ public class DecreaseBalanceByAdmin extends TestBase {
   }
 
   @Test
-  public void testPaymentByAdmin() {
+  public void testDecreaseBalanceByAdmin() {
     app.goTo().menuStudents();
     Payments before = app.db().payments("decreaseAdmin");
     app.payment().decreaseAdmin("decreaseAdminChild", "-1");

@@ -13,6 +13,7 @@ import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
 import io.itgen.services.MaterialBranchService;
 import io.itgen.services.MaterialService;
+import io.itgen.services.PaymentService;
 import io.itgen.tests.TestBase;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,10 +28,12 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CreateMaterial extends TestBase {
+
   MaterialData materialClean = null;
   MaterialBranchData materialBranchClean = null;
   MaterialService materialService = new MaterialService();
   MaterialBranchService materialBranchService = new MaterialBranchService();
+  PaymentService paymentService = new PaymentService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -50,9 +53,10 @@ public class CreateMaterial extends TestBase {
       }
       Gson gson = new Gson();
       List<MaterialData> materials =
-          gson.fromJson(json, new TypeToken<List<MaterialData>>() {}.getType());
+          gson.fromJson(json, new TypeToken<List<MaterialData>>() {
+          }.getType());
       return materials.stream()
-          .map((s) -> new Object[] {s})
+          .map((s) -> new Object[]{s})
           .collect(Collectors.toList())
           .iterator();
     }
@@ -101,5 +105,6 @@ public class CreateMaterial extends TestBase {
     materialService.DeleteById(materialClean.getId());
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
     materialBranchService.DeleteById(materialBranchClean.getId());
+    paymentService.drop();
   }
 }

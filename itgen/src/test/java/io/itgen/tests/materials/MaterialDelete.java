@@ -47,7 +47,7 @@ public class MaterialDelete extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
-    app.material().deleteMaterial();
+    app.material().deleteMaterial("MaterialDelete");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);

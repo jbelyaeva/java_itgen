@@ -2,6 +2,8 @@ package io.itgen.model.tasks;
 
 import dev.morphia.annotations.Property;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class D {
@@ -10,6 +12,10 @@ public class D {
 
   @Property("old")
   public String oldData;
+
+  @Property("langs")
+  public List<String> langs = new ArrayList<>();
+
   public D() {
   }
 
@@ -20,6 +26,11 @@ public class D {
 
   public D withOldData(String oldData) {
     this.oldData = oldData;
+    return this;
+  }
+
+  public D withLangs(List<String> langs) {
+    this.langs = langs;
     return this;
   }
 
