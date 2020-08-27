@@ -10,10 +10,28 @@ import io.itgen.model.schedule.Times;
 import io.itgen.services.ScheduleService;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class TrScheduleTomorrowHelper {
   private final TimeGeneral time = new TimeGeneral();
   private final ScheduleService scheduleService = new ScheduleService();
+
+  private List<Slots> generateSlots(String period, String idTrainer, ArrayList<List<C>> listsC) {
+    int week = 604800000;
+    ArrayList<Slots> slots = new ArrayList<>();
+    for (int i = 0; i < listsC.size(); i++) {
+      slots.add(
+          new Slots()
+              .withId(idTrainer)
+              .withW(time.dateTomorrow() + week * i)
+              .withSt(
+                  new ST()
+                      .withS(time.StimeTomorrow(period) + week * i)
+                      .withE(time.EtimeTomorrow(period) + week * i))
+              .withC(listsC.get(i)));
+    }
+    return slots;
+  }
 
   // Завтра разовое занятие, на которое записан ученик, после первого успешного пробного
   public void SingleScheduleWithOneStudent(
@@ -205,23 +223,17 @@ public class TrScheduleTomorrowHelper {
 
   // Завтра разовое занятие без учеников
   public void SingleScheduleWithoutStudent(String period, String idSchedule, String idTrainer) {
-    ArrayList<C> listC = new ArrayList<>();
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+    for (int i = 0; i < 1; i++) {
+      listsC.add(new ArrayList<>());
+    }
     ArrayList<FinishedSlots> listFSlots = new ArrayList<>();
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(listC)))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withFinishedSlots(listFSlots)
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1")
@@ -231,48 +243,17 @@ public class TrScheduleTomorrowHelper {
 
   // завтра регулярное занятие без ученика
   public void RegularScheduleWithoutStudents(String period, String idSchedule, String idTrainer) {
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+    for (int i = 0; i < 4; i++) {
+      listsC.add(new ArrayList<>());
+    }
 
-    int week = 604800000;
-    ArrayList<C> listC = new ArrayList<>();
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(listC)))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
@@ -286,56 +267,28 @@ public class TrScheduleTomorrowHelper {
       String idStudent,
       String idSubject,
       String lang) {
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
 
-    int week = 604800000;
-    ArrayList<C> listC = new ArrayList<>();
+    listsC.add(
+        Arrays.asList(
+            new C()
+                .withId(idStudent)
+                .withType(3)
+                .withSubject(idSubject)
+                .withLang(lang)
+                .withS("normal")
+                .withTrial(true)));
+
+    for (int i = 0; i < 3; i++) {
+      listsC.add(new ArrayList<>());
+    }
+
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withTrial(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(listC)))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
@@ -350,85 +303,43 @@ public class TrScheduleTomorrowHelper {
       String idSubject,
       String lang) {
 
-    int week = 604800000;
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+
+    listsC.add(
+        Arrays.asList(
+            new C()
+                .withId(idStudent)
+                .withType(1)
+                .withSubject(idSubject)
+                .withLang(lang)
+                .withS("normal")
+                .withNewSubj(true)
+                .withP(true)));
+
+    for (int i = 0; i < 3; i++) {
+      listsC.add(
+          Arrays.asList(
+              new C()
+                  .withId(idStudent)
+                  .withType(1)
+                  .withSubject(idSubject)
+                  .withLang(lang)
+                  .withS("normal")
+                  .withP(true)));
+    }
+
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(1)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withNewSubj(true)
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(1)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(1)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(1)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true)))))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
   }
 
-  // регулярное занятие, тренер на всех уроках 1, студен записан постоянно на первый час.
+  // регулярное занятие, тренер на всех уроках 1, студен записан постоянно на второй час.
   public void CombinationWithOneStudentOnRegularSchedule_3(
       String period,
       String idSchedule,
@@ -437,80 +348,37 @@ public class TrScheduleTomorrowHelper {
       String idSubject,
       String lang) {
 
-    int week = 604800000;
-    ArrayList<C> listC = new ArrayList<>();
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+
+    listsC.add(
+        Arrays.asList(
+            new C()
+                .withId(idStudent)
+                .withType(2)
+                .withSubject(idSubject)
+                .withLang(lang)
+                .withS("normal")
+                .withNewSubj(true)
+                .withP(true)));
+
+    for (int i = 0; i < 3; i++) {
+      listsC.add(
+          Arrays.asList(
+              new C()
+                  .withId(idStudent)
+                  .withType(2)
+                  .withSubject(idSubject)
+                  .withLang(lang)
+                  .withS("normal")
+                  .withP(true)));
+    }
+
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(2)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withNewSubj(true)
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(2)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(2)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(2)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true)))))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
@@ -524,71 +392,29 @@ public class TrScheduleTomorrowHelper {
       String idStudent,
       String idSubject,
       String lang) {
-    int week = 604800000;
-    ArrayList<C> listC = new ArrayList<>();
+
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+
+    for (int i = 0; i < 1; i++) {
+      listsC.add(new ArrayList<>());
+    }
+    for (int i = 0; i < 3; i++) {
+      listsC.add(
+          Arrays.asList(
+              new C()
+                  .withId(idStudent)
+                  .withType(3)
+                  .withSubject(idSubject)
+                  .withLang(lang)
+                  .withS("normal")
+                  .withP(true)));
+    }
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(listC),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true)))))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
@@ -602,78 +428,26 @@ public class TrScheduleTomorrowHelper {
       String idStudent,
       String idSubject,
       String lang) {
-    int week = 604800000;
+
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+
+    for (int i = 0; i < 4; i++) {
+      listsC.add(
+          Arrays.asList(
+              new C()
+                  .withId(idStudent)
+                  .withType(3)
+                  .withSubject(idSubject)
+                  .withLang(lang)
+                  .withS("normal")
+                  .withP(true)));
+    }
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true)))))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
@@ -687,79 +461,36 @@ public class TrScheduleTomorrowHelper {
       String idStudent,
       String idSubject,
       String lang) {
-    int week = 604800000;
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+
+    listsC.add(
+        Arrays.asList(
+            new C()
+                .withId(idStudent)
+                .withType(3)
+                .withSubject(idSubject)
+                .withLang(lang)
+                .withS("normal")
+                .withNewSubj(true)
+                .withP(true)));
+
+    for (int i = 0; i < 3; i++) {
+      listsC.add(
+          Arrays.asList(
+              new C()
+                  .withId(idStudent)
+                  .withType(3)
+                  .withSubject(idSubject)
+                  .withLang(lang)
+                  .withS("normal")
+                  .withP(true)));
+    }
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
             .withVer(0)
             .withFromDate(time.dateTomorrow())
-            .withSlots(
-                Arrays.asList(
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow())
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period))
-                                .withE(time.EtimeTomorrow(period)))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withNewSubj(true)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week)
-                                .withE(time.EtimeTomorrow(period) + week))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 2)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 2)
-                                .withE(time.EtimeTomorrow(period) + week * 2))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true))),
-                    new Slots()
-                        .withId(idTrainer)
-                        .withW(time.dateTomorrow() + week * 3)
-                        .withSt(
-                            new ST()
-                                .withS(time.StimeTomorrow(period) + week * 3)
-                                .withE(time.EtimeTomorrow(period) + week * 3))
-                        .withC(
-                            Arrays.asList(
-                                new C()
-                                    .withId(idStudent)
-                                    .withType(3)
-                                    .withSubject(idSubject)
-                                    .withLang(lang)
-                                    .withS("normal")
-                                    .withP(true)))))
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);

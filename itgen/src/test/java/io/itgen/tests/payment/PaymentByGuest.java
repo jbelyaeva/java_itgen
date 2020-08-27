@@ -32,7 +32,7 @@ public class PaymentByGuest extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test
+  @Test(enabled = false)
   public void testPaymentByGuest() {
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();
@@ -53,12 +53,12 @@ public class PaymentByGuest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    studentService.findByIdAndDelete("paymantByGuest");
+    scheduleService.DeleteById("FinishedSchedule");
+    studentService.DeleteById("paymantByGuest");
 
     Tasks tasks = app.dbschedules().tasksComposition("paymantByGuest");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

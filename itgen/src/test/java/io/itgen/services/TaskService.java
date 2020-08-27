@@ -1,24 +1,24 @@
 package io.itgen.services;
 
-import io.itgen.model.LeadData;
-import io.itgen.model.TaskData;
 import io.itgen.dao.TaskDao;
+import io.itgen.model.LeadData;
 import io.itgen.model.StudentData;
+import io.itgen.model.TaskData;
 
 public class TaskService {
   private TaskDao taskDao = new TaskDao();
 
   public TaskService() {}
 
-  public TaskData findByIdAndDeleteTask(String id) {
+  public TaskData DeleteById(String id) {
     return taskDao.findByIdAndDeleteTask(id);
   }
 
-  public TaskData findByIdAndDeleteTask(StudentData student) {
+  public TaskData DeleteById(StudentData student) {
     return taskDao.findByIdAndDeleteTask(student);
   }
 
-  public TaskData findByIdAndDeleteTask(LeadData leadNew) {
+  public TaskData DeleteById(LeadData leadNew) {
     return taskDao.findByIdAndDeleteTask(leadNew);
   }
 

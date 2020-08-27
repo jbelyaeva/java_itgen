@@ -104,15 +104,15 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("removeStudentFromLesson");
+    scheduleService.DeleteById("removeStudentFromLesson");
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("removeStudentFromLesson");
+    studentService.DeleteById("removeStudentFromLesson");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("removeStudentFromLesson");
     Tasks tasks = app.dbschedules().tasksComposition("removeStudentFromLesson");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 

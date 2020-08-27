@@ -9,7 +9,7 @@ public class TrainerService {
   public TrainerService() {
   }
 
-  public TrainerData findByIdAndDelete(String id) {
+  public TrainerData DeleteById(String id) {
     return trainerDao.findByIdAndDelete(id);
   }
 

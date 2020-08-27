@@ -53,7 +53,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
   }
 
   @Test
-  public void testPaymentByAdmin() {
+  public void testIncreaseBalanceByAdmin() {
     app.goTo().menuStudents();
     Payments before = app.db().payments("increaseAdmin");
     app.payment().increaseAdmin("increaseAdminChild", "1");
@@ -65,7 +65,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     familyService.DeleteById("increaseAdmin");
-    studentService.findByIdAndDelete("increaseAdminChild");
+    studentService.DeleteById("increaseAdminChild");
     parentService.DeleteById("increaseAdminParent");
     paymentService.DeleteById(paymentNew.getId());
   }

@@ -84,7 +84,7 @@ public class ParentCreationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("forParentCreation");
+    studentService.DeleteById("forParentCreation");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("parentCreate");
     ParentService parentService = new ParentService();

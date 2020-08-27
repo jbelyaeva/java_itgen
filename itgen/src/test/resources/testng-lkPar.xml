@@ -3,7 +3,7 @@
 <suite name="lkParent" verbose="1" >
     <test name="lkParent">
         <classes>
-          <!--  <class name="io.itgen.tests.lkParent.AddNewStudent"/> -->
+            <class name="io.itgen.tests.lkParent.AddNewStudent"/>
             <class name="io.itgen.tests.lkParent.RecordOnTrail"/>
             <class name="io.itgen.tests.lkParent.RecordOnRegular"/>
             <class name="io.itgen.tests.lkParent.RecordOnSingle"/>

@@ -63,13 +63,12 @@ public class Comments {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Comments comments = (Comments) o;
-    return Objects.equals(id, comments.id) &&
-            Objects.equals(owner, comments.owner) &&
+    return  Objects.equals(owner, comments.owner) &&
             Objects.equals(text, comments.text);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, owner, text);
+    return Objects.hash(owner, text);
   }
 }

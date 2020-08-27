@@ -58,7 +58,7 @@ public class ScheduleSingleAssignTrainerTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleSingleAssignTrainer");
+    scheduleService.DeleteById("scheduleSingleAssignTrainer");
   }
 
   private void check(Schedules before, Schedules after) {

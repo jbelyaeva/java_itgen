@@ -5,6 +5,7 @@ import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import io.itgen.model.tasks.Activity;
+import io.itgen.model.tasks.Comments;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,14 +47,14 @@ public class MaterialData {
   @Property("tags")
   private List<String> tags = new ArrayList<>();
 
-  @Property("comments")
-  private List<String> comments = new ArrayList<>();
+  @Embedded("comments")
+  private List<Comments> comments = new ArrayList<>();
 
   @Embedded("activity")
   private List<Activity> activity = new ArrayList<>();
 
-  @Property("linkedMaterials")
-  private List<String> linkedMaterials = new ArrayList<String>();
+  @Embedded("linkedMaterials")
+  private List<LinkedMaterials> linkedMaterials = new ArrayList<LinkedMaterials>();
 
   @Property("originality")
   private String originality;
@@ -130,7 +131,7 @@ public class MaterialData {
     return this;
   }
 
-  public MaterialData withLimkedMaterials(List<String> materialLink) {
+  public MaterialData withLimkedMaterials(List<LinkedMaterials> materialLink) {
     this.linkedMaterials = linkedMaterials;
     return this;
   }
@@ -140,7 +141,7 @@ public class MaterialData {
     return this;
   }
 
-  public MaterialData withComments(List<String> comments) {
+  public MaterialData withComments(List<Comments> comments) {
     this.comments = comments;
     return this;
   }
@@ -229,7 +230,7 @@ public class MaterialData {
     return tags;
   }
 
-  public List<String> getComments() {
+  public List<Comments> getComments() {
     return comments;
   }
 

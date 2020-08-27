@@ -67,12 +67,12 @@ public class SshotFiltrRecordOnSingle extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    studentService.findByIdAndDelete("LkRecordOnSingleSchedule");
+    scheduleService.DeleteById("FinishedSchedule");
+    studentService.DeleteById("LkRecordOnSingleSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnSingleSchedule");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

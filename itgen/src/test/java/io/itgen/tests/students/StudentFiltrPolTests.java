@@ -70,8 +70,8 @@ public class StudentFiltrPolTests extends TestBase {
   public void clean() {
     StudentService studentService = new StudentService();
     FamilyService familyService = new FamilyService();
-    studentService.findByIdAndDelete("studentFiltrPol1");
-    studentService.findByIdAndDelete("studentFiltrPol2");
+    studentService.DeleteById("studentFiltrPol1");
+    studentService.DeleteById("studentFiltrPol2");
     familyService.DeleteById("studentFiltr");
   }
 }

@@ -8,11 +8,14 @@
       <class name="io.itgen.tests.FamilyDeletionTests"/>
       <class name="io.itgen.tests.screenShot.SshotFamily"/>
       <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
-      <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests"/>
+      <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests"/> <!--  move - падает в docker -->
       <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests"/>
       <class name="io.itgen.tests.materials.MaterialAddNewBranch"/>
       <class name="io.itgen.tests.materials.MaterialTakeForReview"/>
       <class name="io.itgen.tests.materials.MaterialDelete"/>
+      <class name="io.itgen.tests.materials.MaterialMakeReview"/>
+      <class name="io.itgen.tests.materials.MaterialsLink"/>
+      <class name="io.itgen.tests.materials.MaterialLeaveComment"/>
     </classes>
   </test>
 </suite>

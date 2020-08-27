@@ -78,15 +78,15 @@ public class RecordStudentOnTrialSingleScheduleTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("recordStudentOnLesson");
+    scheduleService.DeleteById("recordStudentOnLesson");
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("recordStudent");
+    studentService.DeleteById("recordStudent");
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 

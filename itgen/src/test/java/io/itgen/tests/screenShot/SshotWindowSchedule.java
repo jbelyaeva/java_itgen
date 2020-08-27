@@ -116,10 +116,10 @@ public class SshotWindowSchedule extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("sshotWindowSchedule");
+    scheduleService.DeleteById("sshotWindowSchedule");
 
     StudentService studentService = new StudentService();
-    studentService.findByIdAndDelete("sshotWindowSchedule");
+    studentService.DeleteById("sshotWindowSchedule");
 
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("sshotWindowSchedule");
@@ -127,7 +127,7 @@ public class SshotWindowSchedule extends TestBase {
     Tasks tasks = app.dbschedules().tasksComposition("sshotWindowSchedule");
     TaskService taskService = new TaskService();
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 }

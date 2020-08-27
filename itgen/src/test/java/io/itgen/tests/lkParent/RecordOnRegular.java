@@ -50,13 +50,13 @@ public class RecordOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("FinishedSchedule");
-    scheduleService.findByIdAndDelete("LkRecordOnRegularSchedule");
-    studentService.findByIdAndDelete("LkRecordOnRegularSchedule");
+    scheduleService.DeleteById("FinishedSchedule");
+    scheduleService.DeleteById("LkRecordOnRegularSchedule");
+    studentService.DeleteById("LkRecordOnRegularSchedule");
 
     Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnRegularSchedule");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 

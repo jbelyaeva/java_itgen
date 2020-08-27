@@ -27,6 +27,8 @@ public class WindowRecordFreeStudentOnRegular2hScheduleTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    scheduleService.drop();
+
     app.trScheduleTomorrow().RegularScheduleWithoutStudents(period, "recordStudentOnLesson", "14");
 
     app.trFamily().newFamily("recordStudent", false, "txa");
@@ -60,12 +62,12 @@ public class WindowRecordFreeStudentOnRegular2hScheduleTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.findByIdAndDelete("recordStudentOnLesson");
-    studentService.findByIdAndDelete("recordStudent");
+    scheduleService.DeleteById("recordStudentOnLesson");
+    studentService.DeleteById("recordStudent");
     familyService.DeleteById("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     for (TaskData taskClean : tasks) {
-      taskService.findByIdAndDeleteTask(taskClean.getId());
+      taskService.DeleteById(taskClean.getId());
     }
   }
 

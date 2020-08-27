@@ -79,7 +79,7 @@ public class ScheduleRegularBlockTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     ScheduleService scheduleService = new ScheduleService();
-    scheduleService.findByIdAndDelete("scheduleRegularBlock");
+    scheduleService.DeleteById("scheduleRegularBlock");
   }
 
   private void check(Schedules before, Schedules after) {

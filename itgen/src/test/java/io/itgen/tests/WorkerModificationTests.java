@@ -80,7 +80,7 @@ public class WorkerModificationTests extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     WorkerService workerService = new WorkerService();
-    workerService.findByIdAndDelete("workerModify");
+    workerService.DeleteById("workerModify");
   }
 
 }
