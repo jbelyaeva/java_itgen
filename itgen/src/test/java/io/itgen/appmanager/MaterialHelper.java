@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 
 import io.itgen.model.materials.MaterialData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 public class MaterialHelper extends HelperBase {
@@ -125,6 +126,7 @@ public class MaterialHelper extends HelperBase {
   }
 
   private void tabEng() {
+    ((JavascriptExecutor) wd).executeScript("window.scrollBy(0,-250)", "");
     click(By.xpath("//li[contains(@class,'switcher')][2]"));
   }
 
