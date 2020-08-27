@@ -367,6 +367,8 @@ public class LKParentHelper extends HelperBase {
     goHrefActiveLK(token);
     inputPassword("111111");
     btnSave();
+    refresh();
+    logout();
   }
 
   public void clickByFullArea() {
