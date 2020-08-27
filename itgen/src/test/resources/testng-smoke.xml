@@ -57,22 +57,12 @@
       <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests"/>
       <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests"/>
       <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests"/>
-      <class name="io.itgen.tests.materials.CreateMaterial"/>
-      <class name="io.itgen.tests.materials.CreateMaterialBad"/>
-      </classes>
-  </test>
-
-  <test name="Smoke2">
-    <classes>
       <class name="io.itgen.tests.payment.PaymentByAdmin"/>
       <class name="io.itgen.tests.payment.IncreaseBalanceByAdmin"/>
       <class name="io.itgen.tests.payment.DecreaseBalanceByAdmin"/>
-    </classes>
+      <class name="io.itgen.tests.materials.CreateMaterial"/>
+      <class name="io.itgen.tests.materials.CreateMaterialBad"/>
+      <class name="io.itgen.tests.selfRegistration.SelfRegistration"/>
+      </classes>
   </test>
-
-  <test name="Smoke3">
-  <classes>
-    <class name="io.itgen.tests.selfRegistration.SelfRegistration"/>
-  </classes>
-</test>
 </suite>
