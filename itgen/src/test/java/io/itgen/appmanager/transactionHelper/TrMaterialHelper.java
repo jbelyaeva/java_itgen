@@ -109,6 +109,7 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
+
     MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
         level, lang)
         .withOriginality(originality)
@@ -177,6 +178,7 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
+
     MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
         level, lang)
         .withOriginality(originality)
@@ -280,6 +282,7 @@ public class TrMaterialHelper {
                         new D().withNewData(text))))
         .withVerifier(verifier)
         .withRemoved(true);
+
     materialService.save(material);
   }
 
