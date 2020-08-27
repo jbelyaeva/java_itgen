@@ -67,7 +67,7 @@ public class SelfRegistration extends TestBase {
             "Europe/Minsk",
             "ru",
             "+7859561122",
-            "mail@list.ru",
+            "mail12@list.ru",
             "new",
             "site",
             "manual");
