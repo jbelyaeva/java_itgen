@@ -476,7 +476,17 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void bntRemove() {
-    click(By.xpath("//button[contains(@class,'remove')]"));
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, 10))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[contains(@class,'remove')]")));
+    dynamicElement.click();
+    if (!isElementPresent(By.cssSelector("div.modal-header"))) {
+      refresh();
+      clickEmptyArea();
+      click(By.cssSelector("//button[contains(@class,'remove')]"));
+    }
   }
 
   private void clickEmptyArea() {
