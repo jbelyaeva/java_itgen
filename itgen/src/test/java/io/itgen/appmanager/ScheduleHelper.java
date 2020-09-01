@@ -8,7 +8,6 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,13 +36,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectBlock() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class,'block')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    moveToElementWithWait(10, "//a[contains(@class,'block')]");
   }
 
   private void selectAssign() {
@@ -61,12 +54,7 @@ public class ScheduleHelper extends HelperBase {
 
   private void selectOnAllSchedule() {
     // решение на периодическое не нажимание радиобаттон
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    moveToElementWithWait(10, "//input[@value='1']");
   }
 
   public void selectTime() {}
@@ -99,14 +87,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void bntPoints() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath(" //button[@id='dropdownMenuActions']")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    click(By.xpath(" //button[@id='dropdownMenuActions']"));
+    moveToElementWithWait(10, " //button[@id='dropdownMenuActions']");
   }
 
   public void createSingleSchedule() {
@@ -243,12 +224,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectAllScheduleBlock() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='1']")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    moveToElementWithWait(10, "//input[@value='1']");
   }
 
   public void cancel(String id) {
@@ -281,14 +257,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnMove() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath(" //button[contains(@class,'accept')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    click(By.xpath(" //button[contains(@class,'accept')]"));
+    moveToElementWithWait(10, "//button[contains(@class,'accept')]");
   }
 
   private void btnMoveDisabled() {
@@ -311,14 +280,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnCancel() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class,'cancel')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    moveToElementWithWait(10, "//button[contains(@class,'cancel')]");
   }
 
   private void selectNewTrainer() {
@@ -401,14 +363,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnRecord() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class,'create')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    moveToElementWithWait(10, "//button[contains(@class,'create')]");
   }
 
   private void selectNo() {
@@ -472,20 +427,16 @@ public class ScheduleHelper extends HelperBase {
   private void alertDeleteStudent() {
     click(By.cssSelector("div.modal-header"));
     click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
-    noErrorMessage(); // проверка отсутствия сообщения об ошибке
+    noErrorMessage();
   }
 
   private void bntRemove() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class,'remove')]")));
-    dynamicElement.click();
+    By locator = By.xpath("//button[contains(@class,'remove')]");
+    new WebDriverWait(wd, 10).until(ExpectedConditions.elementToBeClickable(locator)).click();
     if (!isElementPresent(By.cssSelector("div.modal-header"))) {
       refresh();
       clickEmptyArea();
-      click(By.cssSelector("//button[contains(@class,'remove')]"));
+      click(locator);
     }
   }
 

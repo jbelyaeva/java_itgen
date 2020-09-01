@@ -12,7 +12,6 @@
             <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
             <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests" />
             <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
-            <class name="io.itgen.tests.scheduleWindow.WindowTest" />
         </classes>
     </test>
 </suite>

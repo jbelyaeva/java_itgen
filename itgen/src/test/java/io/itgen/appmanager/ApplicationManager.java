@@ -104,7 +104,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setVersion("83");
+      capabilities.setVersion("85");
       capabilities.setCapability("enableVNC", true);
       capabilities.setCapability("enableVideo", true);
       capabilities.setCapability("videoName", System.getProperty("videoName", "selenoid.mp4"));

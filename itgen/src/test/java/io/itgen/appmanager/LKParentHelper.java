@@ -24,6 +24,9 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void RecordOnTrail() {
+    if (isElementPresent(By.xpath("//button[@title='Skip']")))
+      click(By.xpath("//button[@title='Skip']"));
+
     btnRecordOnTrail();
     btnSelectScratch();
     selectLesson();
@@ -112,6 +115,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void btnAddNewStudent() {
+    if (!isElementPresent(By.xpath("//a[contains(@href,'addChild')]"))) btnLogo();
+
     click(By.xpath("//a[contains(@href,'addChild')]"));
     noErrorMessage();
   }
@@ -367,8 +372,7 @@ public class LKParentHelper extends HelperBase {
     goHrefActiveLK(token);
     inputPassword("111111");
     btnSave();
-    refresh();
-    logout();
+    noErrorMessage();
   }
 
   public void clickByFullArea() {

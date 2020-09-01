@@ -11,7 +11,6 @@ package io.itgen.tests.selfRegistration;
 8. Провести проверки
  */
 
-import static io.itgen.appmanager.ApplicationManager.properties;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -67,7 +66,7 @@ public class SelfRegistration extends TestBase {
             "Europe/Minsk",
             "ru",
             "+7859561122",
-            "mail12@list.ru",
+            "mail@list.ru",
             "new",
             "site",
             "manual");
@@ -109,8 +108,6 @@ public class SelfRegistration extends TestBase {
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();
     app.lkParent().activation(token);
-    app.session()
-        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
 
     Leads leadsAfter = app.db().leads();
     Students studentsAfter = app.dbstudents().students();
