@@ -46,12 +46,12 @@ public class CancelOnSingle extends TestBase {
 
   @Test()
   public void testCancelOnSingle() {
+    app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelLessonInSingleSchedule();
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
-    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)

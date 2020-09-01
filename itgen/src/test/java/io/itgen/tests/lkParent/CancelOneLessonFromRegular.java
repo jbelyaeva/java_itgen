@@ -42,12 +42,12 @@ public class CancelOneLessonFromRegular extends TestBase {
 
   @Test()
   public void testCancelOneLessonFromRegular() {
+    app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
     app.lkParent().cancelOneLessonInRegularSchedule();
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
-    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -131,5 +132,16 @@ public class HelperBase {
 
   public String getText(String locator) {
     return wd.findElement(By.xpath(locator)).getText();
+  }
+
+  public void moveToElementWithWait(int second, String locator) {
+    WebElement dynamicElement =
+        (new WebDriverWait(wd, second))
+            .until(
+                ExpectedConditions.elementToBeClickable(
+                    By.xpath(locator)));
+    Actions actions = new Actions(wd);
+    actions.moveToElement(dynamicElement).build().perform();
+    dynamicElement.click();
   }
 }

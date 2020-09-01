@@ -1,7 +1,5 @@
 package io.itgen.tests.payment;
 
-import static org.testng.AssertJUnit.assertEquals;
-
 import io.itgen.model.TaskData;
 import io.itgen.model.Tasks;
 import io.itgen.services.ScheduleService;
@@ -30,7 +28,7 @@ public class PaymentByParent extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test (enabled = false)
+  @Test
   public void testPaymentByParent() {
     app.payment().goToShopByParent();
     app.payment().paymentByParent();

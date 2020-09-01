@@ -3,7 +3,6 @@
 <suite name="Payments" verbose="1" >
     <test name="Payments">
         <classes>
-            <class name="io.itgen.tests.payment.PaymentByAdmin"/>
             <class name="io.itgen.tests.payment.IncreaseBalanceByAdmin"/>
             <class name="io.itgen.tests.payment.DecreaseBalanceByAdmin"/>
         </classes>

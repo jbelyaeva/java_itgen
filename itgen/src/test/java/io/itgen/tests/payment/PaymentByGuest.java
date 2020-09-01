@@ -32,7 +32,7 @@ public class PaymentByGuest extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test(enabled = false)
+  @Test
   public void testPaymentByGuest() {
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();
