@@ -38,7 +38,7 @@ public class PaymentByGuest extends TestBase {
     app.payment().goToShopByGuest();
 
     String text = app.goTo().getText("(//p[contains(@class,'static')])[2]//span");
-    assertEquals("Дефолтный Ро******", text);
+    assertEquals("Родитель Де*******", text);
 
     app.payment().paymentByGuest();
     app.goTo().goByHref(properties.getProperty("web.baseUrl"));
