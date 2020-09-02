@@ -116,7 +116,7 @@ public class PaymentHelper extends HelperBase {
   public void paymentByParent() {
     btnPay4Lessons();
     fillTestCard();
-    //  btnBuy(); нужно решение по взаимодействию с внешним апи
+    btnBuy();
     WebElement dynamicElement =
         (new WebDriverWait(wd, 10))
             .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
