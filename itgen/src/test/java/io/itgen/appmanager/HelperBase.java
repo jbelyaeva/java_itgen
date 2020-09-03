@@ -144,4 +144,5 @@ public class HelperBase {
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
   }
+
 }
