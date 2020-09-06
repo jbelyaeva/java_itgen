@@ -149,7 +149,7 @@ public class LKParentHelper extends HelperBase {
     if (isElementPresent(By.xpath(locator))) {
       click(By.xpath(locator));
     } else {
-      click(By.xpath("//div[@class='picker-item selected']"));
+      click(By.xpath("//div[@class='picker-item']"));
     }
     noErrorMessage();
   }
