@@ -86,7 +86,9 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//input[@data-id='en']"));
     click(By.xpath("//div[@class='users-edit']"));
 
-    dropDownList(By.id("profile-pay-base"), String.valueOf(trainerData.getPayBase()));
+    click(By.id("profile-pay-base"));
+    click(By.xpath("//select[@id='profile-pay-base']//option["+trainerData.getPayBase()+"]"));
+
     type(By.name("profile-contact-phone"), trainerData.getPhone());
     type(By.name("profile-contact-telegram"), trainerData.getTelegram());
     type(By.name("profile-contact-viber"), trainerData.getViber());
