@@ -4,8 +4,6 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.connection.MFSessionFactory;
 import io.itgen.model.LeadData;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.StudentData;
 
 import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 

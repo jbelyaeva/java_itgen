@@ -16,6 +16,6 @@ public class SessionHelper extends HelperBase {
   public void login(String username, String password) {
     type(By.name("username"), username);
     type(By.name("password"), password);
-    moveToElementWithWait(5,"//button[contains(@class,'btn-login')]");
+    moveToElementWithWait(5,By.xpath("//button[contains(@class,'btn-login')]"));
   }
 }

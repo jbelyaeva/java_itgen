@@ -103,6 +103,35 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-info"), trainerData.getInfo());
   }
 
+  public void modifiLKTrainerForm(TrainerData trainerData) {
+    type(By.name("profile-firstName"), trainerData.getFirstName());
+    type(By.name("profile-lastName"), trainerData.getLastName());
+    enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
+    dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
+    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
+    dropDownList(By.id("profile-country"), trainerData.getCountry());
+    type(By.name("profile-city"), trainerData.getCity());
+    dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
+    dropDownList(By.id("profile-locale"), trainerData.getLocate());
+
+    // выбор языка обучения -- чек-боксы
+    click(By.xpath("(//button[contains(@class,dropdown)])[2]"));
+    click(By.xpath("//input[@data-id='ru']"));
+    click(By.xpath("//input[@data-id='en']"));
+    click(By.xpath("//div[@class='users-edit']"));
+
+    type(By.name("profile-contact-phone"), trainerData.getPhone());
+    type(By.name("profile-contact-telegram"), trainerData.getTelegram());
+    type(By.name("profile-contact-viber"), trainerData.getViber());
+    click(By.cssSelector("a.btn-link.btn-show"));
+    type(By.name("profile-contact-skype"), trainerData.getSkype());
+    type(By.name("profile-contact-whatsapp"), trainerData.getWhatsapp());
+    type(By.name("profile-contact-facebook"), trainerData.getFb());
+    type(By.name("profile-contact-vk"), trainerData.getVk());
+    type(By.name("profile-contact-ok"), trainerData.getOk());
+    type(By.name("profile-contact-instagram"), trainerData.getInst());
+  }
+
   public String create(TrainerData trainer) {
     bntAddTrainer();
     fillTrainerForm(trainer);
@@ -216,5 +245,68 @@ public class TrainerHelper extends HelperBase {
         }
       }
     }
+  }
+
+  public void modifyInLk(TrainerData trainer) {
+    bntOpenProfile();
+    btnModify();
+    modifiLKTrainerForm(trainer);
+    btnSaveModify();
+    noErrorMessage();
+
+  }
+
+  private void btnModify() {
+    click(By.xpath("//a[contains(@class,'edit')]"));
+    noErrorMessage();
+  }
+
+  private void bntOpenProfile() {
+    click(By.xpath("//div[@class='head']"));
+    click(By.xpath("//ul[@role='menu']//button"));
+    noErrorMessage();
+  }
+
+  public void startLesson(String id) {
+    selectLesson(id);
+    btnStartLesson();
+  }
+
+  private void btnStartLesson() {
+    click(By.xpath("//button[contains(@class,'start-lesson')]"));
+    noErrorMessage();
+  }
+
+  private void selectLesson(String id) {
+    click(By.xpath("//a[contains(@href,'"+id+"')]"));
+    noErrorMessage();
+  }
+
+  public void finishedLessonWithWas(String idLesson) {
+    selectLesson(idLesson);
+    selectStudent();
+    btnNotWas();
+    btnFinishLesson();
+    gotoTask();
+  }
+
+  private void gotoTask() {
+    click(By.xpath("//a[@href='/tasks']"));
+    noErrorMessage();
+  }
+
+  private void btnFinishLesson() {
+    click(By.xpath("//button[contains(@class,'finish-lesson')]"));
+    noErrorMessage();
+  }
+
+  private void btnNotWas() {
+    click(By.xpath("//button[@data-action='skipped']"));
+    noErrorMessage();
+  }
+
+  private void selectStudent() {
+    click(By.xpath("//div[@class='child-list'][1]"));
+    noErrorMessage();
   }
 }

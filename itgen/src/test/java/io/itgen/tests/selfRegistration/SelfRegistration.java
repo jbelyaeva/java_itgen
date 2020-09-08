@@ -1,6 +1,6 @@
 package io.itgen.tests.selfRegistration;
 /*кейс:
-1. Нужно добавить родителя лида под админом
+1. Нужно добавить родителя лида под суперадмином
 2. Взять его id
 3. Вставить в ссылку на саморегистрацию
 4. Заполнить форму
@@ -8,9 +8,11 @@ package io.itgen.tests.selfRegistration;
 по созданной ссылке на активацию
 6. Придумать пароль
 7. Попасть в ЛК родителя
+8. Затем вернуться в лк суперадмина
 8. Провести проверки
  */
 
+import static io.itgen.appmanager.ApplicationManager.properties;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -108,6 +110,8 @@ public class SelfRegistration extends TestBase {
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();
     app.lkParent().activation(token);
+    app.session()
+        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
 
     Leads leadsAfter = app.db().leads();
     Students studentsAfter = app.dbstudents().students();

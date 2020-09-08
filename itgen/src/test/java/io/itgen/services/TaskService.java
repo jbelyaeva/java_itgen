@@ -3,12 +3,14 @@ package io.itgen.services;
 import io.itgen.dao.TaskDao;
 import io.itgen.model.LeadData;
 import io.itgen.model.StudentData;
-import io.itgen.model.TaskData;
+import io.itgen.model.tasks.TaskData;
 
 public class TaskService {
-  private TaskDao taskDao = new TaskDao();
 
-  public TaskService() {}
+  private final TaskDao taskDao = new TaskDao();
+
+  public TaskService() {
+  }
 
   public TaskData DeleteById(String id) {
     return taskDao.findByIdAndDeleteTask(id);

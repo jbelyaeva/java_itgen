@@ -68,6 +68,13 @@ public class FinishedSlots {
     return c;
   }
 
+  public Double getStartedAt() {
+    return startedAt;
+  }
+
+  public Double getFinishedAt() {
+    return finishedAt;
+  }
 
   @Override
   public boolean equals(Object o) {

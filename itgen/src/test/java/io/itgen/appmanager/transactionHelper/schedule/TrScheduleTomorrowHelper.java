@@ -1,7 +1,7 @@
 package io.itgen.appmanager.transactionHelper.schedule;
 
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.ScheduleData;
+import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.FinishedSlots;
 import io.itgen.model.schedule.ST;

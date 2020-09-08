@@ -4,7 +4,8 @@ import io.itgen.dao.MaterialDao;
 import io.itgen.model.materials.MaterialData;
 
 public class MaterialService {
-  private MaterialDao materialDao = new MaterialDao();
+
+  private final MaterialDao materialDao = new MaterialDao();
 
   public MaterialService() {
   }

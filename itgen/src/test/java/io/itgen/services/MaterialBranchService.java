@@ -4,7 +4,8 @@ import io.itgen.dao.MaterialBranchDao;
 import io.itgen.model.materials.MaterialBranchData;
 
 public class MaterialBranchService {
-  private MaterialBranchDao materialBranchDao = new MaterialBranchDao();
+
+  private final MaterialBranchDao materialBranchDao = new MaterialBranchDao();
 
   public MaterialBranchService() {
   }

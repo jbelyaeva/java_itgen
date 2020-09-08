@@ -7,6 +7,7 @@ import io.itgen.model.materials.MaterialBranchData;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
 import io.itgen.services.MaterialBranchService;
+import io.itgen.services.MaterialNewService;
 import io.itgen.services.MaterialService;
 import io.itgen.tests.TestBase;
 import org.testng.annotations.AfterMethod;
@@ -19,6 +20,7 @@ public class MaterialsLink extends TestBase {
   MaterialBranchService materialBranchService = new MaterialBranchService();
   MaterialData materialClean = null;
   MaterialService materialService = new MaterialService();
+  MaterialNewService materialNewService = new MaterialNewService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -110,5 +112,6 @@ public class MaterialsLink extends TestBase {
 
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
     materialBranchService.DeleteById(materialBranchClean.getId());
+    materialNewService.drop();
   }
 }

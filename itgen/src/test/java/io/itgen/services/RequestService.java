@@ -1,10 +1,11 @@
 package io.itgen.services;
 
 import io.itgen.dao.RequestDao;
-import io.itgen.model.RequestData;
+import io.itgen.model.requests.RequestData;
 
 public class RequestService {
-  private RequestDao requestDao = new RequestDao();
+
+  private final RequestDao requestDao = new RequestDao();
 
   public RequestService() {
   }

@@ -2,8 +2,8 @@ package io.itgen.appmanager;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +36,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectBlock() {
-    moveToElementWithWait(10, "//a[contains(@class,'block')]");
+    moveToElementWithWait(10, By.xpath("//a[contains(@class,'block')]"));
   }
 
   private void selectAssign() {
@@ -54,7 +54,7 @@ public class ScheduleHelper extends HelperBase {
 
   private void selectOnAllSchedule() {
     // решение на периодическое не нажимание радиобаттон
-    moveToElementWithWait(10, "//input[@value='1']");
+    moveToElementWithWait(10, By.xpath("//input[@value='1']"));
   }
 
   public void selectTime() {}
@@ -87,7 +87,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void bntPoints() {
-    moveToElementWithWait(10, " //button[@id='dropdownMenuActions']");
+    moveToElementWithWait(10, By.xpath(" //button[@id='dropdownMenuActions']"));
   }
 
   public void createSingleSchedule() {
@@ -224,7 +224,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectAllScheduleBlock() {
-    moveToElementWithWait(10, "//input[@value='1']");
+    moveToElementWithWait(10, By.xpath("//input[@value='1']"));
   }
 
   public void cancel(String id) {
@@ -257,7 +257,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnMove() {
-    moveToElementWithWait(10, "//button[contains(@class,'accept')]");
+    moveToElementWithWait(10,By.xpath("//button[contains(@class,'accept')]"));
   }
 
   private void btnMoveDisabled() {
@@ -280,7 +280,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnCancel() {
-    moveToElementWithWait(10, "//button[contains(@class,'cancel')]");
+    moveToElementWithWait(10, By.xpath("//button[contains(@class,'cancel')]"));
   }
 
   private void selectNewTrainer() {
@@ -363,7 +363,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnRecord() {
-    moveToElementWithWait(10, "//button[contains(@class,'create')]");
+    moveToElementWithWait(10, By.xpath("//button[contains(@class,'create')]"));
   }
 
   private void selectNo() {

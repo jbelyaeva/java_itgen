@@ -4,9 +4,11 @@ import io.itgen.dao.StudentDao;
 import io.itgen.model.StudentData;
 
 public class StudentService {
-  private StudentDao studentDao = new StudentDao();
 
-  public StudentService() {}
+  private final StudentDao studentDao = new StudentDao();
+
+  public StudentService() {
+  }
 
   public StudentData DeleteById(StudentData student) {
     return studentDao.findByIdAndDelete(student);

@@ -1,10 +1,9 @@
 package io.itgen.dao;
 
-import com.mongodb.WriteResult;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.model.LeadData;
-import io.itgen.model.TaskData;
+import io.itgen.model.tasks.TaskData;
 import io.itgen.model.StudentData;
 
 import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;

@@ -4,8 +4,8 @@ import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import java.util.List;
 
 public class ScheduleDao {

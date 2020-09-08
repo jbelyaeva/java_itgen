@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeTrainer" verbose="1">
+  <test name="SmokeTrainer">
+    <classes>
+      <class name="io.itgen.tests.lkTrainer.TrainerModifyProfile"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerStartLesson"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentNotWas"/>
+      <!--<class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentWas"/> -->
+      <!--<class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentDisrupt"/>-->
+    </classes>
+  </test>
+</suite>

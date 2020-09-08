@@ -5,6 +5,7 @@
     <classes>
       <class name="io.itgen.tests.payment.PaymentByGuest"/>
       <class name="io.itgen.tests.payment.PaymentByParent"/>
+      <class name="io.itgen.tests.lkParent.RecordOnTrail"/>
     </classes>
   </test>
 </suite>

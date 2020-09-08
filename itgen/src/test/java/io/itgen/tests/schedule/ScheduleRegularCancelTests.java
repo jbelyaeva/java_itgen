@@ -2,8 +2,8 @@ package io.itgen.tests.schedule;
 //автотест проверяет отмену занятия у тренера в постоянном расписании
 
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.Slots;

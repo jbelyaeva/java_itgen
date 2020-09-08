@@ -54,14 +54,25 @@
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
 1. testSmokeParent
-2. testLkParent
-3. testNostableParent
+2. testNostableParent
+
+Запуск под дефолтным тренером -Ptarget=localTrainer 
+1. testSmokeTrainer
 
 Запускаем автоматически ночью:
-1. testSmoke
-2. testSmokeParent
-3. testNostable
-4. testNostableParent
+ 1.  testFamilies 
+ 2.  testStudents 
+ 3.  testParents 
+ 4.  testLeads 
+ 5.  testWorkers 
+ 6.  testTrainers 
+ 7.  testSchedule 
+ 8.  testWindowSchedule 
+ 9.  testRequests 
+ 10. testMaterials
+ 11. testPayments
+ 12. testSmokeParent
+ 
 
 
 

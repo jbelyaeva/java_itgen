@@ -4,7 +4,8 @@ import io.itgen.dao.PaymentDao;
 import io.itgen.model.PaymentData;
 
 public class PaymentService {
-  private PaymentDao paymentDao = new PaymentDao();
+
+  private final PaymentDao paymentDao = new PaymentDao();
 
   public PaymentService() {
   }
@@ -25,5 +26,7 @@ public class PaymentService {
     return paymentDao.findById(id);
   }
 
-  public void drop() {paymentDao.drop(); }
+  public void drop() {
+    paymentDao.drop();
+  }
 }

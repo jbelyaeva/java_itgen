@@ -1,12 +1,14 @@
 package io.itgen.services;
 
 import io.itgen.dao.ScheduleDao;
-import io.itgen.model.ScheduleData;
+import io.itgen.model.schedule.ScheduleData;
 
 public class ScheduleService {
-  private ScheduleDao scheduleDao = new ScheduleDao();
 
-  public ScheduleService() {}
+  private final ScheduleDao scheduleDao = new ScheduleDao();
+
+  public ScheduleService() {
+  }
 
   public ScheduleData DeleteById(String id) {
     return scheduleDao.findByIdAndDelete(id);

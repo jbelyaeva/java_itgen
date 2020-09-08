@@ -10,8 +10,9 @@
     "city": "Минск",
     "timeZone": "Europe/Minsk",
     "locate": "ru",
-    "payBase": 5,
+    "payBase": 2.5,
     "note": null,
-    "info": null
+    "info": null,
+    "workloadLevel":"easy"
   }
 ]

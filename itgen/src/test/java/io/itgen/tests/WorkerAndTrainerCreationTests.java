@@ -77,7 +77,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "validWorkersFromJson")
-  public void testWorkerCreation(WorkerData worker) {
+  public void testWorkerCreation(WorkerData worker){
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
@@ -91,7 +91,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "validWorkersAdminsFromJson", enabled = false)
-  public void testWorkerAdminCreation(WorkerData worker) {
+  public void testWorkerAdminCreation(WorkerData worker){
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     int before = app.worker().getWorkerCount();
@@ -100,7 +100,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     Assert.assertEquals(after, before + 1);
   }
 
-  @Test(dataProvider = "validWorkersTrainersFromJson",enabled = false)
+  @Test(dataProvider = "validWorkersTrainersFromJson")
   public void testWorkerTrainerCreation(TrainerData trainer) {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();

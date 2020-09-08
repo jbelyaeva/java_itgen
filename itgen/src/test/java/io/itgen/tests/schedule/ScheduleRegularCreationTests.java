@@ -1,7 +1,7 @@
 package io.itgen.tests.schedule;
 
 
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.services.ScheduleService;
 import io.itgen.tests.TestBase;
 import org.hamcrest.MatcherAssert;

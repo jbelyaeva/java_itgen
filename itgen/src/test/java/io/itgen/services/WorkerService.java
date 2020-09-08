@@ -4,9 +4,11 @@ import io.itgen.dao.WorkerDao;
 import io.itgen.model.WorkerData;
 
 public class WorkerService {
-  private WorkerDao workerDao = new WorkerDao();
 
-  public WorkerService() {}
+  private final WorkerDao workerDao = new WorkerDao();
+
+  public WorkerService() {
+  }
 
   public WorkerData DeleteById(String id) {
     return workerDao.findByIdAndDelete(id);

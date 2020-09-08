@@ -1,7 +1,7 @@
 package io.itgen.tests.payment;
 
-import io.itgen.model.TaskData;
-import io.itgen.model.Tasks;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;

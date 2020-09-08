@@ -8,11 +8,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.StudentData;
-import io.itgen.model.TaskData;
-import io.itgen.model.Tasks;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.Slots;

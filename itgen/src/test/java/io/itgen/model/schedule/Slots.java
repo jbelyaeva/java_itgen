@@ -17,6 +17,7 @@ public class Slots {
   private String blockDesc;
   private Boolean cancelled;
   private Double cancelledAt;
+  private Double startedAt;
 
   public Slots() {
   }
@@ -61,6 +62,11 @@ public class Slots {
     return this;
   }
 
+  public Slots withStartedAt(Double startedAt) {
+    this.startedAt = startedAt;
+    return this;
+  }
+
   public Double getW() {
     return w;
   }
@@ -93,6 +99,10 @@ public class Slots {
     return cancelledAt;
   }
 
+  public Double getStartedAt() {
+    return startedAt;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -122,6 +132,7 @@ public class Slots {
             ", blocked=" + blocked +
             ", blockDesc='" + blockDesc + '\'' +
             ", cancelled=" + cancelled +
+            ", started=" + startedAt +
             '}';
   }
 }

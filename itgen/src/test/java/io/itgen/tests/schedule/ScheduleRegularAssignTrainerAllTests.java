@@ -2,8 +2,8 @@ package io.itgen.tests.schedule;
 //автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
 //начальные данные: период, id тренера
 
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.C;
 import io.itgen.services.ScheduleService;
 import org.testng.annotations.AfterMethod;

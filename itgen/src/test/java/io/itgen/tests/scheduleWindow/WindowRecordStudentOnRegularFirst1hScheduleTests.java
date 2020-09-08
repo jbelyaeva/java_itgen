@@ -1,7 +1,13 @@
 package io.itgen.tests.scheduleWindow;
 /* автотест проверяет запись платника на постоянное занятие на первый час в постоянном расписании*/
 
-import io.itgen.model.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.services.FamilyService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
@@ -11,10 +17,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
+
   String period = "18:00 - 20:00";
   String name = "Маша Машина";
   ScheduleService scheduleService = new ScheduleService();
