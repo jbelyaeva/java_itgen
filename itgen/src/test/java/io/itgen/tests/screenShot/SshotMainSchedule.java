@@ -7,7 +7,7 @@ package io.itgen.tests.screenShot;
 import static io.itgen.appmanager.ApplicationManager.properties;
 
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.ScheduleData;
+import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.Slots;

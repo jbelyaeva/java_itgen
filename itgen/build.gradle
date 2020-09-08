@@ -498,31 +498,6 @@ testMaterials.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 
-//
-task testLkParent(type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testng-lkParent.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('platform')) {
-        systemProperty 'platform', "${platform}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-    if (project.hasProperty('videoName')) {
-        systemProperty 'videoName', "${videoName}"
-    }
-}
-testLkParent.doFirst {
-    jvmArgs "-javaagent:${configurations.agent.singleFile}"
-}
-
 task testPayments(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-payments.xml'
@@ -544,6 +519,31 @@ task testPayments(type: Test) {
     }
 }
 testPayments.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+//
+task testSmokeTrainer(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-smoke-trainer.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testSmokeTrainer.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
 //

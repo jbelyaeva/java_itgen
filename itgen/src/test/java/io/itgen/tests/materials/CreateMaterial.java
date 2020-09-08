@@ -12,6 +12,7 @@ import io.itgen.model.materials.MaterialBranchData;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
 import io.itgen.services.MaterialBranchService;
+import io.itgen.services.MaterialNewService;
 import io.itgen.services.MaterialService;
 import io.itgen.services.PaymentService;
 import io.itgen.tests.TestBase;
@@ -34,6 +35,7 @@ public class CreateMaterial extends TestBase {
   MaterialService materialService = new MaterialService();
   MaterialBranchService materialBranchService = new MaterialBranchService();
   PaymentService paymentService = new PaymentService();
+  MaterialNewService materialNewService = new MaterialNewService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -105,6 +107,7 @@ public class CreateMaterial extends TestBase {
     materialService.DeleteById(materialClean.getId());
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
     materialBranchService.DeleteById(materialBranchClean.getId());
+    materialNewService.drop();
     paymentService.drop();
   }
 }

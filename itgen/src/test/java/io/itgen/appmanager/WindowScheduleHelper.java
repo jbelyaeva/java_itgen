@@ -96,7 +96,7 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectSingle() {
-      moveToElementWithWait(5,"//button[contains(@class,'onetime')]");
+      moveToElementWithWait(5,By.xpath("//button[contains(@class,'onetime')]"));
   }
 
   public void recordStudentOnSingleFirst1h(String name, String id) {

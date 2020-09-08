@@ -4,8 +4,8 @@ package io.itgen.tests.screenShotPar;
 */
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.model.TaskData;
-import io.itgen.model.Tasks;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
@@ -39,7 +39,7 @@ public class SshotEntryOnTrial extends TestBase {
   }
 
   @Test
-  public void testEntryOnTrial() throws AWTException, IOException {
+  public void testEntryOnTrial() throws AWTException, IOException, InterruptedException {
     app.lkParent().RecordOnTrail();
 
     String name = "Parent_EntryOnTrial_RU_Chrome";

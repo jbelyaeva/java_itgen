@@ -1,7 +1,7 @@
 package io.itgen.appmanager;
 
-import io.itgen.model.RequestData;
-import io.itgen.model.Requests;
+import io.itgen.model.requests.RequestData;
+import io.itgen.model.requests.Requests;
 import org.openqa.selenium.WebDriver;
 
 public class RequestHelper extends HelperBase {

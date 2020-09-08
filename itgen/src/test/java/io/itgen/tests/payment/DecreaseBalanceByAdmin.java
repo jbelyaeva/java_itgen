@@ -53,7 +53,7 @@ public class DecreaseBalanceByAdmin extends TestBase {
   }
 
   @Test
-  public void testDecreaseBalanceByAdmin() {
+  public void testDecreaseBalanceByAdmin() throws InterruptedException {
     app.goTo().menuStudents();
     Payments before = app.db().payments("decreaseAdmin");
     app.payment().decreaseAdmin("decreaseAdminChild", "-1");

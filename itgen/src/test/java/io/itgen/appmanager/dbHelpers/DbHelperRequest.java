@@ -2,8 +2,8 @@ package io.itgen.appmanager.dbHelpers;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
-import io.itgen.model.RequestData;
-import io.itgen.model.Requests;
+import io.itgen.model.requests.RequestData;
+import io.itgen.model.requests.Requests;
 
 import java.util.List;
 

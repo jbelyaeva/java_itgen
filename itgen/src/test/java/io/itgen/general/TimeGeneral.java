@@ -1,12 +1,12 @@
 package io.itgen.general;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
+import static io.itgen.appmanager.ApplicationManager.properties;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
-import static io.itgen.appmanager.ApplicationManager.properties;
+import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 public class TimeGeneral {
 
@@ -14,7 +14,7 @@ public class TimeGeneral {
     super();
   }
 
-  // установка времени на начало дня по UTC
+  // установка времени на начало дня ( на 00:00 )по UTC
   private long getMsLocalTime() {
     LocalDate date = LocalDate.now();
     return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
@@ -30,6 +30,13 @@ public class TimeGeneral {
     return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }
 
+  // только время
+  public long getTimeNow() {
+    long dataWithTime = new Date().getTime();
+    return dataWithTime - getMsLocalTime();
+  }
+
+  // поправка на часовой пояс, заданный в properties
   public long diffTz() {
     long timeUTC = DateTime.now(DateTimeZone.UTC).getMillisOfDay();
     long timeTZ = DateTime.now(DateTimeZone.forID(properties.getProperty("tz"))).getMillisOfDay();
@@ -37,6 +44,7 @@ public class TimeGeneral {
     return (long) (Math.floor(diff / 1000) * 1000);
   }
 
+  //сегодня 00:00 в мс
   public Double date() {
     long nowTime = getMsLocalTime();
     return (nowTime + diffTz()) * 1.0;
@@ -83,30 +91,57 @@ public class TimeGeneral {
   }
 
   public int start(String period) {
-    int startValue = 0;
-    if (period.equals("21:00 - 23:00")) {
-      startValue = 64800000;
+    int hours = Integer.parseInt(period.substring(0, 2));
+    int minutes = Integer.parseInt(period.substring(3, 5));
+    int startValue = hours * 3600000;
+
+    if ((hours < 3) && (minutes != 30)) {
+      startValue += 75600000;
     }
-    if (period.equals("18:00 - 20:00")) {
-      startValue = 54000000;
+    if ((hours < 3) && (minutes == 30)) {
+      startValue += 77400000;
     }
-    if (period.equals("01:00 - 03:00")) {
-      startValue = 79200000;
+    if ((hours >= 3) && (minutes != 30)) {
+      startValue -= 10800000;
     }
+    if ((hours >= 3) && (minutes == 30)) {
+      startValue -= 9000000;
+    }
+
     return startValue;
   }
 
   public int finish(String period) {
-    int finishValue = 0;
-    if (period.equals("21:00 - 23:00")) {
-      finishValue = 72000000;
+    int hours = Integer.parseInt(period.substring(0, 2));
+    int minutes = Integer.parseInt(period.substring(3, 5));
+    int finishValue = hours * 3600000;
+
+    if ((hours < 3) && (minutes != 30)) {
+      finishValue += 82800000;
     }
-    if (period.equals("18:00 - 20:00")) {
-      finishValue = 61200000;
+    if ((hours < 3) && (minutes == 30)) {
+      finishValue -= 84600000;
     }
-    if (period.equals("01:00 - 03:00")) {
-      finishValue = 86400000;
+    if ((hours >= 3) && (minutes != 30)) {
+      finishValue -= 3600000;
     }
+    if ((hours >= 3) && (minutes == 30)) {
+      finishValue -= 1800000;
+    }
+
     return finishValue;
   }
+
+  //для определения ближайшего занятия, в зависимости от того, сколько сейчас времени
+  public String getPeriod(long time) {
+    int index = (int) (time/1800000);
+    int minutes = 0;
+    int hours=index/2;
+
+    if (index % 2 != 0) {
+      minutes = 30;
+    }
+    return String.format("%02d:%02d - $02d:%02d", hours, minutes, hours + 2, minutes);
+  }
+
 }

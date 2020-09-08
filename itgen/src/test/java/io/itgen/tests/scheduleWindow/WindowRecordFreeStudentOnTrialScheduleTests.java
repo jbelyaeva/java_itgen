@@ -3,7 +3,13 @@ package io.itgen.tests.scheduleWindow;
 //проверяет, что переключатель Пробное стоит по дефолту
 //начальные данные: период, id тренера
 
-import io.itgen.model.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.services.FamilyService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
@@ -13,10 +19,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class WindowRecordFreeStudentOnTrialScheduleTests extends TestBase {
+
   String period = "18:00 - 20:00";
   String name = "Маша Машина";
   ScheduleService scheduleService = new ScheduleService();
@@ -48,7 +52,7 @@ public class WindowRecordFreeStudentOnTrialScheduleTests extends TestBase {
   public void testWindowRecordFreeStudentOnTrial() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOnTrial(name,"14"); //имя ученика, id тренера
+    app.windowSchedule().recordStudentOnTrial(name, "14"); //имя ученика, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
@@ -71,7 +75,6 @@ public class WindowRecordFreeStudentOnTrialScheduleTests extends TestBase {
         .CombinationWithOneStudentOnRegularScredule_1(
             period, "recordStudentOnLesson", "14", "recordStudent", "1", "ru");
     ScheduleData scheduleAdd = scheduleService.findById("recordStudentOnLesson");
-
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordStudentOnLesson")) {

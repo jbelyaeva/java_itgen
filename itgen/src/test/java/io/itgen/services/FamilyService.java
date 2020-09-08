@@ -4,7 +4,8 @@ import io.itgen.dao.FamilyDao;
 import io.itgen.model.FamilyData;
 
 public class FamilyService {
-  private FamilyDao familyDao = new FamilyDao();
+
+  private final FamilyDao familyDao = new FamilyDao();
 
   public FamilyService() {
   }

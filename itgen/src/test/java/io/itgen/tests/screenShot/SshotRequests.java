@@ -1,9 +1,12 @@
 package io.itgen.tests.screenShot;
 
 import io.itgen.model.*;
-import io.itgen.model.requests.Activity;
-import io.itgen.model.requests.Comment;
+import io.itgen.model.general.Activity;
+import io.itgen.model.general.Comments;
+import io.itgen.model.requests.RequestData;
 import io.itgen.model.requests.Times;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -30,7 +33,7 @@ import java.util.Date;
 import static io.itgen.appmanager.ApplicationManager.properties;
 
 public class SshotRequests extends TestBase {
-  ArrayList<Comment> listcomment = new ArrayList<>();
+  ArrayList<Comments> listcomment = new ArrayList<>();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -43,7 +46,7 @@ public class SshotRequests extends TestBase {
             .withCreatorAt(new Date())
             .withStatus("open")
             .withChildId("sshotRequests")
-            .withComment(listcomment)
+            .withComments(listcomment)
             .withActivity(
                 Arrays.asList(
                     new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))

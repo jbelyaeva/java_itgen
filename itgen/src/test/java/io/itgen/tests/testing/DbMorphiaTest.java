@@ -3,15 +3,11 @@ package io.itgen.tests.testing;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.connection.MFSessionFactory;
-import io.itgen.model.RequestData;
-import io.itgen.model.StudentData;
 import io.itgen.model.TrainerData;
 import io.itgen.tests.TestBase;
 import org.testng.annotations.Test;
 
 import java.util.List;
-
-import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 
 public class DbMorphiaTest extends TestBase {

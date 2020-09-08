@@ -7,6 +7,7 @@ import io.itgen.model.materials.MaterialBranchData;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
 import io.itgen.services.MaterialBranchService;
+import io.itgen.services.MaterialNewService;
 import io.itgen.services.MaterialService;
 import io.itgen.services.PaymentService;
 import io.itgen.tests.TestBase;
@@ -20,6 +21,7 @@ public class MaterialMakeReview extends TestBase {
   MaterialBranchService materialBranchService = new MaterialBranchService();
   MaterialData materialClean = null;
   MaterialService materialService = new MaterialService();
+  MaterialNewService materialNewService = new MaterialNewService();
   PaymentService paymentService = new PaymentService();
 
   @BeforeMethod
@@ -90,6 +92,7 @@ public class MaterialMakeReview extends TestBase {
     materialClean = app.dbmaterial().lastMaterial();
     materialBranchService.DeleteById(materialBranchClean.getId());
     materialService.DeleteById(materialClean.getId());
+    materialNewService.drop();
     paymentService.drop();
   }
 }

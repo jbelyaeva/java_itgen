@@ -134,15 +134,14 @@ public class HelperBase {
     return wd.findElement(By.xpath(locator)).getText();
   }
 
-  public void moveToElementWithWait(int second, String locator) {
+  public void moveToElementWithWait(int second, By locator) {
     WebElement dynamicElement =
         (new WebDriverWait(wd, second))
             .until(
                 ExpectedConditions.elementToBeClickable(
-                    By.xpath(locator)));
+                    locator));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
   }
-
 }

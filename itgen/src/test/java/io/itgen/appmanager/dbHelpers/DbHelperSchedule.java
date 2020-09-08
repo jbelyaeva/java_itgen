@@ -2,11 +2,16 @@ package io.itgen.appmanager.dbHelpers;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
-import io.itgen.model.TaskData;
-import io.itgen.model.Tasks;
+import io.itgen.model.schedule.FinishedChildLessonData;
+import io.itgen.model.schedule.FinishedChildLessons;
+import io.itgen.model.schedule.FinishedLessonData;
+import io.itgen.model.schedule.FinishedLessons;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 
+import io.itgen.services.FinishedChildLessonService;
 import java.util.List;
 
 import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
@@ -18,6 +23,20 @@ public class DbHelperSchedule {
     Query<ScheduleData> query = datastore.createQuery(ScheduleData.class);
     List<ScheduleData> schedules = query.find().toList();
     return new Schedules(schedules);
+  }
+
+  public FinishedChildLessons finishedChildLessons() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<FinishedChildLessonData> query = datastore.createQuery(FinishedChildLessonData.class);
+    List<FinishedChildLessonData> finishedChildLessons = query.find().toList();
+    return new FinishedChildLessons(finishedChildLessons);
+  }
+
+  public FinishedLessons finishedLessons() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<FinishedLessonData> query = datastore.createQuery(FinishedLessonData.class);
+    List<FinishedLessonData> finishedLessons = query.find().toList();
+    return new FinishedLessons(finishedLessons);
   }
 
   public ScheduleData findById(String id) {

@@ -54,7 +54,7 @@ public class PaymentHelper extends HelperBase {
     btnPay();
     btnPay4Lessons();
     fillTestCard();
-    //btnBuy(); нужно решение с внешним апи
+    // btnBuy(); нужно решение с внешним апи
   }
 
   private void btnBuy() {
@@ -90,6 +90,9 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void goToShopByParent() {
+    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
+      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
+    }
     btnPay();
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     noErrorMessage();
@@ -103,7 +106,7 @@ public class PaymentHelper extends HelperBase {
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     btnPay4Lessons();
     fillTestCard();
-  //  btnBuy(); нужно решение по взаимодействию с внешним апи
+    //  btnBuy(); нужно решение по взаимодействию с внешним апи
     wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
   }
 
@@ -117,12 +120,10 @@ public class PaymentHelper extends HelperBase {
     btnPay4Lessons();
     fillTestCard();
     btnBuy();
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
+    new WebDriverWait(wd, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
   }
 
-  public void increaseAdmin(String id, String lessons) {
+  public void increaseAdmin(String id, String lessons) throws InterruptedException {
     student.selectStudentInListUIById(id);
     student.btnFamily();
     Integer before = Integer.valueOf(getBalance());
@@ -134,8 +135,8 @@ public class PaymentHelper extends HelperBase {
     assertThat(after, equalTo(before + 1));
   }
 
-  private String getBalance() {
-    refresh();
+  private String getBalance() throws InterruptedException {
+    Thread.sleep(3000); // для докера
     String balance = getText("//div[@class='first']//span");
     String[] text = balance.split(" ");
     return text[0];
@@ -173,14 +174,14 @@ public class PaymentHelper extends HelperBase {
     return paymentNew;
   }
 
-  public void decreaseAdmin(String id, String lessons) {
+  public void decreaseAdmin(String id, String lessons) throws InterruptedException {
     student.selectStudentInListUIById(id);
     student.btnFamily();
-    Integer before = Integer.valueOf(getBalance());
+    int before = Integer.valueOf(getBalance());
     btnPencil();
     fillForm(lessons, "Уменьшение баланса на ");
     btnConfirm();
-    Integer after = Integer.valueOf(getBalance());
+    int after = Integer.valueOf(getBalance());
     // проверка, что баланс уменьшился на 1 через ui
     assertThat(after, equalTo(before - 1));
   }

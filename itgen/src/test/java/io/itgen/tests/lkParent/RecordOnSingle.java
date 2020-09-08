@@ -3,10 +3,10 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
-import io.itgen.model.TaskData;
-import io.itgen.model.Tasks;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;

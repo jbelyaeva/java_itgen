@@ -9,8 +9,8 @@ import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
-import io.itgen.model.ScheduleData;
-import io.itgen.model.Schedules;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.services.ScheduleService;
 import io.itgen.tests.TestBase;
 

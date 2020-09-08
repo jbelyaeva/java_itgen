@@ -2,9 +2,13 @@ package io.itgen.tests.requests;
 //предполагается, что бд тестовая и нет расписаний на дефолтное время, следовательно можно оставить заявку
 
 import io.itgen.model.*;
-import io.itgen.model.requests.Activity;
-import io.itgen.model.requests.Comment;
+import io.itgen.model.general.Activity;
+import io.itgen.model.general.Comments;
+import io.itgen.model.requests.RequestData;
+import io.itgen.model.requests.Requests;
 import io.itgen.model.requests.Times;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -27,7 +31,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class RequestOnTrial2hScratchTests extends TestBase {
   String name = "Маша Машина";
   String idNewRequest = "";
-  ArrayList<Comment> listcomment = new ArrayList<>();
+  ArrayList<Comments> listcomment = new ArrayList<>();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -84,7 +88,7 @@ public class RequestOnTrial2hScratchTests extends TestBase {
             .withCreatorAt(new Date())
             .withStatus("open")
             .withChildId("makeRequest")
-            .withComment(listcomment)
+            .withComments(listcomment)
             .withActivity(Arrays.asList(new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))
             .withSkill("1")
             .withDuration(2)

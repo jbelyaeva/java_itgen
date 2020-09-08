@@ -4,7 +4,8 @@ import io.itgen.dao.TrainerDao;
 import io.itgen.model.TrainerData;
 
 public class TrainerService {
-  private TrainerDao trainerDao = new TrainerDao();
+
+  private final TrainerDao trainerDao = new TrainerDao();
 
   public TrainerService() {
   }
