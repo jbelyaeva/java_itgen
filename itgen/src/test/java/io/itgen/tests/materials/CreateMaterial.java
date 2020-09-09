@@ -66,7 +66,7 @@ public class CreateMaterial extends TestBase {
 
   @Test(dataProvider = "validMaterialFromJson")
   public void testCreateMaterial(MaterialData material) {
-    app.goTo().menuTasks();
+   // app.goTo().menuTasks();
     app.goTo().menuMaterials();
     app.material().addNewMaterial(material);
     Materials materialAfter = app.dbmaterial().materials();
