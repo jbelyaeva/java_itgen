@@ -10,6 +10,7 @@ import io.itgen.model.schedule.Schedules;
 import io.itgen.services.FamilyService;
 import io.itgen.services.FinishedChildLessonService;
 import io.itgen.services.FinishedLessonService;
+import io.itgen.services.PaymentService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.tests.TestBase;
@@ -22,6 +23,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
   ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
   FamilyService familyService = new FamilyService();
+  PaymentService paymentService = new PaymentService();
   private final TimeGeneral time = new TimeGeneral();
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
@@ -73,6 +75,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     familyService.DeleteById("finishLessonByTrainer");
     finishedChildLessonService.drop();
     finishedLessonService.drop();
+    paymentService.drop();
   }
 
   private void check(Schedules after) {
