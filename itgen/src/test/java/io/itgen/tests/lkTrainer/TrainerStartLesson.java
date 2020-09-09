@@ -52,6 +52,7 @@ public class TrainerStartLesson extends TestBase {
 
   @Test
   public void testTrainerStartLesson() {
+    app.trainer().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.trainer().startLesson("startLessonByTrainer");
     Schedules after = app.dbschedules().schedules();

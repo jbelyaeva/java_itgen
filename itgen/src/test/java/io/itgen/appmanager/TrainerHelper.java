@@ -309,4 +309,9 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//div[@class='child-list'][1]"));
     noErrorMessage();
   }
+
+  public void menuSchedule() {
+    click(By.xpath("//a[@href='/schedule']"));
+    noErrorMessage();
+  }
 }
