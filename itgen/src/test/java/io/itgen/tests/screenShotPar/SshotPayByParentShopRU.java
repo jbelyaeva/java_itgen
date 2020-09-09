@@ -53,7 +53,7 @@ public class SshotPayByParentShopRU extends TestBase {
     app.sshot().changeTopBar();
 
     ImageDiff diff = this.getDiff(name, locatorIgnor);
-    if (diff.getDiffSize() > 0) {
+    if (diff.getDiffSize() > 200) {
       diff = this.getDiff(name, locatorIgnor);
     }
 

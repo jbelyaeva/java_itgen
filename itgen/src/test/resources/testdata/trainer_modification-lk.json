@@ -21,8 +21,8 @@
     "inst": "inst 1"
   },
   {
-    "firstName": "Настя",
-    "lastName": "Бокша",
+    "firstName": "Дефолтный",
+    "lastName": "Тренер",
     "birthdayUi": "20.06.1999",
     "gender": 2,
     "country": "BY",

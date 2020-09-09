@@ -136,9 +136,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void recordOnRegular() {
-    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
-      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
-    }
+    skipHalper();
+    btnLogo();
     btnShowSchedule();
     btnRecordOnLesson();
     btnTomorrowForRegular();
@@ -384,5 +383,11 @@ public class LKParentHelper extends HelperBase {
 
   public void clickByFullArea() {
     click(By.xpath("//div[@class='course-selection-page']"));
+  }
+
+  public void skipHalper() {
+    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
+      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
+    }
   }
 }
