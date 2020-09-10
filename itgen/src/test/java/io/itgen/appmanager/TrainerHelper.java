@@ -51,6 +51,8 @@ public class TrainerHelper extends HelperBase {
   public void modifiTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
+    type(By.name("profile-english-firstName"), trainerData.getEngFirstName());
+    type(By.name("profile-english-lastName"), trainerData.getEngLastName());
     enterADate(By.name("profile-startWorkAt"), trainerData.getStartWorkUi());
     enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
@@ -106,6 +108,8 @@ public class TrainerHelper extends HelperBase {
   public void modifiLKTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
+    type(By.name("profile-english-firstName"), trainerData.getEngFirstName());
+    type(By.name("profile-english-lastName"), trainerData.getEngLastName());
     enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
     dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
@@ -147,6 +151,8 @@ public class TrainerHelper extends HelperBase {
   public void fillTrainerForm(TrainerData trainerData) {
     type(By.name("user-firstName"), trainerData.getFirstName());
     type(By.name("user-lastName"), trainerData.getLastName());
+    type(By.name("user-engFirstName"),trainerData.getEngFirstName());
+    type(By.name("user-engLastName"), trainerData.getEngLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), trainerData.getPhone());
     dropDownList(By.name("role"), trainerData.getRoleUi());
@@ -253,7 +259,6 @@ public class TrainerHelper extends HelperBase {
     modifiLKTrainerForm(trainer);
     btnSaveModify();
     noErrorMessage();
-
   }
 
   private void btnModify() {

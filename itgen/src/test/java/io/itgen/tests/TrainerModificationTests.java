@@ -55,6 +55,8 @@ public class TrainerModificationTests extends TestBase {
             .withId("trainerModify")
             .withFirstName("Маша")
             .withLastName("Машина")
+            .withEngFirstName("Masha")
+            .withEngLastName("Mashina")
             .withRoles(Arrays.asList("trainer", "employee"))
             .withCountry("AL")
             .withTimeZone("Europe/Minsk")

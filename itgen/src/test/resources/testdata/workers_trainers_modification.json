@@ -2,6 +2,8 @@
   {
     "firstName": "Ветрин_0",
     "lastName": "Ветер_0",
+    "engFirstName": "Vetrin",
+    "engLastName": "Veter",
     "startWorkUi": "25.10.1980",
     "birthdayUi": "16.01.1971",
     "gender": 2,

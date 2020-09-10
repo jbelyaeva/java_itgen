@@ -126,6 +126,12 @@ public class TrainerData {
   @Property("workloadLevel")
   private String workloadLevel;
 
+  @Property("engFirstName")
+  private String engFirstName;
+
+  @Property("engLastName")
+  private String engLastName;
+
   /* setters */
 
   public TrainerData withId(String id) {
@@ -294,6 +300,16 @@ public class TrainerData {
     return this;
   }
 
+  public TrainerData withEngFirstName(String engFirstName) {
+    this.engFirstName = engFirstName;
+    return this;
+  }
+
+  public TrainerData withEngLastName(String engLastName) {
+    this.engLastName = engLastName;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -427,6 +443,14 @@ public class TrainerData {
 
   public String getWorkloadLevel() {
     return workloadLevel;
+  }
+
+  public String getEngFirstName() {
+    return engFirstName;
+  }
+
+  public String getEngLastName() {
+    return engLastName;
   }
 
 
