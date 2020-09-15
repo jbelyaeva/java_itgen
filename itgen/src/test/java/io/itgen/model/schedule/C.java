@@ -91,11 +91,12 @@ public class C {
             Objects.equals(lang, c.lang) &&
             Objects.equals(isTrial, c.isTrial) &&
             Objects.equals(newSubj, c.newSubj) &&
+            Objects.equals(s, c.s) &&
             Objects.equals(p, c.p);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, lang, isTrial, newSubj, p);
+    return Objects.hash(id, type, subject, lang, isTrial, newSubj, s, p);
   }
 }

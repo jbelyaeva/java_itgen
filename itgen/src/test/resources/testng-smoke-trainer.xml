@@ -6,8 +6,12 @@
       <class name="io.itgen.tests.lkTrainer.TrainerModifyProfile"/>
       <class name="io.itgen.tests.lkTrainer.TrainerStartLesson"/>
       <class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentNotWas"/>
-      <!--<class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentWas"/> -->
-      <!--<class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentDisrupt"/>-->
+      <class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentWas"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerFinishedLessonWithStudentDisrupt"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerLessonEnvelopes"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerCrateMaterial"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerMakeReview"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerTakeForReview"/>
     </classes>
   </test>
 </suite>

@@ -69,6 +69,42 @@ public class SShotHelper extends HelperBase {
     return diff;
   }
 
+  public ImageDiff getImageDiffWithoutScroll(
+      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor, float dpr)
+      throws AWTException, IOException {
+    Robot bot = new Robot();
+    bot.mouseMove(0, 0);
+
+    Screenshot actualScreenshot =
+        new AShot()
+            .coordsProvider(new WebDriverCoordsProvider())
+            .ignoredElements(locatorIgnor)
+            .takeScreenshot(wd);
+    Set<Coords> ignoredCoords = actualScreenshot.getIgnoredAreas();
+
+    // взять скриншот после появления элемента с локатором
+    etalon(expected, name, actualScreenshot);
+
+    File actualFile = new File(actual + name + ".png");
+    ImageIO.write(actualScreenshot.getImage(), "png", actualFile);
+
+    // берем эталонный снимок
+    Screenshot expectedScreenshot =
+        new Screenshot(ImageIO.read(new File(expected + name + ".png")));
+    expectedScreenshot.setIgnoredAreas(ignoredCoords);
+
+    // сравниваем
+    ImageDiff diff = new ImageDiffer().makeDiff(expectedScreenshot, actualScreenshot);
+
+    // результат
+    if (diff.getDiffSize() != 0) {
+      File diffFile = new File(markedImages + name + ".png");
+      ImageIO.write(diff.getMarkedImage(), "png", diffFile);
+      getScreenShot(name);
+    }
+    return diff;
+  }
+
   @Attachment()
   public static byte[] getScreenShot(String ResourseName) throws IOException {
     String Path = properties.getProperty("markedImages") + ResourseName + ".png";

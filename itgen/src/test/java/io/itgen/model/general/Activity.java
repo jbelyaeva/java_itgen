@@ -11,6 +11,8 @@ public class Activity {
   private String t;
   @Embedded
   private D d;
+  private String s;
+  private Double w;
 
   public Activity() {
   }
@@ -35,6 +37,16 @@ public class Activity {
     return this;
   }
 
+  public Activity withS(String s) {
+    this.s = s;
+    return this;
+  }
+
+  public Activity withW(Double w) {
+    this.w = w;
+    return this;
+  }
+
   public String getUId() {
     return uId;
   }
@@ -49,6 +61,14 @@ public class Activity {
 
   public D getD() {
     return d;
+  }
+
+  public String getS() {
+    return s;
+  }
+
+  public Double getW() {
+    return w;
   }
 
   @Override

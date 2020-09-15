@@ -16,7 +16,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MaterialMakeReview extends TestBase {
-
   MaterialBranchData materialBranchClean = null;
   MaterialBranchService materialBranchService = new MaterialBranchService();
   MaterialData materialClean = null;

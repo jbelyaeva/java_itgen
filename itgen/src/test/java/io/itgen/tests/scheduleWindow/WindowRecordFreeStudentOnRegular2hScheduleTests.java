@@ -32,7 +32,7 @@ public class WindowRecordFreeStudentOnRegular2hScheduleTests extends TestBase {
 
     app.trScheduleTomorrow().RegularScheduleWithoutStudents(period, "recordStudentOnLesson", "14");
 
-    app.trFamily().newFamily("recordStudent", false, "txa");
+    app.trFamily().newFamily("recordStudent", false, "txc");
 
     app.trStudent()
         .newStudentFree(
