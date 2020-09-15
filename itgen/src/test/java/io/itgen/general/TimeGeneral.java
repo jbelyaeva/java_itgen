@@ -134,9 +134,9 @@ public class TimeGeneral {
 
   //для определения ближайшего занятия, в зависимости от того, сколько сейчас времени
   public String getPeriod(long time) {
-    int index = (int) (time/1800000);
+    int index = (int) (time / 1800000);
     int minutes = 0;
-    int hours=index/2;
+    int hours = index / 2;
 
     if (index % 2 != 0) {
       minutes = 30;

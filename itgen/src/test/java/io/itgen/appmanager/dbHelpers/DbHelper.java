@@ -112,9 +112,9 @@ public class DbHelper {
     return lead;
   }
 
-  public Payments payments(String id) {
+  public Payments payments(String idFamily) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<PaymentData> q = datastore.createQuery(PaymentData.class).filter("fId", id);
+    Query<PaymentData> q = datastore.createQuery(PaymentData.class).filter("fId", idFamily);
     List<PaymentData> payments = q.find().toList();
     return new Payments(payments);
   }

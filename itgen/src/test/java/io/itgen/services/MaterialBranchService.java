@@ -25,4 +25,8 @@ public class MaterialBranchService {
   public MaterialBranchData findById(String id) {
     return materialBranchDao.findById(id);
   }
+
+  public void drop() {
+    materialBranchDao.drop();
+  }
 }

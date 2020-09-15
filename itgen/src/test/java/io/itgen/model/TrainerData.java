@@ -132,6 +132,7 @@ public class TrainerData {
   @Property("engLastName")
   private String engLastName;
 
+
   /* setters */
 
   public TrainerData withId(String id) {
@@ -452,7 +453,6 @@ public class TrainerData {
   public String getEngLastName() {
     return engLastName;
   }
-
 
   /* toString(), hashCode() & equals() */
 

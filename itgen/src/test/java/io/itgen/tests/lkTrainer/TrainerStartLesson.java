@@ -4,18 +4,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertTrue;
 
-import com.sun.istack.NotNull;
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.StudentData;
-import io.itgen.model.schedule.FinishedSlots;
-import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.services.FamilyService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.tests.TestBase;
-import java.util.HashSet;
-import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,7 +28,7 @@ public class TrainerStartLesson extends TestBase {
     app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period,"startLessonByTrainer",
         "23", "startLessonByTrainer", "1", "ru");
 
-    app.trFamily().newFamily("startLessonByTrainer", false, "txa");
+    app.trFamily().newFamily("startLessonByTrainer", false, "txc");
 
     app.trStudent()
         .newStudent(
@@ -52,22 +46,22 @@ public class TrainerStartLesson extends TestBase {
 
   @Test
   public void testTrainerStartLesson() {
-    app.trainer().menuSchedule();
+    app.trainer().gotoSchedule();
     Schedules before = app.dbschedules().schedules();
     app.trainer().startLesson("startLessonByTrainer");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(before, after);
+    check(after);
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("startLessonByTrainer");
+    scheduleService.drop();
     studentService.DeleteById("startLessonByTrainer");
     familyService.DeleteById("startLessonByTrainer");
   }
 
-  private void check(Schedules before, Schedules after) {
+  private void check(Schedules after) {
     //проверка, что появилось поле startedAt
     assertTrue(!(
         scheduleService.findById("startLessonByTrainer").getSlots().get(0).getStartedAt() == null));

@@ -25,4 +25,8 @@ public class MaterialService {
   public MaterialData findById(String id) {
     return materialDao.findById(id);
   }
+
+  public void drop() {
+    materialDao.drop();
+  }
 }

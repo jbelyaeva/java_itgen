@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SshotAddNewStudentFormFirst extends TestBase {
+
   @DataProvider
   public Iterator<Object[]> StudentsFromJson() throws IOException {
     try (BufferedReader reader =

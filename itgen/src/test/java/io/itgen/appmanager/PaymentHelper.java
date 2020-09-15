@@ -90,9 +90,6 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void goToShopByParent() {
-    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
-      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
-    }
     btnPay();
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     noErrorMessage();

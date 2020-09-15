@@ -2,6 +2,8 @@ package io.itgen.appmanager.dbHelpers;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
+import io.itgen.model.schedule.CommentData;
+import io.itgen.model.schedule.Comments;
 import io.itgen.model.schedule.FinishedChildLessonData;
 import io.itgen.model.schedule.FinishedChildLessons;
 import io.itgen.model.schedule.FinishedLessonData;
@@ -37,6 +39,13 @@ public class DbHelperSchedule {
     Query<FinishedLessonData> query = datastore.createQuery(FinishedLessonData.class);
     List<FinishedLessonData> finishedLessons = query.find().toList();
     return new FinishedLessons(finishedLessons);
+  }
+
+  public Comments comments() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<CommentData> query = datastore.createQuery(CommentData.class);
+    List<CommentData> comments = query.find().toList();
+    return new Comments(comments);
   }
 
   public ScheduleData findById(String id) {

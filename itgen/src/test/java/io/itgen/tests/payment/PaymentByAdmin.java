@@ -15,7 +15,7 @@ public class PaymentByAdmin extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trFamily().newFamily("paymentAdmin", true, "txc");
+    app.trFamily().newFamily("paymentAdmin", true, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(
