@@ -31,7 +31,7 @@ public class WindowRecordStudentOnTrialScheduleTests extends TestBase {
   public void ensurePreconditions() {
     app.trScheduleTomorrow().RegularScheduleWithoutStudents(period, "recordStudentOnLesson", "14");
 
-    app.trFamily().newFamily("recordStudent", false, "txa");
+    app.trFamily().newFamily("recordStudent", false, "txc");
 
     app.trStudent()
         .newStudent(

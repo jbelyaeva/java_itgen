@@ -28,7 +28,7 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "recordOnSchedule", "14");
-    app.trFamily().newFamily("recordStudent", false, "txa");
+    app.trFamily().newFamily("recordStudent", false, "txc");
 
     app.trStudent()
         .newStudent(

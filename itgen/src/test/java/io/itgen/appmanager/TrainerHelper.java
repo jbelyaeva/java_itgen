@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TrainerHelper extends HelperBase {
+
   public TrainerHelper(WebDriver wd) {
     super(wd);
   }
@@ -76,7 +77,8 @@ public class TrainerHelper extends HelperBase {
     builder.click().perform();
 
     type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
-    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
+    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"),
+        trainerData.getWorkloadLevel());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -89,7 +91,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//div[@class='users-edit']"));
 
     click(By.id("profile-pay-base"));
-    click(By.xpath("//select[@id='profile-pay-base']//option["+trainerData.getPayBase()+"]"));
+    click(By.xpath("//select[@id='profile-pay-base']//option[" + trainerData.getPayBase() + "]"));
 
     type(By.name("profile-contact-phone"), trainerData.getPhone());
     type(By.name("profile-contact-telegram"), trainerData.getTelegram());
@@ -112,7 +114,8 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-english-lastName"), trainerData.getEngLastName());
     enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
-    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
+    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"),
+        trainerData.getWorkloadLevel());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -151,8 +154,8 @@ public class TrainerHelper extends HelperBase {
   public void fillTrainerForm(TrainerData trainerData) {
     type(By.name("user-firstName"), trainerData.getFirstName());
     type(By.name("user-lastName"), trainerData.getLastName());
-    type(By.name("user-engFirstName"),trainerData.getEngFirstName());
-    type(By.name("user-engLastName"), trainerData.getEngLastName());
+    type(By.name("profile-engFirstName"), trainerData.getEngFirstName());
+    type(By.name("profile-engLastName"), trainerData.getEngLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), trainerData.getPhone());
     dropDownList(By.name("role"), trainerData.getRoleUi());
@@ -259,6 +262,7 @@ public class TrainerHelper extends HelperBase {
     modifiLKTrainerForm(trainer);
     btnSaveModify();
     noErrorMessage();
+
   }
 
   private void btnModify() {
@@ -275,6 +279,7 @@ public class TrainerHelper extends HelperBase {
   public void startLesson(String id) {
     selectLesson(id);
     btnStartLesson();
+    selectStudent();
   }
 
   private void btnStartLesson() {
@@ -283,19 +288,18 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void selectLesson(String id) {
-    click(By.xpath("//a[contains(@href,'"+id+"')]"));
+    click(By.xpath("//a[contains(@href,'" + id + "')]"));
     noErrorMessage();
   }
 
-  public void finishedLessonWithWas(String idLesson) {
+  public void finishedLessonWithNotWas(String idLesson) {
     selectLesson(idLesson);
     selectStudent();
     btnNotWas();
     btnFinishLesson();
-    gotoTask();
   }
 
-  private void gotoTask() {
+  public void gotoTask() {
     click(By.xpath("//a[@href='/tasks']"));
     noErrorMessage();
   }
@@ -315,8 +319,207 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void menuSchedule() {
+  public void finishedLessonWithWas(String idLesson) {
+    selectLesson(idLesson);
+    selectStudent();
+    btnWas();
+    tabResuts();
+    fillResults();
+    btnSave();
+    noErrorMessage();
+    btnFinishLesson();
+    noErrorMessage();
+    gotoTask();
+  }
+
+  private void btnSave() {
+    click(By.xpath("//div[@class='results-container']//button//span"));
+    noErrorMessage();
+  }
+
+  private void fillResults() {
+    clickWithMoveToElementAndWait(5, By.xpath("//span//img[contains(@src,'capricious')]"));
+
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='done']"));
+    type(By.xpath("//input[@id-qa='done']"), "Проект Головоломка");
+
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='homework']"));
+    type(By.xpath("//input[@id-qa='homework']"), "Проект Лаборатория");
+
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='topics']"));
+    type(By.xpath("//input[@id-qa='topics']"), "3D координаты, телепортация");
+
+    //выбор эмоций
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[3]"));
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[7]"));
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[14]"));
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[16]"));
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[22]"));
+    click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[26]"));
+
+    type(By.xpath("//textarea[@id-qa='text-for-parents']"),
+        "Ребенок очень старался, был внимательный, "
+            + "проекты делал самостоятельно");
+
+    type(By.xpath("//textarea[@id-qa='note']"), "Ребенок очень старался, был внимательный, "
+        + "проекты делал самостоятельно");
+
+  }
+
+  private void tabResuts() {
+    clickWithMoveToElementAndWait(10, By.xpath("//a[@href='#result']"));
+  }
+
+  private void btnWas() {
+    click(By.xpath("//button[@data-action='finished']"));
+    noErrorMessage();
+  }
+
+  public void gotoSchedule() {
     click(By.xpath("//a[@href='/schedule']"));
     noErrorMessage();
+  }
+
+  public void gotoMaterial() {
+    click(By.xpath("//a[@href='/materials']"));
+    noErrorMessage();
+  }
+
+  public void finishedLessonWithDiscrupt(String idLesson) {
+    gotoSchedule();
+    selectLesson(idLesson);
+    selectStudent();
+    btnDiscrupt();
+    tabResuts();
+    fillResultsForDiscrupt();
+    btnSave();
+    noErrorMessage();
+    btnFinishLesson();
+    noErrorMessage();
+  }
+
+  private void fillResultsForDiscrupt() {
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='done']"));
+    type(By.xpath("//input[@id-qa='done']"), "Проект Головоломка");
+
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='homework']"));
+    type(By.xpath("//input[@id-qa='homework']"), "Проект Лаборатория");
+
+    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='topics']"));
+    type(By.xpath("//input[@id-qa='topics']"), "3D координаты, телепортация");
+
+    type(By.xpath("//textarea[@id-qa='text-for-parents']"),
+        "Ребенок очень старался, был внимательный, "
+            + "проекты делал самостоятельно");
+
+    type(By.xpath("//textarea[@id-qa='note']"), "Ребенок очень старался, был внимательный, "
+        + "проекты делал самостоятельно");
+  }
+
+  private void btnDiscrupt() {
+    click(By.xpath("//button[@data-action='abort']"));
+    noErrorMessage();
+  }
+
+  public void finishedLessonWithWas_giveProject(String idLesson, String material1,
+      String material2) {
+    gotoSchedule();
+    selectLesson(idLesson);
+    refresh();
+    selectStudent();
+    btnWas();
+    tabProjects();
+    searchProject(material1);
+    openBranch();
+    giveHomeWork();
+    searchProject(material2);
+    giveWhatDoing();
+    tabResuts();
+    fillResults();
+    btnSave();
+    noErrorMessage();
+    btnFinishLesson();
+    noErrorMessage();
+  }
+
+  private void giveWhatDoing() {
+    click(By.xpath("//div[@class='materials-tab-item']"));
+    click(By.xpath("//div[contains(@class,'status-select')]"));
+    click(By.xpath("//div[@data-value='done']"));
+  }
+
+  private void giveHomeWork() {
+    click(By.xpath("//div[@class='materials-tab-item']"));
+    click(By.xpath("//div[contains(@class,'hw')]"));
+    click(By.xpath("//div[@data-value='1']"));
+  }
+
+  private void openBranch() {
+    click(By.xpath("//span[@class='title-branch']"));
+    if(!isElementPresent(By.xpath("//div[@class='materials-tab-item']")))
+    { click(By.xpath("//span[@class='title-branch']"));}
+  }
+
+  private void searchProject(String title) {
+    click(By.xpath("(//input[contains(@class,'input')])[2]"));
+    type(By.xpath("(//input[contains(@class,'input')])[2]"), title);
+  }
+
+  private void tabProjects() {
+    clickWithMoveToElementAndWait(10, By.xpath("//a[@href='#materials']"));
+  }
+
+  public void envelopes(String idLesson) {
+    gotoSchedule();
+    selectLesson(idLesson);
+    btnStartLesson();
+    selectStudent();
+    sendEnvelopLate();
+    openDropdown();
+    sendEnvelopeNotInternet();
+    sendEnvelopeNotReturn();
+  }
+
+  private void openDropdown() {
+    click(By.xpath("//div[@class='send-notifications']//button[2]"));
+  }
+
+  private void sendEnvelopeNotReturn() {
+    wd.findElement(By.xpath("(//div[@role='presentation']//div[3]//div)[2]")).click();
+    noErrorMessage();
+  }
+
+  private void sendEnvelopeNotInternet() {
+    wd.findElement(By.xpath("(//div[@role='presentation']//div[3]//div)[1]")).click();
+    noErrorMessage();
+  }
+
+  private void sendEnvelopLate() {
+    click(By.xpath("//div[@class='send-notifications']"));
+    noErrorMessage();
+  }
+
+  public void startLessonWithResuts(String idLesson) {
+    wd.manage().window().maximize();
+    selectLesson(idLesson);
+    btnStartLesson();
+    selectStudent();
+    btnWas();
+    tabResuts();
+    fillResults();
+  }
+
+  public void notStartLesson(String idLesson) {
+    selectLesson(idLesson);
+  }
+
+  public void startLessonWithProjects(String idLesson) {
+    gotoSchedule();
+    selectLesson(idLesson);
+    refresh();
+    selectStudent();
+    btnWas();
+    tabProjects();
+    openBranch();
   }
 }

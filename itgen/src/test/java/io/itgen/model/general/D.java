@@ -16,6 +16,12 @@ public class D {
   @Property("langs")
   public List<String> langs = new ArrayList<>();
 
+  @Property("from")
+  public Boolean from;
+
+  @Property("to")
+  public Boolean to;
+
   public D() {
   }
 
@@ -31,6 +37,16 @@ public class D {
 
   public D withLangs(List<String> langs) {
     this.langs = langs;
+    return this;
+  }
+
+  public D withFrom(Boolean from) {
+    this.from = from;
+    return this;
+  }
+
+  public D withTo(Boolean to) {
+    this.to = to;
     return this;
   }
 

@@ -16,7 +16,6 @@ public class MaterialHelper extends HelperBase {
   }
 
   public void tabInProgress() {
-    if (!isElementPresent(By.xpath("//a[@href='#inProgress']"))) refresh();
     click(By.xpath("//a[@href='#inProgress']"));
     noErrorMessage();
   }

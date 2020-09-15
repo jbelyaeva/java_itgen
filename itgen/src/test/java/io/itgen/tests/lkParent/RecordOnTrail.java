@@ -33,7 +33,6 @@ public class RecordOnTrail extends TestBase {
 
   @Test()
   public void testRecordOnTrail() throws InterruptedException {
-    app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
     app.lkParent().RecordOnTrail();
     Schedules after = app.dbschedules().schedules();

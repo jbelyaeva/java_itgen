@@ -23,7 +23,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trFamily().newFamily("increaseAdmin", true, "txa");
+    app.trFamily().newFamily("increaseAdmin", true, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(

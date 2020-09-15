@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.itgen.general.TimeGeneral;
+import io.itgen.model.Payments;
 import io.itgen.model.schedule.FinishedChildLessons;
 import io.itgen.model.schedule.FinishedLessons;
 import io.itgen.model.schedule.Schedules;
@@ -37,7 +38,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
         "finishLessonByTrainer",
         "23", "finishLessonByTrainer", "1", "ru");
 
-    app.trFamily().newFamily("finishLessonByTrainer", false, "txa");
+    app.trFamily().newFamily("finishLessonByTrainer", false, "txc");
 
     app.trStudent()
         .newStudent(
@@ -58,10 +59,13 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     Schedules before = app.dbschedules().schedules();
     FinishedChildLessons finishChildBefore = app.dbschedules().finishedChildLessons();
     FinishedLessons finishBefore = app.dbschedules().finishedLessons();
-    app.trainer().finishedLessonWithWas("finishLessonByTrainer");
+
+    app.trainer().finishedLessonWithNotWas("finishLessonByTrainer");
+    app.trainer().gotoTask();
     Schedules after = app.dbschedules().schedules();
     FinishedChildLessons finishChildAfter = app.dbschedules().finishedChildLessons();
     FinishedLessons finishAfter = app.dbschedules().finishedLessons();
+
     assertThat(after.size(), equalTo(before.size()));
     assertThat(finishChildAfter.size(), equalTo(finishChildBefore.size() + 1));
     assertThat(finishAfter.size(), equalTo(finishBefore.size() + 1));
@@ -76,6 +80,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     finishedChildLessonService.drop();
     finishedLessonService.drop();
     paymentService.drop();
+
   }
 
   private void check(Schedules after) {

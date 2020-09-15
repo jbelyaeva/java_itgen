@@ -20,15 +20,13 @@ public class LKParentHelper extends HelperBase {
 
   public void btnRecordOnTrail() {
     if (isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) refresh();//для докера
-    moveToElementWithWait(5, By.xpath("(//button[contains(@id-qa,'trial')])[2]"));
+    clickWithMoveToElementAndWait(5, By.xpath("(//button[contains(@id-qa,'trial')])[2]"));
     noErrorMessage();
   }
 
-  public void RecordOnTrail() throws InterruptedException {
-    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
-      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
-    }
-    Thread.sleep(3000);
+  public void RecordOnTrail() {
+    skipHelper();
+    btnLogo();
     btnRecordOnTrail();
     btnSelectScratch();
     selectLesson();
@@ -145,6 +143,12 @@ public class LKParentHelper extends HelperBase {
     btnNext();
     selectCheckBox();
     btnRecord();
+  }
+
+  public void skipHelper() {
+    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
+      clickWithMoveToElementAndWait(5, By.xpath("//button[@title='Skip']"));
+    }
   }
 
   private void btnTomorrowForRegular() {
@@ -383,11 +387,5 @@ public class LKParentHelper extends HelperBase {
 
   public void clickByFullArea() {
     click(By.xpath("//div[@class='course-selection-page']"));
-  }
-
-  public void skipHelper() {
-    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
-      moveToElementWithWait(5, By.xpath("//button[@title='Skip']"));
-    }
   }
 }
