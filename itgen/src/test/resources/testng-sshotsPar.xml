@@ -3,7 +3,6 @@
 <suite name="Suite1" verbose="1">
   <test name="ScreenShotsPar">
     <classes>
-      <class name="io.itgen.tests.screenShotPar.SshotMain"/>
       <class name="io.itgen.tests.screenShotPar.SshotCourseSelectionForTrial"/>
       <class name="io.itgen.tests.screenShotPar.SshotEntryOnTrial"/>
       <class name="io.itgen.tests.screenShotPar.SshotSignUpOnTrial"/>
@@ -13,6 +12,7 @@
       <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnRegular"/>
       <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnSingle"/>
       <class name="io.itgen.tests.screenShotPar.SshotPayByParentShopRU"/>
+      <class name="io.itgen.tests.screenShotPar.SshotMain"/>
     </classes>
   </test>
 </suite>
