@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -39,14 +38,20 @@ public class SshotLessonStartTabProjects extends TestBase {
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private long alreadyRun = 7200000; //2 часа идет занятие
+  private long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday().StartSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru");
 
     app.trFamily().newFamily("finishLessonByTrainer", false, "txa");
 
@@ -111,12 +116,16 @@ public class SshotLessonStartTabProjects extends TestBase {
 
     String name = "Trainer_StartLessonTabProjects_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
-    locatorIgnor.add(By.xpath("//div[@class='text-muted']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
-    String[] deleteElements = {"//div[@class='date']", "//div[@class='duration']",
-        "//div[@class='time']"};
+    String[] deleteElements = {
+      "//div[@class='text-capitalize'][2]",
+      "//div[@class='text-muted']",
+      "//div[@class='date']",
+      "//div[@class='duration']",
+      "//div[@class='time']"
+    };
+
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =

@@ -16,6 +16,7 @@ public class MaterialHelper extends HelperBase {
   }
 
   public void tabInProgress() {
+    if (!isElementPresent(By.xpath(" // a [@href = '# inProgress'] "))) refresh();
     click(By.xpath("//a[@href='#inProgress']"));
     noErrorMessage();
   }
@@ -144,7 +145,6 @@ public class MaterialHelper extends HelperBase {
       type(By.id("id(searchLinkedMaterialsInput)"), name);
       click(By.xpath("//li[@class='search-result']"));
     }
-
   }
 
   public void leaveComment(String id, String text) {
@@ -156,8 +156,9 @@ public class MaterialHelper extends HelperBase {
   }
 
   private void checkComment(String text) {
-    assertThat(wd.findElement(By.xpath("//span[contains(@class,'multiline')]")).getText(),
-        equalTo(text));;
+    assertThat(
+        wd.findElement(By.xpath("//span[contains(@class,'multiline')]")).getText(), equalTo(text));
+    ;
   }
 
   private void btnAddComment() {

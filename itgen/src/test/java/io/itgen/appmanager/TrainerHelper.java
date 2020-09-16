@@ -154,8 +154,8 @@ public class TrainerHelper extends HelperBase {
   public void fillTrainerForm(TrainerData trainerData) {
     type(By.name("user-firstName"), trainerData.getFirstName());
     type(By.name("user-lastName"), trainerData.getLastName());
-    type(By.name("profile-engFirstName"), trainerData.getEngFirstName());
-    type(By.name("profile-engLastName"), trainerData.getEngLastName());
+    type(By.name("user-engFirstName"), trainerData.getEngFirstName());
+    type(By.name("user-engLastName"), trainerData.getEngLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), trainerData.getPhone());
     dropDownList(By.name("role"), trainerData.getRoleUi());
