@@ -71,13 +71,17 @@ public class C {
   @Override
   public String toString() {
     return "C{" +
-            "id='" + id + '\'' +
-            ", subject='" + subject + '\'' +
-            ", lang='" + lang + '\'' +
-            ", isTrial=" + isTrial +
-            ", newSubj=" + newSubj +
-            ", p=" + p +
-            '}';
+        "id='" + id + '\'' +
+        ", type=" + type +
+        ", subject='" + subject + '\'' +
+        ", s='" + s + '\'' +
+        ", lang='" + lang + '\'' +
+        ", isTrial=" + isTrial +
+        ", newSubj=" + newSubj +
+        ", score=" + score +
+        ", rating=" + rating +
+        ", p=" + p +
+        '}';
   }
 
   @Override
@@ -91,12 +95,11 @@ public class C {
             Objects.equals(lang, c.lang) &&
             Objects.equals(isTrial, c.isTrial) &&
             Objects.equals(newSubj, c.newSubj) &&
-            Objects.equals(s, c.s) &&
             Objects.equals(p, c.p);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, lang, isTrial, newSubj, s, p);
+    return Objects.hash(id, type, subject, lang, isTrial, newSubj, p);
   }
 }
