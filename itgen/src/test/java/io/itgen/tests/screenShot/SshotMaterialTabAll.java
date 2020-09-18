@@ -48,7 +48,6 @@ public class SshotMaterialTabAll extends TestBase {
 
   @Test()
   public void testMaterialTabAll() throws AWTException, IOException {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     app.material().openBranch();
 

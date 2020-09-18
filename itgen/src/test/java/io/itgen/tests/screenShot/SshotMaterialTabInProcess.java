@@ -66,6 +66,7 @@ public class SshotMaterialTabInProcess extends TestBase {
                 name,
                 locatorIgnor, 1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)
