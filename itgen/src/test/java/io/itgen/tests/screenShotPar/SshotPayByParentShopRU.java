@@ -56,8 +56,9 @@ public class SshotPayByParentShopRU extends TestBase {
     if (diff.getDiffSize() > 0) {
       diff = this.getDiff(name, locatorIgnor);
     }
-
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diff.getDiffSize() > 100) { // погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
     app.payment().goToFamily("111");
   }
 

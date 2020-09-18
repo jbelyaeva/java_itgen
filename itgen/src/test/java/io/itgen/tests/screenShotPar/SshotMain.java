@@ -28,7 +28,7 @@ public class SshotMain extends TestBase {
   public void testSshotMain() throws AWTException, IOException {
     String name = "Parent_Main_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    app.lkParent().refresh();
+    //app.lkParent().refresh();
     app.lkParent().skipHelper();
     app.lkParent().btnClickHistory();
     app.sshot().changeTopBar();
