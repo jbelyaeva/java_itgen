@@ -31,4 +31,12 @@ public class TaskService {
   public void save(TaskData task) {
     taskDao.save(task);
   }
+
+  public TaskData findById(String id) {
+    return taskDao.findById(id);
+  }
+
+  public void deleteField(String idTask, String nameField) {
+    taskDao.deleteField(idTask,nameField);
+  }
 }

@@ -17,4 +17,9 @@ public class WorkerService {
   public void create(WorkerData worker) {
     workerDao.save(worker);
   }
+
+  public WorkerData findById(String id) {
+    return workerDao.findById(id);
+  }
+
 }

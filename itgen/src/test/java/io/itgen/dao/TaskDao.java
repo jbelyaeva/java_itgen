@@ -2,7 +2,9 @@ package io.itgen.dao;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
+import dev.morphia.query.UpdateOperations;
 import io.itgen.model.LeadData;
+import io.itgen.model.materials.MaterialData;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.StudentData;
 
@@ -40,6 +42,19 @@ public class TaskDao {
     Query<TaskData> query = datastore.createQuery(TaskData.class);
     datastore.delete(query);
   }
+
+  public TaskData findById(String id) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    return datastore.find(TaskData.class).field("id").equal(id).first();
+  }
+
+  public void deleteField(String id, String name) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TaskData> query = datastore.createQuery(TaskData.class).field("id").equal(id);
+    UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).unset(name);
+    datastore.update(query, (UpdateOperations<TaskData>) ops);
+  }
+
 
 }
 

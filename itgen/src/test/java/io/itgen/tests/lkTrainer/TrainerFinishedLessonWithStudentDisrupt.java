@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.itgen.general.TimeGeneral;
-import io.itgen.model.Payments;
 import io.itgen.model.schedule.Comments;
 import io.itgen.model.schedule.FinishedChildLessons;
 import io.itgen.model.schedule.FinishedLessons;
@@ -40,7 +39,7 @@ public class TrainerFinishedLessonWithStudentDisrupt extends TestBase {
         "finishLessonByTrainer",
         "23", "finishLessonByTrainer", "1", "ru");
 
-    app.trFamily().newFamily("finishLessonByTrainer", false, "txc");
+    app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(

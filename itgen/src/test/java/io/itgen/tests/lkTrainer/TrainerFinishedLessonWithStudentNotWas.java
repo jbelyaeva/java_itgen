@@ -38,7 +38,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
         "finishLessonByTrainer",
         "23", "finishLessonByTrainer", "1", "ru");
 
-    app.trFamily().newFamily("finishLessonByTrainer", false, "txc");
+    app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(

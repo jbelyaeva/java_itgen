@@ -597,6 +597,30 @@ testNotDockerParent.doFirst {
 }
 
 //
+task testTasks(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-tasks.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testTasks.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+//
 task testScreenShotsTrainer(type: Test) {
     useTestNG {
         suites 'src/test/resources/testng-sshotsTrainer.xml'

@@ -1,5 +1,6 @@
 package io.itgen.model.general;
 
+import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Property;
 
 import java.util.ArrayList;
@@ -12,6 +13,12 @@ public class D {
 
   @Property("old")
   public String oldData;
+
+  @Embedded
+  public New newChangeData;
+
+  @Embedded
+  public Old oldChangeData;
 
   @Property("langs")
   public List<String> langs = new ArrayList<>();
@@ -47,6 +54,16 @@ public class D {
 
   public D withTo(Boolean to) {
     this.to = to;
+    return this;
+  }
+
+  public D withNewChangeData(New newChangeData) {
+    this.newChangeData = newChangeData;
+    return this;
+  }
+
+  public D withOldChangeData(Old oldChangeData) {
+    this.oldChangeData = oldChangeData;
     return this;
   }
 

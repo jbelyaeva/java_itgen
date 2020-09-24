@@ -125,15 +125,14 @@ public class Slots {
   @Override
   public String toString() {
     return "Slots{" +
-        "w=" + w +
-        ", id='" + id + '\'' +
-        ", st=" + st +
-        ", c=" + c +
-        ", blocked=" + blocked +
-        ", blockDesc='" + blockDesc + '\'' +
-        ", cancelled=" + cancelled +
-        ", cancelledAt=" + cancelledAt +
-        ", startedAt=" + startedAt +
-        '}';
+            "w=" + w +
+            ", id='" + id + '\'' +
+            ", st=" + st +
+            ", c=" + c +
+            ", blocked=" + blocked +
+            ", blockDesc='" + blockDesc + '\'' +
+            ", cancelled=" + cancelled +
+            ", started=" + startedAt +
+            '}';
   }
 }

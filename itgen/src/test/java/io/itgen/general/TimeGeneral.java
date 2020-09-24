@@ -15,7 +15,7 @@ public class TimeGeneral {
   }
 
   // установка времени на начало дня ( на 00:00 )по UTC
-  private long getMsLocalTime() {
+  public long getMsLocalTime() {
     LocalDate date = LocalDate.now();
     return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }

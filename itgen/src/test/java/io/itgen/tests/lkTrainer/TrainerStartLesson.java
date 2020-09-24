@@ -28,7 +28,7 @@ public class TrainerStartLesson extends TestBase {
     app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period,"startLessonByTrainer",
         "23", "startLessonByTrainer", "1", "ru");
 
-    app.trFamily().newFamily("startLessonByTrainer", false, "txc");
+    app.trFamily().newFamily("startLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(

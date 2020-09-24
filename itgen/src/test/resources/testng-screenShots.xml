@@ -15,6 +15,8 @@
      <!-- <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/> -->
       <class name="io.itgen.tests.screenShot.SshotMaterialTabInProcess"/>
       <class name="io.itgen.tests.screenShot.SshotMaterialTabAll"/>
+      <class name="io.itgen.tests.screenShot.SshotMainTasks"/>
+      <class name="io.itgen.tests.screenShot.SshotPopupTasks"/>
     </classes>
   </test>
 </suite>

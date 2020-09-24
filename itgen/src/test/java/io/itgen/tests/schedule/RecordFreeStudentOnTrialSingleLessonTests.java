@@ -130,7 +130,6 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withS("normal")
                                     .withTrial(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1")
