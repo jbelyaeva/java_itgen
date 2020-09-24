@@ -55,11 +55,10 @@ public class SshotLessonEnvelopes extends TestBase {
 
     String name = "Trainer_LessonEnvelopes_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
+    locatorIgnor.add(By.xpath("//div[@class='text-muted']"));
+    locatorIgnor.add(By.xpath("//div[@class='duration']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
-
-    String[] deleteElements = {"(//div[@class='text-capitalize'])[2]","//div[@class='text-muted']", "//div[@class='duration']"};
-
-    app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =
         app.sshot()

@@ -26,7 +26,7 @@ public class TrainerLessonEnvelopes extends TestBase {
     app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period, "envelope",
         "23", "envelop", "1", "ru");
 
-    app.trFamily().newFamily("envelop", false, "txc");
+    app.trFamily().newFamily("envelop", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(

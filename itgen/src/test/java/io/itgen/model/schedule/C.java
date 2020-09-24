@@ -71,17 +71,13 @@ public class C {
   @Override
   public String toString() {
     return "C{" +
-        "id='" + id + '\'' +
-        ", type=" + type +
-        ", subject='" + subject + '\'' +
-        ", s='" + s + '\'' +
-        ", lang='" + lang + '\'' +
-        ", isTrial=" + isTrial +
-        ", newSubj=" + newSubj +
-        ", score=" + score +
-        ", rating=" + rating +
-        ", p=" + p +
-        '}';
+            "id='" + id + '\'' +
+            ", subject='" + subject + '\'' +
+            ", lang='" + lang + '\'' +
+            ", isTrial=" + isTrial +
+            ", newSubj=" + newSubj +
+            ", p=" + p +
+            '}';
   }
 
   @Override

@@ -1,6 +1,7 @@
 package io.itgen.services;
 
 import io.itgen.dao.TrainerDao;
+import io.itgen.model.ParentData;
 import io.itgen.model.TrainerData;
 
 public class TrainerService {
@@ -16,6 +17,10 @@ public class TrainerService {
 
   public void save(TrainerData trainer) {
     trainerDao.save(trainer);
+  }
+
+  public TrainerData findById(String id) {
+    return trainerDao.findById(id);
   }
 
 }

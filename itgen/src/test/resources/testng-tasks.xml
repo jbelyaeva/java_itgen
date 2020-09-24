@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Tasks">
+        <classes>
+            <class name="io.itgen.tests.task.TaskManualAddNew"/>
+            <class name="io.itgen.tests.task.TaskManualDoneInStack"/>
+            <class name="io.itgen.tests.task.TaskAutoTake"/>
+            <class name="io.itgen.tests.task.TaskAutoDoneInStack"/>
+            <class name="io.itgen.tests.task.TaskManualWaitAnswerInStack"/>
+            <class name="io.itgen.tests.task.TaskManualDeleteInStack"/>
+            <class name="io.itgen.tests.task.TaskAutoDeleteInStack"/>
+            <class name="io.itgen.tests.task.TaskAutoGetControlInStack"/>
+            <class name="io.itgen.tests.task.TaskManualOnTomorrowInStack"/>
+            <class name="io.itgen.tests.task.TaskManualGetControlInStack"/>
+            <class name="io.itgen.tests.task.TaskFiltrByUserInStack"/>
+            <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualChangeTitle"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualChangeAssignee"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualChangePriority"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualChangeDate"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualDeleteInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualDoneInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualWaitAnswerInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualOnTomorrowInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskManuaGetControlInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoChangeAssignee"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoChangeDate"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoChangeClient"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoDeleteInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoDoneInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoTakeOnControlInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskManualLeaveCommentInPopup"/>
+            <class name="io.itgen.tests.taskPopap.TaskAutoLeaveCommentInPopup"/>
+        </classes>
+    </test>
+</suite>

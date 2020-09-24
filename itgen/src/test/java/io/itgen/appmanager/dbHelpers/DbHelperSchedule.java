@@ -62,9 +62,9 @@ public class DbHelperSchedule {
     return new Schedules(schedules);
   }
 
-  public Tasks tasksComposition(String id) {
+  public Tasks tasksComposition(String idUser) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> q = datastore.createQuery(TaskData.class).filter("linkUser", id);
+    Query<TaskData> q = datastore.createQuery(TaskData.class).filter("linkUser", idUser);
     List<TaskData> tasks = q.find().toList();
     return new Tasks(tasks);
   }

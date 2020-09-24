@@ -46,10 +46,33 @@ public class TaskData {
   private Date dueDate;
 
   @Property("dueDateSort")
-  private Date dueDateSort;
+  private double dueDateSort;
+
+  @Property("dueDateWithTime")
+  private Date dueDateWithTime;
 
   @Embedded("lesson")
   private Lesson lesson;
+
+  @Property("creator")
+  private String creator;
+
+  @Property("assignee")
+  private String assignee;
+
+  @Property("text")
+  private String text;
+
+  @Property("priority")
+  private int priority;
+
+  private String dateUi;
+
+  private String timeUi;
+
+  private String userUi;
+
+  private String dueDateTimeUi;
 
   public TaskData() {
   }
@@ -104,13 +127,38 @@ public class TaskData {
     return this;
   }
 
-  public TaskData withDueDateSort(Date dueDateSort) {
+  public TaskData withDueDateSort(double dueDateSort) {
     this.dueDateSort = dueDateSort;
+    return this;
+  }
+
+  public TaskData withDueDateWithTime(Date dateWithTime) {
+    this.dueDateWithTime = dateWithTime;
     return this;
   }
 
   public TaskData withLesson(Lesson lesson) {
     this.lesson = lesson;
+    return this;
+  }
+
+  public TaskData withCreator (String creator) {
+    this.creator = creator;
+    return this;
+  }
+
+  public TaskData withAssignee(String assignee) {
+    this.assignee = assignee;
+    return this;
+  }
+
+  public TaskData withText(String text) {
+    this.text = text;
+    return this;
+  }
+
+  public TaskData withPriority(int priority) {
+    this.priority = priority;
     return this;
   }
 
@@ -154,27 +202,68 @@ public class TaskData {
     return dueDate;
   }
 
-  public Date getDueDateSort() {
+  public double getDueDateSort() {
     return dueDateSort;
+  }
+
+  public Date getDueDateWithTime() {
+    return dueDateWithTime;
+  }
+
+  public String getCreator() {
+    return creator;
+  }
+
+  public String getAssignee() {
+    return assignee;
   }
 
   public Lesson getLesson() {
     return lesson;
   }
 
+  public String getText() {
+    return text;
+  }
+
+  public int getPriority() {
+    return priority;
+  }
+
+  public String getDateUi() {
+    return dateUi;
+  }
+
+  public String getTimeUi() {
+    return timeUi;
+  }
+
+  public String getUserUi() {
+    return userUi;
+  }
+
+  public String getDueDateTimeUi() {
+    return dueDateTimeUi;
+  }
+
   @Override
   public String toString() {
     return "TaskData{" +
-            "id='" + id + '\'' +
-            ", t='" + t + '\'' +
+            "id='" + id +
+            ", creator=" + creator +
+            ", assignee=" + assignee +
+            ", text='" + text +
+            ", priority='" + priority +
+            ", t='" + t +
             ", createAt=" + createAt +
-            ", status='" + status + '\'' +
+            ", status='" + status +
             ", watchers=" + watchers +
             ", comments=" + comments +
             ", activity=" + activity +
-            ", linkUser='" + linkUser + '\'' +
+            ", linkUser='" + linkUser +
             ", dueDate=" + dueDate +
             ", dueDateSort=" + dueDateSort +
+            ", dueDateWithTime=" + dueDateWithTime +
             '}';
   }
 
@@ -185,7 +274,10 @@ public class TaskData {
     TaskData taskData = (TaskData) o;
     return Objects.equals(id, taskData.id) &&
             Objects.equals(t, taskData.t) &&
-            Objects.equals(createAt, taskData.createAt) &&
+            Objects.equals(creator, taskData.creator) &&
+            Objects.equals(assignee, taskData.assignee) &&
+            Objects.equals(text, taskData.text) &&
+            Objects.equals(priority, taskData.priority) &&
             Objects.equals(status, taskData.status) &&
             Objects.equals(watchers, taskData.watchers) &&
             Objects.equals(comments, taskData.comments) &&
@@ -195,6 +287,6 @@ public class TaskData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, t, createAt, status, watchers, comments, activity, linkUser);
+    return Objects.hash(id, t, creator, assignee, text, priority, status, watchers, comments, activity, linkUser);
   }
 }
