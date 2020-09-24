@@ -112,6 +112,7 @@ public class SelfRegistration extends TestBase {
     app.lkParent().activation(token);
     app.session()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+    app.goTo().menuRequests();
 
     Leads leadsAfter = app.db().leads();
     Students studentsAfter = app.dbstudents().students();
