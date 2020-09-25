@@ -84,6 +84,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void fillStudentForm1(StudentData studentData) {
+    clickWithMoveToElementAndWait(5,By.xpath("//input[@id-qa='name']"));
     type(By.xpath("//input[@id-qa='name']"), studentData.getFirstname());
     type(By.xpath("//input[@id-qa='surname']"), studentData.getLastname());
     type(By.xpath("//input[@id-qa='birthday']"), studentData.getBirthdayUi());
