@@ -73,7 +73,7 @@
       <class name="io.itgen.tests.task.TaskManualOnTomorrowInStack"/>
       <class name="io.itgen.tests.task.TaskManualGetControlInStack"/>
       <class name="io.itgen.tests.task.TaskFiltrByUserInStack"/>
-      <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>
+     <!-- <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>-->
       <class name="io.itgen.tests.taskPopap.TaskManualChangeTitle"/>
       <class name="io.itgen.tests.taskPopap.TaskManualChangeAssignee"/>
       <class name="io.itgen.tests.taskPopap.TaskManualChangePriority"/>

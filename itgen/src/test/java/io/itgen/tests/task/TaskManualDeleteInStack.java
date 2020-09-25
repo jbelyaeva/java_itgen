@@ -42,8 +42,6 @@ public class TaskManualDeleteInStack extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    if (taskService.findById("DeleteInStack") != null) {
-      taskService.DeleteById("DeleteInStack");
-    }
+    taskService.drop();
   }
 }

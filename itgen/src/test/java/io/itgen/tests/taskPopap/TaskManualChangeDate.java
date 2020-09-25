@@ -4,6 +4,7 @@ package io.itgen.tests.taskPopap;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -41,7 +42,7 @@ public class TaskManualChangeDate extends TestBase {
             "21");
   }
 
-  @Test
+  @Test (retryAnalyzer = RunTestAgain.class)
   public void testTaskManualChangeDate() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
@@ -50,6 +51,7 @@ public class TaskManualChangeDate extends TestBase {
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.task().refresh();
     app.goTo().menuSchedule();
   }
 

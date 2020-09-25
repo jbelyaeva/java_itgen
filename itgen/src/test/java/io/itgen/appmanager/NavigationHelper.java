@@ -40,8 +40,7 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuTasks() {
-    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href, '/tasks')]"));
-   // click(By.xpath("//a[contains(@href, '/tasks')]"));
+    clickWithMoveToElementAndWait(8,By.xpath("//a[contains(@href, '/tasks')]"));
   }
 
   public void menuLeads() {
@@ -49,8 +48,7 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuSchedule() {
-   clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href, '/schoolSchedule')]"));
-  //  click(By.xpath("//a[contains(@href, '/schoolSchedule')]"));
+   clickWithMoveToElementAndWait(8,By.xpath("//a[contains(@href, '/schoolSchedule')]"));
   }
 
   public void menuRequests() {

@@ -88,6 +88,6 @@ public class TaskAutoGetControlInStack extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.DeleteById(taskClean.getId());
+    taskService.drop();
   }
 }

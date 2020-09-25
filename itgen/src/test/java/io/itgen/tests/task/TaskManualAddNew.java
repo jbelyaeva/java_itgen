@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -26,6 +27,10 @@ public class TaskManualAddNew extends TestBase {
 
   TaskService taskService = new TaskService();
   TaskData taskClean = null;
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    taskService.drop();}
 
   @DataProvider
   public Iterator<Object[]> validTaskFromJson() throws IOException {

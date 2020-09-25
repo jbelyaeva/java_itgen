@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -17,7 +18,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class HelperBase{
+public class HelperBase {
 
   public WebDriver wd;
 
@@ -25,9 +26,7 @@ public class HelperBase{
     this.wd = wd;
   }
 
-  public HelperBase() {
-  }
-
+  public HelperBase() {}
 
   protected void click(By locator) {
     wd.findElement(locator).click();
@@ -76,8 +75,12 @@ public class HelperBase{
       click(locator);
       wd.findElement(locator).clear();
       click(locator);
-      Actions builder = new Actions(wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
-      builder.sendKeys(date).perform(); // исполнить нужную последовательность действий (ввести дату в поле)
+      Actions builder =
+          new Actions(
+              wd); // Создаем объект класса Actions, с помощью которого будем генерировать действия
+      builder
+          .sendKeys(date)
+          .perform(); // исполнить нужную последовательность действий (ввести дату в поле)
     }
   }
 
@@ -89,9 +92,11 @@ public class HelperBase{
     int count = 0;
     // явное ожидание появления элемента
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
+    wait.until(
+        ExpectedConditions.presenceOfElementLocated(By.xpath("//ul[@class='pagination']//li[2]")));
     //
-    String next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
+    String next =
+        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
         count = count + wd.findElements(By.cssSelector("a.btn-link")).size();
@@ -108,7 +113,7 @@ public class HelperBase{
 
   public String getId(String url) {
     String[] getIdSplit = url.split("/");
-    String id = getIdSplit[4]; //достали id
+    String id = getIdSplit[4]; // достали id
     return id;
   }
 
@@ -117,14 +122,19 @@ public class HelperBase{
   }
 
   protected void noErrorMessage() {
-    Assert.assertFalse(isElementPresent(By.cssSelector(".help-block.help-block-error"))
-            && isElementPresent(By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
+    Assert.assertFalse(
+        isElementPresent(By.cssSelector(".help-block.help-block-error"))
+            && isElementPresent(
+                By.cssSelector("[id^=alert]"))); // проверка отсутствия сообщения об ошибке
   }
 
   protected void thereAreErrorMessages() {
-    Assert.assertTrue(isElementPresent(By.cssSelector(".help-block.help-block-error"))
+    Assert.assertTrue(
+        isElementPresent(By.cssSelector(".help-block.help-block-error"))
             || isElementPresent(By.cssSelector("[id^=alert]"))
-            || isElementPresent(By.xpath("//p[contains(@class,'error')]"))); // проверка появления сообщения об ошибке
+            || isElementPresent(
+                By.xpath(
+                    "//p[contains(@class,'error')]"))); // проверка появления сообщения об ошибке
   }
 
   public void logout() {
@@ -142,10 +152,7 @@ public class HelperBase{
 
   public void clickWithMoveToElementAndWait(int second, By locator) {
     WebElement dynamicElement =
-        (new WebDriverWait(wd, second))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    locator));
+        (new WebDriverWait(wd, second)).until(ExpectedConditions.elementToBeClickable(locator));
     Actions actions = new Actions(wd);
     actions.moveToElement(dynamicElement).build().perform();
     dynamicElement.click();
@@ -153,27 +160,21 @@ public class HelperBase{
 
   public void clickWaitElementToBeClicable(int second, By locator) {
     WebElement dynamicElement =
-        (new WebDriverWait(wd, second))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    locator));
+        (new WebDriverWait(wd, second)).until(ExpectedConditions.elementToBeClickable(locator));
     dynamicElement.click();
   }
 
   public void moveToElement(int second, By locator) {
     WebElement element = wd.findElement(locator);
-    (new WebDriverWait(wd, second))
-        .until(
-            ExpectedConditions.elementToBeClickable(
-                locator));
+    (new WebDriverWait(wd, second)).until(ExpectedConditions.elementToBeClickable(locator));
     Actions actions = new Actions(wd);
     actions.moveToElement(element).build().perform();
   }
 
   public Date StringToDate(String stringDate) throws ParseException {
-    String startDate = stringDate; //"Tue May 15 00:00:01 MSK 2012";
+    String startDate = stringDate; // "Tue May 15 00:00:01 MSK 2012";
     SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.US);
-    Date date = (Date) parser .parse(startDate );
+    Date date = (Date) parser.parse(startDate);
     return date;
   }
 
@@ -189,8 +190,16 @@ public class HelperBase{
     executor.executeScript("arguments[0].click();", element);
   }
 
-  public void maxBrowser(){
+  public void maxBrowser() {
     wd.manage().window().maximize();
   }
 
+  public void explicitWait(int ms) {
+    wd.manage().timeouts().implicitlyWait(ms, TimeUnit.MICROSECONDS);
+  }
+
+  public void waitUntilRefreshElement(WebElement element) {
+    WebDriverWait waitRefreshTable = new WebDriverWait(wd, 10);
+    waitRefreshTable.until(ExpectedConditions.stalenessOf(element));
+  }
 }

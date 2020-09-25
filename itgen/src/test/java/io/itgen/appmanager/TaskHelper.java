@@ -6,7 +6,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import io.itgen.model.tasks.TaskData;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,6 +13,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class TaskHelper extends HelperBase {
@@ -37,7 +38,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void fillFormTask(TaskData task) {
-    click(By.xpath("//div[@class='form-group']//input"));
+    clickWithMoveToElementAndWait(5,By.xpath("//div[@class='form-group']//input"));
     type(By.xpath("//div[@class='form-group']//input"), task.getText());
 
     type(By.xpath("//div[@class='input-group']//input[@name='user-name']"), "Admin");
@@ -50,11 +51,12 @@ public class TaskHelper extends HelperBase {
 
     type(By.xpath("//input[contains(@class,'child-name')]"), task.getUserUi().substring(0, 5));
     click(By.xpath("//li[@class='result']//span"));
+
   }
 
   public void doneTaskInStek() {
     btnLowPriority();
-    btnPoints();
+    btnPointsInStack();
     btnDoneManualTask();
   }
 
@@ -63,17 +65,19 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnPoints() {
-    try {
-      clickWaitElementToBeClicable(5,By.xpath("//button[contains(@class,'dropdown')]"));
-    }catch (ElementClickInterceptedException e){
-      btnClosePopup();
+    if(!isElementPresent(By.xpath("//button[contains(@class,'add-comment')]"))){
+      refresh();
       goToPopup();
-      clickWaitElementToBeClicable(5,By.xpath("//button[contains(@class,'dropdown')]"));
     }
+    clickWithMoveToElementAndWait(8,By.xpath("//button[contains(@class,'dropdown')]"));
+  }
+
+  private void btnPointsInStack() {
+    clickWithMoveToElementAndWait(8,By.xpath("//button[contains(@class,'dropdown')]"));
   }
 
   public void btnLowPriority() {
-    click(By.xpath("(//div[@role='group'])[3]//button[2]"));
+    clickWithMoveToElementAndWait(5, By.xpath("(//div[@role='group'])[3]//button[2]"));
   }
 
   public void btnMiddlePriority() {
@@ -81,27 +85,27 @@ public class TaskHelper extends HelperBase {
   }
 
   public void takeAutoTask() {
-    click(By.xpath("(//div[@class='actions']//button)[2]"));
+    clickWithMoveToElementAndWait(5,By.xpath("(//div[@class='actions']//button)[2]"));
   }
 
   public void doneAutoTask() {
-    btnPoints();
+    btnPointsInStack();
     btnDoneAutoTask();
   }
 
   private void btnDoneAutoTask() {
-    click(By.xpath("(//ul[contains(@class,'dropdown')]//button)[1]"));
+    clickWithMoveToElementAndWait(10,By.xpath("(//ul[contains(@class,'dropdown')]//button)[1]"));
   }
 
   public void waitAnswerInStack() {
     btnLowPriority();
-    btnPoints();
+    btnPointsInStack();
     btnWaitAnswer();
   }
 
   public void deleteInStack() {
     btnLowPriority();
-    btnPoints();
+    btnPointsInStack();
     btnDelete();
     assertDelete();
     noErrorMessage();
@@ -123,7 +127,7 @@ public class TaskHelper extends HelperBase {
   }
 
   public void deleteAutoTask() {
-    btnPoints();
+    btnPointsInStack();
     btnDaleteAutoTask();
     assertDelete();
     noErrorMessage();
@@ -134,7 +138,7 @@ public class TaskHelper extends HelperBase {
   }
 
   public void takeOnControlAutoTaskInStack() {
-    btnPoints();
+    btnPointsInStack();
     btnTakeOnControlAutoTask();
   }
 
@@ -144,17 +148,17 @@ public class TaskHelper extends HelperBase {
 
   public void selectOnTomorrowInStack() {
     btnLowPriority();
-    btnPoints();
+    btnPointsInStack();
     btnOnTomorrowTask();
   }
 
   private void btnOnTomorrowTask() {
-    click(By.xpath("(//ul[contains(@class,'dropdown')]//button)[3]"));
+    clickWithMoveToElementAndWait(5,By.xpath("(//ul[contains(@class,'dropdown')]//button)[3]"));
   }
 
   public void takeOnControManualTaskInStack() {
     btnLowPriority();
-    btnPoints();
+    btnPointsInStack();
     btnOnControlManualTask();
   }
 
@@ -169,6 +173,7 @@ public class TaskHelper extends HelperBase {
   }
 
   public Integer getCountSearchUI() {
+    moveToElement(5,By.xpath("//div[@class='panel-footer']//p"));
     String text = wd.findElement(By.xpath("//div[@class='panel-footer']//p")).getText();
     String[] elementsText = text.split(":");
     Integer count = Integer.valueOf((elementsText[1]).trim());
@@ -197,6 +202,8 @@ public class TaskHelper extends HelperBase {
   }
 
   public Integer getCountInTabUI() {
+    WebDriverWait element = new WebDriverWait(wd, 20);
+    element.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//div[@class='actions']//span)[4]")));
     String text = wd.findElement(By.xpath("(//div[@class='actions']//span)[4]")).getText();
     return Integer.valueOf(text);
   }
@@ -231,7 +238,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnClosePopup() {
-    click(By.className("close"));
+    clickWithMoveToElementAndWait(5,By.className("close"));
   }
 
   private void clickOnFullArea() {
@@ -251,12 +258,12 @@ public class TaskHelper extends HelperBase {
   }
 
   public void changePriorityManualTaskInPopup(String priority) {
-    wd.manage().timeouts().implicitlyWait(1000,TimeUnit.MICROSECONDS);
+    explicitWait(1000);
     goToPopup();
     selectChangePriority();
     changePriority(priority);
     btnClosePopup();
-    wd.manage().timeouts().implicitlyWait(0,TimeUnit.MICROSECONDS);
+    explicitWait(0);
   }
 
   private void changePriority(String priority) {
@@ -271,7 +278,6 @@ public class TaskHelper extends HelperBase {
     click(By.xpath("//select[@class='task-priority']//option[@value='" + priority + "']"));
   }
 
-
   private void selectChangePriority() {
     clickWithMoveToElementAndWait(5,By.xpath("(//div[@class='editable'])[3]"));
   }
@@ -284,25 +290,22 @@ public class TaskHelper extends HelperBase {
   }
 
   private void changeUser(String newAssignee) {
-    moveToElement(5, By.xpath("//div[@class='input-group']//input"));
-    click(By.xpath("//div[@class='input-group']//input"));
+    clickWithMoveToElementAndWait(20, By.xpath("//div[@class='input-group']//input"));
     type(By.xpath("//div[@class='input-group']//input"), newAssignee);
-    click(By.xpath("//span[contains(@class,'result')]"));
+    clickWithMoveToElementAndWait(10,By.xpath("//span[contains(@class,'result')]"));
   }
 
   private void selectChangeAssignee() {
     moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
-    clickWithMoveToElementAndWait(1, By.xpath("(//span[contains(@class,'pencil')])[2]"));
+    clickWithMoveToElementAndWait(5, By.xpath("(//span[contains(@class,'pencil')])[2]"));
   }
 
   public void changeDateManualTaskInPopup() {
     goToPopup();
-    wd.manage().timeouts().implicitlyWait(500, TimeUnit.MICROSECONDS);
     selectChangeDateByManualTask();
     changeDateNextDay();
     clickOnFullArea();
     btnClosePopup();
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.MICROSECONDS);
   }
 
   private void changeDateNextDay() {
@@ -317,8 +320,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void selectChangeDateByManualTask() {
-    moveToElement(5, By.xpath("(//div[contains(@class,'editable')])[7]"));
-    clickWithMoveToElementAndWait(1, By.xpath("(//div[contains(@class,'editable')])[7]"));
+    clickWithMoveToElementAndWait(10, By.xpath("(//div[contains(@class,'editable')])[7]"));
   }
 
   public void deleteTaskInPopup() {
@@ -333,6 +335,7 @@ public class TaskHelper extends HelperBase {
     try {
       clickWaitElementToBeClicable(5,By.xpath("//a[contains(@class,'remove')]"));
     }catch (ElementClickInterceptedException e){
+      refresh();
       btnClosePopup();
       goToPopup();
       btnPoints();
@@ -359,7 +362,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnWaitAnswerPopup() {
-    click(By.xpath("//a[contains(@class,'wait')]"));
+   clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@class,'wait')]"));
   }
 
   public void onTomorrowManualTaskInPopup() {
@@ -370,7 +373,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnOnTomorrowPopup() {
-    click(By.xpath("//a[contains(@class,'tomorrow')]"));
+    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@class,'tomorrow')]"));
   }
 
   public void onControlManualTaskInPopup() {
@@ -381,7 +384,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnOnControlPopup() {
-    click(By.xpath("//a[contains(@class,'watch')]"));
+    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@class,'watch')]"));
   }
 
   public void changeAssigneeAutoTaskInPopup(String newAssignee) {
@@ -392,7 +395,10 @@ public class TaskHelper extends HelperBase {
   }
 
   private void selectChangeAssigneeForAutoTask() {
-    moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
+    moveToElement(30, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
+    if(!isElementPresent( By.xpath("(//span[contains(@class,'pencil')])[1]"))){
+      moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
+    }
     clickWithMoveToElementAndWait(1, By.xpath("(//span[contains(@class,'pencil')])[1]"));
   }
 
@@ -411,13 +417,13 @@ public class TaskHelper extends HelperBase {
 
   public void changeClientAutoTaskInPopup(String nameClient) {
     goToPopup();
-    selectChangeClentForAutoTask();
+    selectChangeClientForAutoTask();
     changeUser(nameClient);
     btnClosePopup();
   }
 
-  private void selectChangeClentForAutoTask() {
-    moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
+  private void selectChangeClientForAutoTask() {
+    moveToElement(20, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
     clickWithMoveToElementAndWait(1, By.xpath("(//span[contains(@class,'pencil')])[3]"));
   }
 
@@ -437,7 +443,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnDoneAutoTaskPopup() {
-    click(By.xpath("//a[contains(@class,'complete')]"));
+    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@class,'complete')]"));
   }
 
   public void takeOnControlAutoTaskInPopup() {
@@ -466,4 +472,7 @@ public class TaskHelper extends HelperBase {
         element);
   }
 
+  public void selectStatusNotDone() {
+    click(By.xpath("//div[@role='group']//button[1]"));
+  }
 }

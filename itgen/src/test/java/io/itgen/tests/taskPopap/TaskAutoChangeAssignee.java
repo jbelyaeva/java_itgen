@@ -1,6 +1,5 @@
 package io.itgen.tests.taskPopap;
 
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -48,7 +47,7 @@ public class TaskAutoChangeAssignee extends TestBase {
   }
 
   @Test
-  public void testAutoDoneInStack() {
+  public void testAutoChangeAssigne() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
     app.task().changeAssigneeAutoTaskInPopup("Дефолтный тренер");;

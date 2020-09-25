@@ -7,12 +7,14 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -155,9 +157,22 @@ public class TaskFiltrByPriorityInStack extends TestBase {
 
   }
 
-  @Test//приоритет средний, чек-бокс Исполнитель
-  public void testFiltrByPriorityInStack_1() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, статус Выполненные
+  public void testFiltrByPriorityInStack_1() throws InterruptedException {
     app.goTo().menuTasks();
+    app.task().selectStatusDone();
+    app.task().btnLowPriority();
+    assertThat(app.task().getCountSearchUI(), equalTo(1));
+    assertThat(app.task().getNameClientUI(), equalTo("Дефолтный Ребенок"));
+    assertThat(app.task().getCountInTabUI(), equalTo(1));
+    assertThat(app.task().getCountInMenuUI(), equalTo(2));
+  }
+
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Исполнитель
+  public void testFiltrByPriorityInStack_2() throws InterruptedException {
+    app.goTo().menuTasks();
+    app.task().btnMiddlePriority();
+    app.task().selectStatusNotDone();
     //проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(1));
     //проверка, что найдена именно Настя Бокша и она одна
@@ -168,8 +183,8 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test//приоритет средний, чек-бокс Создатель
-  public void testFiltrByPriorityInStack_2() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Создатель
+  public void testFiltrByPriorityInStack_3() throws InterruptedException {
     app.task().selectAssigner();
     app.task().selectCreator();
     //проверка, что футере правильное количество найденных записей
@@ -185,52 +200,41 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test//приоритет низкий, чек-бокс Исполнитель
-  public void testFiltrByPriorityInStack_3() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Исполнитель
+  public void testFiltrByPriorityInStack_4() throws InterruptedException {
     app.task().selectCreator();
     app.task().selectAssigner();
     app.task().btnLowPriority();
-
+    Thread.sleep(5000);
     assertThat(app.task().getCountSearchUI(), equalTo(0));
     assertThat(app.task().getCountInTabUI(), equalTo(1));
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test//приоритет низкий, чек-бокс Создатель
-  public void testFiltrByPriorityInStack_4() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Создатель
+  public void testFiltrByPriorityInStack_5() throws InterruptedException {
     app.task().selectAssigner();
     app.task().selectCreator();
     app.task().btnLowPriority();
-
     assertThat(app.task().getCountSearchUI(), equalTo(0));
     assertThat(app.task().getCountInTabUI(), equalTo(1));
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test//приоритет низкий, статус Выполненные
-  public void testFiltrByPriorityInStack_5() {
-    app.task().selectCreator();
-    app.task().selectStatusDone();
-    app.task().btnLowPriority();
-
-    assertThat(app.task().getCountSearchUI(), equalTo(1));
-    assertThat(app.task().getNameClientUI(), equalTo("Дефолтный Ребенок"));
-    assertThat(app.task().getCountInTabUI(), equalTo(1));
-    assertThat(app.task().getCountInMenuUI(), equalTo(2));
-  }
-
-  @Test//приоритет средний, статус Выполненные
-  public void testFiltrByPriorityInStack_6() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Выполненные
+  public void testFiltrByPriorityInStack_6() throws InterruptedException {
     app.task().btnMiddlePriority();
-
+    app.task().selectStatusDone();
     assertThat(app.task().getCountSearchUI(), equalTo(0));
     assertThat(app.task().getCountInTabUI(), equalTo(1));
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test//приоритет средний, статус Жду ответа
-  public void testFiltrByPriorityInStack_7() {
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Жду ответа
+  public void testFiltrByPriorityInStack_7() throws InterruptedException {
     app.task().selectStatusWaitAnswer();
+    app.task().selectCreator();
+    app.task().selectAssigner();
     assertThat(app.task().getCountSearchUI(), equalTo(1));
     assertThat(app.task().getNameClientUI(), equalTo("Дефолтный Ребенок"));
     assertThat(app.task().getCountInTabUI(), equalTo(1));
@@ -244,4 +248,5 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     studentService.DeleteById("Student");
     familyService.DeleteById("Student");
   }
+
 }
