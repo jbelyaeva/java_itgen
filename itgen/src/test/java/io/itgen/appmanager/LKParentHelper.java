@@ -368,6 +368,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void inputPassword(String password) {
+    clickWithMoveToElementAndWait(5,By.xpath("//input[@autocomplete='new-password']"));
     type(By.xpath("//input[@autocomplete='new-password']"), password);
     noErrorMessage();
   }

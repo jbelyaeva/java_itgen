@@ -2,6 +2,7 @@ package io.itgen.tests.screenShot;
 
 import static io.itgen.appmanager.ApplicationManager.properties;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
@@ -155,7 +156,7 @@ public class SshotMainTasks extends TestBase {
 
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotMainTasks() throws AWTException, IOException {
     String name = "Admin_TasksMain_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
