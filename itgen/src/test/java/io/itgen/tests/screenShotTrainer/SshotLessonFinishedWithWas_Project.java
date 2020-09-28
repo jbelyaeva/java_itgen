@@ -110,13 +110,16 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
 
     String name = "Trainer_FinishedLessonWithWasProject_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//div[@class='text-capitalize'][2]"));
-    locatorIgnor.add(By.xpath("//div[@class='text-muted']"));
     locatorIgnor.add(By.xpath("//div[@class='history-month-header']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
-    String[] deleteElements = {"//div[@class='date']", "//div[@class='duration']",
-        "//div[@class='time']", "//span[@class='create-time']"};
+    String[] deleteElements = {
+        "//div[@class='text-capitalize'][2]",
+        "//div[@class='text-muted']",
+        "//div[@class='date']",
+        "//div[@class='duration']",
+        "//div[@class='time']",
+        "//span[@class='create-time']"};
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =
