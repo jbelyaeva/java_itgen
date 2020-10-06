@@ -78,7 +78,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @Test(dataProvider = "validWorkersFromJson")
   public void testWorkerCreation(WorkerData worker){
-    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
     String url = app.worker().createWorker(worker);

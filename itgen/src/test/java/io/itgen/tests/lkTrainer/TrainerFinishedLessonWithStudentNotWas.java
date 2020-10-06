@@ -73,7 +73,8 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
   }
 
   @AfterMethod(alwaysRun = true)
-  public void clean() {
+  public void clean() throws InterruptedException {
+    Thread.sleep(10000);
     scheduleService.DeleteById("finishLessonByTrainer");
     studentService.DeleteById("finishLessonByTrainer");
     familyService.DeleteById("finishLessonByTrainer");

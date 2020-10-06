@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Python",
+    "description": "Очень клевый тест",
+    "rootFormId": "12345",
+    "maxScore": 9,
+    "minScore": 8,
+    "timeForPassing": 15
+  }
+  ]

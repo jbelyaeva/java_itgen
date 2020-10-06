@@ -1,6 +1,5 @@
 package io.itgen.tests.payment;
 
-import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
@@ -29,7 +28,7 @@ public class PaymentByParent extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testPaymentByParent() {
     app.payment().goToShopByParent();
     app.payment().paymentByParent();

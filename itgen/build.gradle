@@ -644,3 +644,28 @@ task testScreenShotsTrainer(type: Test) {
 testScreenShotsTrainer.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
+
+//
+task testTypeform(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-typeform.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testTypeform.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}

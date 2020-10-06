@@ -34,8 +34,8 @@ public class TimeGeneral {
   public long getTimeNow() {
     long dataWithTime = new Date().getTime();
     int popravka = 0;
-    if (diffTz()<100){ popravka = 10800000;}
-    return dataWithTime - getMsLocalTime()+popravka;
+    if (diffTz()<100){popravka = 10800000;}
+    return dataWithTime - getMsLocalTime() + popravka;
   }
 
   // поправка на часовой пояс, заданный в properties

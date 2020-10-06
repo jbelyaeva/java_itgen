@@ -5,6 +5,7 @@ import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
 public class RunTestAgain extends TestBase implements IRetryAnalyzer {
+
   private int nowCount = 0;
   private int maxCount = 1;
 
@@ -17,9 +18,8 @@ public class RunTestAgain extends TestBase implements IRetryAnalyzer {
         app.base().refresh();
         return true; // пока истина перезапускаем
       }
-    }
-    else {
-        iTestResult.setStatus(ITestResult.FAILURE);
+    } else {
+      iTestResult.setStatus(ITestResult.FAILURE);
     }
     System.out.println("ТЕСТ ПРОВАЛЕН ДВАЖДЫ!!! ");
     nowCount = 0;

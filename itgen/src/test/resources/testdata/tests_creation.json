@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Scratch",
+    "description": "Тест для перехода на Scratch",
+    "rootFormId": "11",
+    "maxScore": 5,
+    "minScore": 4,
+    "timeForPassing": 5
+  }
+  ]

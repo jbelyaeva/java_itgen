@@ -66,7 +66,7 @@ public class ParentCreationTests extends TestBase {
 
   @Test(dataProvider = "validParentsFromJson")
   public void testParentCreation(ParentData parent) {
-    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     app.goTo().menuStudents();
     Parents before = app.db().parents();
     app.student().selectStudentInListUIById("forParentCreation");

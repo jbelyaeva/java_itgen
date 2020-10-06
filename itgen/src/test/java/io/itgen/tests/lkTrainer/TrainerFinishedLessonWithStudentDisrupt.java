@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.itgen.general.TimeGeneral;
+import io.itgen.model.Payments;
 import io.itgen.model.schedule.Comments;
 import io.itgen.model.schedule.FinishedChildLessons;
 import io.itgen.model.schedule.FinishedLessons;

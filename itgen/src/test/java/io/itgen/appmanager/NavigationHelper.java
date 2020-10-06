@@ -18,29 +18,20 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuStudents() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//a[contains(@href, '/childs')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    doubleClick(By.xpath("//a[contains(@href, '/childs')]"));
+  //  clickWithMoveToElementAndWait(10,By.xpath("//a[contains(@href, '/childs')]"));
   }
 
   public void menuTrainers() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//a[contains(@href, '/trainers')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(10, By.xpath("//a[contains(@href, '/trainers')]"));
   }
 
   public void menuTasks() {
     clickWithMoveToElementAndWait(8,By.xpath("//a[contains(@href, '/tasks')]"));
+  }
+
+  public void menuTests() {
+    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href, '/tests')]"));
   }
 
   public void menuLeads() {
@@ -48,11 +39,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuSchedule() {
-   clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/schoolSchedule')]"));
+    clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/schoolSchedule')]"));
   }
 
   public void menuRequests() {
-    clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/requests')]"));
+    click(By.xpath("//a[contains(@href, '/requests')]"));
   }
 
   public void menuMaterials() {

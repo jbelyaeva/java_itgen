@@ -58,10 +58,10 @@ public class SshotLessonStart extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     String[] deleteElements = {
-        "//div[@class='text-capitalize'][2]",
+        "(//div[@class='text-capitalize'])[2]",
         "//div[@class='text-muted']",
-        "//div[@class='duration']"
-    };
+        "//div[@class='duration']"};
+
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =

@@ -20,7 +20,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 public class SshotPopupTasks extends TestBase {
 
   private final TaskService taskService = new TaskService();
-  private TaskData taskClean = null;
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();

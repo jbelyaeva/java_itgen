@@ -54,7 +54,7 @@ public class FamilyCreationTests extends TestBase {
     String url = app.family().getURL();
     idFamily = app.family().getId(url);
     Students users = app.db().familyComposition(idFamily);
-    assertThat(users.size(), equalTo(2));
+    assertThat(users.size(), equalTo(2)); 
   }
 
   @AfterMethod(alwaysRun = true)
