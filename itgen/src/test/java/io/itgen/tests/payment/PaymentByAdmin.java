@@ -1,5 +1,6 @@
 package io.itgen.tests.payment;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.FamilyService;
 import io.itgen.services.ParentService;
 import io.itgen.services.StudentService;
@@ -44,7 +45,7 @@ public class PaymentByAdmin extends TestBase {
             true);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testPaymentByAdmin()  {
     app.goTo().menuTasks();
     app.goTo().menuStudents();

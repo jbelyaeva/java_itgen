@@ -8,6 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.materials.MaterialBranchData;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.Materials;
@@ -64,7 +65,7 @@ public class CreateMaterial extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validMaterialFromJson")
+  @Test(dataProvider = "validMaterialFromJson", retryAnalyzer = RunTestAgain.class)
   public void testCreateMaterial(MaterialData material) {
     app.goTo().menuTasks();
     app.goTo().menuMaterials();
