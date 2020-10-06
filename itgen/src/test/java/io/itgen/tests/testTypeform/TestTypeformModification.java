@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.typeform.TestData;
 import io.itgen.model.typeform.Tests;
 import io.itgen.services.TestService;
@@ -55,7 +56,7 @@ public class TestTypeformModification extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validDataTestFromJson")
+  @Test(dataProvider = "validDataTestFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTypeformModification(TestData test) {
     app.goTo().menuSchedule();
     app.goTo().menuTests();
