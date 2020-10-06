@@ -45,7 +45,7 @@ public class LeadCreationTest extends TestBase {
 
   @Test(dataProvider = "validLeadsFromJson")
   public void testLeadCreation(LeadData lead) {
-    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     app.goTo().menuLeads();
     Leads before = app.db().leads();
     app.lead().create(lead);

@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import io.itgen.model.tasks.TaskData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -176,7 +177,7 @@ public class TaskHelper extends HelperBase {
   }
 
   public Integer getCountSearchUI() {
-    moveToElement(5, By.xpath("//div[@class='panel-footer']//p"));
+    moveToClicableElement(5, By.xpath("//div[@class='panel-footer']//p"));
     String text = wd.findElement(By.xpath("//div[@class='panel-footer']//p")).getText();
     String[] elementsText = text.split(":");
     return Integer.valueOf((elementsText[1]).trim());
@@ -243,7 +244,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void btnClosePopup() {
-    moveToElement(5, By.className("close"));
+    moveToClicableElement(5, By.className("close"));
     clickWithMoveToElementAndWait(5, By.className("close"));
   }
 
@@ -285,7 +286,7 @@ public class TaskHelper extends HelperBase {
   }
 
   private void selectChangePriority() {
-    clickWithMoveToElementAndWait(5, By.xpath("(//div[@class='editable'])[3]"));
+    clickWithMoveToElementAndWait(5,By.xpath("(//div[@class='editable'])[3]"));
   }
 
   public void changeAssigneeManualTaskInPopup(String newAssignee) throws InterruptedException {
@@ -303,7 +304,7 @@ public class TaskHelper extends HelperBase {
 
   private void selectChangeAssignee() throws InterruptedException {
     Thread.sleep(5000);
-    moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
+    moveToClicableElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
     clickWithMoveToElementAndWait(5, By.xpath("(//span[contains(@class,'pencil')])[2]"));
   }
 
@@ -422,10 +423,10 @@ public class TaskHelper extends HelperBase {
 
   private void selectChangeAssigneeForAutoTask() throws InterruptedException {
     Thread.sleep(3000);
-    moveToElement(30, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
+    moveToClicableElement(30, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
     //если не найден карандаш, то повторить наведение
     if (!isElementPresent(By.xpath("(//span[contains(@class,'pencil')])[1]"))) {
-      moveToElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
+      moveToClicableElement(5, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[1]"));
     }
     clickWithMoveToElementAndWait(1, By.xpath("(//span[contains(@class,'pencil')])[1]"));
   }
@@ -440,7 +441,7 @@ public class TaskHelper extends HelperBase {
 
   private void selectChangeDateByAutoTask() throws InterruptedException {
     Thread.sleep(5000);
-    moveToElement(5, By.xpath("(//div[contains(@class,'editable')])[3]"));
+    moveToClicableElement(5, By.xpath("(//div[contains(@class,'editable')])[3]"));
     clickWithMoveToElementAndWait(1, By.xpath("(//div[contains(@class,'editable')])[3]"));
   }
 
@@ -453,7 +454,7 @@ public class TaskHelper extends HelperBase {
 
   private void selectChangeClientForAutoTask() throws InterruptedException {
     Thread.sleep(3000);
-    moveToElement(20, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
+    moveToClicableElement(20, By.xpath("(//div[@class='modal-content']//div[@class='editable'])[2]"));
     clickWithMoveToElementAndWait(1, By.xpath("(//span[contains(@class,'pencil')])[3]"));
   }
 

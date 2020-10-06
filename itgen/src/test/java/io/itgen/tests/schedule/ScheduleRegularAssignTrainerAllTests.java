@@ -2,23 +2,24 @@ package io.itgen.tests.schedule;
 //автотест проверяет назначение другого тренера (c id=18) в постоянном расписании на одно занятие и на все
 //начальные данные: период, id тренера
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import io.itgen.general.TimeGeneral;
-import io.itgen.model.schedule.C;
-import io.itgen.model.schedule.ST;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
-import io.itgen.model.schedule.Slots;
-import io.itgen.model.schedule.Times;
+import io.itgen.model.schedule.C;
 import io.itgen.services.ScheduleService;
-import io.itgen.tests.TestBase;
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import io.itgen.general.TimeGeneral;
+import io.itgen.model.schedule.ST;
+import io.itgen.model.schedule.Slots;
+import io.itgen.model.schedule.Times;
+import io.itgen.tests.TestBase;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleRegularAssignTrainerAllTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();

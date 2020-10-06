@@ -45,12 +45,13 @@
 5.  testWorkers 
 6.  testTrainers 
 7.  testSchedule 
-8.  testWindowSchedule 
+8.  testWindowsSchedule 
 9.  testRequests 
 10. testMaterials
 11. testPayments
 12. testSmoke
-13. testNostable
+13. testTasks
+14. testNostable
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
 1. testSmokeParent
@@ -67,11 +68,13 @@
  5.  testWorkers 
  6.  testTrainers 
  7.  testSchedule 
- 8.  testWindowSchedule 
+ 8.  testWindowsSchedule 
  9.  testRequests 
  10. testMaterials
- 11. testPayments
+ 11. testTasks
  12. testSmokeParent
+ 13. testSmokeTrainer
+ 
  
 
 

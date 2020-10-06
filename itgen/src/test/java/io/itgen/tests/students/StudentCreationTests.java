@@ -63,7 +63,7 @@ public class StudentCreationTests extends TestBase {
 
   @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
-    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().create(student);
@@ -77,7 +77,7 @@ public class StudentCreationTests extends TestBase {
 
   @Test(dataProvider = "noValidStudentsFromJson")
   public void testBadStudentCreation(StudentData student) {
-    app.goTo().menuTasks();
+    app.goTo().menuTrainers();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().createBad(student);

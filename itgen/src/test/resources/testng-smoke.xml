@@ -74,7 +74,7 @@
       <class name="io.itgen.tests.task.TaskManualOnTomorrowInStack"/>
       <class name="io.itgen.tests.task.TaskManualGetControlInStack"/>
       <class name="io.itgen.tests.task.TaskFiltrByUserInStack"/>
-     <!-- <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>-->
+     <!-- <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/> -->
       <class name="io.itgen.tests.taskPopup.TaskManualChangeTitle"/>
       <class name="io.itgen.tests.taskPopup.TaskManualChangeAssignee"/>
       <class name="io.itgen.tests.taskPopup.TaskManualChangePriority"/>
@@ -92,6 +92,13 @@
       <class name="io.itgen.tests.taskPopup.TaskAutoTakeOnControlInPopup"/>
       <class name="io.itgen.tests.taskPopup.TaskManualLeaveCommentInPopup"/>
       <class name="io.itgen.tests.taskPopup.TaskAutoLeaveCommentInPopup"/>
+      <class name="io.itgen.tests.testTypeform.TestTypeformAddNewEnglishTest" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformModification" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformAvailableToStudent" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformRemoteNotHaveStudent" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformInProcess" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformDone" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformDeletion" />
       </classes>
   </test>
 </suite>

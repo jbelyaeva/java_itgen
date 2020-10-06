@@ -26,6 +26,5 @@ public class WorkerDao {
     Datastore datastore = morphiaSessionFactoryUtil();
     return datastore.find(WorkerData.class).field("id").equal(id).first();
   }
-
 }
 

@@ -30,9 +30,16 @@ public class TrTaskHelper {
   private final TimeGeneral time = new TimeGeneral();
 
   public void newManualTask(
-      String idTask, String idCreator, String idAssignee, String text, int priority,
-      Date createAt, String status, Date dateWithTime, double dateSort, String idUser
-  ) {
+      String idTask,
+      String idCreator,
+      String idAssignee,
+      String text,
+      int priority,
+      Date createAt,
+      String status,
+      Date dateWithTime,
+      double dateSort,
+      String idUser) {
     TaskData task =
         new TaskData()
             .withId(idTask)
@@ -51,9 +58,15 @@ public class TrTaskHelper {
     taskService.save(task);
   }
 
-  public void newAutoTask(String idTask, String text, Date createAt, String status,
+  public void newAutoTask(
+      String idTask,
+      String text,
+      Date createAt,
+      String status,
       Date dateWithTime,
-      double dateSort, String idUser, String period) {
+      double dateSort,
+      String idUser,
+      String period) {
     TaskData task =
         new TaskData()
             .withId(idTask)
@@ -67,7 +80,9 @@ public class TrTaskHelper {
             .withDueDateSort(dateSort)
             .withLinkUser(idUser)
             .withLesson(
-                new Lesson().withSId("recordOnSchedule").withSt((double) time.getMsLocalTime())
+                new Lesson()
+                    .withSId("recordOnSchedule")
+                    .withSt((double) time.getMsLocalTime())
                     .withW(time.Stime(period)));
     taskService.save(task);
   }
@@ -97,15 +112,18 @@ public class TrTaskHelper {
             .withWatchers(getWatchers(idAssignee, activities))
             .withComments(getComments(commentaries, activities))
             .withActivity(
-                getActivities(idAssignee, activities, uId, idUser, dates, texts, clients,
-                    commentaries))
+                getActivities(
+                    idAssignee, activities, uId, idUser, dates, texts, clients, commentaries))
             .withDueDateWithTime(dateWithTime)
             .withDueDateSort(dateSort)
             .withAssignee(idAssignee)
             .withLinkUser(idUser)
             .withPriority(0)
-            .withLesson(new Lesson().withSId("Schedule").withSt((double) time.getMsLocalTime())
-                .withW(time.Stime(period)));
+            .withLesson(
+                new Lesson()
+                    .withSId("Schedule")
+                    .withSt((double) time.getMsLocalTime())
+                    .withW(time.Stime(period)));
     taskService.save(task);
   }
 
@@ -135,8 +153,8 @@ public class TrTaskHelper {
             .withWatchers(getWatchers(idAssignee, activities))
             .withComments(getComments(commentaries, activities))
             .withActivity(
-                getActivities(idAssignee, activities, uId, idUser, dates, texts, clients,
-                    commentaries))
+                getActivities(
+                    idAssignee, activities, uId, idUser, dates, texts, clients, commentaries))
             .withDueDateWithTime(dateWithTime)
             .withDueDateSort(dateSort)
             .withAssignee(idAssignee)
@@ -146,9 +164,15 @@ public class TrTaskHelper {
     taskService.save(task);
   }
 
-  private List<Activity> getActivities(String idAssignee, String activites, String uId,
+  private List<Activity> getActivities(
+      String idAssignee,
+      String activites,
+      String uId,
       String idUser,
-      Date[] dates, String[] texts, String[] clients, String[] commentaries) {
+      Date[] dates,
+      String[] texts,
+      String[] clients,
+      String[] commentaries) {
     switch (activites) {
       case ("newAutoTask_takeAutoTask"):
         return Collections.singletonList(
@@ -162,83 +186,151 @@ public class TrTaskHelper {
         return Arrays.asList(
             new Activity().withUId(idAssignee).withTs(new Date()).withT("tookToWork"),
             new Activity().withUId(idAssignee).withTs(new Date()).withT("watched"));
-      case ("takeAutoTask_changeAssigneeAutoTask"): //супера на тренера
+      case ("takeAutoTask_changeAssigneeAutoTask"): // супера на тренера
         return Arrays.asList(
             new Activity().withUId(uId).withTs(new Date()).withT("tookToWork"),
-            new Activity().withUId(uId).withTs(new Date()).withT("assigneeChanged")
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("assigneeChanged")
                 .withD(
                     new D()
                         .withNewChangeData(
-                            new New().withId(idAssignee)
-                                .withN("" + trainerService.findById(idAssignee).getFirstName()
-                                    + " " + trainerService.findById(idAssignee).getLastName() + ""))
+                            new New()
+                                .withId(idAssignee)
+                                .withN(
+                                    ""
+                                        + trainerService.findById(idAssignee).getFirstName()
+                                        + " "
+                                        + trainerService.findById(idAssignee).getLastName()
+                                        + ""))
                         .withOldChangeData(
-                            new Old().withId(uId)
-                                .withN("" + workerService.findById(uId).getFirstName()
-                                    + " " + workerService.findById(uId).getLastName() + ""))));
+                            new Old()
+                                .withId(uId)
+                                .withN(
+                                    ""
+                                        + workerService.findById(uId).getFirstName()
+                                        + " "
+                                        + workerService.findById(uId).getLastName()
+                                        + ""))));
       case ("takeAutoTask_changeDateAutoTask"):
         return Arrays.asList(
             new Activity().withUId(uId).withTs(new Date()).withT("tookToWork"),
-            new Activity().withUId(uId).withTs(new Date()).withT("dateChanged")
-                .withD(new D().withNewChangeData(new New().withV(dates[1]))
-                    .withOldChangeData(new Old().withV(dates[0]))),
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("dateChanged")
+                .withD(
+                    new D()
+                        .withNewChangeData(new New().withV(dates[1]))
+                        .withOldChangeData(new Old().withV(dates[0]))),
             new Activity().withUId(uId).withTs(new Date()).withT("completed"));
       case ("takeAutoTask_changeClientAutoTask"):
         return Arrays.asList(
             new Activity().withUId(uId).withTs(new Date()).withT("tookToWork"),
-            new Activity().withUId(uId).withTs(new Date()).withT("linkUserUpdated")
-                .withD(new D().withNewChangeData(new New().withId(idUser)
-                    .withN("" + studentService.findById(idUser).getFirstname()
-                        + " " + studentService.findById(idUser).getLastname() + "")
-                    .withT(studentService.findById(idUser).getRoles().get(0)))
-                    .withOldChangeData(new Old().withId(clients[0])
-                        .withN("" + studentService.findById(clients[0]).getFirstname()
-                            + " " + studentService.findById(clients[0]).getLastname() + "")
-                        .withT(studentService.findById(clients[0]).getRoles().get(0)))));
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("linkUserUpdated")
+                .withD(
+                    new D()
+                        .withNewChangeData(
+                            new New()
+                                .withId(idUser)
+                                .withN(
+                                    ""
+                                        + studentService.findById(idUser).getFirstname()
+                                        + " "
+                                        + studentService.findById(idUser).getLastname()
+                                        + "")
+                                .withT(studentService.findById(idUser).getRoles().get(0)))
+                        .withOldChangeData(
+                            new Old()
+                                .withId(clients[0])
+                                .withN(
+                                    ""
+                                        + studentService.findById(clients[0]).getFirstname()
+                                        + " "
+                                        + studentService.findById(clients[0]).getLastname()
+                                        + "")
+                                .withT(studentService.findById(clients[0]).getRoles().get(0)))));
       case ("newTask_leaveAutoCommentTask"):
         return Arrays.asList(
             new Activity().withUId(uId).withTs(new Date()).withT("tookToWork"),
-            new Activity().withUId(uId).withTs(new Date()).withT("commentAdded")
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("commentAdded")
                 .withD(new D().withNewData(commentaries[0])));
       case ("newTask_waitAnswer"):
         return Collections.singletonList(
-            new Activity().withUId(uId).withTs(new Date()).withT("statusChanged")
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("statusChanged")
                 .withD(new D().withNewData("wait").withOldData("open")));
       case ("newTask_doneTask"):
         return Collections.singletonList(
-            new Activity().withUId(idAssignee).withTs(new Date()).withT("statusChanged")
+            new Activity()
+                .withUId(idAssignee)
+                .withTs(new Date())
+                .withT("statusChanged")
                 .withD(new D().withNewData("closed").withOldData("open")));
       case ("newTask_changeDateTask"):
         return Collections.singletonList(
-            new Activity().withUId(idAssignee).withTs(new Date()).withT("dateChanged")
-                .withD(new D().withNewChangeData(new New().withV(dates[1]))
-                    .withOldChangeData(new Old().withV(dates[0]))));
+            new Activity()
+                .withUId(idAssignee)
+                .withTs(new Date())
+                .withT("dateChanged")
+                .withD(
+                    new D()
+                        .withNewChangeData(new New().withV(dates[1]))
+                        .withOldChangeData(new Old().withV(dates[0]))));
       case ("newTask_takeOnControlTask"):
         return Collections.singletonList(
             new Activity().withUId(idAssignee).withTs(new Date()).withT("watched"));
       case ("newTask_changeTextTask"):
         return Collections.singletonList(
-            new Activity().withUId(idAssignee).withTs(new Date()).withT("textChanged")
+            new Activity()
+                .withUId(idAssignee)
+                .withTs(new Date())
+                .withT("textChanged")
                 .withD(new D().withNewData(texts[1]).withOldData(texts[0])));
       case ("newTask_changePriority"):
         return Collections.singletonList(
             new Activity().withUId(idAssignee).withTs(new Date()).withT("priorityChanged"));
-      case ("newTask_changeAssignee"): //супера на тренера
+      case ("newTask_changeAssignee"): // супера на тренера
         return Collections.singletonList(
-            new Activity().withUId(uId).withTs(new Date()).withT("assigneeChanged")
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("assigneeChanged")
                 .withD(
                     new D()
                         .withNewChangeData(
-                            new New().withId(idAssignee)
-                                .withN("" + trainerService.findById(idAssignee).getFirstName()
-                                    + " " + trainerService.findById(idAssignee).getLastName() + ""))
+                            new New()
+                                .withId(idAssignee)
+                                .withN(
+                                    ""
+                                        + trainerService.findById(idAssignee).getFirstName()
+                                        + " "
+                                        + trainerService.findById(idAssignee).getLastName()
+                                        + ""))
                         .withOldChangeData(
-                            new Old().withId(uId)
-                                .withN("" + workerService.findById(uId).getFirstName()
-                                    + " " + workerService.findById(uId).getLastName() + ""))));
+                            new Old()
+                                .withId(uId)
+                                .withN(
+                                    ""
+                                        + workerService.findById(uId).getFirstName()
+                                        + " "
+                                        + workerService.findById(uId).getLastName()
+                                        + ""))));
       case ("newTask_leaveCommentTask"):
         return Collections.singletonList(
-            new Activity().withUId(uId).withTs(new Date()).withT("commentAdded")
+            new Activity()
+                .withUId(uId)
+                .withTs(new Date())
+                .withT("commentAdded")
                 .withD(new D().withNewData(commentaries[0])));
       default:
         return new ArrayList<>();
@@ -246,8 +338,8 @@ public class TrTaskHelper {
   }
 
   private List<String> getWatchers(String idAssignee, String activites) {
-    if (activites.equals("takeAutoTask_takeOnControlAutoTask") || activites
-        .equals("newTask_takeOnControlTask")) {
+    if (activites.equals("takeAutoTask_takeOnControlAutoTask")
+        || activites.equals("newTask_takeOnControlTask")) {
       String[] watchers = {idAssignee};
       return Arrays.asList(watchers);
     }
@@ -255,16 +347,24 @@ public class TrTaskHelper {
   }
 
   private List<Comments> getComments(String[] commentaries, String activites) {
+    String id = "";
+
     switch (activites) {
       case ("newTask_leaveCommentTask"):
-        return Arrays.asList(new Comments().withId("different").withOwner(commentaries[1])
-            .withText(commentaries[0]).withCreateAt(new Date()));
+        id = "different";
+        break;
       case ("newTask_leaveAutoCommentTask"):
-        return Arrays.asList(new Comments().withId("differents").withOwner(commentaries[1])
-            .withText(commentaries[0]).withCreateAt(new Date()));
+        id = "differents";
+        break;
       default:
         return new ArrayList<>();
     }
-  }
 
+    return Arrays.asList(
+        new Comments()
+            .withId(id)
+            .withOwner(commentaries[1])
+            .withText(commentaries[0])
+            .withCreateAt(new Date()));
+  }
 }

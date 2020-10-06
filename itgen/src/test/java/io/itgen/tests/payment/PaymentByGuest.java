@@ -4,7 +4,6 @@ import static io.itgen.appmanager.ApplicationManager.properties;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.AssertJUnit.assertEquals;
 
-import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
@@ -33,7 +32,7 @@ public class PaymentByGuest extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testPaymentByGuest() {
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();

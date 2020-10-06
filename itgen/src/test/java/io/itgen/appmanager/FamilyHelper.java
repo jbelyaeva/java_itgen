@@ -102,7 +102,7 @@ public class FamilyHelper extends HelperBase {
   }
 
   public void bntDeleteFamily() {
-    click(By.xpath("//button[contains(@class, 'btn-remove-family')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class, 'btn-remove-family')]"));
   }
 
   public void alertDeleteSelectedFamily() {

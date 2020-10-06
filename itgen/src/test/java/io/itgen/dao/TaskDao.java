@@ -54,7 +54,5 @@ public class TaskDao {
     UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).unset(name);
     datastore.update(query, (UpdateOperations<TaskData>) ops);
   }
-
-
 }
 

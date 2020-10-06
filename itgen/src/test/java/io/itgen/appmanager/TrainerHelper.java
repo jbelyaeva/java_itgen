@@ -288,7 +288,8 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void selectLesson(String id) {
-    click(By.xpath("//a[contains(@href,'" + id + "')]"));
+    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href,'" + id + "')]"));
+  //  click(By.xpath("//a[contains(@href,'" + id + "')]"));
     noErrorMessage();
   }
 

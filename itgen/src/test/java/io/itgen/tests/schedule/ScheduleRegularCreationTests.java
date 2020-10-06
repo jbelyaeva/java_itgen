@@ -1,15 +1,15 @@
 package io.itgen.tests.schedule;
 
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import io.itgen.model.schedule.Schedules;
 import io.itgen.services.ScheduleService;
 import io.itgen.tests.TestBase;
 import org.hamcrest.MatcherAssert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ScheduleRegularCreationTests extends TestBase {
   //Тест на создание постоянного расписания на текущую дату при выборе дефолтного тренера

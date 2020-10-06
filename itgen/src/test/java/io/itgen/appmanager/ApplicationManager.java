@@ -6,6 +6,7 @@ import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import io.itgen.appmanager.dbHelpers.DbHelperStudents;
 import io.itgen.appmanager.dbHelpers.DbHelperTasks;
+import io.itgen.appmanager.dbHelpers.DbHelperTest;
 import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
 import io.itgen.appmanager.transactionHelper.TrMaterialHelper;
@@ -13,6 +14,7 @@ import io.itgen.appmanager.transactionHelper.TrParentHelper;
 import io.itgen.appmanager.transactionHelper.TrPaymentHelper;
 import io.itgen.appmanager.transactionHelper.TrStudentHelper;
 import io.itgen.appmanager.transactionHelper.TrTaskHelper;
+import io.itgen.appmanager.transactionHelper.TrTestHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
@@ -50,6 +52,7 @@ public class ApplicationManager {
   private HelperBase helperBase;
   private ScheduleHelper scheduleHelper;
   private SessionHelper sessionHelper;
+  private TestHelper testHelper;
   private NavigationHelper navigationHelper;
   private String browser;
   private DbHelper dbHelper;
@@ -59,6 +62,7 @@ public class ApplicationManager {
   private DbHelperRequest dbHelperRequest;
   private DbHelperMaterials dbHelperMaterials;
   private DbHelperTasks dbHelperTasks;
+  private DbHelperTest dbHelperTest;
   private WindowScheduleHelper windowScheduleHelper;
   private RequestHelper requestHelper;
   private LKParentHelper lkParentHelper;
@@ -75,6 +79,7 @@ public class ApplicationManager {
   private TrFamilyHelper transactionFamilyHelper;
   private TrMaterialHelper transactionMaterialHelper;
   private TrTaskHelper transactionTaskHelper;
+  private TrTestHelper transactionTestHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -91,6 +96,7 @@ public class ApplicationManager {
     dbHelperRequest = new DbHelperRequest();
     dbHelperMaterials = new DbHelperMaterials();
     dbHelperTasks = new DbHelperTasks();
+    dbHelperTest = new DbHelperTest();
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
@@ -101,6 +107,7 @@ public class ApplicationManager {
     transactionFamilyHelper = new TrFamilyHelper();
     transactionMaterialHelper = new TrMaterialHelper();
     transactionTaskHelper = new TrTaskHelper();
+    transactionTestHelper = new TrTestHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -139,6 +146,7 @@ public class ApplicationManager {
     helperBase = new HelperBase(wd);
     materialHelper = new MaterialHelper(wd);
     taskHelper = new TaskHelper(wd);
+    testHelper = new TestHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
@@ -199,6 +207,10 @@ public class ApplicationManager {
     return dbHelperTasks;
   }
 
+  public DbHelperTest dbtest() {
+    return dbHelperTest;
+  }
+
   public StudentHelper student() {
     return studentHelper;
   }
@@ -255,6 +267,10 @@ public class ApplicationManager {
     return helperBase;
   }
 
+  public TestHelper test() {
+    return testHelper;
+  }
+
   public TrScheduleTomorrowHelper trScheduleTomorrow() {
     return trScheduleTomorrowHelper;
   }
@@ -293,6 +309,10 @@ public class ApplicationManager {
 
   public TrTaskHelper trTask() {
     return transactionTaskHelper;
+  }
+
+  public TrTestHelper trTest() {
+    return transactionTestHelper;
   }
 
   public byte[] takeScreenshot() {
