@@ -104,10 +104,10 @@ public class WindowScheduleHelper extends HelperBase{
       clickWithMoveToElementAndWait(5,By.xpath("//button[contains(@class,'onetime')]"));
   }
 
-  public void recordStudentOnSingleFirst1h(String name, String id) {
+  public void recordStudentOnSingleFirst1h(String name, String id) throws InterruptedException {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
+    Thread.sleep(3000);
     selectSingle();
     selectDuration();
     selectLesson1h(id);
@@ -115,10 +115,10 @@ public class WindowScheduleHelper extends HelperBase{
     noErrorMessage();
   }
 
-  public void recordStudentOnSingleSecond1h(String name, String id) {
+  public void recordStudentOnSingleSecond1h(String name, String id) throws InterruptedException {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
+    Thread.sleep(3000);
     selectSingle();
     selectDuration();
     selectLesson2h(id);

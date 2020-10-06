@@ -45,7 +45,7 @@ public class WindowRecordStudentOnSingleFirst1hScheduleTests extends TestBase {
   }
 
   @Test
-  public void testWindowRecordStudentOnRegularFirst1h() {
+  public void testWindowRecordStudentOnRegularFirst1h() throws InterruptedException {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.windowSchedule().recordStudentOnSingleFirst1h(name, "14");

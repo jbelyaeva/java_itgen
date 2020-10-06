@@ -46,7 +46,7 @@ public class WindowRecordStudentOnSingleSecond1hScheduleTests extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testWindowRecordStudentOnSingleSecond1h() {
+  public void testWindowRecordStudentOnSingleSecond1h() throws InterruptedException {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.windowSchedule().recordStudentOnSingleSecond1h(name, "14");
