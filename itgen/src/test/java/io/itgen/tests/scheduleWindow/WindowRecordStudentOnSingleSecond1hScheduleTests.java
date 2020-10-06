@@ -3,6 +3,7 @@ package io.itgen.tests.scheduleWindow;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
@@ -44,7 +45,7 @@ public class WindowRecordStudentOnSingleSecond1hScheduleTests extends TestBase {
             "recordStudent");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testWindowRecordStudentOnSingleSecond1h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();

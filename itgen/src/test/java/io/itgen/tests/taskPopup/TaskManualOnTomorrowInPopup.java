@@ -1,8 +1,9 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -12,14 +13,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskAutoChangeDate extends TestBase {
+public class TaskManualOnTomorrowInPopup extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime() + 86400000; //на завтра
+  private final long duoDateSort = new Date().getTime()+86400000;
   private final Date duoDateWithTime = new Date(duoDateSort);
-  private  Date[] dates = null;
+  private Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
@@ -27,29 +28,24 @@ public class TaskAutoChangeDate extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trTask()
-        .saveAutoTask(
-            "AutoTaskChangeAssignee",
-            "contactForPayment",
-            createAt,
-            "inProgress",
+        .newManualTask(
+            "TomorrowInPopup",
+            "777",
+            "666",
+            "Записать на пробное",
+            2,
+            new Date(),
+            "open",
             new Date(),
             new Date().getTime(),
-            "666",
-            "21",
-            "21",
-            "21.00 : 23.00",
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newAutoTask_takeAutoTask");
+            "21");
   }
 
-  @Test
-  public void testTaskAutoChangeDate() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskManualOnTomorrowInPopup() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().changeDateAutoTaskInPopup();// на завтра
+    app.task().onTomorrowManualTaskInPopup();
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
@@ -58,25 +54,25 @@ public class TaskAutoChangeDate extends TestBase {
   }
 
   private void check(Tasks after) {
-    //автозадача перешла опять в стек (нет исполнителя и статус опять open)
-    dates= new Date[]{createAt, duoDateWithTime};
+    dates = new Date[]{createAt,duoDateWithTime};
     app.trTask()
-        .saveAutoTask(
-            "AutoTaskChangeAssignee",
-            "contactForPayment",
+        .saveManualTask(
+            "TomorrowInPopup",
+            "Записать на пробное",
             createAt,
             "open",
             duoDateWithTime,
             duoDateSort,
-            null,
-            "21",
             "666",
-            "21.00 : 23.00",
+            "21",
+            "777",
+            "666",
+            2,
             dates,
             texts,
             clients,
             commentaries,
-            "takeAutoTask_changeDateAutoTask");
+            "newTask_changeDateTask");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 

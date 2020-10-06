@@ -1,9 +1,10 @@
-package io.itgen.tests.taskPopap;
-
+package io.itgen.tests.taskPopup;
+// Таска на сейчас переносится на завтра
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -13,14 +14,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskManualWaitAnswerInPopup extends TestBase {
+public class TaskManualChangeDate extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final Date duoDateWithTime = new Date();
-  private final long duoDateSort = new Date().getTime();
-  private final Date[] dates = null;
+  private final long duoDateSort = new Date().getTime() + 86400000; //на завтра
+  private final Date duoDateWithTime = new Date(duoDateSort);
+  private Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
@@ -29,37 +30,39 @@ public class TaskManualWaitAnswerInPopup extends TestBase {
   public void ensurePreconditions() {
     app.trTask()
         .newManualTask(
-            "PopupWaitAnswerTask",
+            "PopupChangeDateTask",
             "777",
             "666",
             "Записать на пробное",
             1,
             createAt,
             "open",
-            duoDateWithTime,
-            duoDateSort,
+            new Date(),
+            new Date().getTime(),
             "21");
   }
 
-  @Test
-  public void testTaskManualWaitAnswerInPopup() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskManualChangeDate() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().waitAnswerManualTaskInPopup();
+    app.task().changeDateManualTaskInPopup();
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.task().refresh();
     app.goTo().menuSchedule();
   }
 
   private void check(Tasks after) {
+    dates = new Date[]{createAt, duoDateWithTime};
     app.trTask()
         .saveManualTask(
-            "PopupWaitAnswerTask",
+            "PopupChangeDateTask",
             "Записать на пробное",
             createAt,
-            "wait",
+            "open",
             duoDateWithTime,
             duoDateSort,
             "666",
@@ -71,7 +74,7 @@ public class TaskManualWaitAnswerInPopup extends TestBase {
             texts,
             clients,
             commentaries,
-            "newTask_waitAnswer");
+            "newTask_changeDateTask");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 

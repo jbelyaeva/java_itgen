@@ -2,8 +2,6 @@ package io.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,6 +13,7 @@ public class WindowScheduleHelper extends HelperBase{
   public void recordStudentOn2hRegular(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
     selectRegular();
     selectLesson(id);
     btnRecord();
@@ -30,12 +29,7 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectRegular() {
-    WebElement dynamicElement = (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'permanent')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
-  //  click(By.xpath("//button[contains(@class,'permanent')]"));
+    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'permanent')]"));
   }
 
   private void btnRecordOnLesson() {
@@ -43,7 +37,6 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectStudent(String name) {
-
     type(By.id("child-name"), name);
     if (isElementPresent(By.xpath("//span[contains(@class,'result')]"))) {
       click(By.xpath("//span[contains(@class,'result')]"));
@@ -52,11 +45,20 @@ public class WindowScheduleHelper extends HelperBase{
       type(By.id("child-name"), name);
       click(By.xpath("//span[contains(@class,'result')]"));
     }
+
   }
 
-  public void recordStudentOnRegularFirst1h(String name, String id) {
+  public void waitVisibleSchedule(String idTrainer){
+    WebDriverWait wait = new WebDriverWait(wd,10);
+    wait
+        .until(ExpectedConditions.visibilityOf(wd.
+            findElement(By.xpath("//div[@data-trainer-id='"+idTrainer+"']"))));
+  }
+
+  public void recordStudentOnRegularFirst1h(String name, String id) throws InterruptedException {
     btnRecordOnLesson();
     selectStudent(name);
+    Thread.sleep(3000);
     selectRegular();
     selectDuration();
     selectLesson1h(id);
@@ -72,9 +74,11 @@ public class WindowScheduleHelper extends HelperBase{
    click(By.xpath("//select[@id='create-schedule-duration']//option[@value='4']"));
   }
 
-  public void recordStudentOnRegularSecond1h(String name, String id) {
+  public void recordStudentOnRegularSecond1h(String name, String id) throws InterruptedException {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
+    Thread.sleep(3000);
     selectRegular();
     selectDuration();
     selectLesson2h(id);
@@ -89,6 +93,7 @@ public class WindowScheduleHelper extends HelperBase{
   public void recordStudentOn2hSingle(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
     selectSingle();
     selectLesson(id);
     btnRecord();
@@ -102,6 +107,7 @@ public class WindowScheduleHelper extends HelperBase{
   public void recordStudentOnSingleFirst1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
     selectSingle();
     selectDuration();
     selectLesson1h(id);
@@ -112,6 +118,7 @@ public class WindowScheduleHelper extends HelperBase{
   public void recordStudentOnSingleSecond1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
     selectSingle();
     selectDuration();
     selectLesson2h(id);
@@ -122,6 +129,7 @@ public class WindowScheduleHelper extends HelperBase{
   public void recordStudentOnTrial(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
+    waitVisibleSchedule(id);
     selectLesson(id);
     btnRecord();
     noErrorMessage();

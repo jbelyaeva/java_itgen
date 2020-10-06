@@ -1,13 +1,16 @@
 package io.itgen.tests.schedule;
 //автотест проверяет подвижку разового расписания
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
-import io.itgen.model.schedule.ScheduleData;
-import io.itgen.model.schedule.Schedules;
 import io.itgen.model.StudentData;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
 import io.itgen.model.users.Contacts;
@@ -16,16 +19,12 @@ import io.itgen.services.FamilyService;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.tests.TestBase;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
   String period = "18:00 - 20:00";

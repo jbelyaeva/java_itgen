@@ -33,7 +33,9 @@ public class TimeGeneral {
   // только время
   public long getTimeNow() {
     long dataWithTime = new Date().getTime();
-    return dataWithTime - getMsLocalTime();
+    int popravka = 0;
+    if (diffTz()<100){ popravka = 10800000;}
+    return dataWithTime - getMsLocalTime()+popravka;
   }
 
   // поправка на часовой пояс, заданный в properties

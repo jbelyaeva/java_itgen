@@ -1,8 +1,9 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -12,68 +13,65 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskAutoTakeOnControlInPopup extends TestBase {
-  private TaskData taskClean = null;
+public class TaskManualLeaveCommentInPopup extends TestBase {
   private final TaskService taskService = new TaskService();
-  private final Date createAt = new Date();
-  private final Date duoDateWithTime = new Date();
+  private TaskData taskClean = null;
+  private final Date createAt=new Date();
+  private final Date duoDateWithTime =new Date();
   private final long duoDateSort = new Date().getTime();
-  private  final Date[] dates = null;
+  private  Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
-  private final String[] commentaries = null;
+  private String[] commentaries = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.trTask()
-        .saveAutoTask(
-            "AutoTaskTakeOnControlInPopup",
-            "contactForPayment",
+        .newManualTask(
+            "PopupLeaveCommentByManualTask",
+            "777",
+            "666",
+            "Записать на пробное",
+            1,
             createAt,
-            "inProgress",
+            "open",
             duoDateWithTime,
             duoDateSort,
-            "666",
-            "21",
-            "21",
-            "21.00 : 23.00",
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newAutoTask_takeAutoTask");
+            "21");
   }
 
-  @Test
-  public void testTaskAutoTakeOnControlInPopup() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskManualLeaveCommentInPopup() {
     app.goTo().menuTasks();
-    Tasks before = app.dbtasks().tasks();
-    app.task().takeOnControlAutoTaskInPopup();
-    Tasks after = app.dbtasks().tasks();
+    Tasks before=app.dbtasks().tasks();
+    app.task().leaveCommentTask("Комментарий, comments");
+    Tasks after=app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
     app.goTo().menuSchedule();
   }
 
-  private void check(Tasks after) {
+  private void check(Tasks after){
+    commentaries = new String[]{"Комментарий, comments", "666"};
     app.trTask()
-        .saveAutoTask(
-            "AutoTaskTakeOnControlInPopup",
-            "contactForPayment",
+        .saveManualTask(
+            "PopupLeaveCommentByManualTask",
+            "Записать на пробное",
             createAt,
-            "inProgress",
+            "open",
             duoDateWithTime,
             duoDateSort,
             "666",
             "21",
-            "21",
-            "21.00 : 23.00",
+            "777",
+            "666",
+            1,
             dates,
             texts,
             clients,
             commentaries,
-            "takeAutoTask_takeOnControlAutoTask");
+            "newTask_leaveCommentTask");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
@@ -87,6 +85,6 @@ public class TaskAutoTakeOnControlInPopup extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    taskService.DeleteById(taskClean.getId());
   }
 }

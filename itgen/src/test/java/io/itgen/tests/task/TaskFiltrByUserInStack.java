@@ -1,5 +1,5 @@
 package io.itgen.tests.task;
- /*автотаска, которую взял пользователь будет всегда в стеке, пока не выполнится. Остальные автотаски
+/*автотаска, которую взял пользователь будет всегда в стеке, пока не выполнится. Остальные автотаски
  * не отображаются  в стеке, т.к. не имеют создателя(авто) и пока исполнителя, но их количество указано в счетчике
  * в табе. Счетчик в меню (красный) считает те задачи, в которых пользователь исполнитель.*/
 // в данном кейсе проверяется, что автотаска, взятая в работу есть в стеке, и по фильтру выходит
@@ -8,6 +8,7 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
@@ -26,10 +27,10 @@ public class TaskFiltrByUserInStack extends TestBase {
   private final Date duoDateWithTimeFirst = new Date();
   private final Date duoDateWithTimeSecond = new Date(new Date().getTime() - 86400000);
   private final long duoDateSort = new Date().getTime();
-  private  Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
+  private final Date[] dates = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -70,7 +71,7 @@ public class TaskFiltrByUserInStack extends TestBase {
             duoDateSort,
             "21",
             "21.00 : 23.00");
-    taskService.deleteField("FiltrTaskAutoFirst","priority");
+    taskService.deleteField("FiltrTaskAutoFirst", "priority");
     app.trTask()
         .newManualTask(
             "FiltrTaskSecond",
@@ -114,12 +115,13 @@ public class TaskFiltrByUserInStack extends TestBase {
             clients,
             commentaries,
             "newAutoTask_takeAutoTask");
-    taskService.deleteField("FiltrTaskAutoSecond","priority");
+    taskService.deleteField("FiltrTaskAutoSecond", "priority");
   }
 
-  @Test
-  public void testFiltrByUserInStack() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testFiltrByUserInStack() throws InterruptedException {
     app.goTo().menuTasks();
+    app.task().btnMiddlePriority();
     app.task().filtrByUserInStek("Бокша");
     //проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(1));
@@ -129,6 +131,7 @@ public class TaskFiltrByUserInStack extends TestBase {
     assertThat(app.task().getCountInTabUI(), equalTo(1));
     //проверка, что красный счетчик в меню = 1
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
+    app.task().refresh();
     app.goTo().menuSchedule();
   }
 

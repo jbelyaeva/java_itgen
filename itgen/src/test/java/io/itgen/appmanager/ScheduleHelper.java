@@ -181,7 +181,6 @@ public class ScheduleHelper extends HelperBase {
     selectMove();
     fillBadTime();
     btnMoveDisabled();
-    thereAreErrorMessages();
     refresh();
   }
 
@@ -353,7 +352,7 @@ public class ScheduleHelper extends HelperBase {
     wd.findElement(By.id("tp")).click();
   }
 
-  public void recordStudentOn2h(String name, String id) {
+  public void recordStudentOn2h(String name, String id) throws InterruptedException {
     selectScheduleInListUIById(id);
     bntRecordStudent();
     selectStudent(name);
@@ -366,7 +365,8 @@ public class ScheduleHelper extends HelperBase {
     clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'create')]"));
   }
 
-  private void selectNo() {
+  private void selectNo() throws InterruptedException {
+    Thread.sleep(3000);
     click(By.xpath("//button[contains(@class,'change')][2]"));
   }
 
@@ -386,7 +386,7 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@class,'create')]"));
   }
 
-  public void recordStudentOnFirst1h(String name, String id) {
+  public void recordStudentOnFirst1h(String name, String id) throws InterruptedException {
     selectScheduleInListUIById(id);
     bntRecordStudent();
     selectStudent(name);
@@ -401,7 +401,7 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//button[contains(@data-itemid,'1')]"));
   }
 
-  public void recordStudentOnSecond1h(String name, String id) {
+  public void recordStudentOnSecond1h(String name, String id) throws InterruptedException {
     selectScheduleInListUIById(id);
     bntRecordStudent();
     selectStudent(name);

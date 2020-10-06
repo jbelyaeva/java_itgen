@@ -48,11 +48,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuSchedule() {
-   clickWithMoveToElementAndWait(8,By.xpath("//a[contains(@href, '/schoolSchedule')]"));
+   clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/schoolSchedule')]"));
   }
 
   public void menuRequests() {
-    click(By.xpath("//a[contains(@href, '/requests')]"));
+    clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/requests')]"));
   }
 
   public void menuMaterials() {

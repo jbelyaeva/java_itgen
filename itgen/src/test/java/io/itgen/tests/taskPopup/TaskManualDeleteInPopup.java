@@ -1,9 +1,9 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.itgen.model.tasks.TaskData;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
@@ -35,8 +35,8 @@ public class TaskManualDeleteInPopup extends TestBase {
             "21");
   }
 
-  @Test
-  public void testTaskManualDeleteInPopup() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskManualDeleteInPopup() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
     app.task().deleteTaskInPopup();

@@ -1,5 +1,4 @@
-package io.itgen.tests.taskPopap;
-// Таска на сейчас переносится на завтра
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -14,58 +13,58 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskManualChangeDate extends TestBase {
+public class TaskManualChangeAssignee extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime() + 86400000; //на завтра
-  private final Date duoDateWithTime = new Date(duoDateSort);
-  private Date[] dates = null;
+  private final Date duoDateWithTime = new Date();
+  private final long duoDateSort = new Date().getTime();
+  private  Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
 
+
   @BeforeMethod
   public void ensurePreconditions() {
+    taskService.drop();
     app.trTask()
         .newManualTask(
-            "PopupChangeDateTask",
+            "PopupChangeAssigneeTask",
             "777",
             "666",
             "Записать на пробное",
             1,
             createAt,
             "open",
-            new Date(),
-            new Date().getTime(),
+            duoDateWithTime,
+            duoDateSort,
             "21");
   }
 
-  @Test (retryAnalyzer = RunTestAgain.class)
-  public void testTaskManualChangeDate() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskManualChangeAssignee() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().changeDateManualTaskInPopup();
+    app.task().changeAssigneeManualTaskInPopup("Дефолтный тренер");
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
-    app.task().refresh();
     app.goTo().menuSchedule();
   }
 
   private void check(Tasks after) {
-    dates = new Date[]{createAt, duoDateWithTime};
     app.trTask()
         .saveManualTask(
-            "PopupChangeDateTask",
+            "PopupChangeAssigneeTask",
             "Записать на пробное",
             createAt,
             "open",
             duoDateWithTime,
             duoDateSort,
-            "666",
+            "23",
             "21",
             "777",
             "666",
@@ -74,7 +73,7 @@ public class TaskManualChangeDate extends TestBase {
             texts,
             clients,
             commentaries,
-            "newTask_changeDateTask");
+            "newTask_changeAssignee");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
@@ -88,6 +87,6 @@ public class TaskManualChangeDate extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.DeleteById(taskClean.getId());
+    taskService.drop();
   }
 }

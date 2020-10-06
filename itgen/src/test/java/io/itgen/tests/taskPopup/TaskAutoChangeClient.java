@@ -1,10 +1,14 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
+// меняем в таске студента на студента
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
+import io.itgen.services.FamilyService;
+import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import java.util.Date;
@@ -12,24 +16,40 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskAutoChangeAssignee extends TestBase {
+public class TaskAutoChangeClient extends TestBase {
 
+  private final StudentService studentService = new StudentService();
+  private final FamilyService familyService = new FamilyService();
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
-  private final String[] commentaries=null;
-  private final Date[] dates=null;
-  private final String[] texts=null;
-  private final String[] clients=null;
+  private final Date[] dates = null;
+  private final String[] texts = null;
+  private String[] clients = null;
+  private final String[] commentaries = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    taskService.drop();
+    app.trFamily().newFamily("Student", false, "txc");
+
+    app.trStudent()
+        .newStudent(
+            "Student",
+            "Маша",
+            "Машина",
+            "expert",
+            "AL",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "Student");
+
     app.trTask()
         .saveAutoTask(
-            "AutoTaskChangeAssignee",
+            "AutoTaskChangeClient",
             "contactForPayment",
             createAt,
             "inProgress",
@@ -46,11 +66,12 @@ public class TaskAutoChangeAssignee extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test
-  public void testAutoChangeAssigne() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskAutoChangeClient() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().changeAssigneeAutoTaskInPopup("Дефолтный тренер");;
+    app.task().changeClientAutoTaskInPopup("Машина Маша");
+    ;
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
@@ -59,23 +80,24 @@ public class TaskAutoChangeAssignee extends TestBase {
   }
 
   private void check(Tasks after) {
+    clients = new String[]{"21"};
     app.trTask()
         .saveAutoTask(
-            "AutoTaskChangeAssignee",
+            "AutoTaskChangeClient",
             "contactForPayment",
             createAt,
             "inProgress",
             duoDateWithTime,
             duoDateSort,
-            "23",
-            "21",
+            "666",
+            "Student",
             "666",
             "21.00 : 23.00",
             dates,
             texts,
             clients,
             commentaries,
-            "takeAutoTask_changeAssigneeAutoTask");
+            "takeAutoTask_changeClientAutoTask");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
@@ -89,6 +111,8 @@ public class TaskAutoChangeAssignee extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.DeleteById(taskClean.getId());
+    taskService.drop();
+    studentService.DeleteById("Student");
+    familyService.DeleteById("Student");
   }
 }

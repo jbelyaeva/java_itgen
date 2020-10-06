@@ -19,7 +19,6 @@ import io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,6 +38,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ApplicationManager {
+
   public static Properties properties;
   public WebDriver wd;
   private TrainerHelper trainerHelper;
@@ -47,6 +47,7 @@ public class ApplicationManager {
   private ParentHelper parentHelper;
   private WorkerHelper workerHelper;
   private LeadHelper leadHelper;
+  private HelperBase helperBase;
   private ScheduleHelper scheduleHelper;
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
@@ -135,16 +136,25 @@ public class ApplicationManager {
     requestHelper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
+    helperBase = new HelperBase(wd);
     materialHelper = new MaterialHelper(wd);
     taskHelper = new TaskHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
+    Path requiredMainDir =
+        Paths.get(properties.getProperty("testsScreenshot"));
+    if (!Files.exists(requiredMainDir)) Files.createDirectory(requiredMainDir);
+
     Path[] requiredDirs = {
-      Paths.get(properties.getProperty("actual")), Paths.get(properties.getProperty("markedImages"))
+        Paths.get(properties.getProperty("actual")),
+        Paths.get(properties.getProperty("expected")),
+        Paths.get(properties.getProperty("markedImages"))
     };
     for (Path dir : requiredDirs) {
-      if (Files.exists(dir)) continue;
+      if (Files.exists(dir)) {
+        continue;
+      }
       Files.createDirectory(dir);
     }
   }
@@ -239,6 +249,10 @@ public class ApplicationManager {
 
   public TaskHelper task() {
     return taskHelper;
+  }
+
+  public HelperBase base() {
+    return helperBase;
   }
 
   public TrScheduleTomorrowHelper trScheduleTomorrow() {

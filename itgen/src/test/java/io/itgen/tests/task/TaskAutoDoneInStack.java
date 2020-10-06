@@ -3,6 +3,7 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -15,7 +16,6 @@ import org.testng.annotations.Test;
 public class TaskAutoDoneInStack extends TestBase {
 
   private final TaskService taskService = new TaskService();
-  private TaskData taskClean = null;
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
@@ -23,7 +23,7 @@ public class TaskAutoDoneInStack extends TestBase {
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
-
+  private TaskData taskClean = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -46,7 +46,7 @@ public class TaskAutoDoneInStack extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testAutoDoneInStack() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();

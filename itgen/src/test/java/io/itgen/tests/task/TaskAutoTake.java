@@ -13,15 +13,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TaskAutoTake extends TestBase {
+
   private final TaskService taskService = new TaskService();
-  private TaskData taskClean = null;
-  private final Date createAt=new Date();
-  private final Date duoDateWithTime =new Date();
+  private final Date createAt = new Date();
+  private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
   private final Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
+  private TaskData taskClean = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -33,23 +34,23 @@ public class TaskAutoTake extends TestBase {
             "open",
             duoDateWithTime,
             duoDateSort,
-           "21",
+            "21",
             "21.00 : 23.00");
   }
 
   @Test
   public void testTaskAutoTake() {
     app.goTo().menuTasks();
-    Tasks before=app.dbtasks().tasks();
+    Tasks before = app.dbtasks().tasks();
     app.task().takeAutoTask();
-    Tasks after=app.dbtasks().tasks();
+    Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
     app.goTo().menuSchedule();
   }
 
-  private void check(Tasks after){
+  private void check(Tasks after) {
     app.trTask()
         .saveAutoTask(
             taskClean.getId(),

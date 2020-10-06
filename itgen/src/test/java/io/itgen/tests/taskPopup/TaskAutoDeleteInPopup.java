@@ -1,9 +1,9 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.itgen.model.tasks.TaskData;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
@@ -12,13 +12,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskAutoDoneInPopup extends TestBase {
-  private TaskData taskClean = null;
+public class TaskAutoDeleteInPopup extends TestBase {
+
   private final TaskService taskService = new TaskService();
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
-  private final Date[] dates = null;
+  private  Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
@@ -27,7 +27,7 @@ public class TaskAutoDoneInPopup extends TestBase {
   public void ensurePreconditions() {
     app.trTask()
         .saveAutoTask(
-            "AutoTaskDoneInPopup",
+            "AutoTaskDeleteInPopup",
             "contactForPayment",
             createAt,
             "inProgress",
@@ -44,50 +44,22 @@ public class TaskAutoDoneInPopup extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test
-  public void testTaskAutoDoneInPopup() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskAutoDeleteInPopup() throws InterruptedException {
+    Thread.sleep(3000);
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().doneAutoTaskInPopup();
+    app.task().deleteAutoTaskInPopup();
     Tasks after = app.dbtasks().tasks();
-    taskClean = app.dbtasks().lastTask();
-    assertThat(after.size(), equalTo(before.size()));
-    check(after);
-    app.task().refresh();
+    assertThat(after.size(), equalTo(before.size() - 1));
     app.goTo().menuSchedule();
   }
 
-  private void check(Tasks after) {
-    app.trTask()
-        .saveAutoTask(
-            "AutoTaskDoneInPopup",
-            "contactForPayment",
-            createAt,
-            "closed",
-            duoDateWithTime,
-            duoDateSort,
-            null,
-            "21",
-            "666",
-            "21.00 : 23.00",
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "takeAutoTask_doneAutoTask");
-
-    TaskData taskAdd = taskService.findById(taskClean.getId());
-
-    for (TaskData taskAfter : after) {
-      if (taskAfter.getId().equals(taskClean.getId())) {
-        assertThat(after, equalTo(after.without(taskAfter).withAdded(taskAdd)));
-        return;
-      }
-    }
-  }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    if (taskService.findById("AutoTaskDeleteInPopup") != null) {
+      taskService.DeleteById("AutoTaskDeleteInPopup");
+    }
   }
 }

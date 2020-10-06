@@ -1,8 +1,9 @@
-package io.itgen.tests.taskPopap;
+package io.itgen.tests.taskPopup;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -12,39 +13,44 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TaskManualOnTomorrowInPopup extends TestBase {
+public class TaskAutoLeaveCommentInPopup extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime()+86400000;
-  private final Date duoDateWithTime = new Date(duoDateSort);
+  private final Date duoDateWithTime = new Date();
+  private final long duoDateSort = new Date().getTime();
   private Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
-  private final String[] commentaries = null;
+  private String[] commentaries = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.trTask()
-        .newManualTask(
-            "TomorrowInPopup",
-            "777",
+        .saveAutoTask(
+            "AutoTaskLeaveCommentInPopup",
+            "contactForPayment",
+            createAt,
+            "inProgress",
+            duoDateWithTime,
+            duoDateSort,
             "666",
-            "Записать на пробное",
-            2,
-            new Date(),
-            "open",
-            new Date(),
-            new Date().getTime(),
-            "21");
+            "21",
+            "21",
+            "21.00 : 23.00",
+            dates,
+            texts,
+            clients,
+            commentaries,
+            "newAutoTask_takeAutoTask");
   }
 
-  @Test
-  public void testTaskManualOnTomorrowInPopup() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTaskAutoLeaveCommentInPopup() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().onTomorrowManualTaskInPopup();
+    app.task().leaveCommentTask("Комментарий, comments");
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
@@ -53,25 +59,24 @@ public class TaskManualOnTomorrowInPopup extends TestBase {
   }
 
   private void check(Tasks after) {
-    dates = new Date[]{createAt,duoDateWithTime};
+    commentaries = new String[]{"Комментарий, comments", "666"};
     app.trTask()
-        .saveManualTask(
-            "TomorrowInPopup",
-            "Записать на пробное",
+        .saveAutoTask(
+            "AutoTaskLeaveCommentInPopup",
+            "contactForPayment",
             createAt,
-            "open",
+            "inProgress",
             duoDateWithTime,
             duoDateSort,
             "666",
             "21",
-            "777",
             "666",
-            2,
+            "21.00 : 23.00",
             dates,
             texts,
             clients,
             commentaries,
-            "newTask_changeDateTask");
+            "newTask_leaveAutoCommentTask");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 

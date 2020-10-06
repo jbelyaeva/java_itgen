@@ -8,15 +8,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
-import io.itgen.model.schedule.ScheduleData;
-import io.itgen.model.schedule.Schedules;
 import io.itgen.model.StudentData;
-import io.itgen.model.tasks.TaskData;
-import io.itgen.model.tasks.Tasks;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -89,7 +89,7 @@ public class RecordStudentOnSingleSecond1hScheduleTests extends TestBase {
   }
 
   @Test
-  public void testRecordStudentOnSingleSecond1h() {
+  public void testRecordStudentOnSingleSecond1h() throws InterruptedException {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().recordStudentOnSecond1h(name, "recordOnSchedule");

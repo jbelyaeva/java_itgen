@@ -1,6 +1,5 @@
 package io.itgen.tests.task;
 
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,7 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,9 +26,9 @@ public class TaskManualAddNew extends TestBase {
   TaskService taskService = new TaskService();
   TaskData taskClean = null;
 
-  @BeforeMethod
   public void ensurePreconditions() {
-    taskService.drop();}
+    taskService.drop();
+  }
 
   @DataProvider
   public Iterator<Object[]> validTaskFromJson() throws IOException {
@@ -57,6 +55,7 @@ public class TaskManualAddNew extends TestBase {
 
   @Test(dataProvider = "validTaskFromJson")
   public void testAddNewTask(TaskData task) {
+    app.goTo().menuTrainers();
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
     app.task().addNewTask(task);

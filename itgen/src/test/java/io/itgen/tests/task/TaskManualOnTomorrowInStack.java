@@ -14,15 +14,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TaskManualOnTomorrowInStack extends TestBase {
+
   private final TaskService taskService = new TaskService();
-  private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime()+86400000;
+  private final long duoDateSort = new Date().getTime() + 86400000;
   private final Date duoDateWithTime = new Date(duoDateSort);
-  private Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
+  private TaskData taskClean = null;
+  private Date[] dates = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
