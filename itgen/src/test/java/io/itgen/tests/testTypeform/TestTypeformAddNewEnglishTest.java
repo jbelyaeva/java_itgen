@@ -58,7 +58,6 @@ public class TestTypeformAddNewEnglishTest extends TestBase {
 
   @Test(dataProvider = "validAddTestFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTypeformAddNewEnglishTest(TestData test) {
-    app.goTo().menuSchedule();
     app.goTo().menuTests();
     Tests before = app.dbtest().tests();
     app.test().addEnglishTest(test);
