@@ -1,6 +1,7 @@
 package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.StudentService;
@@ -28,7 +29,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
         .StudentAddDefaultFamily("LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotCourseSelectionForTrial() throws AWTException, IOException {
     app.lkParent().btnRecordOnTrail();
 

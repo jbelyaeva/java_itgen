@@ -1,6 +1,7 @@
 package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
@@ -45,7 +46,7 @@ public class SshotPayByParentShopRU extends TestBase {
             "paymantByGuest", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotPayByParentShopRU() throws AWTException, IOException {
     String name = "Parent_PayByParentShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

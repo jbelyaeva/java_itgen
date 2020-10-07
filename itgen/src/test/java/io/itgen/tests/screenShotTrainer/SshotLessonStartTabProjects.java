@@ -1,6 +1,7 @@
 package io.itgen.tests.screenShotTrainer;
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.services.CommentService;
 import io.itgen.services.FamilyService;
@@ -102,7 +103,7 @@ public class SshotLessonStartTabProjects extends TestBase {
             "666");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotLessonStartTabProjects() throws AWTException, IOException {
     app.trainer().maxBrowser();
     app.trainer().gotoSchedule();

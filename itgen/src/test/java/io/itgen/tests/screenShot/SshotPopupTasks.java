@@ -76,6 +76,7 @@ public class SshotPopupTasks extends TestBase {
     if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
+    app.task().btnClosePopup();
   }
 
   @AfterMethod(alwaysRun = true)

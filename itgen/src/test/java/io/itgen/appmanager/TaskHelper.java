@@ -243,7 +243,7 @@ public class TaskHelper extends HelperBase {
     btnClosePopup();
   }
 
-  private void btnClosePopup() {
+  public void btnClosePopup() {
     moveToClicableElement(5, By.className("close"));
     clickWithMoveToElementAndWait(5, By.className("close"));
   }
@@ -269,7 +269,7 @@ public class TaskHelper extends HelperBase {
     goToPopup();
     selectChangePriority();
     changePriority(priority);
-    btnClosePopup();
+    btnClosePopup();btnClosePopup();
     explicitWait(3);
   }
 
