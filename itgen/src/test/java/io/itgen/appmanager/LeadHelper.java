@@ -48,7 +48,7 @@ public class LeadHelper extends HelperBase {
   }
 
   public void btnPencil() {
-    click(By.xpath("//span[contains(@class,'pencil')]"));
+   clickWithMoveToElementAndWait(5, By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void fillLeadForm(LeadData leadData) {
