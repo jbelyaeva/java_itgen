@@ -1,5 +1,6 @@
 package io.itgen.tests;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.users.Contacts;
 import io.itgen.services.TrainerService;
 import org.testng.annotations.AfterMethod;
@@ -35,7 +36,7 @@ public class TrainerDeletionTests extends TestBase {
 
   }
 
-  @Test
+  @Test  (retryAnalyzer = RunTestAgain.class)
   public void testTrainerDeletion() {
    // app.goTo().menuSchedule();
     app.goTo().menuTrainers();

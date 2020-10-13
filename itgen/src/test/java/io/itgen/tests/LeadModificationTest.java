@@ -2,6 +2,7 @@ package io.itgen.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.model.users.Contacts;
@@ -54,7 +55,7 @@ public class LeadModificationTest extends TestBase {
     leadService.create(lead);
   }
 
-  @Test(dataProvider = "validLeadsFromJson")
+  @Test(dataProvider = "validLeadsFromJson",  retryAnalyzer = RunTestAgain.class)
   public void testLeadModification(LeadData lead) {
     app.goTo().menuTasks();
     app.goTo().menuLeads();

@@ -120,9 +120,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
     app.schedule().recordStudentOn2h(name, "recordStudentOnLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(
-        before,
-        after); // проверка на то, что новая запись записалась в бд верно, и остальные записи не
+    check(before, after); // проверка на то, что новая запись записалась в бд верно, и остальные записи не
                 // испортились
     app.goTo().menuTasks();
   }
