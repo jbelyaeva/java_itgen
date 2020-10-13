@@ -106,7 +106,9 @@ public class SshotRequests extends TestBase {
                 name,
                 locatorIgnor,
                 1.25f);
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diff.getDiffSize() > 100) { // погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
   }
 
   @AfterMethod(alwaysRun = true)

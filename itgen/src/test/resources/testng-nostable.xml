@@ -3,15 +3,14 @@
 <suite name="Suite1" verbose="1">
   <test name="Nostable">
     <classes>
-      <class name="io.itgen.tests.testTypeform.TestTypeformCreate" />
+     <!-- <class name="io.itgen.tests.testTypeform.TestTypeformCreate" /> -->
       <class name="io.itgen.tests.testTypeform.TestTypeformAddNewEnglishTest" />
       <class name="io.itgen.tests.testTypeform.TestTypeformModification" />
       <class name="io.itgen.tests.testTypeform.TestTypeformDeletion" />
       <class name="io.itgen.tests.FamilyDeletionTests"/>
       <class name="io.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests"/>
       <class name="io.itgen.tests.schedule.ScheduleBadMoveTests"/>
-      <class name="io.itgen.tests.testTypeform.TestTypeformCreate" />
-      <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>
+      <!--<class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/> -->
     </classes>
   </test>
 </suite>
