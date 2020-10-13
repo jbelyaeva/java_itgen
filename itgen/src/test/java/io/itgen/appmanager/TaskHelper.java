@@ -265,12 +265,10 @@ public class TaskHelper extends HelperBase {
   }
 
   public void changePriorityManualTaskInPopup(String priority) {
-    explicitWait(1000);
     goToPopup();
     selectChangePriority();
     changePriority(priority);
-    btnClosePopup();btnClosePopup();
-    explicitWait(3);
+    btnClosePopup();
   }
 
   private void changePriority(String priority) {
