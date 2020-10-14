@@ -74,7 +74,7 @@ public class SshotLessonEnvelopes extends TestBase {
                 locatorIgnor,
                 1.98f);
 
-    if (diff.getDiffSize() > 200) { // погрешность
+    if (diff.getDiffSize() > 500) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
     app.trainer().refresh();
