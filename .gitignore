@@ -18,3 +18,4 @@ gradle-app.setting
 *.class
 *.log
 .DS_Store
+itgen/.idea/checkstyle-idea.xml

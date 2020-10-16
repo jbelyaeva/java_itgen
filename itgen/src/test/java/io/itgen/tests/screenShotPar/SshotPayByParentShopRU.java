@@ -1,5 +1,8 @@
 package io.itgen.tests.screenShotPar;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
@@ -7,9 +10,12 @@ import io.itgen.model.tasks.Tasks;
 import io.itgen.services.ScheduleService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
+import io.itgen.services.TestResultsService;
+import io.itgen.services.TestService;
 import io.itgen.tests.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;

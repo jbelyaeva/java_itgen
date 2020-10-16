@@ -2,11 +2,6 @@ package io.itgen.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(WebDriver wd) {
@@ -19,7 +14,6 @@ public class NavigationHelper extends HelperBase {
 
   public void menuStudents() {
     doubleClick(By.xpath("//a[contains(@href, '/childs')]"));
-  //  clickWithMoveToElementAndWait(10,By.xpath("//a[contains(@href, '/childs')]"));
   }
 
   public void menuTrainers() {
@@ -48,5 +42,38 @@ public class NavigationHelper extends HelperBase {
 
   public void menuMaterials() {
     click(By.xpath("//a[contains(@href, '/materials')]"));
+  }
+
+  public void menuCandidates() {
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href, '/candidates')]"));
+  }
+
+  public void urlSchedule() {
+    wd.get(address() + "/schoolSchedule");
+  }
+
+  public void urlTests() {
+    wd.get(address() + "/tests");
+    waiteVisibleElement(10,By.xpath("//h2"));
+  }
+
+  public void urlTasks() {
+    wd.get(address() + "/tasks");
+    waiteVisibleElement(5,By.xpath("//div[@class='panel-footer']"));
+  }
+
+  public void urlMaterials() {
+    wd.get(address() + "/materials");
+    waiteVisibleElement(5,By.xpath("//h1"));
+  }
+
+  public void urlCandidates() {
+    wd.get(address() + "/candidates");
+    waiteVisibleElement(5,By.xpath("//h2"));
+  }
+
+  public void urlStudents() {
+    wd.get(address() + "/childs");
+    waiteVisibleElement(5,By.xpath("//h2"));
   }
 }

@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import io.itgen.model.TrainerData;
@@ -45,7 +46,7 @@ public class TrainerModifyProfile extends TestBase {
     }
   }
 
-  @Test(dataProvider = "ValidTrainerFromJson")
+  @Test(dataProvider = "ValidTrainerFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTrainerModifyProfile(TrainerData trainer)  {
     Trainers before = app.db().trainers();
     app.trainer().modifyInLk(trainer);

@@ -13,6 +13,7 @@
       <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnRegular"/>
       <class name="io.itgen.tests.screenShotPar.SshotFiltrRecordOnSingle"/>
       <class name="io.itgen.tests.screenShotPar.SshotPayByParentShopRU"/>
+      <class name="io.itgen.tests.screenShotPar.SshotTypeformHistory"/>
     </classes>
   </test>
 </suite>

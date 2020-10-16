@@ -17,6 +17,7 @@
       <class name="io.itgen.tests.screenShot.SshotMaterialTabAll"/>
       <class name="io.itgen.tests.screenShot.SshotMainTasks"/>
       <class name="io.itgen.tests.screenShot.SshotPopupTasks"/>
+      <class name="io.itgen.tests.screenShot.SshotTypeformPassLookingResult"/>
     </classes>
   </test>
 </suite>

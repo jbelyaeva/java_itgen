@@ -19,7 +19,9 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnRecordOnTrail() {
-    if (isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) refresh();//для докера
+    if (isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) {
+      refresh();//для докера
+    }
     clickWithMoveToElementAndWait(5, By.xpath("(//button[contains(@id-qa,'trial')])[2]"));
     noErrorMessage();
   }
@@ -115,7 +117,9 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void btnAddNewStudent() {
-    if (!isElementPresent(By.xpath("//a[contains(@href,'addChild')]"))) btnLogo();
+    if (!isElementPresent(By.xpath("//a[contains(@href,'addChild')]"))) {
+      btnLogo();
+    }
 
     click(By.xpath("//a[contains(@href,'addChild')]"));
     noErrorMessage();
@@ -367,7 +371,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void inputPassword(String password) {
-    clickWithMoveToElementAndWait(5,By.xpath("//input[@autocomplete='new-password']"));
+    clickWithMoveToElementAndWait(5, By.xpath("//input[@autocomplete='new-password']"));
     type(By.xpath("//input[@autocomplete='new-password']"), password);
     noErrorMessage();
   }

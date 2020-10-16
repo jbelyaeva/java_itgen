@@ -58,7 +58,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
                 name,
                 locatorIgnor,
                 1.25f);
-    if (diff.getDiffSize() > 200) { // погрешность
+    if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
 

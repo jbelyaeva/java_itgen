@@ -9,6 +9,8 @@
       <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests"/>
       <class name="io.itgen.tests.materials.MaterialsLink"/>
       <class name="io.itgen.tests.payment.PaymentByAdmin"/>
+      <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" />
     </classes>
   </test>
 </suite>

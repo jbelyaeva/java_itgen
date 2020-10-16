@@ -46,8 +46,8 @@ public class TaskAutoDeleteInPopup extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskAutoDeleteInPopup() throws InterruptedException {
-    Thread.sleep(3000);
     app.goTo().menuTasks();
+    Thread.sleep(3000);
     Tasks before = app.dbtasks().tasks();
     app.task().deleteAutoTaskInPopup();
     Tasks after = app.dbtasks().tasks();

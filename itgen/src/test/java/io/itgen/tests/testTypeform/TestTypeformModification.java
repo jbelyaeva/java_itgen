@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -57,16 +58,16 @@ public class TestTypeformModification extends TestBase {
   }
 
   @Test(dataProvider = "validDataTestFromJson", retryAnalyzer = RunTestAgain.class)
-  public void testTypeformModification(TestData test) {
-    app.goTo().menuSchedule();
-    app.goTo().menuTests();
+  public void testTypeformModification(TestData test) throws InterruptedException {
+    app.base().waiteVisibleElement(5, By.xpath("//h2"));
+    app.goTo().urlTests();
     Tests before = app.dbtest().tests();
     app.test().modifyTest(test);
-    Tests after = app.dbtest().tests();
+    app.base().waitElementWithText(5, By.xpath("//td[1]"), "Python");
+    Tests after = app.dbtest().waitAndGetNewDataFromBD(before);
     testClean = app.dbtest().lastTest();
     assertThat(after.size(), equalTo(before.size()));
     check(after, test);
-    app.goTo().menuSchedule();
   }
 
   private void check(Tests after, TestData test) {

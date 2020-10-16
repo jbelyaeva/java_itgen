@@ -47,13 +47,13 @@ public class MaterialMakeReview extends TestBase {
 
   @Test()
   public void testMaterialMakeReview() {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
     app.material().makeReview("MaterialMakeReview");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after) {

@@ -1,12 +1,14 @@
 package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelper;
+import io.itgen.appmanager.dbHelpers.DbHelperCandidaies;
 import io.itgen.appmanager.dbHelpers.DbHelperMaterials;
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
 import io.itgen.appmanager.dbHelpers.DbHelperStudents;
 import io.itgen.appmanager.dbHelpers.DbHelperTasks;
 import io.itgen.appmanager.dbHelpers.DbHelperTest;
+import io.itgen.appmanager.transactionHelper.TrCandidateHelper;
 import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
 import io.itgen.appmanager.transactionHelper.TrMaterialHelper;
@@ -42,6 +44,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 public class ApplicationManager {
 
   public static Properties properties;
+  public static String address;
   public WebDriver wd;
   private TrainerHelper trainerHelper;
   private StudentHelper studentHelper;
@@ -63,12 +66,14 @@ public class ApplicationManager {
   private DbHelperMaterials dbHelperMaterials;
   private DbHelperTasks dbHelperTasks;
   private DbHelperTest dbHelperTest;
+  private DbHelperCandidaies dbHelperCandidaies;
   private WindowScheduleHelper windowScheduleHelper;
   private RequestHelper requestHelper;
   private LKParentHelper lkParentHelper;
   private PaymentHelper paymentHelper;
   private MaterialHelper materialHelper;
   private TaskHelper taskHelper;
+  private CandidateHelper candidateHelper;
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
@@ -80,6 +85,7 @@ public class ApplicationManager {
   private TrMaterialHelper transactionMaterialHelper;
   private TrTaskHelper transactionTaskHelper;
   private TrTestHelper transactionTestHelper;
+  private TrCandidateHelper transactionCandidateHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -97,6 +103,7 @@ public class ApplicationManager {
     dbHelperMaterials = new DbHelperMaterials();
     dbHelperTasks = new DbHelperTasks();
     dbHelperTest = new DbHelperTest();
+    dbHelperCandidaies = new DbHelperCandidaies();
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
@@ -108,6 +115,7 @@ public class ApplicationManager {
     transactionMaterialHelper = new TrMaterialHelper();
     transactionTaskHelper = new TrTaskHelper();
     transactionTestHelper = new TrTestHelper();
+    transactionCandidateHelper = new TrCandidateHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -147,6 +155,7 @@ public class ApplicationManager {
     materialHelper = new MaterialHelper(wd);
     taskHelper = new TaskHelper(wd);
     testHelper = new TestHelper(wd);
+    candidateHelper = new CandidateHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
@@ -211,6 +220,10 @@ public class ApplicationManager {
     return dbHelperTest;
   }
 
+  public DbHelperCandidaies dbcandidates() {
+    return dbHelperCandidaies;
+  }
+
   public StudentHelper student() {
     return studentHelper;
   }
@@ -271,6 +284,10 @@ public class ApplicationManager {
     return testHelper;
   }
 
+  public CandidateHelper cantidate() {
+    return candidateHelper;
+  }
+
   public TrScheduleTomorrowHelper trScheduleTomorrow() {
     return trScheduleTomorrowHelper;
   }
@@ -313,6 +330,10 @@ public class ApplicationManager {
 
   public TrTestHelper trTest() {
     return transactionTestHelper;
+  }
+
+  public TrCandidateHelper trCandidate() {
+    return transactionCandidateHelper;
   }
 
   public byte[] takeScreenshot() {

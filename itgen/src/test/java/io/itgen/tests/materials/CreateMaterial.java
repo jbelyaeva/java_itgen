@@ -65,14 +65,14 @@ public class CreateMaterial extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validMaterialFromJson",  retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validMaterialFromJson", retryAnalyzer = RunTestAgain.class)
   public void testCreateMaterial(MaterialData material) {
-    app.goTo().menuTrainers();
     app.goTo().menuMaterials();
     app.material().addNewMaterial(material);
     Materials materialAfter = app.dbmaterial().materials();
     materialClean = app.dbmaterial().lastMaterial();
     check(materialAfter, materialClean.getId(), material);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after, String id, MaterialData material) {

@@ -54,19 +54,18 @@ public class CreateMaterialBad extends TestBase {
     }
   }
 
-  @Test(dataProvider = "noValidMaterialFromJson",  retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "noValidMaterialFromJson")
   public void testCreateMaterialBad(MaterialData material) {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials materialBefore = app.dbmaterial().materials();
     app.material().addNewMaterialBad(material);
     Materials materialAfter = app.dbmaterial().materials();
     assertThat(materialBefore.size(), equalTo(materialAfter.size()));
+    app.goTo().menuTasks();
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testCreateMaterialNoBranch() {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials materialBefore = app.dbmaterial().materials();
 
@@ -85,5 +84,6 @@ public class CreateMaterialBad extends TestBase {
     app.material().addNewMaterialBad(material);
     Materials materialAfter = app.dbmaterial().materials();
     assertThat(materialBefore.size(), equalTo(materialAfter.size()));
+    app.goTo().menuTasks();
   }
 }

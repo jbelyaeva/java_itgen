@@ -120,9 +120,10 @@ public class TaskFiltrByUserInStack extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testFiltrByUserInStack() throws InterruptedException {
-    app.goTo().menuTasks();
+    app.goTo().urlTasks();
     app.task().btnMiddlePriority();
     app.task().filtrByUserInStek("Бокша");
+
     //проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(1));
     //проверка, что найдена именно Настя Бокша и она одна

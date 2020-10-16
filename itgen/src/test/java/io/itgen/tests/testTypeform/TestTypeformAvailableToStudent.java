@@ -3,6 +3,7 @@ package io.itgen.tests.testTypeform;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.TestService;
 import io.itgen.tests.TestBase;
 import java.util.Date;
@@ -26,12 +27,14 @@ public class TestTypeformAvailableToStudent extends TestBase {
     testService.deleteField("deleteTest", "removedAt");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTypeformAvailableToStudent() {
-    app.goTo().menuTests();
-    app.test().goToStudentProfileTabTests();
+    app.goTo().urlTests();
+    app.test().goToStudentProfileTabTests("21");
 
     //проверка, что кнопка есть и она не задизейблена
+
+    app.base().waiteVisibleElement(15, By.xpath("//button[@id-qa='give-test']"));
     assertThat(app.test().buttonAtributAvailable(By.xpath("//button[@id-qa='give-test']")),
         equalTo(null));
   }

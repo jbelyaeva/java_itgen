@@ -3,6 +3,7 @@ package io.itgen.tests.testTypeform;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.TestResultsService;
 import io.itgen.services.TestService;
 import io.itgen.tests.TestBase;
@@ -28,22 +29,22 @@ public class TestTypeformInProcess extends TestBase {
 
     testService.deleteField("InProcess", "removedAt");
 
-    app.trTest().saveResultTest("InProcess", "21", "InProcess", "Тест",
+    app.trTest().saveResultTestInProcess("InProcess", "21", "InProcess", "Тест",
         "111111", skills, "ru", 5, 5, createAt, "");
   }
 
-  @Test
-  public void testTypeformInProcess() {
-    app.test().goToStudentProfileTabTests();
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testTypeformInProcess() throws InterruptedException {
+    app.test().goToStudentProfileTabTests("21");
 
     //есть лейбл В процессе
+    Thread.sleep(3000);
     assertThat(app.test().isElementPresent(By.xpath("//span[@class='in-process']")), equalTo(true));
     //есть кнопка Удалить и она не задизейблена
     assertThat(app.test().buttonAtributAvailable(By.xpath("//button[@id-qa='delete-test']")),
         equalTo(null));
     //что можно скопировать ссылку (копируется весь текст)
     // app.test().checkHrefInProfileStudent(By.xpath("//div[@id-qa='copy-url']//input"));
-    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

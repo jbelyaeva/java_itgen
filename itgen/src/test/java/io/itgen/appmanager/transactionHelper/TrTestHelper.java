@@ -1,10 +1,12 @@
 package io.itgen.appmanager.transactionHelper;
 
+import io.itgen.model.typeform.Answers;
 import io.itgen.model.typeform.TestData;
 import io.itgen.model.typeform.TestResultsData;
 import io.itgen.services.TestResultsService;
 import io.itgen.services.TestService;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 
 public class TrTestHelper {
@@ -38,7 +40,7 @@ public class TrTestHelper {
   }
 
 
-  public void saveResultTest(
+  public void saveResultTestInProcess(
       String id,
       String childId,
       String testId,
@@ -63,4 +65,39 @@ public class TrTestHelper {
           .withRawFormData(rawFormData);
       testResultsService.create(testResult);
   }
+
+  public void saveResultTest(
+      String id,
+      String childId,
+      String testId,
+      String title,
+      String rootFormId,
+      String[] skills,
+      String language,
+      int minScore,
+      int maxScore,
+      Date createAt,
+      String rawFormData,
+      Boolean pass) {
+    TestResultsData testResult = new TestResultsData().withId(id).withChildId(childId)
+        .withTestId(testId)
+        .withTitle(title)
+        .withRootFormId(rootFormId)
+        .withSkillIds(Arrays.asList(skills))
+        .withLanguage(language)
+        .withMinScore(minScore)
+        .withMaxScore(maxScore)
+        .withCreatedAt(createAt)
+        .withEntityTestId("123456")
+        .withRawFormData(rawFormData)
+        .withAnswers(Collections.singletonList(
+            new Answers().withTitle("Как тебя зовут").withLearnerAnswers("1").withTrueAnswers("-")
+                .withIsAnswerTrue(false)))
+        .withFinishedAt(new Date())
+        .withFinishedSuccess(pass)
+        .withRawFormAnswers("")
+        .withScores(1);
+    testResultsService.create(testResult);
+  }
+
 }

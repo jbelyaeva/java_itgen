@@ -1,10 +1,7 @@
 package io.itgen.services;
 
 import io.itgen.dao.FinishedChildLessonDao;
-import io.itgen.model.LeadData;
-import io.itgen.model.StudentData;
 import io.itgen.model.schedule.FinishedChildLessonData;
-import io.itgen.model.tasks.TaskData;
 
 public class FinishedChildLessonService {
 
@@ -18,7 +15,7 @@ public class FinishedChildLessonService {
   }
 
   public FinishedChildLessonData DeleteByIdStudent(String idStudent) {
-    return finishedChildLessonDao.DeleteByIdStudent(idStudent);
+    return finishedChildLessonDao.FindByIdStudent(idStudent);
   }
 
   public void drop() {

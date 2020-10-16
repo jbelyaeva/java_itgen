@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1" >
+    <test name="Candidates">
+        <classes>
+            <class name="io.itgen.tests.candidates.CandidateQACreationTest" />
+            <class name="io.itgen.tests.candidates.CandidateModificationTest" />
+            <class name="io.itgen.tests.candidates.CandidateDeletionTest" />
+        </classes>
+    </test>
+</suite>

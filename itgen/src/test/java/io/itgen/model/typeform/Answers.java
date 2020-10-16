@@ -28,8 +28,8 @@ public class Answers {
     return this;
   }
 
-  public Answers withAnswerTrue(Boolean answerTrue) {
-    isAnswerTrue = answerTrue;
+  public Answers withIsAnswerTrue(Boolean isAnswerTrue) {
+    this.isAnswerTrue = isAnswerTrue;
     return this;
   }
 

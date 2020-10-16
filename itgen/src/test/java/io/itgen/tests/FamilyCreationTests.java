@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -46,7 +47,8 @@ public class FamilyCreationTests extends TestBase {
 
   @Test(dataProvider = "validFamiliesFromJson")
   public void testFamilyCreation(FamilyDataUI family) {
-    app.goTo().menuStudents();
+    app.base().waiteVisibleElement(5, By.xpath("//h2"));
+    app.goTo().urlStudents();
     Families before = app.db().families();
     app.family().create(family);
     Families after = app.db().families();
@@ -54,7 +56,7 @@ public class FamilyCreationTests extends TestBase {
     String url = app.family().getURL();
     idFamily = app.family().getId(url);
     Students users = app.db().familyComposition(idFamily);
-    assertThat(users.size(), equalTo(2)); 
+    assertThat(users.size(), equalTo(2));
   }
 
   @AfterMethod(alwaysRun = true)

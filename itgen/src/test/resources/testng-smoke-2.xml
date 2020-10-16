@@ -8,7 +8,11 @@
       <class name="io.itgen.tests.testTypeform.TestTypeformAvailableToStudent" />
       <class name="io.itgen.tests.testTypeform.TestTypeformRemoteNotHaveStudent" />
       <class name="io.itgen.tests.testTypeform.TestTypeformInProcess" />
-      <class name="io.itgen.tests.testTypeform.TestTypeformDone" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformDeleteInProfileAfterPassing" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformDeleteMarkInSkills" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformLanguageFromAdmTests" />
       <class name="io.itgen.tests.testTypeform.TestTypeformDeletion" />
       </classes>
   </test>

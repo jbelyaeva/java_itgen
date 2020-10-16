@@ -26,7 +26,7 @@ public class FinishedChildLessonDao {
     datastore.delete(query);
   }
 
-  public FinishedChildLessonData DeleteByIdStudent(String id) {
+  public FinishedChildLessonData FindByIdStudent(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<FinishedChildLessonData> query = datastore.createQuery(FinishedChildLessonData.class)
         .filter("childId", id);

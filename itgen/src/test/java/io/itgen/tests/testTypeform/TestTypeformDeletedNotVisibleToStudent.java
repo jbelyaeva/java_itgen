@@ -10,7 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TestTypeformRemoteNotHaveStudent extends TestBase {
+public class TestTypeformDeletedNotVisibleToStudent extends TestBase {
 
   private final TestService testService = new TestService();
   private final Date createAt = new Date();
@@ -27,9 +27,9 @@ public class TestTypeformRemoteNotHaveStudent extends TestBase {
   }
 
   @Test
-  public void testTypeformRemoteNotHaveStudent() {
-    app.goTo().menuTests();
-    app.test().goToStudentProfileTabTests();
+  public void testTypeformDeletedNotVisibleToStudent() {
+    app.goTo().urlTests();
+    app.test().goToStudentProfileTabTests("21");
 
     //проверка, что кнопка есть и она не задизейблена
     assertThat(app.test().buttonGiveTestMissing(), equalTo(false));

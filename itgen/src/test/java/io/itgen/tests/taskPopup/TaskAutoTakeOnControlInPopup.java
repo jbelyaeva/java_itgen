@@ -53,7 +53,6 @@ public class TaskAutoTakeOnControlInPopup extends TestBase {
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
-    check(after);
     app.goTo().menuSchedule();
   }
 

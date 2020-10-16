@@ -213,7 +213,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void delete(TrainerData deletedTrainer) {
-    selectTrainerById(deletedTrainer);
+    goUrlTrainer(deletedTrainer.getId());
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
     noErrorMessage();
@@ -239,7 +239,7 @@ public class TrainerHelper extends HelperBase {
     List<WebElement> list =
         wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
     if (list.size() > 0) {
-      wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'")).click();
+      clickWithMoveToElementAndWait(5,By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
     } else {
       // если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
@@ -250,10 +250,14 @@ public class TrainerHelper extends HelperBase {
               .click();
           break;
         } else {
-          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
+         clickWithMoveToElementAndWait(5,By.xpath("//span[contains(text(),'»')]"));
         }
       }
     }
+  }
+
+  public void goUrlTrainer(String idTrainer) {
+   wd.get(address()+"/profile/"+idTrainer);
   }
 
   public void modifyInLk(TrainerData trainer) {
@@ -306,7 +310,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnFinishLesson() {
-    click(By.xpath("//button[contains(@class,'finish-lesson')]"));
+   clickWithMoveToElementAndWait(5,By.xpath("//button[contains(@class,'finish-lesson')]"));
     noErrorMessage();
   }
 
@@ -334,7 +338,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnSave() {
-    click(By.xpath("//div[@class='results-container']//button//span"));
+    clickWithMoveToElementAndWait(5,By.xpath("//div[@class='results-container']//button//span"));
     noErrorMessage();
   }
 
