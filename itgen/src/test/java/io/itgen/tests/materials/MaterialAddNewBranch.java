@@ -17,13 +17,13 @@ public class MaterialAddNewBranch extends TestBase {
 
   @Test()
   public void testMaterialAddNewBranch() {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     MaterialBranchs before=app.dbmaterial().materialBranchs();
     app.material().addNewBranch("Scratch");
     MaterialBranchs after=app.dbmaterial().materialBranchs();
     assertThat(after.size(), equalTo(before.size() + 1));
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

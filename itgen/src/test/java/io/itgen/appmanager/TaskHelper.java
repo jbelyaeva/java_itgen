@@ -169,11 +169,15 @@ public class TaskHelper extends HelperBase {
     click(By.xpath("(//ul[contains(@class,'dropdown')]//button)[4]"));
   }
 
-  public void filtrByUserInStek(String user) throws InterruptedException {
-    Thread.sleep(3000);
+  public void filtrByUserInStek(String user) {
+    doubleClick(By.xpath("(//div[@class='filter']//input)[4]"));
     type(By.xpath("(//div[@class='filter']//input)[4]"), user);
-    wd.findElement(By.xpath("(//div[@class='filter']//input)[4]")).sendKeys(Keys.DOWN);
-    wd.findElement(By.xpath("(//div[@class='filter']//input)[4]")).sendKeys(Keys.ENTER);
+    if(wd.findElement(By.xpath("(//div[@class='filter']//input)[4]")).getAttribute("defaultValue").equals("")){
+      refresh();
+      clickWaitElementToBeClicable(5,By.xpath("(//div[@class='filter']//input)[4]"));
+      type(By.xpath("(//div[@class='filter']//input)[4]"), user);
+    }
+    doubleClick(By.xpath("//ul[@role='listbox']//li[@tabindex=-1]"));
   }
 
   public Integer getCountSearchUI() {
@@ -265,10 +269,12 @@ public class TaskHelper extends HelperBase {
   }
 
   public void changePriorityManualTaskInPopup(String priority) {
+    explicitWait(1000);
     goToPopup();
     selectChangePriority();
     changePriority(priority);
     btnClosePopup();
+    explicitWait(3);
   }
 
   private void changePriority(String priority) {

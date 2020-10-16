@@ -158,7 +158,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, статус Выполненные
   public void testFiltrByPriorityInStack_1() throws InterruptedException {
-    app.goTo().menuTasks();
+    app.goTo().urlTasks();
     app.task().selectStatusDone();
     app.task().btnLowPriority();
     assertThat(app.task().getCountSearchUI(), equalTo(1));
@@ -167,11 +167,11 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Исполнитель
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Исполнитель, Не Выполненные
   public void testFiltrByPriorityInStack_2() throws InterruptedException {
-    app.goTo().menuTasks();
+    app.goTo().urlTasks();
     app.task().btnMiddlePriority();
-    app.task().selectStatusNotDone();
+
     //проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(1));
     //проверка, что найдена именно Настя Бокша и она одна
@@ -182,9 +182,10 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Создатель
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Создатель, Не выполненные
   public void testFiltrByPriorityInStack_3() throws InterruptedException {
-    app.task().selectAssigner();
+    app.goTo().urlTasks();
+    app.task().selectAssigner(); //сняли чб Исполнитель
     app.task().selectCreator();
     //проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(3));
@@ -199,10 +200,9 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Исполнитель
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Исполнитель, Не выпол
   public void testFiltrByPriorityInStack_4() throws InterruptedException {
-    app.task().selectCreator();
-    app.task().selectAssigner();
+    app.goTo().urlTasks();
     app.task().btnLowPriority();
     Thread.sleep(5000);
     assertThat(app.task().getCountSearchUI(), equalTo(0));
@@ -210,9 +210,10 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Создатель
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Создатель, Не выпол
   public void testFiltrByPriorityInStack_5() throws InterruptedException {
-    app.task().selectAssigner();
+    app.goTo().urlTasks();
+    app.task().selectAssigner();//убрали чб Исполнитель
     app.task().selectCreator();
     app.task().btnLowPriority();
     assertThat(app.task().getCountSearchUI(), equalTo(0));
@@ -220,8 +221,9 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Выполненные
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Выполненные, Исполнитель
   public void testFiltrByPriorityInStack_6() throws InterruptedException {
+    app.goTo().urlTasks();
     app.task().btnMiddlePriority();
     app.task().selectStatusDone();
     assertThat(app.task().getCountSearchUI(), equalTo(0));
@@ -229,11 +231,11 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Жду ответа
+  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Жду ответа, Исполнитель
   public void testFiltrByPriorityInStack_7() throws InterruptedException {
+    app.goTo().urlTasks();
+    app.task().btnMiddlePriority();
     app.task().selectStatusWaitAnswer();
-    app.task().selectCreator();
-    app.task().selectAssigner();
     assertThat(app.task().getCountSearchUI(), equalTo(1));
     assertThat(app.task().getNameClientUI(), equalTo("Дефолтный Ребенок"));
     assertThat(app.task().getCountInTabUI(), equalTo(1));

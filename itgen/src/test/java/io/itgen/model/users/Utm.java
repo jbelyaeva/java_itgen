@@ -54,4 +54,16 @@ public class Utm {
   public String getContent() {
     return content;
   }
+
+  @Override
+  public String toString() {
+    return "Utm{" +
+        "source='" + source + '\'' +
+        ", medium='" + medium + '\'' +
+        ", campaing='" + campaing + '\'' +
+        ", term='" + term + '\'' +
+        ", content='" + content + '\'' +
+        '}';
+  }
+
 }

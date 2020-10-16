@@ -44,13 +44,13 @@ public class MaterialDelete extends TestBase {
 
   @Test()
   public void testMaterialDelete() throws InterruptedException {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
     app.material().deleteMaterial("MaterialDelete");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after) {

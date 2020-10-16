@@ -372,7 +372,6 @@ task testSmoke(type: Test) {
 testSmoke.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-
 //
 task testSmoke2(type: Test) {
     useTestNG {
@@ -693,5 +692,30 @@ task testTypeform(type: Test) {
     }
 }
 testTypeform.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+//
+task testCandidates(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testng-candidates.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testCandidates.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }

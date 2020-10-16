@@ -3,13 +3,17 @@
 <suite name="Suite1" verbose="1" >
     <test name="Typeform">
         <classes>
-           <!-- <class name="io.itgen.tests.testTypeform.TestTypeformCreate" />-->
+            <class name="io.itgen.tests.testTypeform.TestTypeformCreate" />
             <class name="io.itgen.tests.testTypeform.TestTypeformAddNewEnglishTest" />
             <class name="io.itgen.tests.testTypeform.TestTypeformModification" />
             <class name="io.itgen.tests.testTypeform.TestTypeformAvailableToStudent" />
-            <class name="io.itgen.tests.testTypeform.TestTypeformRemoteNotHaveStudent" />
+            <class name="io.itgen.tests.testTypeform.TestTypeformDeletedNotVisibleToStudent" />
             <class name="io.itgen.tests.testTypeform.TestTypeformInProcess" />
-            <class name="io.itgen.tests.testTypeform.TestTypeformDone" />
+           <!-- <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
+            <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" /> -->
+            <class name="io.itgen.tests.testTypeform.TestTypeformDeleteInProfileAfterPassing" />
+            <class name="io.itgen.tests.testTypeform.TestTypeformDeleteMarkInSkills" />
+            <class name="io.itgen.tests.testTypeform.TestTypeformLanguageFromAdmTests" />
             <class name="io.itgen.tests.testTypeform.TestTypeformDeletion" />
         </classes>
     </test>

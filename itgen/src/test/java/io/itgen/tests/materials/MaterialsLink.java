@@ -64,13 +64,12 @@ public class MaterialsLink extends TestBase {
 
   @Test()
   public void testMaterialLink() {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
     app.material().linkMaterials("MaterialLinkRU", "Beetles");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
-    check(after);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after) {

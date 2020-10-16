@@ -3,6 +3,7 @@ package io.itgen.tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.schedule.Comments;
 import io.itgen.model.schedule.FinishedChildLessons;
@@ -55,7 +56,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
             "finishLessonByTrainer");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTrainerFinishedLessonWithStudentWas() {
     app.trainer().maxBrowser();
     Schedules before = app.dbschedules().schedules();

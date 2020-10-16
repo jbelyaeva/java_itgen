@@ -48,7 +48,7 @@ public class LeadHelper extends HelperBase {
   }
 
   public void btnPencil() {
-   clickWithMoveToElementAndWait(5, By.xpath("//span[contains(@class,'pencil')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void fillLeadForm(LeadData leadData) {
@@ -100,25 +100,8 @@ public class LeadHelper extends HelperBase {
   }
 
   public void selectLeadInListUIById(String id) {
-    // находим пагинатор
-    String next =
-        wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    // есть ли на первой странице наш студент
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
-    if (list.size() > 0) {
-      wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
-    } else {
-      // если студентк не на первой странице, надо нажать пагинатор, пока не найдем
-      while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/leads/" + id + "'"));
-        if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/leads/" + id + "'")).click();
-          break;
-        } else {
-          wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
-        }
-      }
-    }
+    waiteVisibleElement(5,By.cssSelector("a[href='/leads/" + id + "'"));
+    click(By.cssSelector("a[href='/leads/" + id + "'"));
   }
 
   public void delete() {

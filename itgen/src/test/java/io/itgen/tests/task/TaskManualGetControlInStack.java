@@ -41,7 +41,7 @@ public class TaskManualGetControlInStack extends TestBase {
   }
 
   @Test
-  public void testTaskManualOnTomorrowInStack() {
+  public void testTaskManualGetControlInStack() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
     app.task().takeOnControManualTaskInStack();

@@ -36,9 +36,8 @@ public class TrainerDeletionTests extends TestBase {
 
   }
 
-  @Test  (retryAnalyzer = RunTestAgain.class)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTrainerDeletion() {
-   // app.goTo().menuSchedule();
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
     app.trainer().delete(deletedTrainer);

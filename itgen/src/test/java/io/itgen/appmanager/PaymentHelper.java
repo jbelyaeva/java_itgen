@@ -20,7 +20,7 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void btnPay() {
-    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href,'/pay/')]"));
+    click(By.xpath("//a[contains(@href,'/pay/')]"));
   }
 
   public void btnPay4Lessons() {

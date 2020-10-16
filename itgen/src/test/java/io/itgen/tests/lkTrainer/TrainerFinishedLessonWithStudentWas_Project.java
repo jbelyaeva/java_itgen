@@ -3,6 +3,7 @@ package io.itgen.tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.materials.MaterialChilds;
 import io.itgen.model.schedule.Comments;
@@ -100,7 +101,7 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
             "666");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTrainerFinishedLessonWithStudentWas_Project() {
     Schedules before = app.dbschedules().schedules();
     FinishedChildLessons finishChildBefore = app.dbschedules().finishedChildLessons();

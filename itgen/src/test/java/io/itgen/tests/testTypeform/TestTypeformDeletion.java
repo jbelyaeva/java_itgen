@@ -29,14 +29,13 @@ public class TestTypeformDeletion extends TestBase {
 
   @Test
   public void testTypeformDeletion() {
-    app.goTo().menuSchedule();
-    app.goTo().menuTests();
+    app.goTo().urlTests();
     Tests before = app.dbtest().tests();
     app.test().deleteTest();
-    Tests after = app.dbtest().tests();
+    Tests after = app.dbtest().waitAndGetNewDataFromBD(before);
     assertThat(after.size(), equalTo(before.size()));
     check(after);
-    app.goTo().menuStudents();
+    app.goTo().urlTests();
   }
 
   private void check(Tests after) {

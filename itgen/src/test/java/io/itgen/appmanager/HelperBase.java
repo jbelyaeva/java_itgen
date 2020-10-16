@@ -2,6 +2,7 @@ package io.itgen.appmanager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -190,11 +191,29 @@ public class HelperBase{
     wait.until(ExpectedConditions.visibilityOf(wd.findElement(locator)));
   }
 
-  public Date StringToDate(String stringDate) throws ParseException {
+  public void waitElementWithText( int sec, By locator, String text) {
+    WebDriverWait wait = new WebDriverWait(wd,sec);
+    wait.until(ExpectedConditions.textToBe(locator, text));
+  }
+
+  public Date stringToDate(String stringDate) throws ParseException {
     String startDate = stringDate; //"Tue May 15 00:00:01 MSK 2012";
     SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.US);
     Date date = (Date) parser .parse(startDate );
     return date;
+  }
+
+  public Date DateWithCorrectionDays(int days) {
+    Date data = new Date();
+    Calendar c = Calendar.getInstance();
+    c.setTime(data);
+    c.add(Calendar.DATE, days);
+    return c.getTime();
+  }
+
+  public String DateISOToUsualDataString(Date dateISO) {
+    SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
+    return formatForDateNow.format(dateISO);
   }
 
   public void clear(int count, By locator) {
@@ -222,4 +241,8 @@ public class HelperBase{
     waitRefreshElement.until(ExpectedConditions.stalenessOf(element));
   }
 
+  public String address(){
+    String[] split = ApplicationManager.properties.getProperty("web.baseUrl").split("/");
+    return split[0]+"//"+split[2];
+  }
 }

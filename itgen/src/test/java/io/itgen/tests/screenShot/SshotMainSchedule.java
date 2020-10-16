@@ -70,9 +70,7 @@ public class SshotMainSchedule extends TestBase {
                 name,
                 locatorIgnor,
                 1.25f);
-    if (diff.getDiffSize() > 100) { // погрешность
-      Assert.assertEquals(diff.getDiffSize(), 0);
-    }
+    Assert.assertEquals(diff.getDiffSize(), 0);
   }
 
   @AfterMethod(alwaysRun = true)

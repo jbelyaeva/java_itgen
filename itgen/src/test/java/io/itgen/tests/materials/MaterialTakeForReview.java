@@ -47,13 +47,13 @@ public class MaterialTakeForReview extends TestBase {
 
   @Test()
   public void testMaterialTakeForReview() throws InterruptedException {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
     app.material().TakeOnCheck();
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after) {

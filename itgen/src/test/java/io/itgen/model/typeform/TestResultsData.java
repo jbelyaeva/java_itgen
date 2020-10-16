@@ -33,8 +33,9 @@ public class TestResultsData {
   @Property("rootFormId")
   private String rootFormId;
 
-  @Property("skillIds")
+
   @Expose
+  @Property("skillIds")
   private List<String> skillIds= new ArrayList<String>();
 
   @Expose

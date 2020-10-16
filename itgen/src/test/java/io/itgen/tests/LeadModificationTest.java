@@ -55,7 +55,7 @@ public class LeadModificationTest extends TestBase {
     leadService.create(lead);
   }
 
-  @Test(dataProvider = "validLeadsFromJson",  retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validLeadsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testLeadModification(LeadData lead) {
     app.goTo().menuTasks();
     app.goTo().menuLeads();

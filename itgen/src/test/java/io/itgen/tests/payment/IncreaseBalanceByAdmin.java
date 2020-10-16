@@ -3,7 +3,6 @@ package io.itgen.tests.payment;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import io.itgen.general.RunTestAgain;
 import io.itgen.model.PaymentData;
 import io.itgen.model.Payments;
 import io.itgen.services.FamilyService;
@@ -53,7 +52,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
             true);
   }
 
-  @Test  (retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testIncreaseBalanceByAdmin() throws InterruptedException {
     app.goTo().menuStudents();
     Payments before = app.db().payments("increaseAdmin");

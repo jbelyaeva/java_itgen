@@ -54,7 +54,6 @@ public class TaskAutoDoneInPopup extends TestBase {
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
-    app.task().refresh();
     app.goTo().menuSchedule();
   }
 

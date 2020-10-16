@@ -5,14 +5,21 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertFalse;
 
 import io.itgen.model.typeform.TestData;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TestHelper extends HelperBase {
+
+  public static Properties properties;
 
   public String buttonAtributAvailable(By locator) {
     //из документации: атрибут disabled возвращает либо true, либо null
@@ -45,7 +52,8 @@ public class TestHelper extends HelperBase {
   }
 
   public void createTest(TestData test) {
-    btnAddTestInAdm();
+   // btnAddTestInAdm(); - очень глючная кнопка Добавить, делает тест нестабильным
+    wd.get(address()+"/tests/addTest");
     selectFirstLangInList();
     fillFormCreateTest(test);
     btnAddTest();
@@ -189,11 +197,51 @@ public class TestHelper extends HelperBase {
     click(By.xpath("//div[@class='test-buttons']/*[1]"));
   }
 
-  public void goToStudentProfileTabTests() {
-    wd.get("http://localhost:3000/profile/21?tab=tests");
+  public void goToStudentProfileTabTests(String idStudent) {
+    wd.get(address() + "/profile/" + idStudent + "?tab=tests");
+  }
+
+  public void goToStudentProfileTabHistory(String idStudent) {
+    wd.get(address() + "/profile/" + idStudent + "?tab=history");
   }
 
   public Boolean buttonGiveTestMissing() {
     return isElementPresent(By.xpath("//button[@id-qa='give-test']"));
+  }
+
+  public void checkHrefResults() {
+    clickWithMoveToElementAndWait(5, By.xpath("//a[@class='answers']"));
+    assertThat(wd.findElement(By.xpath("//div[@class='title']")).getText(),
+        equalTo("Просмотр ответов"));
+  }
+
+  public void deleteTestInProfile() {
+    clickWithMoveToElementAndWait(8, By.xpath("//button[@id-qa='delete-test']"));
+  }
+
+  public Set<String> getLanguagesInDropdown() {
+     Set<String> langs = new HashSet<>();
+    click(By.xpath("//div[@role='button']"));
+
+    List<WebElement> langsUI = wd.findElements(By.xpath("//ul[@role='listbox']//li"));
+    int count = langsUI.size();
+    for (int i=1; i<=count ; i++){
+      String lang = wd.findElement(By.xpath("//ul[@role='listbox']//li["+i+"]")).getAttribute("textContent");
+      langs.add(lang);
+    }
+    return langs;
+  }
+
+  public Set<String> getEtalonSetInDropdown(String lang1, String lang2) {
+    Set<String> etalon = new HashSet<>();
+    etalon.add(lang1);
+    etalon.add(lang2);
+    return etalon;
+  }
+
+  public void deleteTestConnectionWithSkills() {
+    btnDeleteTest();
+    bntConfirmDelete();
+    thereAreErrorMessages();
   }
 }

@@ -4,6 +4,8 @@ import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
+import io.itgen.model.CandidateData;
+import io.itgen.model.Candidates;
 import io.itgen.model.Families;
 import io.itgen.model.FamilyData;
 import io.itgen.model.LeadData;
@@ -18,6 +20,8 @@ import io.itgen.model.TrainerData;
 import io.itgen.model.Trainers;
 import io.itgen.model.WorkerData;
 import io.itgen.model.Workers;
+import io.itgen.model.skills.SkillsData;
+import io.itgen.model.typeform.TestData;
 import java.util.List;
 
 public class DbHelper {
@@ -106,4 +110,13 @@ public class DbHelper {
     return new Payments(payments);
   }
 
+  public TestData lastTest() {
+    Query<TestData> q = datastore.createQuery(TestData.class);
+    long count=q.count();
+    return q.find().toList().get(Math.toIntExact(count - 1));
+  }
+
+  public SkillsData firstSkill() {
+    return datastore.createQuery(SkillsData.class).find().toList().get(0);
+  }
 }

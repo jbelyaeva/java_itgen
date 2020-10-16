@@ -44,13 +44,13 @@ public class MaterialLeaveComment extends TestBase {
 
   @Test()
   public void testMaterialLeaveComment() {
-    app.goTo().menuTasks();
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
     app.material().leaveComment("MaterialLeaveComment","Комментарий");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
+    app.goTo().menuTasks();
   }
 
   private void check(Materials after) {

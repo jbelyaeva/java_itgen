@@ -3,6 +3,7 @@ package io.itgen.model.users;
 public class Contacts {
   private String type;
   private String val;
+  private Boolean preferred;
 
   public Contacts() {
   }
@@ -17,6 +18,11 @@ public class Contacts {
     return this;
   }
 
+  public Contacts withPreferred(Boolean preferred) {
+    this.preferred = preferred;
+    return this;
+  }
+
   public String getType() {
     return type;
   }
@@ -25,11 +31,16 @@ public class Contacts {
     return val;
   }
 
+  public Boolean getPreferred() {
+    return preferred;
+  }
+
   @Override
   public String toString() {
     return "Contacts{" +
             "type='" + type + '\'' +
             ", val='" + val + '\'' +
+            ", preferred='" + preferred + '\'' +
             '}';
   }
 }
