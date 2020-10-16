@@ -6,7 +6,6 @@
       <class name="io.itgen.tests.testTypeform.TestTypeformAddNewEnglishTest" />
       <class name="io.itgen.tests.testTypeform.TestTypeformModification" />
       <class name="io.itgen.tests.testTypeform.TestTypeformAvailableToStudent" />
-      <class name="io.itgen.tests.testTypeform.TestTypeformRemoteNotHaveStudent" />
       <class name="io.itgen.tests.testTypeform.TestTypeformInProcess" />
       <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
       <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" />
