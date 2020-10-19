@@ -1,6 +1,7 @@
 package io.itgen.tests.screenShot;
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.general.RunTestAgain;
 import io.itgen.services.TestResultsService;
 import io.itgen.services.TestService;
 import io.itgen.tests.TestBase;
@@ -36,7 +37,7 @@ public class SshotTypeformPassLookingResult extends TestBase {
         "111111", skills, "ru", 5, 5, createAt, "", true);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTypeformPass() throws IOException, AWTException {
     String name = "Admin_TypeformLookingGoodResult_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

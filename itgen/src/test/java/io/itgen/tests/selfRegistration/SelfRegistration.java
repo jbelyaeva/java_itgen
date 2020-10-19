@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.Families;
 import io.itgen.model.FamilyData;
 import io.itgen.model.LeadData;
@@ -92,7 +93,7 @@ public class SelfRegistration extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validLeadsFromJson")
+  @Test(dataProvider = "validLeadsFromJson",retryAnalyzer = RunTestAgain.class)
   public void testSelfRegistration(StudentData student) throws InterruptedException {
 
     app.student().logout();

@@ -2,6 +2,7 @@ package io.itgen.tests.students;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -39,7 +40,7 @@ public class StudentModificationTests extends TestBase {
       }
       Gson gson = new Gson();
       List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
+      }.getType());
       return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
     }
   }
@@ -63,7 +64,7 @@ public class StudentModificationTests extends TestBase {
     studentService.save(student);
   }
 
-  @Test(dataProvider = "validStudentsFromJson")
+  @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testStudentModification(StudentData student) {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
