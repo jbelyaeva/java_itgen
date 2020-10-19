@@ -3,14 +3,12 @@
 <suite name="Suite1" verbose="1">
   <test name="NotDockerAdmin">
     <classes>
-      <class name="io.itgen.tests.screenShot.SshotFamily"/>
-      <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
       <class name="io.itgen.tests.schedule.ScheduleSingleMoveTests"/>
       <class name="io.itgen.tests.schedule.ScheduleRegularMoveTests"/>
       <class name="io.itgen.tests.materials.MaterialsLink"/>
       <class name="io.itgen.tests.payment.PaymentByAdmin"/>
-      <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
-      <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" />
+  <!--    <class name="io.itgen.tests.testTypeform.TestTypeformPass" />
+      <class name="io.itgen.tests.testTypeform.TestTypeformNotPass" /> есть в смоке-->
     </classes>
   </test>
 </suite>

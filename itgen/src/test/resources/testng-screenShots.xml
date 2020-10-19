@@ -3,7 +3,7 @@
 <suite name="Suite1" verbose="1">
   <test name="ScreenShots">
     <classes>
-     <!-- <class name="io.itgen.tests.screenShot.SshotFamily"/> -->
+      <class name="io.itgen.tests.screenShot.SshotFamily"/>
       <class name="io.itgen.tests.screenShot.SshotListStudents"/>
       <class name="io.itgen.tests.screenShot.SshotMainSchedule"/>
       <class name="io.itgen.tests.screenShot.SshotLessonWithStudent"/>
@@ -12,7 +12,7 @@
       <class name="io.itgen.tests.screenShot.SshotListWorkers"/>
       <class name="io.itgen.tests.screenShot.SshotWindowSchedule"/>
       <class name="io.itgen.tests.screenShot.SshotPayByAdminCard"/>
-     <!-- <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/> -->
+      <class name="io.itgen.tests.screenShot.SshotPayByAdminShop"/>
       <class name="io.itgen.tests.screenShot.SshotMaterialTabInProcess"/>
       <class name="io.itgen.tests.screenShot.SshotMaterialTabAll"/>
       <class name="io.itgen.tests.screenShot.SshotMainTasks"/>

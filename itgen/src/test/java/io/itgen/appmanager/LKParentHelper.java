@@ -260,12 +260,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnShowSchedule() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[@id-qa='show-schedule']")));
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(10, By.xpath("//button[@id-qa='show-schedule']"));
     noErrorMessage();
   }
 
