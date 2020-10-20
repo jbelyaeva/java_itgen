@@ -3,6 +3,9 @@
 <suite name="Suite1" verbose="1">
   <test name="Smoke2">
     <classes>
+      <class name="io.itgen.tests.candidates.CandidateQACreationTest" />
+      <class name="io.itgen.tests.candidates.CandidateModificationTest" />
+      <class name="io.itgen.tests.candidates.CandidateDeletionTest" />
       <class name="io.itgen.tests.testTypeform.TestTypeformAddNewEnglishTest" />
       <class name="io.itgen.tests.testTypeform.TestTypeformModification" />
       <class name="io.itgen.tests.testTypeform.TestTypeformAvailableToStudent" />

@@ -1,6 +1,9 @@
 package io.itgen.tests.screenShotPar;
 
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.appmanager.FamilyHelper;
+import io.itgen.services.FamilyService;
+import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -8,10 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotMain extends TestBase {
+  FamilyService familyService = new FamilyService();
 
   private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
     return app.sshot()
@@ -22,6 +27,11 @@ public class SshotMain extends TestBase {
             name,
             locatorIgnor,
             1.25f);
+  }
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+  familyService.updateFieldBoolean("111", "isTrialBonusOff", false);
   }
 
   @Test // упадет, если заускать через shift все тесты в подпапке.

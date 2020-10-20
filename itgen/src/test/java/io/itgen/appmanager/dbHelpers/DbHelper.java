@@ -33,6 +33,12 @@ public class DbHelper {
     return new Families(family);
   }
 
+  public Parents parents() {
+    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");
+    List<ParentData> parents = q.find().toList();
+    return new Parents(parents);
+  }
+
   public FamilyData lastFamily() {
     Query<FamilyData> q = datastore.createQuery(FamilyData.class);
     long count=q.count();
@@ -59,11 +65,6 @@ public class DbHelper {
     return new Students(students);
   }
 
-  public Parents parents() {
-    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");
-    List<ParentData> parents = q.find().toList();
-    return new Parents(parents);
-  }
 
   public ParentData getTokenParent(String name, String surname, String role) {
     Query<ParentData> q = datastore.createQuery(ParentData.class);

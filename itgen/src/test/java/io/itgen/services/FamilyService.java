@@ -21,4 +21,8 @@ public class FamilyService {
   public void delete(FamilyData family) {
     familyDao.delete(family);
   }
+
+  public void updateFieldBoolean(String idFamily,String nameFiled, Boolean data) {
+    familyDao.updateFieldBoolean(idFamily, nameFiled, data);
+  }
 }
