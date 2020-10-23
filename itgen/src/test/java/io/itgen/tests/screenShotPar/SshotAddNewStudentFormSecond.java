@@ -49,6 +49,7 @@ public class SshotAddNewStudentFormSecond extends TestBase {
 
     String name = "Parent_AddNewStudentForm2_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//div[@class='content']/*[3]"));
 
     ImageDiff diff =
         app.sshot()

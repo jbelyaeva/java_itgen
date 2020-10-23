@@ -182,4 +182,9 @@ public class PaymentHelper extends HelperBase {
     // проверка, что баланс уменьшился на 1 через ui
     assertThat(after, equalTo(before - 1));
   }
+
+  public String getPayer() {
+    waiteVisibleElement(5, By.xpath("(//p[contains(@class,'static')])[2]//span"));
+   return getText("(//p[contains(@class,'static')])[2]//span");
+  }
 }

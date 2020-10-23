@@ -339,4 +339,5 @@ public class ApplicationManager {
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
+
 }
