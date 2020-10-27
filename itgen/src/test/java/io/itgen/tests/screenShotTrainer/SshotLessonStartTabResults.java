@@ -52,7 +52,7 @@ public class SshotLessonStartTabResults extends TestBase {
             "startLessonByTrainer");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testSshotLessonStartTabResults() throws AWTException, IOException {
     app.trainer().maxBrowser();
     app.trainer().gotoSchedule();

@@ -42,7 +42,6 @@ public class StudentDeletionTests extends TestBase {
 
   @Test
   public void testStudentDeletion() {
-    app.goTo().menuTasks();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().selectStudentInListUIById("studentDelete");
@@ -57,6 +56,7 @@ public class StudentDeletionTests extends TestBase {
       }
     }
     verifyStudentsListInUI();
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

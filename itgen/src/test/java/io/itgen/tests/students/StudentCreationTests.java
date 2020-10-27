@@ -73,6 +73,7 @@ public class StudentCreationTests extends TestBase {
     StudentData studentAdd = student.withId(studentClean.getId());
     assertThat(after, equalTo(before.withAdded(studentAdd)));
     verifyStudentsListInUI();
+    app.goTo().menuTasks();
   }
 
   @Test(dataProvider = "noValidStudentsFromJson")

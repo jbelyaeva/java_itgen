@@ -66,7 +66,6 @@ public class StudentModificationTests extends TestBase {
 
   @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testStudentModification(StudentData student) {
-    app.goTo().menuTasks();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().selectStudentInListUIById("studentModify");
@@ -77,14 +76,13 @@ public class StudentModificationTests extends TestBase {
     for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
       if (studentModify.getId().equals("studentModify")) {
         StudentData studentAdd = student.withId(studentModify.getId());
-        //   boolean check=app.student().deepEquals(after,before.without(studentModify).withAdded(studentAdd));
-        //  assertThat(check, equalTo(true));
         assertThat(after, equalTo(before.without(studentModify).withAdded(studentAdd)));
         return;
       }
     }
 
     verifyStudentsListInUI();
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

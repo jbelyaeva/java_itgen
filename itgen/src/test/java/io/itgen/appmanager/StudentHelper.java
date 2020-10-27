@@ -44,7 +44,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void selectModifyStudent() {
-    click(By.xpath("//span[contains(@class,'pencil')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void btnSaveModify() {
