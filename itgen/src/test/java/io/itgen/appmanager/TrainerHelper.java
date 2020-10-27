@@ -345,14 +345,14 @@ public class TrainerHelper extends HelperBase {
   private void fillResults() {
     clickWithMoveToElementAndWait(5, By.xpath("//span//img[contains(@src,'capricious')]"));
 
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='done']"));
-    type(By.xpath("//input[@id-qa='done']"), "Проект Головоломка");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='done']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='done']")).sendKeys("Проект Головоломка");
 
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='homework']"));
-    type(By.xpath("//input[@id-qa='homework']"), "Проект Лаборатория");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='homework']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='homework']")).sendKeys("Проект Лаборатория");
 
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='topics']"));
-    type(By.xpath("//input[@id-qa='topics']"), "3D координаты, телепортация");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='topics']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='topics']")).sendKeys("3D координаты, телепортация");
 
     //выбор эмоций
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[3]"));
@@ -404,23 +404,23 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void fillResultsForDiscrupt() {
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='done']"));
-    type(By.xpath("//input[@id-qa='done']"), "Проект Головоломка");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='done']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='done']")).sendKeys("Проект Головоломка");
 
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='homework']"));
-    type(By.xpath("//input[@id-qa='homework']"), "Проект Лаборатория");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='homework']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='homework']")).sendKeys("Проект Лаборатория");
 
-    clickWithMoveToElementAndWait(1, By.xpath("//input[@id-qa='topics']"));
-    type(By.xpath("//input[@id-qa='topics']"), "3D координаты, телепортация");
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='topics']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='topics']")).sendKeys("3D координаты, телепортация");
 
-    type(By.xpath("//textarea[@id-qa='text-for-parents']"),
-        "Ребенок очень старался, был внимательный, "
-            + "проекты делал самостоятельно");
+    type(
+        By.xpath("//textarea[@id-qa='text-for-parents']"),
+        "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
 
-    type(By.xpath("//textarea[@id-qa='note']"), "Ребенок очень старался, был внимательный, "
-        + "проекты делал самостоятельно");
+    type(
+        By.xpath("//textarea[@id-qa='note']"),
+        "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
   }
-
   private void btnDiscrupt() {
     click(By.xpath("//button[@data-action='abort']"));
     noErrorMessage();
