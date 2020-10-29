@@ -33,10 +33,9 @@ public class TestResultsData {
   @Property("rootFormId")
   private String rootFormId;
 
-
   @Expose
   @Property("skillIds")
-  private List<String> skillIds= new ArrayList<String>();
+  private List<String> skillIds = new ArrayList<String>();
 
   @Expose
   @Property("language")
@@ -62,8 +61,7 @@ public class TestResultsData {
   @Property("entityTestId")
   private String entityTestId;
 
-  @Embedded
-  private List<Answers> answers = new ArrayList<Answers>();
+  @Embedded private List<Answers> answers = new ArrayList<Answers>();
 
   @Expose
   @Property("finishedAt")
@@ -238,25 +236,51 @@ public class TestResultsData {
 
   @Override
   public String toString() {
-    return "TestResultsData{" +
-        "id='" + id + '\'' +
-        ", childId='" + childId + '\'' +
-        ", testId='" + testId + '\'' +
-        ", title='" + title + '\'' +
-        ", rootFormId='" + rootFormId + '\'' +
-        ", skillIds=" + skillIds +
-        ", language='" + language + '\'' +
-        ", minScore=" + minScore +
-        ", maxScore=" + maxScore +
-        ", createdAt=" + createdAt +
-        ", rawFormData='" + rawFormData + '\'' +
-        ", entityTestId='" + entityTestId + '\'' +
-        ", answers=" + answers +
-        ", finishedAt=" + finishedAt +
-        ", finishedSuccess=" + finishedSuccess +
-        ", rawFormAnswers='" + rawFormAnswers + '\'' +
-        ", scores=" + scores +
-        '}';
+    return "TestResultsData{"
+        + "id='"
+        + id
+        + '\''
+        + ", childId='"
+        + childId
+        + '\''
+        + ", testId='"
+        + testId
+        + '\''
+        + ", title='"
+        + title
+        + '\''
+        + ", rootFormId='"
+        + rootFormId
+        + '\''
+        + ", skillIds="
+        + skillIds
+        + ", language='"
+        + language
+        + '\''
+        + ", minScore="
+        + minScore
+        + ", maxScore="
+        + maxScore
+        + ", createdAt="
+        + createdAt
+        + ", rawFormData='"
+        + rawFormData
+        + '\''
+        + ", entityTestId='"
+        + entityTestId
+        + '\''
+        + ", answers="
+        + answers
+        + ", finishedAt="
+        + finishedAt
+        + ", finishedSuccess="
+        + finishedSuccess
+        + ", rawFormAnswers='"
+        + rawFormAnswers
+        + '\''
+        + ", scores="
+        + scores
+        + '}';
   }
 
   @Override
@@ -268,28 +292,42 @@ public class TestResultsData {
       return false;
     }
     TestResultsData that = (TestResultsData) o;
-    return minScore == that.minScore &&
-        maxScore == that.maxScore &&
-        scores == that.scores &&
-        Objects.equals(id, that.id) &&
-        Objects.equals(childId, that.childId) &&
-        Objects.equals(testId, that.testId) &&
-        Objects.equals(title, that.title) &&
-        Objects.equals(rootFormId, that.rootFormId) &&
-        Objects.equals(skillIds, that.skillIds) &&
-        Objects.equals(language, that.language) &&
-        Objects.equals(createdAt, that.createdAt) &&
-        Objects.equals(rawFormData, that.rawFormData) &&
-        Objects.equals(answers, that.answers) &&
-        Objects.equals(finishedAt, that.finishedAt) &&
-        Objects.equals(finishedSuccess, that.finishedSuccess) &&
-        Objects.equals(rawFormAnswers, that.rawFormAnswers);
+    return minScore == that.minScore
+        && maxScore == that.maxScore
+        && scores == that.scores
+        && Objects.equals(id, that.id)
+        && Objects.equals(childId, that.childId)
+        && Objects.equals(testId, that.testId)
+        && Objects.equals(title, that.title)
+        && Objects.equals(rootFormId, that.rootFormId)
+        && Objects.equals(skillIds, that.skillIds)
+        && Objects.equals(language, that.language)
+        && Objects.equals(createdAt, that.createdAt)
+        && Objects.equals(rawFormData, that.rawFormData)
+        && Objects.equals(answers, that.answers)
+        && Objects.equals(finishedAt, that.finishedAt)
+        && Objects.equals(finishedSuccess, that.finishedSuccess)
+        && Objects.equals(rawFormAnswers, that.rawFormAnswers);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, childId, testId, title, rootFormId, skillIds, language, minScore, maxScore,
-            createdAt, rawFormData, answers, finishedAt, finishedSuccess, rawFormAnswers, scores);
+    return Objects.hash(
+        id,
+        childId,
+        testId,
+        title,
+        rootFormId,
+        skillIds,
+        language,
+        minScore,
+        maxScore,
+        createdAt,
+        rawFormData,
+        answers,
+        finishedAt,
+        finishedSuccess,
+        rawFormAnswers,
+        scores);
   }
 }

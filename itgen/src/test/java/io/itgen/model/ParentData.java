@@ -44,55 +44,31 @@ public class ParentData {
   @Property("locale")
   private String locate;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Embedded
-  private List<Emails> emails = new ArrayList<Emails>();
+  @Embedded private List<Emails> emails = new ArrayList<Emails>();
 
-  @Expose
-  @Transient
-  private String phone;
+  @Expose @Transient private String phone;
 
-  @Expose
-  @Transient
-  private String skype;
+  @Expose @Transient private String skype;
 
-  @Expose
-  @Transient
-  private String email;
+  @Expose @Transient private String email;
 
-  @Expose
-  @Transient
-  private String c2d;
+  @Expose @Transient private String c2d;
 
-  @Expose
-  @Transient
-  private String viber;
+  @Expose @Transient private String viber;
 
-  @Expose
-  @Transient
-  private String whatsapp;
+  @Expose @Transient private String whatsapp;
 
-  @Expose
-  @Transient
-  private String telegram;
+  @Expose @Transient private String telegram;
 
-  @Expose
-  @Transient
-  private String fb;
+  @Expose @Transient private String fb;
 
-  @Expose
-  @Transient
-  private String vk;
+  @Expose @Transient private String vk;
 
-  @Expose
-  @Transient
-  private String ok;
+  @Expose @Transient private String ok;
 
-  @Expose
-  @Transient
-  private String inst;
+  @Expose @Transient private String inst;
 
   @Property("familyId")
   private String familyId;
@@ -329,17 +305,35 @@ public class ParentData {
 
   @Override
   public String toString() {
-    return "ParentData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", country='" + country + '\'' +
-            ", city='" + city + '\'' +
-            ", timeZone='" + timeZone + '\'' +
-            ", locate='" + locate + '\'' +
-            ", note='" + note + '\'' +
-            ", services='" + services + '\'' +
-            '}';
+    return "ParentData{"
+        + "id='"
+        + id
+        + '\''
+        + ", firstName='"
+        + firstName
+        + '\''
+        + ", lastName='"
+        + lastName
+        + '\''
+        + ", country='"
+        + country
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", timeZone='"
+        + timeZone
+        + '\''
+        + ", locate='"
+        + locate
+        + '\''
+        + ", note='"
+        + note
+        + '\''
+        + ", services='"
+        + services
+        + '\''
+        + '}';
   }
 
   @Override
@@ -347,14 +341,14 @@ public class ParentData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ParentData that = (ParentData) o;
-    return Objects.equals(id, that.id) &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(country, that.country) &&
-            Objects.equals(city, that.city) &&
-            Objects.equals(timeZone, that.timeZone) &&
-            Objects.equals(locate, that.locate) &&
-            Objects.equals(note, that.note);
+    return Objects.equals(id, that.id)
+        && Objects.equals(firstName, that.firstName)
+        && Objects.equals(lastName, that.lastName)
+        && Objects.equals(country, that.country)
+        && Objects.equals(city, that.city)
+        && Objects.equals(timeZone, that.timeZone)
+        && Objects.equals(locate, that.locate)
+        && Objects.equals(note, that.note);
   }
 
   @Override

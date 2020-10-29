@@ -37,6 +37,7 @@ public class PaymentByGuest extends TestBase {
   public void testPaymentByGuest() {
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();
+
     assertEquals("Родитель Де*******", app.payment().getPayer());
 
     app.payment().paymentByGuest();

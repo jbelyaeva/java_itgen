@@ -4,7 +4,6 @@ import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -248,6 +247,7 @@ public class StudentHelper extends HelperBase {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
       }
+      waitVisibilityOfElementLocated(5, By.cssSelector("input[name=profile-firstName])"));
     }
   }
 
@@ -255,6 +255,4 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//div[@class='arrow']"));
     click(By.xpath("//ul[contains(@class,'list')]/li[4]"));
   }
-
-
 }

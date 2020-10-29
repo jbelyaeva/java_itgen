@@ -6,8 +6,7 @@ public class Advanced {
   private int age;
   private String state;
 
-  public Advanced() {
-  }
+  public Advanced() {}
 
   public Advanced withAge(int age) {
     this.age = age;
@@ -36,8 +35,7 @@ public class Advanced {
       return false;
     }
     Advanced beginner = (Advanced) o;
-    return age == beginner.age &&
-        state == beginner.state;
+    return age == beginner.age && state == beginner.state;
   }
 
   @Override
@@ -47,9 +45,6 @@ public class Advanced {
 
   @Override
   public String toString() {
-    return "Advanced{" +
-        "age=" + age +
-        ", state=" + state +
-        '}';
+    return "Advanced{" + "age=" + age + ", state=" + state + '}';
   }
 }

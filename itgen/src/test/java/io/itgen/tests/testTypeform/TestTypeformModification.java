@@ -33,10 +33,20 @@ public class TestTypeformModification extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("addEnglishTest", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills,
-        createAt, null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "addEnglishTest",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
   }
 
   @DataProvider
@@ -51,32 +61,41 @@ public class TestTypeformModification extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
-      }.getType());
-      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {}.getType());
+      return tests.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validDataTestFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTypeformModification(TestData test) throws InterruptedException {
-    app.base().waiteVisibleElement(5, By.xpath("//h2"));
-    app.goTo().urlTests();
+    app.base().waitVisibleElement(5, By.xpath("//h2"));
+    app.goTo().menuTests();
     Tests before = app.dbtest().tests();
     app.test().modifyTest(test);
-    app.base().waitElementWithText(5, By.xpath("//td[1]"), "Python");
-    Tests after = app.dbtest().waitAndGetNewDataFromBD(before);
+    //  app.base().waiteElementWithText(5, By.xpath("//td[1]"), "Python");
+    Thread.sleep(5000);
+    Tests after = app.dbtest().trySeveralTimeGetNewDateFromDB(before);
     testClean = app.dbtest().lastTest();
     assertThat(after.size(), equalTo(before.size()));
     check(after, test);
+    app.goTo().menuTasks();
   }
 
   private void check(Tests after, TestData test) {
-    skills = new String[]{"26"};
+    skills = new String[] {"26"};
     app.trTest()
         .saveTest(
-            testClean.getId(), test.getTitle(), test.getRootFormId(), "ru",
-            test.getDescription(), test.getMinScore(), test.getMaxScore(), test.getTimeForPassing(),
-            skills, createAt, null);
+            testClean.getId(),
+            test.getTitle(),
+            test.getRootFormId(),
+            "ru",
+            test.getDescription(),
+            test.getMinScore(),
+            test.getMaxScore(),
+            test.getTimeForPassing(),
+            skills,
+            createAt,
+            null);
 
     TestData testAdd = testService.findById(testClean.getId());
 

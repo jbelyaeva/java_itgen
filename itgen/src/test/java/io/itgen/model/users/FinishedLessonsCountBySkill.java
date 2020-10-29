@@ -8,8 +8,7 @@ public class FinishedLessonsCountBySkill {
   @Property("1")
   public int one;
 
-  public FinishedLessonsCountBySkill() {
-  }
+  public FinishedLessonsCountBySkill() {}
 
   public int getOne() {
     return one;

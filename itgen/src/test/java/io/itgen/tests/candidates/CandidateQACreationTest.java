@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.CandidateData;
 import io.itgen.model.Candidates;
 import io.itgen.services.CandidateService;
@@ -37,20 +38,21 @@ public class CandidateQACreationTest extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<CandidateData> candidates = gson.fromJson(json, new TypeToken<List<CandidateData>>() {
-      }.getType());
-      return candidates.stream().map((p) -> new Object[]{p}).collect(Collectors.toList())
+      List<CandidateData> candidates =
+          gson.fromJson(json, new TypeToken<List<CandidateData>>() {}.getType());
+      return candidates.stream()
+          .map((p) -> new Object[] {p})
+          .collect(Collectors.toList())
           .iterator();
     }
   }
 
-  @Test(dataProvider = "validCandidatesFromJson")
-  public void testCandidateQACreation(CandidateData candidate) throws InterruptedException {
+  @Test(dataProvider = "validCandidatesFromJson", retryAnalyzer = RunTestAgain.class)
+  public void testCandidateQACreation(CandidateData candidate) {
     app.goTo().menuCandidates();
     Candidates before = app.dbcandidates().candidates();
     app.cantidate().create(candidate, "qa");
-    Thread.sleep(500); //необходимо, чтоб кандидат прописался в бд
-    Candidates after = app.dbcandidates().candidates();
+    Candidates after = app.dbcandidates().trySeveralTimeGetNewDateFromDB(before);
     candidateClean = app.dbcandidates().lastCandidate();
     assertThat(after.size(), equalTo(before.size() + 1));
     check(after, candidateClean.getId(), candidate, candidateClean.getVacancyId());

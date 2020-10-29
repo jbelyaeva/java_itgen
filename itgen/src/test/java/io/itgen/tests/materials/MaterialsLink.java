@@ -105,9 +105,10 @@ public class MaterialsLink extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    for (int i=0; i<2; i++){
-    materialClean = app.dbmaterial().lastMaterial();
-    materialService.DeleteById(materialClean.getId());}
+    for (int i = 0; i < 2; i++) {
+      materialClean = app.dbmaterial().lastMaterial();
+      materialService.DeleteById(materialClean.getId());
+    }
 
     materialBranchClean = app.dbmaterial().lastBranchMaterial();
     materialBranchService.DeleteById(materialBranchClean.getId());

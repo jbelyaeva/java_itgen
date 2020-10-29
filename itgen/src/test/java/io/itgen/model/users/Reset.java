@@ -8,7 +8,6 @@ public class Reset {
 
   public Reset() {}
 
-
   public String getToken() {
     return token;
   }
@@ -20,8 +19,6 @@ public class Reset {
 
   @Override
   public String toString() {
-    return "Reset{" +
-        "token='" + token + '\'' +
-        '}';
+    return "Reset{" + "token='" + token + '\'' + '}';
   }
 }

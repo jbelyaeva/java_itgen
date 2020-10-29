@@ -1,12 +1,10 @@
 package io.itgen.model.users;
 
-
 public class Emails {
   private String address;
   private Boolean verified;
 
-  public Emails() {
-  }
+  public Emails() {}
 
   public String getAddress() {
     return address;
@@ -28,9 +26,6 @@ public class Emails {
 
   @Override
   public String toString() {
-    return "Emails{" +
-            "address='" + address + '\'' +
-            ", verified=" + verified +
-            '}';
+    return "Emails{" + "address='" + address + '\'' + ", verified=" + verified + '}';
   }
 }

@@ -7,8 +7,7 @@ public class Utm {
   private String term;
   private String content;
 
-  public Utm() {
-  }
+  public Utm() {}
 
   public Utm withSource(String source) {
     this.source = source;
@@ -57,13 +56,22 @@ public class Utm {
 
   @Override
   public String toString() {
-    return "Utm{" +
-        "source='" + source + '\'' +
-        ", medium='" + medium + '\'' +
-        ", campaing='" + campaing + '\'' +
-        ", term='" + term + '\'' +
-        ", content='" + content + '\'' +
-        '}';
+    return "Utm{"
+        + "source='"
+        + source
+        + '\''
+        + ", medium='"
+        + medium
+        + '\''
+        + ", campaing='"
+        + campaing
+        + '\''
+        + ", term='"
+        + term
+        + '\''
+        + ", content='"
+        + content
+        + '\''
+        + '}';
   }
-
 }

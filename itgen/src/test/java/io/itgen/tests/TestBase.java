@@ -27,7 +27,7 @@ public class TestBase {
   Logger logger = LoggerFactory.getLogger(TestBase.class);
 
   protected static final ApplicationManager app =
-          new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+      new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
   @BeforeSuite(alwaysRun = true)
   public void setUp(ITestContext context) throws Exception {
@@ -55,19 +55,29 @@ public class TestBase {
       app.goTo().menuStudents();
       Students dbStudents = app.dbstudents().students();
       List<StudentData> uiStudents = app.student().list();
-      assertThat(new HashSet<Object>(uiStudents), equalTo(dbStudents
-              .stream().map((s) -> new StudentData()
-                      .withId(s.getId())
-                      .withFirstName(s.getFirstname())
-                      .withLastName(s.getLastname()))
-              .collect(Collectors.toSet())));
+      assertThat(
+          new HashSet<Object>(uiStudents),
+          equalTo(
+              dbStudents.stream()
+                  .map(
+                      (s) ->
+                          new StudentData()
+                              .withId(s.getId())
+                              .withFirstName(s.getFirstname())
+                              .withLastName(s.getLastname()))
+                  .collect(Collectors.toSet())));
     }
   }
 
-  public static void etalon(String expected, String name, Screenshot actualScreenshot) throws IOException {
+  public static void etalon(String expected, String name, Screenshot actualScreenshot)
+      throws IOException {
     if (Boolean.getBoolean("etalon")) {
-      File expectedFile = new File(expected + name + ".png"); //закоммитить после создания эталонного снимка
-      ImageIO.write(actualScreenshot.getImage(), "png", expectedFile);//закоммитить после создания эталонного снимка
+      File expectedFile =
+          new File(expected + name + ".png"); // закоммитить после создания эталонного снимка
+      ImageIO.write(
+          actualScreenshot.getImage(),
+          "png",
+          expectedFile); // закоммитить после создания эталонного снимка
     }
   }
 
@@ -76,12 +86,17 @@ public class TestBase {
       app.goTo().menuWorkers();
       Workers dbWorkers = app.db().workers();
       List<WorkerData> uiWorkers = app.worker().list();
-      assertThat(new HashSet<Object>(uiWorkers), equalTo(dbWorkers
-              .stream().map((s) -> new WorkerData()
-                      .withId(s.getId())
-                      .withFirstName(s.getFirstName())
-                      .withLastName(s.getLastName()))
-              .collect(Collectors.toSet())));
+      assertThat(
+          new HashSet<Object>(uiWorkers),
+          equalTo(
+              dbWorkers.stream()
+                  .map(
+                      (s) ->
+                          new WorkerData()
+                              .withId(s.getId())
+                              .withFirstName(s.getFirstName())
+                              .withLastName(s.getLastName()))
+                  .collect(Collectors.toSet())));
     }
   }
 
@@ -90,12 +105,17 @@ public class TestBase {
       app.goTo().menuTrainers();
       Trainers dbTrainers = app.db().trainers();
       List<TrainerData> uiTrainers = app.trainer().list();
-      assertThat(new HashSet<Object>(uiTrainers), equalTo(dbTrainers
-              .stream().map((s) -> new TrainerData()
-                      .withId(s.getId())
-                      .withFirstName(s.getFirstName())
-                      .withLastName(s.getLastName()))
-              .collect(Collectors.toSet())));
+      assertThat(
+          new HashSet<Object>(uiTrainers),
+          equalTo(
+              dbTrainers.stream()
+                  .map(
+                      (s) ->
+                          new TrainerData()
+                              .withId(s.getId())
+                              .withFirstName(s.getFirstName())
+                              .withLastName(s.getLastName()))
+                  .collect(Collectors.toSet())));
     }
   }
 
@@ -104,14 +124,17 @@ public class TestBase {
       app.goTo().menuLeads();
       Leads dbLeads = app.db().leads();
       List<LeadData> uiLeads = app.lead().list();
-      assertThat(new HashSet<Object>(uiLeads), equalTo(dbLeads
-              .stream().map((s) -> new LeadData()
-                      .withId(s.getId())
-                      .withFirstName(s.getFirstname())
-                      .withLastName(s.getLastname()))
-              .collect(Collectors.toSet())));
+      assertThat(
+          new HashSet<Object>(uiLeads),
+          equalTo(
+              dbLeads.stream()
+                  .map(
+                      (s) ->
+                          new LeadData()
+                              .withId(s.getId())
+                              .withFirstName(s.getFirstname())
+                              .withLastName(s.getLastname()))
+                  .collect(Collectors.toSet())));
     }
   }
-
-
 }

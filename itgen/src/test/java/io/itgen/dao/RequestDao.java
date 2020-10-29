@@ -20,8 +20,7 @@ public class RequestDao {
 
   public RequestData findByIdAndDelete(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<RequestData> query = datastore.createQuery(RequestData.class)
-            .filter("id", id);
+    Query<RequestData> query = datastore.createQuery(RequestData.class).filter("id", id);
     RequestData request = datastore.findAndDelete(query);
     return request;
   }
@@ -35,6 +34,4 @@ public class RequestDao {
     Datastore datastore = morphiaSessionFactoryUtil();
     datastore.delete(request);
   }
-
 }
-

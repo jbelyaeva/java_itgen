@@ -28,11 +28,10 @@ public class FinishedChildLessonDao {
 
   public FinishedChildLessonData FindByIdStudent(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<FinishedChildLessonData> query = datastore.createQuery(FinishedChildLessonData.class)
-        .filter("childId", id);
+    Query<FinishedChildLessonData> query =
+        datastore.createQuery(FinishedChildLessonData.class).filter("childId", id);
     List<FinishedChildLessonData> finishedChildLessons = query.find().toList();
     FinishedChildLessonData finishedChildLesson = finishedChildLessons.stream().findFirst().get();
     return finishedChildLesson;
   }
 }
-

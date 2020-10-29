@@ -6,17 +6,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FinishedChildLessons extends ForwardingSet<FinishedChildLessonData> {
-  private Set<FinishedChildLessonData> delegate;
+  private final Set<FinishedChildLessonData> delegate;
 
   public FinishedChildLessons(FinishedChildLessons finishedChildLessons) {
     this.delegate = new HashSet<FinishedChildLessonData>(finishedChildLessons.delegate);
   }
 
-  public FinishedChildLessons() { //конструктор без параметров
+  public FinishedChildLessons() { // конструктор без параметров
     this.delegate = new HashSet<FinishedChildLessonData>();
   }
 
-  public FinishedChildLessons(Collection<FinishedChildLessonData>  finishedChildLessons) {
+  public FinishedChildLessons(Collection<FinishedChildLessonData> finishedChildLessons) {
     this.delegate = new HashSet<FinishedChildLessonData>(finishedChildLessons);
   }
 
@@ -37,4 +37,3 @@ public class FinishedChildLessons extends ForwardingSet<FinishedChildLessonData>
     return delegate;
   }
 }
-

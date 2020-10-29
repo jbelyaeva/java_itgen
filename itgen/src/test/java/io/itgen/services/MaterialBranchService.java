@@ -7,8 +7,7 @@ public class MaterialBranchService {
 
   private final MaterialBranchDao materialBranchDao = new MaterialBranchDao();
 
-  public MaterialBranchService() {
-  }
+  public MaterialBranchService() {}
 
   public MaterialBranchData DeleteById(String id) {
     return materialBranchDao.findByIdAndDelete(id);

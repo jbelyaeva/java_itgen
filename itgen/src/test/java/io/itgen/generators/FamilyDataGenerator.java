@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.FamilyDataUI;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class FamilyDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<FamilyDataUI> families = generateFamilies(count);
     if (format.equals("json")) {
@@ -48,11 +47,12 @@ public class FamilyDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<FamilyDataUI> families, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(families);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
@@ -60,7 +60,8 @@ public class FamilyDataGenerator extends TestBase {
   private List<FamilyDataUI> generateFamilies(int count) {
     List<FamilyDataUI> families = new ArrayList<FamilyDataUI>();
     for (int i = 0; i < count; i++) {
-      families.add(new FamilyDataUI()
+      families.add(
+          new FamilyDataUI()
               // ученик
               .withFirstnameStudent(String.format("Вася-%s", i))
               .withLastnameStudent(String.format("Васин-%s", i))

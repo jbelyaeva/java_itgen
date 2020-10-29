@@ -1,5 +1,6 @@
 package io.itgen.tests;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -24,27 +25,39 @@ public class FamilyDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("famDeletion").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("famDeletion").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("famDeletion").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("famDeletion")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("famDeletion").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("famDeletion")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testFamilyDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     Families before = app.db().families();
     app.student().selectStudentInListUIById("famDeletion");
-    app.family().delete();//удаляем выбранного студента
+    app.family().delete(); // удаляем выбранного студента
     Families after = app.db().families();
     assertThat(after.size(), equalTo(before.size() - 1));
     Students users = app.db().familyComposition("famDeletion");

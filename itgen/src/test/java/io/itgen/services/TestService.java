@@ -7,8 +7,7 @@ public class TestService {
 
   private final TestDao testDao = new TestDao();
 
-  public TestService() {
-  }
+  public TestService() {}
 
   public TestData DeleteById(String id) {
     return testDao.findByIdAndDelete(id);

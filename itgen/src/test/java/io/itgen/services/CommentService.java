@@ -6,8 +6,7 @@ public class CommentService {
 
   private final CommentDao commentDao = new CommentDao();
 
-  public CommentService() {
-  }
+  public CommentService() {}
 
   public void drop() {
     commentDao.drop();

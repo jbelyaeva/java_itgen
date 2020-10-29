@@ -3,9 +3,7 @@ package io.itgen.model.users;
 public class Skills {
   private String skills;
 
-
-  public Skills() {
-  }
+  public Skills() {}
 
   public Skills withSkills(String type) {
     this.skills = type;
@@ -18,7 +16,6 @@ public class Skills {
 
   @Override
   public String toString() {
-    return "" +
-            skills;
+    return "" + skills;
   }
 }

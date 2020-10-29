@@ -7,14 +7,12 @@ import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Emails;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity("users")
-
 public class TrainerData {
   @Id
   @Property("_id")
@@ -36,15 +34,13 @@ public class TrainerData {
   @Property("createAt")
   private Date createdAt;
 
-  @Expose
-  private String startWorkUi;
+  @Expose private String startWorkUi;
 
   @Expose
   @Property("birthday")
   private Date birthday;
 
-  @Expose
-  private String birthdayUi;
+  @Expose private String birthdayUi;
 
   @Property("langs")
   private List<String> langs = new ArrayList<>();
@@ -57,8 +53,7 @@ public class TrainerData {
   @Property("maxSlots")
   private Integer maxSlots;
 
-  @Expose
-  private String country;
+  @Expose private String country;
 
   @Expose
   @Property("tz")
@@ -68,60 +63,45 @@ public class TrainerData {
   @Property("locale")
   private String locate;
 
-  @Expose
-  private String city;
+  @Expose private String city;
 
   @Property("roles")
   private List<String> roles = new ArrayList<>();
 
-  @Expose
-  private String roleUi;
+  @Expose private String roleUi;
 
   @Expose
   @Property("payBase")
   private Double payBase;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose
-  private String emailUI;
+  @Expose private String emailUI;
 
   @Embedded("emails")
   private List<Emails> emails = new ArrayList<Emails>();
 
-  @Expose
-  private String phone;
+  @Expose private String phone;
 
-  @Expose
-  private String skype;
+  @Expose private String skype;
 
-  @Expose
-  private String viber;
+  @Expose private String viber;
 
-  @Expose
-  private String whatsapp;
+  @Expose private String whatsapp;
 
-  @Expose
-  private String telegram;
+  @Expose private String telegram;
 
-  @Expose
-  private String fb;
+  @Expose private String fb;
 
-  @Expose
-  private String vk;
+  @Expose private String vk;
 
-  @Expose
-  private String ok;
+  @Expose private String ok;
 
-  @Expose
-  private String inst;
+  @Expose private String inst;
 
-  @Expose
-  private String note;
+  @Expose private String note;
 
-  @Expose
-  private String info;
+  @Expose private String info;
 
   @Property("workloadLevel")
   private String workloadLevel;
@@ -131,7 +111,6 @@ public class TrainerData {
 
   @Property("engLastName")
   private String engLastName;
-
 
   /* setters */
 
@@ -179,7 +158,6 @@ public class TrainerData {
     this.langs = langs;
     return this;
   }
-
 
   public TrainerData withGender(Integer gender) {
     this.gender = gender;
@@ -361,7 +339,6 @@ public class TrainerData {
     return roleUi;
   }
 
-
   public Integer getMaxSlots() {
     return maxSlots;
   }
@@ -458,22 +435,47 @@ public class TrainerData {
 
   @Override
   public String toString() {
-    return "TrainerData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", birthdayUi='" + birthdayUi + '\'' +
-            ", gender=" + gender +
-            ", maxSlots=" + maxSlots +
-            ", country='" + country + '\'' +
-            ", timeZone='" + timeZone + '\'' +
-            ", locate='" + locate + '\'' +
-            ", city='" + city + '\'' +
-            ", payBase=" + payBase +
-            ", note='" + note + '\'' +
-            ", info='" + info + '\'' +
-            ", workloadLevel='" + workloadLevel + '\'' +
-            '}';
+    return "TrainerData{"
+        + "id='"
+        + id
+        + '\''
+        + ", firstName='"
+        + firstName
+        + '\''
+        + ", lastName='"
+        + lastName
+        + '\''
+        + ", birthdayUi='"
+        + birthdayUi
+        + '\''
+        + ", gender="
+        + gender
+        + ", maxSlots="
+        + maxSlots
+        + ", country='"
+        + country
+        + '\''
+        + ", timeZone='"
+        + timeZone
+        + '\''
+        + ", locate='"
+        + locate
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", payBase="
+        + payBase
+        + ", note='"
+        + note
+        + '\''
+        + ", info='"
+        + info
+        + '\''
+        + ", workloadLevel='"
+        + workloadLevel
+        + '\''
+        + '}';
   }
 
   @Override
@@ -481,23 +483,36 @@ public class TrainerData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     TrainerData that = (TrainerData) o;
-    return Objects.equals(id, that.id) &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(gender, that.gender) &&
-            Objects.equals(maxSlots, that.maxSlots) &&
-            Objects.equals(country, that.country) &&
-            Objects.equals(timeZone, that.timeZone) &&
-            Objects.equals(locate, that.locate) &&
-            Objects.equals(city, that.city) &&
-            Objects.equals(payBase, that.payBase) &&
-            Objects.equals(note, that.note) &&
-            Objects.equals(workloadLevel, that.workloadLevel) &&
-            Objects.equals(info, that.info);
+    return Objects.equals(id, that.id)
+        && Objects.equals(firstName, that.firstName)
+        && Objects.equals(lastName, that.lastName)
+        && Objects.equals(gender, that.gender)
+        && Objects.equals(maxSlots, that.maxSlots)
+        && Objects.equals(country, that.country)
+        && Objects.equals(timeZone, that.timeZone)
+        && Objects.equals(locate, that.locate)
+        && Objects.equals(city, that.city)
+        && Objects.equals(payBase, that.payBase)
+        && Objects.equals(note, that.note)
+        && Objects.equals(workloadLevel, that.workloadLevel)
+        && Objects.equals(info, that.info);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, lastName, gender, maxSlots, country, timeZone, locate, city, payBase, note, workloadLevel, info);
+    return Objects.hash(
+        id,
+        firstName,
+        lastName,
+        gender,
+        maxSlots,
+        country,
+        timeZone,
+        locate,
+        city,
+        payBase,
+        note,
+        workloadLevel,
+        info);
   }
 }

@@ -93,7 +93,7 @@ public class SelfRegistration extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validLeadsFromJson",retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validLeadsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testSelfRegistration(StudentData student) throws InterruptedException {
 
     app.student().logout();

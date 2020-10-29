@@ -1,13 +1,9 @@
 package io.itgen.appmanager;
 
-import io.itgen.model.PaymentData;
-import io.itgen.model.Payments;
-import io.itgen.model.StudentData;
-import io.itgen.model.Students;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import io.itgen.model.ParentData;
 import io.itgen.model.Parents;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class ParentHelper extends HelperBase {
 

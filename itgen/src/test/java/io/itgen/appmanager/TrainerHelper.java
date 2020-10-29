@@ -34,14 +34,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void bntModifyTrainer() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//span[contains(@class,'pencil')]")));
-    Actions actions = new Actions(wd);
-    actions.moveToElement(dynamicElement).build().perform();
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(5, By.xpath("//span[contains(@class,'pencil')]"));
   }
 
   public void btnSaveModify() {
@@ -77,8 +70,8 @@ public class TrainerHelper extends HelperBase {
     builder.click().perform();
 
     type(By.xpath("//input[@name='profile-maxSlots']"), String.valueOf(trainerData.getMaxSlots()));
-    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"),
-        trainerData.getWorkloadLevel());
+    dropDownList(
+        By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -114,8 +107,8 @@ public class TrainerHelper extends HelperBase {
     type(By.name("profile-english-lastName"), trainerData.getEngLastName());
     enterADate(By.name("profile-birthday"), trainerData.getBirthdayUi());
     dropDownList_Integer(By.id("profile-gender"), trainerData.getGender());
-    dropDownList(By.xpath("//select[contains(@id,'workloadLevel')]"),
-        trainerData.getWorkloadLevel());
+    dropDownList(
+        By.xpath("//select[contains(@id,'workloadLevel')]"), trainerData.getWorkloadLevel());
     dropDownList(By.id("profile-country"), trainerData.getCountry());
     type(By.name("profile-city"), trainerData.getCity());
     dropDownList(By.id("profile-timezone"), trainerData.getTimeZone());
@@ -227,37 +220,12 @@ public class TrainerHelper extends HelperBase {
     refresh();
   }
 
-  public void selectTrainerById(TrainerData deletedTrainer) {
-    // находим пагинатор
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//ul[@class='pagination']//li[2]")));
-    String next = dynamicElement.getAttribute("class");
-    // есть ли на первой странице наш работник
-    List<WebElement> list =
-        wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
-    if (list.size() > 0) {
-      clickWithMoveToElementAndWait(5,By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
-    } else {
-      // если работник не на первой странице, надо нажать пагинатор, пока не найдем
-      while (!next.equals("disabled")) {
-        List<WebElement> list_pagin =
-            wd.findElements(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"));
-        if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + deletedTrainer.getId() + "'"))
-              .click();
-          break;
-        } else {
-         clickWithMoveToElementAndWait(5,By.xpath("//span[contains(text(),'»')]"));
-        }
-      }
-    }
+  public void goToProfileByUrl(TrainerData deletedTrainer) {
+    wd.get(address() + "/profile/" + deletedTrainer.getId());
   }
 
   public void goUrlTrainer(String idTrainer) {
-   wd.get(address()+"/profile/"+idTrainer);
+    wd.get(address() + "/profile/" + idTrainer);
   }
 
   public void modifyInLk(TrainerData trainer) {
@@ -266,7 +234,6 @@ public class TrainerHelper extends HelperBase {
     modifiLKTrainerForm(trainer);
     btnSaveModify();
     noErrorMessage();
-
   }
 
   private void btnModify() {
@@ -292,8 +259,8 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void selectLesson(String id) {
-    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href,'" + id + "')]"));
-  //  click(By.xpath("//a[contains(@href,'" + id + "')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href,'" + id + "')]"));
+    //  click(By.xpath("//a[contains(@href,'" + id + "')]"));
     noErrorMessage();
   }
 
@@ -310,7 +277,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnFinishLesson() {
-   clickWithMoveToElementAndWait(5,By.xpath("//button[contains(@class,'finish-lesson')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'finish-lesson')]"));
     noErrorMessage();
   }
 
@@ -338,7 +305,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnSave() {
-    clickWithMoveToElementAndWait(5,By.xpath("//div[@class='results-container']//button//span"));
+    clickWithMoveToElementAndWait(5, By.xpath("//div[@class='results-container']//button//span"));
     noErrorMessage();
   }
 
@@ -354,7 +321,7 @@ public class TrainerHelper extends HelperBase {
     clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='topics']"));
     wd.findElement(By.xpath("//textarea[@id-qa='topics']")).sendKeys("3D координаты, телепортация");
 
-    //выбор эмоций
+    // выбор эмоций
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[3]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[7]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[14]"));
@@ -362,13 +329,13 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[22]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[26]"));
 
-    type(By.xpath("//textarea[@id-qa='text-for-parents']"),
-        "Ребенок очень старался, был внимательный, "
-            + "проекты делал самостоятельно");
+    type(
+        By.xpath("//textarea[@id-qa='text-for-parents']"),
+        "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
 
-    type(By.xpath("//textarea[@id-qa='note']"), "Ребенок очень старался, был внимательный, "
-        + "проекты делал самостоятельно");
-
+    type(
+        By.xpath("//textarea[@id-qa='note']"),
+        "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
   }
 
   private void tabResuts() {
@@ -421,13 +388,14 @@ public class TrainerHelper extends HelperBase {
         By.xpath("//textarea[@id-qa='note']"),
         "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
   }
+
   private void btnDiscrupt() {
     click(By.xpath("//button[@data-action='abort']"));
     noErrorMessage();
   }
 
-  public void finishedLessonWithWas_giveProject(String idLesson, String material1,
-      String material2) {
+  public void finishedLessonWithWas_giveProject(
+      String idLesson, String material1, String material2) {
     gotoSchedule();
     selectLesson(idLesson);
     refresh();
@@ -461,8 +429,9 @@ public class TrainerHelper extends HelperBase {
 
   private void openBranch() {
     click(By.xpath("//span[@class='title-branch']"));
-    if(!isElementPresent(By.xpath("//div[@class='materials-tab-item']")))
-    { click(By.xpath("//span[@class='title-branch']"));}
+    if (!isElementPresent(By.xpath("//div[@class='materials-tab-item']"))) {
+      click(By.xpath("//span[@class='title-branch']"));
+    }
   }
 
   private void searchProject(String title) {
@@ -526,5 +495,16 @@ public class TrainerHelper extends HelperBase {
     btnWas();
     tabProjects();
     openBranch();
+  }
+
+  public void deleteAlert() {
+    String[] deleteElements = {
+        "//div[contains(@class,'alert')]"};
+    deleteElements(deleteElements);
+  }
+
+  public void goInLesson(String idLesson) {
+    gotoSchedule();
+    selectLesson(idLesson);
   }
 }

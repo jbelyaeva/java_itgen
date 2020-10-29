@@ -30,7 +30,8 @@ public class StudentModificationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(
+    try (BufferedReader reader =
+        new BufferedReader(
             new FileReader(new File("src/test/resources/testdata/students_modification.json")))) {
       String json = "";
       String line = reader.readLine();
@@ -39,9 +40,10 @@ public class StudentModificationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType());
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students =
+          gson.fromJson(
+              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -49,18 +51,30 @@ public class StudentModificationTests extends TestBase {
   public void ensurePreconditions() {
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("studentModify").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("studentModify").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("studentModify").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("studentModify")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("studentModify").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("studentModify")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
   }
 
@@ -73,7 +87,7 @@ public class StudentModificationTests extends TestBase {
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size()));
 
-    for (StudentData studentModify : before) { //найти в списке "до" родителя с таким id
+    for (StudentData studentModify : before) { // найти в списке "до" родителя с таким id
       if (studentModify.getId().equals("studentModify")) {
         StudentData studentAdd = student.withId(studentModify.getId());
         assertThat(after, equalTo(before.without(studentModify).withAdded(studentAdd)));

@@ -36,6 +36,6 @@ public class MFSessionFactory {
     Morphia morphia = new Morphia();
     morphia.getMapper().getOptions().setStoreEmpties(true);
     morphia.mapPackage("io.itgen.model");
-    return morphia.createDatastore(mongoClient, "meteor");
+    return morphia.createDatastore(mongoClient, properties.getProperty("dbName"));
   }
 }

@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Comments extends ForwardingSet<CommentData> {
-  private Set<CommentData> delegate;
+  private final Set<CommentData> delegate;
 
   public Comments(Comments comments) {
     this.delegate = new HashSet<CommentData>(comments.delegate);
   }
 
-  public Comments() { //конструктор без параметров
+  public Comments() { // конструктор без параметров
     this.delegate = new HashSet<CommentData>();
   }
 
@@ -37,4 +37,3 @@ public class Comments extends ForwardingSet<CommentData> {
     return delegate;
   }
 }
-

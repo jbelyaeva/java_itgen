@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.TrainerData;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class WorkerTrainerDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<TrainerData> trainers = generateTrainers(count);
     if (format.equals("json")) {
@@ -48,35 +47,30 @@ public class WorkerTrainerDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<TrainerData> trainers, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(trainers);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
   /**
-   * Инструкция:
-   * генератор настроен на создание данных для тестов на модификацию.
-   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
-   * gender -- 2,
-   * maxSlots -- 1,
-   * country -- "BY",
-   * city -- "Минск",
-   * timeZone -- "Europe/Minsk",
-   * locate -- "ru"
-   * payBase -- 5,
-   * note -- null,
-   * info -- null
-   * */
+   * Инструкция: генератор настроен на создание данных для тестов на модификацию. при генерации
+   * данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * gender -- 2, maxSlots -- 1, country -- "BY", city -- "Минск", timeZone -- "Europe/Minsk",
+   * locate -- "ru" payBase -- 5, note -- null, info -- null
+   */
   private List<TrainerData> generateTrainers(int count) {
     List<TrainerData> trainers = new ArrayList<TrainerData>();
     for (int i = 0; i < count; i++) {
-      trainers.add(new TrainerData()
+      trainers.add(
+          new TrainerData()
               .withFirstName(String.format("Витя-%s", i))
               .withLastName(String.format("Ухов-%s", i))
-       //       .withRoleUi(String.format("trainer", i))  // при создании сотрудника раскоментить
+              //       .withRoleUi(String.format("trainer", i))  // при создании сотрудника
+              // раскоментить
               .withStartWorkUi(String.format("01.01.1998", i))
               .withBirthdayUi(String.format("25.03.1979", i))
               .withGender(Integer.valueOf(String.format("2", i)))

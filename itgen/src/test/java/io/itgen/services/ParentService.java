@@ -7,8 +7,7 @@ public class ParentService {
 
   private final ParentDao parentDao = new ParentDao();
 
-  public ParentService() {
-  }
+  public ParentService() {}
 
   public void save(ParentData parent) {
     parentDao.save(parent);

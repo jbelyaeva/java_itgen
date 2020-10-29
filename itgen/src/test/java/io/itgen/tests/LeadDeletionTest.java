@@ -1,5 +1,6 @@
 package io.itgen.tests;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.LeadData;
 import io.itgen.model.Leads;
 import io.itgen.services.LeadService;
@@ -18,15 +19,22 @@ public class LeadDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     LeadService leadService = new LeadService();
-    LeadData lead = new LeadData().withId("forLeadDeletion").withFirstName("Лид").withLastName("Лидов")
+    LeadData lead =
+        new LeadData()
+            .withId("forLeadDeletion")
+            .withFirstName("Лид")
+            .withLastName("Лидов")
             .withRoles(Collections.singletonList("child"))
-            .withCountry("AL").withTimeZone("Europe/Minsk").withLocate("ru")
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withLocate("ru")
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withStatus("new");
     leadService.create(lead);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testLeadDeletion() {
     app.goTo().menuTasks();
     app.goTo().menuLeads();
@@ -36,7 +44,7 @@ public class LeadDeletionTest extends TestBase {
     Leads after = app.db().leads();
     assertThat(after.size(), equalTo(before.size() - 1));
 
-    for (LeadData lead : before) { //найти в списке "до" родителя с таким id
+    for (LeadData lead : before) { // найти в списке "до" родителя с таким id
       if (lead.getId().equals("forLeadDeletion")) {
         Leads before1 = before.without(lead);
         assertThat(after, equalTo(before1));
@@ -51,5 +59,4 @@ public class LeadDeletionTest extends TestBase {
     LeadService leadService = new LeadService();
     leadService.DeleteById("forLeadDeletion");
   }
-
 }

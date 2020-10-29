@@ -1,10 +1,13 @@
 package io.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.*;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Emails;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,8 +30,7 @@ public class WorkerData {
   @Property("langs")
   private List<String> langs = new ArrayList<>();
 
-  @Expose
-  private String emailUI;
+  @Expose private String emailUI;
 
   @Embedded("emails")
   private List<Emails> emails = new ArrayList<Emails>();
@@ -36,32 +38,26 @@ public class WorkerData {
   @Property("roles")
   private List<String> roles = new ArrayList<>();
 
-  @Expose
-  private String roleUi;
+  @Expose private String roleUi;
 
   @Expose
   @Property("startWorkAt")
   private Date startDay;
 
-  @Expose
-  private String startDayUi;
+  @Expose private String startDayUi;
 
   @Expose
   @Transient
   @Property("birthday")
   private Date birthDay;
 
-  @Expose
-  private String birthDayUi;
+  @Expose private String birthDayUi;
 
-  @Expose
-  private Integer gender;
+  @Expose private Integer gender;
 
-  @Expose
-  private String country;
+  @Expose private String country;
 
-  @Expose
-  private String city;
+  @Expose private String city;
 
   @Expose
   @Property("tz")
@@ -71,35 +67,25 @@ public class WorkerData {
   @Property("locale")
   private String locate;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose
-  private String phone;
+  @Expose private String phone;
 
-  @Expose
-  private String skype;
+  @Expose private String skype;
 
-  @Expose
-  private String viber;
+  @Expose private String viber;
 
-  @Expose
-  private String whatsapp;
+  @Expose private String whatsapp;
 
-  @Expose
-  private String telegram;
+  @Expose private String telegram;
 
-  @Expose
-  private String fb;
+  @Expose private String fb;
 
-  @Expose
-  private String vk;
+  @Expose private String vk;
 
-  @Expose
-  private String ok;
+  @Expose private String ok;
 
-  @Expose
-  private String inst;
+  @Expose private String inst;
 
   /* setters */
 
@@ -352,18 +338,37 @@ public class WorkerData {
 
   @Override
   public String toString() {
-    return "WorkerData{" +
-            "id='" + id + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", startDayUi='" + startDayUi + '\'' +
-            ", birthDayUi='" + birthDayUi + '\'' +
-            ", gender=" + gender +
-            ", country='" + country + '\'' +
-            ", city='" + city + '\'' +
-            ", timeZone='" + timeZone + '\'' +
-            ", locate='" + locate + '\'' +
-            '}';
+    return "WorkerData{"
+        + "id='"
+        + id
+        + '\''
+        + ", firstName='"
+        + firstName
+        + '\''
+        + ", lastName='"
+        + lastName
+        + '\''
+        + ", startDayUi='"
+        + startDayUi
+        + '\''
+        + ", birthDayUi='"
+        + birthDayUi
+        + '\''
+        + ", gender="
+        + gender
+        + ", country='"
+        + country
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", timeZone='"
+        + timeZone
+        + '\''
+        + ", locate='"
+        + locate
+        + '\''
+        + '}';
   }
 
   @Override
@@ -371,14 +376,14 @@ public class WorkerData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     WorkerData that = (WorkerData) o;
-    return Objects.equals(id, that.id) &&
-            Objects.equals(firstName, that.firstName) &&
-            Objects.equals(lastName, that.lastName) &&
-            Objects.equals(gender, that.gender) &&
-            Objects.equals(country, that.country) &&
-            Objects.equals(city, that.city) &&
-            Objects.equals(timeZone, that.timeZone) &&
-            Objects.equals(locate, that.locate);
+    return Objects.equals(id, that.id)
+        && Objects.equals(firstName, that.firstName)
+        && Objects.equals(lastName, that.lastName)
+        && Objects.equals(gender, that.gender)
+        && Objects.equals(country, that.country)
+        && Objects.equals(city, that.city)
+        && Objects.equals(timeZone, that.timeZone)
+        && Objects.equals(locate, that.locate);
   }
 
   @Override

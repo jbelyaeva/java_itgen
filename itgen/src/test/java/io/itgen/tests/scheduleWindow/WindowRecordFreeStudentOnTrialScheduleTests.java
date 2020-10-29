@@ -1,7 +1,7 @@
 package io.itgen.tests.scheduleWindow;
-//автотест проверяет запись бесплатника на пробное занятие в постоянном расписании
-//проверяет, что переключатель Пробное стоит по дефолту
-//начальные данные: период, id тренера
+// автотест проверяет запись бесплатника на пробное занятие в постоянном расписании
+// проверяет, что переключатель Пробное стоит по дефолту
+// начальные данные: период, id тренера
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -53,7 +53,7 @@ public class WindowRecordFreeStudentOnTrialScheduleTests extends TestBase {
   public void testWindowRecordFreeStudentOnTrial() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOnTrial(name, "14"); //имя ученика, id тренера
+    app.windowSchedule().recordStudentOnTrial(name, "14"); // имя ученика, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
@@ -84,6 +84,4 @@ public class WindowRecordFreeStudentOnTrialScheduleTests extends TestBase {
       }
     }
   }
-
 }
-

@@ -56,9 +56,7 @@ public class FinishedChildLessonData {
   @Property("endTime")
   private Double endTime;
 
-
-  public FinishedChildLessonData() {
-  }
+  public FinishedChildLessonData() {}
 
   public FinishedChildLessonData withId(String id) {
     this.id = id;
@@ -213,49 +211,83 @@ public class FinishedChildLessonData {
       return false;
     }
     FinishedChildLessonData that = (FinishedChildLessonData) o;
-    return type == that.type &&
-        score == that.score &&
-        duration == that.duration &&
-        rating == that.rating &&
-        Objects.equals(id, that.id) &&
-        Objects.equals(scheduleId, that.scheduleId) &&
-        Objects.equals(week, that.week) &&
-        Objects.equals(trainerId, that.trainerId) &&
-        Objects.equals(childId, that.childId) &&
-        Objects.equals(status, that.status) &&
-        Objects.equals(skillId, that.skillId) &&
-        Objects.equals(lang, that.lang) &&
-        Objects.equals(isTrail, that.isTrail) &&
-        Objects.equals(p, that.p);
+    return type == that.type
+        && score == that.score
+        && duration == that.duration
+        && rating == that.rating
+        && Objects.equals(id, that.id)
+        && Objects.equals(scheduleId, that.scheduleId)
+        && Objects.equals(week, that.week)
+        && Objects.equals(trainerId, that.trainerId)
+        && Objects.equals(childId, that.childId)
+        && Objects.equals(status, that.status)
+        && Objects.equals(skillId, that.skillId)
+        && Objects.equals(lang, that.lang)
+        && Objects.equals(isTrail, that.isTrail)
+        && Objects.equals(p, that.p);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, scheduleId, week, type, trainerId, childId, status, score, duration, skillId,
-            lang,
-            rating, isTrail, p);
+    return Objects.hash(
+        id,
+        scheduleId,
+        week,
+        type,
+        trainerId,
+        childId,
+        status,
+        score,
+        duration,
+        skillId,
+        lang,
+        rating,
+        isTrail,
+        p);
   }
 
   @Override
   public String toString() {
-    return "FinishedChildLessonData{" +
-        "id='" + id + '\'' +
-        ", scheduleId='" + scheduleId + '\'' +
-        ", week=" + week +
-        ", type=" + type +
-        ", trainerId='" + trainerId + '\'' +
-        ", childId='" + childId + '\'' +
-        ", status='" + status + '\'' +
-        ", score=" + score +
-        ", duration=" + duration +
-        ", skillId='" + skillId + '\'' +
-        ", lang='" + lang + '\'' +
-        ", rating=" + rating +
-        ", isTrail=" + isTrail +
-        ", p=" + p +
-        ", startTime=" + startTime +
-        ", endTime=" + endTime +
-        '}';
+    return "FinishedChildLessonData{"
+        + "id='"
+        + id
+        + '\''
+        + ", scheduleId='"
+        + scheduleId
+        + '\''
+        + ", week="
+        + week
+        + ", type="
+        + type
+        + ", trainerId='"
+        + trainerId
+        + '\''
+        + ", childId='"
+        + childId
+        + '\''
+        + ", status='"
+        + status
+        + '\''
+        + ", score="
+        + score
+        + ", duration="
+        + duration
+        + ", skillId='"
+        + skillId
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", rating="
+        + rating
+        + ", isTrail="
+        + isTrail
+        + ", p="
+        + p
+        + ", startTime="
+        + startTime
+        + ", endTime="
+        + endTime
+        + '}';
   }
 }

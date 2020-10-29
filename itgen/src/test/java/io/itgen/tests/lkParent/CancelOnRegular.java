@@ -4,6 +4,7 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
@@ -40,7 +41,7 @@ public class CancelOnRegular extends TestBase {
             period, "LkCancelRegularSchedule", "14", "LkCancelRegularSchedule", "1", "ru");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testCancelOnRegular() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();

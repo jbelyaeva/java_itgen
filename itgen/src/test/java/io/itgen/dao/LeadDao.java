@@ -23,8 +23,7 @@ public class LeadDao {
 
   public LeadData findByIdAndDelete(LeadData lead) {
     Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
-    Query<LeadData> query = datastore.createQuery(LeadData.class)
-        .filter("id", lead.getId());
+    Query<LeadData> query = datastore.createQuery(LeadData.class).filter("id", lead.getId());
     LeadData leadData = datastore.findAndDelete(query);
     return leadData;
   }

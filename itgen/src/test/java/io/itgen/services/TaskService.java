@@ -9,8 +9,7 @@ public class TaskService {
 
   private final TaskDao taskDao = new TaskDao();
 
-  public TaskService() {
-  }
+  public TaskService() {}
 
   public TaskData DeleteById(String id) {
     return taskDao.findByIdAndDeleteTask(id);
@@ -37,6 +36,10 @@ public class TaskService {
   }
 
   public void deleteField(String idTask, String nameField) {
-    taskDao.deleteField(idTask,nameField);
+    taskDao.deleteField(idTask, nameField);
+  }
+
+  public void updateField(String idTask, String nameFiled, String data) {
+    taskDao.updateField(idTask, nameFiled, data);
   }
 }

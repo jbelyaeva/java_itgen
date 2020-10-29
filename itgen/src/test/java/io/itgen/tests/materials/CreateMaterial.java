@@ -56,10 +56,9 @@ public class CreateMaterial extends TestBase {
       }
       Gson gson = new Gson();
       List<MaterialData> materials =
-          gson.fromJson(json, new TypeToken<List<MaterialData>>() {
-          }.getType());
+          gson.fromJson(json, new TypeToken<List<MaterialData>>() {}.getType());
       return materials.stream()
-          .map((s) -> new Object[]{s})
+          .map((s) -> new Object[] {s})
           .collect(Collectors.toList())
           .iterator();
     }

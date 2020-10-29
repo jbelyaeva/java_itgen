@@ -31,14 +31,24 @@ public class SshotAddEnglishTestTypeform extends TestBase {
   private final TestService testService = new TestService();
   private final Date createAt = new Date();
   TestData testClean = null;
-  private  String[] skills = null;
+  private String[] skills = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("addEnglishTest", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5,
-        5, 10,skills, createAt, null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "addEnglishTest",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
   }
 
   @DataProvider
@@ -53,9 +63,8 @@ public class SshotAddEnglishTestTypeform extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
-      }.getType());
-      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {}.getType());
+      return tests.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -66,7 +75,7 @@ public class SshotAddEnglishTestTypeform extends TestBase {
     app.test().addEnglishTest(test);
     String name = "Admin_TypeformAddEnglishTest_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-  /*  locatorIgnor.add(By.xpath("//td[@class='dueDate']"));
+    /*  locatorIgnor.add(By.xpath("//td[@class='dueDate']"));
     locatorIgnor.add(By.xpath("(//div[contains(@class,'editable')])[3]"));
     locatorIgnor.add(By.xpath("//div[contains(@class,'client-time')]"));
     locatorIgnor.add(By.xpath("//div[contains(@class,'task-lesson')]"));

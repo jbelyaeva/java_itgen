@@ -16,11 +16,15 @@ public class TrScheduleTodayHelper {
 
   private final TimeGeneral time = new TimeGeneral();
   private final ScheduleService scheduleService = new ScheduleService();
-  private ArrayList<Slots> slots = new ArrayList<>();
+  private final ArrayList<Slots> slots = new ArrayList<>();
 
-  public void SingleScheduleWithOneStudentOnTrail(String period, String idSchedule,
+  public void SingleScheduleWithOneStudentOnTrail(
+      String period,
+      String idSchedule,
       String idTrainer,
-      String idStudent, String idSubject, String lang) {
+      String idStudent,
+      String idSubject,
+      String lang) {
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
@@ -31,10 +35,7 @@ public class TrScheduleTodayHelper {
                     new Slots()
                         .withId(idTrainer)
                         .withW(time.date())
-                        .withSt(
-                            new ST()
-                                .withS(time.Stime(period))
-                                .withE(time.Etime(period)))
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(
                             Arrays.asList(
                                 new C()
@@ -51,9 +52,14 @@ public class TrScheduleTodayHelper {
     scheduleService.save(schedule);
   }
 
-  public void StartSingleScheduleWithOneStudentOnTrail(Double alreadyRun, String period,
-      String idSchedule, String idTrainer,
-      String idStudent, String idSubject, String lang) {
+  public void StartSingleScheduleWithOneStudentOnTrail(
+      Double alreadyRun,
+      String period,
+      String idSchedule,
+      String idTrainer,
+      String idStudent,
+      String idSubject,
+      String lang) {
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
@@ -64,10 +70,7 @@ public class TrScheduleTodayHelper {
                     new Slots()
                         .withId(idTrainer)
                         .withW(time.date())
-                        .withSt(
-                            new ST()
-                                .withS(time.Stime(period))
-                                .withE(time.Etime(period)))
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(
                             Arrays.asList(
                                 new C()
@@ -78,17 +81,22 @@ public class TrScheduleTodayHelper {
                                     .withLang(lang)
                                     .withTrial(true)
                                     .withS("normal")))
-                        .withStartedAt((double) new Date().getTime() - alreadyRun)
-                ))
+                        .withStartedAt((double) new Date().getTime() - alreadyRun)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1")
             .withOneTime(true);
     scheduleService.save(schedule);
   }
 
-  public void FinishedSingleScheduleWithOneStudentOnTrail(Double alreadyRun, String period,
-      String idSchedule, String idTrainer,
-      String idStudent, String idSubject, String lang, String status) {
+  public void FinishedSingleScheduleWithOneStudentOnTrail(
+      Double alreadyRun,
+      String period,
+      String idSchedule,
+      String idTrainer,
+      String idStudent,
+      String idSubject,
+      String lang,
+      String status) {
     ScheduleData schedule =
         new ScheduleData()
             .withId(idSchedule)
@@ -100,10 +108,7 @@ public class TrScheduleTodayHelper {
                     new FinishedSlots()
                         .withId(idTrainer)
                         .withW(time.date())
-                        .withSt(
-                            new ST()
-                                .withS(time.Stime(period))
-                                .withE(time.Etime(period)))
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(
                             Arrays.asList(
                                 new C()

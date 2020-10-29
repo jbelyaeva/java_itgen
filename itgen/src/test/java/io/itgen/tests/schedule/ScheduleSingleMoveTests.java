@@ -1,6 +1,7 @@
 package io.itgen.tests.schedule;
-//автотест проверяет подвижку разового расписания
+// автотест проверяет подвижку разового расписания
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
@@ -31,39 +32,41 @@ public class ScheduleSingleMoveTests extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("scheduleSingleMove")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
-
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testScheduleSingleMove() {
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
-    app.schedule().move(periodMove,"scheduleSingleMove");
+    app.schedule().move(periodMove, "scheduleSingleMove");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size() + 1));
     app.goTo().menuTasks();
-    //проверка, что подвинулось занятие
+    // проверка, что подвинулось занятие
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    //при перемещении расписания: старое архивируется и создается новое
+    // при перемещении расписания: старое архивируется и создается новое
     String newSchedule = app.schedule().getNewScheduleDB(before, after);
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.DeleteById(newSchedule);
     scheduleService.DeleteById("scheduleSingleMove");
   }
-
 }

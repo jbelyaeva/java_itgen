@@ -72,10 +72,10 @@ public class MaterialChildData {
       return false;
     }
     MaterialChildData that = (MaterialChildData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(childId, that.childId) &&
-        Objects.equals(materialId, that.materialId) &&
-        Objects.equals(activity, that.activity);
+    return Objects.equals(id, that.id)
+        && Objects.equals(childId, that.childId)
+        && Objects.equals(materialId, that.materialId)
+        && Objects.equals(activity, that.activity);
   }
 
   @Override
@@ -85,11 +85,18 @@ public class MaterialChildData {
 
   @Override
   public String toString() {
-    return "MaterialChildData{" +
-        "id='" + id + '\'' +
-        ", childId='" + childId + '\'' +
-        ", materialId='" + materialId + '\'' +
-        ", activity=" + activity +
-        '}';
+    return "MaterialChildData{"
+        + "id='"
+        + id
+        + '\''
+        + ", childId='"
+        + childId
+        + '\''
+        + ", materialId='"
+        + materialId
+        + '\''
+        + ", activity="
+        + activity
+        + '}';
   }
 }

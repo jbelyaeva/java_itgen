@@ -20,4 +20,3 @@ public class MaterialNewDao {
     datastore.delete(query);
   }
 }
-

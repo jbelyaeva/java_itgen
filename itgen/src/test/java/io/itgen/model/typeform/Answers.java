@@ -1,6 +1,5 @@
 package io.itgen.model.typeform;
 
-
 import java.util.Objects;
 
 public class Answers {
@@ -10,8 +9,7 @@ public class Answers {
   private String trueAnswers;
   private Boolean isAnswerTrue;
 
-  public Answers() {
-  }
+  public Answers() {}
 
   public Answers withTitle(String title) {
     this.title = title;
@@ -58,10 +56,10 @@ public class Answers {
       return false;
     }
     Answers answers = (Answers) o;
-    return Objects.equals(title, answers.title) &&
-        Objects.equals(learnerAnswers, answers.learnerAnswers) &&
-        Objects.equals(trueAnswers, answers.trueAnswers) &&
-        Objects.equals(isAnswerTrue, answers.isAnswerTrue);
+    return Objects.equals(title, answers.title)
+        && Objects.equals(learnerAnswers, answers.learnerAnswers)
+        && Objects.equals(trueAnswers, answers.trueAnswers)
+        && Objects.equals(isAnswerTrue, answers.isAnswerTrue);
   }
 
   @Override
@@ -71,11 +69,18 @@ public class Answers {
 
   @Override
   public String toString() {
-    return "Answers{" +
-        "title='" + title + '\'' +
-        ", learnerAnswers='" + learnerAnswers + '\'' +
-        ", trueAnswers='" + trueAnswers + '\'' +
-        ", isAnswerTrue=" + isAnswerTrue +
-        '}';
+    return "Answers{"
+        + "title='"
+        + title
+        + '\''
+        + ", learnerAnswers='"
+        + learnerAnswers
+        + '\''
+        + ", trueAnswers='"
+        + trueAnswers
+        + '\''
+        + ", isAnswerTrue="
+        + isAnswerTrue
+        + '}';
   }
 }

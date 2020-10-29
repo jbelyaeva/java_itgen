@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Payments extends ForwardingSet<PaymentData> {
-  private Set<PaymentData> delegate;
+  private final Set<PaymentData> delegate;
 
   public Payments(Payments payments) {
     this.delegate = new HashSet<PaymentData>(payments.delegate);
   }
 
-  public Payments() { //конструктор без параметров
+  public Payments() { // конструктор без параметров
     this.delegate = new HashSet<PaymentData>();
   }
 

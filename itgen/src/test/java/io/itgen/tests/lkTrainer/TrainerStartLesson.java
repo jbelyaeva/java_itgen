@@ -20,13 +20,14 @@ public class TrainerStartLesson extends TestBase {
   StudentService studentService = new StudentService();
   FamilyService familyService = new FamilyService();
   private final TimeGeneral time = new TimeGeneral();
-  private String period="";
+  private String period = "";
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow());
-    app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period,"startLessonByTrainer",
-        "23", "startLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .SingleScheduleWithOneStudentOnTrail(
+            period, "startLessonByTrainer", "23", "startLessonByTrainer", "1", "ru");
 
     app.trFamily().newFamily("startLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
@@ -62,13 +63,15 @@ public class TrainerStartLesson extends TestBase {
   }
 
   private void check(Schedules after) {
-    //проверка, что появилось поле startedAt
-    assertTrue(!(
-        scheduleService.findById("startLessonByTrainer").getSlots().get(0).getStartedAt() == null));
+    // проверка, что появилось поле startedAt
+    assertTrue(
+        !(scheduleService.findById("startLessonByTrainer").getSlots().get(0).getStartedAt()
+            == null));
 
     scheduleService.DeleteById("startLessonByTrainer");
-    app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period,"startLessonByTrainer",
-        "23", "startLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .SingleScheduleWithOneStudentOnTrail(
+            period, "startLessonByTrainer", "23", "startLessonByTrainer", "1", "ru");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

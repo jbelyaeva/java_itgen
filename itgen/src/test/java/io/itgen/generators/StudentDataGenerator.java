@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.StudentData;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class StudentDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<StudentData> students = generateContacts(count);
     if (format.equals("json")) {
@@ -48,27 +47,26 @@ public class StudentDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<StudentData> students, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(students);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
 
   /**
-   * Инструкция:
-   * генератор настроен на создание данных для тестов на модификацию.
-   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
-   * studyLang, note -- null
-   * locate -- "ru"
-   * duration -- 2
-   * */
+   * Инструкция: генератор настроен на создание данных для тестов на модификацию. при генерации
+   * данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * studyLang, note -- null locate -- "ru" duration -- 2
+   */
   private List<StudentData> generateContacts(int count) {
     List<StudentData> students = new ArrayList<StudentData>();
     for (int i = 0; i < count; i++) {
-      students.add(new StudentData()
+      students.add(
+          new StudentData()
               .withFirstName(String.format("Вася-%s", i))
               .withLastName(String.format("Васин-%s", i))
               .withGender(Integer.valueOf(String.format("2", i)))

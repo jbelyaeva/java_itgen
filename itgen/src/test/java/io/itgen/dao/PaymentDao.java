@@ -32,4 +32,3 @@ public class PaymentDao {
     datastore.delete(query);
   }
 }
-

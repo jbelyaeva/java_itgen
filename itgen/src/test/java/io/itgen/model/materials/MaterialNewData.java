@@ -55,9 +55,9 @@ public class MaterialNewData {
       return false;
     }
     MaterialNewData that = (MaterialNewData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(trainerId, that.trainerId) &&
-        Objects.equals(newMaterials, that.newMaterials);
+    return Objects.equals(id, that.id)
+        && Objects.equals(trainerId, that.trainerId)
+        && Objects.equals(newMaterials, that.newMaterials);
   }
 
   @Override
@@ -67,10 +67,15 @@ public class MaterialNewData {
 
   @Override
   public String toString() {
-    return "MaterialNew{" +
-        "id='" + id + '\'' +
-        ", trainerId='" + trainerId + '\'' +
-        ", newMaterials=" + newMaterials +
-        '}';
+    return "MaterialNew{"
+        + "id='"
+        + id
+        + '\''
+        + ", trainerId='"
+        + trainerId
+        + '\''
+        + ", newMaterials="
+        + newMaterials
+        + '}';
   }
 }

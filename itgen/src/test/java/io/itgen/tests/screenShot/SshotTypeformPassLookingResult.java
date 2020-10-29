@@ -1,7 +1,6 @@
 package io.itgen.tests.screenShot;
 
 import io.itgen.appmanager.ApplicationManager;
-import io.itgen.general.RunTestAgain;
 import io.itgen.services.TestResultsService;
 import io.itgen.services.TestService;
 import io.itgen.tests.TestBase;
@@ -26,18 +25,29 @@ public class SshotTypeformPassLookingResult extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("Pass", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "Pass",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("Pass", "removedAt");
 
-    app.trTest().saveResultTest("TestPass", "21", "Pass", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "", true);
+    app.trTest()
+        .saveResultTest(
+            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createAt, "", true);
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testTypeformPass() throws IOException, AWTException {
     String name = "Admin_TypeformLookingGoodResult_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -45,8 +55,7 @@ public class SshotTypeformPassLookingResult extends TestBase {
     app.test().goToStudentProfileTabTests("21");
     app.test().checkHrefResults();
 
-    String[] deleteElements = {
-        "//span[@class='date']"};
+    String[] deleteElements = {"//span[@class='date']"};
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =

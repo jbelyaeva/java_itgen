@@ -6,12 +6,11 @@ import java.util.Objects;
 public class New {
 
   private Date v;
-  private String id ;
+  private String id;
   private String n;
   private String t;
 
-  public New() {
-  }
+  public New() {}
 
   public New withV(Date v) {
     this.v = v;
@@ -39,9 +38,7 @@ public class New {
 
   @Override
   public String toString() {
-    return "New{" +
-        "v=" + v +
-        '}';
+    return "New{" + "v=" + v + '}';
   }
 
   @Override
@@ -53,8 +50,7 @@ public class New {
       return false;
     }
     New aNew = (New) o;
-    return Objects.equals(id, aNew.id) &&
-        Objects.equals(n, aNew.n);
+    return Objects.equals(id, aNew.id) && Objects.equals(n, aNew.n);
   }
 
   @Override

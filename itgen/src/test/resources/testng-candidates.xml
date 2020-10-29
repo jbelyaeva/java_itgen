@@ -6,6 +6,11 @@
             <class name="io.itgen.tests.candidates.CandidateQACreationTest" />
             <class name="io.itgen.tests.candidates.CandidateModificationTest" />
             <class name="io.itgen.tests.candidates.CandidateDeletionTest" />
+            <class name="io.itgen.tests.candidates.CandidateStatusNewToDifferentStatuses" />
+            <class name="io.itgen.tests.candidates.CandidateStatusTest1ToDifferentStatuses" />
+            <!--<class name="io.itgen.tests.candidates.CandidateCreateEmployeer" /> в нестабильных-->
+            <class name="io.itgen.tests.candidates.CandidateCreateTask" />
+            <class name="io.itgen.tests.candidates.CandidateDoneTaskInTabTask" />
         </classes>
     </test>
 </suite>

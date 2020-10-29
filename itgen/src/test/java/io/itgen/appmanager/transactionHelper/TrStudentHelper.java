@@ -173,7 +173,7 @@ public class TrStudentHelper {
             .withId(idStudent)
             .withFirstName(name)
             .withLastName(surname)
-            .withRoles(Arrays.asList("child","donator"))
+            .withRoles(Arrays.asList("child", "donator"))
             .withPclevel(pclevel)
             .withCountry(country)
             .withTimeZone(tz)

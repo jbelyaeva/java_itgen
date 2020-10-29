@@ -7,8 +7,7 @@ public class LeadService {
 
   private final LeadDao leadDao = new LeadDao();
 
-  public LeadService() {
-  }
+  public LeadService() {}
 
   public void create(LeadData lead) {
     leadDao.save(lead);

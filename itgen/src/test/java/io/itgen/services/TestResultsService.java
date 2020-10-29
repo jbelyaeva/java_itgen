@@ -7,8 +7,7 @@ public class TestResultsService {
 
   private final TestResultDao testResultDao = new TestResultDao();
 
-  public TestResultsService() {
-  }
+  public TestResultsService() {}
 
   public void create(TestResultsData testResult) {
     testResultDao.save(testResult);

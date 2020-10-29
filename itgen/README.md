@@ -37,7 +37,7 @@
 `allure report open`
 
 **Тестовые наборы** 
-Запуск под суперадмином 
+Наборы доступные для запуска под суперадмином 
 1.  testFamilies 
 2.  testStudents 
 3.  testParents 
@@ -51,7 +51,8 @@
 11. testPayments
 12. testSmoke
 13. testTasks
-14. testNostable
+14. testСandidates
+15. testNostable
 
 Запуск под дефолтным родителем  -Ptarget=localPar 
 1. testSmokeParent
@@ -72,8 +73,9 @@
  9.  testRequests 
  10. testMaterials
  11. testTasks
- 12. testSmokeParent
- 13. testSmokeTrainer
+ 12. testCandidates
+ 13. testSmokeParent
+ 14. testSmokeTrainer
  
  
 

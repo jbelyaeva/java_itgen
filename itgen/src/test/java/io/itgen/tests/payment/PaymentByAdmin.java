@@ -45,7 +45,7 @@ public class PaymentByAdmin extends TestBase {
   }
 
   @Test
-  public void testPaymentByAdmin()  {
+  public void testPaymentByAdmin() {
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdmin("paymentAdminChild");

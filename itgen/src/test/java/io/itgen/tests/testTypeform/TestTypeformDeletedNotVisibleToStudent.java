@@ -18,12 +18,20 @@ public class TestTypeformDeletedNotVisibleToStudent extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
+    skills = new String[] {"1"};
     app.trTest()
         .saveTest(
-            "deleteTest", "Тест", "111111", "ru",
-            "Test на переход на новое направление", 5,
-            5, 10, skills, createAt, new Date());
+            "deleteTest",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            new Date());
   }
 
   @Test
@@ -31,7 +39,7 @@ public class TestTypeformDeletedNotVisibleToStudent extends TestBase {
     app.goTo().urlTests();
     app.test().goToStudentProfileTabTests("21");
 
-    //проверка, что кнопка есть и она не задизейблена
+    // проверка, что кнопка есть и она не задизейблена
     assertThat(app.test().buttonGiveTestMissing(), equalTo(false));
   }
 

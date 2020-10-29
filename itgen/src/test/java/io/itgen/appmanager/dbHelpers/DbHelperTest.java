@@ -26,7 +26,7 @@ public class DbHelperTest {
     return lastTest;
   }
 
-  public Tests waitAndGetNewDataFromBD(Tests before) {
+  public Tests trySeveralTimeGetNewDateFromDB(Tests before) {
     List<TestData> tests = null;
     for (int i = 0; i < 5; i++) {
       Query<TestData> q = datastore.createQuery(TestData.class);

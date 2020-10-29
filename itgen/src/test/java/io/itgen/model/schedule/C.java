@@ -10,13 +10,11 @@ public class C {
   private String lang;
   private Boolean isTrial;
   private Boolean newSubj;
-  private int score;//очки внимания
+  private int score; // очки внимания
   private int rating;
-  private boolean p; //признак постоянного расписания
+  private boolean p; // признак постоянного расписания
 
-  public C() {
-  }
-
+  public C() {}
 
   public C withId(String id) {
     this.id = id;
@@ -70,14 +68,23 @@ public class C {
 
   @Override
   public String toString() {
-    return "C{" +
-            "id='" + id + '\'' +
-            ", subject='" + subject + '\'' +
-            ", lang='" + lang + '\'' +
-            ", isTrial=" + isTrial +
-            ", newSubj=" + newSubj +
-            ", p=" + p +
-            '}';
+    return "C{"
+        + "id='"
+        + id
+        + '\''
+        + ", subject='"
+        + subject
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", isTrial="
+        + isTrial
+        + ", newSubj="
+        + newSubj
+        + ", p="
+        + p
+        + '}';
   }
 
   @Override
@@ -85,13 +92,13 @@ public class C {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     C c = (C) o;
-    return type == c.type &&
-            Objects.equals(id, c.id) &&
-            Objects.equals(subject, c.subject) &&
-            Objects.equals(lang, c.lang) &&
-            Objects.equals(isTrial, c.isTrial) &&
-            Objects.equals(newSubj, c.newSubj) &&
-            Objects.equals(p, c.p);
+    return type == c.type
+        && Objects.equals(id, c.id)
+        && Objects.equals(subject, c.subject)
+        && Objects.equals(lang, c.lang)
+        && Objects.equals(isTrial, c.isTrial)
+        && Objects.equals(newSubj, c.newSubj)
+        && Objects.equals(p, c.p);
   }
 
   @Override

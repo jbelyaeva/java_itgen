@@ -6,6 +6,7 @@ package io.itgen.tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
 import io.itgen.model.schedule.ScheduleData;
@@ -112,7 +113,7 @@ public class RecordStudentOnRegularSecond1hScheduleTests extends TestBase {
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordStudentOnRegularSecond1h() throws InterruptedException {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();

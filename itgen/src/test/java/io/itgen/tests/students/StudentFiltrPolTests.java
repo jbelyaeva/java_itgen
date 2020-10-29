@@ -25,27 +25,50 @@ public class StudentFiltrPolTests extends TestBase {
   public void ensurePreconditions() {
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("studentFiltr").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("studentFiltr").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student1 = new StudentData().withId("studentFiltrPol1").withFirstName("Маша").withLastName("Машина")
+    StudentData student1 =
+        new StudentData()
+            .withId("studentFiltrPol1")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("studentFiltr").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("studentFiltr")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student1);
-    StudentData student2 = new StudentData().withId("studentFiltrPol2").withFirstName("Маша").withLastName("Машина")
+    StudentData student2 =
+        new StudentData()
+            .withId("studentFiltrPol2")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(1)
-            .withFamilyId("studentFiltr").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(1)
+            .withFamilyId("studentFiltr")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student2);
   }
 
@@ -57,12 +80,17 @@ public class StudentFiltrPolTests extends TestBase {
     app.student().btnApply();
     Students list = app.dbstudents().studentFiltrPol(pol);
     List<StudentData> uiStudents = app.student().list();
-    assertThat(new HashSet<Object>(uiStudents), equalTo(list
-            .stream().map((s) -> new StudentData()
-                    .withId(s.getId())
-                    .withFirstName(s.getFirstname())
-                    .withLastName(s.getLastname()))
-            .collect(Collectors.toSet())));
+    assertThat(
+        new HashSet<Object>(uiStudents),
+        equalTo(
+            list.stream()
+                .map(
+                    (s) ->
+                        new StudentData()
+                            .withId(s.getId())
+                            .withFirstName(s.getFirstname())
+                            .withLastName(s.getLastname()))
+                .collect(Collectors.toSet())));
     app.goTo().menuTasks();
   }
 

@@ -20,4 +20,3 @@ public class FinishedLessonDao {
     datastore.delete(query);
   }
 }
-

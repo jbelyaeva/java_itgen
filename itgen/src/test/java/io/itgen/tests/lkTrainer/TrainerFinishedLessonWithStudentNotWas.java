@@ -30,14 +30,20 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private long alreadyRun = 7200000; //2 часа идет занятие
+  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday().StartSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru");
 
     app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
@@ -82,14 +88,20 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     finishedChildLessonService.drop();
     finishedLessonService.drop();
     paymentService.drop();
-
   }
 
   private void check(Schedules after) {
     scheduleService.DeleteById("finishLessonByTrainer");
-    app.trScheduleToday().FinishedSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "14", "finishLessonByTrainer", "1", "ru", "skipped");
+    app.trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "14",
+            "finishLessonByTrainer",
+            "1",
+            "ru",
+            "skipped");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

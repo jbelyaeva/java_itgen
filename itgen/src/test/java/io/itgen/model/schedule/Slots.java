@@ -1,7 +1,6 @@
 package io.itgen.model.schedule;
 
 import dev.morphia.annotations.Embedded;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,18 +8,15 @@ import java.util.Objects;
 public class Slots {
   private Double w;
   private String id;
-  @Embedded
-  private ST st;
-  @Embedded
-  private List<C> c = new ArrayList<C>();
+  @Embedded private ST st;
+  @Embedded private List<C> c = new ArrayList<C>();
   private Boolean blocked;
   private String blockDesc;
   private Boolean cancelled;
   private Double cancelledAt;
   private Double startedAt;
 
-  public Slots() {
-  }
+  public Slots() {}
 
   public Slots withW(Double w) {
     this.w = w;
@@ -108,13 +104,13 @@ public class Slots {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Slots slots = (Slots) o;
-    return Objects.equals(w, slots.w) &&
-            Objects.equals(id, slots.id) &&
-            Objects.equals(st, slots.st) &&
-            Objects.equals(c, slots.c) &&
-            Objects.equals(blocked, slots.blocked) &&
-            Objects.equals(blockDesc, slots.blockDesc) &&
-            Objects.equals(cancelled, slots.cancelled);
+    return Objects.equals(w, slots.w)
+        && Objects.equals(id, slots.id)
+        && Objects.equals(st, slots.st)
+        && Objects.equals(c, slots.c)
+        && Objects.equals(blocked, slots.blocked)
+        && Objects.equals(blockDesc, slots.blockDesc)
+        && Objects.equals(cancelled, slots.cancelled);
   }
 
   @Override
@@ -124,15 +120,25 @@ public class Slots {
 
   @Override
   public String toString() {
-    return "Slots{" +
-            "w=" + w +
-            ", id='" + id + '\'' +
-            ", st=" + st +
-            ", c=" + c +
-            ", blocked=" + blocked +
-            ", blockDesc='" + blockDesc + '\'' +
-            ", cancelled=" + cancelled +
-            ", started=" + startedAt +
-            '}';
+    return "Slots{"
+        + "w="
+        + w
+        + ", id='"
+        + id
+        + '\''
+        + ", st="
+        + st
+        + ", c="
+        + c
+        + ", blocked="
+        + blocked
+        + ", blockDesc='"
+        + blockDesc
+        + '\''
+        + ", cancelled="
+        + cancelled
+        + ", started="
+        + startedAt
+        + '}';
   }
 }

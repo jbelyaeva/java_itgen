@@ -30,5 +30,4 @@ public class RequestHelper extends HelperBase {
     }
     return getIdAfter;
   }
-
 }

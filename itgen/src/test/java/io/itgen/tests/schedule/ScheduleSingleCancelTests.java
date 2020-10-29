@@ -1,6 +1,7 @@
 package io.itgen.tests.schedule;
-//автотест проверяет подвижку разового расписания
+// автотест проверяет подвижку разового расписания
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.C;
@@ -28,22 +29,25 @@ public class ScheduleSingleCancelTests extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("scheduleSingleCancel")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
-
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testScheduleSingleCancel() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
@@ -62,19 +66,24 @@ public class ScheduleSingleCancelTests extends TestBase {
 
   private void check(Schedules after, Schedules before) {
     TimeGeneral time = new TimeGeneral();
-    ScheduleData scheduleAdd = new ScheduleData()
+    ScheduleData scheduleAdd =
+        new ScheduleData()
             .withId("scheduleSingleCancel")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list).withCancelled(true)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)
+                        .withCancelled(true)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
+    for (ScheduleData scheduleBefore : before) { // найти в списке "до" родителя с таким id
       if (scheduleBefore.getId().equals("scheduleSingleCancel")) {
         Schedules aaa = before.without(scheduleBefore).withAdded(scheduleAdd);
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
@@ -82,6 +91,4 @@ public class ScheduleSingleCancelTests extends TestBase {
       }
     }
   }
-
-
 }

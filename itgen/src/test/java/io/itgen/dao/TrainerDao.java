@@ -27,4 +27,3 @@ public class TrainerDao {
     return datastore.find(TrainerData.class).field("id").equal(id).first();
   }
 }
-

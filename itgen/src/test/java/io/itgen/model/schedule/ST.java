@@ -6,8 +6,7 @@ public class ST {
   public Double s;
   public Double e;
 
-  public ST() {
-  }
+  public ST() {}
 
   public ST withS(Double s) {
     this.s = s;
@@ -21,10 +20,7 @@ public class ST {
 
   @Override
   public String toString() {
-    return "ST{" +
-            "s=" + s +
-            ", e=" + e +
-            '}';
+    return "ST{" + "s=" + s + ", e=" + e + '}';
   }
 
   @Override
@@ -32,8 +28,7 @@ public class ST {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ST st = (ST) o;
-    return Objects.equals(s, st.s) &&
-            Objects.equals(e, st.e);
+    return Objects.equals(s, st.s) && Objects.equals(e, st.e);
   }
 
   @Override
@@ -41,4 +36,3 @@ public class ST {
     return Objects.hash(s, e);
   }
 }
-

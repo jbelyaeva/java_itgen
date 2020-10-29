@@ -2,7 +2,7 @@ package io.itgen.tests.task;
 /*автотаска, которую взял пользователь будет всегда в стеке, пока не выполнится. Остальные автотаски
  * не отображаются  в стеке, т.к. не имеют создателя(авто) и пока исполнителя, но их количество указано в счетчике
  * в табе. Счетчик в меню (красный) считает те задачи, в которых пользователь исполнитель.*/
-//фильтр по умолчанию на среднем и высоком приоритете, чек-бокс на исполнителе
+// фильтр по умолчанию на среднем и высоком приоритете, чек-бокс на исполнителе
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -38,16 +38,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
 
     app.trStudent()
         .newStudent(
-            "Student",
-            "Маша",
-            "Машина",
-            "expert",
-            "AL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "Student");
+            "Student", "Маша", "Машина", "expert", "AL", "Europe/Minsk", 2, "ru", "ru", "Student");
 
     app.trTask()
         .newManualTask(
@@ -89,7 +80,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
         .newManualTask(
             "FiltrTaskThird",
             "666",
-            "14",  //Настя Бокша - тренер
+            "14", // Настя Бокша - тренер
             "Проверить материалы",
             1,
             new Date(),
@@ -153,10 +144,9 @@ public class TaskFiltrByPriorityInStack extends TestBase {
             clients,
             commentaries,
             "newTask_waitAnswer");
-
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, статус Выполненные
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет низкий, статус Выполненные
   public void testFiltrByPriorityInStack_1() throws InterruptedException {
     app.goTo().urlTasks();
     app.task().selectStatusDone();
@@ -167,29 +157,30 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Исполнитель, Не Выполненные
+  @Test(
+      retryAnalyzer = RunTestAgain.class) // приоритет средний, чек-бокс Исполнитель, Не Выполненные
   public void testFiltrByPriorityInStack_2() throws InterruptedException {
     app.goTo().urlTasks();
     app.task().btnMiddlePriority();
 
-    //проверка, что футере правильное количество найденных записей
+    // проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(1));
-    //проверка, что найдена именно Настя Бокша и она одна
+    // проверка, что найдена именно Настя Бокша и она одна
     assertThat(app.task().getNameClientUI(), equalTo("Машина Маша"));
-    //проверка, счетчика задач
+    // проверка, счетчика задач
     assertThat(app.task().getCountInTabUI(), equalTo(1));
-    //проверка, красного счетчика
+    // проверка, красного счетчика
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, чек-бокс Создатель, Не выполненные
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет средний, чек-бокс Создатель, Не выполненные
   public void testFiltrByPriorityInStack_3() throws InterruptedException {
     app.goTo().urlTasks();
-    app.task().selectAssigner(); //сняли чб Исполнитель
+    app.task().selectAssigner(); // сняли чб Исполнитель
     app.task().selectCreator();
-    //проверка, что футере правильное количество найденных записей
+    // проверка, что футере правильное количество найденных записей
     assertThat(app.task().getCountSearchUI(), equalTo(3));
-    //проверка, что выборка правильная
+    // проверка, что выборка правильная
     ArrayList<String> listExpected = new ArrayList<String>();
     listExpected.add("Машина Маша");
     listExpected.add("Машина Маша");
@@ -200,7 +191,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Исполнитель, Не выпол
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет низкий, чек-бокс Исполнитель, Не выпол
   public void testFiltrByPriorityInStack_4() throws InterruptedException {
     app.goTo().urlTasks();
     app.task().btnLowPriority();
@@ -210,10 +201,10 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет низкий, чек-бокс Создатель, Не выпол
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет низкий, чек-бокс Создатель, Не выпол
   public void testFiltrByPriorityInStack_5() throws InterruptedException {
     app.goTo().urlTasks();
-    app.task().selectAssigner();//убрали чб Исполнитель
+    app.task().selectAssigner(); // убрали чб Исполнитель
     app.task().selectCreator();
     app.task().btnLowPriority();
     assertThat(app.task().getCountSearchUI(), equalTo(0));
@@ -221,7 +212,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Выполненные, Исполнитель
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет средний, статус Выполненные, Исполнитель
   public void testFiltrByPriorityInStack_6() throws InterruptedException {
     app.goTo().urlTasks();
     app.task().btnMiddlePriority();
@@ -231,7 +222,7 @@ public class TaskFiltrByPriorityInStack extends TestBase {
     assertThat(app.task().getCountInMenuUI(), equalTo(2));
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)//приоритет средний, статус Жду ответа, Исполнитель
+  @Test(retryAnalyzer = RunTestAgain.class) // приоритет средний, статус Жду ответа, Исполнитель
   public void testFiltrByPriorityInStack_7() throws InterruptedException {
     app.goTo().urlTasks();
     app.task().btnMiddlePriority();

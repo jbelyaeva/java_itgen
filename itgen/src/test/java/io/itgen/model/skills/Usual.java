@@ -6,8 +6,7 @@ public class Usual {
   private int age;
   private String state;
 
-  public Usual() {
-  }
+  public Usual() {}
 
   public Usual withAge(int age) {
     this.age = age;
@@ -36,8 +35,7 @@ public class Usual {
       return false;
     }
     Usual beginner = (Usual) o;
-    return age == beginner.age &&
-        state == beginner.state;
+    return age == beginner.age && state == beginner.state;
   }
 
   @Override
@@ -47,9 +45,6 @@ public class Usual {
 
   @Override
   public String toString() {
-    return "Usual{" +
-        "age=" + age +
-        ", state=" + state +
-        '}';
+    return "Usual{" + "age=" + age + ", state=" + state + '}';
   }
 }

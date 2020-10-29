@@ -1,6 +1,5 @@
 package io.itgen.model.materials;
 
-import dev.morphia.annotations.Property;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,9 +9,7 @@ public class Branches {
   private String name;
   private List<String> materialsOrder = new ArrayList<>();
 
-  public Branches() {
-  }
-
+  public Branches() {}
 
   public Branches withId(String id) {
     this.id = id;
@@ -50,8 +47,7 @@ public class Branches {
       return false;
     }
     Branches branches = (Branches) o;
-    return Objects.equals(id, branches.id) &&
-        Objects.equals(name, branches.name);
+    return Objects.equals(id, branches.id) && Objects.equals(name, branches.name);
   }
 
   @Override
@@ -61,10 +57,15 @@ public class Branches {
 
   @Override
   public String toString() {
-    return "Branches{" +
-        "id='" + id + '\'' +
-        ", name='" + name + '\'' +
-        ", materialsOrder=" + materialsOrder +
-        '}';
+    return "Branches{"
+        + "id='"
+        + id
+        + '\''
+        + ", name='"
+        + name
+        + '\''
+        + ", materialsOrder="
+        + materialsOrder
+        + '}';
   }
 }

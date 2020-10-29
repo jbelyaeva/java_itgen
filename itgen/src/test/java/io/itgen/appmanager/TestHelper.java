@@ -21,11 +21,6 @@ public class TestHelper extends HelperBase {
 
   public static Properties properties;
 
-  public String buttonAtributAvailable(By locator) {
-    //из документации: атрибут disabled возвращает либо true, либо null
-    return wd.findElement(locator).getAttribute("disabled");
-  }
-
   public void checkHrefInProfileStudent(By locator) throws InterruptedException {
     String href = wd.findElement(locator).getAttribute("defaultValue");
     wd.findElement(locator).click();
@@ -46,14 +41,13 @@ public class TestHelper extends HelperBase {
     assertThat(href, equalTo(hrefNew));
   }
 
-
   public TestHelper(WebDriver wd) {
     super(wd);
   }
 
   public void createTest(TestData test) {
-   // btnAddTestInAdm(); - очень глючная кнопка Добавить, делает тест нестабильным
-    wd.get(address()+"/tests/addTest");
+    // btnAddTestInAdm(); - очень глючная кнопка Добавить, делает тест нестабильным
+    wd.get(address() + "/tests/addTest");
     selectFirstLangInList();
     fillFormCreateTest(test);
     btnAddTest();
@@ -62,8 +56,9 @@ public class TestHelper extends HelperBase {
   private void btnAddTest() {
     click(By.xpath("//button[contains(@class,'create-test')]"));
     WebDriverWait wait = new WebDriverWait(wd, 50);
-    wait.until(ExpectedConditions
-        .elementToBeClickable(wd.findElement(By.xpath("//div[@class='test-buttons']"))));
+    wait.until(
+        ExpectedConditions.elementToBeClickable(
+            wd.findElement(By.xpath("//div[@class='test-buttons']"))));
   }
 
   private void fillFormCreateTest(TestData test) {
@@ -72,15 +67,15 @@ public class TestHelper extends HelperBase {
         .sendKeys(test.getDescription());
 
     type(By.xpath("//div[@id-qa='rootFormId']//input"), test.getRootFormId());
-    click(By.xpath("//button[@id-qa='skills']")); //открыть список
-    click(
-        By.xpath("(//form//div)[2]"));  // первый - скретч - по умолчанию, добавим еще компьютерную
-    //грамотность
-    click(By.xpath("//button[@id-qa='skills']"));//закрыть список
+    click(By.xpath("//button[@id-qa='skills']")); // открыть список
+    click(By.xpath("(//form//div)[2]")); // первый - скретч - по умолчанию, добавим еще компьютерную
+    // грамотность
+    click(By.xpath("//button[@id-qa='skills']")); // закрыть список
 
     type(By.xpath("//div[@id-qa='maxScore']//input"), String.valueOf(test.getMaxScore()));
     type(By.xpath("//div[@id-qa='minScore']//input"), String.valueOf(test.getMinScore()));
-    type(By.xpath("//div[@id-qa='timeForPassing']//input"),
+    type(
+        By.xpath("//div[@id-qa='timeForPassing']//input"),
         String.valueOf(test.getTimeForPassing()));
   }
 
@@ -91,7 +86,7 @@ public class TestHelper extends HelperBase {
   private void btnAddTestInAdm() {
     moveToElement(By.xpath("//button[@id-qa='create']"));
     clickWaitElementToBeClicable(5, By.xpath("//button[@id-qa='create']"));
-    waiteVisibleElement(10, By.xpath("//li[@id-qa='new-lang'][1]"));
+    waitVisibleElement(10, By.xpath("//li[@id-qa='new-lang'][1]"));
   }
 
   public void addEnglishTest(TestData test) {
@@ -111,25 +106,26 @@ public class TestHelper extends HelperBase {
     wd.findElement(By.xpath("//div[@id-qa='description']//textarea"))
         .sendKeys(test.getDescription());
     type(By.xpath("//div[@id-qa='rootFormId']//input"), test.getRootFormId());
-    //проверить, что выбран чек-бокс
+    // проверить, что выбран чек-бокс
     click(By.xpath("//button[@id-qa='skills']"));
-    assertThat(wd.findElement(By.xpath("//input[@id='checkbox-id-1']"))
-        .getAttribute("defaultChecked"), equalTo("true"));
+    assertThat(
+        wd.findElement(By.xpath("//input[@id='checkbox-id-1']")).getAttribute("defaultChecked"),
+        equalTo("true"));
     click(By.xpath("//button[@id-qa='skills']"));
 
-    //проверить, что общие поля заполнены
-    String maxScore = wd.findElement(By.xpath("//div[@id-qa='maxScore']//input"))
-        .getAttribute("defaultValue");
+    // проверить, что общие поля заполнены
+    String maxScore =
+        wd.findElement(By.xpath("//div[@id-qa='maxScore']//input")).getAttribute("defaultValue");
     assertFalse(maxScore.isEmpty());
 
-    String minScore = wd.findElement(By.xpath("//div[@id-qa='minScore']//input"))
-        .getAttribute("defaultValue");
+    String minScore =
+        wd.findElement(By.xpath("//div[@id-qa='minScore']//input")).getAttribute("defaultValue");
     assertFalse(minScore.isEmpty());
 
-    String timeForPassing = wd.findElement(By.xpath("//div[@id-qa='timeForPassing']//input"))
-        .getAttribute("defaultValue");
+    String timeForPassing =
+        wd.findElement(By.xpath("//div[@id-qa='timeForPassing']//input"))
+            .getAttribute("defaultValue");
     assertFalse(timeForPassing.isEmpty());
-
   }
 
   private void fillFormModify(TestData test) {
@@ -146,10 +142,10 @@ public class TestHelper extends HelperBase {
     clear(30, By.xpath("//div[@id-qa='rootFormId']//input"));
     type(By.xpath("//div[@id-qa='rootFormId']//input"), test.getRootFormId());
 
-    click(By.xpath("//button[@id-qa='skills']")); //открыть список
-    click(By.xpath("(//form//div)[2]"));  //поставим компьютерную грамотность
-    click(By.xpath("//label[@for='checkbox-id-1']")); //уберем скретч
-    click(By.xpath("//button[@id-qa='skills']"));//закрыть список
+    click(By.xpath("//button[@id-qa='skills']")); // открыть список
+    click(By.xpath("(//form//div)[2]")); // поставим компьютерную грамотность
+    click(By.xpath("//label[@for='checkbox-id-1']")); // уберем скретч
+    click(By.xpath("//button[@id-qa='skills']")); // закрыть список
 
     click(By.xpath("//div[@id-qa='maxScore']//input"));
     clear(5, By.xpath("//div[@id-qa='maxScore']//input"));
@@ -161,7 +157,8 @@ public class TestHelper extends HelperBase {
 
     click(By.xpath("//div[@id-qa='timeForPassing']//input"));
     clear(5, By.xpath("//div[@id-qa='timeForPassing']//input"));
-    type(By.xpath("//div[@id-qa='timeForPassing']//input"),
+    type(
+        By.xpath("//div[@id-qa='timeForPassing']//input"),
         String.valueOf(test.getTimeForPassing()));
   }
 
@@ -176,7 +173,6 @@ public class TestHelper extends HelperBase {
   public void deleteTest() {
     btnDeleteTest();
     bntConfirmDelete();
-    waiteVisibleElement(5, By.xpath("//div[@class='childTests-page']//span//span"));
   }
 
   private void bntConfirmDelete() {
@@ -211,8 +207,8 @@ public class TestHelper extends HelperBase {
 
   public void checkHrefResults() {
     clickWithMoveToElementAndWait(5, By.xpath("//a[@class='answers']"));
-    assertThat(wd.findElement(By.xpath("//div[@class='title']")).getText(),
-        equalTo("Просмотр ответов"));
+    assertThat(
+        wd.findElement(By.xpath("//div[@class='title']")).getText(), equalTo("Просмотр ответов"));
   }
 
   public void deleteTestInProfile() {
@@ -220,13 +216,16 @@ public class TestHelper extends HelperBase {
   }
 
   public Set<String> getLanguagesInDropdown() {
-     Set<String> langs = new HashSet<>();
-    click(By.xpath("//div[@role='button']"));
+    waitVisibilityOfElementLocated(10, By.xpath("(//div[@class='child-test-body']//div)[3]"));
+    Set<String> langs = new HashSet<>();
+    click(By.xpath("(//div[@class='child-test-body']//div)[3]"));
 
     List<WebElement> langsUI = wd.findElements(By.xpath("//ul[@role='listbox']//li"));
     int count = langsUI.size();
-    for (int i=1; i<=count ; i++){
-      String lang = wd.findElement(By.xpath("//ul[@role='listbox']//li["+i+"]")).getAttribute("textContent");
+    for (int i = 1; i <= count; i++) {
+      String lang =
+          wd.findElement(By.xpath("//ul[@role='listbox']//li[" + i + "]"))
+              .getAttribute("textContent");
       langs.add(lang);
     }
     return langs;

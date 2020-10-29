@@ -3,6 +3,7 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
@@ -36,7 +37,7 @@ public class RecordOnSingle extends TestBase {
     app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "LkRecordOnSingleSchedule", "14");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnSingle() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();

@@ -1,5 +1,6 @@
 package io.itgen.tests.schedule;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
 import io.itgen.model.schedule.C;
@@ -38,36 +39,58 @@ public class RemoveStudentFromSingle2hSchedule extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("removeStudent")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(Arrays.asList(new C().withId("removeStudent").withType(3).withSubject("1")
-                            .withLang("ru").withNewSubj(true).withS("normal")))))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudent")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("removeStudent").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("removeStudent").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("removeStudent").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("removeStudent")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("removeStudent").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("removeStudent")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRemoveStudentFromSingleSchedule() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
@@ -95,25 +118,26 @@ public class RemoveStudentFromSingle2hSchedule extends TestBase {
 
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
-    ScheduleData scheduleAdd = new ScheduleData()
+    ScheduleData scheduleAdd =
+        new ScheduleData()
             .withId("removeStudent")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
-    for (ScheduleData scheduleBefore : before) { //найти в списке "до" родителя с таким id
+    for (ScheduleData scheduleBefore : before) { // найти в списке "до" родителя с таким id
       if (scheduleBefore.getId().equals("removeStudent")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }
     }
   }
-
-
 }

@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.TrainerData;
 import io.itgen.model.Trainers;
 import io.itgen.model.users.Contacts;
@@ -77,11 +78,11 @@ public class TrainerModificationTests extends TestBase {
     trainerService.save(modifyTrainer);
   }
 
-  @Test(dataProvider = "validWorkersTrainersFromJson")
+  @Test(dataProvider = "validWorkersTrainersFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTrainerModification(TrainerData trainer) {
     app.goTo().menuTrainers();
     Trainers before = app.db().trainers();
-    app.trainer().selectTrainerById(modifyTrainer);
+    app.trainer().goUrlTrainer("trainerModify");
     app.trainer().modify(trainer);
     Trainers after = app.db().trainers();
     assertThat(after.size(), equalTo(before.size()));

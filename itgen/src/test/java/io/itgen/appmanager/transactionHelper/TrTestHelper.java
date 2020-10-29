@@ -14,7 +14,8 @@ public class TrTestHelper {
   private final TestService testService = new TestService();
   private final TestResultsService testResultsService = new TestResultsService();
 
-  public void saveTest(String id,
+  public void saveTest(
+      String id,
       String title,
       String rootFormId,
       String language,
@@ -25,20 +26,22 @@ public class TrTestHelper {
       String[] skills,
       Date createAt,
       Date removedAt) {
-    TestData test = new TestData().withId(id).withTitle(title)
-        .withRootFormId(rootFormId)
-        .withLanguage(language)
-        .withDescription(description)
-        .withSkillIds(Arrays.asList(skills))
-        .withMinScore(minScore)
-        .withMaxScore(maxScore)
-        .withTimeForPassing(timeForPassing)
-        .withCreatedAt(createAt)
-        .withEntityTestId("123456")
-        .withRemovedAt(removedAt);
+    TestData test =
+        new TestData()
+            .withId(id)
+            .withTitle(title)
+            .withRootFormId(rootFormId)
+            .withLanguage(language)
+            .withDescription(description)
+            .withSkillIds(Arrays.asList(skills))
+            .withMinScore(minScore)
+            .withMaxScore(maxScore)
+            .withTimeForPassing(timeForPassing)
+            .withCreatedAt(createAt)
+            .withEntityTestId("123456")
+            .withRemovedAt(removedAt);
     testService.create(test);
   }
-
 
   public void saveResultTestInProcess(
       String id,
@@ -52,18 +55,21 @@ public class TrTestHelper {
       int maxScore,
       Date createAt,
       String rawFormData) {
-      TestResultsData testResult = new TestResultsData().withId(id).withChildId(childId)
-          .withTestId(testId)
-          .withTitle(title)
-          .withRootFormId(rootFormId)
-          .withSkillIds(Arrays.asList(skills))
-          .withLanguage(language)
-          .withMinScore(minScore)
-          .withMaxScore(maxScore)
-          .withCreatedAt(createAt)
-          .withEntityTestId("123456")
-          .withRawFormData(rawFormData);
-      testResultsService.create(testResult);
+    TestResultsData testResult =
+        new TestResultsData()
+            .withId(id)
+            .withChildId(childId)
+            .withTestId(testId)
+            .withTitle(title)
+            .withRootFormId(rootFormId)
+            .withSkillIds(Arrays.asList(skills))
+            .withLanguage(language)
+            .withMinScore(minScore)
+            .withMaxScore(maxScore)
+            .withCreatedAt(createAt)
+            .withEntityTestId("123456")
+            .withRawFormData(rawFormData);
+    testResultsService.create(testResult);
   }
 
   public void saveResultTest(
@@ -79,25 +85,31 @@ public class TrTestHelper {
       Date createAt,
       String rawFormData,
       Boolean pass) {
-    TestResultsData testResult = new TestResultsData().withId(id).withChildId(childId)
-        .withTestId(testId)
-        .withTitle(title)
-        .withRootFormId(rootFormId)
-        .withSkillIds(Arrays.asList(skills))
-        .withLanguage(language)
-        .withMinScore(minScore)
-        .withMaxScore(maxScore)
-        .withCreatedAt(createAt)
-        .withEntityTestId("123456")
-        .withRawFormData(rawFormData)
-        .withAnswers(Collections.singletonList(
-            new Answers().withTitle("Как тебя зовут").withLearnerAnswers("1").withTrueAnswers("-")
-                .withIsAnswerTrue(false)))
-        .withFinishedAt(new Date())
-        .withFinishedSuccess(pass)
-        .withRawFormAnswers("")
-        .withScores(1);
+    TestResultsData testResult =
+        new TestResultsData()
+            .withId(id)
+            .withChildId(childId)
+            .withTestId(testId)
+            .withTitle(title)
+            .withRootFormId(rootFormId)
+            .withSkillIds(Arrays.asList(skills))
+            .withLanguage(language)
+            .withMinScore(minScore)
+            .withMaxScore(maxScore)
+            .withCreatedAt(createAt)
+            .withEntityTestId("123456")
+            .withRawFormData(rawFormData)
+            .withAnswers(
+                Collections.singletonList(
+                    new Answers()
+                        .withTitle("Как тебя зовут")
+                        .withLearnerAnswers("1")
+                        .withTrueAnswers("-")
+                        .withIsAnswerTrue(false)))
+            .withFinishedAt(new Date())
+            .withFinishedSuccess(pass)
+            .withRawFormAnswers("")
+            .withScores(1);
     testResultsService.create(testResult);
   }
-
 }

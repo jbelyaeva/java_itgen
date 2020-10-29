@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Schedules extends ForwardingSet<ScheduleData> {
-  private Set<ScheduleData> delegate;
+  private final Set<ScheduleData> delegate;
 
   public Schedules(Schedules schedules) {
     this.delegate = new HashSet<ScheduleData>(schedules.delegate);
   }
 
-  public Schedules() { //конструктор без параметров
+  public Schedules() { // конструктор без параметров
     this.delegate = new HashSet<ScheduleData>();
   }
 
@@ -38,4 +38,3 @@ public class Schedules extends ForwardingSet<ScheduleData> {
     return delegate;
   }
 }
-

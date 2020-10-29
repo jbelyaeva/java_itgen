@@ -1,17 +1,25 @@
 package io.itgen.tests.students;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.itgen.general.RunTestAgain;
+import io.itgen.model.FamilyData;
+import io.itgen.model.users.Contacts;
+import io.itgen.model.users.Status;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import org.openqa.selenium.By;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,18 +27,24 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StudentCreationTests extends TestBase {
-  String id;
   StudentData studentClean;
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    String[] deleteElements = {"//div[contains(@id,'MeteorToys')]"};
+    app.sshot().deleteElements(deleteElements);
+  }
 
   @DataProvider
   public Iterator<Object[]> validStudentsFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -38,16 +52,17 @@ public class StudentCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students =
+          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
   @DataProvider
   public Iterator<Object[]> noValidStudentsFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/students_creation_bad.json")))) {
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/students_creation_bad.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -55,15 +70,15 @@ public class StudentCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<StudentData> students = gson.fromJson(json, new TypeToken<List<StudentData>>() {
-      }.getType()); // List<StudentData>.class
-      return students.stream().map((s) -> new Object[]{s}).collect(Collectors.toList()).iterator();
+      List<StudentData> students =
+          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
-  @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validStudentsFromJson")
   public void testStudentCreation(StudentData student) {
-    app.goTo().menuTrainers();
+    app.goTo().menuSchedule();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().create(student);
@@ -76,9 +91,9 @@ public class StudentCreationTests extends TestBase {
     app.goTo().menuTasks();
   }
 
-  @Test(dataProvider = "noValidStudentsFromJson", retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "noValidStudentsFromJson")
   public void testBadStudentCreation(StudentData student) {
-    app.goTo().menuTrainers();
+    app.goTo().menuSchedule();
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().createBad(student);
@@ -86,7 +101,8 @@ public class StudentCreationTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
     studentClean = null;
-   }
+    app.goTo().menuTasks();
+  }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
@@ -94,7 +110,7 @@ public class StudentCreationTests extends TestBase {
       FamilyService familyService = new FamilyService();
       familyService.DeleteById(studentClean.getFamilyId());
       TaskService taskService = new TaskService();
-      taskService.DeleteById(studentClean);
+      taskService.drop();
       StudentService studentService = new StudentService();
       studentService.DeleteById(studentClean);
     }

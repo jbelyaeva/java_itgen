@@ -4,7 +4,6 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-
 import io.itgen.model.general.Activity;
 import io.itgen.model.general.Comments;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.Objects;
 
 @Entity("tasks")
 public class TaskData {
+
   @Id
   @Property("_id")
   private String id;
@@ -38,6 +38,9 @@ public class TaskData {
 
   @Property("linkUser")
   private String linkUser;
+
+  @Property("linkCandidate")
+  private String linkCandidate;
 
   @Property("leadUser")
   private String linkLead;
@@ -74,8 +77,7 @@ public class TaskData {
 
   private String dueDateTimeUi;
 
-  public TaskData() {
-  }
+  public TaskData() {}
 
   public TaskData withId(String id) {
     this.id = id;
@@ -117,6 +119,11 @@ public class TaskData {
     return this;
   }
 
+  public TaskData withLinkCandidate(String linkCandidate) {
+    this.linkCandidate = linkCandidate;
+    return this;
+  }
+
   public TaskData withLinkLead(String linkLead) {
     this.linkLead = linkLead;
     return this;
@@ -142,7 +149,7 @@ public class TaskData {
     return this;
   }
 
-  public TaskData withCreator (String creator) {
+  public TaskData withCreator(String creator) {
     this.creator = creator;
     return this;
   }
@@ -192,6 +199,10 @@ public class TaskData {
 
   public String getLinkUser() {
     return linkUser;
+  }
+
+  public String getLinkCandidate() {
+    return linkCandidate;
   }
 
   public String getLinkLead() {
@@ -248,45 +259,77 @@ public class TaskData {
 
   @Override
   public String toString() {
-    return "TaskData{" +
-            "id='" + id +
-            ", creator=" + creator +
-            ", assignee=" + assignee +
-            ", text='" + text +
-            ", priority='" + priority +
-            ", t='" + t +
-            ", createAt=" + createAt +
-            ", status='" + status +
-            ", watchers=" + watchers +
-            ", comments=" + comments +
-            ", activity=" + activity +
-            ", linkUser='" + linkUser +
-            ", dueDate=" + dueDate +
-            ", dueDateSort=" + dueDateSort +
-            ", dueDateWithTime=" + dueDateWithTime +
-            '}';
+    return "TaskData{"
+        + "id='"
+        + id
+        + ", creator="
+        + creator
+        + ", assignee="
+        + assignee
+        + ", text='"
+        + text
+        + ", priority='"
+        + priority
+        + ", t='"
+        + t
+        + ", createAt="
+        + createAt
+        + ", status='"
+        + status
+        + ", watchers="
+        + watchers
+        + ", comments="
+        + comments
+        + ", activity="
+        + activity
+        + ", linkUser='"
+        + linkUser
+        + ", dueDate="
+        + dueDate
+        + ", dueDateSort="
+        + dueDateSort
+        + ", dueDateWithTime="
+        + dueDateWithTime
+        + '}';
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     TaskData taskData = (TaskData) o;
-    return Objects.equals(id, taskData.id) &&
-            Objects.equals(t, taskData.t) &&
-            Objects.equals(creator, taskData.creator) &&
-            Objects.equals(assignee, taskData.assignee) &&
-            Objects.equals(text, taskData.text) &&
-            Objects.equals(priority, taskData.priority) &&
-            Objects.equals(status, taskData.status) &&
-            Objects.equals(watchers, taskData.watchers) &&
-            Objects.equals(comments, taskData.comments) &&
-            Objects.equals(activity, taskData.activity) &&
-            Objects.equals(linkUser, taskData.linkUser);
+    return Objects.equals(id, taskData.id)
+        && Objects.equals(t, taskData.t)
+        && Objects.equals(creator, taskData.creator)
+        && Objects.equals(assignee, taskData.assignee)
+        && Objects.equals(text, taskData.text)
+        && Objects.equals(priority, taskData.priority)
+        && Objects.equals(status, taskData.status)
+        && Objects.equals(watchers, taskData.watchers)
+        && Objects.equals(comments, taskData.comments)
+        && Objects.equals(activity, taskData.activity)
+        && Objects.equals(linkUser, taskData.linkUser)
+        && Objects.equals(linkCandidate, taskData.linkCandidate);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, t, creator, assignee, text, priority, status, watchers, comments, activity, linkUser);
+    return Objects.hash(
+        id,
+        t,
+        creator,
+        assignee,
+        text,
+        priority,
+        status,
+        watchers,
+        comments,
+        activity,
+        linkUser,
+        linkCandidate);
   }
 }

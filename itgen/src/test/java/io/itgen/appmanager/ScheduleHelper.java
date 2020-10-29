@@ -168,11 +168,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void checkFindBusyStuden(String idStudent) {
     WebElement element = wd.findElement(By.xpath("//a[@href='/profile/" + idStudent + "']"));
-    if (element != null) {
-      assertTrue(true);
-    } else {
-      assertTrue(false);
-    }
+    assertTrue(element != null);
   }
 
   public void badMove(String id) {
@@ -256,7 +252,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnMove() {
-    clickWithMoveToElementAndWait(10,By.xpath("//button[contains(@class,'accept')]"));
+    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'accept')]"));
   }
 
   private void btnMoveDisabled() {
@@ -292,6 +288,7 @@ public class ScheduleHelper extends HelperBase {
 
   public void selectScheduleInListUIById(String id) {
     // находим пагинатор
+    waitVisibleElement(5, By.xpath("//button[contains(@class,'next')]"));
     String next =
         wd.findElement(By.xpath("//button[contains(@class,'next')]")).getAttribute("class");
     // есть ли на первой странице наше занятие
@@ -359,6 +356,7 @@ public class ScheduleHelper extends HelperBase {
     selectNo();
     btnRecord();
     noErrorMessage();
+    waitElementWithAttribute(5, By.xpath("//div[@class='name-block']//a"), "text", name);
   }
 
   private void btnRecord() {
@@ -470,6 +468,7 @@ public class ScheduleHelper extends HelperBase {
     btnRecord();
     noErrorMessage();
     refresh();
+    waitElementWithAttribute(5, By.xpath("//div[@class='name-block']//a"), "text", name);
   }
 
   public void waitForLoadTextCenterOnMainSchedule() {

@@ -16,10 +16,10 @@ import org.testng.annotations.Test;
 public class TaskManualLeaveCommentInPopup extends TestBase {
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
-  private final Date createAt=new Date();
-  private final Date duoDateWithTime =new Date();
+  private final Date createAt = new Date();
+  private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
-  private  Date[] dates = null;
+  private final Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private String[] commentaries = null;
@@ -43,17 +43,17 @@ public class TaskManualLeaveCommentInPopup extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskManualLeaveCommentInPopup() {
     app.goTo().menuTasks();
-    Tasks before=app.dbtasks().tasks();
+    Tasks before = app.dbtasks().tasks();
     app.task().leaveCommentTask("Комментарий, comments");
-    Tasks after=app.dbtasks().tasks();
+    Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
     app.goTo().menuSchedule();
   }
 
-  private void check(Tasks after){
-    commentaries = new String[]{"Комментарий, comments", "666"};
+  private void check(Tasks after) {
+    commentaries = new String[] {"Комментарий, comments", "666"};
     app.trTask()
         .saveManualTask(
             "PopupLeaveCommentByManualTask",

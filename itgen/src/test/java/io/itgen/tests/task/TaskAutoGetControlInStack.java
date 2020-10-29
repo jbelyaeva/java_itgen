@@ -3,6 +3,7 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -45,7 +46,7 @@ public class TaskAutoGetControlInStack extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskAutoGetControlInStack() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();

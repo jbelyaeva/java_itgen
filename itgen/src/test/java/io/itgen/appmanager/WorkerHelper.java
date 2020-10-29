@@ -1,14 +1,13 @@
 package io.itgen.appmanager;
 
+import io.itgen.model.WorkerData;
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.itgen.model.WorkerData;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WorkerHelper extends HelperBase {
 
@@ -118,17 +117,18 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void selectedWorkerById(String id) {
-    //находим пагинатор
+    // находим пагинатор
     String next = wd.findElement(By.xpath("//button[3]")).getAttribute("class");
     //  List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-    //есть ли на первой странице наш работник
+    // есть ли на первой странице наш работник
     List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
     if (list.size() > 0) {
       wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
-      //если работник не на первой странице, надо нажать пагинатор, пока не найдем
+      // если работник не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
-        List<WebElement> list_pagin = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+        List<WebElement> list_pagin =
+            wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
         if (list_pagin.size() > 0) {
           wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
           break;
@@ -139,14 +139,16 @@ public class WorkerHelper extends HelperBase {
     }
   }
 
-
-  //работник с пагинацией
+  // работник с пагинацией
   public List<WorkerData> list() {
     // selectListAll();
     List<WorkerData> workers = new ArrayList<WorkerData>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[contains(@aria-label,'next')]")));//ждать пока не появится элемент
-    String next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
+    wait.until(
+        ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//button[contains(@aria-label,'next')]"))); // ждать пока не появится элемент
+    String next =
+        wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
     if (!next.equals("disabled")) {
       while (!next.equals("disabled")) {
@@ -154,26 +156,28 @@ public class WorkerHelper extends HelperBase {
         wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).click();
         elements.removeAll(elements);
         elements = wd.findElements(By.cssSelector("a.btn-link"));
-        next = wd.findElement(By.xpath("//button[contains(@aria-label,'next')]")).getAttribute("class");
+        next =
+            wd.findElement(By.xpath("//button[contains(@aria-label,'next')]"))
+                .getAttribute("class");
       }
     }
     includeInListBaseWebElement(workers, elements);
     return workers;
   }
 
-
-  //из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из ссылки в атрибуте
-  //, а ФИ cо страницы ui
+  // из вэб-элементов на странице формируем список элементов типа StudentData, путем взятия id из
+  // ссылки в атрибуте
+  // , а ФИ cо страницы ui
   private void includeInListBaseWebElement(List<WorkerData> workers, List<WebElement> elements) {
     for (WebElement element : elements) {
       String getId = element.getAttribute("href");
       String[] getIdSplit = getId.split("/");
-      String id = getIdSplit[4]; //достали id
+      String id = getIdSplit[4]; // достали id
       String name = element.getText();
-      String[] name_surname = name.split("\\s"); //разрезали Имя Фамилия
-      WorkerData worker = new WorkerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
+      String[] name_surname = name.split("\\s"); // разрезали Имя Фамилия
+      WorkerData worker =
+          new WorkerData().withId(id).withFirstName(name_surname[1]).withLastName(name_surname[0]);
       workers.add(worker);
     }
   }
-
 }

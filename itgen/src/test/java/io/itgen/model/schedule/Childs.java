@@ -123,39 +123,54 @@ public class Childs {
       return false;
     }
     Childs childs = (Childs) o;
-    return score == childs.score &&
-        duration == childs.duration &&
-        rating == childs.rating &&
-        Objects.equals(id, childs.id) &&
-        Objects.equals(status, childs.status) &&
-        Objects.equals(skillId, childs.skillId) &&
-        Objects.equals(lang, childs.lang) &&
-        Objects.equals(isTrail, childs.isTrail) &&
-        Objects.equals(p, childs.p) &&
-        Objects.equals(startTime, childs.startTime) &&
-        Objects.equals(endTime, childs.endTime);
+    return score == childs.score
+        && duration == childs.duration
+        && rating == childs.rating
+        && Objects.equals(id, childs.id)
+        && Objects.equals(status, childs.status)
+        && Objects.equals(skillId, childs.skillId)
+        && Objects.equals(lang, childs.lang)
+        && Objects.equals(isTrail, childs.isTrail)
+        && Objects.equals(p, childs.p)
+        && Objects.equals(startTime, childs.startTime)
+        && Objects.equals(endTime, childs.endTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, status, score, duration, skillId, lang, rating, isTrail, p, startTime, endTime);
+    return Objects.hash(
+        id, status, score, duration, skillId, lang, rating, isTrail, p, startTime, endTime);
   }
 
   @Override
   public String toString() {
-    return "Childs{" +
-        "id='" + id + '\'' +
-        ", status='" + status + '\'' +
-        ", score=" + score +
-        ", duration=" + duration +
-        ", skillId='" + skillId + '\'' +
-        ", lang='" + lang + '\'' +
-        ", rating=" + rating +
-        ", isTrail=" + isTrail +
-        ", p=" + p +
-        ", startTime=" + startTime +
-        ", endTime=" + endTime +
-        '}';
+    return "Childs{"
+        + "id='"
+        + id
+        + '\''
+        + ", status='"
+        + status
+        + '\''
+        + ", score="
+        + score
+        + ", duration="
+        + duration
+        + ", skillId='"
+        + skillId
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", rating="
+        + rating
+        + ", isTrail="
+        + isTrail
+        + ", p="
+        + p
+        + ", startTime="
+        + startTime
+        + ", endTime="
+        + endTime
+        + '}';
   }
 }

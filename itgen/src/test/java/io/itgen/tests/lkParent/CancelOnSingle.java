@@ -4,6 +4,7 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
@@ -44,7 +45,7 @@ public class CancelOnSingle extends TestBase {
             "ru");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testCancelOnSingle() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();

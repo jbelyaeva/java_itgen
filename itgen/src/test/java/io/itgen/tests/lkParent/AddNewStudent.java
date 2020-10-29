@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import io.itgen.services.StudentService;
@@ -67,7 +68,7 @@ public class AddNewStudent extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validStudentsFromJson")
+  @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testAddNewStudent(StudentData student) throws InterruptedException {
     Students before = app.dbstudents().students();
     app.lkParent().create(student);

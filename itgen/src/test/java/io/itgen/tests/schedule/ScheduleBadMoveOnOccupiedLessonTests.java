@@ -1,6 +1,7 @@
 package io.itgen.tests.schedule;
-//автотест проверяет подвижку разового расписания
+// автотест проверяет подвижку разового расписания
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
 import io.itgen.model.schedule.ScheduleData;
@@ -37,60 +38,95 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    //расписание, на которое записан ученик, его будем двигать на время расписания ниже
-    ScheduleData schedule = new ScheduleData()
+    // расписание, на которое записан ученик, его будем двигать на время расписания ниже
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("badMoveSchedule")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(Arrays.asList(new C().withId("badMoveSchedule").withType(3).withSubject("1")
-                            .withLang("ru").withNewSubj(true).withS("normal")))))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("badMoveSchedule")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
-    //расписание, на которое ученик уже записан
-    ScheduleData scheduleOccupied = new ScheduleData()
+    // расписание, на которое ученик уже записан
+    ScheduleData scheduleOccupied =
+        new ScheduleData()
             .withId("scheduleOccupied")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(periodMove)).withE(time.Etime(periodMove)))
-                    .withC(Arrays.asList(new C().withId("badMoveSchedule").withType(3).withSubject("1")
-                            .withLang("ru").withNewSubj(true).withS("normal")))))
-            .withTimes(new Times().withStart(time.start(periodMove)).withEnd(time.finish(periodMove)))
-            .withSkypeId("1").withOneTime(true);
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(
+                            new ST().withS(time.Stime(periodMove)).withE(time.Etime(periodMove)))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("badMoveSchedule")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withS("normal")))))
+            .withTimes(
+                new Times().withStart(time.start(periodMove)).withEnd(time.finish(periodMove)))
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(scheduleOccupied);
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("badMoveSchedule").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("badMoveSchedule").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("badMoveSchedule").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("badMoveSchedule")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("badMoveSchedule").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("badMoveSchedule")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testBadMoveOnOccupiedLesson() {
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
-    app.schedule().badMoveOccupied(periodMove,"badMoveSchedule");
+    app.schedule().badMoveOccupied(periodMove, "badMoveSchedule");
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что в списке недоступных студентов появился студент из предусловия
+    // проверка, что в списке недоступных студентов появился студент из предусловия
     app.schedule().checkFindBusyStuden("badMoveSchedule");
     app.goTo().menuTasks();
   }
@@ -105,5 +141,4 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("badMoveSchedule");
   }
-
 }

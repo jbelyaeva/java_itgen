@@ -5,12 +5,7 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
-import io.itgen.model.users.Emails;
-import io.itgen.model.users.FinishedLessonsCountBySkill;
-import io.itgen.model.users.Services;
-import io.itgen.model.users.Status;
 import io.itgen.model.users.Utm;
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,11 +90,9 @@ public class CandidateData {
   @Property("testTask")
   private String testTask;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Embedded
-  private Utm utm ;
+  @Embedded private Utm utm;
 
   public CandidateData() {}
 
@@ -301,52 +294,85 @@ public class CandidateData {
       return false;
     }
     CandidateData that = (CandidateData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(status, that.status) &&
-        Objects.equals(firstname, that.firstname) &&
-        Objects.equals(lastname, that.lastname) &&
-        Objects.equals(gender, that.gender) &&
-        Objects.equals(vacancyId, that.vacancyId) &&
-        Objects.equals(locale, that.locale) &&
-        Objects.equals(country, that.country) &&
-        Objects.equals(city, that.city) &&
-        Objects.equals(timezone, that.timezone) &&
-        Objects.equals(note, that.note) &&
-        Objects.equals(info, that.info) &&
-        Objects.equals(referId, that.referId) &&
-        Objects.equals(resume, that.resume) &&
-        Objects.equals(testTask, that.testTask);
+    return Objects.equals(id, that.id)
+        && Objects.equals(status, that.status)
+        && Objects.equals(firstname, that.firstname)
+        && Objects.equals(lastname, that.lastname)
+        && Objects.equals(gender, that.gender)
+        && Objects.equals(vacancyId, that.vacancyId)
+        && Objects.equals(locale, that.locale)
+        && Objects.equals(country, that.country)
+        && Objects.equals(city, that.city)
+        && Objects.equals(timezone, that.timezone)
+        && Objects.equals(note, that.note)
+        && Objects.equals(info, that.info)
+        && Objects.equals(referId, that.referId)
+        && Objects.equals(resume, that.resume)
+        && Objects.equals(testTask, that.testTask);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, status, firstname, lastname, gender, vacancyId, locale, country, city,
-            timezone, note, info, referId, resume, testTask);
+    return Objects.hash(
+        id, status, firstname, lastname, gender, vacancyId, locale, country, city, timezone, note,
+        info, referId, resume, testTask);
   }
 
   @Override
   public String toString() {
-    return "CandidateData{" +
-        "id='" + id + '\'' +
-        ", createAt=" + createAt +
-        ", status='" + status + '\'' +
-        ", firstname='" + firstname + '\'' +
-        ", lastname='" + lastname + '\'' +
-        ", gender=" + gender +
-        ", vacancyId='" + vacancyId + '\'' +
-        ", locale='" + locale + '\'' +
-        ", birthday=" + birthday +
-        ", country='" + country + '\'' +
-        ", city='" + city + '\'' +
-        ", timezone='" + timezone + '\'' +
-        ", note='" + note + '\'' +
-        ", info='" + info + '\'' +
-        ", referId='" + referId + '\'' +
-        ", resume='" + resume + '\'' +
-        ", testTask='" + testTask + '\'' +
-        ", contacts=" + contacts +
-        ", utm=" + utm +
-        '}';
+    return "CandidateData{"
+        + "id='"
+        + id
+        + '\''
+        + ", createAt="
+        + createAt
+        + ", status='"
+        + status
+        + '\''
+        + ", firstname='"
+        + firstname
+        + '\''
+        + ", lastname='"
+        + lastname
+        + '\''
+        + ", gender="
+        + gender
+        + ", vacancyId='"
+        + vacancyId
+        + '\''
+        + ", locale='"
+        + locale
+        + '\''
+        + ", birthday="
+        + birthday
+        + ", country='"
+        + country
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", timezone='"
+        + timezone
+        + '\''
+        + ", note='"
+        + note
+        + '\''
+        + ", info='"
+        + info
+        + '\''
+        + ", referId='"
+        + referId
+        + '\''
+        + ", resume='"
+        + resume
+        + '\''
+        + ", testTask='"
+        + testTask
+        + '\''
+        + ", contacts="
+        + contacts
+        + ", utm="
+        + utm
+        + '}';
   }
 }

@@ -7,8 +7,7 @@ public class FinishedChildLessonService {
 
   private final FinishedChildLessonDao finishedChildLessonDao = new FinishedChildLessonDao();
 
-  public FinishedChildLessonService() {
-  }
+  public FinishedChildLessonService() {}
 
   public void save(FinishedChildLessonData finishedChildLesson) {
     finishedChildLessonDao.save(finishedChildLesson);

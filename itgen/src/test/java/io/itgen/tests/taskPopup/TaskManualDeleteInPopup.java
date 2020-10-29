@@ -45,7 +45,6 @@ public class TaskManualDeleteInPopup extends TestBase {
     app.goTo().menuSchedule();
   }
 
-
   @AfterMethod(alwaysRun = true)
   public void clean() {
     if (taskService.findById("PopupDeleteTask") != null) {

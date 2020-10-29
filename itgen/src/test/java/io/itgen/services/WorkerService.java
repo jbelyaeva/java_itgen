@@ -7,8 +7,7 @@ public class WorkerService {
 
   private final WorkerDao workerDao = new WorkerDao();
 
-  public WorkerService() {
-  }
+  public WorkerService() {}
 
   public WorkerData DeleteById(String id) {
     return workerDao.findByIdAndDelete(id);
@@ -21,5 +20,4 @@ public class WorkerService {
   public WorkerData findById(String id) {
     return workerDao.findById(id);
   }
-
 }

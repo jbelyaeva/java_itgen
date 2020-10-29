@@ -31,7 +31,7 @@ public class SshotMain extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-  familyService.updateFieldBoolean("111", "isTrialBonusOff", false);
+    familyService.updateFieldBoolean("111", "isTrialBonusOff", false);
   }
 
   @Test // упадет, если заускать через shift все тесты в подпапке.

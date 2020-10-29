@@ -20,11 +20,10 @@ public class TaskManualChangeAssignee extends TestBase {
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
-  private  Date[] dates = null;
+  private final Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
-
 
   @BeforeMethod
   public void ensurePreconditions() {

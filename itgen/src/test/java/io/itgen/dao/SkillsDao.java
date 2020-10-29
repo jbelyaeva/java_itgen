@@ -16,10 +16,10 @@ public class SkillsDao {
     datastore.save(skill);
   }
 
-  public void updateField(String idSkill,String nameFiled, String data) {
+  public void updateField(String idSkill, String nameFiled, String data) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<SkillsData> query = datastore.createQuery(SkillsData.class).filter("id", idSkill);;
-    UpdateOperations ops = datastore.createUpdateOperations(SkillsData.class).set(nameFiled,data);
+    Query<SkillsData> query = datastore.createQuery(SkillsData.class).filter("id", idSkill);
+    UpdateOperations ops = datastore.createUpdateOperations(SkillsData.class).set(nameFiled, data);
     datastore.update(query, (UpdateOperations<SkillsData>) ops);
   }
 
@@ -35,4 +35,3 @@ public class SkillsDao {
     datastore.update(query, datastore.createUpdateOperations(SkillsData.class).unset(name));
   }
 }
-

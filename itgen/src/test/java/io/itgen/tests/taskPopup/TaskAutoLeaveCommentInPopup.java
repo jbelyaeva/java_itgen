@@ -20,7 +20,7 @@ public class TaskAutoLeaveCommentInPopup extends TestBase {
   private final Date createAt = new Date();
   private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
-  private Date[] dates = null;
+  private final Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private String[] commentaries = null;
@@ -59,7 +59,7 @@ public class TaskAutoLeaveCommentInPopup extends TestBase {
   }
 
   private void check(Tasks after) {
-    commentaries = new String[]{"Комментарий, comments", "666"};
+    commentaries = new String[] {"Комментарий, comments", "666"};
     app.trTask()
         .saveAutoTask(
             "AutoTaskLeaveCommentInPopup",

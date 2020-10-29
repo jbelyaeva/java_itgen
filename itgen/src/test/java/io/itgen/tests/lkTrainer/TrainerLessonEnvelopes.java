@@ -23,23 +23,14 @@ public class TrainerLessonEnvelopes extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow());
-    app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period, "envelope",
-        "23", "envelop", "1", "ru");
+    app.trScheduleToday()
+        .SingleScheduleWithOneStudentOnTrail(period, "envelope", "23", "envelop", "1", "ru");
 
     app.trFamily().newFamily("envelop", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
         .newStudent(
-            "envelop",
-            "Маша",
-            "Машина",
-            "expert",
-            "AL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "envelop");
+            "envelop", "Маша", "Машина", "expert", "AL", "Europe/Minsk", 2, "ru", "ru", "envelop");
   }
 
   @Test
@@ -59,5 +50,4 @@ public class TrainerLessonEnvelopes extends TestBase {
     studentService.DeleteById("envelop");
     familyService.DeleteById("envelop");
   }
-
 }

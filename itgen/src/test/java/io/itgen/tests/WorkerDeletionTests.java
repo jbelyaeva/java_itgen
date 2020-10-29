@@ -1,38 +1,25 @@
 package io.itgen.tests;
-//Тест на удаление работника. Для подключения проверки на соответствие ui и бд в конфигурации
+// Тест на удаление работника. Для подключения проверки на соответствие ui и бд в конфигурации
 // запуска указываем -DverifyUI=true.
-
-import io.itgen.model.users.Contacts;
-import io.itgen.services.WorkerService;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-import io.itgen.model.WorkerData;
-import io.itgen.model.Workers;
-import io.itgen.model.users.Emails;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.model.WorkerData;
+import io.itgen.model.Workers;
+import io.itgen.services.WorkerService;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 public class WorkerDeletionTests extends TestBase {
+
   public WorkerData deletedWorker;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    WorkerService workerService = new WorkerService();
-    deletedWorker = new WorkerData().withId("workerDelete").withFirstName("Маша").withLastName("Машина")
-            .withRoles(Arrays.asList("employee"))
-            .withCountry("AL").withTimeZone("Europe/Minsk")
-            .withLocate("ru")
-            .withBirthday(new Date(1556726891000L))
-            .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withEmails(Collections.singletonList(new Emails().withAddress("julja83@list.ru").withVerified(true)));
-    workerService.create(deletedWorker);
+    app.trWorker().saveNewWorker("worker", "Маша", "Машина", "employee",
+        "AL", "Europe/Minsk", "ru", "ru", "1234567899", "julja83@list.ru");
   }
 
   @Test

@@ -30,8 +30,7 @@ public class TrainerModifyProfile extends TestBase {
   public Iterator<Object[]> ValidTrainerFromJson() throws IOException {
     try (BufferedReader reader =
         new BufferedReader(
-            new FileReader(
-                new File("src/test/resources/testdata/trainer_modification-lk.json")))) {
+            new FileReader(new File("src/test/resources/testdata/trainer_modification-lk.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -40,14 +39,13 @@ public class TrainerModifyProfile extends TestBase {
       }
       Gson gson = new Gson();
       List<TrainerData> trainers =
-          gson.fromJson(
-              json, new TypeToken<List<TrainerData>>() {}.getType());
+          gson.fromJson(json, new TypeToken<List<TrainerData>>() {}.getType());
       return trainers.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "ValidTrainerFromJson", retryAnalyzer = RunTestAgain.class)
-  public void testTrainerModifyProfile(TrainerData trainer)  {
+  public void testTrainerModifyProfile(TrainerData trainer) {
     Trainers before = app.db().trainers();
     app.trainer().modifyInLk(trainer);
     Trainers after = app.db().trainers();

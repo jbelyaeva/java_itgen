@@ -7,8 +7,7 @@ public class RequestService {
 
   private final RequestDao requestDao = new RequestDao();
 
-  public RequestService() {
-  }
+  public RequestService() {}
 
   public RequestData DeleteById(String id) {
     return requestDao.findByIdAndDelete(id);

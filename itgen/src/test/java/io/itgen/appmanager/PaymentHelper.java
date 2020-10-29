@@ -20,7 +20,7 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void btnPay() {
-    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href,'/pay/')]"));
+    click(By.xpath("//a[contains(@href,'/pay/')]"));
   }
 
   public void btnPay4Lessons() {
@@ -63,9 +63,7 @@ public class PaymentHelper extends HelperBase {
 
   public Boolean findPictureSuccessPay() {
     wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-    if (isElementPresent(By.xpath("//img[contains(@alt,'Success')]"))) return true;
-
-    return false;
+    return isElementPresent(By.xpath("//img[contains(@alt,'Success')]"));
   }
 
   public void paymentAdminShop(String id) {
@@ -184,7 +182,7 @@ public class PaymentHelper extends HelperBase {
   }
 
   public String getPayer() {
-    waiteVisibleElement(5, By.xpath("(//p[contains(@class,'static')])[2]//span"));
-   return getText("(//p[contains(@class,'static')])[2]//span");
+    waitVisibleElement(5,By.xpath("(//p[contains(@class,'static')])[2]//span"));
+    return getText("(//p[contains(@class,'static')])[2]//span");
   }
 }

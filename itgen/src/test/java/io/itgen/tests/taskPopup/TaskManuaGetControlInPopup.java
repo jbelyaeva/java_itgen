@@ -54,7 +54,7 @@ public class TaskManuaGetControlInPopup extends TestBase {
   }
 
   private void check(Tasks after) {
-    dates = new Date[]{createAt, duoDateWithTime};
+    dates = new Date[] {createAt, duoDateWithTime};
     app.trTask()
         .saveManualTask(
             "PopupOnControlManualTask",

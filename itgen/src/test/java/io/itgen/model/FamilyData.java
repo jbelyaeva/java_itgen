@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @dev.morphia.annotations.Entity("families")
-
 public class FamilyData {
   @Id
   @Property("_id")
@@ -35,7 +34,7 @@ public class FamilyData {
   @Property("tierId")
   private String tierId;
 
-  //сеттеры
+  // сеттеры
   public FamilyData withId(String id) {
     this.id = id;
     return this;
@@ -56,8 +55,7 @@ public class FamilyData {
     return this;
   }
 
-  //геттеры
-
+  // геттеры
 
   public String getId() {
     return id;
@@ -74,6 +72,4 @@ public class FamilyData {
   public String getTierId() {
     return tierId;
   }
-
-
 }

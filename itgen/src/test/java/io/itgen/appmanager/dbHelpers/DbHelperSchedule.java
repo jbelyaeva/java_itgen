@@ -1,5 +1,7 @@
 package io.itgen.appmanager.dbHelpers;
 
+import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
+
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.model.schedule.CommentData;
@@ -12,11 +14,7 @@ import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
-
-import io.itgen.services.FinishedChildLessonService;
 import java.util.List;
-
-import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 public class DbHelperSchedule {
   // вся коллекция расписания
@@ -68,5 +66,4 @@ public class DbHelperSchedule {
     List<TaskData> tasks = q.find().toList();
     return new Tasks(tasks);
   }
-
 }

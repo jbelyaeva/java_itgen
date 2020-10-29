@@ -6,8 +6,7 @@ public class Times {
   public Integer start;
   public Integer end;
 
-  public Times() {
-  }
+  public Times() {}
 
   public Times withStart(Integer start) {
     this.start = start;
@@ -21,10 +20,7 @@ public class Times {
 
   @Override
   public String toString() {
-    return "Times{" +
-            "start=" + start +
-            ", end=" + end +
-            '}';
+    return "Times{" + "start=" + start + ", end=" + end + '}';
   }
 
   @Override
@@ -32,8 +28,7 @@ public class Times {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Times times = (Times) o;
-    return Objects.equals(start, times.start) &&
-            Objects.equals(end, times.end);
+    return Objects.equals(start, times.start) && Objects.equals(end, times.end);
   }
 
   @Override

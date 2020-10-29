@@ -7,8 +7,7 @@ public class StudentService {
 
   private final StudentDao studentDao = new StudentDao();
 
-  public StudentService() {
-  }
+  public StudentService() {}
 
   public StudentData DeleteById(StudentData student) {
     return studentDao.findByIdAndDelete(student);

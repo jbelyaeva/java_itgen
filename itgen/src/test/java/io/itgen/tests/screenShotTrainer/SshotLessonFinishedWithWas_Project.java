@@ -39,14 +39,20 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private long alreadyRun = 7200000; //2 часа идет занятие
+  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday().StartSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru");
 
     app.trFamily().newFamily("finishLessonByTrainer", false, "txa");
 
@@ -106,7 +112,7 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
   public void testSshotLessonFinishedWithWas_Project() throws AWTException, IOException {
     app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
-    app.trainer().finishedLessonWithWas_giveProject("finishLessonByTrainer","Жуки","Лабиринт");
+    app.trainer().finishedLessonWithWas_giveProject("finishLessonByTrainer", "Жуки", "Лабиринт");
 
     String name = "Trainer_FinishedLessonWithWasProject_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -114,12 +120,13 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     String[] deleteElements = {
-        "//div[@class='text-capitalize'][2]",
-        "//div[@class='text-muted']",
-        "//div[@class='date']",
-        "//div[@class='duration']",
-        "//div[@class='time']",
-        "//span[@class='create-time']"};
+      "//div[@class='text-capitalize'][2]",
+      "//div[@class='text-muted']",
+      "//div[@class='date']",
+      "//div[@class='duration']",
+      "//div[@class='time']",
+      "//span[@class='create-time']"
+    };
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =

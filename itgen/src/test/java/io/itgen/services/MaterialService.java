@@ -7,8 +7,7 @@ public class MaterialService {
 
   private final MaterialDao materialDao = new MaterialDao();
 
-  public MaterialService() {
-  }
+  public MaterialService() {}
 
   public MaterialData DeleteById(String id) {
     return materialDao.findByIdAndDelete(id);
