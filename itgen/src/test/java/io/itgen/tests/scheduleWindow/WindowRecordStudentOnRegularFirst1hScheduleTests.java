@@ -54,7 +54,7 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
     app.windowSchedule().recordStudentOnRegularFirst1h(name, "14");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    //проверка, что назначен новый тренер и остальные записи не изменились
+    // проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
     app.goTo().menuTasks();
   }
@@ -83,6 +83,4 @@ public class WindowRecordStudentOnRegularFirst1hScheduleTests extends TestBase {
       }
     }
   }
-
 }
-

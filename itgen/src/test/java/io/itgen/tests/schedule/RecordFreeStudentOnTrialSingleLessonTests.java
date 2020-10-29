@@ -3,6 +3,7 @@ package io.itgen.tests.schedule;
 // на все
 // начальные данные: период, id тренера
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
 import io.itgen.model.schedule.C;
@@ -41,7 +42,7 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
-  String name = "Маша Машина";
+  String name = "Машина Маша";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -88,7 +89,7 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordFreeStudentOnTrialSingleLesson() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
@@ -101,9 +102,9 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-        scheduleService.DeleteById("recordStudentOnLesson");
-       studentService.DeleteById("recordStudent");
-       familyService.DeleteById("recordStudent");
+    scheduleService.DeleteById("recordStudentOnLesson");
+    studentService.DeleteById("recordStudent");
+    familyService.DeleteById("recordStudent");
     Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
     for (TaskData taskClean : tasks) {
       taskService.DeleteById(taskClean.getId());

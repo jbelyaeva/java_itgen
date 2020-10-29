@@ -18,7 +18,7 @@ public class TaskManualOnTomorrowInPopup extends TestBase {
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime()+86400000;
+  private final long duoDateSort = new Date().getTime() + 86400000;
   private final Date duoDateWithTime = new Date(duoDateSort);
   private Date[] dates = null;
   private final String[] texts = null;
@@ -54,7 +54,7 @@ public class TaskManualOnTomorrowInPopup extends TestBase {
   }
 
   private void check(Tasks after) {
-    dates = new Date[]{createAt,duoDateWithTime};
+    dates = new Date[] {createAt, duoDateWithTime};
     app.trTask()
         .saveManualTask(
             "TomorrowInPopup",

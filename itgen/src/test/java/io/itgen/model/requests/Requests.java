@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Requests extends ForwardingSet<RequestData> {
-  private Set<RequestData> delegate;
+  private final Set<RequestData> delegate;
 
   public Requests(Requests requests) {
     this.delegate = new HashSet<RequestData>(requests.delegate);
   }
 
-  public Requests() { //конструктор без параметров
+  public Requests() { // конструктор без параметров
     this.delegate = new HashSet<RequestData>();
   }
 
@@ -38,4 +38,3 @@ public class Requests extends ForwardingSet<RequestData> {
     return delegate;
   }
 }
-

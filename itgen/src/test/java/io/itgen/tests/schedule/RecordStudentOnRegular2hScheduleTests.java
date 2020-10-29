@@ -6,17 +6,18 @@ package io.itgen.tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.FamilyData;
-import io.itgen.model.schedule.ScheduleData;
-import io.itgen.model.schedule.Schedules;
 import io.itgen.model.StudentData;
-import io.itgen.model.tasks.TaskData;
-import io.itgen.model.tasks.Tasks;
 import io.itgen.model.schedule.C;
 import io.itgen.model.schedule.ST;
+import io.itgen.model.schedule.ScheduleData;
+import io.itgen.model.schedule.Schedules;
 import io.itgen.model.schedule.Slots;
 import io.itgen.model.schedule.Times;
+import io.itgen.model.tasks.TaskData;
+import io.itgen.model.tasks.Tasks;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Status;
 import io.itgen.services.FamilyService;
@@ -33,6 +34,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RecordStudentOnRegular2hScheduleTests extends TestBase {
+
   ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
   FamilyService familyService = new FamilyService();
@@ -42,7 +44,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
   ArrayList<C> list = new ArrayList<>();
   String period = "21:00 - 23:00";
   int week = 604800000;
-  String name = "Маша Машина";
+  String name = "Машина Маша";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -113,17 +115,14 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordStudentOnRegular2h() throws InterruptedException {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.schedule().recordStudentOn2h(name, "recordStudentOnLesson");
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
-    check(
-        before,
-        after); // проверка на то, что новая запись записалась в бд верно, и остальные записи не
-                // испортились
+    check(before, after);
     app.goTo().menuTasks();
   }
 

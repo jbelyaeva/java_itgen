@@ -49,9 +49,7 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   public void testWindowRecordStudentOnSingle2h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule()
-        .recordStudentOn2hSingle(
-            name, "14"); // имя ученика для поиска, id тренера
+    app.windowSchedule().recordStudentOn2hSingle(name, "14"); // имя ученика для поиска, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);
@@ -70,8 +68,9 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   }
 
   private void check(Schedules before, Schedules after) {
-    app.trScheduleTomorrow().SingleScheduleWithOneNewStudent(period, "recordOnSchedule", "14",
-        "recordStudent", "1", "ru");
+    app.trScheduleTomorrow()
+        .SingleScheduleWithOneNewStudent(
+            period, "recordOnSchedule", "14", "recordStudent", "1", "ru");
     ScheduleData scheduleAdd = scheduleService.findById("recordOnSchedule");
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordOnSchedule")) {

@@ -1,13 +1,13 @@
 package io.itgen.appmanager.transactionHelper;
 
+import io.itgen.model.general.Activity;
+import io.itgen.model.general.Comments;
+import io.itgen.model.general.D;
 import io.itgen.model.materials.Branches;
 import io.itgen.model.materials.LinkedMaterials;
 import io.itgen.model.materials.MaterialBranchData;
 import io.itgen.model.materials.MaterialData;
 import io.itgen.model.materials.MaterialPermsData;
-import io.itgen.model.general.Activity;
-import io.itgen.model.general.Comments;
-import io.itgen.model.general.D;
 import io.itgen.services.MaterialBranchService;
 import io.itgen.services.MaterialPermsService;
 import io.itgen.services.MaterialService;
@@ -39,7 +39,8 @@ public class TrMaterialHelper {
     materialBranchService.save(materialBranch);
   }
 
-  public MaterialData materialBase(String idMaterial,
+  public MaterialData materialBase(
+      String idMaterial,
       String creator,
       String title,
       String status,
@@ -78,17 +79,17 @@ public class TrMaterialHelper {
       String projectLink,
       String sourceLink,
       String desc) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(linkedMaterials)
-        .withComments(comments)
-        .withDesc(desc)
-        .withActivity(activity);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(linkedMaterials)
+            .withComments(comments)
+            .withDesc(desc)
+            .withActivity(activity);
     materialService.save(material);
   }
 
@@ -108,20 +109,20 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(linkedMaterials)
-        .withComments(comments)
-        .withDesc(desc)
-        .withActivity(
-            Arrays.asList(
-                new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
-        .withVerifier(verifier);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(linkedMaterials)
+            .withComments(comments)
+            .withDesc(desc)
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
+            .withVerifier(verifier);
     materialService.save(material);
   }
 
@@ -141,22 +142,25 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(linkedMaterials)
-        .withComments(comments)
-        .withDesc(desc)
-        .withActivity(
-            Arrays.asList(
-                new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
-                new Activity().withUId(verifier).withTs(new Date()).withT("statusChanged")
-                    .withD(new D().withNewData("published").withOldData("checking"))))
-        .withVerifier(verifier);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(linkedMaterials)
+            .withComments(comments)
+            .withDesc(desc)
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("statusChanged")
+                        .withD(new D().withNewData("published").withOldData("checking"))))
+            .withVerifier(verifier);
     materialService.save(material);
   }
 
@@ -176,21 +180,21 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(linkedMaterials)
-        .withComments(comments)
-        .withDesc(desc)
-        .withActivity(
-            Arrays.asList(
-                new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
-        .withVerifier(verifier)
-        .withRemoved(true);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(linkedMaterials)
+            .withComments(comments)
+            .withDesc(desc)
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview")))
+            .withVerifier(verifier)
+            .withRemoved(true);
     materialService.save(material);
   }
 
@@ -212,31 +216,41 @@ public class TrMaterialHelper {
       String sourceLink,
       String desc,
       String verifier) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(
-            Arrays.asList(
-                new LinkedMaterials().withId(idLinkMaterial).withLang(linkLang).withStatus("published")))
-        .withComments(comments)
-        .withDesc(desc)
-        .withActivity(
-            Arrays.asList(
-                new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
-                new Activity().withUId(verifier).withTs(new Date()).withT("statusChanged")
-                    .withD(
-                        new D().withNewData("published").withOldData("checking")),
-                new Activity().withUId(verifier).withTs(new Date()).withT("linkMaterialCreated")
-                    .withD(
-                        new D().withLangs(Arrays.asList(linkLang))),
-                new Activity().withUId(verifier).withTs(new Date()).withT("descUpdated")
-                    .withD(new D().withNewData(desc + " " + desc))))
-        .withVerifier(verifier)
-        .withRemoved(true);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(
+                Arrays.asList(
+                    new LinkedMaterials()
+                        .withId(idLinkMaterial)
+                        .withLang(linkLang)
+                        .withStatus("published")))
+            .withComments(comments)
+            .withDesc(desc)
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("statusChanged")
+                        .withD(new D().withNewData("published").withOldData("checking")),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("linkMaterialCreated")
+                        .withD(new D().withLangs(Arrays.asList(linkLang))),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("descUpdated")
+                        .withD(new D().withNewData(desc + " " + desc))))
+            .withVerifier(verifier)
+            .withRemoved(true);
     materialService.save(material);
   }
 
@@ -257,37 +271,42 @@ public class TrMaterialHelper {
       String desc,
       String verifier,
       String text) {
-    MaterialData material = materialBase(idMaterial, creator, title, status, skill, idBranch, type,
-        level, lang)
-        .withOriginality(originality)
-        .withMaterialLink(materialLink)
-        .withProjectLink(projectLink)
-        .withSourceLink(sourceLink)
-        .withTags(tags)
-        .withLimkedMaterials(linkedMaterials)
-        .withComments(Arrays.asList(
-            new Comments().withId("different").withOwner("666").withText("Комментарий")))
-        .withDesc(desc)
-        .withActivity(
-            Arrays.asList(
-                new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
-                new Activity().withUId(verifier).withTs(new Date()).withT("statusChanged")
-                    .withD(
-                        new D().withNewData("published").withOldData("checking")),
-                new Activity().withUId(verifier).withTs(new Date()).withT("commentAdded")
-                    .withD(
-                        new D().withNewData(text))))
-        .withVerifier(verifier)
-        .withRemoved(true);
+    MaterialData material =
+        materialBase(idMaterial, creator, title, status, skill, idBranch, type, level, lang)
+            .withOriginality(originality)
+            .withMaterialLink(materialLink)
+            .withProjectLink(projectLink)
+            .withSourceLink(sourceLink)
+            .withTags(tags)
+            .withLimkedMaterials(linkedMaterials)
+            .withComments(
+                Arrays.asList(
+                    new Comments().withId("different").withOwner("666").withText("Комментарий")))
+            .withDesc(desc)
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId(verifier).withTs(new Date()).withT("tookForReview"),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("statusChanged")
+                        .withD(new D().withNewData("published").withOldData("checking")),
+                    new Activity()
+                        .withUId(verifier)
+                        .withTs(new Date())
+                        .withT("commentAdded")
+                        .withD(new D().withNewData(text))))
+            .withVerifier(verifier)
+            .withRemoved(true);
     materialService.save(material);
   }
 
-  public void addMaterialPerms(String id, String[] perms, String[] reviews ) {
+  public void addMaterialPerms(String id, String[] perms, String[] reviews) {
     MaterialPermsData materialPerms =
         new MaterialPermsData()
-        .withId(id)
-        .withPerms(Arrays.asList(perms))
-        .withReviewPerms(Arrays.asList(reviews));
+            .withId(id)
+            .withPerms(Arrays.asList(perms))
+            .withReviewPerms(Arrays.asList(reviews));
     materialPermsService.save(materialPerms);
   }
 }

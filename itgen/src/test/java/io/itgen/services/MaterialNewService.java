@@ -7,8 +7,7 @@ public class MaterialNewService {
 
   private final MaterialNewDao materialNewDao = new MaterialNewDao();
 
-  public MaterialNewService() {
-  }
+  public MaterialNewService() {}
 
   public void save(MaterialNewData materialNew) {
     materialNewDao.save(materialNew);
@@ -18,4 +17,3 @@ public class MaterialNewService {
     materialNewDao.drop();
   }
 }
-

@@ -1,6 +1,5 @@
 package io.itgen.model;
 
-
 import com.google.gson.annotations.Expose;
 import dev.morphia.annotations.*;
 import io.itgen.model.users.Contacts;
@@ -41,54 +40,31 @@ public class LeadData {
   @Property("locale")
   private String locate;
 
-  @Embedded
-  private Utm utm;
+  @Embedded private Utm utm;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose
-  @Transient
-  private String phone;
+  @Expose @Transient private String phone;
 
-  @Expose
-  @Transient
-  private String skype;
+  @Expose @Transient private String skype;
 
-  @Expose
-  @Transient
-  private String c2d;
+  @Expose @Transient private String c2d;
 
-  @Expose
-  @Transient
-  private String viber;
+  @Expose @Transient private String viber;
 
-  @Expose
-  @Transient
-  private String whatsapp;
+  @Expose @Transient private String whatsapp;
 
-  @Expose
-  @Transient
-  private String telegram;
+  @Expose @Transient private String telegram;
 
-  @Expose
-  @Transient
-  private String fb;
+  @Expose @Transient private String fb;
 
-  @Expose
-  @Transient
-  private String vk;
+  @Expose @Transient private String vk;
 
-  @Expose
-  @Transient
-  private String ok;
+  @Expose @Transient private String ok;
 
-  @Expose
-  @Transient
-  private String inst;
+  @Expose @Transient private String inst;
 
-  @Expose
-  private String roleUi;
+  @Expose private String roleUi;
 
   @Property("roles")
   private List<String> roles = new ArrayList<>();
@@ -196,7 +172,6 @@ public class LeadData {
     return this;
   }
 
-
   public LeadData withStatus(String status) {
     this.status = status;
     return this;
@@ -295,18 +270,17 @@ public class LeadData {
     return utm;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     LeadData leadData = (LeadData) o;
-    return Objects.equals(id, leadData.id) &&
-            Objects.equals(firstname, leadData.firstname) &&
-            Objects.equals(lastname, leadData.lastname) &&
-            Objects.equals(country, leadData.country) &&
-            Objects.equals(timezone, leadData.timezone) &&
-            Objects.equals(locate, leadData.locate);
+    return Objects.equals(id, leadData.id)
+        && Objects.equals(firstname, leadData.firstname)
+        && Objects.equals(lastname, leadData.lastname)
+        && Objects.equals(country, leadData.country)
+        && Objects.equals(timezone, leadData.timezone)
+        && Objects.equals(locate, leadData.locate);
   }
 
   @Override

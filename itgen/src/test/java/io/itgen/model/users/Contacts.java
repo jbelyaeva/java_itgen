@@ -5,8 +5,7 @@ public class Contacts {
   private String val;
   private Boolean preferred;
 
-  public Contacts() {
-  }
+  public Contacts() {}
 
   public Contacts withType(String type) {
     this.type = type;
@@ -37,10 +36,16 @@ public class Contacts {
 
   @Override
   public String toString() {
-    return "Contacts{" +
-            "type='" + type + '\'' +
-            ", val='" + val + '\'' +
-            ", preferred='" + preferred + '\'' +
-            '}';
+    return "Contacts{"
+        + "type='"
+        + type
+        + '\''
+        + ", val='"
+        + val
+        + '\''
+        + ", preferred='"
+        + preferred
+        + '\''
+        + '}';
   }
 }

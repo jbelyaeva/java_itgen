@@ -4,8 +4,6 @@ import static io.itgen.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
-import io.itgen.model.CandidateData;
-import io.itgen.model.Candidates;
 import io.itgen.model.Families;
 import io.itgen.model.FamilyData;
 import io.itgen.model.LeadData;
@@ -41,16 +39,16 @@ public class DbHelper {
 
   public FamilyData lastFamily() {
     Query<FamilyData> q = datastore.createQuery(FamilyData.class);
-    long count=q.count();
+    long count = q.count();
     List<FamilyData> family = q.find().toList();
     FamilyData lastFamily = family.get(Math.toIntExact(count - 1));
     return lastFamily;
   }
 
   public ParentData lastParent() {
-    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");;
-    long count=q.count();
-    List<ParentData> parent= q.find().toList();
+    Query<ParentData> q = datastore.createQuery(ParentData.class).filter("roles", "parent");
+    long count = q.count();
+    List<ParentData> parent = q.find().toList();
     ParentData lastParent = parent.get(Math.toIntExact(count - 1));
     return lastParent;
   }
@@ -64,7 +62,6 @@ public class DbHelper {
     List<StudentData> students = q.find().toList();
     return new Students(students);
   }
-
 
   public ParentData getTokenParent(String name, String surname, String role) {
     Query<ParentData> q = datastore.createQuery(ParentData.class);
@@ -93,6 +90,15 @@ public class DbHelper {
     return new Trainers(trainers);
   }
 
+  public TrainerData lastTrainer() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TrainerData> q = datastore.createQuery(TrainerData.class);
+    long count = q.count();
+    List<TrainerData> trainer = q.find().toList();
+    TrainerData lastTrainer = trainer.get(Math.toIntExact(count - 1));
+    return lastTrainer;
+  }
+
   public Leads leads() {
     Query<LeadData> q = datastore.createQuery(LeadData.class);
     List<LeadData> leads = q.find().toList();
@@ -113,7 +119,7 @@ public class DbHelper {
 
   public TestData lastTest() {
     Query<TestData> q = datastore.createQuery(TestData.class);
-    long count=q.count();
+    long count = q.count();
     return q.find().toList().get(Math.toIntExact(count - 1));
   }
 

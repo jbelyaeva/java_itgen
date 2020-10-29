@@ -26,8 +26,8 @@ public class TestResultDao {
 
   public void deleteField(String id, String name) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TestResultsData> query = datastore.createQuery(TestResultsData.class).field("id").equal(id);
-    datastore.update(query,datastore.createUpdateOperations(TestResultsData.class).unset(name));
+    Query<TestResultsData> query =
+        datastore.createQuery(TestResultsData.class).field("id").equal(id);
+    datastore.update(query, datastore.createUpdateOperations(TestResultsData.class).unset(name));
   }
 }
-

@@ -34,7 +34,9 @@ public class TimeGeneral {
   public long getTimeNow() {
     long dataWithTime = new Date().getTime();
     int popravka = 0;
-    if (diffTz()<100){popravka = 10800000;}
+    if (diffTz() < 100) {
+      popravka = 10800000;
+    }
     return dataWithTime - getMsLocalTime() + popravka;
   }
 
@@ -46,7 +48,7 @@ public class TimeGeneral {
     return (long) (Math.floor(diff / 1000) * 1000);
   }
 
-  //сегодня 00:00 в мс
+  // сегодня 00:00 в мс
   public Double date() {
     long nowTime = getMsLocalTime();
     return (nowTime + diffTz()) * 1.0;
@@ -134,7 +136,7 @@ public class TimeGeneral {
     return finishValue;
   }
 
-  //для определения ближайшего занятия, в зависимости от того, сколько сейчас времени
+  // для определения ближайшего занятия, в зависимости от того, сколько сейчас времени
   public String getPeriod(long time) {
     int index = (int) (time / 1800000);
     int minutes = 0;
@@ -145,5 +147,4 @@ public class TimeGeneral {
     }
     return String.format("%02d:%02d - $02d:%02d", hours, minutes, hours + 2, minutes);
   }
-
 }

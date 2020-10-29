@@ -22,28 +22,40 @@ public class TestTypeformInProcess extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("InProcess", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "InProcess",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("InProcess", "removedAt");
 
-    app.trTest().saveResultTestInProcess("InProcess", "21", "InProcess", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "");
+    app.trTest()
+        .saveResultTestInProcess(
+            "InProcess", "21", "InProcess", "Тест", "111111", skills, "ru", 5, 5, createAt, "");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTypeformInProcess() throws InterruptedException {
     app.test().goToStudentProfileTabTests("21");
 
-    //есть лейбл В процессе
+    // есть лейбл В процессе
     Thread.sleep(3000);
     assertThat(app.test().isElementPresent(By.xpath("//span[@class='in-process']")), equalTo(true));
-    //есть кнопка Удалить и она не задизейблена
-    assertThat(app.test().buttonAtributAvailable(By.xpath("//button[@id-qa='delete-test']")),
+    // есть кнопка Удалить и она не задизейблена
+    assertThat(
+        app.test().elementAtributAvailable(By.xpath("//button[@id-qa='delete-test']")),
         equalTo(null));
-    //что можно скопировать ссылку (копируется весь текст)
+    // что можно скопировать ссылку (копируется весь текст)
     // app.test().checkHrefInProfileStudent(By.xpath("//div[@id-qa='copy-url']//input"));
   }
 

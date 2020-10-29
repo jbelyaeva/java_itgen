@@ -58,10 +58,11 @@
       <class name="io.itgen.tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests"/>
       <class name="io.itgen.tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests"/>
       <class name="io.itgen.tests.requests.RequestOnTrial2hScratchTests"/>
+      <class name="io.itgen.tests.payment.PaymentByAdmin"/>
       <class name="io.itgen.tests.payment.IncreaseBalanceByAdmin"/>
       <class name="io.itgen.tests.payment.DecreaseBalanceByAdmin"/>
-      <class name="io.itgen.tests.materials.CreateMaterial" />
-      <class name="io.itgen.tests.materials.CreateMaterialBad" />
+      <class name="io.itgen.tests.materials.CreateMaterial"/>
+      <class name="io.itgen.tests.materials.CreateMaterialBad"/>
       <class name="io.itgen.tests.materials.MaterialAddNewBranch"/>
       <class name="io.itgen.tests.materials.MaterialTakeForReview"/>
       <class name="io.itgen.tests.materials.MaterialDelete"/>
@@ -77,8 +78,8 @@
       <class name="io.itgen.tests.task.TaskAutoGetControlInStack"/>
       <class name="io.itgen.tests.task.TaskManualOnTomorrowInStack"/>
       <class name="io.itgen.tests.task.TaskManualGetControlInStack"/>
-      <class name="io.itgen.tests.task.TaskFiltrByUserInStack"/>
-     <!-- <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/> -->
+      <class name="io.itgen.tests.task.TaskFiltrByUserInStack"/> <!--нет CI-->
+      <class name="io.itgen.tests.task.TaskFiltrByPriorityInStack"/>
       <class name="io.itgen.tests.taskPopup.TaskManualChangeTitle"/>
       <class name="io.itgen.tests.taskPopup.TaskManualChangeAssignee"/>
       <class name="io.itgen.tests.taskPopup.TaskManualChangePriority"/>

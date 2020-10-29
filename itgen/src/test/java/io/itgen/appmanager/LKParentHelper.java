@@ -20,7 +20,7 @@ public class LKParentHelper extends HelperBase {
 
   public void btnRecordOnTrail() {
     if (isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) {
-      refresh();//для докера
+      refresh(); // для докера
     }
     clickWithMoveToElementAndWait(5, By.xpath("(//button[contains(@id-qa,'trial')])[2]"));
     noErrorMessage();
@@ -108,7 +108,7 @@ public class LKParentHelper extends HelperBase {
       click(By.xpath("//input[@id-qa='pcLevel']/.."));
       String pcLevel = "//li[@data-value='" + studentData.getPclevel() + "']";
       wait.until(this.expectVisible(pcLevel));
-      click(By.xpath(pcLevel));
+      clickWithMoveToElementAndWait(3, By.xpath(pcLevel));
     }
   }
 
@@ -133,7 +133,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   private void btnNextBad() {
-    click(By.className("button-next"));
+    clickWithMoveToElementAndWait(2, By.className("button-next"));
     thereAreErrorMessages();
   }
 
@@ -150,20 +150,20 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void skipHelper() {
-    if (isElementPresent(By.xpath("//button[@title='Skip']"))) {
-      clickWithMoveToElementAndWait(5, By.xpath("//button[@title='Skip']"));
-    }
+    trySearchElementTwoTimesAndClickWithWaiteAndMove(5, By.xpath("//button[@title='Skip']"));
   }
 
   private void btnTomorrowForRegular() {
-    // находим активный элемент и берем следующий сестринский вниз по дереву
-    String locator = "//div[@class='picker-item selected']/following-sibling::div";
-    if (isElementPresent(By.xpath(locator))) {
-      click(By.xpath(locator));
-    } else {
-      click(By.xpath("//div[@class='picker-item selected']"));
+    if (!checkMatchTZServerUTC()) {
+      // находим активный элемент и берем следующий сестринский вниз по дереву
+      String locator = "//div[@class='picker-item selected']/following-sibling::div";
+      if (isElementPresent(By.xpath(locator))) {
+        click(By.xpath(locator));
+      } else {
+        click(By.xpath("//div[@class='picker-item selected']"));
+      }
+      noErrorMessage();
     }
-    noErrorMessage();
   }
 
   public void recordOnSingle() {
@@ -179,7 +179,9 @@ public class LKParentHelper extends HelperBase {
 
   private void btnTomorrowForSingle() {
     // находим активный элемент и берем следующий сестринский вниз по дереву
-    click(By.xpath("//div[@class='picker-item selected']/following-sibling::div"));
+    if (checkMatchTZServerUTC()) {
+      click(By.xpath("//div[@class='picker-item selected']/following-sibling::div"));
+    }
   }
 
   public void GoToFiltrRecordSingle() {

@@ -26,7 +26,6 @@ public class TestTypeformCreate extends TestBase {
 
   private final TestService testService = new TestService();
 
-
   @DataProvider
   public Iterator<Object[]> validTestsFromJson() throws IOException {
     try (BufferedReader reader =
@@ -39,16 +38,15 @@ public class TestTypeformCreate extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
-      }.getType());
-      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {}.getType());
+      return tests.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validTestsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testTestTypeformCreate(TestData test) throws InterruptedException {
     Thread.sleep(5000);
-    app.test().waiteVisibleElement(5, By.xpath("//h2"));
+    app.test().waitVisibleElement(5, By.xpath("//h2"));
     app.goTo().urlTests();
     Tests before = app.dbtest().tests();
     app.test().createTest(test);

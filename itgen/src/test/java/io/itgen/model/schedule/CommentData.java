@@ -4,9 +4,7 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity("comments")
@@ -57,11 +55,9 @@ public class CommentData {
   @Property("topics")
   private String topics;
 
-  @Embedded
-  private Grades grades;
+  @Embedded private Grades grades;
 
-  public CommentData() {
-  }
+  public CommentData() {}
 
   public CommentData withId(String id) {
     this.id = id;
@@ -216,49 +212,89 @@ public class CommentData {
       return false;
     }
     CommentData that = (CommentData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(owner, that.owner) &&
-        Objects.equals(target, that.target) &&
-        Objects.equals(s, that.s) &&
-        Objects.equals(w, that.w) &&
-        Objects.equals(sTime, that.sTime) &&
-        Objects.equals(eTime, that.eTime) &&
-        Objects.equals(skillId, that.skillId) &&
-        Objects.equals(text, that.text) &&
-        Objects.equals(done, that.done) &&
-        Objects.equals(hw, that.hw) &&
-        Objects.equals(textForParents, that.textForParents) &&
-        Objects.equals(finished, that.finished) &&
-        Objects.equals(topics, that.topics) &&
-        Objects.equals(grades, that.grades);
+    return Objects.equals(id, that.id)
+        && Objects.equals(owner, that.owner)
+        && Objects.equals(target, that.target)
+        && Objects.equals(s, that.s)
+        && Objects.equals(w, that.w)
+        && Objects.equals(sTime, that.sTime)
+        && Objects.equals(eTime, that.eTime)
+        && Objects.equals(skillId, that.skillId)
+        && Objects.equals(text, that.text)
+        && Objects.equals(done, that.done)
+        && Objects.equals(hw, that.hw)
+        && Objects.equals(textForParents, that.textForParents)
+        && Objects.equals(finished, that.finished)
+        && Objects.equals(topics, that.topics)
+        && Objects.equals(grades, that.grades);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, owner, target, s, w, sTime, eTime, skillId, text, done, hw, textForParents,
-            finished, topics, grades);
+    return Objects.hash(
+        id,
+        owner,
+        target,
+        s,
+        w,
+        sTime,
+        eTime,
+        skillId,
+        text,
+        done,
+        hw,
+        textForParents,
+        finished,
+        topics,
+        grades);
   }
 
   @Override
   public String toString() {
-    return "CommentData{" +
-        "id='" + id + '\'' +
-        ", owner='" + owner + '\'' +
-        ", target='" + target + '\'' +
-        ", s='" + s + '\'' +
-        ", w=" + w +
-        ", sTime=" + sTime +
-        ", eTime=" + eTime +
-        ", skillId='" + skillId + '\'' +
-        ", createAt=" + createAt +
-        ", text='" + text + '\'' +
-        ", done='" + done + '\'' +
-        ", hw='" + hw + '\'' +
-        ", textForParents='" + textForParents + '\'' +
-        ", finished='" + finished + '\'' +
-        ", topics='" + topics + '\'' +
-        ", grades=" + grades +
-        '}';
+    return "CommentData{"
+        + "id='"
+        + id
+        + '\''
+        + ", owner='"
+        + owner
+        + '\''
+        + ", target='"
+        + target
+        + '\''
+        + ", s='"
+        + s
+        + '\''
+        + ", w="
+        + w
+        + ", sTime="
+        + sTime
+        + ", eTime="
+        + eTime
+        + ", skillId='"
+        + skillId
+        + '\''
+        + ", createAt="
+        + createAt
+        + ", text='"
+        + text
+        + '\''
+        + ", done='"
+        + done
+        + '\''
+        + ", hw='"
+        + hw
+        + '\''
+        + ", textForParents='"
+        + textForParents
+        + '\''
+        + ", finished='"
+        + finished
+        + '\''
+        + ", topics='"
+        + topics
+        + '\''
+        + ", grades="
+        + grades
+        + '}';
   }
 }

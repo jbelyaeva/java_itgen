@@ -1,8 +1,6 @@
 package io.itgen.model.schedule;
 
 import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Property;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,16 +8,13 @@ import java.util.Objects;
 public class FinishedSlots {
   private Double w;
   private String id;
-  @Embedded
-  private ST st;
-  @Embedded
-  private List<C> c = new ArrayList<C>();
+  @Embedded private ST st;
+  @Embedded private List<C> c = new ArrayList<C>();
 
   private Double startedAt;
   private Double finishedAt;
 
-  public FinishedSlots() {
-  }
+  public FinishedSlots() {}
 
   public FinishedSlots withW(Double w) {
     this.w = w;
@@ -41,16 +36,15 @@ public class FinishedSlots {
     return this;
   }
 
-  public FinishedSlots withStartedAt (Double startedAt) {
+  public FinishedSlots withStartedAt(Double startedAt) {
     this.startedAt = startedAt;
     return this;
   }
 
-  public FinishedSlots withFinishedAt (Double finishedAt) {
+  public FinishedSlots withFinishedAt(Double finishedAt) {
     this.finishedAt = finishedAt;
     return this;
   }
-
 
   public Double getW() {
     return w;
@@ -81,10 +75,10 @@ public class FinishedSlots {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     FinishedSlots slots = (FinishedSlots) o;
-    return Objects.equals(w, slots.w) &&
-            Objects.equals(id, slots.id) &&
-            Objects.equals(st, slots.st) &&
-            Objects.equals(c, slots.c);
+    return Objects.equals(w, slots.w)
+        && Objects.equals(id, slots.id)
+        && Objects.equals(st, slots.st)
+        && Objects.equals(c, slots.c);
   }
 
   @Override
@@ -94,11 +88,6 @@ public class FinishedSlots {
 
   @Override
   public String toString() {
-    return "Slots{" +
-            "w=" + w +
-            ", id='" + id + '\'' +
-            ", st=" + st +
-            ", c=" + c +
-            '}';
+    return "Slots{" + "w=" + w + ", id='" + id + '\'' + ", st=" + st + ", c=" + c + '}';
   }
 }

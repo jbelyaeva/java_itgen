@@ -22,15 +22,26 @@ public class TestTypeformDeleteInProfileAfterPassing extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("Pass", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "Pass",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("Pass", "removedAt");
 
-    app.trTest().saveResultTest("TestPass", "21", "Pass", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "", true);
+    app.trTest()
+        .saveResultTest(
+            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createAt, "", true);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -38,18 +49,20 @@ public class TestTypeformDeleteInProfileAfterPassing extends TestBase {
     app.test().goToStudentProfileTabTests("21");
     app.test().deleteTestInProfile();
 
-    //проверить, что нет значка Pass
-    assertThat(app.base().isElementPresent(By.xpath("//div[@class='success-icon']")),
-        equalTo(false));
+    // проверить, что нет значка Pass
+    assertThat(
+        app.base().isElementPresent(By.xpath("//div[@class='success-icon']")), equalTo(false));
 
-    //проверки, что кнопка удалить изменилась на Выдать
-    assertThat(app.base().wd.findElement(By.xpath("//div[@class='title']//span")).getText(),
+    // проверки, что кнопка удалить изменилась на Выдать
+    assertThat(
+        app.base().wd.findElement(By.xpath("//div[@class='title']//span")).getText(),
         equalTo("Тест"));
-    assertThat(app.base().isElementPresent(By.xpath("//button[@id-qa='delete-test']")),
-        equalTo(false));
+    assertThat(
+        app.base().isElementPresent(By.xpath("//button[@id-qa='delete-test']")), equalTo(false));
 
-    //проверка, что кнопка Выдать есть и она не задизейблена
-    assertThat(app.test().buttonAtributAvailable(By.xpath("//button[@id-qa='give-test']")),
+    // проверка, что кнопка Выдать есть и она не задизейблена
+    assertThat(
+        app.test().elementAtributAvailable(By.xpath("//button[@id-qa='give-test']")),
         equalTo(null));
   }
 

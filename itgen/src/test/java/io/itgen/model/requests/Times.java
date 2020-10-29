@@ -4,8 +4,7 @@ public class Times {
   public Double min;
   public Double max;
 
-  public Times() {
-  }
+  public Times() {}
 
   public Times withMin(Double min) {
     this.min = min;
@@ -27,9 +26,6 @@ public class Times {
 
   @Override
   public String toString() {
-    return "Times{" +
-            "min=" + min +
-            ", max=" + max +
-            '}';
+    return "Times{" + "min=" + min + ", max=" + max + '}';
   }
 }

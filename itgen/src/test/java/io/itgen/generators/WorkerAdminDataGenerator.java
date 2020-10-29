@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.WorkerData;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class WorkerAdminDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<WorkerData> workers = generateWorkers(count);
     if (format.equals("json")) {
@@ -48,11 +47,12 @@ public class WorkerAdminDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<WorkerData> workers, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(workers);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
@@ -60,10 +60,12 @@ public class WorkerAdminDataGenerator extends TestBase {
   private List<WorkerData> generateWorkers(int count) {
     List<WorkerData> workers = new ArrayList<WorkerData>();
     for (int i = 0; i < count; i++) {
-      workers.add(new WorkerData()
+      workers.add(
+          new WorkerData()
               .withFirstName(String.format("Алеша-%s", i))
               .withLastName(String.format("Зайцев-%s", i))
-              .withEmailUI(String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
+              .withEmailUI(
+                  String.format("eee+" + Math.round(Math.random() * 1000) + "@gmail.com", i))
               .withPhone(String.format("89032566987", i))
               .withRoleUi("Администратор"));
     }

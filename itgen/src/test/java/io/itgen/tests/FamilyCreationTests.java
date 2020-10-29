@@ -31,7 +31,8 @@ public class FamilyCreationTests extends TestBase {
   @DataProvider
   public Iterator<Object[]> validFamiliesFromJson() throws IOException {
     try (BufferedReader reader =
-                 new BufferedReader(new FileReader(new File("src/test/resources/testdata/families_creation.json")))) {
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/families_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -39,15 +40,15 @@ public class FamilyCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<FamilyDataUI> families = gson.fromJson(json, new TypeToken<List<FamilyDataUI>>() {
-      }.getType());
-      return families.stream().map((f) -> new Object[]{f}).collect(Collectors.toList()).iterator();
+      List<FamilyDataUI> families =
+          gson.fromJson(json, new TypeToken<List<FamilyDataUI>>() {}.getType());
+      return families.stream().map((f) -> new Object[] {f}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validFamiliesFromJson")
   public void testFamilyCreation(FamilyDataUI family) {
-    app.base().waiteVisibleElement(5, By.xpath("//h2"));
+    app.base().waitVisibleElement(5, By.xpath("//h2"));
     app.goTo().urlStudents();
     Families before = app.db().families();
     app.family().create(family);
@@ -63,7 +64,10 @@ public class FamilyCreationTests extends TestBase {
   public void cleanFamily() {
     FamilyService familyService = new FamilyService();
     familyService.DeleteById(idFamily);
-    Students students = app.db().familyComposition(idFamily); //в данном случае в список Students попадут ученики и родители
+    Students students =
+        app.db()
+            .familyComposition(
+                idFamily); // в данном случае в список Students попадут ученики и родители
     StudentService studentService = new StudentService();
     TaskService taskService = new TaskService();
     for (StudentData studentClean : students) {
@@ -71,5 +75,4 @@ public class FamilyCreationTests extends TestBase {
       taskService.DeleteById(studentClean);
     }
   }
-
 }

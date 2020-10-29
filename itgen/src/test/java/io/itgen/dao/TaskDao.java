@@ -5,6 +5,7 @@ import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
 import io.itgen.model.LeadData;
 import io.itgen.model.materials.MaterialData;
+import io.itgen.model.skills.SkillsData;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.StudentData;
 
@@ -26,10 +27,12 @@ public class TaskDao {
 
   public TaskData findByIdAndDeleteTask(StudentData student) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkUser", student.getId());
+    Query<TaskData> query =
+        datastore.createQuery(TaskData.class).filter("linkUser", student.getId());
     TaskData task = datastore.findAndDelete(query);
     return task;
   }
+
   public TaskData findByIdAndDeleteTask(LeadData lead) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkLead", lead.getId());
@@ -37,7 +40,7 @@ public class TaskDao {
     return task;
   }
 
-  public void drop () {
+  public void drop() {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class);
     datastore.delete(query);
@@ -54,5 +57,11 @@ public class TaskDao {
     UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).unset(name);
     datastore.update(query, (UpdateOperations<TaskData>) ops);
   }
-}
 
+  public void updateField(String idTask, String nameFiled, String data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("id", idTask);
+    UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).set(nameFiled, data);
+    datastore.update(query, (UpdateOperations<TaskData>) ops);
+  }
+}

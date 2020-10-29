@@ -7,8 +7,7 @@ public class Lesson {
   public Double w;
   public Double st;
 
-  public Lesson() {
-  }
+  public Lesson() {}
 
   public Lesson withSId(String sId) {
     this.sId = sId;
@@ -27,11 +26,7 @@ public class Lesson {
 
   @Override
   public String toString() {
-    return "Lesson{" +
-            "sId=" + sId +
-            ", w=" + w +
-            ", st=" + st +
-            '}';
+    return "Lesson{" + "sId=" + sId + ", w=" + w + ", st=" + st + '}';
   }
 
   @Override
@@ -39,9 +34,9 @@ public class Lesson {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Lesson lesson = (Lesson) o;
-    return Objects.equals(sId, lesson.sId) &&
-            Objects.equals(w, lesson.w) &&
-            Objects.equals(st, lesson.st);
+    return Objects.equals(sId, lesson.sId)
+        && Objects.equals(w, lesson.w)
+        && Objects.equals(st, lesson.st);
   }
 
   @Override

@@ -1,7 +1,9 @@
 package io.itgen.appmanager;
 
 import io.itgen.appmanager.dbHelpers.DbHelper;
+import io.itgen.appmanager.dbHelpers.DbHelperBase;
 import io.itgen.appmanager.dbHelpers.DbHelperCandidaies;
+import io.itgen.appmanager.dbHelpers.DbHelperChat;
 import io.itgen.appmanager.dbHelpers.DbHelperMaterials;
 import io.itgen.appmanager.dbHelpers.DbHelperRequest;
 import io.itgen.appmanager.dbHelpers.DbHelperSchedule;
@@ -9,6 +11,7 @@ import io.itgen.appmanager.dbHelpers.DbHelperStudents;
 import io.itgen.appmanager.dbHelpers.DbHelperTasks;
 import io.itgen.appmanager.dbHelpers.DbHelperTest;
 import io.itgen.appmanager.transactionHelper.TrCandidateHelper;
+import io.itgen.appmanager.transactionHelper.TrChatHelper;
 import io.itgen.appmanager.transactionHelper.TrFamilyHelper;
 import io.itgen.appmanager.transactionHelper.TrLeadHelper;
 import io.itgen.appmanager.transactionHelper.TrMaterialHelper;
@@ -17,6 +20,7 @@ import io.itgen.appmanager.transactionHelper.TrPaymentHelper;
 import io.itgen.appmanager.transactionHelper.TrStudentHelper;
 import io.itgen.appmanager.transactionHelper.TrTaskHelper;
 import io.itgen.appmanager.transactionHelper.TrTestHelper;
+import io.itgen.appmanager.transactionHelper.TrWorkerHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
 import io.itgen.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
@@ -56,9 +60,11 @@ public class ApplicationManager {
   private ScheduleHelper scheduleHelper;
   private SessionHelper sessionHelper;
   private TestHelper testHelper;
+  private ChatHelper chatHelper;
   private NavigationHelper navigationHelper;
-  private String browser;
+  private final String browser;
   private DbHelper dbHelper;
+  private DbHelperBase dbHelperBase;
   private SShotHelper sShotHelper;
   private DbHelperStudents dbHelperStudents;
   private DbHelperSchedule dbHelperSchedule;
@@ -66,6 +72,7 @@ public class ApplicationManager {
   private DbHelperMaterials dbHelperMaterials;
   private DbHelperTasks dbHelperTasks;
   private DbHelperTest dbHelperTest;
+  private DbHelperChat dbHelperChat;
   private DbHelperCandidaies dbHelperCandidaies;
   private WindowScheduleHelper windowScheduleHelper;
   private RequestHelper requestHelper;
@@ -85,7 +92,10 @@ public class ApplicationManager {
   private TrMaterialHelper transactionMaterialHelper;
   private TrTaskHelper transactionTaskHelper;
   private TrTestHelper transactionTestHelper;
+  private TrChatHelper transactionChatHelper;
   private TrCandidateHelper transactionCandidateHelper;
+  private TrWorkerHelper transactionWorkerHelper;
+
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -97,12 +107,14 @@ public class ApplicationManager {
     properties.load(
         new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
     dbHelper = new DbHelper();
+    dbHelperBase = new DbHelperBase();
     dbHelperStudents = new DbHelperStudents();
     dbHelperSchedule = new DbHelperSchedule();
     dbHelperRequest = new DbHelperRequest();
     dbHelperMaterials = new DbHelperMaterials();
     dbHelperTasks = new DbHelperTasks();
     dbHelperTest = new DbHelperTest();
+    dbHelperChat = new DbHelperChat();
     dbHelperCandidaies = new DbHelperCandidaies();
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
@@ -115,7 +127,9 @@ public class ApplicationManager {
     transactionMaterialHelper = new TrMaterialHelper();
     transactionTaskHelper = new TrTaskHelper();
     transactionTestHelper = new TrTestHelper();
+    transactionChatHelper = new TrChatHelper();
     transactionCandidateHelper = new TrCandidateHelper();
+    transactionWorkerHelper = new TrWorkerHelper();
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
         wd = new FirefoxDriver();
@@ -127,7 +141,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setVersion("85");
+      capabilities.setVersion("86");
       capabilities.setCapability("enableVNC", true);
       capabilities.setCapability("enableVideo", true);
       capabilities.setCapability("videoName", System.getProperty("videoName", "selenoid.mp4"));
@@ -155,18 +169,18 @@ public class ApplicationManager {
     materialHelper = new MaterialHelper(wd);
     taskHelper = new TaskHelper(wd);
     testHelper = new TestHelper(wd);
+    chatHelper = new ChatHelper(wd);
     candidateHelper = new CandidateHelper(wd);
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
-    Path requiredMainDir =
-        Paths.get(properties.getProperty("testsScreenshot"));
+    Path requiredMainDir = Paths.get(properties.getProperty("testsScreenshot"));
     if (!Files.exists(requiredMainDir)) Files.createDirectory(requiredMainDir);
 
     Path[] requiredDirs = {
-        Paths.get(properties.getProperty("actual")),
-        Paths.get(properties.getProperty("expected")),
-        Paths.get(properties.getProperty("markedImages"))
+      Paths.get(properties.getProperty("actual")),
+      Paths.get(properties.getProperty("expected")),
+      Paths.get(properties.getProperty("markedImages"))
     };
     for (Path dir : requiredDirs) {
       if (Files.exists(dir)) {
@@ -190,6 +204,10 @@ public class ApplicationManager {
 
   public DbHelper db() {
     return dbHelper;
+  }
+
+  public DbHelperBase dbbase() {
+    return dbHelperBase;
   }
 
   public SessionHelper session() {
@@ -218,6 +236,10 @@ public class ApplicationManager {
 
   public DbHelperTest dbtest() {
     return dbHelperTest;
+  }
+
+  public DbHelperChat dbchat() {
+    return dbHelperChat;
   }
 
   public DbHelperCandidaies dbcandidates() {
@@ -284,6 +306,10 @@ public class ApplicationManager {
     return testHelper;
   }
 
+  public ChatHelper chat() {
+    return chatHelper;
+  }
+
   public CandidateHelper cantidate() {
     return candidateHelper;
   }
@@ -332,12 +358,19 @@ public class ApplicationManager {
     return transactionTestHelper;
   }
 
+  public TrChatHelper trChat() {
+    return transactionChatHelper;
+  }
+
   public TrCandidateHelper trCandidate() {
     return transactionCandidateHelper;
+  }
+
+  public TrWorkerHelper trWorker() {
+    return transactionWorkerHelper;
   }
 
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
-
 }

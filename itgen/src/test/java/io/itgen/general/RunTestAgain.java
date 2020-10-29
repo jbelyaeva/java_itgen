@@ -7,7 +7,7 @@ import org.testng.ITestResult;
 public class RunTestAgain extends TestBase implements IRetryAnalyzer {
 
   private int nowCount = 0;
-  private int maxCount = 1;
+  private final int maxCount = 1;
 
   @Override
   public boolean retry(ITestResult iTestResult) {

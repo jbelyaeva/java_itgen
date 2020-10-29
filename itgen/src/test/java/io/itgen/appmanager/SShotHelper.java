@@ -32,7 +32,12 @@ public class SShotHelper extends HelperBase {
   }
 
   public ImageDiff getImageDiff(
-      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor, float dpr)
+      String expected,
+      String actual,
+      String markedImages,
+      String name,
+      Set<By> locatorIgnor,
+      float dpr)
       throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
@@ -70,7 +75,12 @@ public class SShotHelper extends HelperBase {
   }
 
   public ImageDiff getImageDiffWithoutScroll(
-      String expected, String actual, String markedImages, String name, Set<By> locatorIgnor, float dpr)
+      String expected,
+      String actual,
+      String markedImages,
+      String name,
+      Set<By> locatorIgnor,
+      float dpr)
       throws AWTException, IOException {
     Robot bot = new Robot();
     bot.mouseMove(0, 0);
@@ -138,14 +148,4 @@ public class SShotHelper extends HelperBase {
     }
   }
 
-  public void deleteElements(String[] deleteElements) {
-    if (deleteElements != null) {
-      for (int i = 0; i <= deleteElements.length - 1; i++) {
-        List<WebElement> elementsList = wd.findElements(By.xpath(deleteElements[i]));
-        for (WebElement element : elementsList) {
-          ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", element);
-        }
-      }
-    }
-  }
 }

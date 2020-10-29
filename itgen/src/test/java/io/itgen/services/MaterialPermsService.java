@@ -7,8 +7,7 @@ public class MaterialPermsService {
 
   private final MaterialPermsDao materialPermsDao = new MaterialPermsDao();
 
-  public MaterialPermsService() {
-  }
+  public MaterialPermsService() {}
 
   public void save(MaterialPermsData materialPerms) {
     materialPermsDao.save(materialPerms);

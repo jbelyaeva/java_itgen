@@ -1,7 +1,9 @@
 package io.itgen.model.requests;
 
-import dev.morphia.annotations.*;
-
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
 import io.itgen.model.general.Activity;
 import io.itgen.model.general.Comments;
 import java.util.ArrayList;
@@ -48,12 +50,11 @@ public class RequestData {
   @Embedded("times")
   private List<Times> times = new ArrayList<Times>();
 
-  //getters and setters
-
+  // getters and setters
 
   public RequestData withId(String id) {
     this.id = id;
-    return  this;
+    return this;
   }
 
   public RequestData withCreator(String creator) {
@@ -161,20 +162,37 @@ public class RequestData {
 
   @Override
   public String toString() {
-    return "RequestsData{" +
-            "id='" + id + '\'' +
-            ", creator='" + creator + '\'' +
-            ", creatorAt=" + creatorAt +
-            ", status='" + status + '\'' +
-            ", childId='" + childId + '\'' +
-            ", comments=" + comments +
-            ", activity=" + activity +
-            ", skill='" + skill + '\'' +
-            ", duration=" + duration +
-            ", permanent=" + permanent +
-            ", trial=" + trial +
-            ", times=" + times +
-            '}';
+    return "RequestsData{"
+        + "id='"
+        + id
+        + '\''
+        + ", creator='"
+        + creator
+        + '\''
+        + ", creatorAt="
+        + creatorAt
+        + ", status='"
+        + status
+        + '\''
+        + ", childId='"
+        + childId
+        + '\''
+        + ", comments="
+        + comments
+        + ", activity="
+        + activity
+        + ", skill='"
+        + skill
+        + '\''
+        + ", duration="
+        + duration
+        + ", permanent="
+        + permanent
+        + ", trial="
+        + trial
+        + ", times="
+        + times
+        + '}';
   }
 
   @Override
@@ -182,14 +200,14 @@ public class RequestData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     RequestData that = (RequestData) o;
-    return duration == that.duration &&
-            Objects.equals(id, that.id) &&
-            Objects.equals(creator, that.creator) &&
-            Objects.equals(status, that.status) &&
-            Objects.equals(childId, that.childId) &&
-            Objects.equals(skill, that.skill) &&
-            Objects.equals(permanent, that.permanent) &&
-            Objects.equals(trial, that.trial);
+    return duration == that.duration
+        && Objects.equals(id, that.id)
+        && Objects.equals(creator, that.creator)
+        && Objects.equals(status, that.status)
+        && Objects.equals(childId, that.childId)
+        && Objects.equals(skill, that.skill)
+        && Objects.equals(permanent, that.permanent)
+        && Objects.equals(trial, that.trial);
   }
 
   @Override

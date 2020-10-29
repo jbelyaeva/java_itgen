@@ -1,11 +1,9 @@
 package io.itgen.model.users;
 
 import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Property;
 
 public class Password {
-  @Embedded
-  public Reset reset;
+  @Embedded public Reset reset;
 
   public Password() {}
 
@@ -20,8 +18,6 @@ public class Password {
 
   @Override
   public String toString() {
-    return "Password{" +
-        "reset=" + reset +
-        '}';
+    return "Password{" + "reset=" + reset + '}';
   }
 }

@@ -1,18 +1,16 @@
 package io.itgen.tests;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.itgen.services.TrainerService;
-import io.itgen.services.WorkerService;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
 import io.itgen.model.TrainerData;
 import io.itgen.model.Trainers;
 import io.itgen.model.WorkerData;
 import io.itgen.model.Workers;
-
+import io.itgen.services.TrainerService;
+import io.itgen.services.WorkerService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,9 +18,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class WorkerAndTrainerCreationTests extends TestBase {
   String idWorker = "null";
@@ -30,7 +29,9 @@ public class WorkerAndTrainerCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -38,15 +39,18 @@ public class WorkerAndTrainerCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>() {
-      }.getType()); // List<WorkerData>.class
-      return workers.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
+      List<WorkerData> workers =
+          gson.fromJson(
+              json, new TypeToken<List<WorkerData>>() {}.getType()); // List<WorkerData>.class
+      return workers.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }
   }
 
   @DataProvider
   public Iterator<Object[]> validWorkersAdminsFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_admins_creation.json")))) {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/workers_admins_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -54,15 +58,19 @@ public class WorkerAndTrainerCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<WorkerData> workers = gson.fromJson(json, new TypeToken<List<WorkerData>>() {
-      }.getType()); // List<WorkerData>.class
-      return workers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
+      List<WorkerData> workers =
+          gson.fromJson(
+              json, new TypeToken<List<WorkerData>>() {}.getType()); // List<WorkerData>.class
+      return workers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 
   @DataProvider
   public Iterator<Object[]> validWorkersTrainersFromJson() throws IOException {
-    try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/testdata/workers_trainers_creation.json")))) {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/workers_trainers_creation.json")))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -70,14 +78,15 @@ public class WorkerAndTrainerCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TrainerData> trainers = gson.fromJson(json, new TypeToken<List<TrainerData>>() {
-      }.getType()); // List<TrainerData>.class
-      return trainers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
+      List<TrainerData> trainers =
+          gson.fromJson(
+              json, new TypeToken<List<TrainerData>>() {}.getType()); // List<TrainerData>.class
+      return trainers.stream().map((w) -> new Object[] {w}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validWorkersFromJson")
-  public void testWorkerCreation(WorkerData worker){
+  public void testWorkerCreation(WorkerData worker) {
     app.goTo().menuTrainers();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
@@ -91,7 +100,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
   }
 
   @Test(dataProvider = "validWorkersAdminsFromJson", enabled = false)
-  public void testWorkerAdminCreation(WorkerData worker){
+  public void testWorkerAdminCreation(WorkerData worker) {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     int before = app.worker().getWorkerCount();

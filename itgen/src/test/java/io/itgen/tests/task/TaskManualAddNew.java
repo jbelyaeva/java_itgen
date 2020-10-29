@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -42,18 +43,12 @@ public class TaskManualAddNew extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TaskData> tasks =
-          gson.fromJson(json, new TypeToken<List<TaskData>>() {
-          }.getType());
-      return tasks.stream()
-          .map((s) -> new Object[]{s})
-          .collect(Collectors.toList())
-          .iterator();
+      List<TaskData> tasks = gson.fromJson(json, new TypeToken<List<TaskData>>() {}.getType());
+      return tasks.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
     }
   }
 
-
-  @Test(dataProvider = "validTaskFromJson")
+  @Test(dataProvider = "validTaskFromJson", retryAnalyzer = RunTestAgain.class)
   public void testAddNewTask(TaskData task) {
     app.goTo().menuTrainers();
     app.goTo().menuTasks();

@@ -7,76 +7,42 @@ public class FamilyDataUI {
   private String familyId;
 
   // атрибуты ученика
-  @Expose
-  private String firstnameStudent;
-  @Expose
-  private String lastnameStudent;
-  @Expose
-  private Integer genderStudent;
-  @Expose
-  private String birthdayUiStudent;
-  @Expose
-  private String pclevelStudent;
-  @Expose
-  private String countryStudent;
-  @Expose
-  private String cityStudent;
-  @Expose
-  private String timezoneStudent;
-  @Expose
-  private String phoneStudent;
-  @Expose
-  private String telegramStudent;
-  @Expose
-  private String viberStudent;
-  @Expose
-  private String c2dStudent;
-  @Expose
-  private String skypeStudent;
-  @Expose
-  private String whatsappStudent;
-  @Expose
-  private String fbStudent;
-  @Expose
-  private String vkStudent;
-  @Expose
-  private String okStudent;
-  @Expose
-  private String instStudent;
+  @Expose private String firstnameStudent;
+  @Expose private String lastnameStudent;
+  @Expose private Integer genderStudent;
+  @Expose private String birthdayUiStudent;
+  @Expose private String pclevelStudent;
+  @Expose private String countryStudent;
+  @Expose private String cityStudent;
+  @Expose private String timezoneStudent;
+  @Expose private String phoneStudent;
+  @Expose private String telegramStudent;
+  @Expose private String viberStudent;
+  @Expose private String c2dStudent;
+  @Expose private String skypeStudent;
+  @Expose private String whatsappStudent;
+  @Expose private String fbStudent;
+  @Expose private String vkStudent;
+  @Expose private String okStudent;
+  @Expose private String instStudent;
 
   // атрибуты родителя
-  @Expose
-  private String firstnameParent;
-  @Expose
-  private String lastnameParent;
-  @Expose
-  private String countryParent;
-  @Expose
-  private String cityParent;
-  @Expose
-  private String timezoneParent;
-  @Expose
-  private String phoneParent;
-  @Expose
-  private String emailParent;
-  @Expose
-  private String telegramParent;
-  @Expose
-  private String viberParent;
-  @Expose
-  private String c2dParent;
-  @Expose
-  private String skypeParent;
-  @Expose
-  private String whatsappParent;
-  @Expose
-  private String fbParent;
-  @Expose
-  private String vkParent;
-  @Expose
-  private String okParent;
-  @Expose
-  private String instParent;
+  @Expose private String firstnameParent;
+  @Expose private String lastnameParent;
+  @Expose private String countryParent;
+  @Expose private String cityParent;
+  @Expose private String timezoneParent;
+  @Expose private String phoneParent;
+  @Expose private String emailParent;
+  @Expose private String telegramParent;
+  @Expose private String viberParent;
+  @Expose private String c2dParent;
+  @Expose private String skypeParent;
+  @Expose private String whatsappParent;
+  @Expose private String fbParent;
+  @Expose private String vkParent;
+  @Expose private String okParent;
+  @Expose private String instParent;
 
   /* setters */
 
@@ -407,6 +373,5 @@ public class FamilyDataUI {
   }
 
   /* toString(), hashCode() & equals() */
-
 
 }

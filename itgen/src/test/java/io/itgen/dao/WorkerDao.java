@@ -27,4 +27,3 @@ public class WorkerDao {
     return datastore.find(WorkerData.class).field("id").equal(id).first();
   }
 }
-

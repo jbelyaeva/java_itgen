@@ -44,8 +44,7 @@ public class MaterialBranchData {
       return false;
     }
     MaterialBranchData that = (MaterialBranchData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(branches, that.branches);
+    return Objects.equals(id, that.id) && Objects.equals(branches, that.branches);
   }
 
   @Override
@@ -55,9 +54,6 @@ public class MaterialBranchData {
 
   @Override
   public String toString() {
-    return "MaterialBranchData{" +
-        "id='" + id + '\'' +
-        ", branches=" + branches +
-        '}';
+    return "MaterialBranchData{" + "id='" + id + '\'' + ", branches=" + branches + '}';
   }
 }

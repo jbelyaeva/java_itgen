@@ -22,15 +22,37 @@ public class TestTypeformNotPass extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("NotPass", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "NotPass",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("NotPass", "removedAt");
 
-    app.trTest().saveResultTest("TestNotPass", "21", "NotPass", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "", false);
+    app.trTest()
+        .saveResultTest(
+            "TestNotPass",
+            "21",
+            "NotPass",
+            "Тест",
+            "111111",
+            skills,
+            "ru",
+            5,
+            5,
+            createAt,
+            "",
+            false);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -38,16 +60,16 @@ public class TestTypeformNotPass extends TestBase {
     app.test().goToStudentProfileTabTests("21");
 
     Thread.sleep(5000);
-    //проверить, что нет значка Pass
-    assertThat(app.base().isElementPresent(By.xpath("//div[@class='success-icon']")),
-        equalTo(false));
-    //проверить, что результат красный
-    app.base().waiteVisibleElement(2, By.xpath("//span[@class='score failed']"));
-    //есть кнопки Удалить нет
-    assertThat(app.base().isElementPresent(By.xpath("//button[@id-qa='delete-test']")),
-        equalTo(false));
-    //проверить, что есть ссылка Посмотреть ответы и она кликабельна
-    app.base().waiteVisibleElement(2, By.xpath("//a[@class='answers']"));
+    // проверить, что нет значка Pass
+    assertThat(
+        app.base().isElementPresent(By.xpath("//div[@class='success-icon']")), equalTo(false));
+    // проверить, что результат красный
+    app.base().waitVisibleElement(2, By.xpath("//span[@class='score failed']"));
+    // есть кнопки Удалить нет
+    assertThat(
+        app.base().isElementPresent(By.xpath("//button[@id-qa='delete-test']")), equalTo(false));
+    // проверить, что есть ссылка Посмотреть ответы и она кликабельна
+    app.base().waitVisibleElement(2, By.xpath("//a[@class='answers']"));
     app.test().checkHrefResults();
   }
 

@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Services {
-  @Embedded
-  private Password password;
+  @Embedded private Password password;
   private String bcrypt;
-  @Embedded
-  private List<LoginTokens> loginTokens = new ArrayList<LoginTokens>();
+  @Embedded private List<LoginTokens> loginTokens = new ArrayList<LoginTokens>();
 
   public Services() {}
 

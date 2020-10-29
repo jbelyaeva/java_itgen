@@ -6,8 +6,7 @@ public class Beginner {
   private int age;
   private String state;
 
-  public Beginner() {
-  }
+  public Beginner() {}
 
   public Beginner withAge(int age) {
     this.age = age;
@@ -36,8 +35,7 @@ public class Beginner {
       return false;
     }
     Beginner beginner = (Beginner) o;
-    return age == beginner.age &&
-        state == beginner.state;
+    return age == beginner.age && state == beginner.state;
   }
 
   @Override
@@ -47,9 +45,6 @@ public class Beginner {
 
   @Override
   public String toString() {
-    return "Beginner{" +
-        "age=" + age +
-        ", state=" + state +
-        '}';
+    return "Beginner{" + "age=" + age + ", state=" + state + '}';
   }
 }

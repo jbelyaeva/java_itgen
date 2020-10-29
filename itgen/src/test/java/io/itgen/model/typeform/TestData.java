@@ -34,7 +34,7 @@ public class TestData {
 
   @Property("skillIds")
   @Expose
-  private List<String> skillIds= new ArrayList<String>();
+  private List<String> skillIds = new ArrayList<String>();
 
   @Expose
   @Property("minScore")
@@ -181,21 +181,40 @@ public class TestData {
 
   @Override
   public String toString() {
-    return "TestData{" +
-        "id='" + id + '\'' +
-        ", title='" + title + '\'' +
-        ", rootFormId='" + rootFormId + '\'' +
-        ", language='" + language + '\'' +
-        ", description='" + description + '\'' +
-        ", skillIds=" + skillIds +
-        ", minScore=" + minScore +
-        ", maxScore=" + maxScore +
-        ", timeForPassing=" + timeForPassing +
-        ", createdAt=" + createdAt +
-        ", entityTestId='" + entityTestId + '\'' +
-        ", updatedAt=" + updatedAt +
-        ", removedAt=" + removedAt +
-        '}';
+    return "TestData{"
+        + "id='"
+        + id
+        + '\''
+        + ", title='"
+        + title
+        + '\''
+        + ", rootFormId='"
+        + rootFormId
+        + '\''
+        + ", language='"
+        + language
+        + '\''
+        + ", description='"
+        + description
+        + '\''
+        + ", skillIds="
+        + skillIds
+        + ", minScore="
+        + minScore
+        + ", maxScore="
+        + maxScore
+        + ", timeForPassing="
+        + timeForPassing
+        + ", createdAt="
+        + createdAt
+        + ", entityTestId='"
+        + entityTestId
+        + '\''
+        + ", updatedAt="
+        + updatedAt
+        + ", removedAt="
+        + removedAt
+        + '}';
   }
 
   @Override
@@ -207,20 +226,20 @@ public class TestData {
       return false;
     }
     TestData testData = (TestData) o;
-    return minScore == testData.minScore &&
-        maxScore == testData.maxScore &&
-        timeForPassing == testData.timeForPassing &&
-        Objects.equals(id, testData.id) &&
-        Objects.equals(title, testData.title) &&
-        Objects.equals(rootFormId, testData.rootFormId) &&
-        Objects.equals(language, testData.language) &&
-        Objects.equals(description, testData.description) &&
-        Objects.equals(skillIds, testData.skillIds);
+    return minScore == testData.minScore
+        && maxScore == testData.maxScore
+        && timeForPassing == testData.timeForPassing
+        && Objects.equals(id, testData.id)
+        && Objects.equals(title, testData.title)
+        && Objects.equals(rootFormId, testData.rootFormId)
+        && Objects.equals(language, testData.language)
+        && Objects.equals(description, testData.description)
+        && Objects.equals(skillIds, testData.skillIds);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, title, rootFormId, language, description, skillIds, minScore, maxScore,
-        timeForPassing);
+    return Objects.hash(
+        id, title, rootFormId, language, description, skillIds, minScore, maxScore, timeForPassing);
   }
 }

@@ -3,6 +3,7 @@ package io.itgen.tests.lkParent;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.schedule.ScheduleData;
 import io.itgen.model.schedule.Schedules;
 import io.itgen.model.tasks.TaskData;
@@ -31,7 +32,7 @@ public class RecordOnTrail extends TestBase {
         .StudentAddDefaultFamily("LKOnTrail", "expert", "BL", "Europe/Minsk", 2, "ru", "ru");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnTrail() throws InterruptedException {
     Schedules before = app.dbschedules().schedules();
     app.lkParent().RecordOnTrail();

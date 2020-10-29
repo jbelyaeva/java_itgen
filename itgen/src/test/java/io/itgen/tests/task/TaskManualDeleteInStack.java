@@ -3,6 +3,7 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
@@ -31,7 +32,7 @@ public class TaskManualDeleteInStack extends TestBase {
             "21");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskManualDeleteInStack() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();

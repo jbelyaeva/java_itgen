@@ -7,8 +7,7 @@ public class PaymentService {
 
   private final PaymentDao paymentDao = new PaymentDao();
 
-  public PaymentService() {
-  }
+  public PaymentService() {}
 
   public PaymentData DeleteById(String id) {
     return paymentDao.findByIdAndDelete(id);

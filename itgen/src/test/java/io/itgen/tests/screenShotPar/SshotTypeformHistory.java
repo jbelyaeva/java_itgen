@@ -28,24 +28,57 @@ public class SshotTypeformHistory extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("Pass", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "Pass",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("Pass", "removedAt");
 
-    app.trTest().saveResultTest("TestPass", "21", "Pass", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "", true);
+    app.trTest()
+        .saveResultTest(
+            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createAt, "", true);
 
-    app.trTest().saveTest("NotPass", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5, 5, 10, skills, createAt,
-        null);
+    app.trTest()
+        .saveTest(
+            "NotPass",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     testService.deleteField("NotPass", "removedAt");
 
-    app.trTest().saveResultTest("TestNotPass", "21", "NotPass", "Тест",
-        "111111", skills, "ru", 5, 5, createAt, "", false);
+    app.trTest()
+        .saveResultTest(
+            "TestNotPass",
+            "21",
+            "NotPass",
+            "Тест",
+            "111111",
+            skills,
+            "ru",
+            5,
+            5,
+            createAt,
+            "",
+            false);
   }
 
   @Test
@@ -55,8 +88,9 @@ public class SshotTypeformHistory extends TestBase {
     String name = "Parent_TypeformHistory_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
 
-    String[] deleteElements = {"//div[@class='history-month-header']","//div[@class='date']",
-        "//span[@class='time']"};
+    String[] deleteElements = {
+      "//div[@class='history-month-header']", "//div[@class='date']", "//span[@class='time']"
+    };
 
     app.sshot().deleteElements(deleteElements);
 

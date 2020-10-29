@@ -1,6 +1,5 @@
 package io.itgen.tests.taskPopup;
 
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 

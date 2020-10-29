@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Tests extends ForwardingSet<TestData> {
-  private Set<TestData> delegate;
+  private final Set<TestData> delegate;
 
   public Tests(Tests tests) {
     this.delegate = new HashSet<TestData>(tests.delegate);
   }
 
-  public Tests() { //конструктор без параметров
+  public Tests() { // конструктор без параметров
     this.delegate = new HashSet<TestData>();
   }
 

@@ -19,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
-
 public class SshotMaterialTabInProcess extends TestBase {
   MaterialBranchData materialBranchClean = null;
   MaterialBranchService materialBranchService = new MaterialBranchService();
@@ -64,7 +63,8 @@ public class SshotMaterialTabInProcess extends TestBase {
                 properties.getProperty("actual"),
                 properties.getProperty("markedImages"),
                 name,
-                locatorIgnor, 1.25f);
+                locatorIgnor,
+                1.25f);
     Assert.assertEquals(diff.getDiffSize(), 0);
     app.goTo().menuTasks();
   }

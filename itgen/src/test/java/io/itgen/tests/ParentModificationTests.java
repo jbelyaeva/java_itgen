@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.FamilyData;
 import io.itgen.model.ParentData;
 import io.itgen.model.Parents;
@@ -93,7 +94,7 @@ public class ParentModificationTests extends TestBase {
     parentService.save(parent);
   }
 
-  @Test(dataProvider = "validParentsFromJson")
+  @Test(dataProvider = "validParentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testParentModification(ParentData parent) {
     app.goTo().menuTasks();
     app.goTo().menuStudents();

@@ -28,7 +28,6 @@ public class SshotPopupTasks extends TestBase {
   private final String[] clients = null;
   private final String[] commentaries = null;
 
-
   @BeforeMethod
   public void ensurePreconditions() {
     app.trTask()

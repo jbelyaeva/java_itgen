@@ -28,14 +28,24 @@ public class TestTypeformAddNewEnglishTest extends TestBase {
   private final TestService testService = new TestService();
   private final Date createAt = new Date();
   TestData testClean = null;
-  private  String[] skills = null;
+  private String[] skills = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest().saveTest("addEnglishTest", "Тест", "111111", "ru",
-        "Test на переход на новое направление", 5,
-        5, 10,skills, createAt, null);
+    skills = new String[] {"1"};
+    app.trTest()
+        .saveTest(
+            "addEnglishTest",
+            "Тест",
+            "111111",
+            "ru",
+            "Test на переход на новое направление",
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
   }
 
   @DataProvider
@@ -50,9 +60,8 @@ public class TestTypeformAddNewEnglishTest extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
-      }.getType());
-      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {}.getType());
+      return tests.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -61,17 +70,26 @@ public class TestTypeformAddNewEnglishTest extends TestBase {
     app.goTo().urlTests();
     Tests before = app.dbtest().tests();
     app.test().addEnglishTest(test);
-    Tests after = app.dbtest().waitAndGetNewDataFromBD(before);
+    Tests after = app.dbtest().trySeveralTimeGetNewDateFromDB(before);
     testClean = app.dbtest().lastTest();
     assertThat(after.size(), equalTo(before.size() + 1));
     check(after, test);
   }
 
-  private void check (Tests after, TestData test) {
+  private void check(Tests after, TestData test) {
     app.trTest()
         .saveTest(
-            testClean.getId(), test.getTitle(), test.getRootFormId(), "en",
-            test.getDescription(), 5, 5, 10, skills, createAt,null);
+            testClean.getId(),
+            test.getTitle(),
+            test.getRootFormId(),
+            "en",
+            test.getDescription(),
+            5,
+            5,
+            10,
+            skills,
+            createAt,
+            null);
 
     TestData testAdd = testService.findById(testClean.getId());
 

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class WindowScheduleHelper extends HelperBase{
+public class WindowScheduleHelper extends HelperBase {
   public WindowScheduleHelper(WebDriver wd) {
     super(wd);
   }
@@ -25,7 +25,7 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectLesson(String id) {
-   click(By.xpath("//div[@data-trainer-id='"+id+"']"));
+    click(By.xpath("//div[@data-trainer-id='" + id + "']"));
   }
 
   private void selectRegular() {
@@ -45,14 +45,13 @@ public class WindowScheduleHelper extends HelperBase{
       type(By.id("child-name"), name);
       click(By.xpath("//span[contains(@class,'result')]"));
     }
-
   }
 
-  public void waitVisibleSchedule(String idTrainer){
-    WebDriverWait wait = new WebDriverWait(wd,10);
-    wait
-        .until(ExpectedConditions.visibilityOf(wd.
-            findElement(By.xpath("//div[@data-trainer-id='"+idTrainer+"']"))));
+  public void waitVisibleSchedule(String idTrainer) {
+    WebDriverWait wait = new WebDriverWait(wd, 10);
+    wait.until(
+        ExpectedConditions.visibilityOf(
+            wd.findElement(By.xpath("//div[@data-trainer-id='" + idTrainer + "']"))));
   }
 
   public void recordStudentOnRegularFirst1h(String name, String id) throws InterruptedException {
@@ -67,11 +66,12 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectLesson1h(String id) {
-    click(By.xpath("//div[@data-trainer-id='"+id+"' and contains (@data-lesson-duration, '1')]"));
+    click(
+        By.xpath("//div[@data-trainer-id='" + id + "' and contains (@data-lesson-duration, '1')]"));
   }
 
   private void selectDuration() {
-   click(By.xpath("//select[@id='create-schedule-duration']//option[@value='4']"));
+    click(By.xpath("//select[@id='create-schedule-duration']//option[@value='4']"));
   }
 
   public void recordStudentOnRegularSecond1h(String name, String id) throws InterruptedException {
@@ -87,7 +87,8 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectLesson2h(String id) {
-    click(By.xpath("//div[@data-trainer-id='"+id+"' and contains (@data-lesson-duration, '2')]"));
+    click(
+        By.xpath("//div[@data-trainer-id='" + id + "' and contains (@data-lesson-duration, '2')]"));
   }
 
   public void recordStudentOn2hSingle(String name, String id) {
@@ -101,7 +102,7 @@ public class WindowScheduleHelper extends HelperBase{
   }
 
   private void selectSingle() {
-      clickWithMoveToElementAndWait(5,By.xpath("//button[contains(@class,'onetime')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'onetime')]"));
   }
 
   public void recordStudentOnSingleFirst1h(String name, String id) throws InterruptedException {

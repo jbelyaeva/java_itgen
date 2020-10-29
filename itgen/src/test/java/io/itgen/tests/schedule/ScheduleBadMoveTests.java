@@ -1,6 +1,7 @@
 package io.itgen.tests.schedule;
-//автотест проверяет подвижку разового расписания
+// автотест проверяет подвижку разового расписания
 
+import io.itgen.general.RunTestAgain;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,22 +31,25 @@ public class ScheduleBadMoveTests extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("scheduleSingleMove")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                    .withId("14")
-                    .withW(time.date())
-                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                    .withC(list)))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1").withOneTime(true);
+            .withSkypeId("1")
+            .withOneTime(true);
     scheduleService.save(schedule);
-
   }
 
-  @Test // нельзя подвинуть на время в прошлом
+  @Test(retryAnalyzer = RunTestAgain.class) // нельзя подвинуть на время в прошлом
   public void testBadTimeScheduleSingleMove() {
     app.goTo().menuSchedule();
     before = app.dbschedules().schedules();
@@ -55,7 +59,7 @@ public class ScheduleBadMoveTests extends TestBase {
     app.goTo().menuTasks();
   }
 
-  @Test (alwaysRun = true)
+  @Test(alwaysRun = true)
   // нельзя подвинуть не поменяв дату и время
   public void testNoChangeDateTimeScheduleSingleMove() {
     app.goTo().menuSchedule();
@@ -64,7 +68,6 @@ public class ScheduleBadMoveTests extends TestBase {
     after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     app.goTo().menuTasks();
-
   }
 
   @AfterMethod(alwaysRun = true)
@@ -72,5 +75,4 @@ public class ScheduleBadMoveTests extends TestBase {
     ScheduleService scheduleService = new ScheduleService();
     scheduleService.DeleteById("scheduleSingleMove");
   }
-
 }

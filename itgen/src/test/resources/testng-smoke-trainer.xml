@@ -12,6 +12,11 @@
       <class name="io.itgen.tests.lkTrainer.TrainerCreateMaterial"/>
       <class name="io.itgen.tests.lkTrainer.TrainerMakeReview"/>
       <class name="io.itgen.tests.lkTrainer.TrainerTakeForReview"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerNewMessageInChatOnLesson"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerChatWithAdminByDefoltTest"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerChatSearchDialogWithEmployeersTest"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerChatSearchDialogWithNewFamilyTest"/>
+      <class name="io.itgen.tests.lkTrainer.TrainerChatSearchDialogWithOldFamilyTest"/>
     </classes>
   </test>
 </suite>

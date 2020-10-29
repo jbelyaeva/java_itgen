@@ -10,8 +10,7 @@ public class Grades {
   public Integer wasInattentive;
   public Integer hasDesireToLearn;
 
-  public Grades() {
-  }
+  public Grades() {}
 
   public Grades withCompleteHw(Integer completeHw) {
     this.completeHw = completeHw;
@@ -76,29 +75,40 @@ public class Grades {
       return false;
     }
     Grades grades = (Grades) o;
-    return Objects.equals(completeHw, grades.completeHw) &&
-        Objects.equals(learnedNewTopic, grades.learnedNewTopic) &&
-        Objects.equals(completeTasks, grades.completeTasks) &&
-        Objects.equals(madeNoMistakes, grades.madeNoMistakes) &&
-        Objects.equals(wasInattentive, grades.wasInattentive) &&
-        Objects.equals(hasDesireToLearn, grades.hasDesireToLearn);
+    return Objects.equals(completeHw, grades.completeHw)
+        && Objects.equals(learnedNewTopic, grades.learnedNewTopic)
+        && Objects.equals(completeTasks, grades.completeTasks)
+        && Objects.equals(madeNoMistakes, grades.madeNoMistakes)
+        && Objects.equals(wasInattentive, grades.wasInattentive)
+        && Objects.equals(hasDesireToLearn, grades.hasDesireToLearn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(completeHw, learnedNewTopic, completeTasks, madeNoMistakes, wasInattentive,
+    return Objects.hash(
+        completeHw,
+        learnedNewTopic,
+        completeTasks,
+        madeNoMistakes,
+        wasInattentive,
         hasDesireToLearn);
   }
 
   @Override
   public String toString() {
-    return "Grades{" +
-        "completeHw=" + completeHw +
-        ", learnedNewTopic=" + learnedNewTopic +
-        ", completeTasks=" + completeTasks +
-        ", madeNoMistakes=" + madeNoMistakes +
-        ", wasInattentive=" + wasInattentive +
-        ", hasDesireToLearn=" + hasDesireToLearn +
-        '}';
+    return "Grades{"
+        + "completeHw="
+        + completeHw
+        + ", learnedNewTopic="
+        + learnedNewTopic
+        + ", completeTasks="
+        + completeTasks
+        + ", madeNoMistakes="
+        + madeNoMistakes
+        + ", wasInattentive="
+        + wasInattentive
+        + ", hasDesireToLearn="
+        + hasDesireToLearn
+        + '}';
   }
 }

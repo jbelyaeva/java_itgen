@@ -6,8 +6,7 @@ public class LoginTokens {
   private Date when;
   private String hashedToken;
 
-  public LoginTokens() {
-  }
+  public LoginTokens() {}
 
   public Date getWhen() {
     return when;
@@ -27,9 +26,6 @@ public class LoginTokens {
 
   @Override
   public String toString() {
-    return "LoginTokens{" +
-            "when=" + when +
-            ", hashedToken='" + hashedToken + '\'' +
-            '}';
+    return "LoginTokens{" + "when=" + when + ", hashedToken='" + hashedToken + '\'' + '}';
   }
 }

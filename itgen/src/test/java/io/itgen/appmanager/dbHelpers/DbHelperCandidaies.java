@@ -6,8 +6,6 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import io.itgen.model.CandidateData;
 import io.itgen.model.Candidates;
-import io.itgen.model.typeform.TestData;
-import io.itgen.model.typeform.Tests;
 import java.util.List;
 
 public class DbHelperCandidaies {
@@ -28,4 +26,15 @@ public class DbHelperCandidaies {
     return lastCandidate;
   }
 
+  public Candidates trySeveralTimeGetNewDateFromDB(Candidates before) {
+    List<CandidateData> candidates = null;
+    for (int i = 0; i < 5; i++) {
+      Query<CandidateData> q = datastore.createQuery(CandidateData.class);
+      candidates = q.find().toList();
+      if (candidates.size() == before.size() + 1) {
+        break;
+      }
+    }
+    return new Candidates(candidates);
+  }
 }

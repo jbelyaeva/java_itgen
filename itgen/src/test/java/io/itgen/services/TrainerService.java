@@ -1,15 +1,13 @@
 package io.itgen.services;
 
 import io.itgen.dao.TrainerDao;
-import io.itgen.model.ParentData;
 import io.itgen.model.TrainerData;
 
 public class TrainerService {
 
   private final TrainerDao trainerDao = new TrainerDao();
 
-  public TrainerService() {
-  }
+  public TrainerService() {}
 
   public TrainerData DeleteById(String id) {
     return trainerDao.findByIdAndDelete(id);
@@ -22,5 +20,4 @@ public class TrainerService {
   public TrainerData findById(String id) {
     return trainerDao.findById(id);
   }
-
 }

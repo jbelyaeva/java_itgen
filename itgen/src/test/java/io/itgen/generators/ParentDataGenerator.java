@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.ParentData;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class ParentDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<ParentData> parents = generateParents(count);
     if (format.equals("json")) {
@@ -48,25 +47,26 @@ public class ParentDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<ParentData> parents, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(parents);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
 
   /**
-   * Инструкция:
-   * генератор настроен на создание данных для тестов на модификацию.
-   * при генерации данных для тестов на создание необходимо установить значение по умолчанию для следующих полей:
+   * Инструкция: генератор настроен на создание данных для тестов на модификацию. при генерации
+   * данных для тестов на создание необходимо установить значение по умолчанию для следующих полей:
    * country, city, timeZone, note -- null
-   * */
+   */
   private List<ParentData> generateParents(int count) {
     List<ParentData> parents = new ArrayList<ParentData>();
     for (int i = 0; i < count; i++) {
-      parents.add(new ParentData()
+      parents.add(
+          new ParentData()
               .withFirstName(String.format("Витя-%s", i))
               .withLastName(String.format("Васильев-%s", i))
               .withCountry(String.format("RU", i))

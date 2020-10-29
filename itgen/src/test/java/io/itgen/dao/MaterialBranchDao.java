@@ -17,7 +17,8 @@ public class MaterialBranchDao {
 
   public MaterialBranchData findByIdAndDelete(String id) {
     Datastore datastore = MFSessionFactory.morphiaSessionFactoryUtil();
-    Query<MaterialBranchData> query = datastore.createQuery(MaterialBranchData.class).filter("id", id);
+    Query<MaterialBranchData> query =
+        datastore.createQuery(MaterialBranchData.class).filter("id", id);
     MaterialBranchData materialBranch = datastore.findAndDelete(query);
     return materialBranch;
   }
@@ -33,4 +34,3 @@ public class MaterialBranchDao {
     datastore.delete(query);
   }
 }
-

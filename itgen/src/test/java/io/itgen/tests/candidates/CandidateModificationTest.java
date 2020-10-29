@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.CandidateData;
 import io.itgen.model.Candidates;
 import io.itgen.services.CandidateService;
@@ -38,9 +39,11 @@ public class CandidateModificationTest extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<CandidateData> candidates = gson.fromJson(json, new TypeToken<List<CandidateData>>() {
-      }.getType());
-      return candidates.stream().map((p) -> new Object[]{p}).collect(Collectors.toList())
+      List<CandidateData> candidates =
+          gson.fromJson(json, new TypeToken<List<CandidateData>>() {}.getType());
+      return candidates.stream()
+          .map((p) -> new Object[] {p})
+          .collect(Collectors.toList())
           .iterator();
     }
   }
@@ -86,16 +89,17 @@ public class CandidateModificationTest extends TestBase {
             "mother");
   }
 
-  @Test(dataProvider = "validCandidatesFromJson")
+  @Test(dataProvider = "validCandidatesFromJson", retryAnalyzer = RunTestAgain.class)
   public void testCandidateMofidication(CandidateData candidate) throws InterruptedException {
     app.goTo().urlCandidates();
     Candidates before = app.dbcandidates().candidates();
     app.cantidate().modify("CandidateModify", candidate);
-    Thread.sleep(500);//необходимо, чтоб кандидат прописался в бд
+    Thread.sleep(500); // необходимо, чтоб кандидат прописался в бд
     Candidates after = app.dbcandidates().candidates();
     candidateClean = app.dbcandidates().lastCandidate();
     assertThat(after.size(), equalTo(before.size()));
     check(after, candidateClean.getId(), candidate, candidateClean.getVacancyId());
+    app.goTo().menuCandidates();
   }
 
   private void check(Candidates after, String id, CandidateData candidate, String vacancy) {

@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Skills extends ForwardingSet<SkillsData> {
-  private Set<SkillsData> delegate;
+  private final Set<SkillsData> delegate;
 
   public Skills(Skills skills) {
     this.delegate = new HashSet<SkillsData>(skills.delegate);
   }
 
-  public Skills() { //конструктор без параметров
+  public Skills() { // конструктор без параметров
     this.delegate = new HashSet<SkillsData>();
   }
 

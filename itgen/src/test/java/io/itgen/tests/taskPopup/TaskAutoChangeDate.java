@@ -18,9 +18,9 @@ public class TaskAutoChangeDate extends TestBase {
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
   private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime() + 86400000; //на завтра
+  private final long duoDateSort = new Date().getTime() + 86400000; // на завтра
   private final Date duoDateWithTime = new Date(duoDateSort);
-  private  Date[] dates = null;
+  private Date[] dates = null;
   private final String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
@@ -50,7 +50,7 @@ public class TaskAutoChangeDate extends TestBase {
   public void testTaskAutoChangeDate() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
-    app.task().changeDateAutoTaskInPopup();// на завтра
+    app.task().changeDateAutoTaskInPopup(); // на завтра
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
@@ -59,8 +59,8 @@ public class TaskAutoChangeDate extends TestBase {
   }
 
   private void check(Tasks after) {
-    //автозадача перешла опять в стек (нет исполнителя и статус опять open)
-    dates= new Date[]{createAt, duoDateWithTime};
+    // автозадача перешла опять в стек (нет исполнителя и статус опять open)
+    dates = new Date[] {createAt, duoDateWithTime};
     app.trTask()
         .saveAutoTask(
             "AutoTaskChangeAssignee",

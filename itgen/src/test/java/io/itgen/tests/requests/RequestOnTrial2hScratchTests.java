@@ -1,5 +1,6 @@
 package io.itgen.tests.requests;
-//предполагается, что бд тестовая и нет расписаний на дефолтное время, следовательно можно оставить заявку
+// предполагается, что бд тестовая и нет расписаний на дефолтное время, следовательно можно оставить
+// заявку
 
 import io.itgen.model.*;
 import io.itgen.model.general.Activity;
@@ -37,20 +38,31 @@ public class RequestOnTrial2hScratchTests extends TestBase {
   public void ensurePreconditions() {
 
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("makeRequest").withTrialBonusOff(false).withTierId("txa");
+    FamilyData family =
+        new FamilyData().withId("makeRequest").withTrialBonusOff(false).withTierId("txa");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("makeRequest").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("makeRequest")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child", "donator"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("makeRequest").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("makeRequest")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("noTrial"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
-
   }
 
   @Test
@@ -78,23 +90,28 @@ public class RequestOnTrial2hScratchTests extends TestBase {
     }
     RequestService requestService = new RequestService();
     requestService.DeleteById(idNewRequest);
-
   }
 
   private void check(Requests before, Requests after) {
-    RequestData requestAdd = new RequestData()
+    RequestData requestAdd =
+        new RequestData()
             .withId(idNewRequest)
-            .withCreator("666") //суперадмин создал заявку (может быть привязаться к тому, кто залогинен)
+            .withCreator(
+                "666") // суперадмин создал заявку (может быть привязаться к тому, кто залогинен)
             .withCreatorAt(new Date())
             .withStatus("open")
             .withChildId("makeRequest")
             .withComments(listcomment)
-            .withActivity(Arrays.asList(new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))
+            .withActivity(
+                Arrays.asList(
+                    new Activity().withUId("666").withTs(new Date()).withT("requestCreated")))
             .withSkill("1")
             .withDuration(2)
             .withPermanent(false)
             .withTrial(false)
-            .withTimes(Arrays.asList(new Times().withMin(1592110800000.0).withMax(1592157600000.0),
+            .withTimes(
+                Arrays.asList(
+                    new Times().withMin(1592110800000.0).withMax(1592157600000.0),
                     new Times().withMin(1592197200000.0).withMax(1592244000000.0),
                     new Times().withMin(1592283600000.0).withMax(1592330400000.0)));
 
@@ -104,8 +121,5 @@ public class RequestOnTrial2hScratchTests extends TestBase {
         return;
       }
     }
-
   }
-
 }
-

@@ -31,14 +31,20 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private long alreadyRun = 7200000; //2 часа идет занятие
+  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday().StartSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru");
 
     app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
@@ -72,7 +78,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
     Comments commentsAfter = app.dbschedules().comments();
 
     assertThat(after.size(), equalTo(before.size()));
-    assertThat(finishChildAfter.size(), equalTo(finishChildBefore.size()+1));
+    assertThat(finishChildAfter.size(), equalTo(finishChildBefore.size() + 1));
     assertThat(finishAfter.size(), equalTo(finishBefore.size() + 1));
     assertThat(commentsAfter.size(), equalTo(commentsBefore.size() + 1));
     check(after);
@@ -91,9 +97,16 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
 
   private void check(Schedules after) {
     scheduleService.DeleteById("finishLessonByTrainer");
-    app.trScheduleToday().FinishedSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru", "finished");
+    app.trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru",
+            "finished");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

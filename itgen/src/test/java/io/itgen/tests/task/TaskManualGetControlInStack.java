@@ -3,6 +3,7 @@ package io.itgen.tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.tasks.TaskData;
 import io.itgen.model.tasks.Tasks;
 import io.itgen.services.TaskService;
@@ -40,7 +41,7 @@ public class TaskManualGetControlInStack extends TestBase {
             "21");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskManualGetControlInStack() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
@@ -53,7 +54,7 @@ public class TaskManualGetControlInStack extends TestBase {
   }
 
   private void check(Tasks after) {
-    dates = new Date[]{createAt, duoDateWithTime};
+    dates = new Date[] {createAt, duoDateWithTime};
     app.trTask()
         .saveManualTask(
             "OnControlTaskInStack",

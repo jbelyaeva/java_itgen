@@ -24,7 +24,8 @@ public class SshotPayByAdminShop extends TestBase {
             ApplicationManager.properties.getProperty("actual"),
             ApplicationManager.properties.getProperty("markedImages"),
             name,
-            locatorIgnor,1.25f);
+            locatorIgnor,
+            1.25f);
   }
 
   @Test

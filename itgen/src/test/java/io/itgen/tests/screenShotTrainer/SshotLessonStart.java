@@ -28,8 +28,9 @@ public class SshotLessonStart extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow());
-    app.trScheduleToday().SingleScheduleWithOneStudentOnTrail(period, "startLessonByTrainer",
-        "23", "startLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .SingleScheduleWithOneStudentOnTrail(
+            period, "startLessonByTrainer", "23", "startLessonByTrainer", "1", "ru");
 
     app.trFamily().newFamily("startLessonByTrainer", false, "txc");
 
@@ -58,9 +59,10 @@ public class SshotLessonStart extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     String[] deleteElements = {
-        "(//div[@class='text-capitalize'])[2]",
-        "//div[@class='text-muted']",
-        "//div[@class='duration']"};
+      "(//div[@class='text-capitalize'])[2]",
+      "//div[@class='text-muted']",
+      "//div[@class='duration']"
+    };
 
     app.sshot().deleteElements(deleteElements);
 

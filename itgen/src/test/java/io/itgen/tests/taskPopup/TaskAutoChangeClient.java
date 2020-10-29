@@ -36,16 +36,7 @@ public class TaskAutoChangeClient extends TestBase {
 
     app.trStudent()
         .newStudent(
-            "Student",
-            "Маша",
-            "Машина",
-            "expert",
-            "AL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "Student");
+            "Student", "Маша", "Машина", "expert", "AL", "Europe/Minsk", 2, "ru", "ru", "Student");
 
     app.trTask()
         .saveAutoTask(
@@ -71,7 +62,6 @@ public class TaskAutoChangeClient extends TestBase {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
     app.task().changeClientAutoTaskInPopup("Машина Маша");
-    ;
     Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
@@ -80,7 +70,7 @@ public class TaskAutoChangeClient extends TestBase {
   }
 
   private void check(Tasks after) {
-    clients = new String[]{"21"};
+    clients = new String[] {"21"};
     app.trTask()
         .saveAutoTask(
             "AutoTaskChangeClient",

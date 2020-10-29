@@ -41,8 +41,7 @@ public class FinishedLessonData {
   @Property("finishedAt")
   private Double fibishedAt;
 
-  public FinishedLessonData() {
-  }
+  public FinishedLessonData() {}
 
   public FinishedLessonData withId(String id) {
     this.id = id;
@@ -143,38 +142,50 @@ public class FinishedLessonData {
       return false;
     }
     FinishedLessonData that = (FinishedLessonData) o;
-    return type == that.type &&
-        Objects.equals(id, that.id) &&
-        Objects.equals(scheduleId, that.scheduleId) &&
-        Objects.equals(week, that.week) &&
-        Objects.equals(trainerId, that.trainerId) &&
-        Objects.equals(startTime, that.startTime) &&
-        Objects.equals(endTime, that.endTime) &&
-        Objects.equals(childs, that.childs) &&
-        Objects.equals(startedAt, that.startedAt) &&
-        Objects.equals(fibishedAt, that.fibishedAt);
+    return type == that.type
+        && Objects.equals(id, that.id)
+        && Objects.equals(scheduleId, that.scheduleId)
+        && Objects.equals(week, that.week)
+        && Objects.equals(trainerId, that.trainerId)
+        && Objects.equals(startTime, that.startTime)
+        && Objects.equals(endTime, that.endTime)
+        && Objects.equals(childs, that.childs)
+        && Objects.equals(startedAt, that.startedAt)
+        && Objects.equals(fibishedAt, that.fibishedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, scheduleId, week, trainerId, startTime, endTime, type, childs, startedAt,
-            fibishedAt);
+    return Objects.hash(
+        id, scheduleId, week, trainerId, startTime, endTime, type, childs, startedAt, fibishedAt);
   }
 
   @Override
   public String toString() {
-    return "FinishedChildLessonData{" +
-        "id='" + id + '\'' +
-        ", scheduleId='" + scheduleId + '\'' +
-        ", week=" + week +
-        ", trainerId='" + trainerId + '\'' +
-        ", startTime=" + startTime +
-        ", endTime=" + endTime +
-        ", type=" + type +
-        ", childs=" + childs +
-        ", startedAt=" + startedAt +
-        ", fibishedAt=" + fibishedAt +
-        '}';
+    return "FinishedChildLessonData{"
+        + "id='"
+        + id
+        + '\''
+        + ", scheduleId='"
+        + scheduleId
+        + '\''
+        + ", week="
+        + week
+        + ", trainerId='"
+        + trainerId
+        + '\''
+        + ", startTime="
+        + startTime
+        + ", endTime="
+        + endTime
+        + ", type="
+        + type
+        + ", childs="
+        + childs
+        + ", startedAt="
+        + startedAt
+        + ", fibishedAt="
+        + fibishedAt
+        + '}';
   }
 }

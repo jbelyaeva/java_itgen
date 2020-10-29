@@ -33,4 +33,3 @@ public class MaterialDao {
     datastore.delete(query);
   }
 }
-

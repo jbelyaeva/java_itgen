@@ -1,7 +1,9 @@
 package io.itgen.tests.schedule;
-//удаление ученика с постоянного двухчасового занятия
-// Есть регулярное расписание на сегодня с 21-23. На него записан ученик на 2 ч платник. Отменить первое занятие
+// удаление ученика с постоянного двухчасового занятия
+// Есть регулярное расписание на сегодня с 21-23. На него записан ученик на 2 ч платник. Отменить
+// первое занятие
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.general.TimeGeneral;
 import io.itgen.model.*;
 import io.itgen.model.schedule.C;
@@ -40,61 +42,153 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
   public void ensurePreconditions() {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
-    ScheduleData schedule = new ScheduleData()
+    ScheduleData schedule =
+        new ScheduleData()
             .withId("removeStudentFromLesson")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                            .withId("14")
-                            .withW(time.date())
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3)))
-                            .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week)
-                            .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 2)
-                            .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 3)
-                            .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 4)
-                            .withSt(new ST().withS(time.Stime(period) + week * 4).withE(time.Etime(period) + week * 4))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 5)
-                            .withSt(new ST().withS(time.Stime(period) + week * 5).withE(time.Etime(period) + week * 5))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3)))))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3)))
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week)
+                                .withE(time.Etime(period) + week))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 2)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 2)
+                                .withE(time.Etime(period) + week * 2))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 3)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 3)
+                                .withE(time.Etime(period) + week * 3))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 4)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 4)
+                                .withE(time.Etime(period) + week * 4))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 5)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 5)
+                                .withE(time.Etime(period) + week * 5))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
-    FamilyData family = new FamilyData().withId("removeStudentFromLesson").withTrialBonusOff(false).withTierId("txb");
+    FamilyData family =
+        new FamilyData()
+            .withId("removeStudentFromLesson")
+            .withTrialBonusOff(false)
+            .withTierId("txb");
     familyService.save(family);
 
     StudentService studentService = new StudentService();
-    StudentData student = new StudentData().withId("removeStudentFromLesson").withFirstName("Маша").withLastName("Машина")
+    StudentData student =
+        new StudentData()
+            .withId("removeStudentFromLesson")
+            .withFirstName("Маша")
+            .withLastName("Машина")
             .withRoles(Arrays.asList("child"))
-            .withPclevel("expert").withCountry("AL").withTimeZone("Europe/Minsk").withGender(2)
-            .withFamilyId("removeStudentFromLesson").withStudyLang("ru").withLocate("ru")
+            .withPclevel("expert")
+            .withCountry("AL")
+            .withTimeZone("Europe/Minsk")
+            .withGender(2)
+            .withFamilyId("removeStudentFromLesson")
+            .withStudyLang("ru")
+            .withLocate("ru")
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList("ru"))
-            .withContacts(Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
-            .withDuration(2).withStatus(new Status().withState("learning"));
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
+            .withDuration(2)
+            .withStatus(new Status().withState("learning"));
     studentService.save(student);
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testRemoveStudentFromSingleSchedule() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
@@ -122,40 +216,108 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
 
   private void check(Schedules before, Schedules after) {
     TimeGeneral time = new TimeGeneral();
-    ScheduleData scheduleAdd = new ScheduleData()
+    ScheduleData scheduleAdd =
+        new ScheduleData()
             .withId("removeStudentFromLesson")
             .withVer(0)
             .withFromDate(time.date())
-            .withSlots(Arrays.asList(new Slots()
-                            .withId("14")
-                            .withW(time.date())
-                            .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
-                            .withC(list),
-                    new Slots().withId("14")
-                            .withW(time.date() + week)
-                            .withSt(new ST().withS(time.Stime(period) + week).withE(time.Etime(period) + week))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 2)
-                            .withSt(new ST().withS(time.Stime(period) + week * 2).withE(time.Etime(period) + week * 2))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 3)
-                            .withSt(new ST().withS(time.Stime(period) + week * 3).withE(time.Etime(period) + week * 3))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 4)
-                            .withSt(new ST().withS(time.Stime(period) + week * 4).withE(time.Etime(period) + week * 4))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3))),
-                    new Slots().withId("14")
-                            .withW(time.date() + week * 5)
-                            .withSt(new ST().withS(time.Stime(period) + week * 5).withE(time.Etime(period) + week * 5))
-                            .withC(Arrays.asList(new C().withId("removeStudentFromLesson").withType(3).withSubject("1")
-                                    .withLang("ru").withNewSubj(true).withP(true).withS("normal").withScore(3)))))
+            .withSlots(
+                Arrays.asList(
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date())
+                        .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                        .withC(list),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week)
+                                .withE(time.Etime(period) + week))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 2)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 2)
+                                .withE(time.Etime(period) + week * 2))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 3)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 3)
+                                .withE(time.Etime(period) + week * 3))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 4)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 4)
+                                .withE(time.Etime(period) + week * 4))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3))),
+                    new Slots()
+                        .withId("14")
+                        .withW(time.date() + week * 5)
+                        .withSt(
+                            new ST()
+                                .withS(time.Stime(period) + week * 5)
+                                .withE(time.Etime(period) + week * 5))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId("removeStudentFromLesson")
+                                    .withType(3)
+                                    .withSubject("1")
+                                    .withLang("ru")
+                                    .withNewSubj(true)
+                                    .withP(true)
+                                    .withS("normal")
+                                    .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withSkypeId("1");
 
@@ -166,6 +328,4 @@ public class RemoveStudentFromRegular2hSchedule extends TestBase {
       }
     }
   }
-
-
 }

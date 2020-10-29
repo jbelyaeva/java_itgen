@@ -1,10 +1,16 @@
 package io.itgen.model;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.*;
-import io.itgen.model.users.*;
-import io.itgen.tests.FamilyDeletionTests;
-
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
+import dev.morphia.annotations.Transient;
+import io.itgen.model.users.Contacts;
+import io.itgen.model.users.Emails;
+import io.itgen.model.users.FinishedLessonsCountBySkill;
+import io.itgen.model.users.Services;
+import io.itgen.model.users.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +27,7 @@ public class StudentData {
   private String username;
 
   @Property("skills")
-  private List<String> skills = new ArrayList<String>();
+  private final List<String> skills = new ArrayList<String>();
 
   @Expose
   @Property("firstName")
@@ -38,9 +44,7 @@ public class StudentData {
   @Property("birthday")
   private Date birthday;
 
-  @Expose
-  @Transient
-  private String birthdayUi;
+  @Expose @Transient private String birthdayUi;
 
   @Expose
   @Property("pcLevel")
@@ -62,9 +66,7 @@ public class StudentData {
   @Property("locale")
   private String locate;
 
-  @Expose
-  @Transient
-  private String studyLang;
+  @Expose @Transient private String studyLang;
 
   @Property("langs")
   private List<String> langs = new ArrayList<>();
@@ -73,48 +75,27 @@ public class StudentData {
   @Property("duration")
   private Integer duration;
 
-  @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose
-  @Transient
-  private String phone;
+  @Expose @Transient private String phone;
 
-  @Expose
-  @Transient
-  private String skype;
+  @Expose @Transient private String skype;
 
-  @Expose
-  @Transient
-  private String c2d;
+  @Expose @Transient private String c2d;
 
-  @Expose
-  @Transient
-  private String viber;
+  @Expose @Transient private String viber;
 
-  @Expose
-  @Transient
-  private String whatsapp;
+  @Expose @Transient private String whatsapp;
 
-  @Expose
-  @Transient
-  private String telegram;
+  @Expose @Transient private String telegram;
 
-  @Expose
-  @Transient
-  private String fb;
+  @Expose @Transient private String fb;
 
-  @Expose
-  @Transient
-  private String vk;
+  @Expose @Transient private String vk;
 
-  @Expose
-  @Transient
-  private String ok;
+  @Expose @Transient private String ok;
 
-  @Expose
-  @Transient
-  private String inst;
+  @Expose @Transient private String inst;
 
   @Property("familyId")
   private String familyId;
@@ -126,8 +107,7 @@ public class StudentData {
   @Property("roles")
   private List<String> roles = new ArrayList<>();
 
-  @Embedded
-  private Status status;
+  @Embedded private Status status;
 
   @Transient
   @Property("startWorkAt")
@@ -159,7 +139,7 @@ public class StudentData {
 
   @Transient
   @Embedded("emails")
-  private List<Emails> emails = new ArrayList<Emails>();
+  private final List<Emails> emails = new ArrayList<Emails>();
 
   @Property("lastSubjs")
   private List<String> lastSubjs = new ArrayList<>();
@@ -168,12 +148,11 @@ public class StudentData {
   private List<String> usedSubjs = new ArrayList<>();
 
   @Property("finishedLessonsCount")
-  private int finishedLessonsCount ;
+  private int finishedLessonsCount;
 
-  @Embedded
-  private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
+  @Embedded private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
 
-  //getters and setters
+  // getters and setters
 
   public Status getStatus() {
     return status;
@@ -340,11 +319,12 @@ public class StudentData {
   }
 
   public StudentData withFinishedLessonsCount(int finishedLessonsCount) {
-    this.finishedLessonsCount= finishedLessonsCount;
+    this.finishedLessonsCount = finishedLessonsCount;
     return this;
   }
 
-  public StudentData withFinishedLessonsCountBySkill(FinishedLessonsCountBySkill finishedLessonsCpontBySkill) {
+  public StudentData withFinishedLessonsCountBySkill(
+      FinishedLessonsCountBySkill finishedLessonsCpontBySkill) {
     this.finishedLessonsCountBySkill = finishedLessonsCountBySkill;
     return this;
   }
@@ -487,20 +467,43 @@ public class StudentData {
 
   @Override
   public String toString() {
-    return "StudentData{" +
-            "id='" + id + '\'' +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            ", gender=" + gender +
-            ", birthdayUi='" + birthdayUi + '\'' +
-            ", pclevel='" + pclevel + '\'' +
-            ", country='" + country + '\'' +
-            ", city='" + city + '\'' +
-            ", timezone='" + timezone + '\'' +
-            ", locate='" + locate + '\'' +
-            ", note='" + note + '\'' +
-            ", duration='" + duration + '\'' +
-            '}';
+    return "StudentData{"
+        + "id='"
+        + id
+        + '\''
+        + ", firstname='"
+        + firstname
+        + '\''
+        + ", lastname='"
+        + lastname
+        + '\''
+        + ", gender="
+        + gender
+        + ", birthdayUi='"
+        + birthdayUi
+        + '\''
+        + ", pclevel='"
+        + pclevel
+        + '\''
+        + ", country='"
+        + country
+        + '\''
+        + ", city='"
+        + city
+        + '\''
+        + ", timezone='"
+        + timezone
+        + '\''
+        + ", locate='"
+        + locate
+        + '\''
+        + ", note='"
+        + note
+        + '\''
+        + ", duration='"
+        + duration
+        + '\''
+        + '}';
   }
 
   @Override
@@ -508,10 +511,10 @@ public class StudentData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     StudentData that = (StudentData) o;
-    return Objects.equals(id, that.id) &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname) &&
-            Objects.equals(gender, that.gender);
+    return Objects.equals(id, that.id)
+        && Objects.equals(firstname, that.firstname)
+        && Objects.equals(lastname, that.lastname)
+        && Objects.equals(gender, that.gender);
   }
 
   @Override

@@ -180,11 +180,12 @@ public class MaterialData {
     this.verifier = verifier;
     return this;
   }
+
   public MaterialData withRemoved(Boolean removed) {
     this.removed = removed;
     return this;
   }
-  //getters
+  // getters
 
   public String getId() {
     return id;
@@ -271,55 +272,105 @@ public class MaterialData {
       return false;
     }
     MaterialData that = (MaterialData) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(creator, that.creator) &&
-        Objects.equals(title, that.title) &&
-        Objects.equals(status, that.status) &&
-        Objects.equals(skill, that.skill) &&
-        Objects.equals(branch, that.branch) &&
-        Objects.equals(type, that.type) &&
-        Objects.equals(lang, that.lang) &&
-        Objects.equals(materialLink, that.materialLink) &&
-        Objects.equals(tags, that.tags) &&
-        Objects.equals(comments, that.comments) &&
-        Objects.equals(activity, that.activity) &&
-        Objects.equals(originality, that.originality) &&
-        Objects.equals(level, that.level) &&
-        Objects.equals(sourceLink, that.sourceLink) &&
-        Objects.equals(projectLink, that.projectLink) &&
-        Objects.equals(desc, that.desc) &&
-        Objects.equals(verifier, that.verifier);
+    return Objects.equals(id, that.id)
+        && Objects.equals(creator, that.creator)
+        && Objects.equals(title, that.title)
+        && Objects.equals(status, that.status)
+        && Objects.equals(skill, that.skill)
+        && Objects.equals(branch, that.branch)
+        && Objects.equals(type, that.type)
+        && Objects.equals(lang, that.lang)
+        && Objects.equals(materialLink, that.materialLink)
+        && Objects.equals(tags, that.tags)
+        && Objects.equals(comments, that.comments)
+        && Objects.equals(activity, that.activity)
+        && Objects.equals(originality, that.originality)
+        && Objects.equals(level, that.level)
+        && Objects.equals(sourceLink, that.sourceLink)
+        && Objects.equals(projectLink, that.projectLink)
+        && Objects.equals(desc, that.desc)
+        && Objects.equals(verifier, that.verifier);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, creator, title, status, skill, branch, type, lang, materialLink, tags, comments,
-            activity, originality, level, sourceLink, projectLink, desc, verifier);
+    return Objects.hash(
+        id,
+        creator,
+        title,
+        status,
+        skill,
+        branch,
+        type,
+        lang,
+        materialLink,
+        tags,
+        comments,
+        activity,
+        originality,
+        level,
+        sourceLink,
+        projectLink,
+        desc,
+        verifier);
   }
 
   @Override
   public String toString() {
-    return "MaterialData{" +
-        "id='" + id + '\'' +
-        ", createAt=" + createAt +
-        ", creator='" + creator + '\'' +
-        ", title='" + title + '\'' +
-        ", status='" + status + '\'' +
-        ", skill='" + skill + '\'' +
-        ", branch='" + branch + '\'' +
-        ", type='" + type + '\'' +
-        ", lang='" + lang + '\'' +
-        ", materialLink='" + materialLink + '\'' +
-        ", tags=" + tags +
-        ", comments=" + comments +
-        ", activity=" + activity +
-        ", originality='" + originality + '\'' +
-        ", level='" + level + '\'' +
-        ", sourceLink='" + sourceLink + '\'' +
-        ", projectLink='" + projectLink + '\'' +
-        ", desc='" + desc + '\'' +
-        ", verifier='" + verifier + '\'' +
-        '}';
+    return "MaterialData{"
+        + "id='"
+        + id
+        + '\''
+        + ", createAt="
+        + createAt
+        + ", creator='"
+        + creator
+        + '\''
+        + ", title='"
+        + title
+        + '\''
+        + ", status='"
+        + status
+        + '\''
+        + ", skill='"
+        + skill
+        + '\''
+        + ", branch='"
+        + branch
+        + '\''
+        + ", type='"
+        + type
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", materialLink='"
+        + materialLink
+        + '\''
+        + ", tags="
+        + tags
+        + ", comments="
+        + comments
+        + ", activity="
+        + activity
+        + ", originality='"
+        + originality
+        + '\''
+        + ", level='"
+        + level
+        + '\''
+        + ", sourceLink='"
+        + sourceLink
+        + '\''
+        + ", projectLink='"
+        + projectLink
+        + '\''
+        + ", desc='"
+        + desc
+        + '\''
+        + ", verifier='"
+        + verifier
+        + '\''
+        + '}';
   }
 }

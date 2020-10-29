@@ -24,9 +24,9 @@ public class TrTaskHelper {
   private final StudentService studentService = new StudentService();
   private final TrainerService trainerService = new TrainerService();
   private final WorkerService workerService = new WorkerService();
-  private ArrayList<String> watchers = new ArrayList<>();
-  private ArrayList<Comments> comments = new ArrayList<>();
-  private ArrayList<Activity> activities = new ArrayList<>();
+  private final ArrayList<String> watchers = new ArrayList<>();
+  private final ArrayList<Comments> comments = new ArrayList<>();
+  private final ArrayList<Activity> activities = new ArrayList<>();
   private final TimeGeneral time = new TimeGeneral();
 
   public void newManualTask(

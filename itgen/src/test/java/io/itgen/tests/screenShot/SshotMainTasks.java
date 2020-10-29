@@ -38,16 +38,7 @@ public class SshotMainTasks extends TestBase {
 
     app.trStudent()
         .newStudent(
-            "Student",
-            "Маша",
-            "Машина",
-            "expert",
-            "AL",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "Student");
+            "Student", "Маша", "Машина", "expert", "AL", "Europe/Minsk", 2, "ru", "ru", "Student");
 
     app.trTask()
         .newManualTask(
@@ -89,7 +80,7 @@ public class SshotMainTasks extends TestBase {
         .newManualTask(
             "FiltrTaskThird",
             "666",
-            "14",  //Настя Бокша - тренер
+            "14", // Настя Бокша - тренер
             "Проверить материалы",
             1,
             new Date(),
@@ -153,7 +144,6 @@ public class SshotMainTasks extends TestBase {
             clients,
             commentaries,
             "newTask_waitAnswer");
-
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

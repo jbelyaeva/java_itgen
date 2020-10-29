@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MaterialBranchs extends ForwardingSet<MaterialBranchData> {
-  private Set<MaterialBranchData> delegate;
+  private final Set<MaterialBranchData> delegate;
 
   public MaterialBranchs(MaterialBranchs materialBranchs) {
     this.delegate = new HashSet<MaterialBranchData>(materialBranchs.delegate);

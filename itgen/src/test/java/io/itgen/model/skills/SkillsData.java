@@ -5,10 +5,6 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import io.itgen.model.schedule.Times;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity("skills")
@@ -58,8 +54,7 @@ public class SkillsData {
   @Property("downloadLink")
   private String downloadLink;
 
-  @Embedded
-  private Requirements requirements;
+  @Embedded private Requirements requirements;
 
   public SkillsData() {}
 
@@ -180,42 +175,72 @@ public class SkillsData {
       return false;
     }
     SkillsData that = (SkillsData) o;
-    return minAge == that.minAge &&
-        minAgeWithoutTest == that.minAgeWithoutTest &&
-        Objects.equals(id, that.id) &&
-        Objects.equals(lang, that.lang) &&
-        Objects.equals(title, that.title) &&
-        Objects.equals(visibility, that.visibility) &&
-        Objects.equals(desc, that.desc) &&
-        Objects.equals(skillId, that.skillId) &&
-        Objects.equals(testId, that.testId) &&
-        Objects.equals(needRemindAboutLesson, that.needRemindAboutLesson) &&
-        Objects.equals(downloadLink, that.downloadLink) &&
-        Objects.equals(requirements, that.requirements);
+    return minAge == that.minAge
+        && minAgeWithoutTest == that.minAgeWithoutTest
+        && Objects.equals(id, that.id)
+        && Objects.equals(lang, that.lang)
+        && Objects.equals(title, that.title)
+        && Objects.equals(visibility, that.visibility)
+        && Objects.equals(desc, that.desc)
+        && Objects.equals(skillId, that.skillId)
+        && Objects.equals(testId, that.testId)
+        && Objects.equals(needRemindAboutLesson, that.needRemindAboutLesson)
+        && Objects.equals(downloadLink, that.downloadLink)
+        && Objects.equals(requirements, that.requirements);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(id, lang, title, visibility, desc, minAge, skillId, testId, minAgeWithoutTest,
-            needRemindAboutLesson, downloadLink, requirements);
+    return Objects.hash(
+        id,
+        lang,
+        title,
+        visibility,
+        desc,
+        minAge,
+        skillId,
+        testId,
+        minAgeWithoutTest,
+        needRemindAboutLesson,
+        downloadLink,
+        requirements);
   }
 
   @Override
   public String toString() {
-    return "SkillsData{" +
-        "id='" + id + '\'' +
-        ", lang='" + lang + '\'' +
-        ", title='" + title + '\'' +
-        ", visibility='" + visibility + '\'' +
-        ", desc='" + desc + '\'' +
-        ", minAge=" + minAge +
-        ", skillId='" + skillId + '\'' +
-        ", testId='" + testId + '\'' +
-        ", minAgeWithoutTest=" + minAgeWithoutTest +
-        ", needRemindAboutLesson=" + needRemindAboutLesson +
-        ", downloadLink='" + downloadLink + '\'' +
-        ", requirements=" + requirements +
-        '}';
+    return "SkillsData{"
+        + "id='"
+        + id
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", title='"
+        + title
+        + '\''
+        + ", visibility='"
+        + visibility
+        + '\''
+        + ", desc='"
+        + desc
+        + '\''
+        + ", minAge="
+        + minAge
+        + ", skillId='"
+        + skillId
+        + '\''
+        + ", testId='"
+        + testId
+        + '\''
+        + ", minAgeWithoutTest="
+        + minAgeWithoutTest
+        + ", needRemindAboutLesson="
+        + needRemindAboutLesson
+        + ", downloadLink='"
+        + downloadLink
+        + '\''
+        + ", requirements="
+        + requirements
+        + '}';
   }
 }

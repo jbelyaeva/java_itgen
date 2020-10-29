@@ -14,7 +14,6 @@ public class CandidateHelper extends HelperBase {
     super(wd);
   }
 
-
   public void create(CandidateData candidate, String vacancy) {
     btnAddCandidate();
     fillFormCandidate(candidate, vacancy);
@@ -23,6 +22,7 @@ public class CandidateHelper extends HelperBase {
 
   private void btnCreate() {
     click(By.xpath("//button[contains(@class,'create')]"));
+    waitVisibilityOfElementLocated(5, By.xpath("//h2"));
   }
 
   private void fillFormCandidate(CandidateData candidate, String vacancy) {
@@ -30,7 +30,8 @@ public class CandidateHelper extends HelperBase {
     type(By.xpath("//input[@name='profile-lastName']"), candidate.getLastName());
     type(By.name("profile-english-firstName"), candidate.getEngFirstName());
     type(By.name("profile-english-lastName"), candidate.getEngLastName());
-    enterADate(By.cssSelector("input[name=profile-birthday]"),
+    enterADate(
+        By.cssSelector("input[name=profile-birthday]"),
         DateISOToUsualDataString(candidate.getBirthday()));
 
     dropDownList_Integer(By.cssSelector("#profile-gender"), candidate.getGender());
@@ -49,11 +50,9 @@ public class CandidateHelper extends HelperBase {
     click(By.xpath("//select[@id='profile-locale']"));
     click(By.xpath("//option[@value='" + candidate.getLocale() + "']"));
 
-    wd.findElement(By.xpath("//textarea[@name='profile-note']"))
-        .sendKeys(candidate.getNote());
+    wd.findElement(By.xpath("//textarea[@name='profile-note']")).sendKeys(candidate.getNote());
 
-    wd.findElement(By.xpath("//textarea[@name='profile-info']"))
-        .sendKeys(candidate.getInfo());
+    wd.findElement(By.xpath("//textarea[@name='profile-info']")).sendKeys(candidate.getInfo());
 
     TrainerData trainer = trainerService.findById(candidate.getReferId());
     type(By.xpath("//div[@class='input-group']//input[@name='user-name']"), trainer.getLastName());
@@ -63,28 +62,36 @@ public class CandidateHelper extends HelperBase {
 
     type(By.xpath("//input[@name='profile-test-task-link']"), candidate.getTestTask());
 
-    type(By.cssSelector("input[name=profile-contact-phone]"),
+    type(
+        By.cssSelector("input[name=profile-contact-phone]"),
         candidate.getContacts().get(0).getVal());
-    type(By.cssSelector("input[name=profile-contact-email]"),
+    type(
+        By.cssSelector("input[name=profile-contact-email]"),
         candidate.getContacts().get(1).getVal());
-    type(By.cssSelector("input[name=profile-contact-telegram]"),
+    type(
+        By.cssSelector("input[name=profile-contact-telegram]"),
         candidate.getContacts().get(2).getVal());
-    type(By.cssSelector("input[name=profile-contact-viber]"),
+    type(
+        By.cssSelector("input[name=profile-contact-viber]"),
         candidate.getContacts().get(3).getVal());
-    type(By.cssSelector("input[name=profile-contact-c2d]"),
-        candidate.getContacts().get(4).getVal());
+    type(
+        By.cssSelector("input[name=profile-contact-c2d]"), candidate.getContacts().get(4).getVal());
 
     click(By.cssSelector("a.btn-link.btn-show"));
 
-    type(By.cssSelector("input[name=profile-contact-skype]"),
+    type(
+        By.cssSelector("input[name=profile-contact-skype]"),
         candidate.getContacts().get(5).getVal());
-    type(By.cssSelector("input[name=profile-contact-whatsapp]"),
+    type(
+        By.cssSelector("input[name=profile-contact-whatsapp]"),
         candidate.getContacts().get(6).getVal());
-    type(By.cssSelector("input[name=profile-contact-facebook]"),
+    type(
+        By.cssSelector("input[name=profile-contact-facebook]"),
         candidate.getContacts().get(7).getVal());
     type(By.cssSelector("input[name=profile-contact-vk]"), candidate.getContacts().get(8).getVal());
     type(By.cssSelector("input[name=profile-contact-ok]"), candidate.getContacts().get(9).getVal());
-    type(By.cssSelector("input[name=profile-contact-instagram]"),
+    type(
+        By.cssSelector("input[name=profile-contact-instagram]"),
         candidate.getContacts().get(10).getVal());
 
     type(By.cssSelector("input[name=candidate-utm-source]"), candidate.getUtm().getSource());
@@ -112,8 +119,9 @@ public class CandidateHelper extends HelperBase {
     type(By.name("profile-english-lastName"), candidate.getEngLastName());
 
     clear(8, By.cssSelector("input[name=profile-birthday]"));
-    click(By.name("profile-english-lastName"));//кликнуть в др место
-    enterADate(By.cssSelector("input[name=profile-birthday]"),
+    click(By.name("profile-english-lastName")); // кликнуть в др место
+    enterADate(
+        By.cssSelector("input[name=profile-birthday]"),
         DateISOToUsualDataString(candidate.getBirthday()));
 
     dropDownList_Integer(By.cssSelector("#profile-gender"), candidate.getGender());
@@ -130,12 +138,10 @@ public class CandidateHelper extends HelperBase {
     click(By.xpath("//option[@value='" + candidate.getLocale() + "']"));
 
     clear(35, By.xpath("//textarea[@name='profile-note']"));
-    wd.findElement(By.xpath("//textarea[@name='profile-note']"))
-        .sendKeys(candidate.getNote());
+    wd.findElement(By.xpath("//textarea[@name='profile-note']")).sendKeys(candidate.getNote());
 
     clear(30, By.xpath("//textarea[@name='profile-info']"));
-    wd.findElement(By.xpath("//textarea[@name='profile-info']"))
-        .sendKeys(candidate.getInfo());
+    wd.findElement(By.xpath("//textarea[@name='profile-info']")).sendKeys(candidate.getInfo());
 
     TrainerData trainer = trainerService.findById(candidate.getReferId());
     clear(30, By.xpath("//div[@class='input-group']//input[@name='user-name']"));
@@ -146,28 +152,36 @@ public class CandidateHelper extends HelperBase {
 
     type(By.xpath("//input[@name='profile-test-task-link']"), candidate.getTestTask());
 
-    type(By.cssSelector("input[name=profile-contact-phone]"),
+    type(
+        By.cssSelector("input[name=profile-contact-phone]"),
         candidate.getContacts().get(0).getVal());
-    type(By.cssSelector("input[name=profile-contact-email]"),
+    type(
+        By.cssSelector("input[name=profile-contact-email]"),
         candidate.getContacts().get(1).getVal());
-    type(By.cssSelector("input[name=profile-contact-telegram]"),
+    type(
+        By.cssSelector("input[name=profile-contact-telegram]"),
         candidate.getContacts().get(2).getVal());
-    type(By.cssSelector("input[name=profile-contact-viber]"),
+    type(
+        By.cssSelector("input[name=profile-contact-viber]"),
         candidate.getContacts().get(3).getVal());
-    type(By.cssSelector("input[name=profile-contact-c2d]"),
-        candidate.getContacts().get(4).getVal());
+    type(
+        By.cssSelector("input[name=profile-contact-c2d]"), candidate.getContacts().get(4).getVal());
 
     click(By.cssSelector("a.btn-link.btn-show"));
 
-    type(By.cssSelector("input[name=profile-contact-skype]"),
+    type(
+        By.cssSelector("input[name=profile-contact-skype]"),
         candidate.getContacts().get(5).getVal());
-    type(By.cssSelector("input[name=profile-contact-whatsapp]"),
+    type(
+        By.cssSelector("input[name=profile-contact-whatsapp]"),
         candidate.getContacts().get(6).getVal());
-    type(By.cssSelector("input[name=profile-contact-facebook]"),
+    type(
+        By.cssSelector("input[name=profile-contact-facebook]"),
         candidate.getContacts().get(7).getVal());
     type(By.cssSelector("input[name=profile-contact-vk]"), candidate.getContacts().get(8).getVal());
     type(By.cssSelector("input[name=profile-contact-ok]"), candidate.getContacts().get(9).getVal());
-    type(By.cssSelector("input[name=profile-contact-instagram]"),
+    type(
+        By.cssSelector("input[name=profile-contact-instagram]"),
         candidate.getContacts().get(10).getVal());
 
     type(By.cssSelector("input[name=candidate-utm-source]"), candidate.getUtm().getSource());
@@ -186,7 +200,7 @@ public class CandidateHelper extends HelperBase {
   }
 
   private void selectModifyCandidate(String idCandidate) {
-    click(By.xpath("//a[@href='/candidates/" + idCandidate + "']"));
+    clickWithMoveToElementAndWait(5, By.xpath("//a[@href='/candidates/" + idCandidate + "']"));
   }
 
   public void delete(String idCandidte) {
@@ -202,6 +216,125 @@ public class CandidateHelper extends HelperBase {
   }
 
   private void btnPoints() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'dropdown')]"));
+    clickWithMoveToElementAndWait(7, By.xpath("//button[contains(@class,'dropdown')]"));
+  }
+
+  public void changeStatusOnWait() {
+    btnPoints();
+    btnWait();
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Отписали");
+  }
+
+  public void changeStatusOnTest1() {
+    btnPoints();
+    btnTest1();
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Тестовое 1");
+  }
+
+  public void changeStatusOnSuspend() {
+    btnPoints();
+    btnSuspend();
+    type(By.xpath("//input[@name='status-reason']"), "Причина");
+    clickWithMoveToElementAndWait(3, By.xpath("//button[contains(@class, 'change')]"));
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Подвис");
+  }
+
+  private void btnSuspend() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'suspend')]"));
+  }
+
+  private void btnTest1() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'test1')]"));
+  }
+
+  private void btnWait() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'wait')]"));
+  }
+
+  public void changeStatusOnLeave() {
+    btnPoints();
+    btnLeave();
+    type(By.xpath("//input[@name='status-reason']"), "Причина");
+    clickWithMoveToElementAndWait(3, By.xpath("//button[contains(@class, 'change')]"));
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Отвалился");
+  }
+
+  private void btnLeave() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'leave')]"));
+  }
+
+  public void changeStatusOnNew() {
+    btnPoints();
+    btnNew();
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Новый");
+  }
+
+  private void btnNew() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'new')]"));
+  }
+
+  public void changeStatusOnInterview() {
+    btnPoints();
+    btnInterview();
+    waitElementWithText(3, By.xpath("//td[contains(@class,'status')]//span/*"), "Собес");
+  }
+
+  private void btnInterview() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'interview')]"));
+  }
+
+  public void createEmployee(String name) {
+    waitElementWithText(5, By.xpath("//tr//td[5]"), "Тренер");
+    btnPoints();
+    btnCreateEmployee();
+    btnAddEmpolyee(name);
+    waitVisibleElement(5, By.xpath("//div[@class='info']//a[contains(@href,'candidates')]"));
+  }
+
+  private void btnAddEmpolyee(String name) {
+    waitElementWithValue(5, By.xpath("//input[@name='user-firstName']"), name);
+    click(By.xpath("//button[contains(@class,'create')]"));
+  }
+
+  private void btnCreateEmployee() {
+    click(By.xpath("//ul[contains(@class,'dropdown')]//a[contains(@class,'employee')]"));
+  }
+
+  public void createTask(String title) {
+    btnPlus();
+    fillFormTask(title);
+    btnSaveNewTask();
+  }
+
+  private void btnSaveNewTask() {
+    click(By.xpath("//button[contains(@class,'create')]"));
+  }
+
+  private void fillFormTask(String title) {
+    clickWithMoveToElementAndWait(5, By.xpath("//div[@class='form-group']//input"));
+    type(By.xpath("//div[@class='form-group']//input"), title);
+  }
+
+  private void btnPlus() {
+    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'create-task')]"));
+  }
+
+  public void doneTask(String idCandidte) {
+    selectModifyCandidate(idCandidte);
+    selectTabTask();
+    btnPointsInTabTask();
+    btnDoneTask();
+  }
+
+  private void btnDoneTask() {
+    click(By.xpath("//a[contains(@class,'close')]"));
+  }
+
+  private void btnPointsInTabTask() {
+    clickWithMoveToElementAndWait(5, By.xpath("(//button[contains(@class,'dropdown')])[2]"));
+  }
+
+  private void selectTabTask() {
+    click(By.xpath("//a[@href='#tasks']"));
   }
 }

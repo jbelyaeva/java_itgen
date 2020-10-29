@@ -3,6 +3,7 @@ package io.itgen.tests.candidates;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.CandidateData;
 import io.itgen.model.Candidates;
 import io.itgen.services.CandidateService;
@@ -57,9 +58,9 @@ public class CandidateDeletionTest extends TestBase {
             "mother");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testCandidateDeletion() {
-    app.goTo().urlCandidates();
+    app.goTo().menuCandidates();
     Candidates before = app.dbcandidates().candidates();
     app.cantidate().delete("CandidateDelete");
     Candidates after = app.dbcandidates().candidates();

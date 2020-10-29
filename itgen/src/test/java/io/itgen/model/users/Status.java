@@ -6,8 +6,7 @@ public class Status {
 
   public String state;
 
-  public Status() {
-  }
+  public Status() {}
 
   public String getState() {
     return state;

@@ -4,7 +4,6 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +26,7 @@ public class ScheduleData {
   @Embedded("finishedSlots")
   private List<FinishedSlots> finishedSlots = new ArrayList<FinishedSlots>();
 
-  @Embedded
-  private Times times;
+  @Embedded private Times times;
 
   @Property("skypeId")
   private String skypeId;
@@ -36,8 +34,7 @@ public class ScheduleData {
   @Property("oneTime")
   private Boolean oneTime;
 
-  public ScheduleData() {
-  }
+  public ScheduleData() {}
 
   public ScheduleData withId(String id) {
     this.id = id;
@@ -113,14 +110,23 @@ public class ScheduleData {
 
   @Override
   public String toString() {
-    return "ScheduleData{" +
-            "id='" + id + '\'' +
-            ", fromDate=" + fromDate +
-            ", slots=" + slots +
-            ", times=" + times +
-            ", skypeId='" + skypeId + '\'' +
-            ", oneTime='" + oneTime + '\'' +
-            '}';
+    return "ScheduleData{"
+        + "id='"
+        + id
+        + '\''
+        + ", fromDate="
+        + fromDate
+        + ", slots="
+        + slots
+        + ", times="
+        + times
+        + ", skypeId='"
+        + skypeId
+        + '\''
+        + ", oneTime='"
+        + oneTime
+        + '\''
+        + '}';
   }
 
   @Override
@@ -128,12 +134,12 @@ public class ScheduleData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ScheduleData that = (ScheduleData) o;
-    return Objects.equals(id, that.id) &&
-            Objects.equals(fromDate, that.fromDate) &&
-            Objects.equals(slots, that.slots) &&
-            Objects.equals(times, that.times) &&
-            Objects.equals(skypeId, that.skypeId) &&
-            Objects.equals(oneTime, that.oneTime);
+    return Objects.equals(id, that.id)
+        && Objects.equals(fromDate, that.fromDate)
+        && Objects.equals(slots, that.slots)
+        && Objects.equals(times, that.times)
+        && Objects.equals(skypeId, that.skypeId)
+        && Objects.equals(oneTime, that.oneTime);
   }
 
   @Override

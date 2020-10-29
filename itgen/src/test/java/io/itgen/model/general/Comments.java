@@ -9,8 +9,7 @@ public class Comments {
   private String text;
   private Date createAt;
 
-  public Comments() {
-  }
+  public Comments() {}
 
   public Comments withId(String id) {
     this.id = id;
@@ -50,12 +49,19 @@ public class Comments {
 
   @Override
   public String toString() {
-    return "Comments{" +
-            "id='" + id + '\'' +
-            ", owner='" + owner + '\'' +
-            ", text='" + text + '\'' +
-            ", createAt=" + createAt +
-            '}';
+    return "Comments{"
+        + "id='"
+        + id
+        + '\''
+        + ", owner='"
+        + owner
+        + '\''
+        + ", text='"
+        + text
+        + '\''
+        + ", createAt="
+        + createAt
+        + '}';
   }
 
   @Override
@@ -63,8 +69,7 @@ public class Comments {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Comments comments = (Comments) o;
-    return  Objects.equals(owner, comments.owner) &&
-            Objects.equals(text, comments.text);
+    return Objects.equals(owner, comments.owner) && Objects.equals(text, comments.text);
   }
 
   @Override

@@ -17,34 +17,28 @@ public class FamilyHelper extends HelperBase {
 
   public void fillFamilyForm(FamilyDataUI familyDataUI) {
 
-    if(isElementPresent(By.name("profile-firstName"))){
-    type(By.name("profile-firstName"), familyDataUI.getFirstnameStudent());}
-    else refresh();
+    if (isElementPresent(By.name("profile-firstName"))) {
+      type(By.name("profile-firstName"), familyDataUI.getFirstnameStudent());
+    } else refresh();
 
     type(By.name("profile-lastName"), familyDataUI.getLastnameStudent());
     dropDownList_Integer(By.cssSelector("#profile-gender"), familyDataUI.getGenderStudent());
-    enterADate(
-        By.name("profile-birthday"), familyDataUI.getBirthdayUiStudent());
+    enterADate(By.name("profile-birthday"), familyDataUI.getBirthdayUiStudent());
     dropDownList(By.xpath("//select[@id='profile-pc-level']"), familyDataUI.getPclevelStudent());
     dropDownList(By.cssSelector("#profile-country"), familyDataUI.getCountryStudent());
     type(By.name("profile-city"), familyDataUI.getCityStudent());
     dropDownList(By.cssSelector("#profile-timezone"), familyDataUI.getTimezoneStudent());
     type(By.name("profile-contact-phone"), familyDataUI.getPhoneStudent());
-    type(
-        By.name("profile-contact-telegram"),
-        familyDataUI.getTelegramStudent());
+    type(By.name("profile-contact-telegram"), familyDataUI.getTelegramStudent());
     type(By.name("profile-contact-viber"), familyDataUI.getViberStudent());
     type(By.name("profile-contact-c2d"), familyDataUI.getC2dStudent());
     click(By.cssSelector("a.btn-link.btn-show"));
     type(By.name("profile-contact-skype"), familyDataUI.getSkypeStudent());
-    type(
-        By.name("profile-contact-whatsapp"),
-        familyDataUI.getWhatsappStudent());
+    type(By.name("profile-contact-whatsapp"), familyDataUI.getWhatsappStudent());
     type(By.name("profile-contact-facebook"), familyDataUI.getFbStudent());
     type(By.name("profile-contact-vk"), familyDataUI.getVkStudent());
     type(By.name("profile-contact-ok"), familyDataUI.getOkStudent());
-    type(
-        By.name("profile-contact-instagram"), familyDataUI.getInstStudent());
+    type(By.name("profile-contact-instagram"), familyDataUI.getInstStudent());
     // заполнение формы родителя
     Actions actions = new Actions(wd);
     WebElement element =

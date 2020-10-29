@@ -6,20 +6,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Requirements {
-  @Embedded
-  private List<Beginner> beginner = new ArrayList<Beginner>();
+  @Embedded private List<Beginner> beginner = new ArrayList<Beginner>();
 
-  @Embedded
-  private List<Usual> usual = new ArrayList<Usual>();
+  @Embedded private List<Usual> usual = new ArrayList<Usual>();
 
-  @Embedded
-  private List<Advanced> advanced = new ArrayList<Advanced>();
+  @Embedded private List<Advanced> advanced = new ArrayList<Advanced>();
 
-  @Embedded
-  private List<Expert> expert = new ArrayList<Expert>();
+  @Embedded private List<Expert> expert = new ArrayList<Expert>();
 
-  public Requirements() {
-  }
+  public Requirements() {}
 
   public Requirements withtBeginner(List<Beginner> beginner) {
     this.beginner = beginner;
@@ -66,10 +61,10 @@ public class Requirements {
       return false;
     }
     Requirements that = (Requirements) o;
-    return Objects.equals(beginner, that.beginner) &&
-        Objects.equals(usual, that.usual) &&
-        Objects.equals(advanced, that.advanced) &&
-        Objects.equals(expert, that.expert);
+    return Objects.equals(beginner, that.beginner)
+        && Objects.equals(usual, that.usual)
+        && Objects.equals(advanced, that.advanced)
+        && Objects.equals(expert, that.expert);
   }
 
   @Override
@@ -79,11 +74,15 @@ public class Requirements {
 
   @Override
   public String toString() {
-    return "Requirements{" +
-        "beginner=" + beginner +
-        ", usual=" + usual +
-        ", advanced=" + advanced +
-        ", expert=" + expert +
-        '}';
+    return "Requirements{"
+        + "beginner="
+        + beginner
+        + ", usual="
+        + usual
+        + ", advanced="
+        + advanced
+        + ", expert="
+        + expert
+        + '}';
   }
 }

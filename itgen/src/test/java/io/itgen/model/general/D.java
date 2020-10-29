@@ -2,7 +2,6 @@ package io.itgen.model.general;
 
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Property;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,11 +13,9 @@ public class D {
   @Property("old")
   public String oldData;
 
-  @Embedded
-  public New newChangeData;
+  @Embedded public New newChangeData;
 
-  @Embedded
-  public Old oldChangeData;
+  @Embedded public Old oldChangeData;
 
   @Property("langs")
   public List<String> langs = new ArrayList<>();
@@ -29,8 +26,7 @@ public class D {
   @Property("to")
   public Boolean to;
 
-  public D() {
-  }
+  public D() {}
 
   public D withNewData(String newData) {
     this.newData = newData;
@@ -69,10 +65,7 @@ public class D {
 
   @Override
   public String toString() {
-    return "D{" +
-            "newData=" + newData +
-            "oldData=" + oldData +
-            '}';
+    return "D{" + "newData=" + newData + "oldData=" + oldData + '}';
   }
 
   @Override
@@ -84,8 +77,7 @@ public class D {
       return false;
     }
     D d = (D) o;
-    return Objects.equals(newData, d.newData) &&
-        Objects.equals(oldData, d.oldData);
+    return Objects.equals(newData, d.newData) && Objects.equals(oldData, d.oldData);
   }
 
   @Override

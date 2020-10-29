@@ -9,13 +9,11 @@ public class Activity {
   private String uId;
   private Date ts;
   private String t;
-  @Embedded
-  private D d;
+  @Embedded private D d;
   private String s;
   private Double w;
 
-  public Activity() {
-  }
+  public Activity() {}
 
   public Activity withUId(String uId) {
     this.uId = uId;
@@ -86,8 +84,7 @@ public class Activity {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Activity activity = (Activity) o;
-    return Objects.equals(uId, activity.uId) &&
-            Objects.equals(t, activity.t);
+    return Objects.equals(uId, activity.uId) && Objects.equals(t, activity.t);
   }
 
   @Override

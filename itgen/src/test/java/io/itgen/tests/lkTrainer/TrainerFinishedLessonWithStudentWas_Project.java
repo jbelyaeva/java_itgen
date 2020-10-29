@@ -38,14 +38,20 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
   FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private long alreadyRun = 7200000; //2 часа идет занятие
+  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday().StartSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru");
+    app.trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru");
 
     app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
 
@@ -109,7 +115,7 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
     Comments commentsBefore = app.dbschedules().comments();
     MaterialChilds materialChildsBefore = app.dbmaterial().materialChilds();
 
-    app.trainer().finishedLessonWithWas_giveProject("finishLessonByTrainer","Жуки","Лабиринт");
+    app.trainer().finishedLessonWithWas_giveProject("finishLessonByTrainer", "Жуки", "Лабиринт");
     app.trainer().gotoTask();
     Schedules after = app.dbschedules().schedules();
     FinishedChildLessons finishChildAfter = app.dbschedules().finishedChildLessons();
@@ -118,7 +124,7 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
     MaterialChilds materialChildsAfter = app.dbmaterial().materialChilds();
 
     assertThat(after.size(), equalTo(before.size()));
-    assertThat(finishChildAfter.size(), equalTo(finishChildBefore.size()+1));
+    assertThat(finishChildAfter.size(), equalTo(finishChildBefore.size() + 1));
     assertThat(finishAfter.size(), equalTo(finishBefore.size() + 1));
     assertThat(commentsAfter.size(), equalTo(commentsBefore.size() + 1));
     assertThat(materialChildsAfter.size(), equalTo(materialChildsBefore.size() + 2));
@@ -141,9 +147,16 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
 
   private void check(Schedules after) {
     scheduleService.DeleteById("finishLessonByTrainer");
-    app.trScheduleToday().FinishedSingleScheduleWithOneStudentOnTrail((double) alreadyRun, period,
-        "finishLessonByTrainer",
-        "23", "finishLessonByTrainer", "1", "ru", "finished");
+    app.trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "finishLessonByTrainer",
+            "23",
+            "finishLessonByTrainer",
+            "1",
+            "ru",
+            "finished");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

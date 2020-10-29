@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.itgen.model.WorkerData;
 import io.itgen.tests.TestBase;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,7 +37,7 @@ public class WorkerDataGenerator extends TestBase {
     generator.run();
   }
 
-  //генерация тестовых данных
+  // генерация тестовых данных
   private void run() throws IOException {
     List<WorkerData> workers = generateWorkers(count);
     if (format.equals("json")) {
@@ -48,31 +47,29 @@ public class WorkerDataGenerator extends TestBase {
     }
   }
 
-  //сохранение этих данных в файл
+  // сохранение этих данных в файл
   private void saveAsJson(List<WorkerData> workers, File file) throws IOException {
-    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson =
+        new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(workers);
-    try (Writer writer = new FileWriter(file);) {
+    try (Writer writer = new FileWriter(file)) {
       writer.write(json);
     }
   }
   /**
-   * Инструкция:
-   * генератор настроен на создание данных для тестов на модификацию.
-   * при генерации данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
-   * gender -- 2,
-   * country -- "BY",
-   * city -- "Минск",
-   * timeZone -- "Europe/Minsk",
-   * locate -- "ru"
-   * */
+   * Инструкция: генератор настроен на создание данных для тестов на модификацию. при генерации
+   * данных для тестов на создание необходимо установить значения по умолчанию для следующих полей:
+   * gender -- 2, country -- "BY", city -- "Минск", timeZone -- "Europe/Minsk", locate -- "ru"
+   */
   private List<WorkerData> generateWorkers(int count) {
     List<WorkerData> workers = new ArrayList<WorkerData>();
     for (int i = 0; i < count; i++) {
-      workers.add(new WorkerData()
+      workers.add(
+          new WorkerData()
               .withFirstName(String.format("Алеша-%s", i))
               .withLastName(String.format("Зайцев-%s", i))
-       //       .withRoleUi(String.format("employee", i))  // при создании сотрудника раскоментить
+              //       .withRoleUi(String.format("employee", i))  // при создании сотрудника
+              // раскоментить
               .withStartWorkUi(String.format("01.01.1998", i))
               .withBirthdayUi(String.format("25.03.1979", i))
               .withGender(Integer.valueOf(String.format("2", i)))

@@ -8,8 +8,7 @@ public class LinkedMaterials {
   private String lang;
   private String status;
 
-  public LinkedMaterials() {
-  }
+  public LinkedMaterials() {}
 
   public LinkedMaterials withId(String id) {
     this.id = id;
@@ -47,9 +46,9 @@ public class LinkedMaterials {
       return false;
     }
     LinkedMaterials that = (LinkedMaterials) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(lang, that.lang) &&
-        Objects.equals(status, that.status);
+    return Objects.equals(id, that.id)
+        && Objects.equals(lang, that.lang)
+        && Objects.equals(status, that.status);
   }
 
   @Override
@@ -59,10 +58,16 @@ public class LinkedMaterials {
 
   @Override
   public String toString() {
-    return "LinkedMaterials{" +
-        "id='" + id + '\'' +
-        ", lang='" + lang + '\'' +
-        ", status='" + status + '\'' +
-        '}';
+    return "LinkedMaterials{"
+        + "id='"
+        + id
+        + '\''
+        + ", lang='"
+        + lang
+        + '\''
+        + ", status='"
+        + status
+        + '\''
+        + '}';
   }
 }

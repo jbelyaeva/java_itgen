@@ -1,7 +1,9 @@
 package io.itgen.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+
 public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(WebDriver wd) {
@@ -13,7 +15,7 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuStudents() {
-    doubleClick(By.xpath("//a[contains(@href, '/childs')]"));
+    clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/childs')]"));
   }
 
   public void menuTrainers() {
@@ -21,11 +23,11 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void menuTasks() {
-    clickWithMoveToElementAndWait(8,By.xpath("//a[contains(@href, '/tasks')]"));
+    clickWithMoveToElementAndWait(8, By.xpath("//a[contains(@href, '/tasks')]"));
   }
 
   public void menuTests() {
-    clickWithMoveToElementAndWait(5,By.xpath("//a[contains(@href, '/tests')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href, '/tests')]"));
   }
 
   public void menuLeads() {
@@ -54,26 +56,32 @@ public class NavigationHelper extends HelperBase {
 
   public void urlTests() {
     wd.get(address() + "/tests");
-    waiteVisibleElement(10,By.xpath("//h2"));
+    waitVisibleElement(10, By.xpath("//h2"));
   }
 
   public void urlTasks() {
     wd.get(address() + "/tasks");
-    waiteVisibleElement(5,By.xpath("//div[@class='panel-footer']"));
+    waitVisibleElement(5, By.xpath("//div[@class='panel-footer']"));
   }
 
   public void urlMaterials() {
     wd.get(address() + "/materials");
-    waiteVisibleElement(5,By.xpath("//h1"));
+    waitVisibleElement(5, By.xpath("//h1"));
   }
 
   public void urlCandidates() {
-    wd.get(address() + "/candidates");
-    waiteVisibleElement(5,By.xpath("//h2"));
+    try {
+      wd.get(address() + "/candidates");
+      waitVisibleElement(7, By.xpath("//h2"));
+    } catch (TimeoutException e) {
+      refresh();
+      wd.get(address() + "/candidates");
+      waitVisibleElement(7, By.xpath("//h2"));
+    }
   }
 
   public void urlStudents() {
     wd.get(address() + "/childs");
-    waiteVisibleElement(5,By.xpath("//h2"));
+    waitVisibleElement(5, By.xpath("//h2"));
   }
 }

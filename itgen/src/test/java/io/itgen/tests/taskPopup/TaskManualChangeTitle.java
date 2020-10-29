@@ -16,11 +16,11 @@ import org.testng.annotations.Test;
 public class TaskManualChangeTitle extends TestBase {
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
-  private final Date createAt=new Date();
-  private final Date duoDateWithTime =new Date();
+  private final Date createAt = new Date();
+  private final Date duoDateWithTime = new Date();
   private final long duoDateSort = new Date().getTime();
   private final Date[] dates = null;
-  private  String[] texts = null;
+  private String[] texts = null;
   private final String[] clients = null;
   private final String[] commentaries = null;
 
@@ -43,17 +43,17 @@ public class TaskManualChangeTitle extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskManualChangeTitle() {
     app.goTo().menuTasks();
-    Tasks before=app.dbtasks().tasks();
+    Tasks before = app.dbtasks().tasks();
     app.task().changeTitleManualTaskInPopup("Записать на новое пробное");
-    Tasks after=app.dbtasks().tasks();
+    Tasks after = app.dbtasks().tasks();
     taskClean = app.dbtasks().lastTask();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
     app.goTo().menuSchedule();
   }
 
-  private void check(Tasks after){
-    texts = new String[]{"Записать на пробное","Записать на новое пробное"};
+  private void check(Tasks after) {
+    texts = new String[] {"Записать на пробное", "Записать на новое пробное"};
     app.trTask()
         .saveManualTask(
             "PopupChangeTitleTask",
