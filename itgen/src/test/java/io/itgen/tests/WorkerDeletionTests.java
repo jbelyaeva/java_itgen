@@ -15,11 +15,13 @@ import org.testng.annotations.Test;
 public class WorkerDeletionTests extends TestBase {
 
   public WorkerData deletedWorker;
+  WorkerService workerService = new WorkerService();
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trWorker().saveNewWorker("worker", "Маша", "Машина", "employee",
+    app.trWorker().saveNewWorker("workerDelete", "Маша", "Машина", "employee",
         "AL", "Europe/Minsk", "ru", "ru", "1234567899", "julja83@list.ru");
+    deletedWorker = workerService.findById("workerDelete");
   }
 
   @Test
@@ -36,7 +38,6 @@ public class WorkerDeletionTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    WorkerService workerService = new WorkerService();
     workerService.DeleteById("workerDelete");
   }
 }

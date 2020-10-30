@@ -13,7 +13,7 @@ public class WorkerService {
     return workerDao.findByIdAndDelete(id);
   }
 
-  public void create(WorkerData worker) {
+  public void save(WorkerData worker) {
     workerDao.save(worker);
   }
 

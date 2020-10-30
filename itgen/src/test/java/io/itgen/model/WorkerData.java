@@ -5,7 +5,6 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import dev.morphia.annotations.Transient;
 import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Emails;
 import java.util.ArrayList;
@@ -38,22 +37,29 @@ public class WorkerData {
   @Property("roles")
   private List<String> roles = new ArrayList<>();
 
-  @Expose private String roleUi;
+  @Expose
+  private String roleUi;
 
   @Expose
   @Property("startWorkAt")
   private Date startDay;
 
-  @Expose private String startDayUi;
+  @Expose
+  @Property("createdAt")
+  private Date createdAt;
 
   @Expose
-  @Transient
+  private String startDayUi;
+
+  @Expose
   @Property("birthday")
   private Date birthDay;
 
-  @Expose private String birthDayUi;
+  @Expose
+  private String birthDayUi;
 
-  @Expose private Integer gender;
+  @Expose
+  private Integer gender;
 
   @Expose private String country;
 
@@ -131,6 +137,11 @@ public class WorkerData {
 
   public WorkerData withStartDay(Date startDay) {
     this.startDay = startDay;
+    return this;
+  }
+
+  public WorkerData withCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 

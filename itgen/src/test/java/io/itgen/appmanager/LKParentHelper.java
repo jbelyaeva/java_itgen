@@ -179,7 +179,7 @@ public class LKParentHelper extends HelperBase {
 
   private void btnTomorrowForSingle() {
     // находим активный элемент и берем следующий сестринский вниз по дереву
-    if (checkMatchTZServerUTC()) {
+    if (!checkMatchTZServerUTC()) {
       click(By.xpath("//div[@class='picker-item selected']/following-sibling::div"));
     }
   }
@@ -190,6 +190,7 @@ public class LKParentHelper extends HelperBase {
     btnSingleSchedule();
     btnTomorrowForSingle();
     changeScrollTime();
+    changeStyleDayOfTheWeek();
   }
 
   public void changeStyleDayOfTheWeek() {

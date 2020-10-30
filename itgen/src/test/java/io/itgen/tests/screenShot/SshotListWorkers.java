@@ -10,6 +10,11 @@ import io.itgen.model.users.Contacts;
 import io.itgen.model.users.Emails;
 import io.itgen.services.WorkerService;
 import io.itgen.tests.TestBase;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
@@ -18,12 +23,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 
 public class SshotListWorkers extends TestBase {
   public WorkerData deletedWorker;
@@ -47,7 +46,7 @@ public class SshotListWorkers extends TestBase {
             .withEmails(
                 Collections.singletonList(
                     new Emails().withAddress("julja83@list.ru").withVerified(true)));
-    workerService.create(deletedWorker);
+    workerService.save(deletedWorker);
   }
 
   @Test

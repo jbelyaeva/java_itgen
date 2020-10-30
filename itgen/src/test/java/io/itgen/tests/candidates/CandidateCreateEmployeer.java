@@ -69,7 +69,7 @@ public class CandidateCreateEmployeer extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testCandidateCreateEmployeer() {
     newStatus = "success";
-    app.goTo().urlCandidates();
+    app.goTo().menuCandidates();
     Trainers beforeTrainers = app.db().trainers();
     Candidates before = app.dbcandidates().candidates();
     app.cantidate().createEmployee(before.stream().findFirst().get().getFirstName());

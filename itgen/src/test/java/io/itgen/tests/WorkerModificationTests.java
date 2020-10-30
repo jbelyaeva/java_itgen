@@ -25,6 +25,7 @@ import org.testng.annotations.Test;
 public class WorkerModificationTests extends TestBase {
 
   public WorkerData modifydWorker;
+  WorkerService workerService = new WorkerService();
 
   @DataProvider
   public Iterator<Object[]> validWorkersFromJson() throws IOException {
@@ -48,8 +49,9 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trWorker().saveNewWorker("worker", "Маша", "Машина", "employee",
+    app.trWorker().saveNewWorker("workerModify", "Маша", "Машина", "employee",
         "AL", "Europe/Minsk", "ru", "ru", "1234567899", "julja83@list.ru");
+    modifydWorker = workerService.findById("workerModify");
   }
 
   @Test(dataProvider = "validWorkersFromJson")
@@ -68,7 +70,6 @@ public class WorkerModificationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    WorkerService workerService = new WorkerService();
     workerService.DeleteById("workerModify");
   }
 }
