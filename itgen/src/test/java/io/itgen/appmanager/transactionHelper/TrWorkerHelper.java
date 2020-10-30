@@ -32,6 +32,9 @@ public class TrWorkerHelper {
             .withCountry(country)
             .withTimeZone(tz)
             .withLocate(locate)
+            .withGender(2)
+            .withStartDay(new Date())
+            .withCreatedAt(new Date())
             .withBirthday(new Date(1556726891000L))
             .withLangs(Arrays.asList(lang))
             .withContacts(
@@ -39,7 +42,7 @@ public class TrWorkerHelper {
             .withEmails(
                 Collections.singletonList(
                     new Emails().withAddress(email).withVerified(true)));
-    workerService.create(worker);
+    workerService.save(worker);
   }
 
 

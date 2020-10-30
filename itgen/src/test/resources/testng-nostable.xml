@@ -4,7 +4,6 @@
   <test name="Nostable">
     <classes>
       <class name="io.itgen.tests.FamilyDeletionTests"/>
-      <class name="io.itgen.tests.candidates.CandidateCreateEmployeer" />
       <class name="io.itgen.tests.schedule.ScheduleBadMoveOnOccupiedLessonTests"/>
       <class name="io.itgen.tests.schedule.ScheduleBadMoveTests"/>
     </classes>
