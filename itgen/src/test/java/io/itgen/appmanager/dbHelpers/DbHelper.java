@@ -92,7 +92,7 @@ public class DbHelper {
 
   public TrainerData lastTrainer() {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TrainerData> q = datastore.createQuery(TrainerData.class);
+    Query<TrainerData> q = datastore.createQuery(TrainerData.class).filter("roles", "trainer");
     long count = q.count();
     List<TrainerData> trainer = q.find().toList();
     TrainerData lastTrainer = trainer.get(Math.toIntExact(count - 1));

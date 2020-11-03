@@ -1,25 +1,17 @@
 package io.itgen.tests.students;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import io.itgen.model.FamilyData;
-import io.itgen.model.users.Contacts;
-import io.itgen.model.users.Status;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.StudentData;
 import io.itgen.model.Students;
 import io.itgen.services.FamilyService;
 import io.itgen.services.StudentService;
 import io.itgen.services.TaskService;
 import io.itgen.tests.TestBase;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -27,9 +19,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class StudentCreationTests extends TestBase {
   StudentData studentClean;
@@ -76,7 +69,7 @@ public class StudentCreationTests extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validStudentsFromJson")
+  @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testStudentCreation(StudentData student) {
     app.goTo().menuSchedule();
     app.goTo().menuStudents();
@@ -91,7 +84,7 @@ public class StudentCreationTests extends TestBase {
     app.goTo().menuTasks();
   }
 
-  @Test(dataProvider = "noValidStudentsFromJson")
+  @Test(dataProvider = "noValidStudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testBadStudentCreation(StudentData student) {
     app.goTo().menuSchedule();
     app.goTo().menuStudents();
