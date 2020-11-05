@@ -20,7 +20,13 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void btnPay() {
-    click(By.xpath("//a[contains(@href,'/pay/')]"));
+    By locator = By.xpath("//a[contains(@href,'/pay/')]");
+    if (isElementPresent(locator)) {
+      clickWithMoveToElementAndWait(5, locator);
+    } else {
+      refresh();
+      clickWithMoveToElementAndWait(5, locator);
+    }
   }
 
   public void btnPay4Lessons() {
@@ -83,13 +89,11 @@ public class PaymentHelper extends HelperBase {
   }
 
   public void goToFamily(String id) {
-    wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     wd.get("http://localhost:3000/family/" + id);
   }
 
   public void goToShopByParent() {
     btnPay();
-    wd.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
     noErrorMessage();
   }
 

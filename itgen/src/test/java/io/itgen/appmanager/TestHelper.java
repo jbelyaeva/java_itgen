@@ -163,7 +163,7 @@ public class TestHelper extends HelperBase {
   }
 
   private void btnAddTab() {
-    click(By.xpath("//div[@class='add-tab-btn']"));
+   clickWithMoveToElementAndWait(5, By.xpath("//div[@class='add-tab-btn']"));
   }
 
   private void btnEditTest() {

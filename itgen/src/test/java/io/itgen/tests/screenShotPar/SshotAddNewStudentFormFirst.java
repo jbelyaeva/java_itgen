@@ -3,24 +3,24 @@ package io.itgen.tests.screenShotPar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.itgen.appmanager.ApplicationManager;
+import io.itgen.general.RunTestAgain;
 import io.itgen.model.StudentData;
 import io.itgen.tests.TestBase;
+import java.awt.AWTException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class SshotAddNewStudentFormFirst extends TestBase {
 
@@ -43,7 +43,7 @@ public class SshotAddNewStudentFormFirst extends TestBase {
     }
   }
 
-  @Test(dataProvider = "StudentsFromJson")
+  @Test(dataProvider = "StudentsFromJson", retryAnalyzer = RunTestAgain.class)
   public void testAddNewStudentFormFirst(StudentData student) throws AWTException, IOException {
     app.lkParent().createSShotFirstForm(student);
 
