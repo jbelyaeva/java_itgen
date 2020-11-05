@@ -55,7 +55,7 @@ public class SshotTypeformPassLookingResult extends TestBase {
     app.test().goToStudentProfileTabTests("21");
     app.test().checkHrefResults();
 
-    String[] deleteElements = {"//span[@class='date']"};
+    String[] deleteElements = {"//span[@class='date']", "//div[contains(@id,'MeteorToys')]"};
     app.sshot().deleteElements(deleteElements);
 
     ImageDiff diff =

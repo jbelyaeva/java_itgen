@@ -1,8 +1,5 @@
 package io.itgen.tests.screenShotPar;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import io.itgen.appmanager.ApplicationManager;
 import io.itgen.services.TestResultsService;
 import io.itgen.services.TestService;
@@ -89,8 +86,8 @@ public class SshotTypeformHistory extends TestBase {
     Set<By> locatorIgnor = new HashSet<>();
 
     String[] deleteElements = {
-      "//div[@class='history-month-header']", "//div[@class='date']", "//span[@class='time']"
-    };
+        "//div[@class='history-month-header']", "//div[@class='date']", "//span[@class='time']",
+        "//div[contains(@id,'MeteorToys')]"};
 
     app.sshot().deleteElements(deleteElements);
 
