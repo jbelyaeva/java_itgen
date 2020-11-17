@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" verbose="1" >
+    <test name="Chat">
+        <classes>
+            <class name="tests.chat.ChatOpenCloseTest" />
+            <class name="tests.chat.ChatSendMessageNewDialogTest" />
+            <class name="tests.chat.ChatModifyMessageTest" />
+            <class name="tests.chat.ChatDeleteMessageTest" />
+            <class name="tests.chat.ChatDeleteModifyForeignMessageTest" />
+            <class name="tests.chat.ChatForeignMessageWithDateTimeTest" />
+            <class name="tests.chat.ChatIndicatorTest" />
+            <class name="tests.chat.ChatRoleInterlocutorTest" />
+            <class name="tests.chat.ChatDeleteModifyAutoMessageTest" />
+            <class name="tests.chat.ChatSendFileNewDialogTest" />
+        </classes>
+    </test>
+</suite>

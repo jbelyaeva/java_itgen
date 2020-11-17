@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Leads">
+        <classes>
+            <class name="tests.leads.LeadCreationTest" />
+            <class name="tests.leads.LeadDeletionTest" />
+            <class name="tests.leads.LeadModificationTest" />
+        </classes>
+    </test>
+</suite>

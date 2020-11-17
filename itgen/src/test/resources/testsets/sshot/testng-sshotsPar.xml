@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1">
+  <test name="ScreenShotsPar">
+    <classes>
+      <class name="tests.screenShotPar.SshotMain"/>
+      <class name="tests.screenShotPar.SshotCourseSelectionForTrial"/>
+      <class name="tests.screenShotPar.SshotEntryOnTrial"/>
+      <class name="tests.screenShotPar.SshotSignUpOnTrial"/>
+      <class name="tests.screenShotPar.SshotAddNewStudentFormFirst"/>
+      <class name="tests.screenShotPar.SshotAddNewStudentFormSecond"/>
+      <class name="tests.screenShotPar.SshotConfirmRecordOnRegular"/>
+      <class name="tests.screenShotPar.SshotFiltrRecordOnRegular"/>
+      <class name="tests.screenShotPar.SshotFiltrRecordOnSingle"/>
+      <class name="tests.screenShotPar.SshotPayByParentShopRU"/>
+      <class name="tests.screenShotPar.SshotTypeformHistory"/>
+    </classes>
+  </test>
+</suite>
+

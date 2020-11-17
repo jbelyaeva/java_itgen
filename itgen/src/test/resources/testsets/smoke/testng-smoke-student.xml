@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeStudent" verbose="1">
+  <test name="SmokeStudent">
+    <classes>
+      <class name="tests.lkStudent.StudentWithoutTrailDisplayTest"/>
+      <class name="tests.lkStudent.StudentLessonStartTest"/>
+      <class name="tests.lkStudent.TestTypeformAvailableToStudent"/>
+      <class name="tests.lkStudent.ChatDialogOnlyWithGenaTest"/>
+      <class name="tests.lkStudent.ChatDialogWithTrainerTest"/>
+      <class name="tests.lkStudent.ChatSearchDialogWithOldTrainerTest"/>
+      <class name="tests.lkStudent.ChatSearchDialogWithRandomAdminTest"/>
+      <class name="tests.lkStudent.ChatSearchDialogWithRandomParentTest"/>
+      <class name="tests.lkStudent.ChatSearchDialogWithRandomTrainerTest"/>
+      <class name="tests.lkStudent.ChatDeleteMessageTest"/>
+      <class name="tests.lkStudent.ChatModifyMessageTest"/>
+      <class name="tests.lkStudent.ChatSendFileNewDialogTest"/>
+      <class name="tests.lkStudent.StudentPageScheduleTest"/>
+    </classes>
+  </test>
+</suite>

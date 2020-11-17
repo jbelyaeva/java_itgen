@@ -1,0 +1,100 @@
+package tests.lkParent;
+// к дефолтному родителю и ученику добавляется еще ученик, которого запишем на пробное и затем
+// удалим этого ученика и расписание в after-методе
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import core.general.RunTestAgain;
+import data.model.users.StudentData;
+import data.model.users.Students;
+import data.services.StudentService;
+import data.services.TaskService;
+import app.testbase.TestBase;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class AddNewStudent extends TestBase {
+  TaskService taskService = new TaskService();
+  StudentService studentService = new StudentService();
+  StudentData studentClean;
+
+  @DataProvider
+  public Iterator<Object[]> validStudentsFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/students_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<StudentData> students =
+          gson.fromJson(
+              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider
+  public Iterator<Object[]> noValidStudentsFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/students_par_creation_bad.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<StudentData> students =
+          gson.fromJson(
+              json, new TypeToken<List<StudentData>>() {}.getType()); // List<StudentData>.class
+      return students.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @Test(dataProvider = "validStudentsFromJson", retryAnalyzer = RunTestAgain.class)
+  public void testAddNewStudent(StudentData student) throws InterruptedException {
+    Students before = app.dbstudents().students();
+    app.lkParent().create(student);
+    Thread.sleep(3000); // необходимо, т.к. не успевает сохраниться студент в бд
+    Students after = app.dbstudents().students();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    studentClean = app.dbstudents().lastStudent();
+    StudentData studentAdd = student.withId(studentClean.getId());
+    assertThat(after, equalTo(before.withAdded(studentAdd)));
+  }
+
+  @Test(dataProvider = "noValidStudentsFromJson")
+  public void testBadAddNewStudent(StudentData student) {
+    Students before = app.dbstudents().students();
+    app.lkParent().createBad(student);
+    Students after = app.dbstudents().students();
+    assertThat(after.size(), equalTo(before.size()));
+    assertThat(after, equalTo(before));
+    studentClean = null;
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    if (studentClean == null) return;
+
+    taskService.DeleteById(studentClean);
+    studentService.DeleteById(studentClean);
+  }
+}

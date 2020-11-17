@@ -1,9 +1,9 @@
 [
   {
-    "firstname": "Петя 0",
-    "lastname": "Петин 0",
+    "firstname": "Петя",
+    "lastname": "Петин",
     "gender": 1,
-    "birthdayUi": "01.01.1910",
+    "birthday": "2013-01-01T18:25:43.511Z",
     "pclevel": "advanced",
     "country": "AM",
     "city": "Сватково 0",
@@ -11,16 +11,51 @@
     "locate": "ru",
     "studyLang": "ru",
     "duration": 2,
-    "phone": "44444444444",
-    "skype": "sk 0",
-    "c2d": "http:/0",
-    "viber": "55555555555",
-    "whatsapp": "66666666666",
-    "telegram": "tg 1",
-    "fb": "fb 1",
-    "vk": "vk 1",
-    "ok": "ok 1",
-    "inst": "inst 1",
-    "note": "Привет 1"
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "+444444444"
+      },
+      {
+        "type": "email",
+        "val": "email12@yandex.ru"
+      },
+      {
+        "type": "telegram",
+        "val": "+89898098098"
+      },
+      {
+        "type": "viber",
+        "val": "+1111111111"
+      },
+      {
+        "type": "c2d",
+        "val": "https://web.chat2desk.com/chat/all?dialogID=678678"
+      },
+      {
+        "type": "skype",
+        "val": "+0000000000"
+      },
+      {
+        "type": "whatsapp",
+        "val": "+123123123"
+      },
+      {
+        "type": "facebook",
+        "val": "+9999999999"
+      },
+      {
+        "type": "vk",
+        "val": "+5555555555"
+      },
+      {
+        "type": "ok",
+        "val": "+9876543212к"
+      },
+      {
+        "type": "instagram",
+        "val": "+90909090909"
+      }
+    ]
   }
 ]

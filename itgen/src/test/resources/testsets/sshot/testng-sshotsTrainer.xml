@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1">
+  <test name="ScreenShotsTrainer">
+    <classes>
+      <class name="tests.screenShotTrainer.SshotLessonStart"/>
+      <class name="tests.screenShotTrainer.SshotLessonFinishedWithNotWas"/>
+      <class name="tests.screenShotTrainer.SshotLessonFinishedWithWas_Project"/>
+      <class name="tests.screenShotTrainer.SshotLessonFinishedWithDisrupt"/>
+      <class name="tests.screenShotTrainer.SshotLessonNotStart"/>
+      <class name="tests.screenShotTrainer.SshotLessonEnvelopes"/>
+      <class name="tests.screenShotTrainer.SshotLessonStartTabProjects"/>
+      <class name="tests.screenShotTrainer.SshotLessonStartTabResults"/>
+    </classes>
+  </test>
+</suite>
+
