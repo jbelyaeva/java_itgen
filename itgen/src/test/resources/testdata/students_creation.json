@@ -3,7 +3,7 @@
     "firstname": "Вася-0",
     "lastname": "Васин-0",
     "gender": 2,
-    "birthdayUi": "01.01.1978",
+    "birthday": "2012-04-23T18:25:43.511Z",
     "pclevel": "expert",
     "country": "AL",
     "city": "Сватково 0",
@@ -11,23 +11,58 @@
     "locate": "ru",
     "studyLang": "ru",
     "duration": 2,
-    "phone": "11111111111",
-    "skype": "sk 0",
-    "c2d": "http:/0",
-    "viber": "22222222222",
-    "whatsapp": "33333333333",
-    "telegram": "tg 0",
-    "fb": "fb 0",
-    "vk": "vk 0",
-    "ok": "ok 0",
-    "inst": "inst 0",
-    "note": null
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "+79873433445"
+      },
+      {
+        "type": "email",
+        "val": "email@yandex.ru"
+      },
+      {
+        "type": "telegram",
+        "val": "+7987343344"
+      },
+      {
+        "type": "viber",
+        "val": "+7987343344"
+      },
+      {
+        "type": "c2d",
+        "val": "https://web.chat2desk.com/chat/all?dialogID=9277542"
+      },
+      {
+        "type": "skype",
+        "val": "+7987343344"
+      },
+      {
+        "type": "whatsapp",
+        "val": "+7987343344"
+      },
+      {
+        "type": "facebook",
+        "val": "+7987343344"
+      },
+      {
+        "type": "vk",
+        "val": "+7987343344"
+      },
+      {
+        "type": "ok",
+        "val": "+7987343344"
+      },
+      {
+        "type": "instagram",
+        "val": "+7987343344"
+      }
+    ]
   },
   {
     "firstname": "Sem",
     "lastname": "Semovih",
     "gender": 2,
-    "birthdayUi": "01.01.1978",
+    "birthday": "2013-04-23T18:25:43.511Z",
     "pclevel": "expert",
     "country": "AL",
     "city": "Svatkovo",
@@ -35,23 +70,57 @@
     "locate": "ru",
     "studyLang": "ru",
     "duration": 2,
-    "phone": "11111111111",
-    "skype": "sk 0",
-    "c2d": "http:/0",
-    "viber": "22222222222",
-    "whatsapp": "33333333333",
-    "telegram": "tg 0",
-    "fb": "fb 0",
-    "vk": "vk 0",
-    "ok": "ok 0",
-    "inst": "inst 0",
-    "note": null
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "11111111111"
+      },
+      {
+        "type": "email",
+        "val": "email@yandex.ru"
+      },
+      {
+        "type": "telegram",
+        "val": "+7987343344"
+      },
+      {
+        "type": "viber",
+        "val": "222222222222"
+      },
+      {
+        "type": "c2d",
+        "val": "http:/0"
+      },
+      {
+        "type": "skype",
+        "val": "sk0"
+      },
+      {
+        "type": "whatsapp",
+        "val": "333333333333"
+      },
+      {
+        "type": "facebook",
+        "val": "fb0"
+      },
+      {
+        "type": "vk",
+        "val": "vk0"
+      },
+      {
+        "type": "ok",
+        "val": "ok0"
+      },
+      {
+        "type": "instagram",
+        "val": "inst0"
+      }
+    ]
   },
-  {
-    "firstname": "#$%^&&*(*()))",
+  { "firstname": "#$%^&&*(*()))",
     "lastname": "Васин-0",
     "gender": 2,
-    "birthdayUi": "01.01.1978",
+    "birthday": "2013-01-01T18:25:43.511Z",
     "pclevel": "expert",
     "country": "AL",
     "city": "Сватково 0",
@@ -59,23 +128,57 @@
     "locate": "ru",
     "studyLang": "ru",
     "duration": 2,
-    "phone": "11111111111",
-    "skype": "sk 0",
-    "c2d": "http:/0",
-    "viber": "22222222222",
-    "whatsapp": "33333333333",
-    "telegram": "tg 0",
-    "fb": "fb 0",
-    "vk": "vk 0",
-    "ok": "ok 0",
-    "inst": "inst 0",
-    "note": null
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "11111111111"
+      },
+      {
+        "type": "email",
+        "val": "email@yandex.ru"
+      },
+      {
+        "type": "telegram",
+        "val": "+7987343344"
+      },
+      {
+        "type": "viber",
+        "val": "222222222222"
+      },
+      {
+        "type": "c2d",
+        "val": "http:/0"
+      },
+      {
+        "type": "skype",
+        "val": "sk0"
+      },
+      {
+        "type": "whatsapp",
+        "val": "333333333333"
+      },
+      {
+        "type": "facebook",
+        "val": "fb0"
+      },
+      {
+        "type": "vk",
+        "val": "vk0"
+      },
+      {
+        "type": "ok",
+        "val": "ok0"
+      },
+      {
+        "type": "instagram",
+        "val": "inst0"
+      }
+    ]
   },
-  {
-    "firstname": "7777777777777777",
+  { "firstname": "7777777777777777",
     "lastname": "Васин 0",
     "gender": 2,
-    "birthdayUi": "01.01.1978",
+    "birthday": "2013-04-23T18:25:43.511Z",
     "pclevel": "expert",
     "country": "AL",
     "city": "Сватково 0",
@@ -83,16 +186,51 @@
     "locate": "ru",
     "studyLang": "en",
     "duration": 2,
-    "phone": "11111111111",
-    "skype": "sk 0",
-    "c2d": "http:/0",
-    "viber": "22222222222",
-    "whatsapp": "33333333333",
-    "telegram": "tg 0",
-    "fb": "fb 0",
-    "vk": "vk 0",
-    "ok": "ok 0",
-    "inst": "inst 0",
-    "note": null
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "11111111111"
+      },
+      {
+        "type": "email",
+        "val": "email@yandex.ru"
+      },
+      {
+        "type": "telegram",
+        "val": "+7987343344"
+      },
+      {
+        "type": "viber",
+        "val": "222222222222"
+      },
+      {
+        "type": "c2d",
+        "val": "http:/0"
+      },
+      {
+        "type": "skype",
+        "val": "sk0"
+      },
+      {
+        "type": "whatsapp",
+        "val": "333333333333"
+      },
+      {
+        "type": "facebook",
+        "val": "fb0"
+      },
+      {
+        "type": "vk",
+        "val": "vk0"
+      },
+      {
+        "type": "ok",
+        "val": "ok0"
+      },
+      {
+        "type": "instagram",
+        "val": "inst0"
+      }
+    ]
   }
 ]

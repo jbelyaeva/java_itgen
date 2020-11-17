@@ -24,24 +24,14 @@ dependencies {
     implementation 'org.testng:testng:7.1.0'
     implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     implementation 'org.hamcrest:hamcrest:2.2'
-    implementation 'com.beust:jcommander:1.78'
-    implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'joda-time:joda-time:2.10.6'
-    compile group: 'commons-net', name: 'commons-net', version: '3.6'
-    compile 'ru.lanwen.verbalregex:java-verbal-expressions:1.4'
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3.4'
-    compile 'org.subethamail:subethasmtp:3.1.7'
-
     compile 'dev.morphia.morphia:core:1.5.8'
-    implementation 'org.mongodb:mongo-java-driver:3.12.4'
+    implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
 
     agent "org.aspectj:aspectjweaver:1.8.0"
     compile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0.RC4"
-
-    implementation 'ru.yandex.qatools.ashot:ashot:1.5.4'
-
 }
 
 // решение проблемы:
@@ -64,7 +54,7 @@ tasks.withType(JavaCompile) {
 //
 task testFamilies(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-families.xml'
+        suites 'src/test/resources/testsets/testng-families.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -82,7 +72,6 @@ task testFamilies(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testFamilies.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -90,7 +79,7 @@ testFamilies.doFirst {
 //
 task testParents(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-parents.xml'
+        suites 'src/test/resources/testsets/testng-parents.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -108,7 +97,6 @@ task testParents(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testParents.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -116,7 +104,7 @@ testParents.doFirst {
 //
 task testStudents(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-students.xml'
+        suites 'src/test/resources/testsets/testng-students.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -134,7 +122,6 @@ task testStudents(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testStudents.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -142,7 +129,7 @@ testStudents.doFirst {
 //
 task testTrainers(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-trainers.xml'
+        suites 'src/test/resources/testsets/testng-trainers.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -160,7 +147,6 @@ task testTrainers(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testTrainers.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -168,7 +154,7 @@ testTrainers.doFirst {
 //
 task testWorkers(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-workers.xml'
+        suites 'src/test/resources/testsets/testng-workers.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -186,7 +172,6 @@ task testWorkers(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testWorkers.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -194,7 +179,7 @@ testWorkers.doFirst {
 //
 task testLeads(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-leads.xml'
+        suites 'src/test/resources/testsets/testng-leads.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -212,7 +197,6 @@ task testLeads(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-
 testLeads.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
@@ -220,7 +204,7 @@ testLeads.doFirst {
 //
 task testScreenShots(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-screenShots.xml'
+        suites 'src/test/resources/testsets/sshot/testng-screenShots.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -231,13 +215,12 @@ task testScreenShots(type: Test) {
     if (project.hasProperty('target')) {
         systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('etalon')) {
-        systemProperty 'etalon', "${etalon}"
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testScreenShots.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -246,7 +229,7 @@ testScreenShots.doFirst {
 //
 task testSchedule(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-schedule.xml'
+        suites 'src/test/resources/testsets/testng-schedule.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -263,16 +246,15 @@ task testSchedule(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testSchedule.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
+
 //
 task testWindowsSchedule(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-windowsSchedule.xml'
+        suites 'src/test/resources/testsets/testng-windowsSchedule.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -289,16 +271,15 @@ task testWindowsSchedule(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testWindowsSchedule.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-//
 
+//
 task testNostable(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-nostable.xml'
+        suites 'src/test/resources/testsets/testng-nostable.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -315,7 +296,6 @@ task testNostable(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testNostable.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -324,7 +304,7 @@ testNostable.doFirst {
 //
 task testRequests(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-requests.xml'
+        suites 'src/test/resources/testsets/testng-requests.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -341,7 +321,6 @@ task testRequests(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testRequests.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -350,7 +329,7 @@ testRequests.doFirst {
 
 task testSmoke(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-smoke.xml'
+        suites 'src/test/resources/testsets/smoke/testng-smoke.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -367,7 +346,6 @@ task testSmoke(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testSmoke.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -375,7 +353,7 @@ testSmoke.doFirst {
 //
 task testSmoke2(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-smoke-2.xml'
+        suites 'src/test/resources/testsets/smoke/testng-smoke-2.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -392,7 +370,6 @@ task testSmoke2(type: Test) {
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
-
 }
 testSmoke2.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
@@ -400,7 +377,7 @@ testSmoke2.doFirst {
 //
 task testFirst(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-first.xml'
+        suites 'src/test/resources/testsets/testng-first.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -418,39 +395,39 @@ task testFirst(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-    testFirst.doFirst {
-        jvmArgs "-javaagent:${configurations.agent.singleFile}"
-    }
+testFirst.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 
-    //
-    task testSmokeParent(type: Test) {
-        useTestNG {
-            suites 'src/test/resources/testng-smoke-parent.xml'
-        }
-        if (project.hasProperty('browser')) {
-            systemProperty 'browser', "${browser}"
-        }
-        if (project.hasProperty('platform')) {
-            systemProperty 'platform', "${platform}"
-        }
-        if (project.hasProperty('target')) {
-            systemProperty 'target', "${target}"
-        }
-        if (project.hasProperty('verifyUI')) {
-            systemProperty 'verifyUI', "${verifyUI}"
-        }
-        if (project.hasProperty('videoName')) {
-            systemProperty 'videoName', "${videoName}"
-        }
+//
+task testSmokeParent(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testsets/smoke/testng-smoke-parent.xml'
     }
-        testSmokeParent.doFirst {
-            jvmArgs "-javaagent:${configurations.agent.singleFile}"
-        }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testSmokeParent.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 
-    //
+//
 task testNostableParent(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-nostable_par.xml'
+        suites 'src/test/resources/testsets/testng-nostable_par.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -468,40 +445,39 @@ task testNostableParent(type: Test) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-    testNostableParent.doFirst {
-        jvmArgs "-javaagent:${configurations.agent.singleFile}"
-    }
-
+testNostableParent.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 
 //
 task testScreenShotsPar(type: Test) {
    useTestNG {
-        suites 'src/test/resources/testng-sshotsPar.xml'
+        suites 'src/test/resources/testsets/sshot/testng-sshotsPar.xml'
    }
-   if (project.hasProperty('browser')) {
-       systemProperty 'browser', "${browser}"
-   }
-   if (project.hasProperty('platform')) {
-       systemProperty 'platform', "${platform}"
-   }
-   if (project.hasProperty('target')) {
-       systemProperty 'target', "${target}"
-   }
-   if (project.hasProperty('verifyUI')) {
-      systemProperty 'verifyUI', "${verifyUI}"
-   }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
     if (project.hasProperty('videoName')) {
         systemProperty 'videoName', "${videoName}"
     }
 }
-   testScreenShotsPar.doFirst {
-       jvmArgs "-javaagent:${configurations.agent.singleFile}"
-   }
+testScreenShotsPar.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 
 //
 task testMaterials(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-materials.xml'
+        suites 'src/test/resources/testsets/testng-materials.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -525,7 +501,7 @@ testMaterials.doFirst {
 
 task testPayments(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-payments.xml'
+        suites 'src/test/resources/testsets/testng-payments.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -550,7 +526,7 @@ testPayments.doFirst {
 //
 task testSmokeTrainer(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-smoke-trainer.xml'
+        suites 'src/test/resources/testsets/smoke/testng-smoke-trainer.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -571,10 +547,35 @@ task testSmokeTrainer(type: Test) {
 testSmokeTrainer.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
+
+//
+task testSmokeStudent(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testsets/smoke/testng-smoke-student.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testSmokeStudent.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
 //
 task testNotDockerAdmin(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-not-docker-admin.xml'
+        suites 'src/test/resources/testsets/testng-not-docker-admin.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -599,7 +600,7 @@ testNotDockerAdmin.doFirst {
 //
 task testNotDockerParent(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-not-docker-parent.xml'
+        suites 'src/test/resources/testsets/testng-not-docker-parent.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -624,7 +625,7 @@ testNotDockerParent.doFirst {
 //
 task testTasks(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-tasks.xml'
+        suites 'src/test/resources/testsets/testng-tasks.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -648,7 +649,7 @@ testTasks.doFirst {
 //
 task testScreenShotsTrainer(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-sshotsTrainer.xml'
+        suites 'src/test/resources/testsets/sshot/testng-sshotsTrainer.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -671,9 +672,35 @@ testScreenShotsTrainer.doFirst {
 }
 
 //
+task testScreenShotsStudent(type: Test) {
+    useTestNG {
+        suites 'src/test/resources/testsets/sshot/testng-sshotsStudent.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
+    }
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
+    }
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
+    }
+    if (project.hasProperty('videoName')) {
+        systemProperty 'videoName', "${videoName}"
+    }
+}
+testScreenShotsStudent.doFirst {
+    jvmArgs "-javaagent:${configurations.agent.singleFile}"
+}
+
+
+//
 task testTypeform(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-typeform.xml'
+        suites 'src/test/resources/testsets/testng-typeform.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -698,7 +725,7 @@ testTypeform.doFirst {
 //
 task testCandidates(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-candidates.xml'
+        suites 'src/test/resources/testsets/testng-candidates.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"
@@ -723,7 +750,7 @@ testCandidates.doFirst {
 //
 task testChat(type: Test) {
     useTestNG {
-        suites 'src/test/resources/testng-chat.xml'
+        suites 'src/test/resources/testsets/testng-chat.xml'
     }
     if (project.hasProperty('browser')) {
         systemProperty 'browser', "${browser}"

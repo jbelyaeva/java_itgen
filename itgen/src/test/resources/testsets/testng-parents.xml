@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Parents">
+        <classes>
+            <class name="tests.parents.ParentCreationTests" />
+            <class name="tests.parents.ParentModificationTests" />
+            <class name="tests.parents.ParentDeletionTests" />
+        </classes>
+    </test>
+</suite>

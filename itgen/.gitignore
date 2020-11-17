@@ -5,6 +5,7 @@ allure-report/
 src/test/testsScreenshot/actual/
 src/test/testsScreenshot/markedImages/
 src/test/testsScreenshot/
+ci.properties
 
 # Ignore Gradle GUI config
 gradle-app.setting

@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Materials" verbose="1" >
+    <test name="Materials">
+        <classes>
+            <class name="tests.materials.CreateMaterial" />
+            <class name="tests.materials.CreateMaterialBad" />
+            <class name="tests.materials.MaterialAddNewBranch"/>
+            <class name="tests.materials.MaterialTakeForReview"/>
+            <class name="tests.materials.MaterialDelete"/>
+            <class name="tests.materials.MaterialMakeReview"/>
+            <class name="tests.materials.MaterialLeaveComment"/>
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,22 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeTrainer" verbose="1">
+  <test name="SmokeTrainer">
+    <classes>
+      <class name="tests.lkTrainer.TrainerModifyProfile"/>
+      <class name="tests.lkTrainer.TrainerStartLesson"/>
+      <class name="tests.lkTrainer.TrainerFinishedLessonWithStudentNotWas"/>
+      <class name="tests.lkTrainer.TrainerFinishedLessonWithStudentWas"/>
+      <class name="tests.lkTrainer.TrainerFinishedLessonWithStudentDisrupt"/>
+      <class name="tests.lkTrainer.TrainerLessonEnvelopes"/>
+      <class name="tests.lkTrainer.TrainerCreateMaterial"/>
+      <class name="tests.lkTrainer.TrainerMakeReview"/>
+      <class name="tests.lkTrainer.TrainerTakeForReview"/>
+      <class name="tests.lkTrainer.TrainerNewMessageInChatOnLesson"/>
+      <class name="tests.lkTrainer.TrainerChatWithAdminByDefoltTest"/>
+      <class name="tests.lkTrainer.TrainerChatSearchDialogWithEmployeersTest"/>
+      <class name="tests.lkTrainer.TrainerChatSearchDialogWithNewFamilyTest"/>
+      <class name="tests.lkTrainer.TrainerChatSearchDialogWithOldFamilyTest"/>
+    </classes>
+  </test>
+</suite>

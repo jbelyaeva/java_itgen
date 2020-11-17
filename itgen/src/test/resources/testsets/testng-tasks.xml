@@ -1,0 +1,37 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Tasks">
+        <classes>
+            <class name="tests.task.TaskManualAddNew"/>
+            <class name="tests.task.TaskManualDoneInStack"/>
+            <class name="tests.task.TaskAutoTake"/>
+            <class name="tests.task.TaskAutoDoneInStack"/>
+            <class name="tests.task.TaskManualWaitAnswerInStack"/>
+            <class name="tests.task.TaskManualDeleteInStack"/>
+            <class name="tests.task.TaskAutoDeleteInStack"/>
+            <class name="tests.task.TaskAutoGetControlInStack"/>
+            <class name="tests.task.TaskManualOnTomorrowInStack"/>
+            <class name="tests.task.TaskManualGetControlInStack"/>
+            <class name="tests.task.TaskFiltrByUserInStack"/>
+            <!--<class name="TaskFiltrByPriorityInStack"/> -->
+            <class name="tests.taskPopup.TaskManualChangeTitle"/>
+            <class name="tests.taskPopup.TaskManualChangeAssignee"/>
+            <class name="tests.taskPopup.TaskManualChangePriority"/>
+            <class name="tests.taskPopup.TaskManualChangeDate"/>
+            <class name="tests.taskPopup.TaskManualDeleteInPopup"/>
+            <class name="tests.taskPopup.TaskManualDoneInPopup"/>
+          <!--  <class name="TaskManualWaitAnswerInPopup"/>
+            <class name="TaskManualOnTomorrowInPopup"/>
+            <class name="TaskManuaGetControlInPopup"/>-->
+            <class name="tests.taskPopup.TaskAutoChangeAssignee"/>
+            <class name="tests.taskPopup.TaskAutoChangeDate"/>
+            <class name="tests.taskPopup.TaskAutoChangeClient"/>
+            <class name="tests.taskPopup.TaskAutoDeleteInPopup"/>
+            <class name="tests.taskPopup.TaskAutoDoneInPopup"/>
+            <class name="tests.taskPopup.TaskAutoTakeOnControlInPopup"/>
+            <class name="tests.taskPopup.TaskManualLeaveCommentInPopup"/>
+            <class name="tests.taskPopup.TaskAutoLeaveCommentInPopup"/>
+        </classes>
+    </test>
+</suite>

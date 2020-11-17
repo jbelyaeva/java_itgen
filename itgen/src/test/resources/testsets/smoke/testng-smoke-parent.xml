@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SmokeParent" verbose="1">
+  <test name="SmokeParent">
+    <classes>
+      <class name="tests.lkParent.RecordOnRegular"/>
+      <class name="tests.lkParent.RecordOnSingle"/>
+     <!-- <class name="RecordOnTrail"/> -->
+      <class name="tests.lkParent.CancelOnSingle"/>
+      <class name="tests.lkParent.CancelOnRegular"/>
+      <class name="tests.lkParent.CancelOneLessonFromRegular"/>
+      <class name="tests.lkParent.AddNewStudent"/>
+    </classes>
+  </test>
+</suite>
