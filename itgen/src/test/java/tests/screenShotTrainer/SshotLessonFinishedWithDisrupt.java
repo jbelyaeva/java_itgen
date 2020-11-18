@@ -1,6 +1,7 @@
 package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.services.CommentService;
 import data.services.FamilyService;
@@ -9,7 +10,6 @@ import data.services.FinishedLessonService;
 import data.services.PaymentService;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -89,7 +89,7 @@ public class SshotLessonFinishedWithDisrupt extends TestBase {
     };
 
     app.sshot().deleteElements(deleteElements);
-
+    app.sshot().deleteAlerts();
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

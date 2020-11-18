@@ -76,8 +76,8 @@ public class TestResultsData {
   private String rawFormAnswers;
 
   @Expose
-  @Property("score")
-  private int score;
+  @Property("scores")
+  private int scores;
 
   public TestResultsData() {}
 
@@ -161,8 +161,8 @@ public class TestResultsData {
     return this;
   }
 
-  public TestResultsData withScore(int score) {
-    this.score = score;
+  public TestResultsData withScores(int scores) {
+    this.scores = scores;
     return this;
   }
 
@@ -230,8 +230,8 @@ public class TestResultsData {
     return rawFormAnswers;
   }
 
-  public int getScore() {
-    return score;
+  public int getScores() {
+    return scores;
   }
 
   @Override
@@ -253,7 +253,7 @@ public class TestResultsData {
         ", finishedAt=" + finishedAt +
         ", finishedSuccess=" + finishedSuccess +
         ", rawFormAnswers='" + rawFormAnswers + '\'' +
-        ", score=" + score +
+        ", scores=" + scores +
         '}';
   }
 
@@ -268,7 +268,7 @@ public class TestResultsData {
     TestResultsData that = (TestResultsData) o;
     return minScore == that.minScore
         && maxScore == that.maxScore
-        && score == that.score
+        && scores == that.scores
         && Objects.equals(id, that.id)
         && Objects.equals(childId, that.childId)
         && Objects.equals(testId, that.testId)
@@ -302,6 +302,6 @@ public class TestResultsData {
         finishedAt,
         finishedSuccess,
         rawFormAnswers,
-        score);
+        scores);
   }
 }

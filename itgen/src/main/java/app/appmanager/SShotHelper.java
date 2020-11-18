@@ -128,6 +128,7 @@ public class SShotHelper extends HelperBase {
 
   public void changeTopBarInLKParent() {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
+    ((JavascriptExecutor) wd).executeScript("$('.header').css('position', 'inherit');");
   }
 
   // приводим таблицу с доступными занятиями к одному стилю, т.к. стиль меняется динамически,

@@ -269,6 +269,7 @@ public class TrainerHelper extends HelperBase {
     selectStudent();
     btnNotWas();
     btnFinishLesson();
+    deleteAlerts();
   }
 
   public void gotoTask() {
@@ -320,10 +321,11 @@ public class TrainerHelper extends HelperBase {
 
     clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='topics']"));
     wd.findElement(By.xpath("//textarea[@id-qa='topics']")).sendKeys("3D координаты, телепортация");
-
+    deleteAlerts();
     // выбор эмоций
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[3]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[7]"));
+    deleteAlerts();
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[14]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[16]"));
     click(By.xpath("(//input[contains(@class,'PrivateSwitchBase-input')])[22]"));
@@ -368,6 +370,7 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage();
     btnFinishLesson();
     noErrorMessage();
+    deleteAlerts();
   }
 
   private void fillResultsForDiscrupt() {
@@ -379,7 +382,7 @@ public class TrainerHelper extends HelperBase {
 
     clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='topics']"));
     wd.findElement(By.xpath("//textarea[@id-qa='topics']")).sendKeys("3D координаты, телепортация");
-
+    deleteAlerts();
     type(
         By.xpath("//textarea[@id-qa='text-for-parents']"),
         "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");

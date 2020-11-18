@@ -186,11 +186,16 @@ public class LKParentHelper extends HelperBase {
     }
   }
 
+  private void btnTomorrowForSingleSshot() {
+    // находим активный элемент и берем следующий сестринский вниз по дереву
+    click(By.xpath("//div[@class='picker-item selected']/following-sibling::div"));
+  }
+
   public void GoToFiltrRecordSingle() {
     btnShowSchedule();
     btnRecordOnLesson();
     btnSingleSchedule();
-    btnTomorrowForSingle();
+    btnTomorrowForSingleSshot();
     changeScrollTime();
   }
 

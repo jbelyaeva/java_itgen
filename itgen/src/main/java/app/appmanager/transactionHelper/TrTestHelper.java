@@ -109,7 +109,7 @@ public class TrTestHelper {
             .withFinishedAt(date)
             .withFinishedSuccess(pass)
             .withRawFormAnswers("")
-            .withScore(1);
+            .withScores(1);
     testResultsService.create(testResult);
   }
 }

@@ -284,7 +284,7 @@ public class Sshot1Feed extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.99f);
+                1.25f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
