@@ -4,13 +4,13 @@ package tests.screenShotPar;
 */
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -64,7 +64,7 @@ public class SshotEntryOnTrial extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='day']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
-    app.sshot().changeTopBar();
+    app.sshot().changeTopBarInLKParent();
 
     ImageDiff diff =
         app.sshot()

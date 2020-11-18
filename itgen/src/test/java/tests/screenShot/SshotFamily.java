@@ -39,10 +39,10 @@ public class SshotFamily extends TestBase {
     app.sshot().changeTopBar();
 
     ImageDiff diff = this.getDiff(name, locatorIgnor);
-    if (diff.getDiffSize() > 100) {
-      diff = this.getDiff(name, locatorIgnor);
-    }
 
-    Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diff.getDiffSize() > 150) {
+      diff = this.getDiff(name, locatorIgnor);
+      Assert.assertEquals(diff.getDiffSize(), 0);
+    }
   }
 }

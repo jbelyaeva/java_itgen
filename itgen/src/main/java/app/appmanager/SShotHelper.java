@@ -2,7 +2,7 @@ package app.appmanager;
 
 import static app.appmanager.ApplicationManager.properties;
 
-import app.appmanager.HelperBase;
+import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.File;
@@ -23,7 +23,6 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import ru.yandex.qatools.ashot.coordinates.Coords;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
-import app.testbase.TestBase;
 
 public class SShotHelper extends HelperBase {
 
@@ -124,6 +123,10 @@ public class SShotHelper extends HelperBase {
 
   // открепляем топ-бар
   public void changeTopBar() {
+    ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
+  }
+
+  public void changeTopBarInLKParent() {
     ((JavascriptExecutor) wd).executeScript("$('.top-bar-container').css('position', 'relative');");
   }
 
