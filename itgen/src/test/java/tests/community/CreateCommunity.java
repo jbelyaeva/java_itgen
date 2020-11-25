@@ -8,6 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import core.general.RunTestAgain;
 import data.model.communities.Communities;
 import data.model.communities.CommunityData;
 import data.services.CommunitiesService;
@@ -50,7 +51,7 @@ public class CreateCommunity extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validCommunityFromJson")
+  @Test(dataProvider = "validCommunityFromJson", retryAnalyzer = RunTestAgain.class)
   public void testCreateCommunity(CommunityData community) {
     app.goTo().menuCommunities();
     Communities before = app.dbcommunity().communities();
@@ -68,6 +69,7 @@ public class CreateCommunity extends TestBase {
     String[] idManagers = {"666"};
     String[] idSubscUser = {"666"};
     Date[] dateSubsc = {new Date()};
+    String[] skills = {"1"};
     app.trCommunity()
         .newCommunity(
             communityNew.getId(),
@@ -79,7 +81,9 @@ public class CreateCommunity extends TestBase {
             dateSubsc,
             1,
             community.getTitle(),
-            tags);
+            tags,
+            "ru",
+            skills);
     CommunityData communityAdd = communitiesService.findByIdCommunity(id);
 
     for (CommunityData communityAfter : after) {

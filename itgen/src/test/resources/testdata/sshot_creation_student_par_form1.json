@@ -1,9 +1,9 @@
 [
   {
-    "firstname": "Вася-0",
-    "lastname": "Васин-0",
-    "gender": 2,
-    "birthday": "2012-04-23T18:25:43.511Z",
+    "firstname": "Вася",
+    "lastname": "Васин",
+    "gender": 1,
+    "birthdayUi": "01.01.2010",
     "pclevel": "expert",
     "country": "AL",
     "city": "Сватково 0",
@@ -11,51 +11,16 @@
     "locate": "ru",
     "studyLang": "ru",
     "duration": 2,
-    "contacts": [
-      {
-        "type": "phone",
-        "val": "+79873433445"
-      },
-      {
-        "type": "email",
-        "val": "email@yandex.ru"
-      },
-      {
-        "type": "telegram",
-        "val": "+7987343344"
-      },
-      {
-        "type": "viber",
-        "val": "+7987343344"
-      },
-      {
-        "type": "c2d",
-        "val": "https://web.chat2desk.com/chat/all?dialogID=9277542"
-      },
-      {
-        "type": "skype",
-        "val": "+7987343344"
-      },
-      {
-        "type": "whatsapp",
-        "val": "+7987343344"
-      },
-      {
-        "type": "facebook",
-        "val": "+7987343344"
-      },
-      {
-        "type": "vk",
-        "val": "+7987343344"
-      },
-      {
-        "type": "ok",
-        "val": "+7987343344"
-      },
-      {
-        "type": "instagram",
-        "val": "+7987343344"
-      }
-    ]
+    "phone": "11111111111",
+    "skype": "sk 0",
+    "c2d": "http:/0",
+    "viber": "22222222222",
+    "whatsapp": "33333333333",
+    "telegram": "tg 0",
+    "fb": "fb 0",
+    "vk": "vk 0",
+    "ok": "ok 0",
+    "inst": "inst 0",
+    "note": null
   }
 ]

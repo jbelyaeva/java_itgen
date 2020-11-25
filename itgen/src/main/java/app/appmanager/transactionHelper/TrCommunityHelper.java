@@ -1,6 +1,8 @@
 package app.appmanager.transactionHelper;
 
 import app.appmanager.dbHelpers.DbHelper;
+import data.model.communities.CommunitiesPostCommentData;
+import data.model.communities.CommunitiesPostData;
 import data.model.communities.CommunityData;
 import data.model.communities.Managers;
 import data.model.communities.Subscribers;
@@ -25,7 +27,9 @@ public class TrCommunityHelper {
       Date[] dateSubscribers,
       int subsCount,
       String title,
-      String[] idTags) {
+      String[] idTags,
+      String lang,
+      String[] skills) {
     CommunityData community =
         new CommunityData()
             .withId(idCommunity)
@@ -34,7 +38,9 @@ public class TrCommunityHelper {
             .withDescription(desc)
             .withSubscribersCount(subsCount)
             .withTitle(title)
+            .withLang(lang)
             .withTagIds(Arrays.asList(idTags))
+            .withSkills(Arrays.asList(skills))
             .withManagers(getManagers(idManagers))
             .withSubscribers(getSubscribers(idSubscribers, dateSubscribers));
     communitiesService.saveCommunity(community);
@@ -61,4 +67,55 @@ public class TrCommunityHelper {
   }
 
 
+  public void newCommunityPost(
+      String idPost,
+      String text,
+      String idCommunities,
+      boolean fromCommunity,
+      Date createAt,
+      String[] idLikes,
+      int likesCount,
+      String idCreator,
+      String[] idAttachments) {
+    CommunitiesPostData communityPost =
+        new CommunitiesPostData()
+            .withId(idPost)
+            .withText(text)
+            .withCommunityId(idCommunities)
+            .withFromCommunity(fromCommunity)
+            .withCreateAt(createAt)
+            .withLikes(Arrays.asList(idLikes))
+            .withLikesCount(likesCount)
+            .withAttachments(Arrays.asList(idAttachments))
+            .withCreatorId(idCreator);
+    communitiesService.saveCommunityPost(communityPost);
+  }
+
+  public void newCommunityPostComment(
+      String idComment,
+      String text,
+      String idPost,
+      String idCommunity,
+      boolean fromCommunity,
+      Date createAt,
+      Date updatedAt,
+      String[] idLikes,
+      int likesCount,
+      String idCreator,
+      String[] idAttachments) {
+    CommunitiesPostCommentData communityPostComment =
+        new CommunitiesPostCommentData()
+            .withId(idComment)
+            .withText(text)
+            .withPostId(idPost)
+            .withCommunityId(idCommunity)
+            .withFromCommunity(fromCommunity)
+            .withCreateAt(createAt)
+            .withUpdatedAt(updatedAt)
+            .withLikes(Arrays.asList(idLikes))
+            .withLikesCount(likesCount)
+            .withAttachments(Arrays.asList(idAttachments))
+            .withCreatorId(idCreator);
+    communitiesService.saveCommunityPostComment(communityPostComment);
+  }
 }

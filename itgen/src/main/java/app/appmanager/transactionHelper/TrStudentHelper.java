@@ -136,8 +136,9 @@ public class TrStudentHelper {
     studentService.save(student);
   }
 
-  public void changeDefaultStudent(String idStudent, String name, String surname,
-      String pclevel, String country, String tz, int gender, String studyLang, String locate, String langs, String skills, String phone, int duration,
+  public void changeDefaultStudent(String idStudent, String name, String surname, String[] roles,
+      String pclevel, String country, String tz, int gender, String studyLang, String locate,
+      String langs, String skills, String phone, int duration,
       String status, int finishLessens, String lastSubj, String usedSubj, int countSkill) {
 
     StudentData oldStudent = studentService.findById("21");
@@ -146,7 +147,7 @@ public class TrStudentHelper {
             .withId("21")
             .withFirstName(name)
             .withLastName(surname)
-            .withRoles(Arrays.asList("child"))
+            .withRoles(Arrays.asList(roles))
             .withPclevel(pclevel)
             .withCountry(country)
             .withTimeZone(tz)
@@ -165,11 +166,13 @@ public class TrStudentHelper {
             .withDuration(duration)
             .withStatus(new Status().withState(status))
             .withServices(new Services().withPassword(
-                new Password().withBcrypt("$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
+                new Password()
+                    .withBcrypt("$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
             .withLastSubjs(Arrays.asList(lastSubj))
             .withUsedSubjs(Arrays.asList(usedSubj))
             .withFinishedLessonsCountBySkill(new FinishedLessonsCountBySkill().withOne(countSkill))
-            .withFinishedLessonsCount(finishLessens);
+            .withFinishedLessonsCount(finishLessens)
+            .withLastSeen(new Date());
     studentService.save(newStudent);
   }
 }

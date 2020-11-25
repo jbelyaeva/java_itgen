@@ -7,6 +7,7 @@ import data.model.users.Students;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,10 +33,6 @@ public class StudentHelper extends HelperBase {
 
   public void btnDeleteStudent() {
     click(By.xpath("//button[contains(@class, 'remove')]"));
-  }
-
-  public void btnAddStudentInFamily() {
-    click(By.xpath("//div[contains(@class,'child')]/span[contains(@class,'sign')]"));
   }
 
   public void assertDeleteSelectedStudent() {
@@ -147,7 +144,7 @@ public class StudentHelper extends HelperBase {
 
   // студенты с пагинацией
   public List<StudentData> list() {
-    List<StudentData> students = new ArrayList<StudentData>();
+    List<StudentData> students = new ArrayList<>();
     WebDriverWait wait = new WebDriverWait(wd, 2);
     wait.until(
         ExpectedConditions.presenceOfElementLocated(
@@ -269,7 +266,7 @@ public class StudentHelper extends HelperBase {
   public void goOnLesson() {
     maxBrowser();
     if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
-     btnCloseTutorial();
+      btnCloseTutorial();
     }
     btnGoToLesson();
     btnImReady();
@@ -277,13 +274,13 @@ public class StudentHelper extends HelperBase {
 
   private void btnImReady() {
     if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
-    btnCloseTutorial();
+      btnCloseTutorial();
     }
     click(By.xpath("//div[contains(@class,'preview')]//button"));
   }
 
   private void btnGoToLesson() {
-    clickWithMoveToElementAndWait(5,By.xpath("//button[@tutorialtarget-id='child-go-to-lesson']"));
+    clickWithMoveToElementAndWait(5, By.xpath("//button[@tutorialtarget-id='child-go-to-lesson']"));
   }
 
   public void btnLogo() {
@@ -298,18 +295,23 @@ public class StudentHelper extends HelperBase {
   }
 
   public void goToStudentProfileTabTests() {
+    btnCloseTutorial();
     click(By.xpath("//button[@id-qa='testing']"));
   }
 
   public void skipHelper() {
     maxBrowser();
     deleteAlerts();
-    goInAccauntStudentAfterChended();
+    goInAccountStudentAfterChanged();
     btnCloseTutorial();
   }
 
   public void btnCloseTutorial() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='cancel']"));
+    try {
+      clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='cancel']"));
+    } catch (TimeoutException e) {
+      System.out.println("Исключение:" + e);
+    }
   }
 
   public void goToHistory() {
@@ -323,25 +325,20 @@ public class StudentHelper extends HelperBase {
   }
 
   public void btnHistory() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='view-all']"));
+    clickWaitElementToBeClicable(5, (By.xpath("//button[@id-qa='view-all']")));
   }
 
   public void closeHistory() {
-    moveToElement(By.xpath("(//button)[3]"));
-    clickWaitElementToBeClicable(5, By.xpath("//div[@role='dialog']//button"));
+    clickWithMoveToElementAndWait(7, By.xpath("(//button)[9]"));
   }
-
-//  public void goToTesting() {
-//    clickWithMoveToElementAndWait(5, By.xpath("//a[@href='/testing']"));
-//  }
 
   public void goToCheckConnection() {
     clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='settings']"));
   }
 
   public void openChat() {
-    if(isElementPresent(By.xpath("//button[@id-qa='cancel']"))){
-     btnCloseTutorial();
+    if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
+      btnCloseTutorial();
     }
     clickWithMoveToElementAndWait(5, By.xpath("//div[@class='chat-button']"));
   }
@@ -351,11 +348,11 @@ public class StudentHelper extends HelperBase {
     btnImReady();
   }
 
-  public Boolean findTutorias() {
+  public Boolean findTutorials() {
     return isElementPresent(By.xpath("//div[contains(@class,'tutorials')]"));
   }
 
-  public void goInAccauntStudentAfterChended() {
+  public void goInAccountStudentAfterChanged() {
     refresh();
     wd.get(address() + "/login");
     login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
@@ -378,5 +375,60 @@ public class StudentHelper extends HelperBase {
 
   private void btnSchedule() {
     click(By.xpath("//button[@id-qa='schedule']"));
+  }
+
+  public void btnCommunities() {
+    click(By.xpath("//button[@id-qa='communities']"));
+  }
+
+  public void subscribeOnCommunity() {
+    btnCommunities();
+    btnSubscribe();
+  }
+
+  private void btnSubscribe() {
+    click(By.xpath("//button[@id-qa='subscribe']"));
+  }
+
+  public void unsubscribeOnCommunity() {
+    btnCommunities();
+    btnUnsubscribe();
+  }
+
+  private void btnUnsubscribe() {
+    click(By.xpath("//button[@id-qa='unsubscribe']"));
+  }
+
+  public void addLike() {
+    click(By.xpath("//span[@id-qa='like']"));
+  }
+
+  public void addCommentInFeed(String comment) {
+    refresh();
+    goToFeed();
+    fillNewComment(comment);
+    btnCreateComment();
+  }
+
+  private void btnCreateComment() {
+    click(By.xpath("//button[@id-qa='create']"));
+  }
+
+  private void fillNewComment(String comment) {
+    clickWaitElementToBeClicable(5, By.xpath("//div[@id-qa='wrap']"));
+    wd.findElement(By.xpath("//div[@class='body']//textarea[1]")).sendKeys(comment);
+  }
+
+  public void tabAll() {
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
+  }
+
+  public void btnPoint() {
+    click(By.xpath("//div[@class='right']//button"));
+  }
+
+  public void goInProfile() {
+    click(By.xpath("//div[@class='head']"));
+    clickWithMoveToElementAndWait(5, By.xpath("//li[2]//button"));
   }
 }

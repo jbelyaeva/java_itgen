@@ -35,10 +35,10 @@ public class ChatSearchDialogWithRandomAdminTest extends TestBase {
     app.trChat().saveChatMessage("MessageOnLesson", "RoomMessage", new Date(), messageOld, "21");
     app.trChat()
         .saveChatSubscription(
-            "subsc1", new Date(), "d", "RoomMessage", "21", 1, false, "21", messageOld);
+            "subsc1", new Date(), "d", "RoomMessage", "21", 1, 0, "21", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2", new Date(), "d", "RoomMessage", "23", 1, true, "21", messageOld);
+            "subsc2", new Date(), "d", "RoomMessage", "23", 1, 1, "21", messageOld);
   }
 
 

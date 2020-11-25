@@ -3,11 +3,11 @@ package tests.taskPopup;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -46,7 +46,7 @@ public class TaskAutoChangeDate extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
   public void testTaskAutoChangeDate() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();

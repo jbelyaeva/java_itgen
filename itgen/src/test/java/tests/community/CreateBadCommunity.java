@@ -1,6 +1,6 @@
 package tests.community;
-/* Кейс: создать сообщество под админом, заполнив форму валидными значеням. Проверить, что сообщество
-   корректно записалось в бд, нет сообщений об ошибках, протестить форму валидными значениями*/
+/* Кейс: создать сообщество не заполнив обязательные поля. Проверить, что появляются нужные алерты и
+сообщество не создалось*/
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,6 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import core.general.RunTestAgain;
 import data.model.communities.Communities;
 import data.model.communities.CommunityData;
 import java.io.BufferedReader;
@@ -44,7 +45,7 @@ public class CreateBadCommunity extends TestBase {
     }
   }
 
-  @Test(dataProvider = "noValidCommunityFromJson")
+  @Test(dataProvider = "noValidCommunityFromJson", retryAnalyzer = RunTestAgain.class)
   public void testCreateBadCommunity(CommunityData community) {
     app.goTo().menuCommunities();
     Communities before = app.dbcommunity().communities();

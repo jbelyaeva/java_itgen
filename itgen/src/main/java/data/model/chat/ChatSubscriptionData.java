@@ -28,13 +28,14 @@ public class ChatSubscriptionData {
   @Property("msgs")
   private int msgs;
 
-  @Property("alert")
-  private boolean alert;
+  @Property("alertCount")
+  private int alertCount;
 
   @Embedded("lastMessage")
   LastMessage lastMessage;
 
-  public ChatSubscriptionData() {}
+  public ChatSubscriptionData() {
+  }
 
   public ChatSubscriptionData withId(String id) {
     this.id = id;
@@ -66,8 +67,8 @@ public class ChatSubscriptionData {
     return this;
   }
 
-  public ChatSubscriptionData withAlert(boolean alert) {
-    this.alert = alert;
+  public ChatSubscriptionData withAlertCount(int alertCount) {
+    this.alertCount = alertCount;
     return this;
   }
 
@@ -100,8 +101,8 @@ public class ChatSubscriptionData {
     return msgs;
   }
 
-  public boolean getAlert() {
-    return alert;
+  public int getAlertCount() {
+    return alertCount;
   }
 
   public LastMessage getLastMessage() {
@@ -118,7 +119,7 @@ public class ChatSubscriptionData {
     }
     ChatSubscriptionData that = (ChatSubscriptionData) o;
     return msgs == that.msgs
-        && alert == that.alert
+        && alertCount == that.alertCount
         && Objects.equals(id, that.id)
         && Objects.equals(type, that.type)
         && Objects.equals(roomId, that.roomId)
@@ -128,32 +129,21 @@ public class ChatSubscriptionData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, roomId, userId, msgs, alert, lastMessage);
+    return Objects.hash(id, type, roomId, userId, msgs, alertCount, lastMessage);
   }
 
   @Override
   public String toString() {
-    return "ChatSubscriptionData{"
-        + "id='"
-        + id
-        + '\''
-        + ", updatedAt="
-        + updatedAt
-        + ", type='"
-        + type
-        + '\''
-        + ", roomId='"
-        + roomId
-        + '\''
-        + ", userId='"
-        + userId
-        + '\''
-        + ", msgs="
-        + msgs
-        + ", alert="
-        + alert
-        + ", lastMessage="
-        + lastMessage
-        + '}';
+    return "ChatSubscriptionData{" +
+        "id='" + id + '\'' +
+        ", updatedAt=" + updatedAt +
+        ", type='" + type + '\'' +
+        ", roomId='" + roomId + '\'' +
+        ", userId='" + userId + '\'' +
+        ", msgs=" + msgs +
+        ", alertCount=" + alertCount +
+        ", lastMessage=" + lastMessage +
+        '}';
   }
+
 }

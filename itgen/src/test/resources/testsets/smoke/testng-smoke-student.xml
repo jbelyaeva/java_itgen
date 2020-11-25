@@ -16,6 +16,16 @@
       <class name="tests.lkStudent.ChatModifyMessageTest"/>
       <class name="tests.lkStudent.ChatSendFileNewDialogTest"/>
       <class name="tests.lkStudent.StudentPageScheduleTest"/>
+      <class name="tests.lkStudent.StudentOpenNewCommunity"/>
+      <class name="tests.lkStudent.SubscribeCommunity"/>
+      <class name="tests.lkStudent.UnsubscribeCommunity"/>
+      <class name="tests.lkStudent.AddLikeToPostCommunity"/>
+      <class name="tests.lkStudent.FeedLeaveCommentForPost"/>
+      <class name="tests.lkStudent.FeedCantDeletePost"/>
+      <class name="tests.lkStudent.AdminCommunityTabFeed"/>
+      <class name="tests.lkStudent.AdminCommunityTabFeedDeleteAndModifyPost"/>
+      <class name="tests.lkStudent.OpenProfile"/>
+
     </classes>
   </test>
 </suite>

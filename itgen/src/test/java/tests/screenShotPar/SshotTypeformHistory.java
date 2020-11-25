@@ -26,11 +26,11 @@ public class SshotTypeformHistory extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     skills = new String[] {"1"};
-/*    app.trTest()
+    app.trTest()
         .saveTest(
             "Pass",
             "Тест",
-            "123456",
+            "111111",
             "ru",
             "Test на переход на новое направление",
             5,
@@ -44,8 +44,8 @@ public class SshotTypeformHistory extends TestBase {
 
     app.trTest()
         .saveResultTest(
-            "TestPass", "21", "Pass", "Тест", "123456", skills, "ru", 5, 5, createAt, "", true);
-*/
+            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createAt, "", true);
+
     app.trTest()
         .saveTest(
             "NotPass",

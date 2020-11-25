@@ -8,7 +8,9 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -29,6 +31,10 @@ public class CommunityHelper extends HelperBase {
 
     clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='desc']"));
     wd.findElement(By.xpath("//textarea[@id-qa='desc']")).sendKeys(community.getDescription());
+
+    click(By.xpath("//div[@role='select-open-role']"));
+    click(By.xpath("//li[@data-value='1']"));
+    clickByCoordinats(400, 400);
 
     for (int i = 0; i < community.getTagUI().size(); i++) {
       type(By.xpath("//input[@id-qa='tags']"), community.getTagUI().get(i));
@@ -77,6 +83,156 @@ public class CommunityHelper extends HelperBase {
       ((RemoteWebDriver) wd).setFileDetector(new LocalFileDetector());
     }
     wd.findElement(By.xpath("//input[@type='file']")).sendKeys(FileHelper.getAbsolutePath(path));
+  }
+
+  public void btnAdministration() {
+    click(By.xpath("//button[@id-qa='administration']"));
+  }
+
+  public void goInCommunity() {
+    click(By.xpath("//h4[@id-qa='title']"));
+  }
+
+  public void modifyCommunity(CommunityData community) {
+    btnAdministration();
+    goInCommunity();
+    btnChange();
+    fillModifyForm(community);
+    btnSaveEdit();
+  }
+
+  private void btnSaveEdit() {
+    click(By.xpath("//button[@id-qa='edit']"));
+  }
+
+  private void fillModifyForm(CommunityData community) {
+    clear(20, By.xpath("//input[@id-qa='title']"));
+    type(By.xpath("//input[@id-qa='title']"), community.getTitle());
+
+    clear(50, By.xpath("//textarea[@id-qa='desc']"));
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='desc']"));
+    wd.findElement(By.xpath("//textarea[@id-qa='desc']")).sendKeys(community.getDescription());
+  }
+
+  private void btnChange() {
+    click(By.xpath("//a[@id-qa='edit']"));
+  }
+
+  public void addTextPost(String text) {
+    btnAdministration();
+    goInCommunity();
+    btnAddPost();
+    fillPost(text);
+    btnCreatePost();
+  }
+
+  public void addFilePost(String path) throws IOException {
+    btnAdministration();
+    goInCommunity();
+    btnAddPost();
+    fillFilePost(path);
+    btnCreatePost();
+  }
+
+  private void fillFilePost(String path) throws IOException {
+    unhide(wd, wd.findElement(By.xpath("//input[@type='file']")));
+    if (!"".equals(properties.getProperty("selenium.server"))) {
+      ((RemoteWebDriver) wd).setFileDetector(new LocalFileDetector());
+    }
+    wd.findElement(By.xpath("//input[@type='file']")).sendKeys(FileHelper.getAbsolutePath(path));
+
+  }
+
+  public void unhide(WebDriver driver, WebElement element) {
+    String script =
+        "arguments[0].style.opacity=1;"
+            + "arguments[0].style['transform']='translate(0px, 0px) scale(1)';"
+            + "arguments[0].style['MozTransform']='translate(0px, 0px) scale(1)';"
+            + "arguments[0].style['WebkitTransform']='translate(0px, 0px) scale(1)';"
+            + "arguments[0].style['msTransform']='translate(0px, 0px) scale(1)';"
+            + "arguments[0].style['OTransform']='translate(0px, 0px) scale(1)';"
+            + "arguments[0].style['border']='1px';"
+            + "arguments[0].style['display']='';"
+            + "return true;";
+    ((JavascriptExecutor) driver).executeScript(script, element);
+  }
+
+
+  private void btnCreatePost() {
+    click(By.xpath("//button[@id-qa='create']"));
+  }
+
+  private void fillPost(String text) {
+    clickWithMoveToElementAndWait(1, By.xpath("//div[@class='community-post-body']//textarea"));
+    wd.findElement(By.xpath("//div[@class='community-post-body']//textarea")).sendKeys(text);
+  }
+
+  private void btnAddPost() {
+    click(By.xpath("//div[@id-qa='add-post']"));
+  }
+
+  public boolean filePostGetTrainerFromAdmin(String login, String password, String fileName) {
+    logout();
+    login(login, password);
+    menuCommunities();
+    goInCommunity();
+    return getByTrainerFile(fileName);
+  }
+
+  private void menuCommunities() {
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href, '/communities')]"));
+  }
+
+  private boolean getByTrainerFile(String fileName) {
+    boolean getFile = false;
+    try {
+      waitVisibilityOfElementLocated(5, By.xpath("//img[@alt='" + fileName + "']"));
+      getFile = isElementPresent(By.xpath("//img[@alt='" + fileName + "']"));
+    } catch (TimeoutException e) {
+      System.out.println("Исключение:" + e);
+    } finally {
+      logout();
+      login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+    }
+    return getFile;
+  }
+
+  public void modifyTextPost(String newText) {
+    btnAdministration();
+    goInCommunity();
+    btnPointPost();
+    btnModifyPost();
+    modifyPost(newText);
+    btnSavePost();
+  }
+
+  private void btnSavePost() {
+    clickWithMoveToElementAndWait(3, By.xpath("//button[@id-qa='save']"));
+  }
+
+  private void modifyPost(String newText) {
+    clear(50, By.xpath("//div[@class='community-post-body']//textarea"));
+    clickWithMoveToElementAndWait(1, By.xpath("//div[@class='community-post-body']//textarea"));
+    wd.findElement(By.xpath("//div[@class='community-post-body']//textarea")).sendKeys(newText);
+  }
+
+  private void btnModifyPost() {
+    clickWithMoveToElementAndWait(3, By.xpath("//li[@id-qa='menu-edit']"));
+  }
+
+  private void btnPointPost() {
+    clickWithMoveToElementAndWait(3, By.xpath("//button[@id-q='menu']"));
+  }
+
+  public void deleteTextPost() {
+    btnAdministration();
+    goInCommunity();
+    btnPointPost();
+    btnDeletePost();
+  }
+
+  private void btnDeletePost() {
+    clickWithMoveToElementAndWait(3, By.xpath("//li[@id-qa='menu-delete']"));
   }
 
 }

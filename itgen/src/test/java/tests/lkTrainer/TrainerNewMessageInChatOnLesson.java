@@ -3,6 +3,7 @@ package tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.services.ChatMessageService;
@@ -16,7 +17,6 @@ import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
 import data.services.TrainerService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -75,10 +75,10 @@ public class TrainerNewMessageInChatOnLesson extends TestBase {
     app.trChat().saveChatMessage("MessageOnLesson", "RoomMessage", new Date(), messageOld, "Chat");
     app.trChat()
         .saveChatSubscription(
-            "subsc1", new Date(), "d", "RoomMessage", "Chat", 1, false, "Chat", messageOld);
+            "subsc1", new Date(), "d", "RoomMessage", "Chat", 1, 0, "Chat", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2", new Date(), "d", "RoomMessage", "23", 1, true, "Chat", messageOld);
+            "subsc2", new Date(), "d", "RoomMessage", "23", 1, 1, "Chat", messageOld);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

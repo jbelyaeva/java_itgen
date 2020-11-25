@@ -5,11 +5,8 @@ import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.model.materials.MaterialData;
 import data.services.MaterialService;
-import data.services.TestResultsService;
-import data.services.TestService;
 import java.awt.AWTException;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
@@ -29,13 +26,10 @@ public class Sshot1Feed extends TestBase {
 
   MaterialService materialService = new MaterialService();
   private final TimeGeneral time = new TimeGeneral();
-  private final TestService testService = new TestService();
-  private final TestResultsService testResultsService = new TestResultsService();
-  private String[] skills = null;
-  private String period = "18:00 - 20:00";
 
   @BeforeMethod
   public void ensurePreconditions() {
+    String period = "18:00 - 20:00";
     app.trScheduleYesterday()
         .FinishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
 
@@ -127,8 +121,8 @@ public class Sshot1Feed extends TestBase {
             4,
             true,
             false,
-            time.Stime(period),
-            time.Etime(period));
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period));
 
     app.trFinishedLesson()
         .finishedLessonWithOneStudent(
@@ -137,10 +131,10 @@ public class Sshot1Feed extends TestBase {
             time.dateYesterday(),
             0,
             "14",
-            time.Stime(period),
-            time.Etime(period),
-            time.Stime(period),
-            time.Etime(period),
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period),
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period),
             "21",
             "finished",
             0,
@@ -151,6 +145,7 @@ public class Sshot1Feed extends TestBase {
             true,
             false);
 
+
     MaterialData hwMaterial = materialService.findById("MaterialOnLessonFirst");
     MaterialData doneMaterial = materialService.findById("MaterialOnLessonSecond");
     String[] hwMaterials = {
@@ -159,6 +154,7 @@ public class Sshot1Feed extends TestBase {
     String[] doneMaterials = {
       doneMaterial.getTitle(), doneMaterial.getType(), doneMaterial.getMaterialLink(), "done"
     };
+
     Integer[] grades = {3, 2, 4, 2, 4, 4};
     String[] text = {"Ученик очень старался", "Ученик очень старался", "Телепортация"};
     app.trMaterial()
@@ -172,8 +168,8 @@ public class Sshot1Feed extends TestBase {
             hwMaterials,
             doneMaterials,
             "Проект Головоломка",
-            time.Etime(period),
-            time.Stime(period),
+            time.EtimeYesterday(period),
+            time.StimeYesterday(period),
             grades,
             "Проект Лаборатория",
             "1",
@@ -185,6 +181,7 @@ public class Sshot1Feed extends TestBase {
             "21",
             "Ребенок",
             "Дефолтный",
+            new String[]{"child"},
             "beginner",
             "BY",
             "Europe/Minsk",
@@ -201,63 +198,6 @@ public class Sshot1Feed extends TestBase {
             "1",
             1);
 
-    skills = new String[] {"1"};
-    Date createTest = app.base().DateWithCorrectionDays(-3);
-    app.trTest()
-        .saveTest(
-            "Pass",
-            "Тест",
-            "111111",
-            "ru",
-            "Test на переход на новое направление",
-            5,
-            5,
-            10,
-            skills,
-            createTest,
-            null);
-
-    testService.deleteField("Pass", "removedAt");
-
-    app.trTest()
-        .saveResultTest(
-            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createTest, "", true);
-
-    Date createTestTNew = app.base().DateWithCorrectionDays(-4);
-    skills = new String[] {"2"};
-    app.trTest()
-        .saveTest(
-            "NotPass",
-            "Тест",
-            "22222",
-            "ru",
-            "Test очень крутой",
-            5,
-            5,
-            10,
-            skills,
-            createTestTNew,
-            null);
-
-    testService.deleteField("NotPass", "removedAt");
-    testService.updateField("NotPass", "entityTestId", "99999");
-
-    app.trTest()
-        .saveResultTest(
-            "TestNotPass",
-            "21",
-            "NotPass",
-            "Тест",
-            "22222",
-            skills,
-            "ru",
-            5,
-            5,
-            createTestTNew,
-            "",
-            false);
-    testResultsService.updateField("TestNotPass", "entityTestId", "99999");
-
     long alreadyRun = 7200000; // 2 часа идет занятие
     String periodLesson = time.getPeriod(time.getTimeNow() - alreadyRun);
     app.trScheduleToday()
@@ -270,7 +210,7 @@ public class Sshot1Feed extends TestBase {
     String name = "Student_FeedPage_RU_Chrome";
     app.student().skipHelper();
     app.student().goToFeed();
-    app.sshot().changeTopBar();
+    app.sshot().changeTopBarInLKParent();
 
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//span[@class='date']"));
@@ -278,13 +218,13 @@ public class Sshot1Feed extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
     ImageDiff diff =
         app.sshot()
-            .getImageDiff(
+            .getImageDiffWithoutScroll(
                 ApplicationManager.properties.getProperty("expected"),
                 ApplicationManager.properties.getProperty("actual"),
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.25f);
+                1.92f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);

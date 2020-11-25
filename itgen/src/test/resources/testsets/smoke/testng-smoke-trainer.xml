@@ -17,6 +17,7 @@
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithEmployeersTest"/>
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithNewFamilyTest"/>
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithOldFamilyTest"/>
+      <class name="tests.lkTrainer.TrainerOpenNewCommunity"/>
     </classes>
   </test>
 </suite>

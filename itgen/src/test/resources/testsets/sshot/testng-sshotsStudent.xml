@@ -5,10 +5,13 @@
     <classes>
       <class name="tests.screenShotStudent.Sshot1Feed"/>
       <class name="tests.screenShotStudent.Sshot2LookHistory"/>
-      <class name="tests.screenShotStudent.Sshot3LookTests"/>
-      <class name="tests.screenShotStudent.Sshot4CheckConnection"/>
-      <class name="tests.screenShotStudent.Sshot5OpenChat"/>
-      <class name="tests.screenShotStudent.Sshot6LessonStart"/>
+      <class name="tests.screenShotStudent.Sshot3CheckConnection"/>
+      <class name="tests.screenShotStudent.Sshot4OpenChat"/>
+      <class name="tests.screenShotStudent.Sshot5LessonStart"/>
+      <class name="tests.screenShotStudent.SshotLearningWithHistoryWithoutSubscribers"/>
+      <class name="tests.screenShotStudent.SshotLearningWithoutSubscribersAndHistory"/>
+      <class name="tests.screenShotStudent.SshotLearningWithSubscriberHistory"/>
+      <class name="tests.screenShotStudent.SshotLookTests"/>
     </classes>
   </test>
 </suite>

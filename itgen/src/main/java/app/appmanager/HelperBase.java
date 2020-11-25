@@ -319,4 +319,9 @@ public class HelperBase {
       deleteElements(deleteElements);
     }
   }
+
+  public void clickByCoordinats(int x, int y) {
+    JavascriptExecutor exe = (JavascriptExecutor) wd;
+    exe.executeScript("$(document.elementFromPoint(" + x + "," + y + ")).click();");
+  }
 }

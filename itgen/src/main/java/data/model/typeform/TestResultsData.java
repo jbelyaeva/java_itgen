@@ -161,8 +161,8 @@ public class TestResultsData {
     return this;
   }
 
-  public TestResultsData withScores(int scores) {
-    this.scores = scores;
+  public TestResultsData withScores(int score) {
+    this.scores = score;
     return this;
   }
 

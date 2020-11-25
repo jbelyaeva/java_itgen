@@ -17,6 +17,7 @@ public class StudentWithoutTrailDisplayTest extends TestBase {
             "21",
             "Ребенок",
             "Дефолтный",
+            new String[]{"child"},
             "beginner",
             "BY",
             "Europe/Minsk",
@@ -36,8 +37,8 @@ public class StudentWithoutTrailDisplayTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentWithoutTrailDisplay() {
-    app.student().goInAccauntStudentAfterChended();
-    assertThat(app.student().findTutorias(), equalTo(true));
+    app.student().goInAccountStudentAfterChanged();
+    assertThat(app.student().findTutorials(), equalTo(true));
     assertThat(app.student().openCheckConnection(), equalTo(true));
     app.student().btnCloseTutorial();
   }

@@ -71,6 +71,7 @@ public class CreateCommunityWithPicture extends TestBase {
     String[] idManagers = {"666"};
     String[] idSubscUser = {"666"};
     Date[] dateSubsc = {new Date()};
+    String[] skills = {"1"};
     app.trCommunity()
         .newCommunity(
             communityNew.getId(),
@@ -82,7 +83,9 @@ public class CreateCommunityWithPicture extends TestBase {
             dateSubsc,
             1,
             community.getTitle(),
-            tags);
+            tags,
+            "ru",
+            skills);
     CommunityData communityAdd = communitiesService.findByIdCommunity(id);
 
     for (CommunityData communityAfter : after) {

@@ -1,15 +1,15 @@
 package data.model.users;
 
 import com.google.gson.annotations.Expose;
-import dev.morphia.annotations.Embedded;
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Property;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Emails;
 import data.model.usersGeneral.FinishedLessonsCountBySkill;
 import data.model.usersGeneral.Services;
 import data.model.usersGeneral.Status;
+import dev.morphia.annotations.Embedded;
+import dev.morphia.annotations.Entity;
+import dev.morphia.annotations.Id;
+import dev.morphia.annotations.Property;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +25,7 @@ public class StudentData {
   private String username;
 
   @Property("skills")
-  private final List<String> skills = new ArrayList<String>();
+  private List<String> skills = new ArrayList<>();
 
   @Expose
   @Property("firstName")
@@ -73,7 +73,7 @@ public class StudentData {
   private Integer duration;
 
   @Embedded
-  private List<Contacts> contacts = new ArrayList<Contacts>();
+  private List<Contacts> contacts = new ArrayList<>();
 
   @Property("familyId")
   private String familyId;
@@ -92,13 +92,13 @@ public class StudentData {
   private Services services;
 
   @Property("lastSeen")
-  private String lastSeen;
+  private Date lastSeen;
 
   @Property("lessonCount")
   private int lessonCount;
 
   @Embedded("emails")
-  private final List<Emails> emails = new ArrayList<Emails>();
+  private final List<Emails> emails = new ArrayList<>();
 
   @Property("lastSubjs")
   private List<String> lastSubjs = new ArrayList<>();
@@ -109,8 +109,9 @@ public class StudentData {
   @Property("finishedLessonsCount")
   private int finishedLessonsCount;
 
-  @Embedded("finishedLessonsCountBySkill")
+  @Embedded
   private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
+
 
   public StudentData() {}
 
@@ -136,6 +137,11 @@ public class StudentData {
 
   public StudentData withBirthday(Date birthday) {
     this.birthday = birthday;
+    return this;
+  }
+
+  public StudentData withSkills(List<String> skills) {
+    this.skills = skills;
     return this;
   }
 
@@ -204,10 +210,6 @@ public class StudentData {
     return this;
   }
 
-  public StudentData withSkills(List<String> skills) {
-    this.langs = langs;
-    return this;
-  }
 
   public StudentData withLastSubjs(List<String> lastSubjs) {
     this.lastSubjs = lastSubjs;
@@ -225,7 +227,7 @@ public class StudentData {
   }
 
   public StudentData withFinishedLessonsCountBySkill(
-      FinishedLessonsCountBySkill finishedLessonsCpontBySkill) {
+      FinishedLessonsCountBySkill finishedLessonsCountBySkill) {
     this.finishedLessonsCountBySkill = finishedLessonsCountBySkill;
     return this;
   }
@@ -237,6 +239,11 @@ public class StudentData {
 
   public StudentData withUsername(String username) {
     this.username = username;
+    return this;
+  }
+
+  public StudentData withLastSeen(Date lastSeen) {
+    this.lastSeen = lastSeen;
     return this;
   }
 
@@ -340,7 +347,7 @@ public class StudentData {
     return services;
   }
 
-  public String getLastSeen() {
+  public Date getLastSeen() {
     return lastSeen;
   }
 

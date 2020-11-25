@@ -1,6 +1,7 @@
 package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.services.CommentService;
 import data.services.FamilyService;
@@ -12,7 +13,6 @@ import data.services.MaterialService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -132,7 +132,7 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
       "//span[@class='create-time']"
     };
     app.sshot().deleteElements(deleteElements);
-
+    app.sshot().deleteAlerts();
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

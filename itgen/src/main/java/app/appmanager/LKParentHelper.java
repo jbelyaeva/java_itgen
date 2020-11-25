@@ -19,7 +19,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnRecordOnTrail() {
-    if (isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) {
+    if (!isElementPresent(By.xpath("(//button[contains(@id-qa,'trial')])[2]"))) {
       refresh(); // для докера
     }
     clickWithMoveToElementAndWait(5, By.xpath("(//button[contains(@id-qa,'trial')])[2]"));

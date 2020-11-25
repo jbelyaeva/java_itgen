@@ -3,6 +3,7 @@ package tests.chat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import data.model.users.ParentData;
 import data.model.users.WorkerData;
 import data.services.ChatMessageService;
@@ -10,7 +11,6 @@ import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
 import data.services.ParentService;
 import data.services.WorkerService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -39,10 +39,10 @@ public class ChatDeleteModifyAutoMessageTest extends TestBase {
     app.trChat().saveChatMessage("deleteMessage", "RoomMessage", new Date(), messageOld, "-1");
     app.trChat()
         .saveChatSubscription(
-            "subsc1", new Date(), "m", "RoomMessage", "22", 1, true, "-1", messageOld);
+            "subsc1", new Date(), "m", "RoomMessage", "22", 1, 1, "-1", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2", new Date(), "m", "RoomMessage", "-1", 1, false, "-1", messageOld);
+            "subsc2", new Date(), "m", "RoomMessage", "-1", 1, 0, "-1", messageOld);
   }
 
   @Test

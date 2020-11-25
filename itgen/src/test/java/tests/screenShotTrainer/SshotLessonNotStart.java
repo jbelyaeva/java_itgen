@@ -70,7 +70,7 @@ public class SshotLessonNotStart extends TestBase {
     };
 
     app.sshot().deleteElements(deleteElements);
-    app.sshot().deleteAlerts();
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

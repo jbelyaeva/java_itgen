@@ -47,6 +47,10 @@ public class CommunitiesPostData {
   @Property("updatedTime")
   private Double updatedTime;
 
+  @Expose
+  @Property("removedAt")
+  private Date removedAt;
+
   public CommunitiesPostData() {
   }
 
@@ -100,6 +104,11 @@ public class CommunitiesPostData {
     return this;
   }
 
+  public CommunitiesPostData withRemovedAt(Date removedAt) {
+    this.removedAt = removedAt;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -140,6 +149,10 @@ public class CommunitiesPostData {
     return updatedTime;
   }
 
+  public Date getRemovedAt() {
+    return removedAt;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -154,7 +167,6 @@ public class CommunitiesPostData {
         Objects.equals(text, that.text) &&
         Objects.equals(communityId, that.communityId) &&
         Objects.equals(fromCommunity, that.fromCommunity) &&
-        Objects.equals(createAt, that.createAt) &&
         Objects.equals(likes, that.likes) &&
         Objects.equals(attachments, that.attachments) &&
         Objects.equals(creatorId, that.creatorId);
@@ -163,7 +175,7 @@ public class CommunitiesPostData {
   @Override
   public int hashCode() {
     return Objects
-        .hash(id, text, communityId, fromCommunity, createAt, likes, likesCount, attachments,
+        .hash(id, text, communityId, fromCommunity, likes, likesCount, attachments,
             creatorId);
   }
 

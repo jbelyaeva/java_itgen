@@ -188,6 +188,7 @@ public class ApplicationManager {
     chatHelper = new ChatHelper(wd);
     candidateHelper = new CandidateHelper(wd);
     communityHelper = new CommunityHelper(wd);
+    assertions = new Assertions(wd);
 
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));

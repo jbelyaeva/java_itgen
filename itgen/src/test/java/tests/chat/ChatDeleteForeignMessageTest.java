@@ -1,5 +1,6 @@
 package tests.chat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.users.TrainerData;
 import data.model.users.WorkerData;
@@ -8,7 +9,6 @@ import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
 import data.services.TrainerService;
 import data.services.WorkerService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -36,10 +36,10 @@ public class ChatDeleteForeignMessageTest extends TestBase {
         .saveChatMessage("modifyMessage", "RoomModifyMessage", new Date(), messageOld, "666");
     app.trChat()
         .saveChatSubscription(
-            "subsc1", new Date(), "m", "RoomModifyMessage", "23", 1, true, "666", messageOld);
+            "subsc1", new Date(), "m", "RoomModifyMessage", "23", 1, 1, "666", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2", new Date(), "m", "RoomModifyMessage", "-1", 1, false, "666", messageOld);
+            "subsc2", new Date(), "m", "RoomModifyMessage", "-1", 1, 0, "666", messageOld);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

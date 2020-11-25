@@ -3,6 +3,10 @@ package app.appmanager.dbHelpers;
 import static data.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
 import data.model.communities.Communities;
+import data.model.communities.CommunitiesPostCommentData;
+import data.model.communities.CommunitiesPostComments;
+import data.model.communities.CommunitiesPostData;
+import data.model.communities.CommunitiesPosts;
 import data.model.communities.CommunitiesTagData;
 import data.model.communities.CommunityData;
 import dev.morphia.Datastore;
@@ -20,11 +24,28 @@ public class DbHelperCommunity {
     return new Communities(q.find().toList());
   }
 
+  public CommunitiesPosts posts() {
+    Query<CommunitiesPostData> q = datastore.createQuery(CommunitiesPostData.class);
+    return new CommunitiesPosts(q.find().toList());
+  }
+
+  public CommunitiesPostComments comments() {
+    Query<CommunitiesPostCommentData> q = datastore.createQuery(CommunitiesPostCommentData.class);
+    return new CommunitiesPostComments(q.find().toList());
+  }
+
   public CommunityData lastCommunity() {
     Query<CommunityData> q = datastore.createQuery(CommunityData.class);
     long count = q.count();
     List<CommunityData> communities = q.find().toList();
     return communities.get(Math.toIntExact(count - 1));
+  }
+
+  public CommunitiesPostData lastPost() {
+    Query<CommunitiesPostData> q = datastore.createQuery(CommunitiesPostData.class);
+    long count = q.count();
+    List<CommunitiesPostData> posts = q.find().toList();
+    return posts.get(Math.toIntExact(count - 1));
   }
 
   public String[] tags() {

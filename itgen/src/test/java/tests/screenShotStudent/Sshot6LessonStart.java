@@ -75,6 +75,7 @@ public class Sshot6LessonStart extends TestBase {
              "21",
              "Ребенок",
              "Дефолтный",
+             new String[]{"child"},
              "beginner",
              "BY",
              "Europe/Minsk",

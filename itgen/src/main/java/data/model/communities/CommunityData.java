@@ -47,12 +47,20 @@ public class CommunityData {
   @Property("subscribersCount")
   private int subscribersCount;
 
-  @Embedded private AvatarUrls avatarUrls;
+  @Embedded
+  private AvatarUrls avatarUrls;
+
+  @Property("lang")
+  private String lang;
+
+  @Property("skills")
+  private List<String> skills = new ArrayList<>();
 
   @Transient
   private List<String> tagUI = new ArrayList<>();
 
-  public CommunityData() {}
+  public CommunityData() {
+  }
 
   public CommunityData withId(String id) {
     this.id = id;
@@ -109,6 +117,16 @@ public class CommunityData {
     return this;
   }
 
+  public CommunityData withLang(String lang) {
+    this.lang = lang;
+    return this;
+  }
+
+  public CommunityData withSkills(List<String> skills) {
+    this.skills = skills;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -153,6 +171,14 @@ public class CommunityData {
     return tagUI;
   }
 
+  public String getLang() {
+    return lang;
+  }
+
+  public List<String> getSkills() {
+    return skills;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -190,6 +216,9 @@ public class CommunityData {
         ", title='" + title + '\'' +
         ", subscribersCount=" + subscribersCount +
         ", avatarUrls=" + avatarUrls +
+        ", lang='" + lang + '\'' +
+        ", skills=" + skills +
+        ", tagUI=" + tagUI +
         '}';
   }
 }

@@ -3,6 +3,7 @@ package tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import data.model.users.ParentData;
 import data.model.users.StudentData;
 import data.model.users.TrainerData;
@@ -12,7 +13,6 @@ import data.services.ChatSubscriptionService;
 import data.services.ParentService;
 import data.services.StudentService;
 import data.services.TrainerService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -41,10 +41,10 @@ public class TrainerChatSearchDialogWithOldFamilyTest extends TestBase {
     app.trChat().saveChatMessage("MessageOnLesson", "RoomStudent", new Date(), messageOld, "21");
     app.trChat()
         .saveChatSubscription(
-            "subsc1", new Date(), "d", "RoomStudent", "21", 1, false, "21", messageOld);
+            "subsc1", new Date(), "d", "RoomStudent", "21", 1, 0, "21", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2", new Date(), "d", "RoomStudent", "23", 1, true, "21", messageOld);
+            "subsc2", new Date(), "d", "RoomStudent", "23", 1, 1, "21", messageOld);
 
     Object[] usersDialog2 = new Object[2];
     usersDialog2[0] = parent;
@@ -54,10 +54,10 @@ public class TrainerChatSearchDialogWithOldFamilyTest extends TestBase {
     app.trChat().saveChatMessage("MessageParent", "RoomParent", new Date(), messageOld, "21");
     app.trChat()
         .saveChatSubscription(
-            "subsc1Par", new Date(), "d", "RoomParent", "22", 1, false, "22", messageOld);
+            "subsc1Par", new Date(), "d", "RoomParent", "22", 1, 0, "22", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2Par", new Date(), "d", "RoomParent", "23", 1, true, "22", messageOld);
+            "subsc2Par", new Date(), "d", "RoomParent", "23", 1, 1, "22", messageOld);
   }
 
   @Test
