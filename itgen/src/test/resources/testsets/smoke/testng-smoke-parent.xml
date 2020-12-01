@@ -5,7 +5,7 @@
     <classes>
       <class name="tests.lkParent.RecordOnRegular"/>
       <class name="tests.lkParent.RecordOnSingle"/>
-     <!-- <class name="RecordOnTrail"/> -->
+      <class name="tests.lkParent.RecordOnTrail"/>
       <class name="tests.lkParent.CancelOnSingle"/>
       <class name="tests.lkParent.CancelOnRegular"/>
       <class name="tests.lkParent.CancelOneLessonFromRegular"/>

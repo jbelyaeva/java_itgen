@@ -293,7 +293,6 @@ public class LKParentHelper extends HelperBase {
   public void selfRegistration(StudentData student) {
     fillStudentForm1(student);
     btnNextFirst();
-    btnNextSecond();
   }
 
   public void goHref() {

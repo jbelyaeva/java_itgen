@@ -7,8 +7,6 @@
       <class name="tests.schedule.ScheduleRegularMoveTests"/>
       <class name="tests.materials.MaterialsLink"/>
       <class name="tests.payment.PaymentByAdmin"/>
-   <!--   <class name="TestTypeformPass" />
-      <class name="TestTypeformNotPass" /> -->
     </classes>
   </test>
 </suite>

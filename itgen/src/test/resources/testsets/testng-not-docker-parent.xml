@@ -5,7 +5,6 @@
     <classes>
       <class name="tests.payment.PaymentByGuest"/>
       <class name="tests.payment.PaymentByParent"/>
-      <class name="tests.lkParent.RecordOnTrail"/>
     </classes>
   </test>
 </suite>
