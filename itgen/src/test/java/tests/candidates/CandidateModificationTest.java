@@ -3,50 +3,20 @@ package tests.candidates;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import app.testbase.TestBase;
+import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.candidate.CandidateData;
 import data.model.candidate.Candidates;
 import data.services.CandidateService;
-import app.testbase.TestBase;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CandidateModificationTest extends TestBase {
 
   CandidateService candidateService = new CandidateService();
   CandidateData candidateClean = null;
-
-  @DataProvider
-  public Iterator<Object[]> validCandidatesFromJson() throws IOException {
-    try (BufferedReader reader =
-        new BufferedReader(
-            new FileReader(new File("src/test/resources/testdata/candidate_modification.json")))) {
-      String json = "";
-      String line = reader.readLine();
-      while (line != null) {
-        json += line;
-        line = reader.readLine();
-      }
-      Gson gson = new Gson();
-      List<CandidateData> candidates =
-          gson.fromJson(json, new TypeToken<List<CandidateData>>() {}.getType());
-      return candidates.stream()
-          .map((p) -> new Object[] {p})
-          .collect(Collectors.toList())
-          .iterator();
-    }
-  }
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -89,7 +59,8 @@ public class CandidateModificationTest extends TestBase {
             "mother");
   }
 
-  @Test(dataProvider = "validCandidatesFromJson", retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validModifyCandidatesFromJson", dataProviderClass = LocaleUtilsTestData.class,
+      retryAnalyzer = RunTestAgain.class)
   public void testCandidateMofidication(CandidateData candidate) throws InterruptedException {
     app.goTo().urlCandidates();
     Candidates before = app.dbcandidates().candidates();

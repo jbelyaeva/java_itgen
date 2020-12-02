@@ -13,10 +13,10 @@ import org.testng.annotations.Test;
 
 public class StudentPageScheduleTest extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
   private final TimeGeneral time = new TimeGeneral();
-  private String period = "";
   private final long alreadyRun = 7200000; // 2 часа идет занятие
+  ScheduleService scheduleService = new ScheduleService();
+  private String period = "";
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -31,6 +31,7 @@ public class StudentPageScheduleTest extends TestBase {
             "1",
             "ru");
   }
+
   /*тест проверяет, что кнопка Все расписание нажимается и ведет на расписание*/
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentPageSchedule() {

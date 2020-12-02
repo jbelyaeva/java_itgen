@@ -77,7 +77,8 @@ public class TrStudentHelper {
       String phone,
       String lang,
       String skill,
-      int duration) {
+      int duration,
+      String status) {
     StudentData student =
         new StudentData()
             .withId(idStudent)
@@ -97,7 +98,7 @@ public class TrStudentHelper {
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
             .withDuration(duration)
-            .withStatus(new Status().withState("noTrial"));
+            .withStatus(new Status().withState(status));
     studentService.save(student);
   }
 

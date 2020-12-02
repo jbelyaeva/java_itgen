@@ -150,6 +150,8 @@ public class ScheduleHelper extends HelperBase {
     selectScheduleInListUIById(id);
     bntPoints();
     selectMove();
+    btnCalendar();
+    selectDateToday();
     fillFormMove(period);
     btnMove();
     noErrorMessage();
@@ -160,6 +162,8 @@ public class ScheduleHelper extends HelperBase {
     selectScheduleInListUIById(id);
     bntPoints();
     selectMove();
+    btnCalendar();
+    selectDateToday();
     fillFormMove(period);
     btnMoveDisabled();
     noErrorMessage();
@@ -175,9 +179,19 @@ public class ScheduleHelper extends HelperBase {
     selectScheduleInListUIById(id);
     bntPoints();
     selectMove();
+    btnCalendar();
+    selectDateToday();
     fillBadTime();
     btnMoveDisabled();
     refresh();
+  }
+
+  private void selectDateToday() {
+    click(By.xpath("//button[contains(@class,'daySelect')]"));
+  }
+
+  private void btnCalendar() {
+    click(By.xpath("//div[@id='date-from']//button"));
   }
 
   public void badMoveNotChangeDateTime(String id) {
@@ -311,22 +325,6 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void fillFormMove(String period) {
-    // выбор текущей даты в календаре
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 5))
-            .until(
-                ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//span[contains(@class,'picker')]")));
-    dynamicElement.click();
-
-    // решение на периодическое не открытие календаря
-    if (isElementPresent(By.xpath("//td[contains(@class,'active')]"))) {
-      click(By.xpath(" //td[contains(@class,'active')]"));
-    } else {
-      dynamicElement.click();
-      click(By.xpath(" //td[contains(@class,'active')]"));
-    }
-
     // выбор времени (крайнее на сегодня)
     WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
     Select select1 = new Select(Selectbox_times);

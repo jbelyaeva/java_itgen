@@ -48,7 +48,7 @@ public class TaskManualAddNew extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validTaskFromJson", retryAnalyzer = RunTestAgain.class, enabled = false)
+  @Test(dataProvider = "validTaskFromJson", retryAnalyzer = RunTestAgain.class)
   public void testAddNewTask(TaskData task) {
     app.goTo().menuTrainers();
     app.goTo().menuTasks();

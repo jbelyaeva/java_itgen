@@ -325,7 +325,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void btnHistory() {
-    clickWaitElementToBeClicable(5, (By.xpath("//button[@id-qa='view-all']")));
+    clickWaitElementToBeClicable(5, By.xpath("//button[@id-qa='view-all']"));
   }
 
   public void closeHistory() {
@@ -420,7 +420,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void tabAll() {
-    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='all']"));
   }
 
   public void btnPoint() {
@@ -430,5 +430,13 @@ public class StudentHelper extends HelperBase {
   public void goInProfile() {
     click(By.xpath("//div[@class='head']"));
     clickWithMoveToElementAndWait(5, By.xpath("//li[2]//button"));
+  }
+
+  public void tabAdministration() {
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='administration']"));
+  }
+
+  public void tabFeed() {
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
   }
 }

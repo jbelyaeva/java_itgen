@@ -64,9 +64,9 @@ public class CandidateCreateTask extends TestBase {
             "mother");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testCandidateCreateTask() {
-    app.goTo().urlCandidates();
+    app.goTo().menuCandidates();
 
     Candidates before = app.dbcandidates().candidates();
     Tasks beforeTask = app.dbtasks().tasks();

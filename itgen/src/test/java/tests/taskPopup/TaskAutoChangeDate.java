@@ -46,7 +46,7 @@ public class TaskAutoChangeDate extends TestBase {
             "newAutoTask_takeAutoTask");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskAutoChangeDate() throws InterruptedException {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();

@@ -8,12 +8,12 @@
       <class name="tests.screenShotPar.SshotEntryOnTrial"/>
       <class name="tests.screenShotPar.SshotSignUpOnTrial"/>
       <class name="tests.screenShotPar.SshotAddNewStudentFormFirst"/>
-      <class name="tests.screenShotPar.SshotAddNewStudentFormSecond"/>
       <class name="tests.screenShotPar.SshotConfirmRecordOnRegular"/>
       <class name="tests.screenShotPar.SshotFiltrRecordOnRegular"/>
       <class name="tests.screenShotPar.SshotFiltrRecordOnSingle"/>
       <class name="tests.screenShotPar.SshotPayByParentShopRU"/>
       <class name="tests.screenShotPar.SshotTypeformHistory"/>
+      <class name="tests.screenShotPar.SshotPageFreeLessons"/>
     </classes>
   </test>
 </suite>

@@ -65,7 +65,8 @@ public class TrainerNewMessageInChatOnLesson extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
 
     Object[] users = new Object[2];
     users[0] = studentService.findById("Chat");

@@ -16,6 +16,9 @@ public class Assertions extends HelperBase {
     super(wd);
   }
 
+  public Assertions() {
+  }
+
   /* переводит массивы как множества (порядок не важен, элементы все уникальные) */
   public void twoMas(String[] masOld, String[] masNew) {
     assertThat(SetUtils.equals(Sets.newHashSet(masOld), Sets.newHashSet(masNew)), is(true));
@@ -43,4 +46,19 @@ public class Assertions extends HelperBase {
     assertFalse(isElementPresent(locator));
   }
 
+  /* проверяет, что с данным локатором найдено количество элементов равное ОР
+   * @locator - локатор элемента
+   * @result - ожидаемое количество
+   * */
+  public void countElements(By locator, int result) {
+    assertThat(wd.findElements(locator).size(), is(result));
+  }
+
+  /* проверяет, что с текст совпадает с эталонным
+   * @text - проверяемый текст
+   * @result - ожидаемый результат
+   * */
+  public void twoString(String text, String result) {
+    assertThat(text, is(result));
+  }
 }

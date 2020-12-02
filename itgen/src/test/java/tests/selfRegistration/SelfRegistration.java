@@ -16,8 +16,8 @@ import static app.appmanager.ApplicationManager.properties;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import app.testbase.TestBase;
+import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.family.Families;
 import data.model.family.FamilyData;
@@ -32,20 +32,12 @@ import data.services.LeadService;
 import data.services.ParentService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SelfRegistration extends TestBase {
+
   LeadService leadService = new LeadService();
   TaskService taskService = new TaskService();
   ParentService parentService = new ParentService();
@@ -75,27 +67,9 @@ public class SelfRegistration extends TestBase {
             "manual");
   }
 
-  @DataProvider
-  public Iterator<Object[]> validLeadsFromJson() throws IOException {
-    try (BufferedReader reader =
-        new BufferedReader(
-            new FileReader(new File("src/test/resources/testdata/self_registration.json")))) {
-      String json = "";
-      String line = reader.readLine();
-      while (line != null) {
-        json += line;
-        line = reader.readLine();
-      }
-      Gson gson = new Gson();
-      List<StudentData> students =
-          gson.fromJson(json, new TypeToken<List<StudentData>>() {}.getType());
-      return students.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
-    }
-  }
-
-  @Test(dataProvider = "validLeadsFromJson", retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validSelfRegistrationFromJson", dataProviderClass = LocaleUtilsTestData.class,
+      retryAnalyzer = RunTestAgain.class)
   public void testSelfRegistration(StudentData student) throws InterruptedException {
-
     app.student().logout();
 
     Leads leadsBefore = app.db().leads();
@@ -158,7 +132,8 @@ public class SelfRegistration extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
 
     StudentData studentAdd = studentService.findById(studentClean.getId());
     for (StudentData studentBefore : before) {

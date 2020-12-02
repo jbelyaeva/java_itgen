@@ -20,14 +20,14 @@ import org.testng.annotations.Test;
 
 public class ChatSendFileNewDialogTest extends TestBase {
 
+  private final TimeGeneral time = new TimeGeneral();
+  private final long alreadyRun = 7200000; // 2 часа идет занятие
   ChatRoomService chatRoomService = new ChatRoomService();
   ChatMessageService chatMessageService = new ChatMessageService();
   ChatSubscriptionService chatSubscriptionService = new ChatSubscriptionService();
   String fileName = "file.jpg";
   ScheduleService scheduleService = new ScheduleService();
-  private final TimeGeneral time = new TimeGeneral();
   private String period = "";
-  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {

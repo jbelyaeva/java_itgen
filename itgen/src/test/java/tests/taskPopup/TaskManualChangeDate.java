@@ -42,7 +42,7 @@ public class TaskManualChangeDate extends TestBase {
             "21");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTaskManualChangeDate() {
     app.goTo().menuTasks();
     Tasks before = app.dbtasks().tasks();
