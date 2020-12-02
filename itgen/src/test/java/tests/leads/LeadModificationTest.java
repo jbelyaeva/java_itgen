@@ -3,48 +3,21 @@ package tests.leads;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import app.testbase.TestBase;
+import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.lead.LeadData;
 import data.model.lead.Leads;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Utm;
 import data.services.LeadService;
-import app.testbase.TestBase;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LeadModificationTest extends TestBase {
-  @DataProvider
-  public Iterator<Object[]> validLeadsFromJson() throws IOException {
-    try (BufferedReader reader =
-        new BufferedReader(
-            new FileReader(new File("src/test/resources/testdata/leads_modification.json")))) {
-      String json = "";
-      String line = reader.readLine();
-      while (line != null) {
-        json += line;
-        line = reader.readLine();
-      }
-      Gson gson = new Gson();
-      List<LeadData> leads =
-          gson.fromJson(
-              json, new TypeToken<List<LeadData>>() {}.getType()); // List<StudentData>.class
-      return leads.stream().map((s) -> new Object[] {s}).collect(Collectors.toList()).iterator();
-    }
-  }
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -65,7 +38,8 @@ public class LeadModificationTest extends TestBase {
     leadService.create(lead);
   }
 
-  @Test(dataProvider = "validLeadsFromJson", retryAnalyzer = RunTestAgain.class)
+  @Test(dataProvider = "validModifyLeadsFromJson", dataProviderClass = LocaleUtilsTestData.class,
+      retryAnalyzer = RunTestAgain.class)
   public void testLeadModification(LeadData lead) {
     app.goTo().menuTasks();
     app.goTo().menuLeads();

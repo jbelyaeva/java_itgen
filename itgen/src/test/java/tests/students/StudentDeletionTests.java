@@ -34,7 +34,8 @@ public class StudentDeletionTests extends TestBase {
             "12345678",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test

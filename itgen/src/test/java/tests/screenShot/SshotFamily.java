@@ -37,6 +37,7 @@ public class SshotFamily extends TestBase {
     app.student().selectStudentInListUIById("21");
     app.family().btnFamily();
     app.sshot().changeTopBar();
+    app.base().maxBrowser();
 
     ImageDiff diff = this.getDiff(name, locatorIgnor);
     if (diff.getDiffSize() > 150) {

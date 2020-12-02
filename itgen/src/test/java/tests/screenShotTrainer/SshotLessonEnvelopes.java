@@ -1,11 +1,11 @@
 package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -49,7 +49,8 @@ public class SshotLessonEnvelopes extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test

@@ -71,7 +71,8 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
 

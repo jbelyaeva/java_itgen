@@ -4,7 +4,6 @@ import dev.morphia.annotations.Property;
 import java.util.Objects;
 
 public class FinishedLessonsCountBySkill {
-
   @Property("1")
   public int one;
 

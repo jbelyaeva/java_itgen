@@ -2,11 +2,11 @@ package tests.screenShot;
 
 import static app.appmanager.ApplicationManager.properties;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.services.FamilyService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.Date;
@@ -52,7 +52,8 @@ public class SshotMainTasks extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
     app.trTask()
         .newManualTask(
             "FiltrTaskFirst",

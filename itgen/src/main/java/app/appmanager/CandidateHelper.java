@@ -193,6 +193,7 @@ public class CandidateHelper extends HelperBase {
 
   private void btnSave() {
     click(By.xpath("//button[contains(@class,'save')]"));
+    noErrorMessage();
   }
 
   private void btnPencil() {

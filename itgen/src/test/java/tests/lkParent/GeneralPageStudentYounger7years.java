@@ -1,0 +1,55 @@
+package tests.lkParent;
+/* T-8 */
+/* тестовая ситуация: есть дефолтная семья, к которой добавлен ученик младше 7 лет
+  На главной странице у ребенка есть только кнопка Управлением расписания */
+
+import app.testbase.TestBase;
+import core.general.RunTestAgain;
+import data.services.StudentService;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class GeneralPageStudentYounger7years extends TestBase {
+
+  StudentService studentService = new StudentService();
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+
+    app.trStudent()
+        .NewStudent(
+            "newStudent",
+            "Маша",
+            "Машина",
+            "expert",
+            "BL",
+            "111",
+            "Europe/Minsk",
+            2,
+            app.base().DateWithCorrectionDays(-1460),
+            "ru",
+            "ru",
+            "12345678i",
+            "ru",
+            "1",
+            2,
+            "noTrial"
+        );
+  }
+
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testGeneralPageStudentYounger7years() {
+    app.lkParent().reset();
+    app.check().findElement(app.lkParent().showScheduleSecondChild());
+    app.check().findElement(app.lkParent().showHistorySecondChild());
+    app.check().notFindElement(app.lkParent().btnTrialSecondChild());
+    app.lkParent().btnLogo();
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    studentService.DeleteById("newStudent");
+  }
+
+}

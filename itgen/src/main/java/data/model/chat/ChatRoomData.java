@@ -11,6 +11,7 @@ import java.util.Objects;
 
 @Entity("chat-rooms")
 public class ChatRoomData {
+
   @Id
   @Property("_id")
   private String id;
@@ -25,9 +26,10 @@ public class ChatRoomData {
   private String ownerId;
 
   @Embedded("users")
-  private List<Users> users = new ArrayList<Users>();
+  private List<Users> users = new ArrayList<>();
 
-  public ChatRoomData() {}
+  public ChatRoomData() {
+  }
 
   public ChatRoomData withId(String id) {
     this.id = id;
@@ -96,20 +98,12 @@ public class ChatRoomData {
 
   @Override
   public String toString() {
-    return "ChatRoomData{"
-        + "id='"
-        + id
-        + '\''
-        + ", createdAt="
-        + createdAt
-        + ", type='"
-        + type
-        + '\''
-        + ", ownerId='"
-        + ownerId
-        + '\''
-        + ", users="
-        + users
-        + '}';
+    return "ChatRoomData{" +
+        "id='" + id + '\'' +
+        ", createdAt=" + createdAt +
+        ", type='" + type + '\'' +
+        ", ownerId='" + ownerId + '\'' +
+        ", users=" + users +
+        '}';
   }
 }

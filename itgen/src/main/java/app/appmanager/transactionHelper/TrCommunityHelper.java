@@ -51,7 +51,7 @@ public class TrCommunityHelper {
     for (String idManager : idManagers) {
       mas.add(new Managers()
           .withId(idManager)
-          .withRoles(dbHelper.roles(idManager)));
+          .withRoles(Arrays.asList(new String[]{"admin"})));
     }
     return mas;
   }

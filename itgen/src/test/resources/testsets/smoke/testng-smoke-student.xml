@@ -25,7 +25,7 @@
       <class name="tests.lkStudent.AdminCommunityTabFeed"/>
       <class name="tests.lkStudent.AdminCommunityTabFeedDeleteAndModifyPost"/>
       <class name="tests.lkStudent.OpenProfile"/>
-
+      <class name="tests.lkStudent.ManagerCommunityTabAllWithoutCommunity"/>
     </classes>
   </test>
 </suite>

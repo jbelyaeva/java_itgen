@@ -3,6 +3,7 @@ package tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.schedule.Comments;
@@ -16,7 +17,6 @@ import data.services.FinishedLessonService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -64,7 +64,8 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

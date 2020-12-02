@@ -1,6 +1,7 @@
 package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.services.CommentService;
@@ -13,7 +14,6 @@ import data.services.MaterialService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -72,7 +72,8 @@ public class SshotLessonStartTabProjects extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
 

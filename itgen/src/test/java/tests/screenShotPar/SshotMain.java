@@ -1,8 +1,9 @@
 package tests.screenShotPar;
+/*Кейс: */
 
 import app.appmanager.ApplicationManager;
-import data.services.FamilyService;
 import app.testbase.TestBase;
+import data.services.FamilyService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;

@@ -41,7 +41,8 @@ public class SshotCourseSelectionForTrial extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

@@ -25,7 +25,7 @@ public class SshotTypeformHistory extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[] {"1"};
+    skills = new String[]{"1"};
     app.trTest()
         .saveTest(
             "Pass",
@@ -86,7 +86,8 @@ public class SshotTypeformHistory extends TestBase {
     Set<By> locatorIgnor = new HashSet<>();
 
     String[] deleteElements = {
-      "//div[@class='history-month-header']", "//div[@class='date']", "//span[@class='time']"
+        "//div[@class='history-month-header']", "//div[@class='date']", "//span[@class='time']",
+        "//div[@class='date today']"
     };
 
     app.sshot().deleteElements(deleteElements);
