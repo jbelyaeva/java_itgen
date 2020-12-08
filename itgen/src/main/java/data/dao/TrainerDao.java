@@ -2,10 +2,11 @@ package data.dao;
 
 import static data.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
-import dev.morphia.Datastore;
-import dev.morphia.query.Query;
 import data.connection.MFSessionFactory;
 import data.model.users.TrainerData;
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
+import dev.morphia.query.UpdateOperations;
 
 public class TrainerDao {
 
@@ -24,5 +25,12 @@ public class TrainerDao {
   public TrainerData findById(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     return datastore.find(TrainerData.class).field("id").equal(id).first();
+  }
+
+  public <E> void updateField(String idTrainer, String nameFiled, E[] data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TrainerData> query = datastore.createQuery(TrainerData.class).filter("id", idTrainer);
+    UpdateOperations ops = datastore.createUpdateOperations(TrainerData.class).set(nameFiled, data);
+    datastore.update(query, (UpdateOperations<TrainerData>) ops);
   }
 }

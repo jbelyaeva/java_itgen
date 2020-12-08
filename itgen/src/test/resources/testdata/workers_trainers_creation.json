@@ -6,6 +6,7 @@
     "engLastName": "Vetrov",
     "roleUi": "trainer",
     "phone": "89032566987",
+    "slack": "ULKQA9ZHR",
     "gender": 2,
     "maxSlots": 1,
     "country": "BY",
@@ -15,6 +16,6 @@
     "payBase": 2.5,
     "note": null,
     "info": null,
-    "workloadLevel":"easy"
+    "workloadLevel": "easy"
   }
 ]

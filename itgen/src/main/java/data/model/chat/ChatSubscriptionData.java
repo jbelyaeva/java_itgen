@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity("chat-subscriptions")
 public class ChatSubscriptionData {
+
   @Id
   @Property("_id")
   private String id;

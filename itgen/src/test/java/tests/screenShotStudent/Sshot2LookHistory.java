@@ -23,11 +23,12 @@ public class Sshot2LookHistory extends TestBase {
     app.sshot().changeTopBarInLKParent();
 
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//div[@class='history-month-header']"));
-    locatorIgnor.add(By.xpath("//div[@class='date']"));
-    locatorIgnor.add(By.xpath("//div[@class='date today']"));
     locatorIgnor.add(By.xpath("//div[@class='text']//span"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+
+    String[] deleteElements = {"//span[@class='date']", "//div[@class='date today']",
+        "//div[@class='date today']"};
+    app.sshot().deleteElements(deleteElements);
     ImageDiff diff =
         app.sshot()
             .getImageDiffWithoutScroll(
@@ -42,5 +43,4 @@ public class Sshot2LookHistory extends TestBase {
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }
-
 }

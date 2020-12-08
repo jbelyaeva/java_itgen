@@ -15,7 +15,7 @@ public class TrStudentHelper {
 
   private final StudentService studentService = new StudentService();
 
-  public void StudentAddDefaultFamilyAfterLesson(
+  public void studentAddDefaultFamilyAfterLesson(
       String idStudent,
       String name,
       String surname,
@@ -62,7 +62,7 @@ public class TrStudentHelper {
     studentService.save(student);
   }
 
-  public void NewStudent(
+  public void newStudent(
       String idStudent,
       String name,
       String surname,
@@ -77,7 +77,8 @@ public class TrStudentHelper {
       String phone,
       String lang,
       String skill,
-      int duration) {
+      int duration,
+      String status) {
     StudentData student =
         new StudentData()
             .withId(idStudent)
@@ -97,7 +98,7 @@ public class TrStudentHelper {
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
             .withDuration(duration)
-            .withStatus(new Status().withState("noTrial"));
+            .withStatus(new Status().withState(status));
     studentService.save(student);
   }
 
@@ -137,8 +138,7 @@ public class TrStudentHelper {
   }
 
   public void changeDefaultStudent(String idStudent, String name, String surname, String[] roles,
-      String pclevel, String country, String tz, int gender, String studyLang, String locate,
-      String langs, String skills, String phone, int duration,
+      String pclevel, String country, String tz, int gender, String studyLang, String locate, String langs, String skills, String phone, int duration,
       String status, int finishLessens, String lastSubj, String usedSubj, int countSkill) {
 
     StudentData oldStudent = studentService.findById("21");
@@ -166,8 +166,7 @@ public class TrStudentHelper {
             .withDuration(duration)
             .withStatus(new Status().withState(status))
             .withServices(new Services().withPassword(
-                new Password()
-                    .withBcrypt("$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
+                new Password().withBcrypt("$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
             .withLastSubjs(Arrays.asList(lastSubj))
             .withUsedSubjs(Arrays.asList(usedSubj))
             .withFinishedLessonsCountBySkill(new FinishedLessonsCountBySkill().withOne(countSkill))

@@ -322,14 +322,28 @@ public class TaskHelper extends HelperBase {
   }
 
   private void changeDateNextDay() {
-    click(By.xpath("//span[contains(@class,'picker')]"));
+    click(By.xpath("//div[@class='input-group']//button"));
     if (isElementPresent(
-        By.xpath("//td[contains(@class,'day active')]//following-sibling::td[1]"))) {
-      click(By.xpath("//td[contains(@class,'day active')]//following-sibling::td[1]"));
+        By.xpath("//button[contains(@class,'daySelected')]/../following-sibling::div[1]"))) {
+      // последний день месяца, проверяем, что нельзя выбрать следующую день без щелчка по пагинатору (переходу в следующий месяц)
+      if (!getText("//button[contains(@class,'daySelected')]/../following-sibling::div[1]")
+          .equals("")) {
+        click(By.xpath("//button[contains(@class,'daySelected')]/../following-sibling::div[1]"));
+      } else {
+        click(By.xpath("//div[contains(@class,'switch')]//button[2]"));
+        int i = 1;
+        while (wd.findElement(
+            By.xpath("(//div[contains(@class,'Calendar-week')]//button//span)[" + i + "]"))
+            .getText()
+            .equals("")) {
+          i = i + 1;
+        }
+        click(By.xpath("(//div[contains(@class,'Calendar-week')]//button//span)[" + i + "]"));
+      }
     } else {
       click(
           By.xpath(
-              "//td[contains(@class,'day active')]/ancestor-or-self::tr//following-sibling::tr[1]//td[1]"));
+              "(//button[contains(@class,'daySelected')]/../../following-sibling::div[1]//button)[1]"));
     }
   }
 

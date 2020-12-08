@@ -31,16 +31,8 @@ public class StudentService {
     return studentDao.findById(id);
   }
 
-  public void updateFieldString(String idStudent, String nameFiled, String data) {
-    studentDao.updateFieldString(idStudent, nameFiled, data);
-  }
-
-  public void updateFieldServices(String idStudent, String nameFiled, Services data) {
-    studentDao.updateFieldServices(idStudent, nameFiled, data);
-  }
-
-  public void updateFieldDate(String idStudent, String nameFiled, Date data) {
-    studentDao.updateFieldDate(idStudent, nameFiled, data);
+  public <E> void updateField(String idStudent, String nameFiled, E[] data) {
+    studentDao.updateField (idStudent, nameFiled, data);
   }
 
   public void deleteField(String idStudent, String nameField) {

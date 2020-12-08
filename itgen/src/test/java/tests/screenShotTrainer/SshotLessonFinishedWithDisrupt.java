@@ -50,7 +50,7 @@ public class SshotLessonFinishedWithDisrupt extends TestBase {
     app.trFamily().newFamily("finishLessonByTrainer", false, "txc");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "finishLessonByTrainer",
             "Маша",
             "Машина",
@@ -65,7 +65,8 @@ public class SshotLessonFinishedWithDisrupt extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test
@@ -76,16 +77,17 @@ public class SshotLessonFinishedWithDisrupt extends TestBase {
 
     String name = "Trainer_FinishedLessonWithDisrupt_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//div[@class='history-month-header']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     String[] deleteElements = {
-      "//div[@class='text-muted']",
-      "//div[@class='text-capitalize'][2]",
-      "//div[@class='date']",
-      "//div[@class='duration']",
-      "//div[@class='time']",
-      "//span[@class='create-time']"
+        "//div[@class='text-muted']",
+        "//div[@class='text-capitalize'][2]",
+        "//div[@class='date']",
+        "//div[@class='duration']",
+        "//div[@class='time']",
+        "//span[@class='create-time']",
+        "//div[@class='history-month-header']",
+        "//div[@class='date-today']"
     };
 
     app.sshot().deleteElements(deleteElements);

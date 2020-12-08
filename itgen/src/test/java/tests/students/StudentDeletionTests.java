@@ -19,7 +19,7 @@ public class StudentDeletionTests extends TestBase {
     app.trFamily().newFamily("studentDelete", false, "txc");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "studentDelete",
             "Маша",
             "Машина",
@@ -34,7 +34,8 @@ public class StudentDeletionTests extends TestBase {
             "12345678",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test

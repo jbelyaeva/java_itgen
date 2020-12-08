@@ -1,11 +1,14 @@
 package app.appmanager;
 
+import data.services.TrainerService;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WindowScheduleHelper extends HelperBase {
+
+  TrainerService trainerService = new TrainerService();
   public WindowScheduleHelper(WebDriver wd) {
     super(wd);
   }
@@ -13,7 +16,6 @@ public class WindowScheduleHelper extends HelperBase {
   public void recordStudentOn2hRegular(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
     selectRegular();
     selectLesson(id);
     btnRecord();
@@ -21,15 +23,15 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void btnRecord() {
-    click(By.xpath("//button[contains(@class,'create')]"));
+    click(By.xpath("(//div[@class='schedule-menu']//button)[1]"));
   }
 
   private void selectLesson(String id) {
-    click(By.xpath("//div[@data-trainer-id='" + id + "']"));
+    click(By.xpath("//span[contains(text(),'" + trainerService.findById(id).getLastName() + "')]"));
   }
 
   private void selectRegular() {
-    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'permanent')]"));
+    clickWithMoveToElementAndWait(10, By.xpath("//div[@class='lesson-type']//button[1]"));
   }
 
   private void btnRecordOnLesson() {
@@ -37,12 +39,12 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void selectStudent(String name) {
-    type(By.id("child-name"), name);
+    type(By.xpath("//div[@class='child-search dropdown']//input"), name);
     if (isElementPresent(By.xpath("//span[contains(@class,'result')]"))) {
       click(By.xpath("//span[contains(@class,'result')]"));
     } else {
-      wd.findElement(By.id("child-name")).clear();
-      type(By.id("child-name"), name);
+      wd.findElement(By.xpath("//div[@class='child-search dropdown']//input")).clear();
+      type(By.xpath("//div[@class='child-search dropdown']//input"), name);
       click(By.xpath("//span[contains(@class,'result')]"));
     }
   }
@@ -54,10 +56,9 @@ public class WindowScheduleHelper extends HelperBase {
             wd.findElement(By.xpath("//div[@data-trainer-id='" + idTrainer + "']"))));
   }
 
-  public void recordStudentOnRegularFirst1h(String name, String id) throws InterruptedException {
+  public void recordStudentOnRegularFirst1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    Thread.sleep(3000);
     selectRegular();
     selectDuration();
     selectLesson1h(id);
@@ -67,18 +68,18 @@ public class WindowScheduleHelper extends HelperBase {
 
   private void selectLesson1h(String id) {
     click(
-        By.xpath("//div[@data-trainer-id='" + id + "' and contains (@data-lesson-duration, '1')]"));
+        By.xpath(
+            "(//span[contains(text(),'" + trainerService.findById(id).getLastName() + "')])[1]"));
   }
 
   private void selectDuration() {
-    click(By.xpath("//select[@id='create-schedule-duration']//option[@value='4']"));
+    click(By.xpath("(//div[contains(@class,'select')])[2]"));
+    click(By.xpath("//div[contains(@class,'dropdown')]//li[2]"));
   }
 
-  public void recordStudentOnRegularSecond1h(String name, String id) throws InterruptedException {
+  public void recordStudentOnRegularSecond1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
-    Thread.sleep(3000);
     selectRegular();
     selectDuration();
     selectLesson2h(id);
@@ -88,13 +89,13 @@ public class WindowScheduleHelper extends HelperBase {
 
   private void selectLesson2h(String id) {
     click(
-        By.xpath("//div[@data-trainer-id='" + id + "' and contains (@data-lesson-duration, '2')]"));
+        By.xpath(
+            "(//span[contains(text(),'" + trainerService.findById(id).getLastName() + "')])[2]"));
   }
 
   public void recordStudentOn2hSingle(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
     selectSingle();
     selectLesson(id);
     btnRecord();
@@ -102,13 +103,12 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void selectSingle() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'onetime')]"));
+    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-type']//button)[2]"));
   }
 
-  public void recordStudentOnSingleFirst1h(String name, String id) throws InterruptedException {
+  public void recordStudentOnSingleFirst1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    Thread.sleep(3000);
     selectSingle();
     selectDuration();
     selectLesson1h(id);
@@ -116,10 +116,9 @@ public class WindowScheduleHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void recordStudentOnSingleSecond1h(String name, String id) throws InterruptedException {
+  public void recordStudentOnSingleSecond1h(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    Thread.sleep(3000);
     selectSingle();
     selectDuration();
     selectLesson2h(id);
@@ -130,7 +129,6 @@ public class WindowScheduleHelper extends HelperBase {
   public void recordStudentOnTrial(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleSchedule(id);
     selectLesson(id);
     btnRecord();
     noErrorMessage();

@@ -36,7 +36,7 @@ public class SshotEntryOnTrial extends TestBase {
     app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "LKOnTrail", "14");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "LKOnTrail",
             "Маша",
             "Машина",
@@ -51,12 +51,13 @@ public class SshotEntryOnTrial extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testEntryOnTrial() throws AWTException, IOException {
-    app.lkParent().RecordOnTrail();
+    app.lkParent().recordOnTrail(1);
 
     String name = "Parent_EntryOnTrial_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

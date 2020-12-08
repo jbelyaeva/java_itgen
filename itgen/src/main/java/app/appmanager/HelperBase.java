@@ -6,8 +6,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
@@ -15,6 +18,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -96,8 +100,8 @@ public class HelperBase {
     //
     String next =
         wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    if (!next.equals("disabled")) {
-      while (!next.equals("disabled")) {
+    if (! next.equals("disabled")) {
+      while (! next.equals("disabled")) {
         count = count + wd.findElements(By.cssSelector("a.btn-link")).size();
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
@@ -126,9 +130,9 @@ public class HelperBase {
 
   protected void thereAreErrorMessages() {
     Assert.assertTrue(
-        isElementPresent(By.xpath("//div[@id-qa='notification-error']"))
-            || isElementPresent(By.xpath("//div[contains(@class,'has-error')]"))
-            || isElementPresent(By.xpath("//p[contains(@class,'error')]")));
+        isElementPresent(By.xpath("//div[@id-qa='notification-error']")) ||
+            isElementPresent(By.xpath("//div[contains(@class,'has-error')]")) ||
+            isElementPresent(By.xpath("//p[contains(@class,'error')]")));
   }
 
   public void logout() {
@@ -226,8 +230,7 @@ public class HelperBase {
   public Date stringToDate(String stringDate) throws ParseException {
     String startDate = stringDate; // "Tue May 15 00:00:01 MSK 2012";
     SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.US);
-    Date date = parser.parse(startDate);
-    return date;
+    return parser.parse(startDate);
   }
 
   public String elementAtributAvailable(By locator) {
@@ -305,7 +308,7 @@ public class HelperBase {
     String dateWithTz = sdf.format(new Date());
     String[] lettersDate = dateWithTz.split(" ");
     // проверка, что чп 00
-    Boolean a = !lettersDate[1].equals("+03");
+    Boolean a = ! lettersDate[1].equals("+03");
     // проверка, что время > 21
     Boolean b = Integer.parseInt(lettersDate[0]) >= Integer.parseInt("21");
     return a && b;
@@ -314,14 +317,46 @@ public class HelperBase {
   //метод для удаления предупреждения об открытых двух вкладках, дать разрешение на микрофон  и камеру
   public void deleteAlerts() {
     if (isElementPresent(By.xpath("//div[@id-qa='notification-audio-video-screen-permissions']")) ||
+        isElementPresent(By.xpath("//div[@id-qa='notification-two-tabs-are-opened']")) ||
         isElementPresent(By.xpath("//div[@id-qa='notification-two-tabs-are-opened']"))) {
-      String[] deleteElements = {"//div[@class='notifications-error-container']"};
+      String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
       deleteElements(deleteElements);
     }
   }
 
-  public void clickByCoordinats(int x, int y) {
+  public void JSClickByXY(int x, int y) {
     JavascriptExecutor exe = (JavascriptExecutor) wd;
     exe.executeScript("$(document.elementFromPoint(" + x + "," + y + ")).click();");
+  }
+
+  public String goToNewWindowAndGoToBack(By locatorHref) throws InterruptedException {
+    String originalWindow = wd.getWindowHandle();
+    Set<String> existingWindows = wd.getWindowHandles();
+    click(locatorHref);
+    String newWindow = (new WebDriverWait(wd, 10))
+        .until((ExpectedCondition<String>) driver -> {
+          Set<String> newWindowsSet = Objects.requireNonNull(driver).getWindowHandles();
+              newWindowsSet.removeAll(existingWindows);
+              return newWindowsSet.size() > 0 ?
+                  newWindowsSet.iterator().next() : null;
+            }
+        );
+    wd.switchTo().window(newWindow);
+    Thread.sleep(2000);
+    String url = getURL();
+    wd.close();
+    wd.switchTo().window(originalWindow);
+    return url;
+  }
+
+  public boolean tryDoAction(By locator) {
+    boolean error = false;
+    try{
+      moveToElement(locator);
+    }
+    catch (JavascriptException e){
+      error = true;
+    }
+    return error;
   }
 }

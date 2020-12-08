@@ -3,13 +3,13 @@ package tests.payment;
 import static app.appmanager.ApplicationManager.properties;
 import static org.testng.AssertJUnit.assertEquals;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -28,7 +28,7 @@ public class PaymentByGuest extends TestBase {
         .FinishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymentByGuest", "1");
 
     app.trStudent()
-        .StudentAddDefaultFamilyAfterLesson(
+        .studentAddDefaultFamilyAfterLesson(
             "paymentByGuest",
             "Маша",
             "Машина",

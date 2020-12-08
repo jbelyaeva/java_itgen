@@ -1,18 +1,17 @@
 package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -37,7 +36,7 @@ public class SshotLessonStartTabResults extends TestBase {
     app.trFamily().newFamily("startLessonByTrainer", false, "txc");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "startLessonByTrainer",
             "Маша",
             "Машина",
@@ -52,7 +51,8 @@ public class SshotLessonStartTabResults extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -77,7 +77,7 @@ public class SshotLessonStartTabResults extends TestBase {
     app.sshot().deleteElements(deleteElements);
 
     app.sshot().changeTopBar();
-    app.base().deleteAlerts();
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

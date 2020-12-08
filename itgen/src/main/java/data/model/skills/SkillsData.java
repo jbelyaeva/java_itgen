@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity("skills")
 public class SkillsData {
+
   @Expose
   @Id
   @Property("_id")
@@ -54,9 +55,19 @@ public class SkillsData {
   @Property("downloadLink")
   private String downloadLink;
 
-  @Embedded private Requirements requirements;
+  @Expose
+  @Property("payCoefficient")
+  private int payCoefficient;
 
-  public SkillsData() {}
+  @Expose
+  @Property("trialDuration")
+  private int trialDuration;
+
+  @Embedded
+  private Requirements requirements;
+
+  public SkillsData() {
+  }
 
   public SkillsData withId(String id) {
     this.id = id;
@@ -118,6 +129,16 @@ public class SkillsData {
     return this;
   }
 
+  public SkillsData withPayCoefficient(int payCoefficient) {
+    this.payCoefficient = payCoefficient;
+    return this;
+  }
+
+  public SkillsData withtTrialDuration(int trialDuration) {
+    this.trialDuration = trialDuration;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -166,6 +187,14 @@ public class SkillsData {
     return requirements;
   }
 
+  public int getPayCoefficient() {
+    return payCoefficient;
+  }
+
+  public int getTrialDuration() {
+    return trialDuration;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -191,56 +220,25 @@ public class SkillsData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        id,
-        lang,
-        title,
-        visibility,
-        desc,
-        minAge,
-        skillId,
-        testId,
-        minAgeWithoutTest,
-        needRemindAboutLesson,
-        downloadLink,
-        requirements);
+    return Objects.hash(id, lang, title, visibility, desc, minAge, skillId, testId,
+        minAgeWithoutTest, needRemindAboutLesson, downloadLink, requirements);
   }
 
   @Override
   public String toString() {
-    return "SkillsData{"
-        + "id='"
-        + id
-        + '\''
-        + ", lang='"
-        + lang
-        + '\''
-        + ", title='"
-        + title
-        + '\''
-        + ", visibility='"
-        + visibility
-        + '\''
-        + ", desc='"
-        + desc
-        + '\''
-        + ", minAge="
-        + minAge
-        + ", skillId='"
-        + skillId
-        + '\''
-        + ", testId='"
-        + testId
-        + '\''
-        + ", minAgeWithoutTest="
-        + minAgeWithoutTest
-        + ", needRemindAboutLesson="
-        + needRemindAboutLesson
-        + ", downloadLink='"
-        + downloadLink
-        + '\''
-        + ", requirements="
-        + requirements
-        + '}';
+    return "SkillsData{" +
+        "id='" + id + '\'' +
+        ", lang='" + lang + '\'' +
+        ", title='" + title + '\'' +
+        ", visibility='" + visibility + '\'' +
+        ", desc='" + desc + '\'' +
+        ", minAge=" + minAge +
+        ", skillId='" + skillId + '\'' +
+        ", testId='" + testId + '\'' +
+        ", minAgeWithoutTest=" + minAgeWithoutTest +
+        ", needRemindAboutLesson=" + needRemindAboutLesson +
+        ", downloadLink='" + downloadLink + '\'' +
+        ", requirements=" + requirements +
+        '}';
   }
 }

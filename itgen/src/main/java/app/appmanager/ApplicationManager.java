@@ -20,6 +20,7 @@ import app.appmanager.transactionHelper.TrLeadHelper;
 import app.appmanager.transactionHelper.TrMaterialHelper;
 import app.appmanager.transactionHelper.TrParentHelper;
 import app.appmanager.transactionHelper.TrPaymentHelper;
+import app.appmanager.transactionHelper.TrSkillHelper;
 import app.appmanager.transactionHelper.TrStudentHelper;
 import app.appmanager.transactionHelper.TrTaskHelper;
 import app.appmanager.transactionHelper.TrTestHelper;
@@ -104,6 +105,7 @@ public class ApplicationManager {
   private TrWorkerHelper transactionWorkerHelper;
   private TrFinishedLessonHelper transactionFinishedLessonHelper;
   private TrCommunityHelper transactionCommunityHelper;
+  private TrSkillHelper transactionSkillHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -144,6 +146,7 @@ public class ApplicationManager {
     transactionWorkerHelper = new TrWorkerHelper();
     transactionFinishedLessonHelper = new TrFinishedLessonHelper();
     transactionCommunityHelper = new TrCommunityHelper();
+    transactionSkillHelper = new TrSkillHelper();
 
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -409,6 +412,10 @@ public class ApplicationManager {
 
   public TrCommunityHelper trCommunity() {
     return transactionCommunityHelper;
+  }
+
+  public TrSkillHelper trSkill() {
+    return transactionSkillHelper;
   }
 
   public byte[] takeScreenshot() {

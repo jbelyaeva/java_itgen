@@ -4,6 +4,7 @@ package tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.schedule.C;
@@ -13,7 +14,6 @@ import data.model.schedule.Schedules;
 import data.model.schedule.Slots;
 import data.model.schedule.Times;
 import data.services.ScheduleService;
-import app.testbase.TestBase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.testng.annotations.AfterMethod;
@@ -42,7 +42,8 @@ public class ScheduleSingleBlockTests extends TestBase {
                         .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -81,7 +82,8 @@ public class ScheduleSingleBlockTests extends TestBase {
                         .withBlocked(true)
                         .withBlockDesc(note)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) { // найти в списке "до" родителя с таким id

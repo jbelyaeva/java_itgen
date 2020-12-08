@@ -1,12 +1,12 @@
 package data.model.users;
 
 import com.google.gson.annotations.Expose;
+import data.model.usersGeneral.Contacts;
+import data.model.usersGeneral.Emails;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import data.model.usersGeneral.Contacts;
-import data.model.usersGeneral.Emails;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -69,19 +69,29 @@ public class WorkerData {
   @Property("locale")
   private String locate;
 
-  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded
+  private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose private String phone;
+  @Expose
+  private String phone;
 
-  @Expose private String skype;
+  @Expose
+  private String slack;
 
-  @Expose private String viber;
+  @Expose
+  private String skype;
 
-  @Expose private String whatsapp;
+  @Expose
+  private String viber;
 
-  @Expose private String telegram;
+  @Expose
+  private String whatsapp;
 
-  @Expose private String fb;
+  @Expose
+  private String telegram;
+
+  @Expose
+  private String fb;
 
   @Expose private String vk;
 
@@ -231,6 +241,11 @@ public class WorkerData {
     return this;
   }
 
+  public WorkerData withSlack(String slack) {
+    this.slack = slack;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -339,6 +354,10 @@ public class WorkerData {
 
   public String getInst() {
     return inst;
+  }
+
+  public String getSlack() {
+    return slack;
   }
 
   /* toString(), hashCode() & equals() */

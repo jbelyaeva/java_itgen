@@ -1,12 +1,12 @@
 package tests.screenShotPar;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -33,7 +33,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
             period, "FinishedSchedule", "14", "LkRecordOnSingleSchedule", "1");
 
     app.trStudent()
-        .StudentAddDefaultFamilyAfterLesson(
+        .studentAddDefaultFamilyAfterLesson(
             "LkRecordOnSingleSchedule",
             "Маша",
             "Машина",

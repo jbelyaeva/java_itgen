@@ -5,26 +5,18 @@ package tests.materials;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import app.testbase.TestBase;
+import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.materials.MaterialBranchData;
 import data.model.materials.MaterialData;
 import data.model.materials.Materials;
 import data.services.MaterialBranchService;
-import app.testbase.TestBase;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CreateMaterialBad extends TestBase {
+
   MaterialBranchData materialBranchClean = null;
   MaterialBranchService materialBranchService = new MaterialBranchService();
 
@@ -33,28 +25,8 @@ public class CreateMaterialBad extends TestBase {
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
   }
 
-  @DataProvider
-  public Iterator<Object[]> noValidMaterialFromJson() throws IOException {
-    try (BufferedReader reader =
-        new BufferedReader(
-            new FileReader(new File("src/test/resources/testdata/material_creation_bad.json")))) {
-      String json = "";
-      String line = reader.readLine();
-      while (line != null) {
-        json += line;
-        line = reader.readLine();
-      }
-      Gson gson = new Gson();
-      List<MaterialData> materials =
-          gson.fromJson(json, new TypeToken<List<MaterialData>>() {}.getType());
-      return materials.stream()
-          .map((s) -> new Object[] {s})
-          .collect(Collectors.toList())
-          .iterator();
-    }
-  }
-
-  @Test(dataProvider = "noValidMaterialFromJson")
+  @Test(dataProvider = "noValidMaterialFromJson", dataProviderClass = LocaleUtilsTestData.class,
+      retryAnalyzer = RunTestAgain.class)
   public void testCreateMaterialBad(MaterialData material) {
     app.goTo().menuMaterials();
     Materials materialBefore = app.dbmaterial().materials();

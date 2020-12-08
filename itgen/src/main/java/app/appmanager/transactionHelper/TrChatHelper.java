@@ -1,15 +1,15 @@
 package app.appmanager.transactionHelper;
 
+import data.model.users.ParentData;
+import data.model.users.StudentData;
+import data.model.users.TrainerData;
+import data.model.users.WorkerData;
 import data.model.chat.ChatMessageData;
 import data.model.chat.ChatRoomData;
 import data.model.chat.ChatSubscriptionData;
 import data.model.chat.LastMessage;
 import data.model.chat.User;
 import data.model.chat.Users;
-import data.model.users.ParentData;
-import data.model.users.StudentData;
-import data.model.users.TrainerData;
-import data.model.users.WorkerData;
 import data.services.ChatMessageService;
 import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;

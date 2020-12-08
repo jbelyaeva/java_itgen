@@ -20,4 +20,8 @@ public class TrainerService {
   public TrainerData findById(String id) {
     return trainerDao.findById(id);
   }
+
+  public <E> void updateField(String idTrainer, String nameFiled, E[] data) {
+    trainerDao.updateField(idTrainer, nameFiled, data);
+  }
 }

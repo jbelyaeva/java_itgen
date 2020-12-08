@@ -1,12 +1,12 @@
 package data.model.users;
 
 import com.google.gson.annotations.Expose;
+import data.model.usersGeneral.Contacts;
+import data.model.usersGeneral.Emails;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import data.model.usersGeneral.Contacts;
-import data.model.usersGeneral.Emails;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,10 +40,14 @@ public class TrainerData {
   @Property("birthday")
   private Date birthday;
 
-  @Expose private String birthdayUi;
+  @Expose
+  private String birthdayUi;
 
   @Property("langs")
   private List<String> langs = new ArrayList<>();
+
+  @Property("skills")
+  private List<String> skills = new ArrayList<>();
 
   @Expose
   @Property("gender")
@@ -53,7 +57,8 @@ public class TrainerData {
   @Property("maxSlots")
   private Integer maxSlots;
 
-  @Expose private String country;
+  @Expose
+  private String country;
 
   @Expose
   @Property("tz")
@@ -93,15 +98,23 @@ public class TrainerData {
 
   @Expose private String fb;
 
-  @Expose private String vk;
+  @Expose
+  private String vk;
 
-  @Expose private String ok;
+  @Expose
+  private String ok;
 
-  @Expose private String inst;
+  @Expose
+  private String inst;
 
-  @Expose private String note;
+  @Expose
+  private String note;
 
-  @Expose private String info;
+  @Expose
+  private String info;
+
+  @Expose
+  private String slack;
 
   @Property("workloadLevel")
   private String workloadLevel;
@@ -289,6 +302,15 @@ public class TrainerData {
     return this;
   }
 
+  public TrainerData withSkills(List<String> skills) {
+    this.skills = skills;
+    return this;
+  }
+  public TrainerData withSlack(String slack) {
+    this.slack = slack;
+    return this;
+  }
+
   /* getters */
 
   public String getId() {
@@ -431,51 +453,57 @@ public class TrainerData {
     return engLastName;
   }
 
+  public List<String> getSkills() {
+    return skills;
+  }
+
+  public String getSlack() {
+    return slack;
+  }
+
   /* toString(), hashCode() & equals() */
 
   @Override
   public String toString() {
-    return "TrainerData{"
-        + "id='"
-        + id
-        + '\''
-        + ", firstName='"
-        + firstName
-        + '\''
-        + ", lastName='"
-        + lastName
-        + '\''
-        + ", birthdayUi='"
-        + birthdayUi
-        + '\''
-        + ", gender="
-        + gender
-        + ", maxSlots="
-        + maxSlots
-        + ", country='"
-        + country
-        + '\''
-        + ", timeZone='"
-        + timeZone
-        + '\''
-        + ", locate='"
-        + locate
-        + '\''
-        + ", city='"
-        + city
-        + '\''
-        + ", payBase="
-        + payBase
-        + ", note='"
-        + note
-        + '\''
-        + ", info='"
-        + info
-        + '\''
-        + ", workloadLevel='"
-        + workloadLevel
-        + '\''
-        + '}';
+    return "TrainerData{" +
+        "id='" + id + '\'' +
+        ", firstName='" + firstName + '\'' +
+        ", lastName='" + lastName + '\'' +
+        ", startWorkAt=" + startWorkAt +
+        ", createdAt=" + createdAt +
+        ", startWorkUi='" + startWorkUi + '\'' +
+        ", birthday=" + birthday +
+        ", birthdayUi='" + birthdayUi + '\'' +
+        ", langs=" + langs +
+        ", skills=" + skills +
+        ", gender=" + gender +
+        ", maxSlots=" + maxSlots +
+        ", country='" + country + '\'' +
+        ", timeZone='" + timeZone + '\'' +
+        ", locate='" + locate + '\'' +
+        ", city='" + city + '\'' +
+        ", roles=" + roles +
+        ", roleUi='" + roleUi + '\'' +
+        ", payBase=" + payBase +
+        ", contacts=" + contacts +
+        ", emailUI='" + emailUI + '\'' +
+        ", emails=" + emails +
+        ", phone='" + phone + '\'' +
+        ", skype='" + skype + '\'' +
+        ", viber='" + viber + '\'' +
+        ", whatsapp='" + whatsapp + '\'' +
+        ", telegram='" + telegram + '\'' +
+        ", fb='" + fb + '\'' +
+        ", vk='" + vk + '\'' +
+        ", ok='" + ok + '\'' +
+        ", inst='" + inst + '\'' +
+        ", note='" + note + '\'' +
+        ", info='" + info + '\'' +
+        ", workloadLevel='" + workloadLevel + '\'' +
+        ", engFirstName='" + engFirstName + '\'' +
+        ", engLastName='" + engLastName + '\'' +
+        '}';
+
   }
 
   @Override
@@ -500,19 +528,8 @@ public class TrainerData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(
-        id,
-        firstName,
-        lastName,
-        gender,
-        maxSlots,
-        country,
-        timeZone,
-        locate,
-        city,
-        payBase,
-        note,
-        workloadLevel,
-        info);
+    return Objects.hash(id, firstName, lastName, gender, maxSlots, country, timeZone, locate, city,
+        payBase, note,
+        workloadLevel, info);
   }
 }

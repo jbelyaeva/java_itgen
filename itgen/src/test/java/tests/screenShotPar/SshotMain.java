@@ -1,5 +1,5 @@
 package tests.screenShotPar;
-
+/*Кейс: */
 import app.appmanager.ApplicationManager;
 import data.services.FamilyService;
 import app.testbase.TestBase;

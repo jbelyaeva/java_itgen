@@ -4,22 +4,22 @@ package tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.family.FamilyData;
-import data.model.users.StudentData;
 import data.model.schedule.C;
 import data.model.schedule.ST;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
 import data.model.schedule.Slots;
 import data.model.schedule.Times;
+import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
 import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import app.testbase.TestBase;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -59,7 +59,8 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
                                     .withNewSubj(true)
                                     .withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
     scheduleService.save(schedule);
     // расписание, на которое ученик уже записан
@@ -86,7 +87,8 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
                                     .withS("normal")))))
             .withTimes(
                 new Times().withStart(time.start(periodMove)).withEnd(time.finish(periodMove)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
     scheduleService.save(scheduleOccupied);
 

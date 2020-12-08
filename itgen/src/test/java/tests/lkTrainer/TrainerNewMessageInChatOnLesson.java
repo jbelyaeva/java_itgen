@@ -50,7 +50,7 @@ public class TrainerNewMessageInChatOnLesson extends TestBase {
     app.trFamily().newFamily("Chat", false, "RHCtjnpq5oTfhKPQs");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "Chat",
             "Маша",
             "Машина",
@@ -65,7 +65,8 @@ public class TrainerNewMessageInChatOnLesson extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
 
     Object[] users = new Object[2];
     users[0] = studentService.findById("Chat");
