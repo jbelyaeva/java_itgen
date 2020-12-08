@@ -77,7 +77,7 @@ public class SshotLessonStartTabResults extends TestBase {
     app.sshot().deleteElements(deleteElements);
 
     app.sshot().changeTopBar();
-
+    app.base().deleteAlerts();
     ImageDiff diff =
         app.sshot()
             .getImageDiff(
