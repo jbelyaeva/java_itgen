@@ -13,10 +13,10 @@ import org.testng.annotations.Test;
 
 public class StudentLessonStartTest extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
   private final TimeGeneral time = new TimeGeneral();
-  private String period = "";
   private final long alreadyRun = 7200000; // 2 часа идет занятие
+  ScheduleService scheduleService = new ScheduleService();
+  private String period = "";
 
   @BeforeMethod
   public void ensurePreconditions() {

@@ -28,11 +28,15 @@ public class ScheduleData {
 
   @Embedded private Times times;
 
-  @Property("skypeId")
-  private String skypeId;
-
   @Property("oneTime")
   private Boolean oneTime;
+
+  @Property("duration")
+  private int duration;
+
+  @Property("wholeness")
+  private Boolean wholeness;
+
 
   public ScheduleData() {}
 
@@ -66,13 +70,18 @@ public class ScheduleData {
     return this;
   }
 
-  public ScheduleData withSkypeId(String skypeId) {
-    this.skypeId = skypeId;
+  public ScheduleData withOneTime(Boolean oneTime) {
+    this.oneTime = oneTime;
     return this;
   }
 
-  public ScheduleData withOneTime(Boolean oneTime) {
-    this.oneTime = oneTime;
+  public ScheduleData withDuration(int duration) {
+    this.duration = duration;
+    return this;
+  }
+
+  public ScheduleData withWholeness(boolean wholeness) {
+    this.wholeness = wholeness;
     return this;
   }
 
@@ -100,33 +109,16 @@ public class ScheduleData {
     return times;
   }
 
-  public String getSkypeId() {
-    return skypeId;
-  }
-
   public Boolean getOneTime() {
     return oneTime;
   }
 
-  @Override
-  public String toString() {
-    return "ScheduleData{"
-        + "id='"
-        + id
-        + '\''
-        + ", fromDate="
-        + fromDate
-        + ", slots="
-        + slots
-        + ", times="
-        + times
-        + ", skypeId='"
-        + skypeId
-        + '\''
-        + ", oneTime='"
-        + oneTime
-        + '\''
-        + '}';
+  public int getDuration() {
+    return duration;
+  }
+
+  public Boolean getWholeness() {
+    return wholeness;
   }
 
   @Override
@@ -138,12 +130,13 @@ public class ScheduleData {
         && Objects.equals(fromDate, that.fromDate)
         && Objects.equals(slots, that.slots)
         && Objects.equals(times, that.times)
-        && Objects.equals(skypeId, that.skypeId)
+        && Objects.equals(duration, that.duration)
+        && Objects.equals(wholeness, that.wholeness)
         && Objects.equals(oneTime, that.oneTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromDate, slots, times, skypeId, oneTime);
+    return Objects.hash(id, fromDate, slots, times, duration, wholeness, oneTime);
   }
 }

@@ -17,6 +17,7 @@ import java.util.Objects;
 
 @Entity("users")
 public class StudentData {
+
   @Id
   @Property("_id")
   private String id;
@@ -112,8 +113,8 @@ public class StudentData {
   @Embedded
   private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
 
-
-  public StudentData() {}
+  public StudentData() {
+  }
 
   public StudentData withId(String id) {
     this.id = id;
@@ -137,11 +138,6 @@ public class StudentData {
 
   public StudentData withBirthday(Date birthday) {
     this.birthday = birthday;
-    return this;
-  }
-
-  public StudentData withSkills(List<String> skills) {
-    this.skills = skills;
     return this;
   }
 
@@ -210,6 +206,10 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withSkills(List<String> skills) {
+    this.skills = skills;
+    return this;
+  }
 
   public StudentData withLastSubjs(List<String> lastSubjs) {
     this.lastSubjs = lastSubjs;
@@ -395,8 +395,12 @@ public class StudentData {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     StudentData that = (StudentData) o;
     return Objects.equals(id, that.id)
         && Objects.equals(firstname, that.firstname)

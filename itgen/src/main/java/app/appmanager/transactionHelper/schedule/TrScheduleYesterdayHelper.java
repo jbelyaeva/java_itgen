@@ -52,7 +52,8 @@ public class TrScheduleYesterdayHelper {
                         .withFinishedAt(time.EtimeYesterday(periodFinish))))
             .withTimes(
                 new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }

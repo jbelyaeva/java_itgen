@@ -5,6 +5,8 @@ package tests.screenShot;
  * запускаем конфигурацию запуска со свойством -Detalon=true.
  */
 
+import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.model.schedule.C;
 import data.model.schedule.ST;
@@ -12,7 +14,6 @@ import data.model.schedule.ScheduleData;
 import data.model.schedule.Slots;
 import data.model.schedule.Times;
 import data.services.ScheduleService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import app.appmanager.ApplicationManager;
 
 public class SshotMainSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
@@ -48,7 +48,8 @@ public class SshotMainSchedule extends TestBase {
                         .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
   }
 

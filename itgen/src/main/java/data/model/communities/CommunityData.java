@@ -47,8 +47,7 @@ public class CommunityData {
   @Property("subscribersCount")
   private int subscribersCount;
 
-  @Embedded
-  private AvatarUrls avatarUrls;
+  @Embedded private AvatarUrls avatarUrls;
 
   @Property("lang")
   private String lang;
@@ -59,8 +58,7 @@ public class CommunityData {
   @Transient
   private List<String> tagUI = new ArrayList<>();
 
-  public CommunityData() {
-  }
+  public CommunityData() {}
 
   public CommunityData withId(String id) {
     this.id = id;

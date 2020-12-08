@@ -24,8 +24,8 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class Sshot1Feed extends TestBase {
 
-  MaterialService materialService = new MaterialService();
   private final TimeGeneral time = new TimeGeneral();
+  MaterialService materialService = new MaterialService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -145,14 +145,13 @@ public class Sshot1Feed extends TestBase {
             true,
             false);
 
-
     MaterialData hwMaterial = materialService.findById("MaterialOnLessonFirst");
     MaterialData doneMaterial = materialService.findById("MaterialOnLessonSecond");
     String[] hwMaterials = {
-      hwMaterial.getTitle(), hwMaterial.getType(), hwMaterial.getMaterialLink(), "notStarted"
+        hwMaterial.getTitle(), hwMaterial.getType(), hwMaterial.getMaterialLink(), "notStarted"
     };
     String[] doneMaterials = {
-      doneMaterial.getTitle(), doneMaterial.getType(), doneMaterial.getMaterialLink(), "done"
+        doneMaterial.getTitle(), doneMaterial.getType(), doneMaterial.getMaterialLink(), "done"
     };
 
     Integer[] grades = {3, 2, 4, 2, 4, 4};
@@ -164,7 +163,7 @@ public class Sshot1Feed extends TestBase {
             "21",
             "ScheduleYesterday",
             time.dateYesterday(),
-            app.base().DateWithCorrectionDays(-1),
+            app.base().DateWithCorrectionDays(- 1),
             hwMaterials,
             doneMaterials,
             "Проект Головоломка",
@@ -216,6 +215,10 @@ public class Sshot1Feed extends TestBase {
     locatorIgnor.add(By.xpath("//span[@class='date']"));
     locatorIgnor.add(By.xpath("//div[@class='date today']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+
+    String[] deleteElements = {"//span[@class='date']", "//div[@class='date today']"};
+    app.sshot().deleteElements(deleteElements);
+
     ImageDiff diff =
         app.sshot()
             .getImageDiffWithoutScroll(

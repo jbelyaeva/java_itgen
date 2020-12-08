@@ -6,10 +6,10 @@ package tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.family.FamilyData;
-import data.model.users.StudentData;
 import data.model.schedule.C;
 import data.model.schedule.ST;
 import data.model.schedule.ScheduleData;
@@ -18,13 +18,13 @@ import data.model.schedule.Slots;
 import data.model.schedule.Times;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
+import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
 import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -62,7 +62,8 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
                                     .withNewSubj(true)
                                     .withTrial(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
     scheduleService.save(schedule);
     FamilyService familyService = new FamilyService();
@@ -135,7 +136,8 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
                         .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
                         .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
 
     for (ScheduleData scheduleBefore : before) { // найти в списке "до" родителя с таким id

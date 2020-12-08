@@ -42,20 +42,6 @@ public class StudentDao {
     return datastore.find(StudentData.class).field("id").equal(id).first();
   }
 
-  public void updateFieldString(String idStudent, String nameFiled, String data) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", idStudent);
-    UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameFiled, data);
-    datastore.update(query, (UpdateOperations<StudentData>) ops);
-  }
-
-  public void updateFieldDate(String idStudent, String nameFiled, Date data) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", idStudent);
-    UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameFiled, data);
-    datastore.update(query, (UpdateOperations<StudentData>) ops);
-  }
-
   public void deleteField(String idStudet, String nameField) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> query = datastore.createQuery(StudentData.class).field("id").equal(idStudet);
@@ -63,11 +49,10 @@ public class StudentDao {
 
   }
 
-  public void updateFieldServices(String idStudent, String nameFiled, Services data) {
+  public <E> void updateField (String idStudent, String nameField, E[] data){
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", idStudent);
-    UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameFiled, data);
+    UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameField, data);
     datastore.update(query, (UpdateOperations<StudentData>) ops);
   }
-
 }

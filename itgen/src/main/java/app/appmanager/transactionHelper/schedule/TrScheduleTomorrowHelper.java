@@ -65,7 +65,8 @@ public class TrScheduleTomorrowHelper {
                                     .withS("normal")
                                     .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withWholeness(false)
+            .withDuration(120)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -103,7 +104,8 @@ public class TrScheduleTomorrowHelper {
                                     .withNewSubj(true)
                                     .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -141,7 +143,8 @@ public class TrScheduleTomorrowHelper {
                                     .withNewSubj(true)
                                     .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -179,7 +182,8 @@ public class TrScheduleTomorrowHelper {
                                     .withNewSubj(true)
                                     .withScore(3)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -216,7 +220,8 @@ public class TrScheduleTomorrowHelper {
                                     .withTrial(true)
                                     .withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -236,7 +241,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withFinishedSlots(listFSlots)
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -255,7 +261,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withDuration(120)
+            .withWholeness(false);
     scheduleService.save(schedule);
   }
 
@@ -290,7 +297,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withDuration(120)
+            .withWholeness(false);
     scheduleService.save(schedule);
   }
 
@@ -335,7 +343,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withDuration(120)
+            .withWholeness(false);
     scheduleService.save(schedule);
   }
 
@@ -380,7 +389,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
   }
 
@@ -416,7 +426,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
   }
 
@@ -449,7 +460,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
   }
 
@@ -492,7 +504,8 @@ public class TrScheduleTomorrowHelper {
             .withFromDate(time.dateTomorrow())
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
   }
 }

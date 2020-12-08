@@ -67,7 +67,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name='profile-lastName']"), studentData.getLastname());
     dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
     //01.01.2000 - флаг, при этой дате не заполняем ui поле
-    if (!DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
+    if (! DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
       enterADate(By.cssSelector("input[name='profile-birthday']"),
           DateISOToUsualDataString(studentData.getBirthday()));
     }
@@ -152,8 +152,8 @@ public class StudentHelper extends HelperBase {
     String next =
         wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-    if (!next.equals("disabled")) {
-      while (!next.equals("disabled")) {
+    if (! next.equals("disabled")) {
+      while (! next.equals("disabled")) {
         includeInListBaseWebElement(students, elements);
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         elements.removeAll(elements);
@@ -221,7 +221,7 @@ public class StudentHelper extends HelperBase {
   public StudentData getNewStudentDB(Students before, Students after) {
     StudentData studentNew = null;
     for (StudentData studentListAfter : after) {
-      if (!before.contains(studentListAfter)) {
+      if (! before.contains(studentListAfter)) {
         studentNew = studentListAfter;
         break;
       }
@@ -244,7 +244,7 @@ public class StudentHelper extends HelperBase {
       wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
       // если студент не на первой странице, надо нажать пагинатор, пока не найдем
-      while (!next.equals("disabled")) {
+      while (! next.equals("disabled")) {
         List<WebElement> list_pagin =
             wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
         if (list_pagin.size() > 0) {
@@ -325,7 +325,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void btnHistory() {
-    clickWaitElementToBeClicable(5, (By.xpath("//button[@id-qa='view-all']")));
+    clickWaitElementToBeClicable(5, By.xpath("//button[@id-qa='view-all']"));
   }
 
   public void closeHistory() {
@@ -420,7 +420,7 @@ public class StudentHelper extends HelperBase {
   }
 
   public void tabAll() {
-    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='all']"));
   }
 
   public void btnPoint() {
@@ -431,4 +431,12 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//div[@class='head']"));
     clickWithMoveToElementAndWait(5, By.xpath("//li[2]//button"));
   }
-}
+
+  public void tabAdministration() {
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='administration']"));
+  }
+
+  public void tabFeed() {
+    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
+  }
+  }

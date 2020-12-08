@@ -1,12 +1,12 @@
 package tests.screenShotPar;
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class SshotSignUpOnTrial extends TestBase {
     app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "LKOnTrail", "14");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "LKOnTrail",
             "Маша",
             "Машина",
@@ -47,13 +47,14 @@ public class SshotSignUpOnTrial extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test
   public void testSignUpOnTrial() throws AWTException, IOException {
     app.lkParent().btnRecordOnTrail();
-    app.lkParent().btnSelectScratch();
+    app.lkParent().btnSelectSkill(1);
     app.lkParent().selectLesson();
 
     String name = "Parent_SignUpOnTrial_RU_Chrome";
@@ -61,6 +62,7 @@ public class SshotSignUpOnTrial extends TestBase {
     locatorIgnor.add(By.xpath("//p[@class='user']"));
     locatorIgnor.add(By.xpath("//span[@class='day-of-month']"));
     locatorIgnor.add(By.xpath("//span[@class='month']"));
+    locatorIgnor.add(By.xpath("//div[@class='time-zones']//div[contains(@class,'select')]//div"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     ImageDiff diff =

@@ -87,6 +87,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//select[@id='profile-pay-base']//option[" + trainerData.getPayBase() + "]"));
 
     type(By.name("profile-contact-phone"), trainerData.getPhone());
+    type(By.name("profile-contact-slack"), trainerData.getSlack());
     type(By.name("profile-contact-telegram"), trainerData.getTelegram());
     type(By.name("profile-contact-viber"), trainerData.getViber());
     click(By.cssSelector("a.btn-link.btn-show"));
@@ -121,6 +122,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//div[@class='users-edit']"));
 
     type(By.name("profile-contact-phone"), trainerData.getPhone());
+    type(By.name("profile-contact-slack"), trainerData.getSlack());
     type(By.name("profile-contact-telegram"), trainerData.getTelegram());
     type(By.name("profile-contact-viber"), trainerData.getViber());
     click(By.cssSelector("a.btn-link.btn-show"));
@@ -151,6 +153,7 @@ public class TrainerHelper extends HelperBase {
     type(By.name("user-engLastName"), trainerData.getEngLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), trainerData.getPhone());
+    type(By.name("user-slackId"), trainerData.getSlack());
     dropDownList(By.name("role"), trainerData.getRoleUi());
   }
 

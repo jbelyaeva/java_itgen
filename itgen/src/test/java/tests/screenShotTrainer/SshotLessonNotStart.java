@@ -35,7 +35,7 @@ public class SshotLessonNotStart extends TestBase {
     app.trFamily().newFamily("startLessonByTrainer", false, "txc");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "startLessonByTrainer",
             "Маша",
             "Машина",
@@ -50,7 +50,8 @@ public class SshotLessonNotStart extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test

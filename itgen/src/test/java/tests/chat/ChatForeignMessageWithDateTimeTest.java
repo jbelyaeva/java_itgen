@@ -3,7 +3,6 @@ package tests.chat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.users.TrainerData;
 import data.model.users.WorkerData;
@@ -12,6 +11,7 @@ import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
 import data.services.TrainerService;
 import data.services.WorkerService;
+import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

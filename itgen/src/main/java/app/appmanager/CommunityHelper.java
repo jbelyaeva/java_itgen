@@ -34,7 +34,7 @@ public class CommunityHelper extends HelperBase {
 
     click(By.xpath("//div[@role='select-open-role']"));
     click(By.xpath("//li[@data-value='1']"));
-    clickByCoordinats(400, 400);
+    JSClickByXY(400, 400);
 
     for (int i = 0; i < community.getTagUI().size(); i++) {
       type(By.xpath("//input[@id-qa='tags']"), community.getTagUI().get(i));
@@ -140,7 +140,6 @@ public class CommunityHelper extends HelperBase {
       ((RemoteWebDriver) wd).setFileDetector(new LocalFileDetector());
     }
     wd.findElement(By.xpath("//input[@type='file']")).sendKeys(FileHelper.getAbsolutePath(path));
-
   }
 
   public void unhide(WebDriver driver, WebElement element) {
@@ -157,14 +156,18 @@ public class CommunityHelper extends HelperBase {
     ((JavascriptExecutor) driver).executeScript(script, element);
   }
 
-
   private void btnCreatePost() {
     click(By.xpath("//button[@id-qa='create']"));
   }
 
   private void fillPost(String text) {
+    By locator = By.xpath("//div[@class='community-post-body']//textarea");
     clickWithMoveToElementAndWait(1, By.xpath("//div[@class='community-post-body']//textarea"));
-    wd.findElement(By.xpath("//div[@class='community-post-body']//textarea")).sendKeys(text);
+    wd.findElement(locator).sendKeys(text);
+    if (!wd.findElement(locator).getText().equals(text)) {
+      clear(50, locator);
+      wd.findElement(locator).sendKeys(text);
+    }
   }
 
   private void btnAddPost() {
@@ -220,7 +223,7 @@ public class CommunityHelper extends HelperBase {
     clickWithMoveToElementAndWait(3, By.xpath("//li[@id-qa='menu-edit']"));
   }
 
-  private void btnPointPost() {
+  public void btnPointPost() {
     clickWithMoveToElementAndWait(3, By.xpath("//button[@id-q='menu']"));
   }
 
@@ -235,4 +238,43 @@ public class CommunityHelper extends HelperBase {
     clickWithMoveToElementAndWait(3, By.xpath("//li[@id-qa='menu-delete']"));
   }
 
+  public void btnSubscribers() {
+    click(By.xpath("//button[@id-qa='subscribers']"));
+  }
+
+  public void goToSubscribers() {
+    menuCommunities();
+    btnAdministration();
+    goInCommunity();
+    btnSubscribers();
+  }
+
+  public void SubscriberDidAdmin() {
+    goToSubscribers();
+    btnPointSubsc();
+    btnDidAdmin();
+  }
+
+  private void btnDidAdmin() {
+    click(By.xpath("//span[@id-qa='add-manager-item']"));
+  }
+
+  private void btnPointSubsc() {
+    click(By.xpath("//div[@class='user-item']//button"));
+  }
+
+  public void deleteManager() {
+    goToSubscribers();
+    deleteStudentFromAdmins();
+    btnAlertYes();
+  }
+
+  private void btnAlertYes() {
+    click(By.xpath("//button[contains(@class,'delete')]"));
+  }
+
+  private void deleteStudentFromAdmins() {
+    click(
+        By.xpath("(//div[@class='actions-buttons-wrap']//*[name()='svg' and @id-qa='trash'])[2]"));
+  }
 }

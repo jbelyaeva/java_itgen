@@ -6,10 +6,10 @@ package tests.schedule;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.family.FamilyData;
-import data.model.users.StudentData;
 import data.model.schedule.C;
 import data.model.schedule.ST;
 import data.model.schedule.ScheduleData;
@@ -18,13 +18,13 @@ import data.model.schedule.Slots;
 import data.model.schedule.Times;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
+import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
 import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -86,7 +86,8 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                 .withE(time.Etime(period) + week * 3))
                         .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
     scheduleService.save(schedule);
 
     FamilyData family =
@@ -204,7 +205,8 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                     .withLang("ru")
                                     .withP(true)))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1");
+            .withWholeness(false)
+            .withDuration(120);
 
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordStudentOnLesson")) {

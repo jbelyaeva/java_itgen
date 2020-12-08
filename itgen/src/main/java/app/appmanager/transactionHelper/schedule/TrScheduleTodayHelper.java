@@ -47,7 +47,8 @@ public class TrScheduleTodayHelper {
                                     .withTrial(true)
                                     .withS("normal")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -83,7 +84,8 @@ public class TrScheduleTodayHelper {
                                     .withS("normal")))
                         .withStartedAt((double) new Date().getTime() - alreadyRun)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -124,7 +126,8 @@ public class TrScheduleTodayHelper {
                         .withStartedAt((double) new Date().getTime() - alreadyRun)
                         .withFinishedAt((double) new Date().getTime())))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
-            .withSkypeId("1")
+            .withDuration(120)
+            .withWholeness(false)
             .withOneTime(true);
     scheduleService.save(schedule);
   }

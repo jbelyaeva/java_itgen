@@ -2,7 +2,7 @@ package app.appmanager;
 
 import static app.appmanager.ApplicationManager.properties;
 
-import app.testbase.TestBase;
+import app.appmanager.HelperBase;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.io.File;
@@ -23,6 +23,7 @@ import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import ru.yandex.qatools.ashot.coordinates.Coords;
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import app.testbase.TestBase;
 
 public class SShotHelper extends HelperBase {
 
@@ -136,7 +137,7 @@ public class SShotHelper extends HelperBase {
   public void changeTableInWindowSchedule() {
     By locatorHeading = By.xpath("(//div[@class='cell-heading cell-info'])[1]");
     By locatorGroupList =
-        By.xpath("(//div[@class='create-child-schedule-group-list cell-info'])[1]");
+        By.xpath("(//div[@class='items-list cell-info'])[1]");
     for (int i = 1; i < 8; i++) {
       if (isElementPresent(locatorHeading)) {
         WebElement elementHeading = wd.findElement(locatorHeading);
@@ -146,7 +147,7 @@ public class SShotHelper extends HelperBase {
                 "arguments[0].setAttribute('class', 'cell-heading cell-default')", elementHeading);
         ((JavascriptExecutor) wd)
             .executeScript(
-                "arguments[0].setAttribute('class', 'create-child-schedule-group-list cell-default')",
+                "arguments[0].setAttribute('class', 'items-list cell-default')",
                 elementGroupList);
       }
     }

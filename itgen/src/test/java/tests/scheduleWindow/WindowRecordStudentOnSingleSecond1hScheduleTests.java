@@ -3,6 +3,7 @@ package tests.scheduleWindow;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
@@ -12,7 +13,7 @@ import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -32,7 +33,7 @@ public class WindowRecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     app.trFamily().newFamily("recordStudent", false, "txc");
 
     app.trStudent()
-        .NewStudent(
+        .newStudent(
             "recordStudent",
             "Маша",
             "Машина",
@@ -47,11 +48,12 @@ public class WindowRecordStudentOnSingleSecond1hScheduleTests extends TestBase {
             "12345678i",
             "ru",
             "1",
-            2);
+            2,
+            "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testWindowRecordStudentOnSingleSecond1h() throws InterruptedException {
+  public void testWindowRecordStudentOnSingleSecond1h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
     app.windowSchedule().recordStudentOnSingleSecond1h(name, "14");
@@ -59,6 +61,7 @@ public class WindowRecordStudentOnSingleSecond1hScheduleTests extends TestBase {
     assertThat(after.size(), equalTo(before.size()));
     // проверка, что назначен новый тренер и остальные записи не изменились
     check(before, after);
+    app.check().findElement(By.xpath("//button[contains(@class,'cancel')]"));
     app.goTo().menuTasks();
   }
 

@@ -9,6 +9,7 @@ import java.util.Objects;
 
 @Entity("chat-messages")
 public class ChatMessageData {
+
   @Id
   @Property("_id")
   private String id;
@@ -22,9 +23,11 @@ public class ChatMessageData {
   @Property("text")
   private String text;
 
-  @Embedded private User user;
+  @Embedded
+  private User user;
 
-  public ChatMessageData() {}
+  public ChatMessageData() {
+  }
 
   public ChatMessageData withId(String id) {
     this.id = id;
@@ -93,20 +96,12 @@ public class ChatMessageData {
 
   @Override
   public String toString() {
-    return "ChatMessageData{"
-        + "id='"
-        + id
-        + '\''
-        + ", ts="
-        + ts
-        + ", rId='"
-        + rId
-        + '\''
-        + ", text='"
-        + text
-        + '\''
-        + ", user="
-        + user
-        + '}';
+    return "ChatMessageData{" +
+        "id='" + id + '\'' +
+        ", ts=" + ts +
+        ", rId='" + rId + '\'' +
+        ", text='" + text + '\'' +
+        ", user=" + user +
+        '}';
   }
 }

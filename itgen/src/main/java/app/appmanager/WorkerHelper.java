@@ -30,6 +30,7 @@ public class WorkerHelper extends HelperBase {
     type(By.name("user-lastName"), workerData.getLastName());
     type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
     type(By.name("user-phone"), workerData.getPhone());
+    type(By.name("user-slackId"), workerData.getSlack());
     dropDownList(By.name("role"), workerData.getRoleUi());
   }
 
@@ -71,6 +72,7 @@ public class WorkerHelper extends HelperBase {
     dropDownList(By.id("profile-timezone"), workerData.getTimeZone());
     dropDownList(By.id("profile-locale"), workerData.getLocate());
     type(By.name("profile-contact-phone"), workerData.getPhone());
+    type(By.name("profile-contact-slack"), workerData.getSlack());
     type(By.name("profile-contact-telegram"), workerData.getTelegramg());
     type(By.name("profile-contact-viber"), workerData.getViber());
     click(By.cssSelector("a.btn-link.btn-show"));
