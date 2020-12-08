@@ -24,6 +24,7 @@ public class SshotPayByAdminCard extends TestBase {
 
     app.goTo().menuTasks();
     app.goTo().menuStudents();
+    app.base().maxBrowser();
     app.payment().paymentAdminCard("21");
 
     ImageDiff diff =

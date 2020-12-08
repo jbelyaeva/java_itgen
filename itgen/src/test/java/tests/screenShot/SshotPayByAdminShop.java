@@ -32,7 +32,7 @@ public class SshotPayByAdminShop extends TestBase {
   public void testSshotPayByAdminShop() throws AWTException, IOException {
     String name = "Admin_PayShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-
+    app.base().maxBrowser();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdminShop("21");

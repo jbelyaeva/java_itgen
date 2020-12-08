@@ -95,8 +95,6 @@ public class SshotWindowSchedule extends TestBase {
     String name = "Admin_WindowSchedule_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//span[contains(@class,'capitalize')]"));
-
-    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     app.windowSchedule().selectStudentForSshot(nameStudent);
     app.sshot().changeTopBar();

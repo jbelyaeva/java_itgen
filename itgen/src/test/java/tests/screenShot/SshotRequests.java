@@ -1,20 +1,21 @@
 package tests.screenShot;
 
+import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import data.model.family.FamilyData;
-import data.model.users.StudentData;
 import data.model.general.Activity;
 import data.model.general.Comments;
 import data.model.requests.RequestData;
 import data.model.requests.Times;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
+import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
 import data.services.FamilyService;
 import data.services.RequestService;
 import data.services.StudentService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +30,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-import app.appmanager.ApplicationManager;
 
 public class SshotRequests extends TestBase {
   ArrayList<Comments> listcomment = new ArrayList<>();
@@ -93,7 +93,6 @@ public class SshotRequests extends TestBase {
     String name = "Admin_Requests_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
 
-    app.goTo().menuTasks();
     app.goTo().menuRequests();
 
     ImageDiff diff =

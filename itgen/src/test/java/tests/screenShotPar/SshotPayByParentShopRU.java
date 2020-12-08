@@ -66,6 +66,9 @@ public class SshotPayByParentShopRU extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotPayByParentShopRU() throws AWTException, IOException {
+    app.test().goToStudentProfileTabHistory("21");
+    app.lkParent().btnLogo();
+    app.lkParent().maxBrowser();
     String name = "Parent_PayByParentShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.payment().goToShopByParent();

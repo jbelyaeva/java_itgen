@@ -153,7 +153,6 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     scheduleService.DeleteById("finishLessonByTrainer");
-    studentService.DeleteById("finishLessonByTrainer");
     familyService.DeleteById("finishLessonByTrainer");
     finishedChildLessonService.drop();
     finishedLessonService.drop();
@@ -162,5 +161,24 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
     materialService.drop();
     materialChildsService.drop();
     materialBranchService.drop();
+    app.trStudent()
+        .newStudent(
+            "finishLessonByTrainer",
+            "Маша",
+            "Машина",
+            "expert",
+            "BL",
+            "finishLessonByTrainer",
+            "Europe/Minsk",
+            2,
+            app.base().DateWithCorrectionDays(-3650),
+            "ru",
+            "ru",
+            "12345678i",
+            "ru",
+            "1",
+            2,
+            "noTrial");
+    studentService.DeleteById("finishLessonByTrainer");
   }
 }

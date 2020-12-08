@@ -24,8 +24,6 @@ public class SshotPageFreeLessons extends TestBase {
 
     String name = "Parent_FreeLessons_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    //locatorIgnor.add(By.xpath("//div[@class='lesson']//span[1]"));
-
     app.sshot().changeTopBarInLKParent();
 
     ImageDiff diff =
@@ -36,9 +34,9 @@ public class SshotPageFreeLessons extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.95f);
+                1.25f);
     app.lkParent().btnLogo();
-    if (diff.getDiffSize() > 100) { // погрешность
+    if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }
