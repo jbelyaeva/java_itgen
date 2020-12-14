@@ -7,11 +7,11 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.materials.MaterialBranchData;
 import data.model.materials.MaterialData;
 import data.model.materials.Materials;
+import data.provides.LocaleUtilsTestData;
 import data.services.MaterialBranchService;
 import data.services.MaterialNewService;
 import data.services.MaterialService;

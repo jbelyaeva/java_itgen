@@ -42,6 +42,7 @@ public class ChatDialogWithTrainerTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatDialogWithTrainer() {
+    app.student().refresh();
     String[] etalon = {"Айтигеник", "Дефолтный Тренер"};
     String[] dialogs = app.chat().getDialogs();
     app.chat().btnCloseChat();

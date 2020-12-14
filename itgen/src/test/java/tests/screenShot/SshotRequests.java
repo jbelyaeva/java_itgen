@@ -92,7 +92,6 @@ public class SshotRequests extends TestBase {
   public void testSshotRequests() throws AWTException, IOException {
     String name = "Admin_Requests_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-
     app.goTo().menuRequests();
 
     ImageDiff diff =

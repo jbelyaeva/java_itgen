@@ -17,8 +17,19 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ChatHelper extends HelperBase {
 
+  private final By btnCall = By.xpath("//div[@class='btn-container']/*");
+  private final By btnCreateTalk = By.xpath("(//div[@class='chat-header'])[1]/*[2]");
+
   public ChatHelper(WebDriver wd) {
     super(wd);
+  }
+
+  public By getBtnCall() {
+    return btnCall;
+  }
+
+  public By getBtnCreateTalk() {
+    return btnCreateTalk;
   }
 
   public void openCloseChat() {
@@ -52,7 +63,7 @@ public class ChatHelper extends HelperBase {
     wd.findElement(By.xpath("//div[contains(@class,'chat-message')]//textarea[1]")).sendKeys(text);
   }
 
-  private void search(String userName) {
+  public void search(String userName) {
     click(By.xpath("//input[@name='search-by-user']"));
     type(By.xpath("//input[@name='search-by-user']"), userName);
     click(By.xpath("//div[contains(@class,'result')]//a"));
@@ -93,7 +104,7 @@ public class ChatHelper extends HelperBase {
     logout();
     login(login, password);
     btnOpenChat();
-    clickByLastMessage();
+    clickByMessageFromItigenik();
     return getByTrainerFile(fileName);
   }
 
@@ -113,8 +124,12 @@ public class ChatHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, '" + idStudent + "')]"));
   }
 
-  private void clickByLastMessage() {
+  private void clickByMessageFromItigenik() {
     click(By.xpath("//div[@class='avatar']"));
+  }
+
+  public void clickByFirstMessage() {
+    click(By.xpath("//div[contains(@class,'room-item')]"));
   }
 
   public Boolean getByTrainerDeletedMessageFromAdmin(String login, String password) {
@@ -315,14 +330,14 @@ public class ChatHelper extends HelperBase {
     return dialogs.stream().toArray(String[]::new);
   }
 
-  public String[] searchPersonByStudent(String name) {
+  public String[] searchPersonByUser(String name) {
     click(By.xpath("//input[@name='search-by-user']"));
     type(By.xpath("//input[@name='search-by-user']"), name);
     deleteAlerts();
     return getDialogs(By.xpath("//div[@class='room-info']//span[@class='name']"));
   }
 
-  public String searchBadPersonByStudent(String name) {
+  public String searchBadPersonByUser(String name) {
     click(By.xpath("//input[@name='search-by-user']"));
     type(By.xpath("//input[@name='search-by-user']"), name);
     return wd.findElement(By.xpath("//p[@class='text-center']")).getText();

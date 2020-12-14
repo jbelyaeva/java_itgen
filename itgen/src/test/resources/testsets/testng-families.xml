@@ -3,6 +3,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Families">
         <classes>
+          <!--  <class name="tests.selfRegistration.SelfRegistration"/> -->
             <class name="tests.family.FamilyCreationTests" />
             <class name="tests.family.FamilyDeletionTests" />
         </classes>

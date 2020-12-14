@@ -11,7 +11,6 @@ public class ChatDialogOnlyWithGenaTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatDialogOnlyWithGena() {
-    app.student().refresh();
     String[] dialogs = app.chat().getDialogs();
     assertThat(dialogs.length, equalTo(1));
     assertThat(dialogs[0], equalTo("Айтигеник"));

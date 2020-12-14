@@ -29,7 +29,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(
+        .finishingFirstTrialLesson(
             period, "FinishedSchedule", "14", "LkRecordOnSingleSchedule", "1");
 
     app.trStudent()

@@ -1,5 +1,6 @@
 package core.general;
 
+import static core.general.DateFormat.formatMMMM;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertFalse;
@@ -65,5 +66,19 @@ public class Assertions extends HelperBase {
    * */
   public void assertTrue(Boolean var) {
     assertThat(var, is(true));
+  }
+
+  /* проверяет отображение следующего месяца
+   *@monthUI - месяц, отображаемый в ui, который хотим проверить
+   * */
+  public void nextMonth(String monthUI) {
+    assertThat(monthUI, is(formatMMMM(DateWithCorrectionMonth(+1))));
+  }
+
+  /* проверяет отображение предыдущего месяца
+   *@monthUI - месяц, отображаемый в ui, который хотим проверить
+   * */
+  public void previosMonth(String monthUI) {
+    assertThat(monthUI, is(formatMMMM(DateWithCorrectionMonth(-1))));
   }
 }

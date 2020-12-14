@@ -4,12 +4,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.users.TrainerData;
 import data.model.users.Trainers;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Emails;
+import data.provides.LocaleUtilsTestData;
 import data.services.TrainerService;
 import java.util.Arrays;
 import java.util.Collections;

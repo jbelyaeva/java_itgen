@@ -6,10 +6,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.users.WorkerData;
 import data.model.users.Workers;
+import data.provides.LocaleUtilsTestData;
 import data.services.WorkerService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

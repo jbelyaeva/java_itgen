@@ -9,7 +9,6 @@ package tests.lkParent;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.users.TrainerData;
-import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TrainerService;
 import org.testng.annotations.AfterMethod;
@@ -18,7 +17,6 @@ import org.testng.annotations.Test;
 
 public class GeneralPageTransitionFromCalendarToSchedule extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
   TrainerService trainerService = new TrainerService();
   StudentService studentService = new StudentService();
   String period = "21:00 - 23:00";
@@ -74,6 +72,6 @@ public class GeneralPageTransitionFromCalendarToSchedule extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     studentService.DeleteById("newStudent");
-    scheduleService.drop();
+    app.postClean().dropTaskAndSchedule();
   }
 }

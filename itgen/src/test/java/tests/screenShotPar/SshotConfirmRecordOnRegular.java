@@ -32,7 +32,7 @@ public class SshotConfirmRecordOnRegular extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(
+        .finishingFirstTrialLesson(
             period, "FinishedSchedule", "14", "LkRecordOnRegularSchedule", "1");
 
     app.trStudent()

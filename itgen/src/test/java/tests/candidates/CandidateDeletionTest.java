@@ -3,11 +3,10 @@ package tests.candidates;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.model.candidate.CandidateData;
 import data.model.candidate.Candidates;
 import data.services.CandidateService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,7 +14,6 @@ import org.testng.annotations.Test;
 public class CandidateDeletionTest extends TestBase {
 
   CandidateService candidateService = new CandidateService();
-  CandidateData candidateClean = null;
 
   @BeforeMethod
   public void ensurePreconditions() {

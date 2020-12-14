@@ -5,6 +5,7 @@
         <classes>
             <class name="tests.payment.IncreaseBalanceByAdmin"/>
             <class name="tests.payment.DecreaseBalanceByAdmin"/>
+           <!-- <class name="tests.payment.PaymentByAdmin"/>-->
         </classes>
     </test>
 </suite>

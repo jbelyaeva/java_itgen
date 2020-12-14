@@ -29,6 +29,7 @@ import app.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import core.general.Assertions;
+import data.provides.Clean;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -106,6 +107,7 @@ public class ApplicationManager {
   private TrFinishedLessonHelper transactionFinishedLessonHelper;
   private TrCommunityHelper transactionCommunityHelper;
   private TrSkillHelper transactionSkillHelper;
+  private Clean clean;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -192,6 +194,7 @@ public class ApplicationManager {
     candidateHelper = new CandidateHelper(wd);
     communityHelper = new CommunityHelper(wd);
     assertions = new Assertions(wd);
+    clean = new Clean();
 
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
@@ -348,6 +351,10 @@ public class ApplicationManager {
 
   public Assertions check() {
     return assertions;
+  }
+
+  public Clean postClean() {
+    return clean;
   }
 
   public TrScheduleTomorrowHelper trScheduleTomorrow() {

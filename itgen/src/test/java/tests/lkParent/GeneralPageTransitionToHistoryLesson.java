@@ -11,15 +11,8 @@ import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.materials.MaterialData;
-import data.services.CommentService;
-import data.services.FinishedChildLessonService;
-import data.services.FinishedLessonService;
-import data.services.MaterialBranchService;
-import data.services.MaterialChildsService;
 import data.services.MaterialService;
-import data.services.ScheduleService;
 import data.services.StudentService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -27,14 +20,7 @@ import org.testng.annotations.Test;
 public class GeneralPageTransitionToHistoryLesson extends TestBase {
 
   private final TimeGeneral time = new TimeGeneral();
-  ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
-  TaskService taskService = new TaskService();
-  CommentService commentService = new CommentService();
-  MaterialChildsService materialChildsService = new MaterialChildsService();
-  MaterialBranchService materialBranchService = new MaterialBranchService();
-  FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
-  FinishedLessonService finishedLessonService = new FinishedLessonService();
   MaterialService materialService = new MaterialService();
   String period = "18:00 - 20:00";
 
@@ -61,7 +47,7 @@ public class GeneralPageTransitionToHistoryLesson extends TestBase {
         );
 
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "ScheduleYesterday", "14", "newStudent", "1");
+        .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "newStudent", "1");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
 
@@ -209,7 +195,7 @@ public class GeneralPageTransitionToHistoryLesson extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testGeneralPageTransitionToHistoryLesson() {
     app.lkParent().reset();
-    app.lkParent().clickByShowHistory();
+    app.lkParent().clickByShowHistorySecondChild();
 
     app.check().findElement(app.lkParent().getTabHistory());
     app.check().textElement(app.lkParent().getLabelPeriodLessonInHistory(), period);
@@ -224,14 +210,6 @@ public class GeneralPageTransitionToHistoryLesson extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     studentService.DeleteById("newStudent");
-    scheduleService.drop();
-    scheduleService.DeleteById("ScheduleYesterday");
-    materialBranchService.drop();
-    materialChildsService.drop();
-    materialService.drop();
-    finishedChildLessonService.drop();
-    finishedLessonService.drop();
-    taskService.drop();
-    commentService.drop();
+    app.postClean().dropTaskAndSchedule().dropMaterial().dropFinishedLesson();
   }
 }

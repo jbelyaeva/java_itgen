@@ -6,9 +6,6 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.ChatMessageService;
-import data.services.ChatRoomService;
-import data.services.ChatSubscriptionService;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import org.testng.annotations.AfterMethod;
@@ -16,11 +13,7 @@ import org.testng.annotations.Test;
 
 public class PageFreeLessonsCheckRefCode extends TestBase {
 
-  ChatRoomService chatRoomService = new ChatRoomService();
-  ChatMessageService chatMessageService = new ChatMessageService();
-  ChatSubscriptionService chatSubscriptionService = new ChatSubscriptionService();
-
-  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testPageFreeLessonsCheckRefCode()
       throws IOException, UnsupportedFlavorException {
     app.lkParent().reset();
@@ -30,8 +23,6 @@ public class PageFreeLessonsCheckRefCode extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    chatRoomService.drop();
-    chatMessageService.drop();
-    chatSubscriptionService.drop();
+    app.postClean().dropChat();
   }
 }

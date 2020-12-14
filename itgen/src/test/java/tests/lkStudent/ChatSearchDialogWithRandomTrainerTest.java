@@ -45,7 +45,7 @@ public class ChatSearchDialogWithRandomTrainerTest extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatSearchDialogWithRandomTrainer() {
     app.chat().btnOpenChat();
-    String record = app.chat().searchBadPersonByStudent("Бокша");
+    String record = app.chat().searchBadPersonByUser("Бокша");
     assertThat(record, equalTo("Ничего не нашли..."));
     app.chat().btnCloseChat();
   }

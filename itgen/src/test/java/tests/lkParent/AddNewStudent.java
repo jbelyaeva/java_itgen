@@ -7,18 +7,16 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.users.StudentData;
 import data.model.users.Students;
+import data.provides.LocaleUtilsTestData;
 import data.services.StudentService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class AddNewStudent extends TestBase {
 
-  TaskService taskService = new TaskService();
   StudentService studentService = new StudentService();
   StudentData studentClean;
 
@@ -51,7 +49,7 @@ public class AddNewStudent extends TestBase {
     if (studentClean == null) {
       return;
     }
-    taskService.DeleteById(studentClean);
     studentService.DeleteById(studentClean);
+    app.postClean().dropTaskAndSchedule();
   }
 }

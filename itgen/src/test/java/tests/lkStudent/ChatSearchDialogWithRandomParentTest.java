@@ -45,7 +45,7 @@ public class ChatSearchDialogWithRandomParentTest extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatSearchDialogWithRandomParent() {
     app.chat().btnOpenChat();
-    String record = app.chat().searchBadPersonByStudent("Родитель");
+    String record = app.chat().searchBadPersonByUser("Родитель");
     assertThat(record, equalTo("Ничего не нашли..."));
     app.chat().btnCloseChat();
   }

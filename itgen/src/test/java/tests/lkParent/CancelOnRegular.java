@@ -8,18 +8,14 @@ import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CancelOnRegular extends TestBase {
 
-  TaskService taskService = new TaskService();
   ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
@@ -30,7 +26,7 @@ public class CancelOnRegular extends TestBase {
   public void ensurePreconditions() {
 
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(
+        .finishingFirstTrialLesson(
             period, "FinishedSchedule", "14", "LkCancelRegularSchedule", "1");
 
     app.trStudent()
@@ -72,14 +68,8 @@ public class CancelOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("FinishedSchedule");
-    scheduleService.DeleteById("LkCancelRegularSchedule");
     studentService.DeleteById("LkCancelRegularSchedule");
-
-    Tasks tasks = app.dbschedules().tasksComposition("LkCancelRegularSchedule");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
+    app.postClean().dropTaskAndSchedule();
   }
 
   private void check(Schedules before, Schedules after) {

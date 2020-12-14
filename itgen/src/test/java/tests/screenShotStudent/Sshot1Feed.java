@@ -31,7 +31,7 @@ public class Sshot1Feed extends TestBase {
   public void ensurePreconditions() {
     String period = "18:00 - 20:00";
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
+        .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
 
