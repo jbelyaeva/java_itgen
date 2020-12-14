@@ -47,7 +47,9 @@ public class FinishedLessonsCountBySkill {
       return false;
     }
     FinishedLessonsCountBySkill that = (FinishedLessonsCountBySkill) o;
-    return one == that.one && count == that.count && minutes == that.minutes;
+    return one == that.one &&
+        count == that.count &&
+        minutes == that.minutes;
   }
 
   @Override

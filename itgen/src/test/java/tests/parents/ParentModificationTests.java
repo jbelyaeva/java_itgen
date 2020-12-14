@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.family.FamilyData;
 import data.model.users.ParentData;
@@ -12,6 +11,7 @@ import data.model.users.Parents;
 import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
+import data.provides.LocaleUtilsTestData;
 import data.services.FamilyService;
 import data.services.ParentService;
 import data.services.StudentService;

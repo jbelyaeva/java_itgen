@@ -141,7 +141,6 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     scheduleService.DeleteById("ScheduleFinishLessonByTrainer");
-    studentService.DeleteById("StudentFinishLessonByTrainer");
     familyService.DeleteById("FamilyFinishLessonByTrainer");
     finishedChildLessonService.drop();
     finishedLessonService.drop();
@@ -150,6 +149,7 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
     materialService.drop();
     materialChildsService.drop();
     materialBranchService.drop();
+    studentService.DeleteById("StudentFinishLessonByTrainer");
   }
 
   private void check(Schedules after) {

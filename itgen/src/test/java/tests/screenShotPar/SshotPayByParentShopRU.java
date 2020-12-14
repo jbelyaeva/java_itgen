@@ -39,7 +39,7 @@ public class SshotPayByParentShopRU extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymantByGuest", "1");
+        .finishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymantByGuest", "1");
 
     app.trStudent()
         .studentAddDefaultFamilyAfterLesson(

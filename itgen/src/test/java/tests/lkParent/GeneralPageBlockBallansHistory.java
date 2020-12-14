@@ -6,14 +6,11 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.PaymentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class GeneralPageBlockBallansHistory extends TestBase {
-
-  PaymentService paymentService = new PaymentService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -32,6 +29,6 @@ public class GeneralPageBlockBallansHistory extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    paymentService.drop();
+    app.postClean().dropPayment();
   }
 }

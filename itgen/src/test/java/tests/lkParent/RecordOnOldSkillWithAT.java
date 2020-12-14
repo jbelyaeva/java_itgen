@@ -8,9 +8,7 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.ScheduleService;
 import data.services.StudentService;
-import data.services.TaskService;
 import data.services.TrainerService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,9 +16,7 @@ import org.testng.annotations.Test;
 
 public class RecordOnOldSkillWithAT extends TestBase {
 
-  private final ScheduleService scheduleService = new ScheduleService();
   private final StudentService studentService = new StudentService();
-  private final TaskService taskService = new TaskService();
   private final TrainerService trainerService = new TrainerService();
   private final String descrition = "Ученик будет конструировать 3D миры, "
       + "строить логические цепочки, получит базовые знание по решению задач на программирование "
@@ -52,7 +48,7 @@ public class RecordOnOldSkillWithAT extends TestBase {
 
     String period = "18:00 - 20:00";
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "ScheduleYesterday", "14", "RecordOnOldSkill", "21");
+        .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "RecordOnOldSkill", "21");
 
     app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "RecordOnOldSkill", "14");
 
@@ -86,9 +82,7 @@ public class RecordOnOldSkillWithAT extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.drop();
     studentService.DeleteById("RecordOnOldSkill");
-    taskService.drop();
-    taskService.drop();
+    app.postClean().dropTaskAndSchedule();
   }
 }

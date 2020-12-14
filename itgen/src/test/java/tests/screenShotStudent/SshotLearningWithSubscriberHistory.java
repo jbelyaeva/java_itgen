@@ -51,7 +51,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
+        .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
 

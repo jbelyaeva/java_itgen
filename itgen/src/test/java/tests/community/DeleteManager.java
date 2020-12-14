@@ -9,7 +9,6 @@ import static app.appmanager.ApplicationManager.properties;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.services.CommunitiesService;
-import data.services.FamilyService;
 import data.services.StudentService;
 import java.util.Date;
 import org.openqa.selenium.By;
@@ -21,7 +20,6 @@ public class DeleteManager extends TestBase {
 
   CommunitiesService communitiesService = new CommunitiesService();
   StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
   String title = "Scratch";
 
   @BeforeMethod

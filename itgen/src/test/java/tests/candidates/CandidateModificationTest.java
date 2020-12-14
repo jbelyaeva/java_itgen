@@ -4,10 +4,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.candidate.CandidateData;
 import data.model.candidate.Candidates;
+import data.provides.LocaleUtilsTestData;
 import data.services.CandidateService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

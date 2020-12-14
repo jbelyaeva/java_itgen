@@ -45,13 +45,14 @@ public class TestTypeformAvailableToStudent extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testTypeformAvailableToStudent() throws InterruptedException {
+  public void testTypeformAvailableToStudent() {
     app.student().goToStudentProfileTabTests();
     assertThat(
         app.test().elementAtributAvailable(By.xpath("//button[@id-qa='start']")),
         equalTo(null));
     assertThat(
         app.test().findLableInProcess(), equalTo(true));
+    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)

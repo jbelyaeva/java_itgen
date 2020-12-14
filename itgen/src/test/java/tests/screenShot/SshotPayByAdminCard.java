@@ -21,10 +21,9 @@ public class SshotPayByAdminCard extends TestBase {
   public void testSshotPayByAdminCard() throws AWTException, IOException {
     String name = "Admin_PayCard_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-
+    app.base().maxBrowser();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    app.base().maxBrowser();
     app.payment().paymentAdminCard("21");
 
     ImageDiff diff =

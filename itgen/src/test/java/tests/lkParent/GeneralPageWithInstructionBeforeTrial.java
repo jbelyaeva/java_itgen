@@ -5,7 +5,6 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.ScheduleService;
 import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +12,6 @@ import org.testng.annotations.Test;
 
 public class GeneralPageWithInstructionBeforeTrial extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
 
@@ -56,7 +54,7 @@ public class GeneralPageWithInstructionBeforeTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("newStudent");
+    app.postClean().dropTaskAndSchedule();
     studentService.DeleteById("newStudent");
   }
 }

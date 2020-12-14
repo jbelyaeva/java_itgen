@@ -3,6 +3,7 @@ package data.model.schedule;
 import java.util.Objects;
 
 public class C {
+
   private String id;
   private int type;
   private String subject;
@@ -13,8 +14,11 @@ public class C {
   private int score; // очки внимания
   private int rating;
   private boolean p; // признак постоянного расписания
+  private Double startTime;
+  private Double endTime;
 
-  public C() {}
+  public C() {
+  }
 
   public C withId(String id) {
     this.id = id;
@@ -66,31 +70,42 @@ public class C {
     return this;
   }
 
+  public C withStartTime(double startTime) {
+    this.startTime = startTime;
+    return this;
+  }
+
+  public C withEndTime(double endTime) {
+    this.endTime = endTime;
+    return this;
+  }
+
   @Override
   public String toString() {
-    return "C{"
-        + "id='"
-        + id
-        + '\''
-        + ", subject='"
-        + subject
-        + '\''
-        + ", lang='"
-        + lang
-        + '\''
-        + ", isTrial="
-        + isTrial
-        + ", newSubj="
-        + newSubj
-        + ", p="
-        + p
-        + '}';
+    return "C{" +
+        "id='" + id + '\'' +
+        ", type=" + type +
+        ", subject='" + subject + '\'' +
+        ", s='" + s + '\'' +
+        ", lang='" + lang + '\'' +
+        ", isTrial=" + isTrial +
+        ", newSubj=" + newSubj +
+        ", score=" + score +
+        ", rating=" + rating +
+        ", p=" + p +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        '}';
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     C c = (C) o;
     return type == c.type
         && Objects.equals(id, c.id)

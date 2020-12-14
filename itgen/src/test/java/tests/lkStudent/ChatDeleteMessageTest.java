@@ -49,6 +49,7 @@ public class ChatDeleteMessageTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatDeleteMessage() {
+    app.student().refresh();
     ChatMessages beforeMessage = app.dbchat().chatMessages();
     ChatRooms beforeRooms = app.dbchat().chatRooms();
     ChatSubscriptions beforeSubscription = app.dbchat().chatSubscriptions();

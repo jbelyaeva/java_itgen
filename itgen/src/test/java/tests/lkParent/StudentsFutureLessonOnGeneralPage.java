@@ -7,7 +7,6 @@ import static core.general.DateFormat.formatDDMMMM;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.ScheduleService;
 import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,7 +14,6 @@ import org.testng.annotations.Test;
 
 public class StudentsFutureLessonOnGeneralPage extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();
   String period = "21:00 - 23:00";
   String text = " 21:00 Scratch";
@@ -64,6 +62,6 @@ public class StudentsFutureLessonOnGeneralPage extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     studentService.DeleteById("newStudent");
-    scheduleService.drop();
+    app.postClean().dropTaskAndSchedule();
   }
 }

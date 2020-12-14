@@ -15,7 +15,7 @@ public class TrScheduleYesterdayHelper {
   private final TimeGeneral time = new TimeGeneral();
   private final ScheduleService scheduleService = new ScheduleService();
   // вчера завершенное первое пробное занятие (ученик русский)
-  public void FinishingFirstTrialLesson(
+  public void finishingFirstTrialLesson(
       String periodFinish,
       String idSchedule,
       String idTrainer,
@@ -47,7 +47,9 @@ public class TrScheduleYesterdayHelper {
                                     .withTrial(true)
                                     .withS("finished")
                                     .withScore(3)
-                                    .withRating(4)))
+                                    .withRating(4)
+                                    .withStartTime(time.StimeYesterday(periodFinish))
+                                    .withEndTime(time.EtimeYesterday(periodFinish))))
                         .withStartedAt(time.StimeYesterday(periodFinish))
                         .withFinishedAt(time.EtimeYesterday(periodFinish))))
             .withTimes(
@@ -55,6 +57,57 @@ public class TrScheduleYesterdayHelper {
             .withDuration(120)
             .withWholeness(false)
             .withOneTime(true);
+    scheduleService.save(schedule);
+  }
+
+  public void finishedLesson(
+      String periodFinish,
+      String idSchedule,
+      String idTrainer,
+      String idStudent,
+      String idSubject,
+      int type,
+      String status,
+      Boolean newSubject,
+      Boolean withTrial,
+      Boolean wholness,
+      String lang,
+      int duration) {
+    ArrayList<Slots> listSlots = new ArrayList<>();
+    ScheduleData schedule =
+        new ScheduleData()
+            .withId(idSchedule)
+            .withVer(0)
+            .withFromDate(time.dateYesterday())
+            .withSlots(listSlots)
+            .withFinishedSlots(
+                Arrays.asList(
+                    new FinishedSlots()
+                        .withId(idTrainer)
+                        .withW(time.dateYesterday())
+                        .withSt(
+                            new ST()
+                                .withS(time.StimeYesterday(periodFinish))
+                                .withE(time.EtimeYesterday(periodFinish)))
+                        .withC(
+                            Arrays.asList(
+                                new C()
+                                    .withId(idStudent)
+                                    .withType(type)
+                                    .withSubject(idSubject)
+                                    .withLang(lang)
+                                    .withTrial(withTrial)
+                                    .withS(status)
+                                    .withNewSubj(newSubject)
+                                    .withStartTime(time.StimeYesterday(periodFinish))
+                                    .withEndTime(time.EtimeYesterday(periodFinish))))
+                        .withStartedAt(time.StimeYesterday(periodFinish))
+                        .withFinishedAt(time.EtimeYesterday(periodFinish))))
+            .withTimes(
+                new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
+            .withOneTime(true)
+            .withDuration(duration)
+            .withWholeness(wholness);
     scheduleService.save(schedule);
   }
 }

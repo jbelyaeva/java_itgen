@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LKParentHelper extends HelperBase {
 
   private final By btnRecordOnTrail = By.xpath("(//button[contains(@id-qa,'trial')])[2]");
+  private final By btnRecordOnTrailInSchedule = By.xpath("//button[@id-qa='trial']");
   private final By btnLogo = By.xpath("//img[contains(@src,'logo')]");
   private final By btnSignUp = By.xpath("//button[contains(@id-qa,'signup')]");
   private final By selectLesson = By.className("list-of-times");
@@ -39,14 +40,14 @@ public class LKParentHelper extends HelperBase {
   private final By btnTodayInPicker = By.xpath("//div[@class='picker-item selected']");
   private final By selectedIcon = By.xpath("//span[@class='selected-icon']");
   private final By btnSingleSchedule = By.xpath("(//div[@class='info'])[2]");
-  private final By btnRecordOnLesson = By.xpath("//div[@class='buttons']");
+  private final By btnRecordOnLesson = By.xpath("//button//span[text()='Записаться на занятие']");
   private final By selectCheckBoxForSignup = By.xpath("//label[contains(@for,'signup')]");
   private final By btnNext = By.xpath("//button[contains(@class,'next')]");
   private final By editLeftFiltrTime = By.xpath("//div[@class='times-filter']//input[1]");
   private final By editRightFiltrTime = By.xpath("(//div[@class='times-filter']//input)[2]");
   private final By emptyAreaFiltrTime = By.xpath("//div[@class='times-filter']");
   private final By btnRecord = By.xpath("//div[contains(@class,'actions')]//button");
-  private final By btnShowScheduleAlongChild = By.xpath("//button[@id-qa='show-schedule']");
+  private final By btnShowScheduleChild = By.xpath("//button[@id-qa='show-schedule']");
   private final By selectFirstLessonInRegularForCancel = By.xpath(
       "(//label)[1]"); //+привязка к индексу
   private final By btnCancelInPopup = By.xpath("//div[contains(@class,'buttons-group')]");
@@ -60,6 +61,7 @@ public class LKParentHelper extends HelperBase {
       "//div[@class='course-selection-page']");
   private final By btnPrepare = By.xpath("//button[@id-qa='prepare']");
   private final By btnSchedule = By.xpath("//div[@class='child-schedule-btn']");
+  private final By btnShowHistoryFirstChild = By.xpath("//button[@id-qa='show-history']");
   private final By btnShowHistorySecondChild = By.xpath("(//button[@id-qa='show-history'])[2]");
   private final By btnMainHelpCenter = By.xpath("//div[@class='help-center-btn']");
   private final By btnHelpCenterInMenu = By.xpath("//a[contains(@href,'itgen.io')]");
@@ -73,7 +75,9 @@ public class LKParentHelper extends HelperBase {
   private final By labelScheduleSkillOnLesson = By.xpath("(//div[@class='flex-content']//span)[1]");
   private final By scheduleLabelNewOnLesson = By.xpath(
       "(//div[@class='lesson-label new-skill'])[1]");
+  private final By scheduleLabelSkipped = By.xpath("(//div[@class='lesson-label skipped'])[1]");
   private final By scheduleLabelPlannedOnLesson = By.xpath("//div[@class='lesson-label planned']");
+  private final By scheduleLabelFinished = By.xpath("//div[@class='lesson-label finished']");
   private final By tabSettings = By.xpath("//button[@id-qa='tab-settings']");
   private final By labelPersonalInformation = By.xpath("//div[@class='info']//h4");
   private final By labelLoginAndPassword = By.xpath("//div[@class='login-and-password']//h4");
@@ -108,10 +112,19 @@ public class LKParentHelper extends HelperBase {
   private final By btnFacebook = By.xpath("//button[@aria-label='facebook']");
   private final By btnInstall = By.xpath("//button[@id-qa='install']");
   private final By dropdownSkill = By.xpath("(//div[@class='gena-form-item']//div)[1]");
+  private final By dropdownTrainerOnRegular = By.xpath("(//div[@class='gena-form-item'])[6]");
+  private final By dropdownTrainerOnSingle = By.xpath("(//div[@class='gena-form-item'])[5]");
+  private final By checkboxTrainer = By.xpath("//input[@id='with-trainer']/..");
+  private final By trainerNastyaInList = By.xpath("//div[text()='Бокша Настя']");
+  private ApplicationManager app;
   private final By btnInstallInScheduleTomorrow = By.xpath(
       "//div[contains(@class,'lightUp')]//button[@id-qa='install']");
-  // "//div[@class='day-index today']/../following-sibling::div//button[@id-qa='install']");
   private final By cellLightCalendar = By.xpath("//div[contains(@class,'lightUp')]");
+  private final By btnAssighWorking = By.xpath("//div[contains(@class,'assign')]//button");
+  private final By btnScroll = By.xpath("(//div[@class='header']//following-sibling::button)[5]");
+  private final By btnPaginatorRight = By.xpath("//button[contains(@class,'pagination-right')]");
+  private final By btnPaginatorLeft = By.xpath("//button[contains(@class,'pagination-left')]");
+  private final By monthUI = By.xpath("//span[@class='date']");
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
@@ -124,87 +137,115 @@ public class LKParentHelper extends HelperBase {
   public By getShowScheduleSecondChild() {
     return btnShowScheduleSecondChild;
   }
+
   public By getBtnTrialSecondChild() {
     return btnTrialSecondChild;
   }
+
   public By getTabSchedule() {
     return tabSchedule;
   }
+
   public By getSchedulePeriodLesson() {
     return labelSchedulePeriodLesson;
   }
+
   public By getScheduleTrainerOnLesson() {
     return labelScheduleTrainerOnLesson;
   }
+
   public By getScheduleSkillOnLesson() {
     return labelScheduleSkillOnLesson;
   }
+
   public By getScheduleLabelNewOnLesson() {
     return scheduleLabelNewOnLesson;
   }
+
   public By getScheduleLabelPlannedOnLesson() {
     return scheduleLabelPlannedOnLesson;
   }
+
   public By getLabelPersonalInformation() {
     return labelPersonalInformation;
   }
+
   public By getTabSettings() {
     return tabSettings;
   }
+
   public By getLabelLoginAndPassword() {
     return labelLoginAndPassword;
   }
+
   public By getLabelHowToJoinInstruction() {
     return labelHowToJoinInstruction;
   }
+
   public By getLabelFreeLessonsHeader() {
     return labelFreeLessonsHeader;
   }
+
   public By getButtonShareHref() {
     return btnShareHref;
   }
+
   public By getSectionSocialNetworks() {
     return sectionSocialNetworks;
   }
+
   public By getTabHistory() {
     return tabHistory;
   }
+
   public By getLabelPeriodLessonInHistory() {
     return labelPeriodLessonInHistory;
   }
+
   public By getLabelDayAndMonthLessonInHistory() {
     return labelDayAndMonthLessonInHistory;
   }
+
   public By getLabelProjectDoneInHistory() {
     return labelProjectDoneInHistory;
   }
+
   public By getLabelProjectNotStartedInHistory() {
     return labelProjectNotStartedInHistory;
   }
+
   public By getLabelGradeAboutLessonInHistory() {
     return labelGradeAboutLessonInHistory;
   }
+
   public By getLabelWaiteOnLessons() {
     return labelWaiteOnLessons;
   }
+
   public By getLabelRecomendationForFirstLesson() {
     return labelRecomendationForFirstLesson;
   }
+
   public By getIconCalendar() {
     return iconCalendar;
   }
+
   public By getLabelFutureLessonOnGeneralPage() {
     return labelFutureLessonOnGeneralPage;
   }
+
   public By getBtnBlockHistoryBallans() {
     return btnBlockHistoryBallans;
   }
+
   public By getBtnInfoAboutReasonBallans() {
     return btnInfoAboutReasonBallans;
   }
+
   public By getWinTutorialByLkParent() {
     return winTutorialByLkParent;
   }
+
   public By getWinTutorialBySwitchToStudent() {
     return winTutorialBySwitchToStudent;
   }
@@ -221,8 +262,36 @@ public class LKParentHelper extends HelperBase {
     return btnInstallInScheduleTomorrow;
   }
 
+  public By getTrainerNastyaInList() {
+    return trainerNastyaInList;
+  }
+
   public By getCellLightCalendar() {
     return cellLightCalendar;
+  }
+
+  public By getBtnShowScheduleChild() {
+    return btnShowScheduleChild;
+  }
+
+  public By getBtnRecordOnTrailInSchedule() {
+    return btnRecordOnTrailInSchedule;
+  }
+
+  public By getBtnRecordOnLesson() {
+    return btnRecordOnLesson;
+  }
+
+  public By getBtnAssighWorking() {
+    return btnAssighWorking;
+  }
+
+  public By getScheduleLabelSkipped() {
+    return scheduleLabelSkipped;
+  }
+
+  public By getScheduleLabelFinished() {
+    return scheduleLabelFinished;
   }
 
   public void btnRecordOnTrail() {
@@ -254,6 +323,16 @@ public class LKParentHelper extends HelperBase {
 
   public void btnLogo() {
     click(btnLogo);
+    noErrorMessage();
+  }
+
+  public void tabLogo() {
+    click(btnLogo);
+    noErrorMessage();
+  }
+
+  public void clickByTabSchedule() {
+    click(tabSchedule);
     noErrorMessage();
   }
 
@@ -354,7 +433,6 @@ public class LKParentHelper extends HelperBase {
     btnNext();
     selectCheckBox();
     btnRecord();
-    btnLogo();
   }
 
   public void skipHelper() {
@@ -454,7 +532,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnShowSchedule() {
-    clickWithMoveToElementAndWait(10, btnShowScheduleAlongChild);
+    clickWithMoveToElementAndWait(10, btnShowScheduleChild);
     noErrorMessage();
   }
 
@@ -580,12 +658,16 @@ public class LKParentHelper extends HelperBase {
     click(btnSchedule);
   }
 
-  public void clickByNameStudent(String idStudent) {
-    click(By.xpath("//a[contains(@href,'" + idStudent + "')][1]"));
+  public void clickByNameStudent() {
+    click(By.xpath("//a[contains(@href,'21')]"));
   }
 
-  public void clickByShowHistory() {
+  public void clickByShowHistorySecondChild() {
     click(btnShowHistorySecondChild);
+  }
+
+  public void clickByShowHistoryFirstChild() {
+    click(btnShowHistoryFirstChild);
   }
 
   public void clickByFreeLesson() {
@@ -620,7 +702,6 @@ public class LKParentHelper extends HelperBase {
       String id = String.valueOf(((RemoteWebDriver) wd).getSessionId());
       Process proc = Runtime.getRuntime()
           .exec("curl http://135.181.63.111:4444/clipboard/" + id);
-      //http://selenoid:4444 ci.propeties->selenium server
       BufferedReader stdInput = new BufferedReader(new
           InputStreamReader(proc.getInputStream()));
       return stdInput.toString();
@@ -653,5 +734,55 @@ public class LKParentHelper extends HelperBase {
   private void selectSkill(String skill) {
    click(dropdownSkill);
    click(By.xpath("//div[text()='"+skill+"']"));
+  }
+
+  public void trainerInListOnRegularRecord() {
+    skipHelper();
+    btnLogo();
+    btnShowSchedule();
+    btnRecordOnLesson();
+    checkBoxTrainer();
+    dropdownTrainerOnRegular();
+  }
+
+  private void dropdownTrainerOnRegular() {
+    click(dropdownTrainerOnRegular);
+  }
+
+  private void dropdownTrainerOnSingle() {
+    click(dropdownTrainerOnSingle);
+  }
+
+  private void checkBoxTrainer() {
+    click(checkboxTrainer);
+  }
+
+  public void trainerInListOnSingleRecord() {
+    btnSingleSchedule();
+    dropdownTrainerOnSingle();
+  }
+
+  public void clickByRightPaginator() {
+    clickByShowHistorySecondChild();
+    clickByTabSchedule();
+    btnRightPaginator();
+  }
+
+  private void btnRightPaginator() {
+    if (isElementPresent(btnScroll)) {
+      click(btnScroll);
+    }
+    clickWithMoveToElementAndWait(5, btnPaginatorRight);
+  }
+
+  public void clickByLeftPaginator() {
+    //сначала 1 раз вправо (следующий месяц) затем 2 влево (предыдущий месяц)
+    clickWithMoveToElementAndWait(5, btnPaginatorLeft);
+    clickWithMoveToElementAndWait(5, btnPaginatorLeft);
+  }
+
+  public String monthUI() {
+    String data = wd.findElement(monthUI).getText();
+    return data.split(" ")[0]; // достали id
   }
 }

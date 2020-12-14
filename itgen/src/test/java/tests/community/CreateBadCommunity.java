@@ -6,10 +6,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.communities.Communities;
 import data.model.communities.CommunityData;
+import data.provides.LocaleUtilsTestData;
 import org.testng.annotations.Test;
 
 public class CreateBadCommunity extends TestBase {

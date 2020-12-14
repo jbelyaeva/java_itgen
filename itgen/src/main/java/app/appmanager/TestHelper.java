@@ -46,8 +46,7 @@ public class TestHelper extends HelperBase {
   }
 
   public void createTest(TestData test) {
-    // btnAddTestInAdm(); - очень глючная кнопка Добавить, делает тест нестабильным
-    wd.get(address() + "/tests/addTest");
+    btnAddTestInAdm();
     selectFirstLangInList();
     fillFormCreateTest(test);
     btnAddTest();

@@ -15,6 +15,7 @@ import java.util.List;
 public class TrScheduleTomorrowHelper {
   private final TimeGeneral time = new TimeGeneral();
   private final ScheduleService scheduleService = new ScheduleService();
+  private final int week = 604800000;
 
   private List<Slots> generateSlots(String period, String idTrainer, ArrayList<List<C>> listsC) {
     int week = 604800000;
@@ -63,7 +64,9 @@ public class TrScheduleTomorrowHelper {
                                     .withSubject(idSubject)
                                     .withLang(lang)
                                     .withS("normal")
-                                    .withScore(3)))))
+                                    .withScore(3)
+                                    .withStartTime(time.StimeTomorrow(period))
+                                    .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120)
@@ -102,7 +105,9 @@ public class TrScheduleTomorrowHelper {
                                     .withLang(lang)
                                     .withS("normal")
                                     .withNewSubj(true)
-                                    .withScore(3)))))
+                                    .withScore(3)
+                                    .withStartTime(time.StimeTomorrow(period))
+                                    .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
@@ -141,7 +146,9 @@ public class TrScheduleTomorrowHelper {
                                     .withLang(lang)
                                     .withS("normal")
                                     .withNewSubj(true)
-                                    .withScore(3)))))
+                                    .withScore(3)
+                                    .withStartTime(time.StimeTomorrow(period))
+                                    .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
@@ -180,7 +187,9 @@ public class TrScheduleTomorrowHelper {
                                     .withLang(lang)
                                     .withS("normal")
                                     .withNewSubj(true)
-                                    .withScore(3)))))
+                                    .withScore(3)
+                                    .withStartTime(time.StimeTomorrow(period))
+                                    .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
@@ -218,7 +227,9 @@ public class TrScheduleTomorrowHelper {
                                     .withSubject(idSubject)
                                     .withLang(lang)
                                     .withTrial(true)
-                                    .withS("normal")))))
+                                    .withS("normal")
+                                    .withStartTime(time.StimeTomorrow(period))
+                                    .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
@@ -284,7 +295,9 @@ public class TrScheduleTomorrowHelper {
                 .withSubject(idSubject)
                 .withLang(lang)
                 .withS("normal")
-                .withTrial(true)));
+                .withTrial(true)
+                .withStartTime(time.StimeTomorrow(period))
+                .withEndTime(time.EtimeTomorrow(period))));
 
     for (int i = 0; i < 3; i++) {
       listsC.add(new ArrayList<>());
@@ -322,7 +335,9 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)));
+                .withP(true)
+                .withStartTime(time.StimeTomorrow(period))
+                .withEndTime(time.EtimeTomorrow(period))));
 
     for (int i = 0; i < 3; i++) {
       listsC.add(
@@ -333,7 +348,9 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)));
+                  .withP(true)
+                  .withStartTime(time.StimeTomorrow(period) + week * i)
+                  .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
 
     ScheduleData schedule =
@@ -368,7 +385,9 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)));
+                .withP(true)
+                .withStartTime(time.StimeTomorrow(period))
+                .withEndTime(time.EtimeTomorrow(period))));
 
     for (int i = 0; i < 3; i++) {
       listsC.add(
@@ -379,7 +398,9 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)));
+                  .withP(true)
+                  .withStartTime(time.StimeTomorrow(period) + week * i)
+                  .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
 
     ScheduleData schedule =
@@ -417,7 +438,9 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)));
+                  .withP(true)
+                  .withStartTime(time.StimeTomorrow(period) + week * i)
+                  .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
     ScheduleData schedule =
         new ScheduleData()
@@ -441,7 +464,6 @@ public class TrScheduleTomorrowHelper {
       String lang) {
 
     ArrayList<List<C>> listsC = new ArrayList<>(4);
-
     for (int i = 0; i < 4; i++) {
       listsC.add(
           Arrays.asList(
@@ -451,7 +473,9 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)));
+                  .withP(true)
+                  .withStartTime(time.StimeTomorrow(period) + week * i)
+                  .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
     ScheduleData schedule =
         new ScheduleData()
@@ -484,7 +508,9 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)));
+                .withP(true)
+                .withStartTime(time.StimeTomorrow(period))
+                .withEndTime(time.EtimeTomorrow(period))));
 
     for (int i = 0; i < 3; i++) {
       listsC.add(
@@ -495,7 +521,9 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)));
+                  .withP(true)
+                  .withStartTime(time.StimeTomorrow(period) + week * i)
+                  .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
     ScheduleData schedule =
         new ScheduleData()

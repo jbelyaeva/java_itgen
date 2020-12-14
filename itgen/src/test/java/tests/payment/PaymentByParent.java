@@ -22,7 +22,7 @@ public class PaymentByParent extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymentByParent", "1");
+        .finishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymentByParent", "1");
 
     app.trStudent()
         .studentAddDefaultFamilyAfterLesson(
@@ -49,6 +49,7 @@ public class PaymentByParent extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testPaymentByParent() {
+    app.lkParent().reset();
     app.payment().goToShopByParent();
     app.payment().paymentByParent();
     //  assertThat(app.student().findPictureSuccessPay(), equalTo(true)); разкомментить, когда будут

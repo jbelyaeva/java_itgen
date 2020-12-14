@@ -25,7 +25,7 @@ public class PaymentByGuest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymentByGuest", "1");
+        .finishingFirstTrialLesson(period, "FinishedSchedule", "14", "paymentByGuest", "1");
 
     app.trStudent()
         .studentAddDefaultFamilyAfterLesson(
@@ -52,6 +52,7 @@ public class PaymentByGuest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testPaymentByGuest() {
+    app.lkParent().reset();
     app.payment().goToShopByParent();
     app.payment().goToShopByGuest();
 

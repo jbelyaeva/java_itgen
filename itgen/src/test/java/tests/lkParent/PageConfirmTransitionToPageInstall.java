@@ -8,9 +8,7 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.ScheduleService;
 import data.services.StudentService;
-import data.services.TaskService;
 import data.services.TrainerService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,8 +16,6 @@ import org.testng.annotations.Test;
 
 public class PageConfirmTransitionToPageInstall extends TestBase {
 
-  private final TaskService taskService = new TaskService();
-  private final ScheduleService scheduleService = new ScheduleService();
   private final StudentService studentService = new StudentService();
   private final TrainerService trainerService = new TrainerService();
   private final String period = "18:00 - 20:00";
@@ -81,8 +77,7 @@ public class PageConfirmTransitionToPageInstall extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.drop();
     studentService.DeleteById("LKOnTrail");
-    taskService.drop();
+    app.postClean().dropTaskAndSchedule();
   }
 }

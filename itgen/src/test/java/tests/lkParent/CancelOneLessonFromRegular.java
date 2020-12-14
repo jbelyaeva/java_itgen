@@ -8,11 +8,8 @@ import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
 import data.services.ScheduleService;
 import data.services.StudentService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,16 +18,14 @@ public class CancelOneLessonFromRegular extends TestBase {
 
   StudentService studentService = new StudentService();
   ScheduleService scheduleService = new ScheduleService();
-  TaskService taskService = new TaskService();
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
   // 18.00 и который записан на постоянное расписание на завтра в 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-
     app.trScheduleYesterday()
-        .FinishingFirstTrialLesson(
+        .finishingFirstTrialLesson(
             period, "FinishedSchedule", "14", "LkCancelRegularSchedule", "1");
 
     app.trStudent()
@@ -70,31 +65,24 @@ public class CancelOneLessonFromRegular extends TestBase {
     check(before, after);
   }
 
-  @AfterMethod(alwaysRun = true)
-  public void clean() {
-    scheduleService.DeleteById("FinishedSchedule");
-    scheduleService.DeleteById("LkCancelRegularSchedule");
-    studentService.DeleteById("LkCancelRegularSchedule");
-
-    Tasks tasks = app.dbschedules().tasksComposition("LkCancelRegularSchedule");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
-  }
-
   private void check(Schedules before, Schedules after) {
-
     // регулярное расписание на завтра с учеником, первое занятие отменено
     app.trScheduleTomorrow()
         .RegularScheduleWithoutStudentOnFirstLesson(
             period, "LkCancelRegularSchedule", "14", "LkCancelRegularSchedule", "1", "ru");
-
     ScheduleData scheduleAdd = scheduleService.findById("LkCancelRegularSchedule");
+
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("LkCancelRegularSchedule")) {
         assertThat(after, equalTo(before.without(scheduleBefore).withAdded(scheduleAdd)));
         return;
       }
     }
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
+    studentService.DeleteById("LkCancelRegularSchedule");
+    app.postClean().dropTaskAndSchedule();
   }
 }

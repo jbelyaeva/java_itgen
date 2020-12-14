@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.schedule.Comments;
 import data.model.schedule.FinishedChildLessons;
@@ -42,7 +41,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
             period,
             "finishLessonByTrainer",
             "23",
-            "finishLessonByTrainer",
+            "finishLesson",
             "1",
             "ru");
 
@@ -50,7 +49,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
 
     app.trStudent()
         .newStudent(
-            "finishLessonByTrainer",
+            "finishLesson",
             "Маша",
             "Машина",
             "expert",
@@ -68,7 +67,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
             "noTrial");
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test
   public void testTrainerFinishedLessonWithStudentWas() {
     app.trainer().maxBrowser();
     Schedules before = app.dbschedules().schedules();
@@ -92,13 +91,13 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("finishLessonByTrainer");
-    studentService.DeleteById("finishLessonByTrainer");
     familyService.DeleteById("finishLessonByTrainer");
+    scheduleService.drop();
     finishedChildLessonService.drop();
     finishedLessonService.drop();
     taskService.drop();
     commentService.drop();
+    studentService.DeleteById("finishLesson");
   }
 
   private void check(Schedules after) {
@@ -109,7 +108,7 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
             period,
             "finishLessonByTrainer",
             "23",
-            "finishLessonByTrainer",
+            "finishLesson",
             "1",
             "ru",
             "finished");

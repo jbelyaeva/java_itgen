@@ -4,10 +4,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
-import core.general.LocaleUtilsTestData;
 import core.general.RunTestAgain;
 import data.model.typeform.TestData;
 import data.model.typeform.Tests;
+import data.provides.LocaleUtilsTestData;
 import data.services.TestService;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;

@@ -246,6 +246,14 @@ public class HelperBase {
     return c.getTime();
   }
 
+  public Date DateWithCorrectionMonth(int month) {
+    Date data = new Date();
+    Calendar c = Calendar.getInstance();
+    c.setTime(data);
+    c.add(Calendar.MONTH, month);
+    return c.getTime();
+  }
+
   public String DateISOToUsualDataString(Date dateISO) {
     SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
     return formatForDateNow.format(dateISO);
