@@ -57,6 +57,7 @@ public class SshotEntryOnTrial extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testEntryOnTrial() throws AWTException, IOException {
+    app.base().maxBrowser();
     app.lkParent().recordOnTrail(1);
 
     String name = "Parent_EntryOnTrial_RU_Chrome";
