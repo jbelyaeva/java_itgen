@@ -51,6 +51,7 @@ public class TrScheduleTodayHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -90,6 +91,7 @@ public class TrScheduleTodayHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -134,6 +136,47 @@ public class TrScheduleTodayHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
+            .withOneTime(true);
+    scheduleService.save(schedule);
+  }
+
+  public void SingleScheduleWithOneStudentStartedSeveralHours(
+      long hoursImMs,
+      String idSchedule,
+      String idTrainer,
+      String idStudent,
+      String idSubject,
+      String lang) {
+    String period = time.getPeriod(time.getTimeNow() + hoursImMs);
+    ScheduleData schedule =
+        new ScheduleData()
+            .withId(idSchedule)
+            .withVer(0)
+            .withFromDate(time.date())
+            .withSlots(Arrays.asList(
+                new Slots()
+                    .withId(idTrainer)
+                    .withW(time.date())
+                    .withSt(new ST().withS(time.Stime(period)).withE(time.Etime(period)))
+                    .withC(
+                        Arrays.asList(
+                            new C()
+                                .withId(idStudent)
+                                .withType(3)
+                                .withSubject(idSubject)
+                                .withLang(lang)
+                                .withTrial(false)
+                                .withP(false)
+                                .withScore(0)
+                                .withRating(0)
+                                .withS("normal")
+                                .withStartTime(time.Stime(period))
+                                .withEndTime(time.Etime(period))))))
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withDuration(120)
+            .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }

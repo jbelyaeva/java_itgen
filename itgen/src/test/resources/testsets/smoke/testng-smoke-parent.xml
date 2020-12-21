@@ -43,6 +43,18 @@
       <class name="tests.lkParent.TrainerInListWhenLessonsFinishedWithWasAndNotWas"/>
       <class name="tests.lkParent.TrainerInListWhenLessonsFinishedWithWasAndDisrupt"/>
       <class name="tests.lkParent.ScheduleMonths"/>
+      <class name="tests.lkParent.WorkingOffWithLessons"/>
+      <class name="tests.lkParent.RecordOnWorkingOff"/>
+      <class name="tests.lkParent.SettingsErrorPassword"/>
+      <class name="tests.lkParent.SettingsSaveValidLogin"/>
+      <class name="tests.lkParent.SettingsSaveValidPassword"/>
+      <class name="tests.lkParent.SettingsCancelPassword"/>
+      <class name="tests.lkParent.SettingsCancelLogin"/>
+      <class name="tests.lkParent.SettingsNewStudentAddInAccauntAfterSavePassword"/>
+      <class name="tests.lkParent.SettingsHowGoInLkStudent"/>
+      <class name="tests.lkParent.SettingsHowGoInLkStudent"/>
+      <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOff"/>
+      <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOffLater"/>
       <!-- <class name="tests.payment.PaymentByGuest"/>
        <class name="tests.payment.PaymentByParent"/> -->
     </classes>

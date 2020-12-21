@@ -14,7 +14,7 @@ public class GeneralPageBlockBallansHistory extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trPayment().newPayment("newPaymant", "111", "666", 1, 2, "Корректировка", true, 100);
+    data.payments().set1_addPaymentInDefaultFamily();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -29,6 +29,6 @@ public class GeneralPageBlockBallansHistory extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    app.postClean().dropPayment();
+    data.postClean().payment();
   }
 }

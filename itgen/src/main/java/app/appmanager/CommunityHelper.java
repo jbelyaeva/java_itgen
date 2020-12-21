@@ -11,6 +11,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -157,13 +158,18 @@ public class CommunityHelper extends HelperBase {
   }
 
   private void btnCreatePost() {
-    click(By.xpath("//button[@id-qa='create']"));
+    clickWithMoveToElementAndWait(2, By.xpath("//button[@id-qa='create']"));
   }
 
   private void fillPost(String text) {
-    By locator = By.xpath("//div[@class='community-post-body']//textarea");
-    clickWithMoveToElementAndWait(1, By.xpath("//div[@class='community-post-body']//textarea"));
-    wd.findElement(locator).sendKeys(text);
+    By locator = By.xpath("//div[@id-qa='post-text']");
+    clickWithMoveToElementAndWait(1, By.xpath("//div[@id-qa='post-text']"));
+    JavascriptExecutor exe = (JavascriptExecutor) wd;
+    WebElement element = wd.findElement(By.xpath("//div[@id-qa='post-text']"));
+    exe.executeScript("arguments[0].innerHTML='" + text + "';", element);
+    Actions action = new Actions(wd);
+    action.sendKeys(Keys.ENTER).build().perform();
+
     if (!wd.findElement(locator).getText().equals(text)) {
       clear(50, locator);
       wd.findElement(locator).sendKeys(text);
@@ -214,9 +220,13 @@ public class CommunityHelper extends HelperBase {
   }
 
   private void modifyPost(String newText) {
-    clear(50, By.xpath("//div[@class='community-post-body']//textarea"));
-    clickWithMoveToElementAndWait(1, By.xpath("//div[@class='community-post-body']//textarea"));
-    wd.findElement(By.xpath("//div[@class='community-post-body']//textarea")).sendKeys(newText);
+    clear(50, By.xpath("//div[@id-qa='post-text']"));
+    clickWithMoveToElementAndWait(1, By.xpath("//div[@id-qa='post-text']"));
+    JavascriptExecutor exe = (JavascriptExecutor) wd;
+    WebElement element = wd.findElement(By.xpath("//div[@id-qa='post-text']"));
+    exe.executeScript("arguments[0].innerHTML='" + newText + "';", element);
+    Actions action = new Actions(wd);
+    action.sendKeys(Keys.ENTER).build().perform();
   }
 
   private void btnModifyPost() {

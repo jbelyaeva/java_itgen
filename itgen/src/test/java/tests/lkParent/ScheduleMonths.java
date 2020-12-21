@@ -5,43 +5,16 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ScheduleMonths extends TestBase {
-
-  private final StudentService studentService = new StudentService();
-  String periodFirst = "10:00 - 12:00";
+  private final String period = "10:00 - 12:00";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trScheduleYesterday()
-        .finishingFirstTrialLesson(
-            periodFirst, "FinishedTrialSchedule", "14", "LkCancelRegularSchedule", "1");
-
-    app.trStudent()
-        .studentAddDefaultFamilyAfterLesson(
-            "LkCancelRegularSchedule",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            1,
-            "trialFinished",
-            "1",
-            "1",
-            1);
+    data.defFamily().set12_LessonYesterdayFinished_StudentAddInDefaultFamily(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -56,7 +29,6 @@ public class ScheduleMonths extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    studentService.DeleteById("LkCancelRegularSchedule");
-    app.postClean().dropTaskAndSchedule();
+    data.postClean().taskAndSchedule().student();
   }
 }

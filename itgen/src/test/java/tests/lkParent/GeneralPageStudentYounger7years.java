@@ -5,37 +5,15 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class GeneralPageStudentYounger7years extends TestBase {
 
-  StudentService studentService = new StudentService();
-
   @BeforeMethod
   public void ensurePreconditions() {
-
-    app.trStudent()
-        .newStudent(
-            "newStudent",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "111",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-1460),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            "noTrial"
-        );
+   data.defFamily().set3_addNewStudentYanger7Years();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -49,6 +27,6 @@ public class GeneralPageStudentYounger7years extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    studentService.DeleteById("newStudent");
+    data.postClean().student();
   }
 }

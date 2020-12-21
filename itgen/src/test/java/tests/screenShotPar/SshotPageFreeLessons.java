@@ -20,7 +20,6 @@ public class SshotPageFreeLessons extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testPageFreeLessons() throws AWTException, IOException {
     app.lkParent().clickByFreeLesson();
-    app.base().maxBrowser();
 
     String name = "Parent_FreeLessons_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

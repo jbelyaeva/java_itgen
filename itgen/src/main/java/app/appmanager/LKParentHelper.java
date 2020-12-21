@@ -116,15 +116,40 @@ public class LKParentHelper extends HelperBase {
   private final By dropdownTrainerOnSingle = By.xpath("(//div[@class='gena-form-item'])[5]");
   private final By checkboxTrainer = By.xpath("//input[@id='with-trainer']/..");
   private final By trainerNastyaInList = By.xpath("//div[text()='Бокша Настя']");
-  private ApplicationManager app;
   private final By btnInstallInScheduleTomorrow = By.xpath(
       "//div[contains(@class,'lightUp')]//button[@id-qa='install']");
   private final By cellLightCalendar = By.xpath("//div[contains(@class,'lightUp')]");
-  private final By btnAssighWorking = By.xpath("//div[contains(@class,'assign')]//button");
+  private final By btnAssignWorking = By.xpath("//div[contains(@class,'assign')]//button");
   private final By btnScroll = By.xpath("(//div[@class='header']//following-sibling::button)[5]");
   private final By btnPaginatorRight = By.xpath("//button[contains(@class,'pagination-right')]");
   private final By btnPaginatorLeft = By.xpath("//button[contains(@class,'pagination-left')]");
   private final By monthUI = By.xpath("//span[@class='date']");
+  private final By btnAssignInWindowWorkingOff = By.xpath("//button[contains(@class,'assign')]");
+  private final By selectLessonForWorkingOff = By.xpath(
+      "//input[@name='assign-working-off-group']");
+  private final By btnReturnFromWorkingOff = By.xpath("//button[@id-qa='return']");
+  private final By labelWorkingOffOnThirdLessonInSchedule = By.xpath(
+      "((//div[@class='lesson-content-client'])[3]//div[@class='lesson-label working-off'])[1]");
+  private final By clickByFirstStudent = By.xpath("//a[contains(@href,'21')]");
+  private final By clickBySecondStudent = By.xpath("//a[contains(@href,'newStudent')]");
+  private final By btnChangePassword = By.xpath("//div[@class='password']//button");
+  private final By labelLoginInSettings = By.xpath(
+      "(//div[@class='current'])[1]//div[@class='value']");
+  private final By imageInstructionGif = By.xpath("//img[@class='instruction-gif']");
+  private final By winTutorialsInSettings = By.xpath("//div[contains(@class,'tutorials')]");
+  private final By editPasswordFirst = By.xpath("(//input[@type='password'])[1]");
+  private final By editPasswordSecond = By.xpath("(//input[@type='password'])[2]");
+  private final By btnCancelPassword = By.xpath("(//div[@class='password active']//button)[2]");
+  private final By btnSavePassword = By.xpath("(//div[@class='password active']//button)[1]");
+  private final By editLogin = By.xpath("//div[@class='login active']//input");
+  private final By btnCancelLogin = By.xpath("(//div[@class='login active']//button)[2]");
+  private final By btnSaveLogin = By.xpath("//div[@class='login active']//button");
+  private final By btnChangeLogin = By.xpath("//div[@class='login']//button");
+  private final By btnHeaderForLogout = By.xpath("//div[@class='head']");
+  private final By closeFirstTitorialInSettings = By.xpath(
+      "(//div[contains(@class,'dropdown')][1]//span//following::*[local-name()='svg'])[1]");
+  private final By closeSecondTitorialInSettings = By.xpath(
+      "(//div[contains(@class,'dropdown')][1]//span//following::*[local-name()='svg'])[2]");
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
@@ -250,10 +275,6 @@ public class LKParentHelper extends HelperBase {
     return winTutorialBySwitchToStudent;
   }
 
-  public By getBtnFreeLessons() {
-    return btnFreeLessons;
-  }
-
   public By getBtnInstall() {
     return btnInstall;
   }
@@ -270,10 +291,6 @@ public class LKParentHelper extends HelperBase {
     return cellLightCalendar;
   }
 
-  public By getBtnShowScheduleChild() {
-    return btnShowScheduleChild;
-  }
-
   public By getBtnRecordOnTrailInSchedule() {
     return btnRecordOnTrailInSchedule;
   }
@@ -282,8 +299,8 @@ public class LKParentHelper extends HelperBase {
     return btnRecordOnLesson;
   }
 
-  public By getBtnAssighWorking() {
-    return btnAssighWorking;
+  public By getBtnAssignWorking() {
+    return btnAssignWorking;
   }
 
   public By getScheduleLabelSkipped() {
@@ -292,6 +309,26 @@ public class LKParentHelper extends HelperBase {
 
   public By getScheduleLabelFinished() {
     return scheduleLabelFinished;
+  }
+
+  public By getBtnAssignInWindowWorkingOff() {
+    return btnAssignInWindowWorkingOff;
+  }
+
+  public By getLabelWorkingOffOnThirdLessonInSchedule() {
+    return labelWorkingOffOnThirdLessonInSchedule;
+  }
+
+  public By getLabelLoginInSettings() {
+    return labelLoginInSettings;
+  }
+
+  public By getImageInstructionGif() {
+    return imageInstructionGif;
+  }
+
+  public By getWinTutorialsInSettings() {
+    return winTutorialsInSettings;
   }
 
   public void btnRecordOnTrail() {
@@ -316,17 +353,7 @@ public class LKParentHelper extends HelperBase {
     return goToNewWindowAndGoToBack(btnInstall);
   }
 
-  private void btnInstall() {
-    click(btnInstall);
-    noErrorMessage();
-  }
-
   public void btnLogo() {
-    click(btnLogo);
-    noErrorMessage();
-  }
-
-  public void tabLogo() {
     click(btnLogo);
     noErrorMessage();
   }
@@ -357,15 +384,15 @@ public class LKParentHelper extends HelperBase {
     btnNextOnForm();
   }
 
+  public void createNewStudent() {
+    btnAddNewStudent();
+    fillNewStudentForm();
+    btnNextOnForm();
+  }
+
   public void createSShotFirstForm(StudentData student) {
     btnAddNewStudent();
     fillStudentForm(student);
-  }
-
-  public void createSShotSecondForm(StudentData student) {
-    btnAddNewStudent();
-    fillStudentForm(student);
-    btnNextOnForm();
   }
 
   private ExpectedCondition<WebElement> expectVisible(String locator) {
@@ -396,6 +423,21 @@ public class LKParentHelper extends HelperBase {
       wait.until(this.expectVisible(pcLevel));
       clickWithMoveToElementAndWait(3, By.xpath(pcLevel));
     }
+  }
+
+  public void fillNewStudentForm() {
+    type(editNewStudent_firstName, "Олег");
+    type(editNewStudent_lastName, "Олегов");
+    type(editNewStudent_birthday, "01012011");
+    click(editNewStudent_gender);
+    String gender = "//li[@data-value='1']";
+    click(By.xpath(gender));
+    click(editNewStudent_lang);
+    String lang = "//li[@data-value='ru']";
+    click(By.xpath(lang));
+    click(editNewStudent_pcLevel);
+    String pcLevel = "//li[@data-value='expert']";
+    clickWithMoveToElementAndWait(3, By.xpath(pcLevel));
   }
 
   private void btnNextOnForm() {
@@ -562,6 +604,33 @@ public class LKParentHelper extends HelperBase {
     btnCancel();
   }
 
+  public void cancelSingleScheduleAndClickOnWorkingOffNow() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBox();
+    btnDropdown();
+    btnWorkingOffNow();
+  }
+
+  public void cancelSingleScheduleAndClickOnWorkingOffLater() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBox();
+    btnDropdown();
+    btnWorkingOffLater();
+  }
+
+  private void btnWorkingOffLater() {
+    click(By.xpath(
+        "//button[contains(@class,'btn-cancel-and-working-off')]/following-sibling::button"));
+  }
+
+  private void btnWorkingOffNow() {
+    click(By.xpath("//button[contains(@class,'btn-cancel-and-working-off')]"));
+  }
+
   public void cancelLessonsInRegularSchedule() {
     btnShowSchedule();
     btnCancelSchedule();
@@ -658,8 +727,12 @@ public class LKParentHelper extends HelperBase {
     click(btnSchedule);
   }
 
-  public void clickByNameStudent() {
-    click(By.xpath("//a[contains(@href,'21')]"));
+  public void clickByNameFirstStudent() {
+    click(clickByFirstStudent);
+  }
+
+  public void clickByNameSecondStudent() {
+    click(clickBySecondStudent);
   }
 
   public void clickByShowHistorySecondChild() {
@@ -702,6 +775,8 @@ public class LKParentHelper extends HelperBase {
       String id = String.valueOf(((RemoteWebDriver) wd).getSessionId());
       Process proc = Runtime.getRuntime()
           .exec("curl http://135.181.63.111:4444/clipboard/" + id);
+      //https://www.twilio.com/blog/5-ways-to-make-http-requests-in-java
+      ////http://selenoid:4444 ci.propeties->selenium server
       BufferedReader stdInput = new BufferedReader(new
           InputStreamReader(proc.getInputStream()));
       return stdInput.toString();
@@ -784,5 +859,138 @@ public class LKParentHelper extends HelperBase {
   public String monthUI() {
     String data = wd.findElement(monthUI).getText();
     return data.split(" ")[0]; // достали id
+  }
+
+  public void goInWorkingOff() {
+    clickByShowHistorySecondChild();
+    clickByTabSchedule();
+    clickByAssignWorking();
+  }
+
+  private void clickByAssignWorking() {
+    click(btnAssignWorking);
+    noErrorMessage();
+  }
+
+  public void selectLessonForWorkingOff() {
+    click(selectLessonForWorkingOff);
+  }
+
+  public void clickByRecordOnWorkingOff() {
+    click(btnAssignInWindowWorkingOff);
+    noErrorMessage();
+  }
+
+  public void clickByBack() {
+    click(btnReturnFromWorkingOff);
+  }
+
+  public void recordOnWorkingOff() {
+    goInWorkingOff();
+    selectLessonForWorkingOff();
+    clickByRecordOnWorkingOff();
+  }
+
+  public void clickByChangePassword() {
+    click(btnChangePassword);
+  }
+
+  public void typeNotSimilarPasswordInSettings() {
+    clickByNameFirstStudent();
+    btnCloseTutorial();
+    clickByChangePassword();
+    type(editPasswordFirst, "1234");
+    type(editPasswordSecond, "1122");
+    thereAreErrorMessages();
+    clickByBadSavePassword();
+  }
+
+  public void changePasswordInSettings(String newPassword) {
+    clickByNameSecondStudent();
+    btnCloseTutorial();
+    clickByChangePassword();
+    type(editPasswordFirst, newPassword);
+    type(editPasswordSecond, newPassword);
+    clickBySavePassword();
+  }
+
+  public void cancelPasswordInSettings() {
+    clickByNameSecondStudent();
+    btnCloseTutorial();
+    clickByChangePassword();
+    type(editPasswordFirst, "123456");
+    type(editPasswordSecond, "123456");
+    clickByCancelPassword();
+  }
+
+  private void clickByCancelPassword() {
+    click(btnCancelPassword);
+    noErrorMessage();
+  }
+
+  private void clickBySavePassword() {
+    click(btnSavePassword);
+    noErrorMessage();
+  }
+
+  private void clickByBadSavePassword() {
+    click(btnSavePassword);
+    thereAreErrorMessages();
+  }
+
+  public void saveNewLogin(String loginNew) {
+    clickByNameSecondStudent();
+    btnCloseTutorial();
+    clickByChangeLogin();
+    type(editLogin, loginNew);
+    clickBySaveLogin();
+  }
+
+  public void saveLoginAndPassword(String loginNew) {
+    click(By.xpath("//a[text()='Олег']"));
+    btnCloseTutorial();
+    clickByChangeLogin();
+    type(editLogin, loginNew);
+    clickBySaveLogin();
+    clickByChangePassword();
+    type(editPasswordFirst, "123456");
+    type(editPasswordSecond, "123456");
+    clickBySavePassword();
+  }
+
+  public void cancelNewLogin(String loginNew) {
+    clickByNameSecondStudent();
+    btnCloseTutorial();
+    clickByChangeLogin();
+    type(editLogin, loginNew);
+    clickByCancelLogin();
+  }
+
+  private void clickByCancelLogin() {
+    click(btnCancelLogin);
+  }
+
+  private void clickBySaveLogin() {
+    click(btnSaveLogin);
+  }
+
+  private void clickByChangeLogin() {
+    click(btnChangeLogin);
+  }
+
+  public void clickByHeader() {
+    click(btnHeaderForLogout);
+  }
+
+  public void clickByOleg() {
+    click(By.xpath("//span[text()='Олегов Олег']"));
+  }
+
+  public void clickByFirstTutorial() {
+    click(closeFirstTitorialInSettings);
+  }
+
+  public void clickBySecondTutorial() {
+    click(closeSecondTitorialInSettings);
   }
 }

@@ -1,11 +1,8 @@
 package tests.testTypeform;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.services.TestService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
@@ -43,9 +40,7 @@ public class TestTypeformAvailableToStudent extends TestBase {
     app.test().goToStudentProfileTabTests("21");
     Thread.sleep(5000);
     // проверка, что кнопка есть и она не задизейблена
-    assertThat(
-        app.test().elementAtributAvailable(By.xpath("//button[@id-qa='give-test']")),
-        equalTo(null));
+    app.check().onNotDisabled(By.xpath("//button[@id-qa='give-test']"));
     app.goTo().menuTasks();
   }
 

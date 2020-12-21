@@ -23,6 +23,6 @@ public class PageFreeLessonsCheckRefCode extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    app.postClean().dropChat();
+    data.postClean().chat();
   }
 }

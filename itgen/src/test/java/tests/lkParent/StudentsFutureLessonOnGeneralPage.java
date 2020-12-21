@@ -7,47 +7,18 @@ import static core.general.DateFormat.formatDDMMMM;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class StudentsFutureLessonOnGeneralPage extends TestBase {
 
-  StudentService studentService = new StudentService();
-  String period = "21:00 - 23:00";
-  String text = " 21:00 Scratch";
+  private final String period = "21:00 - 23:00";
+  private final String text = " 21:00 Scratch";
 
   @BeforeMethod
   public void ensurePreconditions() {
-
-    app.trStudent()
-        .newStudent(
-            "newStudent",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "111",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-1460),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            "learning"
-        );
-
-    app.trScheduleTomorrow().SingleScheduleWithOneNewStudent(
-        period,
-        "newSchedule",
-        "14",
-        "newStudent",
-        "1",
-        "ru");
+    data.defFamily().set4_SingleLessonTomorrowWithStudent_StudentAddInDefaultFamily(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -61,7 +32,6 @@ public class StudentsFutureLessonOnGeneralPage extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    studentService.DeleteById("newStudent");
-    app.postClean().dropTaskAndSchedule();
+    data.postClean().taskAndSchedule().student();
   }
 }

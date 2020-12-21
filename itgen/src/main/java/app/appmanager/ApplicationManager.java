@@ -25,11 +25,11 @@ import app.appmanager.transactionHelper.TrStudentHelper;
 import app.appmanager.transactionHelper.TrTaskHelper;
 import app.appmanager.transactionHelper.TrTestHelper;
 import app.appmanager.transactionHelper.TrWorkerHelper;
+import app.appmanager.transactionHelper.schedule.TrScheduleHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import core.general.Assertions;
-import data.provides.Clean;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -93,6 +93,7 @@ public class ApplicationManager {
   private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
   private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
   private TrScheduleTodayHelper trScheduleTodayHelper;
+  private TrScheduleHelper trScheduleHelper;
   private TrStudentHelper transactionStudentHelper;
   private TrLeadHelper transactionLeadHelper;
   private TrParentHelper transactionParentHelper;
@@ -107,7 +108,7 @@ public class ApplicationManager {
   private TrFinishedLessonHelper transactionFinishedLessonHelper;
   private TrCommunityHelper transactionCommunityHelper;
   private TrSkillHelper transactionSkillHelper;
-  private Clean clean;
+
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -135,6 +136,7 @@ public class ApplicationManager {
     trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
     trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
     trScheduleTodayHelper = new TrScheduleTodayHelper();
+    trScheduleHelper = new TrScheduleHelper();
     transactionStudentHelper = new TrStudentHelper();
     transactionLeadHelper = new TrLeadHelper();
     transactionParentHelper = new TrParentHelper();
@@ -171,6 +173,7 @@ public class ApplicationManager {
     }
     wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
+    wd.manage().window().maximize();
 
     workerHelper = new WorkerHelper(wd);
     sessionHelper = new SessionHelper(wd);
@@ -194,7 +197,6 @@ public class ApplicationManager {
     candidateHelper = new CandidateHelper(wd);
     communityHelper = new CommunityHelper(wd);
     assertions = new Assertions(wd);
-    clean = new Clean();
 
     sessionHelper.login(
         properties.getProperty("web.Login"), properties.getProperty("web.Password"));
@@ -353,10 +355,6 @@ public class ApplicationManager {
     return assertions;
   }
 
-  public Clean postClean() {
-    return clean;
-  }
-
   public TrScheduleTomorrowHelper trScheduleTomorrow() {
     return trScheduleTomorrowHelper;
   }
@@ -367,6 +365,10 @@ public class ApplicationManager {
 
   public TrScheduleTodayHelper trScheduleToday() {
     return trScheduleTodayHelper;
+  }
+
+  public TrScheduleHelper trSchedule() {
+    return trScheduleHelper;
   }
 
   public TrStudentHelper trStudent() {
@@ -428,5 +430,4 @@ public class ApplicationManager {
   public byte[] takeScreenshot() {
     return ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
   }
-
 }

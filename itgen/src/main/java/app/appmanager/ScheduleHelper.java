@@ -28,7 +28,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   public void checkBoxConst() {
-    click(By.xpath("//input[@type='checkbox']"));
+    click(By.xpath("//div[@class='permanent-form-group']//div"));
   }
 
   private void selectMove() {

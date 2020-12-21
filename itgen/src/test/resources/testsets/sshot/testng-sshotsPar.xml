@@ -14,6 +14,9 @@
       <class name="tests.screenShotPar.SshotPayByParentShopRU"/>
       <class name="tests.screenShotPar.SshotTypeformHistory"/>
       <class name="tests.screenShotPar.SshotPageFreeLessons"/>
+      <class name="tests.screenShotPar.SshotStudentSettingsWithoutPassword"/>
+      <class name="tests.screenShotPar.SshotStudentSettingsWithPassword"/>
+      <class name="tests.screenShotPar.SshotStudentSettingsChangePassword"/>
     </classes>
   </test>
 </suite>

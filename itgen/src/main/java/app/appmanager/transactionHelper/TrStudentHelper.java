@@ -82,6 +82,7 @@ public class TrStudentHelper {
     StudentData student =
         new StudentData()
             .withId(idStudent)
+            .withUsername("newUser")
             .withFirstName(name)
             .withLastName(surname)
             .withRoles(Arrays.asList("child"))
@@ -97,6 +98,9 @@ public class TrStudentHelper {
             .withSkills(Arrays.asList(skill))
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
+            .withServices(new Services()
+                .withPassword(new Password().withBcrypt(
+                    "$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
             .withDuration(duration)
             .withStatus(new Status().withState(status));
     studentService.save(student);

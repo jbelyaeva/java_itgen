@@ -7,9 +7,12 @@ import data.model.users.Students;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -411,12 +414,18 @@ public class StudentHelper extends HelperBase {
   }
 
   private void btnCreateComment() {
-    click(By.xpath("//button[@id-qa='create']"));
+    click(By.xpath("//button[@id='pick-attachments-application']/../following-sibling::button"));
   }
 
   private void fillNewComment(String comment) {
     clickWaitElementToBeClicable(5, By.xpath("//div[@id-qa='wrap']"));
-    wd.findElement(By.xpath("//div[@class='body']//textarea[1]")).sendKeys(comment);
+    clear(50, By.xpath("//div[@id-qa='comment-text']"));
+    clickWithMoveToElementAndWait(1, By.xpath("//div[@id-qa='comment-text']"));
+    JavascriptExecutor exe = (JavascriptExecutor) wd;
+    WebElement element = wd.findElement(By.xpath("//div[@id-qa='comment-text']"));
+    exe.executeScript("arguments[0].innerHTML='" + comment + "';", element);
+    Actions action = new Actions(wd);
+    action.sendKeys(Keys.ENTER).build().perform();
   }
 
   public void tabAll() {

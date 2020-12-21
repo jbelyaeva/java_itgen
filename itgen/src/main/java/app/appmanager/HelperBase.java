@@ -15,6 +15,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -151,6 +152,11 @@ public class HelperBase {
     } else {
       click(By.xpath("(//ul[contains(@class,'Menu')])//li[3]"));
     }
+  }
+
+  public void logoutByParent() {
+    click(By.xpath("//div[@class='head']"));
+    click(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"));
   }
 
   public void login(String login, String password) {
@@ -359,12 +365,19 @@ public class HelperBase {
 
   public boolean tryDoAction(By locator) {
     boolean error = false;
-    try{
+    try {
       moveToElement(locator);
-    }
-    catch (JavascriptException e){
+    } catch (JavascriptException e) {
       error = true;
     }
     return error;
+  }
+
+  public void btnCloseTutorial() {
+    try {
+      clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='cancel']"));
+    } catch (TimeoutException e) {
+      System.out.println("Исключение:" + e);
+    }
   }
 }

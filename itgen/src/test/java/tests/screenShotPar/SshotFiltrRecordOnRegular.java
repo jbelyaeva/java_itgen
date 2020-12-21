@@ -2,11 +2,6 @@ package tests.screenShotPar;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
-import data.services.ScheduleService;
-import data.services.StudentService;
-import data.services.TaskService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,40 +14,16 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotFiltrRecordOnRegular extends TestBase {
-  TaskService taskService = new TaskService();
-  ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
+
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
   // 18.00
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trScheduleYesterday()
-        .finishingFirstTrialLesson(
-            period, "FinishedSchedule", "14", "LkRecordOnRegularSchedule", "1");
-
-    app.trStudent()
-        .studentAddDefaultFamilyAfterLesson(
-            "LkRecordOnRegularSchedule",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            1,
-            "trialFinished",
-            "1",
-            "1",
-            1);
+    data.defFamily()
+        .set9_LessonYesterdayFinished_RegularLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
+            period);
   }
 
   @Test
@@ -83,12 +54,6 @@ public class SshotFiltrRecordOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("FinishedSchedule");
-    studentService.DeleteById("LkRecordOnRegularSchedule");
-
-    Tasks tasks = app.dbschedules().tasksComposition("LkRecordOnRegularSchedule");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
+    data.postClean().taskAndSchedule().student();
   }
 }

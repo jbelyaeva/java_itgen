@@ -13,6 +13,8 @@ import data.model.users.TrainerData;
 import data.model.users.Trainers;
 import data.model.users.WorkerData;
 import data.model.users.Workers;
+import data.precondition.DataManager;
+import data.precondition.TranzactionManager;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -39,6 +41,10 @@ public class TestBase {
 
   protected static final ApplicationManager app =
       new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+
+  protected static final DataManager data = new DataManager();
+
+  protected static final TranzactionManager tr = new TranzactionManager();
 
   @BeforeSuite(alwaysRun = true)
   public void setUp(ITestContext context) throws Exception {

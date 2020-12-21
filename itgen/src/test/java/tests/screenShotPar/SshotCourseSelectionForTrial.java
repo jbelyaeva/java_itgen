@@ -3,10 +3,6 @@ package tests.screenShotPar;
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
-import data.services.StudentService;
-import data.services.TaskService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,30 +15,10 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotCourseSelectionForTrial extends TestBase {
-  TaskService taskService = new TaskService();
-  StudentService studentService = new StudentService();
-
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trStudent()
-        .newStudent(
-            "LKOnTrail",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "111",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-4380),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            "noTrial");
+  data.defFamily().set13_addNewStudentOlder7Years();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -74,11 +50,6 @@ public class SshotCourseSelectionForTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    studentService.DeleteById("LKOnTrail");
-
-    Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
+    data.postClean().taskAndSchedule().student();
   }
 }
