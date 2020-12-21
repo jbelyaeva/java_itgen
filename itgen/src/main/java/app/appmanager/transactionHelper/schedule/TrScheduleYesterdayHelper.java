@@ -56,6 +56,7 @@ public class TrScheduleYesterdayHelper {
                 new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -107,6 +108,7 @@ public class TrScheduleYesterdayHelper {
                 new Times().withStart(time.start(periodFinish)).withEnd(time.finish(periodFinish)))
             .withOneTime(true)
             .withDuration(duration)
+            .withLessonFormat(0)
             .withWholeness(wholness);
     scheduleService.save(schedule);
   }

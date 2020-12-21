@@ -5,7 +5,6 @@ package tests.screenShot;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import data.services.FamilyService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -17,7 +16,6 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotFamily extends TestBase {
-  FamilyService familyService = new FamilyService();
 
   private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
     return app.sshot()
@@ -32,7 +30,7 @@ public class SshotFamily extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    familyService.updateFieldBoolean("111", "isTrialBonusOff", false);
+    data.familyService().updateFieldBoolean("111", "isTrialBonusOff", false);
   }
 
   @Test

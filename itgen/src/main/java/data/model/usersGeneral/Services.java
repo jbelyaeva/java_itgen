@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Services {
-  @Embedded private Password password;
-  private String bcrypt;
-  @Embedded private List<LoginTokens> loginTokens = new ArrayList<LoginTokens>();
 
-  public Services() {}
+  @Embedded
+  private Password password;
+  private String bcrypt;
+  @Embedded
+  private List<LoginTokens> loginTokens = new ArrayList<LoginTokens>();
+
+  public Services() {
+  }
 
   public Services withBcrypt(String bcrypt) {
     this.bcrypt = bcrypt;

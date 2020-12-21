@@ -1,7 +1,7 @@
 package tests.screenShotPar;
 /*Кейс: */
+
 import app.appmanager.ApplicationManager;
-import data.services.FamilyService;
 import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotMain extends TestBase {
-  FamilyService familyService = new FamilyService();
 
   private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
     return app.sshot()
@@ -29,7 +28,7 @@ public class SshotMain extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    familyService.updateFieldBoolean("111", "isTrialBonusOff", false);
+    data.familyService().updateFieldBoolean("111", "isTrialBonusOff", false);
   }
 
   @Test // упадет, если заускать через shift все тесты в подпапке.

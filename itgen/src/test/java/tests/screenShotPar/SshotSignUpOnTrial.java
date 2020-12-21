@@ -2,11 +2,6 @@ package tests.screenShotPar;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
-import data.services.ScheduleService;
-import data.services.StudentService;
-import data.services.TaskService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,9 +14,6 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotSignUpOnTrial extends TestBase {
-  TaskService taskService = new TaskService();
-  ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
   String period = "18:00 - 20:00";
 
   // тестовая ситуация: есть дефолтная семья, к которой добавлен ученик
@@ -29,26 +21,7 @@ public class SshotSignUpOnTrial extends TestBase {
   // пробное
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "LKOnTrail", "14");
-
-    app.trStudent()
-        .newStudent(
-            "LKOnTrail",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "111",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            "1",
-            2,
-            "noTrial");
+    data.defFamily().set6_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(period);
   }
 
   @Test
@@ -83,12 +56,6 @@ public class SshotSignUpOnTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("LKOnTrail");
-    studentService.DeleteById("LKOnTrail");
-
-    Tasks tasks = app.dbschedules().tasksComposition("LKOnTrail");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
+    data.postClean().taskAndSchedule().student();
   }
 }

@@ -70,6 +70,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -111,6 +112,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -152,6 +154,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -193,6 +196,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -233,6 +237,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -254,6 +259,7 @@ public class TrScheduleTomorrowHelper {
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
             .withWholeness(false)
+            .withLessonFormat(0)
             .withOneTime(true);
     scheduleService.save(schedule);
   }
@@ -273,6 +279,7 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
+            .withLessonFormat(0)
             .withWholeness(false);
     scheduleService.save(schedule);
   }
@@ -311,6 +318,7 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
+            .withLessonFormat(0)
             .withWholeness(false);
     scheduleService.save(schedule);
   }
@@ -361,7 +369,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withDuration(120)
-            .withWholeness(false);
+            .withWholeness(false)
+            .withLessonFormat(0);
     scheduleService.save(schedule);
   }
 
@@ -411,7 +420,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
-            .withDuration(120);
+            .withDuration(120)
+            .withLessonFormat(0);
     scheduleService.save(schedule);
   }
 
@@ -450,7 +460,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
-            .withDuration(120);
+            .withDuration(120)
+            .withLessonFormat(0);
     scheduleService.save(schedule);
   }
 
@@ -485,7 +496,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
-            .withDuration(120);
+            .withDuration(120)
+            .withLessonFormat(0);
     scheduleService.save(schedule);
   }
 
@@ -533,7 +545,8 @@ public class TrScheduleTomorrowHelper {
             .withSlots(this.generateSlots(period, idTrainer, listsC))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
-            .withDuration(120);
+            .withDuration(120)
+            .withLessonFormat(0);
     scheduleService.save(schedule);
   }
 }

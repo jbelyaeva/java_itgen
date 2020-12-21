@@ -30,6 +30,11 @@ public class TimeGeneral {
     return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
   }
 
+  private long getMsLocalTimeTargetDay(int countDays) {
+    LocalDate date = LocalDate.now().plusDays(countDays);
+    return date.atStartOfDay().toInstant(OffsetDateTime.now().getOffset()).toEpochMilli();
+  }
+
   // только время
   public long getTimeNow() {
     long dataWithTime = new Date().getTime();
@@ -64,6 +69,11 @@ public class TimeGeneral {
     return (nowTime + diffTz()) * 1.0;
   }
 
+  public Double dateTargetDays(int countDays) {
+    long nowTime = getMsLocalTimeTargetDay(countDays);
+    return (nowTime + diffTz()) * 1.0;
+  }
+
   public Double Stime(String period) {
     long nowTime = getMsLocalTime();
     return (nowTime + diffTz() + start(period)) * 1.0;
@@ -87,6 +97,16 @@ public class TimeGeneral {
   public Double StimeTomorrow(String period) {
     long nowTime = getMsLocalTimeTomorrow();
     return (nowTime + diffTz() + start(period)) * 1.0;
+  }
+
+  public Double StimeTargetDay(String period, int countDays) {
+    long nowTime = getMsLocalTimeTargetDay(countDays);
+    return (nowTime + diffTz() + start(period)) * 1.0;
+  }
+
+  public Double EtimeTargetDay(String period, int countDays) {
+    long nowTime = getMsLocalTimeTargetDay(countDays);
+    return (nowTime + diffTz() + finish(period)) * 1.0;
   }
 
   public Double EtimeTomorrow(String period) {

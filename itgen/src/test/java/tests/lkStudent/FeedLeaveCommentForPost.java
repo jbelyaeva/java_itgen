@@ -64,7 +64,6 @@ public class FeedLeaveCommentForPost extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testFeedLeaveCommentForPost() {
     String comment = "Мой новый комментарий";
-    app.sshot().maxBrowser();
     CommunitiesPostComments before = app.dbcommunity().comments();
     app.student().addCommentInFeed(comment);
     app.base().waitVisibilityOfElementLocated(5, By.xpath("//span[@class='count']"));

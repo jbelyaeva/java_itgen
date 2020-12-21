@@ -37,8 +37,11 @@ public class ScheduleData {
   @Property("wholeness")
   private Boolean wholeness;
 
+  @Property("lessonFormat")
+  private int lessonFormat;
 
-  public ScheduleData() {}
+  public ScheduleData() {
+  }
 
   public ScheduleData withId(String id) {
     this.id = id;
@@ -85,6 +88,11 @@ public class ScheduleData {
     return this;
   }
 
+  public ScheduleData withLessonFormat(int lessonFormat) {
+    this.lessonFormat = lessonFormat;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -121,10 +129,18 @@ public class ScheduleData {
     return wholeness;
   }
 
+  public int getLessonFormat() {
+    return lessonFormat;
+  }
+
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     ScheduleData that = (ScheduleData) o;
     return Objects.equals(id, that.id)
         && Objects.equals(fromDate, that.fromDate)
@@ -138,5 +154,21 @@ public class ScheduleData {
   @Override
   public int hashCode() {
     return Objects.hash(id, fromDate, slots, times, duration, wholeness, oneTime);
+  }
+
+  @Override
+  public String toString() {
+    return "ScheduleData{" +
+        "id='" + id + '\'' +
+        ", ver=" + ver +
+        ", fromDate=" + fromDate +
+        ", slots=" + slots +
+        ", finishedSlots=" + finishedSlots +
+        ", times=" + times +
+        ", oneTime=" + oneTime +
+        ", duration=" + duration +
+        ", wholeness=" + wholeness +
+        ", lessonFormat=" + lessonFormat +
+        '}';
   }
 }

@@ -12,9 +12,9 @@ import org.testng.annotations.Test;
 
 public class PaymentByParent extends TestBase {
 
+  StudentService studentService = new StudentService();
   private final TimeGeneral time = new TimeGeneral();
   MaterialService materialService = new MaterialService();
-  StudentService studentService = new StudentService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -201,7 +201,7 @@ public class PaymentByParent extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    app.postClean().dropTaskAndSchedule().dropPayment().dropMaterial().dropFinishedLesson();
+    data.postClean().taskAndSchedule().payment().material().finishedLesson();
     studentService.DeleteById("paymentByParent");
   }
 }

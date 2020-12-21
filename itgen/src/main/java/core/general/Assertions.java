@@ -2,8 +2,10 @@ package core.general;
 
 import static core.general.DateFormat.formatMMMM;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotSame;
 
 import app.appmanager.HelperBase;
 import org.openqa.selenium.By;
@@ -61,6 +63,14 @@ public class Assertions extends HelperBase {
     assertThat(element, is(etalon));
   }
 
+  /* проверяет, что значение элемента (м/б разного типа данных) не совпадает с эталонным
+   * @element - проверяемое значение
+   * @result - ожидаемый результат
+   * */
+  public <E> void noEqualityOfTwoElements(E element, E etalon) {
+    assertNotSame(element, equals(etalon));
+  }
+
   /* проверяет, что переменная имеет статус true
    * @var - переменная
    * */
@@ -80,5 +90,21 @@ public class Assertions extends HelperBase {
    * */
   public void previosMonth(String monthUI) {
     assertThat(monthUI, is(formatMMMM(DateWithCorrectionMonth(-1))));
+  }
+
+  /* проверяет, что вэбэлемент не дизейблен
+   *locator - локатор проверяемого элмента
+   * */
+  public void onNotDisabled(By locator) {
+    assertThat(
+        wd.findElement(locator).getAttribute("disabled"), equalTo(null));
+  }
+
+  /* проверяет, что вэбэлемент задизейблен
+   *locator - локатор проверяемого элмента
+   * */
+  public void onDisabled(By locator) {
+    assertThat(
+        wd.findElement(locator).getAttribute("disabled"), equalTo("true"));
   }
 }
