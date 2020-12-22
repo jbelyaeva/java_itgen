@@ -83,7 +83,7 @@ public class SshotLookTests extends TestBase {
             "",
             false);
     testResultsService.updateField("TestNotPass", "entityTestId", "99999");
-    app.student().refresh();
+    app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }

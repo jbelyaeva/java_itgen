@@ -249,7 +249,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
             0,
             "666",
             idAttachments);
-    app.student().refresh();
+    app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     app.student().btnCloseTutorial();
@@ -273,7 +273,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                2.0f);
+                1.25f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);

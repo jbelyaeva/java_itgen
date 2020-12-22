@@ -3,7 +3,8 @@ package tests.screenShot;
   сравнивает его с эталонным.
 */
 
-import app.appmanager.ApplicationManager;
+import static app.appmanager.ApplicationManager.properties;
+
 import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
@@ -16,17 +17,6 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotFamily extends TestBase {
-
-  private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
-    return app.sshot()
-        .getImageDiff(
-            ApplicationManager.properties.getProperty("expected"),
-            ApplicationManager.properties.getProperty("actual"),
-            ApplicationManager.properties.getProperty("markedImages"),
-            name,
-            locatorIgnor,
-            1.25f);
-  }
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -43,11 +33,17 @@ public class SshotFamily extends TestBase {
     app.student().selectStudentInListUIById("21");
     app.family().btnFamily();
     app.sshot().changeTopBar();
-    app.base().maxBrowser();
 
-    ImageDiff diff = this.getDiff(name, locatorIgnor);
-    if (diff.getDiffSize() > 150) {
-      diff = this.getDiff(name, locatorIgnor);
+    ImageDiff diff =
+        app.sshot()
+            .getImageDiff(
+                properties.getProperty("expected"),
+                properties.getProperty("actual"),
+                properties.getProperty("markedImages"),
+                name,
+                locatorIgnor,
+                1.25f);
+    if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
   }

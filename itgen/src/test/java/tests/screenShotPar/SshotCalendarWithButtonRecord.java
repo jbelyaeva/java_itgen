@@ -28,7 +28,9 @@ public class SshotCalendarWithButtonRecord extends TestBase {
 
   @Test
   public void testSshotCalendarWithButtonRecorde() throws AWTException, IOException {
+    app.lkParent().reset();
     app.lkParent().btnShowSchedule();
+    app.sshot().changeTopBarInLKParent();
     String name = "Parent_CalendarWithBurronRecord_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='calendar']"));
@@ -41,7 +43,7 @@ public class SshotCalendarWithButtonRecord extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.99f);
+                1.25f);
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }

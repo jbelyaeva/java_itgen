@@ -27,7 +27,7 @@ public class SshotStudentSettingsWithoutPassword extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotStudentSettingsWithoutPassword() throws AWTException, IOException {
-
+    app.lkParent().reset();
     app.lkParent().clickByNameSecondStudent();
     app.student().btnCloseTutorial();
     app.sshot().changeTopBarInLKParent();

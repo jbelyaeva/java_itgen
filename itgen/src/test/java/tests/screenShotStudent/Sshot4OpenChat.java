@@ -18,6 +18,7 @@ public class Sshot4OpenChat extends TestBase {
     String name = "Student_OpenChat_RU_Chrome";
     app.student().openChat();
     app.student().deleteAlerts();
+    app.base().maxBrowser();
 
     Set<By> locatorIgnor = new HashSet<>();
     ImageDiff diff =
@@ -28,7 +29,7 @@ public class Sshot4OpenChat extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.92f);
+                1.25f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);

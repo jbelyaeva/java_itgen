@@ -37,7 +37,7 @@ public class SshotOpenProfile extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.92f);
+                1.25f);
     app.base().goByHref(app.base().address() + "/feed");
     int diffSize = diff.getDiffSize();
     if (diffSize > 200) { // погрешность

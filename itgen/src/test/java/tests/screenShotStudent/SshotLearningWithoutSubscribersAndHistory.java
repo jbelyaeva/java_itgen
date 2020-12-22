@@ -47,7 +47,7 @@ public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
             "1",
             "1",
             1);
-    app.student().refresh();
+    app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
@@ -66,7 +66,7 @@ public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                2.0f);
+                1.25f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);

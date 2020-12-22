@@ -19,7 +19,7 @@ public class SshotStudentSettingsChangePassword extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotStudentSettingsChangePassword() throws AWTException, IOException {
-
+    app.lkParent().reset();
     app.lkParent().clickByNameFirstStudent();
     app.student().btnCloseTutorial();
     app.lkParent().clickByChangePassword();

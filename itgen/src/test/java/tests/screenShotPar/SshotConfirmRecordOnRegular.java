@@ -30,8 +30,8 @@ public class SshotConfirmRecordOnRegular extends TestBase {
 
   @Test
   public void testConfirmRecordOnRegular() throws AWTException, IOException {
+    app.lkParent().reset();
     app.lkParent().confirmRecordOnRegular();
-
     String name = "Parent_ConfirmRecordOnRegular_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//p[@class='user']"));

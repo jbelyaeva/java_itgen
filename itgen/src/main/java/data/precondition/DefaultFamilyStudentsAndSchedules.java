@@ -221,7 +221,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
 
     trStudent()
         .newStudent(
-            "newStudent",
+            "student",
             "Маша",
             "Машина",
             "expert",
@@ -238,6 +238,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             2,
             "noTrial"
         );
+    data.studentService().deleteField("student", "services");
   }
 
   /**

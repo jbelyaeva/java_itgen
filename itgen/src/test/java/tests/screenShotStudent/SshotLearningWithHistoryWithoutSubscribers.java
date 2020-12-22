@@ -4,13 +4,12 @@ package tests.screenShotStudent;
  * скриншоты главного окна
  */
 
-import static app.appmanager.ApplicationManager.properties;
-
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.model.materials.MaterialData;
 import data.services.CommentService;
+import data.services.CommunitiesService;
 import data.services.FinishedChildLessonService;
 import data.services.FinishedLessonService;
 import data.services.MaterialBranchService;
@@ -42,6 +41,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
   private final FinishedLessonService finishedLessonService = new FinishedLessonService();
   private final MaterialService materialService = new MaterialService();
   private final TimeGeneral time = new TimeGeneral();
+  private final CommunitiesService communitiesService = new CommunitiesService();
   private final String period = "18:00 - 20:00";
 
   @BeforeMethod
@@ -211,9 +211,11 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
             "1",
             "1",
             1);
-    app.student().refresh();
+    app.base().goByHref(app.base().address() + "/login");
     app.student()
-        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+        .login("student", "111111");
+    communitiesService.dropCommunity();
+    communitiesService.dropCommPost();
   }
 
   @Test
@@ -235,7 +237,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                2.0f);
+                1.25f);
 
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
