@@ -22,8 +22,6 @@ public class MFSessionFactory {
       MongoClientURI uri = new MongoClientURI(properties.getProperty("mongoURI"));
       mongoClient = new MongoClient(uri);
     } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Can't connect with URI. Fallback to host/port config");
       options.connectionsPerHost(200); // max pool size
       mongoClient =
           new MongoClient(

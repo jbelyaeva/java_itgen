@@ -6,14 +6,15 @@ package tests.screenShot;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SshotPayByAdminCard extends TestBase {
 
@@ -21,7 +22,6 @@ public class SshotPayByAdminCard extends TestBase {
   public void testSshotPayByAdminCard() throws AWTException, IOException {
     String name = "Admin_PayCard_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    app.base().maxBrowser();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdminCard("21");

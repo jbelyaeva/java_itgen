@@ -5,15 +5,10 @@ package tests.screenShot;
 */
 
 import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import data.model.lead.LeadData;
 import data.model.usersGeneral.Contacts;
 import data.services.LeadService;
-import app.testbase.TestBase;
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -21,15 +16,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
+import java.awt.*;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 public class SshotListLeads extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     LeadService leadService = new LeadService();
     LeadData lead =
-        new LeadData()
-            .withId("SshotLeads")
-            .withFirstName("Лид")
+            new LeadData()
+                    .withId("SshotLeads")
+                    .withFirstName("Лид")
             .withLastName("Лидов")
             .withRoles(Collections.singletonList("child"))
             .withCountry("AL")

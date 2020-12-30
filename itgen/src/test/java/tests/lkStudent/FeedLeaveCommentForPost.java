@@ -68,12 +68,12 @@ public class FeedLeaveCommentForPost extends TestBase {
     app.student().addCommentInFeed(comment);
     app.base().waitVisibilityOfElementLocated(5, By.xpath("//span[@class='count']"));
 
-    app.check().textElement(By.xpath("//span[@class='count']"), "1");
     app.check()
         .textElement(By.xpath("//div[@class='post-comments']//span[@class='multiline-text']"),
             comment);
     CommunitiesPostComments after = app.dbcommunity().comments();
     assertThat(after.size(), equalTo(before.size() + 1));
+    app.check().textElement(By.xpath("//span[@class='count']"), "1");
   }
 
   @AfterMethod(alwaysRun = true)

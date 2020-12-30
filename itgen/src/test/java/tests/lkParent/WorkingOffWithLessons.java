@@ -24,11 +24,11 @@ public class WorkingOffWithLessons extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testWorkingOffWithLessons() {
     app.lkParent().reset();
-    app.lkParent().goInWorkingOff();
-    app.check().onDisabled(app.lkParent().getBtnAssignInWindowWorkingOff());
-    app.lkParent().selectLessonForWorkingOff();
-    app.check().onNotDisabled(app.lkParent().getBtnAssignInWindowWorkingOff());
-    app.lkParent().clickByBack();
+    app.lkParentRecord().goInWorkingOff();
+    app.check().onDisabled(app.lkParentRecord().getBtnAssignInWindowWorkingOff());
+    app.lkParentRecord().selectLessonForWorkingOff();
+    app.check().onNotDisabled(app.lkParentRecord().getBtnAssignInWindowWorkingOff());
+    app.lkParentRecord().clickByBack();
     app.check()
         .equalityOfTwoElements(app.base().getURL(),
             app.base().address() + "/profile/newStudent?tab=schedule");

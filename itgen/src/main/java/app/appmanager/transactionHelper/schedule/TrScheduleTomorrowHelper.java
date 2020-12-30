@@ -65,6 +65,7 @@ public class TrScheduleTomorrowHelper {
                                     .withLang(lang)
                                     .withS("normal")
                                     .withScore(3)
+                                    .withKind("oneTime")
                                     .withStartTime(time.StimeTomorrow(period))
                                     .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -107,6 +108,7 @@ public class TrScheduleTomorrowHelper {
                                     .withS("normal")
                                     .withNewSubj(true)
                                     .withScore(3)
+                                    .withKind("oneTime")
                                     .withStartTime(time.StimeTomorrow(period))
                                     .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -149,6 +151,7 @@ public class TrScheduleTomorrowHelper {
                                     .withS("normal")
                                     .withNewSubj(true)
                                     .withScore(3)
+                                    .withKind("oneTime")
                                     .withStartTime(time.StimeTomorrow(period))
                                     .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -191,6 +194,7 @@ public class TrScheduleTomorrowHelper {
                                     .withS("normal")
                                     .withNewSubj(true)
                                     .withScore(3)
+                                    .withKind("oneTime")
                                     .withStartTime(time.StimeTomorrow(period))
                                     .withEndTime(time.EtimeTomorrow(period))))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
@@ -230,7 +234,7 @@ public class TrScheduleTomorrowHelper {
                                     .withType(3)
                                     .withSubject(idSubject)
                                     .withLang(lang)
-                                    .withTrial(true)
+                                    .withKind("trial")
                                     .withS("normal")
                                     .withStartTime(time.StimeTomorrow(period))
                                     .withEndTime(time.EtimeTomorrow(period))))))
@@ -302,7 +306,7 @@ public class TrScheduleTomorrowHelper {
                 .withSubject(idSubject)
                 .withLang(lang)
                 .withS("normal")
-                .withTrial(true)
+                .withKind("trial")
                 .withStartTime(time.StimeTomorrow(period))
                 .withEndTime(time.EtimeTomorrow(period))));
 
@@ -343,7 +347,7 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)
+                .withKind("permanent")
                 .withStartTime(time.StimeTomorrow(period))
                 .withEndTime(time.EtimeTomorrow(period))));
 
@@ -356,7 +360,7 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)
+                  .withKind("permanent")
                   .withStartTime(time.StimeTomorrow(period) + week * i)
                   .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
@@ -394,7 +398,7 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)
+                .withKind("permanent")
                 .withStartTime(time.StimeTomorrow(period))
                 .withEndTime(time.EtimeTomorrow(period))));
 
@@ -407,7 +411,7 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)
+                  .withKind("permanent")
                   .withStartTime(time.StimeTomorrow(period) + week * i)
                   .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
@@ -448,7 +452,7 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)
+                  .withKind("permanent")
                   .withStartTime(time.StimeTomorrow(period) + week * i)
                   .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
@@ -484,7 +488,7 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)
+                  .withKind("permanent")
                   .withStartTime(time.StimeTomorrow(period) + week * i)
                   .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }
@@ -520,7 +524,7 @@ public class TrScheduleTomorrowHelper {
                 .withLang(lang)
                 .withS("normal")
                 .withNewSubj(true)
-                .withP(true)
+                .withKind("permanent")
                 .withStartTime(time.StimeTomorrow(period))
                 .withEndTime(time.EtimeTomorrow(period))));
 
@@ -533,7 +537,7 @@ public class TrScheduleTomorrowHelper {
                   .withSubject(idSubject)
                   .withLang(lang)
                   .withS("normal")
-                  .withP(true)
+                  .withKind("permanent")
                   .withStartTime(time.StimeTomorrow(period) + week * i)
                   .withEndTime(time.EtimeTomorrow(period) + week * i)));
     }

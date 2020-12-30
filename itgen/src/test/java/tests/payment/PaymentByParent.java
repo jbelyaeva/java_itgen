@@ -178,13 +178,13 @@ public class PaymentByParent extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "trialFinished",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

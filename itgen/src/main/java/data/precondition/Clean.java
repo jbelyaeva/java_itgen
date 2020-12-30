@@ -24,6 +24,7 @@ public class Clean {
     data.materialBranchService().drop();
     data.materialChildsService().drop();
     data.materialService().drop();
+    data.materialNewService().drop();
     return this;
   }
 
@@ -57,6 +58,12 @@ public class Clean {
     data.finishedChildLessonService().drop();
     data.finishedLessonService().drop();
     data.commentService().drop();
+    return this;
+  }
+
+  public Clean tests() {
+    data.testService().drop();
+    data.resultsService().drop();
     return this;
   }
 }

@@ -1,5 +1,6 @@
 package data.model.usersGeneral;
 
+import dev.morphia.annotations.Embedded;
 import java.util.Objects;
 
 public class FinishedLessonsCountBySkill {
@@ -7,6 +8,10 @@ public class FinishedLessonsCountBySkill {
   public int one;
   public int count;
   public int minutes;
+  @Embedded("1")
+  public One ones;
+  @Embedded("21")
+  public TwentyOne twentyOnes;
 
   public FinishedLessonsCountBySkill() {
   }
@@ -23,6 +28,14 @@ public class FinishedLessonsCountBySkill {
     return minutes;
   }
 
+  public One getOnes() {
+    return ones;
+  }
+
+  public TwentyOne getTwentyOnes() {
+    return twentyOnes;
+  }
+
   public FinishedLessonsCountBySkill withOne(int one) {
     this.one = one;
     return this;
@@ -35,6 +48,16 @@ public class FinishedLessonsCountBySkill {
 
   public FinishedLessonsCountBySkill withMinutes(int minutes) {
     this.minutes = minutes;
+    return this;
+  }
+
+  public FinishedLessonsCountBySkill withOnes(One ones) {
+    this.ones = ones;
+    return this;
+  }
+
+  public FinishedLessonsCountBySkill withTwentyOnes(TwentyOne twentyOnes) {
+    this.twentyOnes = twentyOnes;
     return this;
   }
 

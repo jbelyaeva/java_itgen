@@ -11,8 +11,8 @@ import data.model.materials.MaterialData;
 import data.model.materials.MaterialPermsData;
 import data.model.schedule.CommentData;
 import data.model.schedule.DoneMaterials;
-import data.model.schedule.HwMaterials;
 import data.model.schedule.Grades;
+import data.model.schedule.HwMaterials;
 import data.services.CommentService;
 import data.services.MaterialBranchService;
 import data.services.MaterialChildsService;
@@ -376,7 +376,7 @@ public class TrMaterialHelper {
         .withTarget(target)
         .withS(idSchedule)
         .withW(w)
-        .withCreateAt(date)
+        .withCreatedAt(date)
         .withHwMaterials(Arrays.asList(
             new HwMaterials()
             .withId("111111")
@@ -406,6 +406,80 @@ public class TrMaterialHelper {
         .withText(text[0])
         .withTextForParents(text[1])
         .withTopics(text[2]);
+    commentService.save(newComment);
+  }
+
+  public void addCommentWithoutMaterialsWithHW(
+      String id,
+      String owner,
+      String target,
+      String idSchedule,
+      Double w,
+      Date date,
+      Double eTime,
+      Double sTime,
+      String hw,
+      String skillId,
+      String t,
+      String text
+  ) {
+    CommentData newComment = new CommentData()
+        .withId(id)
+        .withOwner(owner)
+        .withTarget(target)
+        .withS(idSchedule)
+        .withW(w)
+        .withCreatedAt(date)
+        .withETime(eTime)
+        .withSTime(sTime)
+        .withHw(hw)
+        .withSkillId(skillId)
+        .withT(t)
+        .withTextForParents(text);
+    commentService.save(newComment);
+  }
+
+  public void addCommentWithoutMaterialsAndHW(
+      String id,
+      String owner,
+      String target,
+      String idSchedule,
+      Double w,
+      Date date,
+      Double eTime,
+      Double sTime,
+      String skillId,
+      String t,
+      String text
+  ) {
+    CommentData newComment = new CommentData()
+        .withId(id)
+        .withOwner(owner)
+        .withTarget(target)
+        .withS(idSchedule)
+        .withW(w)
+        .withCreatedAt(date)
+        .withETime(eTime)
+        .withSTime(sTime)
+        .withSkillId(skillId)
+        .withT(t)
+        .withText(text);
+    commentService.save(newComment);
+  }
+
+  public void addCommentWithNoteUser(
+      String id,
+      String owner,
+      String target,
+      Date date,
+      String text
+  ) {
+    CommentData newComment = new CommentData()
+        .withId(id)
+        .withOwner(owner)
+        .withTarget(target)
+        .withCreatedAt(date)
+        .withText(text);
     commentService.save(newComment);
   }
 }

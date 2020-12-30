@@ -1,10 +1,10 @@
 package tests.screenShotPar;
 
+import app.appmanager.ApplicationManager;
+import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import app.appmanager.ApplicationManager;
 import data.model.users.StudentData;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,7 +44,7 @@ public class SshotAddNewStudentFormFirst extends TestBase {
 
   @Test(dataProvider = "StudentsFromJson")
   public void testAddNewStudentFormFirst(StudentData student) throws AWTException, IOException {
-    app.lkParent().createSShotFirstForm(student);
+    app.lkParentRecord().createSShotFirstForm(student);
 
     String name = "Parent_AddNewStudentForm1_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

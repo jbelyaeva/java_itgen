@@ -25,7 +25,7 @@ public class CancelOnSingle extends TestBase {
   public void testCancelOnSingle() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().cancelLessonInSingleSchedule();
+    app.lkParentRecord().cancelLessonInSingleSchedule();
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());

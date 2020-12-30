@@ -24,4 +24,8 @@ public class SkillsService {
   public void deleteField(String idSkills, String nameField) {
     skillsDao.deleteField(idSkills, nameField);
   }
+
+  public SkillsData findBySkillId(String skillId, String lang) {
+    return skillsDao.findBySkillId(skillId, lang);
+  }
 }

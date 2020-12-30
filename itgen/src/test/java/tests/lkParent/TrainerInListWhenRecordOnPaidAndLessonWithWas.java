@@ -21,10 +21,10 @@ public class TrainerInListWhenRecordOnPaidAndLessonWithWas extends TestBase {
 
   @Test
   public void testTrainerInListWhenRecordOnPaidAndLessonWithWas() {
-    app.lkParent().trainerInListOnRegularRecord();
-    app.check().findElement(app.lkParent().getTrainerNastyaInList());
-    app.lkParent().trainerInListOnSingleRecord();
-    app.check().findElement(app.lkParent().getTrainerNastyaInList());
+    app.lkParentRecord().trainerInListOnRegularRecord();
+    app.check().findElement(app.lkParentRecord().getTrainerNastyaInList());
+    app.lkParentRecord().trainerInListOnSingleRecord();
+    app.check().findElement(app.lkParentRecord().getTrainerNastyaInList());
   }
 
   @AfterMethod(alwaysRun = true)

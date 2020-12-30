@@ -133,7 +133,7 @@ public class RecordStudentOnTrialSingleScheduleTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withTrial(true)))))
+                                    .withKind("trial")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120)

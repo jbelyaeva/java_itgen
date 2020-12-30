@@ -2,7 +2,7 @@ package data.precondition;
 
 import app.appmanager.HelperBase;
 
-public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
+public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
 
   protected static final DataManager data = new DataManager();
   HelperBase base = new HelperBase();
@@ -34,13 +34,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "learning",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
 
     trScheduleTomorrow()
         .RegularScheduleWithOneOldStudent(
@@ -74,13 +74,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "learning",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
 
     trScheduleTomorrow()
         .SingleScheduleWithOneStudent(
@@ -111,7 +111,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial"
         );
@@ -131,15 +131,14 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "111",
             "Europe/Minsk",
             2,
-            base.DateWithCorrectionDays(-3650),
+            base.DateWithCorrectionDays(-2956),
             "ru",
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
-
   }
 
   /**
@@ -164,7 +163,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "learning"
         );
@@ -204,7 +203,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "withTrial"
         );
@@ -221,7 +220,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
 
     trStudent()
         .newStudent(
-            "student",
+            "newStudent",
             "Маша",
             "Машина",
             "expert",
@@ -234,11 +233,11 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial"
         );
-    data.studentService().deleteField("student", "services");
+    data.studentService().deleteField("newStudent", "services");
   }
 
   /**
@@ -267,13 +266,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "trialFinished",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
 
     trScheduleTomorrow().SingleScheduleWithoutStudent(period, "newSchedule", "14");
   }
@@ -300,13 +299,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "21",
+            new String[]{"21"},
             2,
             1,
             "trialFinished",
-            "21",
-            "21",
-            1);
+            new String[]{"21"},
+            new String[]{"21"},
+            new int[]{1, 120});
     trScheduleYesterday()
         .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "newStudent", "21");
 
@@ -339,13 +338,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
                 "ru",
                 "12345678i",
                 "ru",
-                "1",
+                new String[]{"1"},
                 2,
                 1,
                 "trialFinished",
-                "1",
-                "1",
-                1);
+                new String[]{"1"},
+                new String[]{"1"},
+                new int[]{1, 120});
 
     trScheduleTomorrow()
         .RegularScheduleWithoutStudents(period, "newSchedule", "14");
@@ -378,13 +377,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
                 "ru",
                 "12345678i",
                 "ru",
-                "1",
+                new String[]{"1"},
                 2,
                 1,
                 "trialFinished",
-                "1",
-                "1",
-                1);
+                new String[]{"1"},
+                new String[]{"1"},
+                new int[]{1, 120});
   }
 
   /**
@@ -408,7 +407,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             3,
             "skipped",
             true,
-            false,
+            "oneTime",
             false,
             "ru",
             120
@@ -428,13 +427,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "trialFinished",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
 
     trScheduleTomorrow()
         .SingleScheduleWithoutStudent(
@@ -467,13 +466,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "trialFinished",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
   }
 
   /* Новый ученик записан на завтра в 14:00-16:00 на пробное на майнкрафт к Насте
@@ -498,7 +497,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
 
@@ -541,7 +540,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             1,
             "abort",
             false,
-            true,
+            "trial",
             false,
             "ru",
             120
@@ -561,13 +560,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
                 "ru",
                 "12345678i",
                 "ru",
-                "1",
+                new String[]{"1"},
                 2,
                 1,
                 "finishedTrial",
-                "1",
-                "1",
-                1);
+                new String[]{"1"},
+                new String[]{"1"},
+                new int[]{1, 120});
   }
 
   /**
@@ -592,7 +591,7 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             1,
             "skipped",
             false,
-            true,
+            "trial",
             false,
             "ru",
             120);
@@ -611,13 +610,13 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
                 "ru",
                 "12345678i",
                 "ru",
-                "1",
+                new String[]{"1"},
                 2,
                 1,
                 "learning",
-                "1",
-                "1",
-                1);
+                new String[]{"1"},
+                new String[]{"1"},
+                new int[]{1, 120});
   }
 
   /**
@@ -647,19 +646,43 @@ public class DefaultFamilyStudentsAndSchedules extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             1,
             "learning",
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120});
 
     trScheduleToday()
         .SingleScheduleWithOneStudentStartedSeveralHours(
             hoursInMs, "newSchedule", "14", "newStudent", "1", "ru");
 
     trScheduleTomorrow().SingleScheduleWithoutStudent(period, "newScheduleSecond", "14");
+  }
+
+  public void set19_ChangeDefaultStudentInStart() {
+    trStudent()
+        .changeDefaultStudent(
+            "21",
+            "Ребенок",
+            "Дефолтный",
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            "1",
+            "+9875645311",
+            2,
+            "noTrial",
+            0,
+            null,
+            null,
+            0);
   }
 }
 

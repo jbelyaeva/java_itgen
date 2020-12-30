@@ -1,23 +1,10 @@
 package tests.screenShot;
 
-import static app.appmanager.ApplicationManager.properties;
-
+import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import data.model.typeform.TestData;
 import data.services.TestService;
-import app.testbase.TestBase;
-import java.awt.AWTException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -25,6 +12,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static app.appmanager.ApplicationManager.properties;
 
 public class SshotAddEnglishTestTypeform extends TestBase {
 
@@ -34,7 +32,7 @@ public class SshotAddEnglishTestTypeform extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[] {"1"};
+    skills = new String[]{"1"};
     app.trTest()
         .saveTest(
             "addEnglishTest",

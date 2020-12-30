@@ -22,11 +22,11 @@ public class RecordOnTrail extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnTrail() {
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().recordOnTrail(1);
+    app.lkParentRecord().recordOnTrail(1);
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());
-    data.schedules().set6_SingleScheduleWithOneStudentRecordOnTrail(period);
+    data.schedules().set6_SingleScheduleWithOneStudentRecordOnTrailOnScratch(period);
     Schedules afterNew = app.dbschedules().schedules();
     app.check().equalityOfTwoElements(after, afterNew);
   }

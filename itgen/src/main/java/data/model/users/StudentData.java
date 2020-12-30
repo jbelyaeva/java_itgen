@@ -110,7 +110,7 @@ public class StudentData {
   @Property("finishedLessonsCount")
   private int finishedLessonsCount;
 
-  @Embedded
+  @Embedded("finishedLessonsCountBySkill")
   private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
 
   public StudentData() {

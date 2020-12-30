@@ -21,13 +21,13 @@ public class RecordOnNewSkillWithAT extends TestBase {
         .set7_LessonYesterdayFinished_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
             period);
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
-    data.skills().set1_MinecraftWithAt();
+    data.skills().set1_MinecraftWithAt(data.skillsService().findBySkillId("21", "ru").getId());
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnNewSkillWithAT() {
     app.lkParent().reset();
-    app.lkParent().recordOnSingleOnNewSkill("Minecraft");
+    app.lkParentRecord().recordOnSingleOnSkill("Minecraft");
     app.check().findElement(app.lkParent().getBtnInstall());
     app.base().refresh();
   }

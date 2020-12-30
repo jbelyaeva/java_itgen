@@ -1,22 +1,23 @@
 package tests.screenShot;
 
-import static app.appmanager.ApplicationManager.properties;
-
+import app.testbase.TestBase;
 import data.model.materials.MaterialBranchData;
 import data.model.materials.MaterialData;
 import data.services.MaterialBranchService;
 import data.services.MaterialService;
-import app.testbase.TestBase;
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+import static app.appmanager.ApplicationManager.properties;
 
 public class SshotMaterialTabAll extends TestBase {
 

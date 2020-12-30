@@ -9,12 +9,16 @@ import data.services.FinishedChildLessonService;
 import data.services.FinishedLessonService;
 import data.services.MaterialBranchService;
 import data.services.MaterialChildsService;
+import data.services.MaterialNewService;
 import data.services.MaterialService;
 import data.services.ParentService;
 import data.services.PaymentService;
 import data.services.ScheduleService;
+import data.services.SkillsService;
 import data.services.StudentService;
 import data.services.TaskService;
+import data.services.TestResultsService;
+import data.services.TestService;
 import data.services.TrainerService;
 import data.services.WorkerService;
 
@@ -27,6 +31,7 @@ public class DataManager {
   private final CommentService commentService = new CommentService();
   private final MaterialChildsService materialChildsService = new MaterialChildsService();
   private final MaterialBranchService materialBranchService = new MaterialBranchService();
+  private final MaterialNewService materialNewService = new MaterialNewService();
   private final FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
   private final FinishedLessonService finishedLessonService = new FinishedLessonService();
   private final MaterialService materialService = new MaterialService();
@@ -37,6 +42,9 @@ public class DataManager {
   private final TrainerService trainerService = new TrainerService();
   private final WorkerService workerService = new WorkerService();
   private final FamilyService familyService = new FamilyService();
+  private final SkillsService skillsService = new SkillsService();
+  private final TestService testService = new TestService();
+  private final TestResultsService testResultsService = new TestResultsService();
   private final Clean clean = new Clean();
   private final DefaultFamilyStudentsAndSchedules defFamily = new DefaultFamilyStudentsAndSchedules();
   private final DefaultFamilyChat defFamilyChat = new DefaultFamilyChat();
@@ -44,6 +52,7 @@ public class DataManager {
   private final NewWorker newWorker = new NewWorker();
   private final Payments payments = new Payments();
   private final Skills skills = new Skills();
+  private final Tests tests = new Tests();
   private final Schedules schedules = new Schedules();
   private final DefaultFamilyAndFinishedLessonWithProjects finishedLessonWithProject = new DefaultFamilyAndFinishedLessonWithProjects();
 
@@ -80,6 +89,10 @@ public class DataManager {
 
   public MaterialBranchService materialBranchService() {
     return materialBranchService;
+  }
+
+  public MaterialNewService materialNewService() {
+    return materialNewService;
   }
 
   public FinishedChildLessonService finishedChildLessonService() {
@@ -122,6 +135,18 @@ public class DataManager {
     return familyService;
   }
 
+  public SkillsService skillsService() {
+    return skillsService;
+  }
+
+  public TestService testService() {
+    return testService;
+  }
+
+  public TestResultsService resultsService() {
+    return testResultsService;
+  }
+
   public DefaultFamilyStudentsAndSchedules defFamily() {
     return defFamily;
   }
@@ -140,6 +165,10 @@ public class DataManager {
 
   public Skills skills() {
     return skills;
+  }
+
+  public Tests tests() {
+    return tests;
   }
 
   public Schedules schedules() {

@@ -3,7 +3,7 @@ package data.precondition;
 import app.appmanager.HelperBase;
 import java.util.Date;
 
-public class DefaultFamilyChat extends TranzactionManager {
+public class DefaultFamilyChat extends TransactionManager {
 
   protected static final DataManager data = new DataManager();
   HelperBase base = new HelperBase();
@@ -34,7 +34,7 @@ public class DefaultFamilyChat extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial"
         );
@@ -84,7 +84,7 @@ public class DefaultFamilyChat extends TranzactionManager {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial"
         );

@@ -77,14 +77,14 @@ public class SelfRegistration extends TestBase {
     Parents parentsBefore = app.db().parents();
     Families familyBefore = app.db().families();
 
-    app.lkParent().goHref();
-    app.lkParent().selfRegistration(student);
+    app.lkParentRecord().goHref();
+    app.lkParentRecord().selfRegistration(student);
 
     Thread.sleep(3000); // необходимо, т.к. не успевает сформироваться токен в бд
 
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();
-    app.lkParent().activation(token);
+    app.lkParentRecord().activation(token);
     app.session()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
 
@@ -131,7 +131,7 @@ public class SelfRegistration extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
 

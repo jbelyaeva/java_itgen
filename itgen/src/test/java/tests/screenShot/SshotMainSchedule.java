@@ -49,7 +49,8 @@ public class SshotMainSchedule extends TestBase {
                         .withC(list)))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
-            .withDuration(120);
+            .withDuration(120)
+            .withOneTime(true);
     scheduleService.save(schedule);
   }
 

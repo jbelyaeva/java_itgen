@@ -15,6 +15,12 @@ public class ScheduleStudentOlder7YearsWithoutTrial extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     data.defFamily().set13_addNewStudentOlder7Years();
+    data.defFamily().set19_ChangeDefaultStudentInStart();
+    data.studentService().deleteField("21", "lastSubjs");
+    data.studentService().deleteField("21", "usedSubjs");
+    data.studentService().deleteField("21", "finishedLessonsCount");
+    data.studentService().deleteField("21", "finishedLessonsCountBySkill");
+    data.studentService().deleteField("21", "lastSeen");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

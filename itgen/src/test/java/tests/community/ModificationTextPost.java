@@ -75,6 +75,7 @@ public class ModificationTextPost extends TestBase {
 
     assertThat(afterComm.size(), equalTo(beforeComm.size()));
     assertThat(afterPost.size(), equalTo(beforePost.size()));
+    app.base().refresh();
     app.check().textElement(By.xpath("//div[@class='community-post-body']//span"), newText);
     check(afterComm, afterPost);
     app.goTo().menuTasks();

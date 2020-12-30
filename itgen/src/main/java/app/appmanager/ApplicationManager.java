@@ -73,6 +73,7 @@ public class ApplicationManager {
   private WindowScheduleHelper windowScheduleHelper;
   private RequestHelper requestHelper;
   private LKParentHelper lkParentHelper;
+  private LKParentRecordHelper lkParentRecordHelper;
   private PaymentHelper paymentHelper;
   private MaterialHelper materialHelper;
   private TaskHelper taskHelper;
@@ -188,6 +189,7 @@ public class ApplicationManager {
     windowScheduleHelper = new WindowScheduleHelper(wd);
     requestHelper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
+    lkParentRecordHelper = new LKParentRecordHelper(wd);
     paymentHelper = new PaymentHelper(wd);
     helperBase = new HelperBase(wd);
     materialHelper = new MaterialHelper(wd);
@@ -317,6 +319,10 @@ public class ApplicationManager {
 
   public LKParentHelper lkParent() {
     return lkParentHelper;
+  }
+
+  public LKParentRecordHelper lkParentRecord() {
+    return lkParentRecordHelper;
   }
 
   public PaymentHelper payment() {

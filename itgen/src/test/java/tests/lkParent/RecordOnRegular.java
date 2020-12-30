@@ -1,6 +1,5 @@
 package tests.lkParent;
-/**
- * тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
+/*тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное в
  * 18.00 и постоянное расписание на завтра в 18.00, на которое нужно записать ученика
  */
 
@@ -25,7 +24,7 @@ public class RecordOnRegular extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnRegular() {
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().recordOnRegular();
+    app.lkParentRecord().recordOnRegular();
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());

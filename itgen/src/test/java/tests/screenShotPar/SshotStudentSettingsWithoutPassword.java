@@ -6,16 +6,17 @@ package tests.screenShotPar;
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SshotStudentSettingsWithoutPassword extends TestBase {
 

@@ -27,7 +27,7 @@ public class SshotFiltrRecordOnSingle extends TestBase {
 
   @Test
   public void testFiltrRecordOnSingle() throws AWTException, IOException {
-    app.lkParent().GoToFiltrRecordSingle();
+    app.lkParentRecord().GoToFiltrRecordSingle();
 
     String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

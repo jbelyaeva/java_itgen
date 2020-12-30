@@ -55,8 +55,18 @@
       <class name="tests.lkParent.SettingsHowGoInLkStudent"/>
       <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOff"/>
       <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOffLater"/>
-      <!-- <class name="tests.payment.PaymentByGuest"/>
-       <class name="tests.payment.PaymentByParent"/> -->
+      <class name="tests.lkParent.RecordOnTrailWithTest"/>
+      <class name="tests.lkParent.RecordOnSingleWithTest"/>
+      <class name="tests.lkParent.RecordOnTrailWithTestStudentTestPassed"/>
+      <class name="tests.lkParent.RecordOnTrailWithTestStudentTestFailed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudentTestPassed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudentTestFailed"/>
+      <class name="tests.lkParent.RecordOnTrailWithTestStudent7YearsTestPassed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudent7YearsTestPassed"/>
+      <class name="tests.lkParent.HistoryAllSkill"/>
+      <class name="tests.lkParent.HistoryLessonWithSkipAndDiscruptWithoutHW"/>
+      <!--  <class name="tests.payment.PaymentByGuest"/>
+         <class name="tests.payment.PaymentByParent"/> -->
     </classes>
   </test>
 </suite>

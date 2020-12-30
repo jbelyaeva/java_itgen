@@ -20,13 +20,13 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotLessonStartTabResults extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  private final TimeGeneral time = new TimeGeneral();
-  private String period = "";
+    ScheduleService scheduleService = new ScheduleService();
+    StudentService studentService = new StudentService();
+    FamilyService familyService = new FamilyService();
+    private final TimeGeneral time = new TimeGeneral();
+    private String period = "";
 
-  @BeforeMethod
+    @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow());
     app.trScheduleToday()
@@ -50,14 +50,13 @@ public class SshotLessonStartTabResults extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotLessonStartTabResults() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().startLessonWithResuts("startLessonByTrainer");
 

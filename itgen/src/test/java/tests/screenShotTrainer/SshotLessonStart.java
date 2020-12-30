@@ -49,14 +49,13 @@ public class SshotLessonStart extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
   }
 
   @Test
   public void testSshotLessonStart() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().startLesson("startLessonByTrainer");
 

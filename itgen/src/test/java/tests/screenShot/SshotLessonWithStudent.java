@@ -45,7 +45,7 @@ public class SshotLessonWithStudent extends TestBase {
     TimeGeneral time = new TimeGeneral();
     ScheduleService scheduleService = new ScheduleService();
     ScheduleData schedule =
-        new ScheduleData()
+            new ScheduleData()
             .withId("SshotOnLessonWithStudent")
             .withVer(0)
             .withFromDate(time.date())
@@ -63,7 +63,10 @@ public class SshotLessonWithStudent extends TestBase {
                                     .withSubject("1")
                                     .withLang("ru")
                                     .withNewSubj(true)
-                                    .withS("normal")))))
+                                    .withS("normal")
+                                    .withStartTime(time.Stime(period))
+                                    .withEndTime(time.Etime(period))
+                                    .withKind("oneTime")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120)

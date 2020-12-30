@@ -33,7 +33,6 @@ public class LKParentHelper extends HelperBase {
   private final By editNewStudent_pcLevel = By.xpath("//input[@id-qa='pcLevel']/..");
   private final By btnNextOnForm = By.className("button-next");
   private final By btnAddNewStudent = By.xpath("//a[contains(@href,'addChild')]");
-  private final By btnNextBadOnForm = By.className("button-next");
   private final By btnSkipHelper = By.xpath("//button[@title='Skip']");
   private final By btnTomorrowInPicker = By.xpath(
       "//div[@class='picker-item selected']/following-sibling::div");
@@ -48,17 +47,7 @@ public class LKParentHelper extends HelperBase {
   private final By emptyAreaFiltrTime = By.xpath("//div[@class='times-filter']");
   private final By btnRecord = By.xpath("//div[contains(@class,'actions')]//button");
   private final By btnShowScheduleChild = By.xpath("//button[@id-qa='show-schedule']");
-  private final By selectFirstLessonInRegularForCancel = By.xpath(
-      "(//label)[1]"); //+привязка к индексу
-  private final By btnCancelInPopup = By.xpath("//div[contains(@class,'buttons-group')]");
-  private final By selectLessonInSingleForCancel = By.xpath("//label");
-  private final By btnDropdown = By.xpath("//button[@data-toggle='dropdown']");
-  private final By btnCancelSchedule = By.xpath("//button[@id-qa='cancel']");
   private final By btnClickHistory = By.xpath("//div[contains(@class,'btn-toggle')]");
-  private final By inputPassword = By.xpath("//input[@autocomplete='new-password']");
-  private final By btnSaveInActivation = By.xpath("//button[1]");
-  private final By fullAreaInCourseSelectionPage = By.xpath(
-      "//div[@class='course-selection-page']");
   private final By btnPrepare = By.xpath("//button[@id-qa='prepare']");
   private final By btnSchedule = By.xpath("//div[@class='child-schedule-btn']");
   private final By btnShowHistoryFirstChild = By.xpath("//button[@id-qa='show-history']");
@@ -67,7 +56,7 @@ public class LKParentHelper extends HelperBase {
   private final By btnHelpCenterInMenu = By.xpath("//a[contains(@href,'itgen.io')]");
   private final By btnShowScheduleSecondChild = By.xpath(
       "(//div[@class='child-management'])[2]//button[@id-qa='show-schedule']");
-  private final By btnTrialSecondChild = By.xpath("//button[@id-qa='trial'])[2]");
+  private final By btnTrialSecondChild = By.xpath("(//button[@id-qa='trial'])[2]");
   private final By tabSchedule = By.xpath("//button[@id-qa='tab-schedule']");
   private final By labelSchedulePeriodLesson = By.xpath("//div[@class='lesson-content-item'][1]");
   private final By labelScheduleTrainerOnLesson = By.xpath(
@@ -111,11 +100,6 @@ public class LKParentHelper extends HelperBase {
       "//div[@class='base-tooltip-tutorials']");
   private final By btnFacebook = By.xpath("//button[@aria-label='facebook']");
   private final By btnInstall = By.xpath("//button[@id-qa='install']");
-  private final By dropdownSkill = By.xpath("(//div[@class='gena-form-item']//div)[1]");
-  private final By dropdownTrainerOnRegular = By.xpath("(//div[@class='gena-form-item'])[6]");
-  private final By dropdownTrainerOnSingle = By.xpath("(//div[@class='gena-form-item'])[5]");
-  private final By checkboxTrainer = By.xpath("//input[@id='with-trainer']/..");
-  private final By trainerNastyaInList = By.xpath("//div[text()='Бокша Настя']");
   private final By btnInstallInScheduleTomorrow = By.xpath(
       "//div[contains(@class,'lightUp')]//button[@id-qa='install']");
   private final By cellLightCalendar = By.xpath("//div[contains(@class,'lightUp')]");
@@ -124,10 +108,6 @@ public class LKParentHelper extends HelperBase {
   private final By btnPaginatorRight = By.xpath("//button[contains(@class,'pagination-right')]");
   private final By btnPaginatorLeft = By.xpath("//button[contains(@class,'pagination-left')]");
   private final By monthUI = By.xpath("//span[@class='date']");
-  private final By btnAssignInWindowWorkingOff = By.xpath("//button[contains(@class,'assign')]");
-  private final By selectLessonForWorkingOff = By.xpath(
-      "//input[@name='assign-working-off-group']");
-  private final By btnReturnFromWorkingOff = By.xpath("//button[@id-qa='return']");
   private final By labelWorkingOffOnThirdLessonInSchedule = By.xpath(
       "((//div[@class='lesson-content-client'])[3]//div[@class='lesson-label working-off'])[1]");
   private final By clickByFirstStudent = By.xpath("//a[contains(@href,'21')]");
@@ -150,6 +130,20 @@ public class LKParentHelper extends HelperBase {
       "(//div[contains(@class,'dropdown')][1]//span//following::*[local-name()='svg'])[1]");
   private final By closeSecondTitorialInSettings = By.xpath(
       "(//div[contains(@class,'dropdown')][1]//span//following::*[local-name()='svg'])[2]");
+  private final By btnRecordOnTrailOnMinecraft = By.xpath("//button[@id-qa='btn-21']");
+  private final By labelResultTestPart1 = By
+      .xpath("(//footer[@class='test-not-successful']//span)[1]");
+  private final By labelResultTestPart2 = By
+      .xpath("(//footer[@class='test-not-successful']//span)[2]");
+  private final By labelNotAllowedRecordOnTestingSkillWithoutTest = By.xpath(
+      "//div[@class='test-not-successful']//span");
+  private final By dropDownSkillMinecraftInRecord = By.xpath("//div[text()='21']");
+  private final By labelInHistoryMinecraft = By.xpath(
+      "//div[@class='lesson-comment']//span[text()='Minecraft']");
+  private final By labelInHistoryScratch = By.xpath(
+      "//div[@class='lesson-comment']//span[text()='Scratch']");
+  private final By btnCloseWinWorkingOffWithoutLesson = By.xpath(
+      "//div[@class='modal-body']//button");
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
@@ -283,10 +277,6 @@ public class LKParentHelper extends HelperBase {
     return btnInstallInScheduleTomorrow;
   }
 
-  public By getTrainerNastyaInList() {
-    return trainerNastyaInList;
-  }
-
   public By getCellLightCalendar() {
     return cellLightCalendar;
   }
@@ -311,10 +301,6 @@ public class LKParentHelper extends HelperBase {
     return scheduleLabelFinished;
   }
 
-  public By getBtnAssignInWindowWorkingOff() {
-    return btnAssignInWindowWorkingOff;
-  }
-
   public By getLabelWorkingOffOnThirdLessonInSchedule() {
     return labelWorkingOffOnThirdLessonInSchedule;
   }
@@ -329,6 +315,34 @@ public class LKParentHelper extends HelperBase {
 
   public By getWinTutorialsInSettings() {
     return winTutorialsInSettings;
+  }
+
+  public By getBtnRecordOnTrailOnMinecraft() {
+    return btnRecordOnTrailOnMinecraft;
+  }
+
+  public By getLabelResultTestPart1() {
+    return labelResultTestPart1;
+  }
+
+  public By getLabelResultTestPart2() {
+    return labelResultTestPart2;
+  }
+
+  public By getLabelNotAllowedRecordOnTestingSkillWithoutTest() {
+    return labelNotAllowedRecordOnTestingSkillWithoutTest;
+  }
+
+  public By getLabelInHistoryMinecraft() {
+    return labelInHistoryMinecraft;
+  }
+
+  public By getLabelInHistoryScratch() {
+    return labelInHistoryScratch;
+  }
+
+  public By getDropDownSkillMinecraftInRecord() {
+    return dropDownSkillMinecraftInRecord;
   }
 
   public void btnRecordOnTrail() {
@@ -346,11 +360,6 @@ public class LKParentHelper extends HelperBase {
     btnSelectSkill(idSkill);
     selectLesson();
     btnSignUp();
-  }
-
-  public String goToPageInstall(int idSkill) throws InterruptedException {
-    recordOnTrail(idSkill);
-    return goToNewWindowAndGoToBack(btnInstall);
   }
 
   public void btnLogo() {
@@ -382,17 +391,6 @@ public class LKParentHelper extends HelperBase {
     btnAddNewStudent();
     fillStudentForm(student);
     btnNextOnForm();
-  }
-
-  public void createNewStudent() {
-    btnAddNewStudent();
-    fillNewStudentForm();
-    btnNextOnForm();
-  }
-
-  public void createSShotFirstForm(StudentData student) {
-    btnAddNewStudent();
-    fillStudentForm(student);
   }
 
   private ExpectedCondition<WebElement> expectVisible(String locator) {
@@ -453,30 +451,6 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void createBad(StudentData student) {
-    btnAddNewStudent();
-    fillStudentForm(student);
-    btnNextBad();
-    btnLogo();
-  }
-
-  private void btnNextBad() {
-    clickWithMoveToElementAndWait(2, btnNextBadOnForm);
-    thereAreErrorMessages();
-  }
-
-  public void recordOnRegular() {
-    skipHelper();
-    btnLogo();
-    btnShowSchedule();
-    btnRecordOnLesson();
-    btnTomorrowForRegular();
-    changeScrollTime();
-    btnNext();
-    selectCheckBox();
-    btnRecord();
-  }
-
   public void skipHelper() {
     trySearchElementTwoTimesAndClickWithWaiteAndMove(5, btnSkipHelper);
   }
@@ -503,24 +477,9 @@ public class LKParentHelper extends HelperBase {
     btnRecord();
   }
 
-  private void btnTomorrowForSingle() {
-    // находим активный элемент и берем следующий сестринский вниз по дереву
-    if (checkMatchTZServerUTC()) {
-      click(btnTomorrowInPicker);
-    }
-  }
-
   private void btnTomorrowForSingleSshot() {
     // находим активный элемент и берем следующий сестринский вниз по дереву
     click(btnTomorrowInPicker);
-  }
-
-  public void GoToFiltrRecordSingle() {
-    btnShowSchedule();
-    btnRecordOnLesson();
-    btnSingleSchedule();
-    btnTomorrowForSingleSshot();
-    changeScrollTime();
   }
 
   public void changeStyleDayOfTheWeek() {
@@ -529,6 +488,14 @@ public class LKParentHelper extends HelperBase {
         .executeScript("arguments[0].setAttribute('class', 'picker-item')", elementPicker);
     WebElement elementSelectedIcon = wd.findElement(selectedIcon);
     ((JavascriptExecutor) wd).executeScript("arguments[0].remove();", elementSelectedIcon);
+  }
+
+  public void GoToFiltrRecordRegular() {
+    btnShowSchedule();
+    btnRecordOnLesson();
+    btnTomorrowForRegular();
+    changeScrollTime();
+    changeStyleDayOfTheWeek();
   }
 
   public void btnSingleSchedule() {
@@ -578,138 +545,9 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void selfRegistration(StudentData student) {
-    fillStudentForm(student);
-    btnNextOnForm();
-  }
-
-  public void goHref() {
-    wd.get("localhost:3000/registerFromLead?leadId=selfRegistration");
-  }
-
-  public void GoToFiltrRecordRegular() {
-    btnShowSchedule();
-    btnRecordOnLesson();
-    btnTomorrowForRegular();
-    changeScrollTime();
-    changeStyleDayOfTheWeek();
-  }
-
-  public void cancelLessonInSingleSchedule() {
-    btnShowSchedule();
-    btnCancelSchedule();
-    btnDropdown();
-    clickCheckBox();
-    btnDropdown();
-    btnCancel();
-  }
-
-  public void cancelSingleScheduleAndClickOnWorkingOffNow() {
-    btnShowSchedule();
-    btnCancelSchedule();
-    btnDropdown();
-    clickCheckBox();
-    btnDropdown();
-    btnWorkingOffNow();
-  }
-
-  public void cancelSingleScheduleAndClickOnWorkingOffLater() {
-    btnShowSchedule();
-    btnCancelSchedule();
-    btnDropdown();
-    clickCheckBox();
-    btnDropdown();
-    btnWorkingOffLater();
-  }
-
-  private void btnWorkingOffLater() {
-    click(By.xpath(
-        "//button[contains(@class,'btn-cancel-and-working-off')]/following-sibling::button"));
-  }
-
-  private void btnWorkingOffNow() {
-    click(By.xpath("//button[contains(@class,'btn-cancel-and-working-off')]"));
-  }
-
-  public void cancelLessonsInRegularSchedule() {
-    btnShowSchedule();
-    btnCancelSchedule();
-    btnDropdown();
-    clickCheckBoxAll();
-    btnDropdown();
-    btnCancel();
-  }
-
-  public void cancelOneLessonInRegularSchedule() {
-    btnShowSchedule();
-    btnCancelSchedule();
-    btnDropdown();
-    clickCheckBoxOneLessonInRegular();
-    btnDropdown();
-    btnCancel();
-  }
-
-  private void clickCheckBoxOneLessonInRegular() {
-    click(selectFirstLessonInRegularForCancel);
-  }
-
-  private void btnCancel() {
-    click(btnCancelInPopup);
-    noErrorMessage();
-  }
-
-  private void clickCheckBox() {
-    click(selectLessonInSingleForCancel);
-  }
-
-  private void clickCheckBoxAll() {
-    for (int i = 1; i < 5; i++) {
-      click(By.xpath("(//label)[" + i + "]"));
-      noErrorMessage();
-    }
-  }
-
-  private void btnDropdown() {
-    click(btnDropdown);
-  }
-
-  private void btnCancelSchedule() {
-    click(btnCancelSchedule);
-    noErrorMessage();
-  }
-
   public void btnClickHistory() {
     click(btnClickHistory);
     noErrorMessage();
-  }
-
-  public void goHrefActiveLK(String token) {
-    wd.get("http://localhost:3000/enrollAccount/" + token + "?locale=ru");
-    noErrorMessage();
-  }
-
-  public void inputPassword(String password) {
-    clickWithMoveToElementAndWait(5, inputPassword);
-    type(inputPassword, password);
-    noErrorMessage();
-  }
-
-  public void btnSave() {
-    click(btnSaveInActivation);
-    noErrorMessage();
-  }
-
-  public void activation(String token) {
-    goHrefActiveLK(token);
-    inputPassword("111111");
-    btnSave();
-    noErrorMessage();
-    refresh();
-    logout();
-  }
-
-  public void clickByFullArea() {
-    click(fullAreaInCourseSelectionPage);
   }
 
   public void btnPrepare() {
@@ -794,49 +632,6 @@ public class LKParentHelper extends HelperBase {
     return words[2];
   }
 
-  public void recordOnSingleOnNewSkill(String skill) {
-    btnShowSchedule();
-    btnRecordOnLesson();
-    btnSingleSchedule();
-    // btnTomorrowForSingle();
-    selectSkill(skill);
-    changeScrollTime();
-    btnNext();
-    selectCheckBox();
-    btnRecord();
-  }
-
-  private void selectSkill(String skill) {
-   click(dropdownSkill);
-   click(By.xpath("//div[text()='"+skill+"']"));
-  }
-
-  public void trainerInListOnRegularRecord() {
-    skipHelper();
-    btnLogo();
-    btnShowSchedule();
-    btnRecordOnLesson();
-    checkBoxTrainer();
-    dropdownTrainerOnRegular();
-  }
-
-  private void dropdownTrainerOnRegular() {
-    click(dropdownTrainerOnRegular);
-  }
-
-  private void dropdownTrainerOnSingle() {
-    click(dropdownTrainerOnSingle);
-  }
-
-  private void checkBoxTrainer() {
-    click(checkboxTrainer);
-  }
-
-  public void trainerInListOnSingleRecord() {
-    btnSingleSchedule();
-    dropdownTrainerOnSingle();
-  }
-
   public void clickByRightPaginator() {
     clickByShowHistorySecondChild();
     clickByTabSchedule();
@@ -872,27 +667,9 @@ public class LKParentHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void selectLessonForWorkingOff() {
-    click(selectLessonForWorkingOff);
-  }
-
-  public void clickByRecordOnWorkingOff() {
-    click(btnAssignInWindowWorkingOff);
-    noErrorMessage();
-  }
-
-  public void clickByBack() {
-    click(btnReturnFromWorkingOff);
-  }
-
-  public void recordOnWorkingOff() {
-    goInWorkingOff();
-    selectLessonForWorkingOff();
-    clickByRecordOnWorkingOff();
-  }
-
   public void clickByChangePassword() {
-    click(btnChangePassword);
+    refresh();
+    clickWithMoveToElementAndWait(2, btnChangePassword);
   }
 
   public void typeNotSimilarPasswordInSettings() {
@@ -992,5 +769,17 @@ public class LKParentHelper extends HelperBase {
 
   public void clickBySecondTutorial() {
     click(closeSecondTitorialInSettings);
+  }
+
+  public void closeWinWorkingOffWithoutLesson() {
+    click(btnCloseWinWorkingOffWithoutLesson);
+  }
+  public void btnShowHistorySecondChild() {
+    click(btnShowHistorySecondChild);
+  }
+
+  public void selectSkillInHistory(String skill) {
+    click(By.xpath("//div[text()='Направление']"));
+    click(By.xpath(" //div[text()='" + skill + "']"));
   }
 }

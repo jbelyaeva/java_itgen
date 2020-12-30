@@ -11,9 +11,15 @@ import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SettingsNewStudentAddInAccauntAfterSavePassword extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    data.postClean().student();
+  }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSettingsNewStudentAddInAccauntAfterSavePassword() {
@@ -21,7 +27,7 @@ public class SettingsNewStudentAddInAccauntAfterSavePassword extends TestBase {
     app.lkParent().clickByHeader();
     app.check().notFindElement(By.xpath("//span[text()='Олегов Олег']"));
     app.base().refresh();
-    app.lkParent().createNewStudent();
+    app.lkParentRecord().createNewStudent();
     app.lkParent().saveLoginAndPassword("loginNew");
     app.lkParent().clickByHeader();
     app.check().findElement(By.xpath("//span[text()='Олегов Олег']"));

@@ -33,7 +33,7 @@ public class StudentDeletionTests extends TestBase {
             "ru",
             "12345678",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
   }

@@ -1,6 +1,6 @@
 package tests.lkParent;
-/**
- * T-25 отмена разового занятия тестовая ситуация: есть дефолтная семья, к которой добавлен ученик,
+/*T-25
+ * отмена разового занятия тестовая ситуация: есть дефолтная семья, к которой добавлен ученик,
  * прошедший вчера успешно пробное в 18.00 и который записан на разовое расписание на сегодня,
  * которое начнется через 4 часаю. Есть занятие без учеников на завтра. Отменить разовое занятие с
  * отработкой позже. Проверить, что перекинуло в расписание и есть кнопка отработки.
@@ -27,7 +27,7 @@ public class CancelOnSingleAndAssignWorkingOffLater extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testCancelOnSingleAndAssignWorkingOffLater() {
     app.lkParent().btnLogo();
-    app.lkParent().cancelSingleScheduleAndClickOnWorkingOffLater();
+    app.lkParentRecord().cancelSingleScheduleAndClickOnWorkingOffLater();
     app.check().findElement(app.lkParent().getBtnAssignWorking());
     app.check().findElement(app.lkParent().getTabSchedule());
   }

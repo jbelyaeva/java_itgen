@@ -64,14 +64,13 @@ public class SshotLessonFinishedWithDisrupt extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
   }
 
   @Test
   public void testSshotLessonFinishedWithDisrupt() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().finishedLessonWithDiscrupt("finishLessonByTrainer");
 

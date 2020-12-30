@@ -375,6 +375,27 @@ public class TrainerHelper extends HelperBase {
     deleteAlerts();
   }
 
+  public void finishedLessonWithDiscruptWithoutHW(String idLesson) {
+    gotoSchedule();
+    selectLesson(idLesson);
+    selectStudent();
+    btnDiscrupt();
+    tabResuts();
+    deleteAlerts();
+    fillResultsForDiscruptWithoutHW();
+    btnSave();
+    noErrorMessage();
+    btnFinishLesson();
+    noErrorMessage();
+    deleteAlerts();
+  }
+
+  private void fillResultsForDiscruptWithoutHW() {
+    type(
+        By.xpath("//textarea[@id-qa='note']"),
+        "Ребенок очень старался, был внимательный, " + "проекты делал самостоятельно");
+  }
+
   private void fillResultsForDiscrupt() {
     clickWithMoveToElementAndWait(1, By.xpath("//textarea[@id-qa='done']"));
     wd.findElement(By.xpath("//textarea[@id-qa='done']")).sendKeys("Проект Головоломка");

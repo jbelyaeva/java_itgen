@@ -2,11 +2,11 @@ package tests.screenShot;
 
 import static app.appmanager.ApplicationManager.properties;
 
+import app.testbase.TestBase;
 import data.model.materials.MaterialBranchData;
 import data.model.materials.MaterialData;
 import data.services.MaterialBranchService;
 import data.services.MaterialService;
-import app.testbase.TestBase;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -50,7 +50,7 @@ public class SshotMaterialTabInProcess extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuMaterials();
     app.material().tabInProgress();
-
+    app.material().tabWaitChecking();
     String name = "Admin_MaterialTabInProgress_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.sshot().changeTopBar();

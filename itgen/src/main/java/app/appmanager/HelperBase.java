@@ -101,8 +101,8 @@ public class HelperBase {
     //
     String next =
         wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
-    if (! next.equals("disabled")) {
-      while (! next.equals("disabled")) {
+    if (!next.equals("disabled")) {
+      while (!next.equals("disabled")) {
         count = count + wd.findElements(By.cssSelector("a.btn-link")).size();
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         next = wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
@@ -138,25 +138,38 @@ public class HelperBase {
 
   public void logout() {
     click(By.xpath("//div[@class='head']"));
-    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])[2]//li[5]"))) {
-      click(By.xpath("(//ul[contains(@class,'Menu')])[2]//li[5]"));
+    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])[2]//li[6]"))) {
+      click(By.xpath("(//ul[contains(@class,'Menu')])[2]//li[6]"));
     } else {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"));
+      if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"))) {
+        click(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"));
+      } else {
+        click(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"));
+      }
     }
   }
 
   public void logoutByStudent() {
     click(By.xpath("//div[@class='head']"));
-    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"))) {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"));
+
+    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"))) {
+      click(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"));
     } else {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[3]"));
+      if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"))) {
+        click(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"));
+      } else {
+        click(By.xpath("(//ul[contains(@class,'Menu')])//li[3]"));
+      }
     }
   }
 
   public void logoutByParent() {
     click(By.xpath("//div[@class='head']"));
-    click(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"));
+    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"))) {
+      click(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"));
+    } else {
+      click(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"));
+    }
   }
 
   public void login(String login, String password) {
@@ -322,7 +335,7 @@ public class HelperBase {
     String dateWithTz = sdf.format(new Date());
     String[] lettersDate = dateWithTz.split(" ");
     // проверка, что чп 00
-    Boolean a = ! lettersDate[1].equals("+03");
+    Boolean a = !lettersDate[1].equals("+03");
     // проверка, что время > 21
     Boolean b = Integer.parseInt(lettersDate[0]) >= Integer.parseInt("21");
     return a && b;

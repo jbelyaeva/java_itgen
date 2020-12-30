@@ -1,6 +1,6 @@
 package data.precondition;
 
-public class Payments extends TranzactionManager {
+public class Payments extends TransactionManager {
 
   protected static final DataManager data = new DataManager();
 

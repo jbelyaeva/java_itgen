@@ -20,13 +20,14 @@ public class PageConfirmTransitionToPageInstall extends TestBase {
   public void ensurePreconditions() {
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
     data.defFamily().set6_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(period);
-    data.skills().set1_MinecraftWithAt();
+    String id = data.skillsService().findBySkillId("21", "ru").getId();
+    data.skills().set1_MinecraftWithAt(id);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testPageConfirmTransitionToPageInstall() throws InterruptedException {
     app.check()
-        .equalityOfTwoElements(app.lkParent().goToPageInstall(21),
+        .equalityOfTwoElements(app.lkParentRecord().goToPageInstall(21),
             "https://drive.google.com/drive/folders/1FntRoW1PkC_Qay4pGj_NNZ55KmDv00zy");
     app.base().refresh();
   }

@@ -2,7 +2,7 @@ package tests.lkParent;
 /* T-102 */
 /* К дефолтной семье добавлен ученик старше 7 лет. Вчера было завершено пробное, а затем так же
  * вчера им было пропущено занятие. Перейти в отработку нажав на кнопку Отработка, проверить:
- * Записаться на отработку -нет алертв, перекинуло в расписание, отображается лейбл Отработка
+ * Записаться на отработку -нет алертов, перекинуло в расписание, отображается лейбл Отработка
  */
 
 import app.testbase.TestBase;
@@ -22,7 +22,7 @@ public class RecordOnWorkingOff extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnWorkingOff() {
     app.lkParent().reset();
-    app.lkParent().recordOnWorkingOff();
+    app.lkParentRecord().recordOnWorkingOff();
     app.check()
         .equalityOfTwoElements(app.base().getURL(),
             app.base().address() + "/profile/newStudent?tab=schedule");

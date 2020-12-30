@@ -55,7 +55,6 @@ public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
   @Test
   public void testLearningWithoutSubscribersAndHistory() throws AWTException, IOException {
     String name = "Student_LearningWithoutSubscribersAndHistory_RU_Chrome";
-    app.sshot().maxBrowser();
     Set<By> locatorIgnor = new HashSet<>();
     app.sshot().changeTopBarInLKParent();
     ImageDiff diff =

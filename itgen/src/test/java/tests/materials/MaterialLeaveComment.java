@@ -3,21 +3,16 @@ package tests.materials;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import data.model.materials.MaterialBranchData;
+import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import data.model.materials.MaterialData;
 import data.model.materials.Materials;
-import data.services.MaterialBranchService;
 import data.services.MaterialService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MaterialLeaveComment extends TestBase {
-
-  MaterialBranchData materialBranchClean = null;
-  MaterialBranchService materialBranchService = new MaterialBranchService();
-  MaterialData materialClean = null;
   MaterialService materialService = new MaterialService();
 
   @BeforeMethod
@@ -42,7 +37,7 @@ public class MaterialLeaveComment extends TestBase {
             "666");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testMaterialLeaveComment() {
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
@@ -85,9 +80,6 @@ public class MaterialLeaveComment extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialClean = app.dbmaterial().lastMaterial();
-    materialBranchService.DeleteById(materialBranchClean.getId());
-    materialService.DeleteById(materialClean.getId());
+    data.postClean().material();
   }
 }

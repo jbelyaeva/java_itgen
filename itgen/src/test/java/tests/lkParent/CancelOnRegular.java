@@ -1,6 +1,6 @@
 package tests.lkParent;
-/**
- * T-23* тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное
+/* T-23*
+ * тестовая ситуация: есть дефолтная семья, к которой добавлен ученик, прошедший вчера пробное
  * в 18.00 и который записан на постоянное расписание на завтра в 18.00. Отменить ученику все
  * занятия из постоянного расписания
  */
@@ -26,7 +26,7 @@ public class CancelOnRegular extends TestBase {
   public void testCancelOnRegular() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().cancelLessonsInRegularSchedule();
+    app.lkParentRecord().cancelLessonsInRegularSchedule();
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());
