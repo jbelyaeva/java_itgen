@@ -59,7 +59,7 @@ public class Sshot5LessonStart extends TestBase {
                 ApplicationManager.properties.getProperty("markedImages"),
                 name,
                 locatorIgnor,
-                1.92f);
+                1.25f);
 
     if (diff.getDiffSize() > 250) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);

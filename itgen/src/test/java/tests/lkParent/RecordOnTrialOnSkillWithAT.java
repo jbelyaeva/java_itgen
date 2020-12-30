@@ -19,12 +19,12 @@ public class RecordOnTrialOnSkillWithAT extends TestBase {
   public void ensurePreconditions() {
     data.defFamily().set6_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(period);
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
-    data.skills().set1_MinecraftWithAt();
+    data.skills().set1_MinecraftWithAt(data.skillsService().findBySkillId("21", "ru").getId());
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnTrialOnSkillWithoutAT() {
-    app.lkParent().recordOnTrail(21);
+    app.lkParentRecord().recordOnTrail(21);
     app.check().findElement(app.lkParent().getBtnInstall());
     app.base().refresh();
   }

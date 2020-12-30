@@ -3,25 +3,17 @@ package tests.materials;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import data.model.materials.MaterialBranchData;
+import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import data.model.materials.MaterialData;
 import data.model.materials.Materials;
-import data.services.MaterialBranchService;
-import data.services.MaterialNewService;
 import data.services.MaterialService;
-import data.services.PaymentService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MaterialMakeReview extends TestBase {
-  MaterialBranchData materialBranchClean = null;
-  MaterialBranchService materialBranchService = new MaterialBranchService();
-  MaterialData materialClean = null;
   MaterialService materialService = new MaterialService();
-  MaterialNewService materialNewService = new MaterialNewService();
-  PaymentService paymentService = new PaymentService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -43,9 +35,26 @@ public class MaterialMakeReview extends TestBase {
             "https://docs.google.com",
             "Развивает внимательность",
             "666");
+    app.trMaterial()
+        .checkingMaterial(
+            "MaterialMakeReviewSecond",
+            "23",
+            "Бабочки",
+            "checking",
+            "1",
+            "CreateNewMaterial",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает усидчивость",
+            "666");
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testMaterialMakeReview() {
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
@@ -87,11 +96,6 @@ public class MaterialMakeReview extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialClean = app.dbmaterial().lastMaterial();
-    materialBranchService.DeleteById(materialBranchClean.getId());
-    materialService.DeleteById(materialClean.getId());
-    materialNewService.drop();
-    paymentService.drop();
+    data.postClean().material().payment();
   }
 }

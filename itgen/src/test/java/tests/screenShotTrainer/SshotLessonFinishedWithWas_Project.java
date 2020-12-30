@@ -70,7 +70,7 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
 
@@ -115,7 +115,6 @@ public class SshotLessonFinishedWithWas_Project extends TestBase {
 
   @Test
   public void testSshotLessonFinishedWithWas_Project() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().finishedLessonWithWas_giveProject("finishLessonByTrainer", "Жуки", "Лабиринт");
 

@@ -20,4 +20,8 @@ public class ParentService {
   public ParentData findById(String id) {
     return parentDao.findById(id);
   }
+
+  public void deleteField(String idParent, String nameField) {
+    parentDao.deleteField(idParent, nameField);
+  }
 }

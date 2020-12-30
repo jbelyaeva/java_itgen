@@ -6,24 +6,25 @@ package tests.screenShot;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import java.awt.AWTException;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
+import java.awt.*;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 public class SshotPayByAdminShop extends TestBase {
 
   private ImageDiff getDiff(String name, Set<By> locatorIgnor) throws AWTException, IOException {
     return app.sshot()
-        .getImageDiff(
-            ApplicationManager.properties.getProperty("expected"),
-            ApplicationManager.properties.getProperty("actual"),
-            ApplicationManager.properties.getProperty("markedImages"),
-            name,
+            .getImageDiff(
+                    ApplicationManager.properties.getProperty("expected"),
+                    ApplicationManager.properties.getProperty("actual"),
+                    ApplicationManager.properties.getProperty("markedImages"),
+                    name,
             locatorIgnor,
             1.25f);
   }
@@ -32,7 +33,6 @@ public class SshotPayByAdminShop extends TestBase {
   public void testSshotPayByAdminShop() throws AWTException, IOException {
     String name = "Admin_PayShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    app.base().maxBrowser();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdminShop("21");

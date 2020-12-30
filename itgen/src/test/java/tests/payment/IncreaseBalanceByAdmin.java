@@ -40,7 +40,7 @@ public class IncreaseBalanceByAdmin extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
 

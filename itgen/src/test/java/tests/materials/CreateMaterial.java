@@ -8,14 +8,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.model.materials.MaterialBranchData;
 import data.model.materials.MaterialData;
 import data.model.materials.Materials;
 import data.provides.LocaleUtilsTestData;
-import data.services.MaterialBranchService;
-import data.services.MaterialNewService;
 import data.services.MaterialService;
-import data.services.PaymentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,11 +19,7 @@ import org.testng.annotations.Test;
 public class CreateMaterial extends TestBase {
 
   MaterialData materialClean = null;
-  MaterialBranchData materialBranchClean = null;
   MaterialService materialService = new MaterialService();
-  MaterialBranchService materialBranchService = new MaterialBranchService();
-  PaymentService paymentService = new PaymentService();
-  MaterialNewService materialNewService = new MaterialNewService();
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -75,10 +67,6 @@ public class CreateMaterial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    materialService.DeleteById(materialClean.getId());
-    materialBranchClean = app.dbmaterial().lastBranchMaterial();
-    materialBranchService.DeleteById(materialBranchClean.getId());
-    materialNewService.drop();
-    paymentService.drop();
+    data.postClean().material().payment();
   }
 }

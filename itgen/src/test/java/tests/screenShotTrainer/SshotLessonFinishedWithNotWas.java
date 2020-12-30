@@ -62,14 +62,13 @@ public class SshotLessonFinishedWithNotWas extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
   }
 
   @Test
   public void testSshotLessonFinishedWithNotWas() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().finishedLessonWithNotWas("finishLessonByTrainer");
 

@@ -9,13 +9,12 @@ public class C {
   private String subject;
   private String s;
   private String lang;
-  private Boolean isTrial;
   private Boolean newSubj;
   private int score; // очки внимания
   private int rating;
-  private boolean p; // признак постоянного расписания
   private Double startTime;
   private Double endTime;
+  private String kind;
 
   public C() {
   }
@@ -45,11 +44,6 @@ public class C {
     return this;
   }
 
-  public C withTrial(Boolean trial) {
-    isTrial = trial;
-    return this;
-  }
-
   public C withNewSubj(Boolean newSubj) {
     this.newSubj = newSubj;
     return this;
@@ -65,11 +59,6 @@ public class C {
     return this;
   }
 
-  public C withP(boolean p) {
-    this.p = p;
-    return this;
-  }
-
   public C withStartTime(double startTime) {
     this.startTime = startTime;
     return this;
@@ -77,6 +66,11 @@ public class C {
 
   public C withEndTime(double endTime) {
     this.endTime = endTime;
+    return this;
+  }
+
+  public C withKind(String kind) {
+    this.kind = kind;
     return this;
   }
 
@@ -88,11 +82,10 @@ public class C {
         ", subject='" + subject + '\'' +
         ", s='" + s + '\'' +
         ", lang='" + lang + '\'' +
-        ", isTrial=" + isTrial +
         ", newSubj=" + newSubj +
         ", score=" + score +
         ", rating=" + rating +
-        ", p=" + p +
+        ", kind=" + kind +
         ", startTime=" + startTime +
         ", endTime=" + endTime +
         '}';
@@ -111,13 +104,12 @@ public class C {
         && Objects.equals(id, c.id)
         && Objects.equals(subject, c.subject)
         && Objects.equals(lang, c.lang)
-        && Objects.equals(isTrial, c.isTrial)
-        && Objects.equals(newSubj, c.newSubj)
-        && Objects.equals(p, c.p);
+        && Objects.equals(kind, c.kind)
+        && Objects.equals(newSubj, c.newSubj);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, type, subject, lang, isTrial, newSubj, p);
+    return Objects.hash(id, type, subject, lang, kind, newSubj);
   }
 }

@@ -22,13 +22,13 @@ public class RecordOnOldSkillWithAT extends TestBase {
             period);
     //тренер ведет данное направление
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
-    data.skills().set1_MinecraftWithAt();
+    data.skills().set1_MinecraftWithAt(data.skillsService().findBySkillId("21", "ru").getId());
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnOldSkillWithAT() {
     app.lkParent().reset();
-    app.lkParent().recordOnSingle();
+    app.lkParentRecord().recordOnSingle();
     app.check().notFindElement(app.lkParent().getCellLightCalendar());
     app.base().refresh();
   }

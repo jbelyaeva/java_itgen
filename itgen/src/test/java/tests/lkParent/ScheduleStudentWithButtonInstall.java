@@ -19,7 +19,7 @@ public class ScheduleStudentWithButtonInstall extends TestBase {
   public void ensurePreconditions() {
     data.defFamily().set14_TomorrowTwoTrialLessons_StudentAddInDefaultFamily();
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
-    data.skills().set1_MinecraftWithAt();
+    data.skills().set1_MinecraftWithAt(data.skillsService().findBySkillId("21", "ru").getId());
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

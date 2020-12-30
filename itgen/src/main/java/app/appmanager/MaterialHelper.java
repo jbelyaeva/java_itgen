@@ -36,7 +36,7 @@ public class MaterialHelper extends HelperBase {
     dropDownList(By.id("material-level"), materialData.getLevel());
   }
 
-  public void btnSend() {
+  public void btnSendToCheck() {
     click(By.xpath("//button[contains(@class,'send')]"));
     noErrorMessage();
   }
@@ -50,12 +50,24 @@ public class MaterialHelper extends HelperBase {
 
   public void addNewMaterial(MaterialData material) {
     tabInProgress();
-    fillForm(material);
+    tabSend();
     btnSend();
+    fillForm(material);
+    btnSendToCheck();
+  }
+
+  private void btnSend() {
+    click(By.xpath("//a[@href='#sendMaterial']"));
+  }
+
+  private void tabSend() {
+    click(By.xpath("//button[@id-qa='send']"));
   }
 
   public void addNewMaterialBad(MaterialData material) {
     tabInProgress();
+    tabSend();
+    btnSend();
     fillForm(material);
     btnSendBad();
   }
@@ -70,21 +82,46 @@ public class MaterialHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void TakeOnCheck() {
+  public void TakeOnCheck(String id) {
     tabInProgress();
+    tabCheck();
+    branchWaitForReview();
+    selectMaterial(id);
     btnTakeForReview();
   }
 
+  public void trainerTakeOnCheck(String id) {
+    tabInProgress();
+    tabCheck();
+    tabWaitChecking();
+    selectMaterial(id);
+    btnTakeForReview();
+  }
+
+  public void tabWaitChecking() {
+    click(By.xpath("(//h4[@class='branch-header'])[2]//span"));
+  }
+
   private void btnTakeForReview() {
-    click(By.xpath("//button[contains(@class,'take-for-review')]"));
+    click(By.xpath("//button[@id-qa='take-for-review']"));
     noErrorMessage();
   }
 
   public void deleteMaterial(String id) {
     tabInProgress();
+    btnChecking();
+    branchTookForReview();
     selectMaterial(id);
     btnDelete();
     alertDeleteSelectedParent();
+  }
+
+  private void branchTookForReview() {
+    click(By.xpath("(//h4[@class='branch-header'])[1]//span"));
+  }
+
+  private void btnChecking() {
+    click(By.xpath("//button[@id-qa='approval']"));
   }
 
   private void alertDeleteSelectedParent() {
@@ -104,10 +141,30 @@ public class MaterialHelper extends HelperBase {
 
   public void makeReview(String id) {
     tabInProgress();
+    btnChecking();
+    branchTookForReview();
     selectMaterial(id);
     selectReady();
     clickByBranch();
     assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
+  }
+
+  private void branchWaitForReview() {
+    click(By.xpath("//span[@id-qa='show-full']"));
+  }
+
+  public void makeReviewTrainer(String id) {
+    tabInProgress();
+    tabCheck();
+    branchTookForReview();
+    selectMaterial(id);
+    selectReady();
+    clickByBranch();
+    assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
+  }
+
+  private void tabCheck() {
+    click(By.xpath("//button[@id-qa='approval']"));
   }
 
   private void clickByBranch() {

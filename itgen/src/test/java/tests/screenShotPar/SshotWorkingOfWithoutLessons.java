@@ -42,46 +42,43 @@ public class SshotWorkingOfWithoutLessons extends TestBase {
             3,
             "skipped",
             true,
-            false,
+            "oneTime",
             false,
             "ru",
             120
         );
 
     app.trStudent()
-        .studentAddDefaultFamilyAfterLesson(
+        .newStudent(
             "newStudent",
             "Маша",
             "Машина",
             "expert",
             "BL",
+            "111",
             "Europe/Minsk",
             2,
-            app.base().DateWithCorrectionDays(-3650),
+            app.base().DateWithCorrectionDays(-2956),
             "ru",
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
-            1,
-            "trialFinished",
-            "1",
-            "1",
-            1);
+            "noTrial");
   }
 
-  @Test(enabled = false)
+  @Test()
   public void testSshotWorkingOfWithoutLessons() throws AWTException, IOException {
     app.lkParent().goInWorkingOff();
 
-    String name = "Parent_FiltrRecordOnSingle_RU_Chrome";
+    String name = "Parent_WorkingOffWithoutLessons_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//p[@class='user']"));
+ /*   locatorIgnor.add(By.xpath("//p[@class='user']"));
     locatorIgnor.add(By.xpath("//div[@class='gena-form-item'][3]//input"));
     locatorIgnor.add(By.xpath("//span[@class='month']"));
     locatorIgnor.add(By.xpath("//div[contains(@class,'btn-group')]"));
-    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));*/
 
     ImageDiff diff =
         app.sshot()
@@ -95,7 +92,7 @@ public class SshotWorkingOfWithoutLessons extends TestBase {
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
-
+    app.lkParent().closeWinWorkingOffWithoutLesson();
     app.lkParent().btnLogo();
   }
 

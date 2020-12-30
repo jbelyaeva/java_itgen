@@ -1,14 +1,14 @@
 package data.precondition;
 
-public class Schedules extends TranzactionManager {
+public class Schedules extends TransactionManager {
 
   protected static final DataManager data = new DataManager();
 
   //завтра регулярное занятие буз ученика на первом уроке (Бокша, руск яз, Scratch)
   public void set1_RegularScheduleWithoutStudentOnFirstLesson(String period) {
     trScheduleTomorrow()
-        .RegularScheduleWithoutStudentOnFirstLesson(
-            period, "newSchedule", "14", "newStudent", "1", "ru");
+            .RegularScheduleWithoutStudentOnFirstLesson(
+                    period, "newSchedule", "14", "newStudent", "1", "ru");
   }
 
   //завтра регулярное занятие буз учеников (Бокша, руск яз, Scratch)
@@ -38,8 +38,20 @@ public class Schedules extends TranzactionManager {
   }
 
   // завтра пробное занятие, на которое записали ученика (Бокша, Scratch, рус)
-  public void set6_SingleScheduleWithOneStudentRecordOnTrail(String period) {
+  public void set6_SingleScheduleWithOneStudentRecordOnTrailOnScratch(String period) {
     trScheduleTomorrow().SingleScheduleWithOneStudentRecordOnTrail(
         period, "newSchedule", "14", "newStudent", "1", "ru");
+  }
+
+  // завтра пробное занятие, на которое записали ученика (Бокша, Minecraft, рус)
+  public void set6_SingleScheduleWithOneStudentRecordOnTrailOnMinecraft(String period) {
+    trScheduleTomorrow().SingleScheduleWithOneStudentRecordOnTrail(
+        period, "newSchedule", "14", "newStudent", "21", "ru");
+  }
+
+  // завтра разовое занятие, на которое записали ученика (Бокша, Minecraft, рус)
+  public void set7_SingleScheduleWithOneStudentRecordOnSingleOnMinecraft(String period) {
+    trScheduleTomorrow().SingleScheduleWithOneNewStudent(
+        period, "newSchedule", "14", "newStudent", "21", "ru");
   }
 }

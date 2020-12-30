@@ -1,20 +1,20 @@
 package app.testbase;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import app.appmanager.ApplicationManager;
 import core.listeners.MyTestListener;
 import data.model.lead.LeadData;
 import data.model.lead.Leads;
-import data.model.users.StudentData;
-import data.model.users.Students;
-import data.model.users.TrainerData;
-import data.model.users.Trainers;
-import data.model.users.WorkerData;
-import data.model.users.Workers;
+import data.model.users.*;
 import data.precondition.DataManager;
-import data.precondition.TranzactionManager;
+import data.precondition.TransactionManager;
+import org.openqa.selenium.remote.BrowserType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
+import ru.yandex.qatools.ashot.Screenshot;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -22,17 +22,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.imageio.ImageIO;
-import org.openqa.selenium.remote.BrowserType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Listeners;
-import ru.yandex.qatools.ashot.Screenshot;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @Listeners(MyTestListener.class)
 public class TestBase {
@@ -44,7 +36,7 @@ public class TestBase {
 
   protected static final DataManager data = new DataManager();
 
-  protected static final TranzactionManager tr = new TranzactionManager();
+  protected static final TransactionManager tr = new TransactionManager();
 
   @BeforeSuite(alwaysRun = true)
   public void setUp(ITestContext context) throws Exception {

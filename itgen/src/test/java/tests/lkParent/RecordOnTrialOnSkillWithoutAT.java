@@ -22,7 +22,7 @@ public class RecordOnTrialOnSkillWithoutAT extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnTrialOnSkillWithoutAT() {
-    app.lkParent().recordOnTrail(1);
+    app.lkParentRecord().recordOnTrail(1);
     app.check().notFindElement(app.lkParent().getBtnInstall());
     app.base().refresh();
   }

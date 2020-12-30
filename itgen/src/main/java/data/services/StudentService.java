@@ -2,8 +2,6 @@ package data.services;
 
 import data.dao.StudentDao;
 import data.model.users.StudentData;
-import data.model.usersGeneral.Services;
-import java.util.Date;
 
 public class StudentService {
 
@@ -32,7 +30,11 @@ public class StudentService {
   }
 
   public <E> void updateField(String idStudent, String nameFiled, E[] data) {
-    studentDao.updateField (idStudent, nameFiled, data);
+    studentDao.updateField(idStudent, nameFiled, data);
+  }
+
+  public <E> void updateFieldClass(String idStudent, String nameFiled, E data) {
+    studentDao.updateFieldClass(idStudent, nameFiled, data);
   }
 
   public void deleteField(String idStudent, String nameField) {

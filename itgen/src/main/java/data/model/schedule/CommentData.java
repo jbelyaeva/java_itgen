@@ -36,8 +36,8 @@ public class CommentData {
   @Property("skillId")
   private String skillId;
 
-  @Property("createAt")
-  private Date createAt;
+  @Property("createdAt")
+  private Date createdAt;
 
   @Property("text")
   private String text;
@@ -108,8 +108,8 @@ public class CommentData {
     return this;
   }
 
-  public CommentData withCreateAt(Date createAt) {
-    this.createAt = createAt;
+  public CommentData withCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
@@ -190,8 +190,8 @@ public class CommentData {
     return skillId;
   }
 
-  public Date getCreateAt() {
-    return createAt;
+  public Date getCreatedAt() {
+    return createdAt;
   }
 
   public String getText() {
@@ -279,7 +279,7 @@ public class CommentData {
         ", sTime=" + sTime +
         ", eTime=" + eTime +
         ", skillId='" + skillId + '\'' +
-        ", createAt=" + createAt +
+        ", createdAt=" + createdAt +
         ", text='" + text + '\'' +
         ", done='" + done + '\'' +
         ", hw='" + hw + '\'' +

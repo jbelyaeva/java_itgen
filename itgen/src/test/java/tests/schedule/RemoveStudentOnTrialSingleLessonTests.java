@@ -60,7 +60,7 @@ public class RemoveStudentOnTrialSingleLessonTests extends TestBase {
                                     .withSubject("1")
                                     .withLang("ru")
                                     .withNewSubj(true)
-                                    .withTrial(true)))))
+                                    .withKind("trial")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120)

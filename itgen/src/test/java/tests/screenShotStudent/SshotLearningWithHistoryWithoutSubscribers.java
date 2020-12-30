@@ -1,15 +1,15 @@
 package tests.screenShotStudent;
-/**
- * Начальные данные: дефолтный ребенок в статусе Занимается , без истории, без подписок сделать
+/*Начальные данные: дефолтный ребенок в статусе Занимается , без истории, без подписок сделать
  * скриншоты главного окна
  */
+
+import static app.appmanager.ApplicationManager.properties;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.model.materials.MaterialData;
 import data.services.CommentService;
-import data.services.CommunitiesService;
 import data.services.FinishedChildLessonService;
 import data.services.FinishedLessonService;
 import data.services.MaterialBranchService;
@@ -41,7 +41,6 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
   private final FinishedLessonService finishedLessonService = new FinishedLessonService();
   private final MaterialService materialService = new MaterialService();
   private final TimeGeneral time = new TimeGeneral();
-  private final CommunitiesService communitiesService = new CommunitiesService();
   private final String period = "18:00 - 20:00";
 
   @BeforeMethod
@@ -213,16 +212,13 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
             1);
     app.base().goByHref(app.base().address() + "/login");
     app.student()
-        .login("student", "111111");
-    communitiesService.dropCommunity();
-    communitiesService.dropCommPost();
+        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 
   @Test
   public void testLearningWithoutSubscribersAndHistory() throws AWTException, IOException {
     app.student().btnCloseTutorial();
     String name = "Student_LearningWithHistoryWithoutSubscribers_RU_Chrome";
-    app.sshot().maxBrowser();
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='history-month-header']"));
     locatorIgnor.add(By.xpath("//div[@class='date']"));

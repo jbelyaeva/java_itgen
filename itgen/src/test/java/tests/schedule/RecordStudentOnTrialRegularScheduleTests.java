@@ -157,7 +157,7 @@ public class RecordStudentOnTrialRegularScheduleTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withTrial(true))),
+                                    .withKind("trial"))),
                     new Slots()
                         .withId("14")
                         .withW(time.date() + week)

@@ -158,7 +158,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                     .withSubject("1")
                                     .withLang("ru")
                                     .withNewSubj(true)
-                                    .withP(true))),
+                                    .withKind("permanent"))),
                     new Slots()
                         .withId("14")
                         .withW(time.date() + week)
@@ -173,7 +173,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withP(true))),
+                                    .withKind("permanent"))),
                     new Slots()
                         .withId("14")
                         .withW(time.date() + week * 2)
@@ -188,7 +188,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withP(true))),
+                                    .withKind("permanent"))),
                     new Slots()
                         .withId("14")
                         .withW(time.date() + week * 3)
@@ -203,7 +203,7 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
                                     .withType(3)
                                     .withSubject("1")
                                     .withLang("ru")
-                                    .withP(true)))))
+                                    .withKind("permanent")))))
             .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
             .withWholeness(false)
             .withDuration(120);

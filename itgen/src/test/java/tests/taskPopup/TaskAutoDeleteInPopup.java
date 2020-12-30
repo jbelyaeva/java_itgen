@@ -3,10 +3,10 @@ package tests.taskPopup;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -57,8 +57,6 @@ public class TaskAutoDeleteInPopup extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    if (taskService.findById("AutoTaskDeleteInPopup") != null) {
-      taskService.DeleteById("AutoTaskDeleteInPopup");
-    }
+    taskService.drop();
   }
 }

@@ -44,7 +44,7 @@ public class TrScheduleYesterdayHelper {
                                     .withType(3)
                                     .withSubject(idSubject)
                                     .withLang("ru")
-                                    .withTrial(true)
+                                    .withKind("trial")
                                     .withS("finished")
                                     .withScore(3)
                                     .withRating(4)
@@ -70,7 +70,7 @@ public class TrScheduleYesterdayHelper {
       int type,
       String status,
       Boolean newSubject,
-      Boolean withTrial,
+      String kind,
       Boolean wholness,
       String lang,
       int duration) {
@@ -97,7 +97,7 @@ public class TrScheduleYesterdayHelper {
                                     .withType(type)
                                     .withSubject(idSubject)
                                     .withLang(lang)
-                                    .withTrial(withTrial)
+                                    .withKind(kind)
                                     .withS(status)
                                     .withNewSubj(newSubject)
                                     .withStartTime(time.StimeYesterday(periodFinish))

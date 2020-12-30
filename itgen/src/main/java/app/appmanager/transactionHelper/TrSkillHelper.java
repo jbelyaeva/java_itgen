@@ -42,13 +42,51 @@ public class TrSkillHelper {
         .withRequirements(new Requirements()
             .withtBeginner(getBeginner(age, state))
             .withAdvanced(getAdvanced(age, state))
-            .withUsual(getUsual(age,state))
+            .withUsual(getUsual(age, state))
             .withExpert(getExpert(age, state)))
         .withSkillId(skillId)
         .withDownloadLink(link)
         .withNeedRemindAboutLesson(needRemind)
         .withPayCoefficient(payCoefficient)
         .withtTrialDuration(duration);
+    skillsService.save(skill);
+  }
+
+  public void updateSkillWithTest(
+      String idSkill,
+      String lang,
+      String title,
+      String visibility,
+      String desc,
+      int minAge,
+      int[] age,
+      String[] state,
+      String skillId,
+      String link,
+      Boolean needRemind,
+      int payCoefficient,
+      int duration,
+      String testId
+  ) {
+    SkillsData skill = new SkillsData()
+        .withId(idSkill)
+        .withLang(lang)
+        .withTitle(title)
+        .withVisibility(visibility)
+        .withDesc(desc)
+        .withMinAge(minAge)
+        .withRequirements(new Requirements()
+            .withtBeginner(getBeginner(age, state))
+            .withAdvanced(getAdvanced(age, state))
+            .withUsual(getUsual(age, state))
+            .withExpert(getExpert(age, state)))
+        .withMinAgeWithoutTest(10)
+        .withSkillId(skillId)
+        .withDownloadLink(link)
+        .withNeedRemindAboutLesson(needRemind)
+        .withPayCoefficient(payCoefficient)
+        .withtTrialDuration(duration)
+        .withTestId(testId);
     skillsService.save(skill);
   }
 

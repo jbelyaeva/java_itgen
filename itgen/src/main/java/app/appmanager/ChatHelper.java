@@ -109,13 +109,14 @@ public class ChatHelper extends HelperBase {
   }
 
   public Boolean fileGetTrainerFromStudent(String login, String password, String fileName,
-      String idStudent) {
+      String idStudent) throws InterruptedException {
     logoutByStudent();
     deleteAlerts();//удалить алерт на две вкладки и по алерту на микрофон и камеру
     deleteAlerts();
     deleteAlerts();
     login(login, password);
     btnOpenChat();
+    Thread.sleep(2000);
     clickByMessageByStudentForTrainer(idStudent);
     return getByTrainerFile(fileName);
   }

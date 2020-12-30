@@ -2,7 +2,7 @@ package data.precondition;
 
 import app.appmanager.HelperBase;
 
-public class NewFamily extends TranzactionManager {
+public class NewFamily extends TransactionManager {
 
   protected static final DataManager data = new DataManager();
   HelperBase base = new HelperBase();
@@ -27,7 +27,7 @@ public class NewFamily extends TranzactionManager {
             "ru",
             "78787878i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial"
         );

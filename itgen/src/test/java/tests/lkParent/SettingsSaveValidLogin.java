@@ -38,6 +38,7 @@ public class SettingsSaveValidLogin extends TestBase {
     app.check().findElement(app.lkParent().getWinTutorialsInSettings());
     app.base().btnCloseTutorial();
     app.base().logoutByStudent();
+    app.base().goByHref(app.base().address() + "/login");
     app.base().login("parent", "111111");
   }
 

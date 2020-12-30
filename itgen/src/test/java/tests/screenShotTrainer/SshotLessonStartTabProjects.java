@@ -71,7 +71,7 @@ public class SshotLessonStartTabProjects extends TestBase {
             "ru",
             "12345678i",
             "ru",
-            "1",
+            new String[]{"1"},
             2,
             "noTrial");
 
@@ -116,7 +116,6 @@ public class SshotLessonStartTabProjects extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotLessonStartTabProjects() throws AWTException, IOException {
-    app.trainer().maxBrowser();
     app.trainer().gotoSchedule();
     app.trainer().startLessonWithProjects("finishLessonByTrainer");
     app.sshot().changeTopBar();

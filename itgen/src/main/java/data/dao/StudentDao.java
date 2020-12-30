@@ -2,13 +2,11 @@ package data.dao;
 
 import static data.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
+import data.connection.MFSessionFactory;
+import data.model.users.StudentData;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
-import data.connection.MFSessionFactory;
-import data.model.users.StudentData;
-import data.model.usersGeneral.Services;
-import java.util.Date;
 
 public class StudentDao {
 
@@ -46,10 +44,16 @@ public class StudentDao {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> query = datastore.createQuery(StudentData.class).field("id").equal(idStudet);
     datastore.update(query, datastore.createUpdateOperations(StudentData.class).unset(nameField));
-
   }
 
-  public <E> void updateField (String idStudent, String nameField, E[] data){
+  public <E> void updateField(String idStudent, String nameField, E[] data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", idStudent);
+    UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameField, data);
+    datastore.update(query, (UpdateOperations<StudentData>) ops);
+  }
+
+  public <E> void updateFieldClass(String idStudent, String nameField, E data) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<StudentData> query = datastore.createQuery(StudentData.class).filter("id", idStudent);
     UpdateOperations ops = datastore.createUpdateOperations(StudentData.class).set(nameField, data);

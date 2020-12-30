@@ -24,7 +24,7 @@ public class RecordOnSingle extends TestBase {
   public void testRecordOnSingle() {
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
-    app.lkParent().recordOnSingle();
+    app.lkParentRecord().recordOnSingle();
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());

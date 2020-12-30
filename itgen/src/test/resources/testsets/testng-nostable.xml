@@ -3,7 +3,6 @@
 <suite name="Suite1" verbose="1">
   <test name="Nostable">
     <classes>
-      <class name="tests.family.FamilyDeletionTests"/>
       <class name="tests.candidates.CandidateCreateEmployeer" />
       <class name="tests.schedule.ScheduleBadMoveOnOccupiedLessonTests"/>
       <class name="tests.schedule.ScheduleBadMoveTests"/>

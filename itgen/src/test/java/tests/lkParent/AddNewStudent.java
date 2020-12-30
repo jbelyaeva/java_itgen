@@ -19,7 +19,7 @@ public class AddNewStudent extends TestBase {
       retryAnalyzer = RunTestAgain.class)
   public void testAddNewStudent(StudentData student) throws InterruptedException {
     Students before = app.dbstudents().students();
-    app.lkParent().create(student);
+    app.lkParentRecord().create(student);
     Thread.sleep(3000); // необходимо, т.к. не успевает сохраниться студент в бд
     Students after = app.dbstudents().students();
     app.check().equalityOfTwoElements(after.size(), before.size() + 1);
@@ -32,7 +32,7 @@ public class AddNewStudent extends TestBase {
       retryAnalyzer = RunTestAgain.class)
   public void testBadAddNewStudent(StudentData student) {
     Students before = app.dbstudents().students();
-    app.lkParent().createBad(student);
+    app.lkParentRecord().createBad(student);
     Students after = app.dbstudents().students();
     app.check().equalityOfTwoElements(after.size(), before.size());
     app.check().equalityOfTwoElements(after, before);
