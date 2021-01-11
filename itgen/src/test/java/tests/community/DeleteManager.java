@@ -77,6 +77,7 @@ public class DeleteManager extends TestBase {
   public void clean() {
     communitiesService.dropCommunity();
     app.student().logoutByStudent();
+    app.base().goByHref(app.base().address() + "/login");
     app.base().login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 }

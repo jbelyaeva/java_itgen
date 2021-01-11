@@ -3,15 +3,16 @@ package tests.employers;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import core.general.RunTestAgain;
 import data.model.users.TrainerData;
 import data.model.users.Trainers;
 import data.model.users.WorkerData;
 import data.model.users.Workers;
 import data.services.TrainerService;
 import data.services.WorkerService;
-import app.testbase.TestBase;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -86,7 +87,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     }
   }
 
-  @Test(dataProvider = "validWorkersFromJson")
+  @Test(dataProvider = "validWorkersFromJson", retryAnalyzer = RunTestAgain.class)
   public void testWorkerCreation(WorkerData worker) {
     app.goTo().menuTrainers();
     app.goTo().menuWorkers();
@@ -110,7 +111,7 @@ public class WorkerAndTrainerCreationTests extends TestBase {
     Assert.assertEquals(after, before + 1);
   }
 
-  @Test(dataProvider = "validWorkersTrainersFromJson")
+  @Test(dataProvider = "validWorkersTrainersFromJson", retryAnalyzer = RunTestAgain.class)
   public void testWorkerTrainerCreation(TrainerData trainer) {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
