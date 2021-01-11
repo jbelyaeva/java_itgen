@@ -50,7 +50,8 @@ public class SshotMaterialTabInProcess extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuMaterials();
     app.material().tabInProgress();
-    app.material().tabWaitChecking();
+    app.material().tabCheck();
+    app.material().branchWaitForReview();
     String name = "Admin_MaterialTabInProgress_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.sshot().changeTopBar();

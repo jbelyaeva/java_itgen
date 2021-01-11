@@ -33,8 +33,8 @@ public class SshotCalendarWithButtonRecord extends TestBase {
     String name = "Parent_CalendarWithBurronRecord_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='calendar']"));
-    app.sshot().changeTopBar();
     app.lkParent().skipHelper();
+    app.sshot().changeTopBarInLKParent();
     ImageDiff diff =
             app.sshot()
                     .getImageDiff(

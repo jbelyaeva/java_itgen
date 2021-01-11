@@ -149,7 +149,7 @@ public class MaterialHelper extends HelperBase {
     assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
   }
 
-  private void branchWaitForReview() {
+  public void branchWaitForReview() {
     click(By.xpath("//span[@id-qa='show-full']"));
   }
 
@@ -163,7 +163,7 @@ public class MaterialHelper extends HelperBase {
     assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
   }
 
-  private void tabCheck() {
+  public void tabCheck() {
     click(By.xpath("//button[@id-qa='approval']"));
   }
 
