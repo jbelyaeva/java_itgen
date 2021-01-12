@@ -92,7 +92,8 @@ public class SshotLookTests extends TestBase {
   public void testSshotLookTests() throws AWTException, IOException {
     String name = "Student_Tests_RU_Chrome";
     app.student().goToStudentProfileTabTests();
-    app.student().deleteAlerts();
+    String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
+    app.base().deleteElements(deleteElements);
 
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[contains(@class,'finished')]//span[@class='date']"));

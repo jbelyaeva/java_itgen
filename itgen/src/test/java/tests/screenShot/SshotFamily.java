@@ -4,6 +4,7 @@ package tests.screenShot;
 */
 
 import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -24,7 +25,7 @@ public class SshotFamily extends TestBase {
         data.familyService().updateFieldBoolean("111", "isTrialBonusOff", false);
     }
 
-    @Test
+    @Test(retryAnalyzer = RunTestAgain .class)
     public void testSshotFamilies() throws AWTException, IOException {
         String name = "Admin_Family_RU_Chrome";
         Set<By> locatorIgnor = new HashSet<>();

@@ -60,7 +60,7 @@ public class MaterialHelper extends HelperBase {
     click(By.xpath("//a[@href='#sendMaterial']"));
   }
 
-  private void tabSend() {
+  public void tabSend() {
     click(By.xpath("//button[@id-qa='send']"));
   }
 

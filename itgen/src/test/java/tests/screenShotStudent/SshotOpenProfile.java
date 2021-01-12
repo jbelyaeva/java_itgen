@@ -1,19 +1,29 @@
 package tests.screenShotStudent;
 /* Кейс: открыть профайл через быстрые переходы*/
 
+import static app.appmanager.ApplicationManager.properties;
+
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
+import data.services.StudentService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotOpenProfile extends TestBase {
+  StudentService studentService = new StudentService();
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+   studentService.deleteField("21","finishedLessonsCountBySkill");
+  }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotOpenProfile() throws IOException, AWTException {
@@ -44,5 +54,4 @@ public class SshotOpenProfile extends TestBase {
       Assert.assertEquals(diffSize, 0);
     }
   }
-
 }

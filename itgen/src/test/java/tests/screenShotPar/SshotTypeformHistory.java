@@ -105,12 +105,12 @@ public class SshotTypeformHistory extends TestBase {
     if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
-    app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
     testService.drop();
     testResultsService.drop();
+    app.lkParent().btnLogo();
   }
 }
