@@ -3,20 +3,19 @@ package tests.screenShot;
   сравнивает его с эталонным.
 */
 
+import static app.appmanager.ApplicationManager.properties;
+
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
-
-import static app.appmanager.ApplicationManager.properties;
 
 public class SshotFamily extends TestBase {
 
@@ -25,7 +24,7 @@ public class SshotFamily extends TestBase {
         data.familyService().updateFieldBoolean("111", "isTrialBonusOff", false);
     }
 
-    @Test(retryAnalyzer = RunTestAgain .class)
+    @Test(retryAnalyzer = RunTestAgain.class)
     public void testSshotFamilies() throws AWTException, IOException {
         String name = "Admin_Family_RU_Chrome";
         Set<By> locatorIgnor = new HashSet<>();

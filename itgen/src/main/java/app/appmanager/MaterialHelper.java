@@ -116,7 +116,7 @@ public class MaterialHelper extends HelperBase {
     alertDeleteSelectedParent();
   }
 
-  private void branchTookForReview() {
+  public void branchTookForReview() {
     click(By.xpath("(//h4[@class='branch-header'])[1]//span"));
   }
 
@@ -149,7 +149,7 @@ public class MaterialHelper extends HelperBase {
     assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
   }
 
-  private void branchWaitForReview() {
+  public void branchWaitForReview() {
     click(By.xpath("//span[@id-qa='show-full']"));
   }
 
@@ -163,7 +163,7 @@ public class MaterialHelper extends HelperBase {
     assertTrue(isElementPresent(By.xpath("//a[@href='#" + id + "']")));
   }
 
-  private void tabCheck() {
+  public void tabCheck() {
     click(By.xpath("//button[@id-qa='approval']"));
   }
 

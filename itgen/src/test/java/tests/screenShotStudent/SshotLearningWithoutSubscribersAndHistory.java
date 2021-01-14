@@ -59,7 +59,6 @@ public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
     app.sshot().changeTopBarInLKParent();
     String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
     app.base().deleteElements(deleteElements);
-
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

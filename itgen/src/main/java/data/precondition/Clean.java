@@ -66,4 +66,11 @@ public class Clean {
     data.resultsService().drop();
     return this;
   }
+
+  public Clean communities() {
+    data.communitiesService().dropCommunity();
+    data.communitiesService().dropCommPost();
+    data.communitiesService().dropCommPostComment();
+    return this;
+  }
 }

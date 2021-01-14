@@ -74,10 +74,9 @@ public class SshotWorkingOfWithoutLessons extends TestBase {
 
     String name = "Parent_WorkingOffWithoutLessons_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
-    locatorIgnor.add(By.xpath("//span[@class='tip-text']"));
     locatorIgnor.add(By.xpath("//div[@class='calendar']"));
-    app.sshot().changeTopBarInLKParent();
+    locatorIgnor.add(By.xpath("//span[@class='tip-text']"));
+    locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     ImageDiff diff =
         app.sshot()

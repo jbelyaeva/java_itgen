@@ -60,9 +60,9 @@ public class FeedCantDeletePost extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testFeedCantDeletePost() {
-    app.sshot().maxBrowser();
-    app.student().goToFeed();
-    assertThat(app.student().isElementPresent(By.xpath("//button[@id-q='menu']")), equalTo(false));
+    app.lkStudent().goToFeed();
+    assertThat(app.lkStudent().isElementPresent(By.xpath("//button[@id-q='menu']")),
+        equalTo(false));
   }
 
   @AfterMethod(alwaysRun = true)

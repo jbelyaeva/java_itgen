@@ -1,6 +1,5 @@
 package app.appmanager.transactionHelper;
 
-import app.appmanager.dbHelpers.DbHelper;
 import data.model.communities.CommunitiesPostCommentData;
 import data.model.communities.CommunitiesPostData;
 import data.model.communities.CommunityData;
@@ -15,8 +14,6 @@ import java.util.List;
 public class TrCommunityHelper {
 
   private final CommunitiesService communitiesService = new CommunitiesService();
-  private final DbHelper dbHelper = new DbHelper();
-
   public void newCommunity(
       String idCommunity,
       Date createAt,

@@ -256,7 +256,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
   }
 
   @Test
-  public void testLearningWithSubscribersAndHistory() throws AWTException, IOException {
+  public void testLearningWithoutSubscribersAndHistory() throws AWTException, IOException {
     String name = "Student_LearningWithSubscriberHistory_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='history-month-header']"));

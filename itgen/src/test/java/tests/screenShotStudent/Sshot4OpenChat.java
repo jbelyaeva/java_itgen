@@ -16,8 +16,8 @@ public class Sshot4OpenChat extends TestBase {
   @Test
   public void testSshot4OpenChat() throws AWTException, IOException {
     String name = "Student_OpenChat_RU_Chrome";
-    app.student().openChat();
-    app.student().deleteAlerts();
+    app.lkStudent().openChat();
+    app.lkStudent().deleteAlerts();
     app.base().maxBrowser();
 
     Set<By> locatorIgnor = new HashSet<>();

@@ -35,12 +35,16 @@ public class SettingsSaveValidPassword extends TestBase {
     app.check().findElement(app.lkParent().getWinTutorialsInSettings());
     app.base().btnCloseTutorial();
     app.base().logoutByStudent();
-    app.base().goByHref(app.base().address() + "/login");
-    app.base().login("parent", "111111");
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
+    if (app.base().getText(app.lkParent().getSelectParent()).equals("родитель")) {
+      app.lkParent().selectParent();
+    } else {
+      app.base().goByHref(app.base().address() + "/login");
+      app.base().login("parent", "111111");
+    }
     data.postClean().student();
   }
 }

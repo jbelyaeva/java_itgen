@@ -101,21 +101,20 @@ public class ManagerCommunityTabAllWithoutCommunity extends TestBase {
             null,
             0);
 
-    app.student()
+    app.lkStudent()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testManagerCommunityTabAllWithoutCommunity() {
-    app.sshot().maxBrowser();
-    app.student().btnCloseTutorial();
-    app.student().btnCommunities();
+    app.lkStudent().btnCloseTutorial();
+    app.lkStudent().btnCommunities();
     //проверка, что в табе Все не отображается сообщество
-    app.student().tabAll();
+    app.lkStudent().tabAll();
     app.check()
         .notFindElement(By.xpath("//h4[@id-qa='title']"));
     //проверить что сообщество отображается в табе Управление
-    app.student().tabAdministration();
+    app.lkStudent().tabAdministration();
     app.check()
         .findElement(By.xpath("//h4[@id-qa='title']"));
     //проверить что есть кнопки изменить/удалить
@@ -159,9 +158,9 @@ public class ManagerCommunityTabAllWithoutCommunity extends TestBase {
     communitiesService.dropCommunity();
     communitiesService.dropCommPost();
     communitiesService.dropCommPostComment();
-    app.student().refresh();
+    app.base().refresh();
     app.base().goByHref(app.base().address() + "/login");
-    app.student()
+    app.lkStudent()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 }

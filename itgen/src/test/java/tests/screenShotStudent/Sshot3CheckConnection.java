@@ -16,8 +16,8 @@ public class Sshot3CheckConnection extends TestBase {
   @Test
   public void testSshot3CheckConnections() throws AWTException, IOException {
     String name = "Student_CheckConnection_RU_Chrome";
-    app.student().goToCheckConnection();
-    app.student().deleteAlerts();
+    app.lkStudent().goToCheckConnection();
+    app.lkStudent().deleteAlerts();
 
     Set<By> locatorIgnor = new HashSet<>();
     ImageDiff diff =

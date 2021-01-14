@@ -1,9 +1,5 @@
 package app.appmanager;
 
-import static org.testng.AssertJUnit.assertTrue;
-
-import data.model.schedule.ScheduleData;
-import data.model.schedule.Schedules;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,136 +10,136 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ScheduleHelper extends HelperBase {
 
+  private final By labelBusyChild = By.xpath(
+      "//div[@class='busy-childs']//a[contains(@href,'newStudent')]");
+  private final By btnMoveInPopup = By.xpath("//div[@class='modal-footer']//button");
+  private final By btnCreateSchedule = By.xpath("//a[contains(@href,'/createSchoolSchedule')]");
+  private final By labelBlockSchedule = By.xpath(
+      "(//div[@class='text-muted header-labels']//span)[3]");
+  private final By labelCancelSchedule = By.xpath(
+      "(//div[@class='text-muted header-labels']//span)[2]");
+  private final By checkBoxConst = By.xpath("//div[@class='permanent-form-group']//div");
+  private final By selectMove = By.xpath("//a[contains(@class,'change')]");
+  private final By selectBlock = By.xpath("//a[contains(@class,'block')]");
+  private final By selectAssign = By.xpath("//a[contains(@class,'assign')]");
+  private final By selectCancel = By.xpath("//a[contains(@class,'cancel')]");
+  private final By typeDesc = By.name("block-desc");
+  private final By radioButtonAll = By.xpath("//input[@value='1']");
+  private final By btnCreate = By.xpath("//div[contains(@class,'footer')]//button");
+  private final By btnPoints = By.xpath(" //button[@id='dropdownMenuActions']");
+  private final By selectDataToday = By.xpath("//button[contains(@class,'daySelect')]");
+  private final By btnCalendar = By.xpath("//div[@id='date-from']//button");
+  private final By selectListTrainer = By.id("trainer");
+  private final By selectListTime = By.xpath("//select[contains(@id,'tp')]");
+  private final By selectTrainerWithId7 = By.xpath("//select[@id='trainer']//option[@value='7']");
+  private final By selectTrainerWithId18 = By.xpath("//select[@id='trainer']//option[@value='18']");
+  private final By studentOnLessonInSchedule = By.xpath("//a[@class='text-capitalize title-name']");
+  private final By btnMove = By.xpath("//button[contains(@class,'accept')]");
+  private final By btnBlock = By.xpath("//button[contains(@class,'block')]");
+  private final By btnAssign = By.xpath(" //button[contains(@class,'assign')]");
+  private final By btnCancel = By.xpath("//button[contains(@class,'cancel')]");
+  private final By btnNextInPaginator = By.xpath("//button[contains(@class,'next')]");
+  private final By btnRemove = By.xpath("//button[contains(@class,'remove')]");
+  private final By selectFirst1h = By.xpath("//button[contains(@data-itemid,'1')]");
+  private final By selectSecond1h = By.xpath("//button[contains(@data-itemid,'2')]");
+  private final By btnRecord = By.xpath("//button[contains(@class,'create')]");
+  private final By typeChildName = By.id("child-name");
+  private final By searchResult = By.xpath("//span[contains(@class,'result')]");
+  private final By selectNo = By.xpath("//button[contains(@class,'change')][2]");
+
   public ScheduleHelper(WebDriver wd) {
     super(wd);
   }
 
+  public By getLabelBusyChild() {
+    return labelBusyChild;
+  }
+
+  public By getBtnMoveInPopup() {
+    return btnMoveInPopup;
+  }
+
+  public By getBtnCreateSchedule() {
+    return btnCreateSchedule;
+  }
+
+  public By getLabelBlockSchedule() {
+    return labelBlockSchedule;
+  }
+
+  public By getLabelCancelSchedule() {
+    return labelCancelSchedule;
+  }
+
+  public By getStudentOnLessonInSchedule() {
+    return studentOnLessonInSchedule;
+  }
+
   public void btnCreateSchedule() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//a[contains(@href,'/createSchoolSchedule')]")));
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(10, btnCreateSchedule);
   }
 
   public void checkBoxConst() {
-    click(By.xpath("//div[@class='permanent-form-group']//div"));
+    click(checkBoxConst);
   }
 
   private void selectMove() {
-    click(By.xpath("//a[contains(@class,'change')]"));
+    click(selectMove);
   }
 
   private void selectBlock() {
-    clickWithMoveToElementAndWait(10, By.xpath("//a[contains(@class,'block')]"));
+    clickWithMoveToElementAndWait(10, selectBlock);
   }
 
   private void selectAssign() {
-    click(By.xpath("//a[contains(@class,'assign')]"));
+    click(selectAssign);
   }
 
   public void writeNote(String note) {
-    // решение на нестабильный ввод примечания
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.name("block-desc")));
-    wd.findElement(By.name("block-desc")).clear();
-    type(By.name("block-desc"), note);
+    waitVisibilityOfElementLocated(5, typeDesc);
+    wd.findElement(typeDesc).clear();
+    type(typeDesc, note);
   }
 
   private void selectOnAllSchedule() {
-    // решение на периодическое не нажимание радиобаттон
-    clickWithMoveToElementAndWait(10, By.xpath("//input[@value='1']"));
+    clickWithMoveToElementAndWait(10, radioButtonAll);
   }
 
-  public void selectTime() {}
-
-  private void selectSchedule() {
-    click(By.xpath("//div[@class='panel-body'][1]"));
-  }
-
-  public String selectScheduleGetId() {
-    click(By.xpath("//div[@class='panel-body'][1]"));
-    String idSchedule = getId(getURL());
-    return idSchedule;
+  public void selectTime() {
   }
 
   private void selectCancel() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//a[contains(@class,'cancel')]")));
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(5, selectCancel);
   }
 
-  public void selectTrainer() {}
-
-  public void selectScype() {}
-
   public void btnCreate() {
-    click(By.xpath("//div[contains(@class,'footer')]//button"));
+    click(btnCreate);
   }
 
   public void bntPoints() {
-    clickWithMoveToElementAndWait(10, By.xpath(" //button[@id='dropdownMenuActions']"));
+    clickWithMoveToElementAndWait(10, btnPoints);
   }
 
   public void createSingleSchedule() {
     btnCreateSchedule();
     checkBoxConst();
     selectTime();
-    selectTrainer();
-    selectScype();
     btnCreate();
-    selectSchedule();
-    noErrorMessage();
-    refresh();
   }
 
   public void createSingleScheduleTest() {
     btnCreateSchedule();
     checkBoxConst();
     selectTime();
-    selectTrainer();
-    selectScype();
     btnCreate();
   }
 
   public void createRegularSchedule() {
     btnCreateSchedule();
     selectTime();
-    selectTrainer();
-    selectScype();
     btnCreate();
     noErrorMessage();
     refresh();
-  }
-
-  public void selectErrorLateData() {
-    click(By.xpath("//div[@class='DayPickerInput']"));
-  }
-
-  public String getIdNewScheduleDB(Schedules before, Schedules after) {
-    int a = 0;
-    String getIdAfter = "";
-    for (ScheduleData schedule : after) {
-      getIdAfter = schedule.getId();
-      for (ScheduleData schedule_before : before) {
-        String getIdBefore = schedule_before.getId();
-        if (getIdAfter.equals(getIdBefore)) {
-          a = 1;
-          break;
-        } else {
-          a = 2;
-        }
-      }
-      if (a == 2) {
-        break;
-      }
-    }
-    return getIdAfter;
   }
 
   public void move(String period, String id) {
@@ -167,12 +163,6 @@ public class ScheduleHelper extends HelperBase {
     fillFormMove(period);
     btnMoveDisabled();
     noErrorMessage();
-    refresh();
-  }
-
-  public void checkFindBusyStuden(String idStudent) {
-    WebElement element = wd.findElement(By.xpath("//a[@href='/profile/" + idStudent + "']"));
-    assertTrue(element != null);
   }
 
   public void badMove(String id) {
@@ -187,15 +177,15 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectDateToday() {
-    click(By.xpath("//button[contains(@class,'daySelect')]"));
+    click(selectDataToday);
   }
 
   private void btnCalendar() {
-    click(By.xpath("//div[@id='date-from']//button"));
+    click(btnCalendar);
   }
 
-  public void badMoveNotChangeDateTime(String id) {
-    selectScheduleInListUIById(id);
+  public void badMoveNotChangeDateTime(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
     bntPoints();
     selectMove();
     fillMoveOnlyTrainer();
@@ -204,11 +194,8 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void fillMoveOnlyTrainer() {
-    // выбор тренера
-    WebElement dynamicElementTrainer =
-        (new WebDriverWait(wd, 5)).until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
-    dynamicElementTrainer.click();
-    click(By.xpath("//select[@id='trainer']//option[@value='7']"));
+    clickWithMoveToElementAndWait(5, selectListTrainer);
+    click(selectTrainerWithId7);
   }
 
   public void block(String id, String note) {
@@ -233,7 +220,7 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectAllScheduleBlock() {
-    clickWithMoveToElementAndWait(10, By.xpath("//input[@value='1']"));
+    clickWithMoveToElementAndWait(10, radioButtonAll);
   }
 
   public void cancel(String id) {
@@ -255,8 +242,8 @@ public class ScheduleHelper extends HelperBase {
     refresh();
   }
 
-  public void assignTrainerAll(String id) {
-    selectScheduleInListUIById(id);
+  public void assignTrainerAll(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
     bntPoints();
     selectAssign();
     selectOnAllSchedule();
@@ -266,45 +253,36 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void btnMove() {
-    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'accept')]"));
+    clickWithMoveToElementAndWait(10, btnMove);
   }
 
   private void btnMoveDisabled() {
-    String dis =
-        wd.findElement(By.xpath(" //button[contains(@class,'accept')]")).getAttribute("disabled");
+    String dis = wd.findElement(btnMove).getAttribute("disabled");
     assert (dis.equals("true"));
   }
 
   private void btnBlock() {
-    WebElement dynamicElement =
-        (new WebDriverWait(wd, 10))
-            .until(
-                ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(@class,'block')]")));
-    dynamicElement.click();
+    clickWithMoveToElementAndWait(5, btnBlock);
   }
 
   private void btnAssign() {
-    click(By.xpath(" //button[contains(@class,'assign')]"));
+    click(btnAssign);
   }
 
   private void btnCancel() {
-    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'cancel')]"));
+    clickWithMoveToElementAndWait(10, btnCancel);
   }
 
   private void selectNewTrainer() {
-    WebElement dynamicElement1 =
-        (new WebDriverWait(wd, 10))
-            .until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
-    dynamicElement1.click();
-    click(By.xpath("//select[@id='trainer']//option[@value='18']"));
+    clickWithMoveToElementAndWait(5, selectListTrainer);
+    click(selectTrainerWithId18);
   }
 
   public void selectScheduleInListUIById(String id) {
     // находим пагинатор
-    waitVisibleElement(5, By.xpath("//button[contains(@class,'next')]"));
+    waitVisibleElement(5, btnNextInPaginator);
     String next =
-        wd.findElement(By.xpath("//button[contains(@class,'next')]")).getAttribute("class");
+        wd.findElement(btnNextInPaginator).getAttribute("class");
     // есть ли на первой странице наше занятие
     List<WebElement> list = wd.findElements(By.xpath("//a[contains(@href,'" + id + "')]"));
     if (list.size() > 0) {
@@ -318,7 +296,7 @@ public class ScheduleHelper extends HelperBase {
           wd.findElement(By.cssSelector("a[href='/lesson/" + id + "'")).click();
           break;
         } else {
-          wd.findElement(By.xpath("//button[contains(@class,'next')]")).click();
+          wd.findElement(btnNextInPaginator).click();
         }
       }
     }
@@ -326,18 +304,13 @@ public class ScheduleHelper extends HelperBase {
 
   private void fillFormMove(String period) {
     // выбор времени (крайнее на сегодня)
-    WebElement Selectbox_times = wd.findElement(By.xpath("//select[contains(@id,'tp')]"));
+    WebElement Selectbox_times = wd.findElement(selectListTime);
     Select select1 = new Select(Selectbox_times);
     select1.selectByVisibleText(period);
 
     // выбор тренера
-    WebElement dynamicElementTrainer =
-        (new WebDriverWait(wd, 5)).until(ExpectedConditions.elementToBeClickable(By.id("trainer")));
-    dynamicElementTrainer.click();
-    click(By.xpath("//select[@id='trainer']//option[@value='7']"));
-
-    // выбор скайпа
-    click(By.xpath("//div[contains(@class,'modal-body')]"));
+    clickWithMoveToElementAndWait(5, selectListTrainer);
+    click(selectTrainerWithId7);
   }
 
   private void fillBadTime() {
@@ -347,43 +320,41 @@ public class ScheduleHelper extends HelperBase {
     wd.findElement(By.id("tp")).click();
   }
 
-  public void recordStudentOn2h(String name, String id) throws InterruptedException {
-    selectScheduleInListUIById(id);
+  public void recordStudentOn2h(String name, String idSchedule) throws InterruptedException {
+    selectScheduleInListUIById(idSchedule);
     bntRecordStudent();
     selectStudent(name);
     selectNo();
     btnRecord();
     noErrorMessage();
-    waitElementWithAttribute(5, By.xpath("//div[@class='name-block']//a"), "text", name);
   }
 
   private void btnRecord() {
-    clickWithMoveToElementAndWait(10, By.xpath("//button[contains(@class,'create')]"));
+    clickWithMoveToElementAndWait(10, btnRecord);
   }
 
   private void selectNo() throws InterruptedException {
     Thread.sleep(3000);
-    click(By.xpath("//button[contains(@class,'change')][2]"));
+    click(selectNo);
   }
 
   private void selectStudent(String name) {
-    type(By.id("child-name"), name);
-
-    if (isElementPresent(By.xpath("//span[contains(@class,'result')]"))) {
-      click(By.xpath("//span[contains(@class,'result')]"));
+    type(typeChildName, name);
+    if (isElementPresent(searchResult)) {
+      click(searchResult);
     } else {
-      wd.findElement(By.id("child-name")).clear();
-      type(By.id("child-name"), name);
-      click(By.xpath("//span[contains(@class,'result')]"));
+      wd.findElement(typeChildName).clear();
+      type(typeChildName, name);
+      click(searchResult);
     }
   }
 
   private void bntRecordStudent() {
-    click(By.xpath("//button[contains(@class,'create')]"));
+    click(btnRecord);
   }
 
-  public void recordStudentOnFirst1h(String name, String id) throws InterruptedException {
-    selectScheduleInListUIById(id);
+  public void recordStudentOnFirst1h(String name, String idSchedule) throws InterruptedException {
+    selectScheduleInListUIById(idSchedule);
     bntRecordStudent();
     selectStudent(name);
     selectNo();
@@ -394,11 +365,11 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectFirst() {
-    click(By.xpath("//button[contains(@data-itemid,'1')]"));
+    click(selectFirst1h);
   }
 
-  public void recordStudentOnSecond1h(String name, String id) throws InterruptedException {
-    selectScheduleInListUIById(id);
+  public void recordStudentOnSecond1h(String name, String idSchedule) throws InterruptedException {
+    selectScheduleInListUIById(idSchedule);
     bntRecordStudent();
     selectStudent(name);
     selectNo();
@@ -409,13 +380,14 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void selectSecond() {
-    click(By.xpath("//button[contains(@data-itemid,'2')]"));
+    click(selectSecond1h);
   }
 
-  public void removeStudent(String id) {
-    selectScheduleInListUIById(id);
+  public void removeStudent(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
     clickEmptyArea();
     bntRemove();
+    noErrorMessage();
     alertDeleteStudent();
     noErrorMessage();
   }
@@ -427,12 +399,12 @@ public class ScheduleHelper extends HelperBase {
   }
 
   private void bntRemove() {
-    By locator = By.xpath("//button[contains(@class,'remove')]");
-    new WebDriverWait(wd, 10).until(ExpectedConditions.elementToBeClickable(locator)).click();
+
+    new WebDriverWait(wd, 10).until(ExpectedConditions.elementToBeClickable(btnRemove)).click();
     if (!isElementPresent(By.cssSelector("div.modal-header"))) {
       refresh();
       clickEmptyArea();
-      click(locator);
+      click(btnRemove);
     }
   }
 
@@ -440,27 +412,8 @@ public class ScheduleHelper extends HelperBase {
     click(By.xpath("//div[contains(@class,'list')]"));
   }
 
-  public String getNewScheduleDB(Schedules before, Schedules after) {
-    boolean a = true;
-    String getAfter = null;
-    for (ScheduleData schedule : after) {
-      getAfter = schedule.getId();
-      for (ScheduleData schedule_before : before) {
-        String getBefore = schedule_before.getId();
-        if (!getAfter.equals(getBefore)) {
-          a = false;
-          break;
-        }
-      }
-      if (!a) {
-        break;
-      }
-    }
-    return getAfter;
-  }
-
-  public void recordStudentOnTrial(String name, String id) {
-    selectScheduleInListUIById(id);
+  public void recordStudentOnTrial(String name, String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
     bntRecordStudent();
     selectStudent(name);
     btnRecord();

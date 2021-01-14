@@ -2,10 +2,11 @@ package data.dao;
 
 import static data.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
-import dev.morphia.Datastore;
-import dev.morphia.query.Query;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
+import dev.morphia.query.UpdateOperations;
 import java.util.List;
 
 public class ScheduleDao {
@@ -32,6 +33,14 @@ public class ScheduleDao {
   public void save(ScheduleData schedule) {
     Datastore datastore = morphiaSessionFactoryUtil();
     datastore.save(schedule);
+  }
+
+  public <E> void updateField(String idSchedule, String nameField, E data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class).filter("id", idSchedule);
+    UpdateOperations ops = datastore.createUpdateOperations(ScheduleData.class)
+        .set(nameField, data);
+    datastore.update(query, (UpdateOperations<ScheduleData>) ops);
   }
 
   public void delete(ScheduleData schedule) {

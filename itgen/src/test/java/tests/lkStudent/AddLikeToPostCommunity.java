@@ -1,105 +1,43 @@
 package tests.lkStudent;
-/* Кейс: создано новое сообщестов (в ensurePreconditions()) без тегов,
+/* T-275
+ * Кейс: создано новое сообщестов (в ensurePreconditions()) без тегов,
  * дефолтный студент без подписки. Поставить лайк под постом. Убедиться,
  * что счетчик лайков увеличился с 0 на 1. В бд добавилась информация о лайке. */
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.model.communities.CommunitiesPostData;
 import data.model.communities.CommunitiesPosts;
-import data.services.CommunitiesService;
-import java.util.Date;
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AddLikeToPostCommunity extends TestBase {
 
-  CommunitiesService communitiesService = new CommunitiesService();
-  String title = "Scratch";
-  String text = "Ученик созванивается с преподавателем";
+  private final String text = "Ученик созванивается с преподавателем";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "AddLike",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
-
-    String[] idLikes = {};
-    String[] idAttachments = {};
-    app.trCommunity()
-        .newCommunityPost(
-            "AddLike",
-            text,
-            "AddLike",
-            true,
-            new Date(),
-            idLikes,
-            0,
-            "666",
-            idAttachments);
+    String title = "Scratch";
+    data.community()
+        .set1_NewCommunityScratchWithoutTagsWithPostWithoutLikes("666", title, text);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testAddLikeToPostCommunity() {
-    app.student().btnCommunities();
+    app.lkStudent().btnCommunities();
     app.community().goInCommunity();
-    app.student().addLike();
-    CommunitiesPosts afterPost = app.dbcommunity().posts();
-    app.check().textElement(By.xpath("//span[@class='likes-count liked']"), "1");
-    app.student().goToFeed();
-    check(afterPost);
-  }
+    app.lkStudent().addLike();
+    CommunitiesPosts after = app.dbcommunity().posts();
 
-  private void check(CommunitiesPosts afterPost) {
-    //проверим запись в коллекцию CommunitiesPosts (добавилась)
-    String[] idLikes = {"21"};
-    String[] idAttachments = {};
-    app.trCommunity()
-        .newCommunityPost(
-            "AddLike",
-            text,
-            "AddLike",
-            true,
-            new Date(),
-            idLikes,
-            1,
-            "666",
-            idAttachments);
-    CommunitiesPostData communityPostNew = communitiesService.findByIdCommPost("AddLike");
-
-    for (CommunitiesPostData communityPostAfter : afterPost) {
-      if (communityPostAfter.getId().equals("AddLike")) {
-        assertThat(afterPost,
-            equalTo(afterPost.without(communityPostAfter).withAdded(communityPostNew)));
-        return;
-      }
-    }
+    data.community().set2_PostWithLike("666", text);
+    CommunitiesPosts afterNew = app.dbcommunity().posts();
+    app.check().equalityOfTwoElements(after, afterNew);
+    app.check().textElement(app.lkStudent().getCountLikes(), "1");
+    app.lkStudent().goToFeed();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommPost();
+    data.postClean().communities();
   }
 }

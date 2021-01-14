@@ -42,10 +42,10 @@ public class UnsubscribeCommunity extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testUnsubscribeCommunity() {
-    app.student().btnCommunities();
-    app.student().unsubscribeOnCommunity();
+    app.lkStudent().btnCommunities();
+    app.lkStudent().unsubscribeOnCommunity();
     app.check().findElement(By.xpath("//button[@id-qa='subscribe']"));
-    app.student().goToFeed();
+    app.lkStudent().goToFeed();
   }
 
   @AfterMethod(alwaysRun = true)

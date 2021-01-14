@@ -40,8 +40,8 @@ public class Sshot5LessonStart extends TestBase {
   @Test
   public void testSshot5LessonStart() throws AWTException, IOException {
     String name = "Student_LessonStart_RU_Chrome";
-    app.student().goToLesson();
-    app.student().deleteAlerts();
+    app.lkStudent().goToLesson();
+    app.lkStudent().deleteAlerts();
 
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='text-muted']"));

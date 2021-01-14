@@ -144,6 +144,7 @@ public class LKParentHelper extends HelperBase {
       "//div[@class='lesson-comment']//span[text()='Scratch']");
   private final By btnCloseWinWorkingOffWithoutLesson = By.xpath(
       "//div[@class='modal-body']//button");
+  private final String selectParent = "(//div[@class='account-item'])[1]//div[@class='profile-short-info']//span[@class='role']";
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
@@ -343,6 +344,10 @@ public class LKParentHelper extends HelperBase {
 
   public By getDropDownSkillMinecraftInRecord() {
     return dropDownSkillMinecraftInRecord;
+  }
+
+  public String getSelectParent() {
+    return selectParent;
   }
 
   public void btnRecordOnTrail() {
@@ -774,6 +779,7 @@ public class LKParentHelper extends HelperBase {
   public void closeWinWorkingOffWithoutLesson() {
     click(btnCloseWinWorkingOffWithoutLesson);
   }
+
   public void btnShowHistorySecondChild() {
     click(btnShowHistorySecondChild);
   }
@@ -781,5 +787,9 @@ public class LKParentHelper extends HelperBase {
   public void selectSkillInHistory(String skill) {
     click(By.xpath("//div[text()='Направление']"));
     click(By.xpath(" //div[text()='" + skill + "']"));
+  }
+
+  public void selectParent() {
+    click(By.xpath(selectParent));
   }
 }

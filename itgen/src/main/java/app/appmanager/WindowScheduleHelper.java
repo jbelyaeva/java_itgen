@@ -13,11 +13,11 @@ public class WindowScheduleHelper extends HelperBase {
     super(wd);
   }
 
-  public void recordStudentOn2hRegular(String name, String id) {
+  public void recordStudentOn2hRegular(String name) {
     btnRecordOnLesson();
     selectStudent(name);
     selectRegular();
-    selectLesson(id);
+    selectLesson();
     btnRecord();
     noErrorMessage();
   }
@@ -26,12 +26,12 @@ public class WindowScheduleHelper extends HelperBase {
     click(By.xpath("(//div[@class='schedule-menu']//button)[1]"));
   }
 
-  private void selectLesson(String id) {
-    click(By.xpath("//span[contains(text(),'" + trainerService.findById(id).getLastName() + "')]"));
+  private void selectLesson() {
+    click(By.xpath("//div[@class='group']//div[@class='trainer-name']"));
   }
 
   private void selectRegular() {
-    clickWithMoveToElementAndWait(10, By.xpath("//div[@class='lesson-type']//button[1]"));
+    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-types']//button)[1]"));
   }
 
   private void btnRecordOnLesson() {
@@ -93,17 +93,17 @@ public class WindowScheduleHelper extends HelperBase {
             "(//span[contains(text(),'" + trainerService.findById(id).getLastName() + "')])[2]"));
   }
 
-  public void recordStudentOn2hSingle(String name, String id) {
+  public void recordStudentOn2hSingle(String name) {
     btnRecordOnLesson();
     selectStudent(name);
     selectSingle();
-    selectLesson(id);
+    selectLesson();
     btnRecord();
     noErrorMessage();
   }
 
   private void selectSingle() {
-    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-type']//button)[2]"));
+    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-types']//button)[2]"));
   }
 
   public void recordStudentOnSingleFirst1h(String name, String id) {
@@ -129,7 +129,7 @@ public class WindowScheduleHelper extends HelperBase {
   public void recordStudentOnTrial(String name, String id) {
     btnRecordOnLesson();
     selectStudent(name);
-    selectLesson(id);
+    selectLesson();
     btnRecord();
     noErrorMessage();
   }

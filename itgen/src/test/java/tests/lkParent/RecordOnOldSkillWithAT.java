@@ -18,7 +18,7 @@ public class RecordOnOldSkillWithAT extends TestBase {
   public void ensurePreconditions() {
     String period = "18:00 - 20:00";
     data.defFamily()
-        .set8_LessonMinecaftYesterdayFinished_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
+        .set8_LessonMinecraftYesterdayFinished_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
             period);
     //тренер ведет данное направление
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
