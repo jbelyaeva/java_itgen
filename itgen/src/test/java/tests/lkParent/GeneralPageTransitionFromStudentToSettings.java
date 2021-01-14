@@ -1,8 +1,6 @@
 package tests.lkParent;
 /* T-11 */
-/*
- * Зайти на главную страницу ЛК и ,нажав на имя ученика, перейти в таб Настройки.
- */
+/* Зайти на главную страницу ЛК и ,нажав на имя ученика, перейти в таб Настройки.*/
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;

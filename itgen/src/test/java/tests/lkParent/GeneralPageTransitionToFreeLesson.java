@@ -1,8 +1,6 @@
 package tests.lkParent;
 /* T-13 */
-/*
- * Перейти из главной страницы в Бесплатные занятия
- */
+/* Перейти из главной страницы в Бесплатные занятия */
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;

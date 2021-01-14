@@ -32,6 +32,7 @@ import data.services.LeadService;
 import data.services.ParentService;
 import data.services.StudentService;
 import data.services.TaskService;
+import java.io.IOException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -69,7 +70,7 @@ public class SelfRegistration extends TestBase {
 
   @Test(dataProvider = "validSelfRegistrationFromJson", dataProviderClass = LocaleUtilsTestData.class,
       retryAnalyzer = RunTestAgain.class)
-  public void testSelfRegistration(StudentData student) throws InterruptedException {
+  public void testSelfRegistration(StudentData student) throws InterruptedException, IOException {
     app.student().logout();
 
     Leads leadsBefore = app.db().leads();
@@ -80,7 +81,7 @@ public class SelfRegistration extends TestBase {
     app.lkParentRecord().goHref();
     app.lkParentRecord().selfRegistration(student);
 
-    Thread.sleep(3000); // необходимо, т.к. не успевает сформироваться токен в бд
+    Thread.sleep(5000); // необходимо, т.к. не успевает сформироваться токен в бд
 
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();

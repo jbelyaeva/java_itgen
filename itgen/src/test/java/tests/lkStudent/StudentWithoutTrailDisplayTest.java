@@ -37,9 +37,9 @@ public class StudentWithoutTrailDisplayTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentWithoutTrailDisplay() {
-    app.student().goInAccountStudentAfterChanged();
-    assertThat(app.student().findTutorials(), equalTo(true));
-    assertThat(app.student().openCheckConnection(), equalTo(true));
-    app.student().btnCloseTutorial();
+    app.lkStudent().goInAccountStudentAfterChanged();
+    assertThat(app.lkStudent().findTutorials(), equalTo(true));
+    assertThat(app.lkStudent().openCheckConnection(), equalTo(true));
+    app.lkStudent().btnCloseTutorial();
   }
 }

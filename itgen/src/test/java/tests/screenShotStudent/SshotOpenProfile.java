@@ -1,8 +1,6 @@
 package tests.screenShotStudent;
 /* Кейс: открыть профайл через быстрые переходы*/
 
-import static app.appmanager.ApplicationManager.properties;
-
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
@@ -18,17 +16,18 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotOpenProfile extends TestBase {
+
   StudentService studentService = new StudentService();
 
   @BeforeMethod
   public void ensurePreconditions() {
-   studentService.deleteField("21","finishedLessonsCountBySkill");
+    studentService.deleteField("21", "finishedLessonsCountBySkill");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshotOpenProfile() throws IOException, AWTException {
-    app.student().goInProfile();
-    app.student().deleteAlerts();
+    app.lkStudent().goInProfile();
+    app.lkStudent().deleteAlerts();
     String name = "Student_Profile_RU_Chrome";
 
     Set<By> locatorIgnor = new HashSet<>();
@@ -54,4 +53,5 @@ public class SshotOpenProfile extends TestBase {
       Assert.assertEquals(diffSize, 0);
     }
   }
+
 }

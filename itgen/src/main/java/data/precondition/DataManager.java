@@ -4,6 +4,7 @@ import data.services.ChatMessageService;
 import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
 import data.services.CommentService;
+import data.services.CommunitiesService;
 import data.services.FamilyService;
 import data.services.FinishedChildLessonService;
 import data.services.FinishedLessonService;
@@ -48,12 +49,17 @@ public class DataManager {
   private final Clean clean = new Clean();
   private final DefaultFamilyStudentsAndSchedules defFamily = new DefaultFamilyStudentsAndSchedules();
   private final DefaultFamilyChat defFamilyChat = new DefaultFamilyChat();
-  private final NewFamily newFamily = new NewFamily();
+  private final Communities community = new Communities();
+  private final NewFamilyWithoutLessons newFamily = new NewFamilyWithoutLessons();
+  private final NewFamilyWithSingleLessons newFamilyWithSingleLessons = new NewFamilyWithSingleLessons();
+  private final NewFamilyWithRegularLessons newFamilyWithRegularLessons = new NewFamilyWithRegularLessons();
   private final NewWorker newWorker = new NewWorker();
   private final Payments payments = new Payments();
   private final Skills skills = new Skills();
+  private final Chat chat = new Chat();
   private final Tests tests = new Tests();
   private final Schedules schedules = new Schedules();
+  private final CommunitiesService communitiesService = new CommunitiesService();
   private final DefaultFamilyAndFinishedLessonWithProjects finishedLessonWithProject = new DefaultFamilyAndFinishedLessonWithProjects();
 
   public DataManager() {
@@ -155,8 +161,20 @@ public class DataManager {
     return defFamilyChat;
   }
 
-  public NewFamily newFamily() {
+  public Communities community() {
+    return community;
+  }
+
+  public NewFamilyWithoutLessons newFamily() {
     return newFamily;
+  }
+
+  public NewFamilyWithSingleLessons newFamilyWithSingleLessons() {
+    return newFamilyWithSingleLessons;
+  }
+
+  public NewFamilyWithRegularLessons newFamilyWithRegularLessons() {
+    return newFamilyWithRegularLessons;
   }
 
   public Payments payments() {
@@ -171,8 +189,16 @@ public class DataManager {
     return tests;
   }
 
+  public Chat chat() {
+    return chat;
+  }
+
   public Schedules schedules() {
     return schedules;
+  }
+
+  public CommunitiesService communitiesService() {
+    return communitiesService;
   }
 
   public NewWorker newWorker() {

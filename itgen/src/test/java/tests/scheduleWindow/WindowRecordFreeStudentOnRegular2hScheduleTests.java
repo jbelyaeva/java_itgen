@@ -54,7 +54,7 @@ public class WindowRecordFreeStudentOnRegular2hScheduleTests extends TestBase {
   public void testWindowRecordFreeStudentOnRegular2h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOn2hRegular(name, "14"); // имя ученика, id тренера
+    app.windowSchedule().recordStudentOn2hRegular(name); // имя ученика, id тренера
     Schedules after = app.dbschedules().schedules();
 
     assertThat(after.size(), equalTo(before.size()));

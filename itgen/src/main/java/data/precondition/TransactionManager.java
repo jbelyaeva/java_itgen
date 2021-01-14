@@ -1,8 +1,17 @@
 package data.precondition;
 
-import app.appmanager.transactionHelper.*;
+import app.appmanager.transactionHelper.TrChatHelper;
+import app.appmanager.transactionHelper.TrCommunityHelper;
+import app.appmanager.transactionHelper.TrFamilyHelper;
+import app.appmanager.transactionHelper.TrFinishedLessonHelper;
+import app.appmanager.transactionHelper.TrMaterialHelper;
+import app.appmanager.transactionHelper.TrParentHelper;
+import app.appmanager.transactionHelper.TrPaymentHelper;
+import app.appmanager.transactionHelper.TrSkillHelper;
+import app.appmanager.transactionHelper.TrStudentHelper;
+import app.appmanager.transactionHelper.TrTestHelper;
+import app.appmanager.transactionHelper.TrWorkerHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
-import app.appmanager.transactionHelper.*;
 import app.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
 import app.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import core.general.TimeGeneral;
@@ -22,6 +31,7 @@ public class TransactionManager {
   private final TrFinishedLessonHelper transactionFinishedLessonHelper = new TrFinishedLessonHelper();
   private final TrSkillHelper transactionSkillHelper = new TrSkillHelper();
   private final TrTestHelper transactionTestHelper = new TrTestHelper();
+  private final TrCommunityHelper transactionCommunityHelper = new TrCommunityHelper();
   private final TimeGeneral time = new TimeGeneral();
 
   public TransactionManager() {
@@ -45,6 +55,10 @@ public class TransactionManager {
 
   public TrChatHelper trChat() {
     return transactionChatHelper;
+  }
+
+  public TrCommunityHelper trCommunity() {
+    return transactionCommunityHelper;
   }
 
   public TrFamilyHelper trFamily() {

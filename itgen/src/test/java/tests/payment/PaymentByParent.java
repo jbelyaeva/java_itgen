@@ -10,6 +10,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/*T-257
+ *Оплатить пакетом под родителем
+ */
+
 public class PaymentByParent extends TestBase {
 
   StudentService studentService = new StudentService();

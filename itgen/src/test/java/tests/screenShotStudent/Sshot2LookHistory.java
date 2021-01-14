@@ -17,9 +17,9 @@ public class Sshot2LookHistory extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSshot2LookHistory() throws AWTException, IOException {
     String name = "Student_History_RU_Chrome";
-    app.student().refresh();
-    app.student().btnCloseTutorial();
-    app.student().goToHistory();
+    app.base().refresh();
+    app.lkStudent().btnCloseTutorial();
+    app.lkStudent().goToHistory();
     app.sshot().changeTopBarInLKParent();
 
     Set<By> locatorIgnor = new HashSet<>();
@@ -38,7 +38,7 @@ public class Sshot2LookHistory extends TestBase {
                 name,
                 locatorIgnor,
                 1.25f);
-    app.student().closeHistory();
+    app.lkStudent().closeHistory();
     if (diff.getDiffSize() > 200) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }

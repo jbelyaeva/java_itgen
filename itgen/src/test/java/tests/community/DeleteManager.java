@@ -67,8 +67,8 @@ public class DeleteManager extends TestBase {
     app.base().logout();
     app.base().goByHref(app.base().address() + "/login");
     app.base().login("student", "111111");
-    app.student().btnCommunities();
-    app.student().goToFeed();
+    app.lkStudent().btnCommunities();
+    app.lkStudent().goToFeed();
     app.check()
         .notFindElement(By.xpath("//button[@id-q='menu']"));
   }

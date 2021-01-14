@@ -1,6 +1,7 @@
 package data.precondition;
 
 import app.appmanager.HelperBase;
+import data.services.StudentService;
 
 public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
 
@@ -283,7 +284,7 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
    *
    * @period время расписания
    */
-  public void set8_LessonMinecaftYesterdayFinished_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
+  public void set8_LessonMinecraftYesterdayFinished_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(
       String period) {
     trStudent()
         .studentAddDefaultFamilyAfterLesson(
@@ -683,6 +684,61 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
             null,
             null,
             0);
+  }
+
+  //дефолтный ребенок - админ сообщества
+  public void set20_DefaultStudentAdminCommunity() {
+    trStudent()
+        .changeDefaultStudent(
+            "21",
+            "Ребенок",
+            "Дефолтный",
+            new String[]{"child", "createCommunities"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            "1",
+            "+9875645311",
+            2,
+            "noTrial",
+            0,
+            null,
+            null,
+            0);
+  }
+
+  public void set21_StartDefaultStudent() {
+    StudentService studentService = new StudentService();
+    trStudent()
+        .changeDefaultStudent(
+            "21",
+            "Ребенок",
+            "Дефолтный",
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            "1",
+            "+9875645311",
+            2,
+            "noTrial",
+            0,
+            null,
+            null,
+            0);
+    studentService.deleteField("21", "lastSubjs");
+    studentService.deleteField("21", "usedSubjs");
+    studentService.deleteField("21", "finishedLessonsCount");
+    studentService.deleteField("21", "finishedLessonsCountBySkill");
+    studentService.deleteField("21", "lastSeen");
   }
 }
 

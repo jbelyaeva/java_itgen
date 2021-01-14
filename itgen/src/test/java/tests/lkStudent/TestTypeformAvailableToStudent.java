@@ -46,7 +46,7 @@ public class TestTypeformAvailableToStudent extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTypeformAvailableToStudent() {
-    app.student().goToStudentProfileTabTests();
+    app.lkStudent().goToStudentProfileTabTests();
     assertThat(
         app.test().elementAtributAvailable(By.xpath("//button[@id-qa='start']")),
         equalTo(null));

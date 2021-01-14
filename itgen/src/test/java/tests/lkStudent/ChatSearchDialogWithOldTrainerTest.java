@@ -44,7 +44,7 @@ public class ChatSearchDialogWithOldTrainerTest extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatSearchDialogWithOldTrainer() {
-    app.student().refresh();
+    app.base().refresh();
     app.chat().btnOpenChat();
     String[] etalon = {"Дефолтный Тренер"};
     String[] dialogs = app.chat().searchPersonByUser("Тренер");

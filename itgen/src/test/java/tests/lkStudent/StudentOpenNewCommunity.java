@@ -44,7 +44,7 @@ public class StudentOpenNewCommunity extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentOpenNewCommunity() {
-    app.student().btnCommunities();
+    app.lkStudent().btnCommunities();
     app.check().textElement(By.xpath("//button[@id-qa='all']"), "Все");
     app.check().notFindElement(By.xpath("//button[@id-qa='administration']"));
     app.check().notFindElement(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
@@ -52,7 +52,7 @@ public class StudentOpenNewCommunity extends TestBase {
     app.community().goInCommunity();
     app.check()
         .textElement(By.xpath("//div[@class='posts-not-exist-item']"), "Тут еще нет публикаций");
-    app.student().goToFeed();
+    app.lkStudent().goToFeed();
   }
 
   @AfterMethod(alwaysRun = true)

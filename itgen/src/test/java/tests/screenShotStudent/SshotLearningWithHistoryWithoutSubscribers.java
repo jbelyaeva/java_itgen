@@ -216,7 +216,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
   }
 
   @Test
-  public void testLearningWithoutSubscribersAndHistory() throws AWTException, IOException {
+  public void testLearningWithSubscribersAndHistory() throws AWTException, IOException {
     app.student().btnCloseTutorial();
     String name = "Student_LearningWithHistoryWithoutSubscribers_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();

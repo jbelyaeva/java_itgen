@@ -13,14 +13,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PaymentHelper extends HelperBase {
+
   StudentHelper student = new StudentHelper(wd);
+  private final By btnPay = By.xpath("//a[contains(@href,'/pay/')]");
+
+  public By getBtnPay() {
+    return btnPay;
+  }
 
   public PaymentHelper(WebDriver wd) {
     super(wd);
   }
 
   public void btnPay() {
-    click(By.xpath("//a[contains(@href,'/pay/')]"));
+    click(btnPay);
   }
 
   public void btnPay4Lessons() {
@@ -118,7 +124,7 @@ public class PaymentHelper extends HelperBase {
     new WebDriverWait(wd, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1")));
   }
 
-  public void increaseAdmin(String id, String lessons) throws InterruptedException {
+  public void increaseAdmin(String id, String lessons) {
     student.selectStudentInListUIById(id);
     student.btnFamily();
     Integer before = Integer.valueOf(getBalance());
@@ -130,9 +136,8 @@ public class PaymentHelper extends HelperBase {
     assertThat(after, equalTo(before + 1));
   }
 
-  private String getBalance() throws InterruptedException {
-    Thread.sleep(3000); // для докера
-    String balance = getText("//div[@class='first']//span");
+  private String getBalance() {
+    String balance = getText("//span[@class='count']");
     String[] text = balance.split(" ");
     return text[0];
   }
@@ -169,7 +174,7 @@ public class PaymentHelper extends HelperBase {
     return paymentNew;
   }
 
-  public void decreaseAdmin(String id, String lessons) throws InterruptedException {
+  public void decreaseAdmin(String id, String lessons) {
     student.selectStudentInListUIById(id);
     student.btnFamily();
     int before = Integer.valueOf(getBalance());

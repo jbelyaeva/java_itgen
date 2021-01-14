@@ -74,6 +74,7 @@ public class ApplicationManager {
   private RequestHelper requestHelper;
   private LKParentHelper lkParentHelper;
   private LKParentRecordHelper lkParentRecordHelper;
+  private LkStudentHelper lkStudentHelper;
   private PaymentHelper paymentHelper;
   private MaterialHelper materialHelper;
   private TaskHelper taskHelper;
@@ -164,7 +165,7 @@ public class ApplicationManager {
     } else {
       DesiredCapabilities capabilities = new DesiredCapabilities();
       capabilities.setBrowserName(browser);
-      capabilities.setVersion("86");
+      capabilities.setVersion("87");
       capabilities.setCapability("enableVNC", true);
       capabilities.setCapability("enableVideo", true);
       capabilities.setCapability("videoName", System.getProperty("videoName", "selenoid.mp4"));
@@ -190,6 +191,7 @@ public class ApplicationManager {
     requestHelper = new RequestHelper(wd);
     lkParentHelper = new LKParentHelper(wd);
     lkParentRecordHelper = new LKParentRecordHelper(wd);
+    lkStudentHelper = new LkStudentHelper(wd);
     paymentHelper = new PaymentHelper(wd);
     helperBase = new HelperBase(wd);
     materialHelper = new MaterialHelper(wd);
@@ -323,6 +325,10 @@ public class ApplicationManager {
 
   public LKParentRecordHelper lkParentRecord() {
     return lkParentRecordHelper;
+  }
+
+  public LkStudentHelper lkStudent() {
+    return lkStudentHelper;
   }
 
   public PaymentHelper payment() {

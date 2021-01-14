@@ -1,6 +1,9 @@
 package app.appmanager;
 
+import static app.appmanager.ApplicationManager.properties;
+
 import data.model.users.StudentData;
+import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,6 +62,7 @@ public class LKParentRecordHelper extends HelperBase {
   private final By selectLessonForWorkingOff = By.xpath(
       "//input[@name='assign-working-off-group']");
   private final By btnReturnFromWorkingOff = By.xpath("//button[@id-qa='return']");
+  private final By labelWithoutStudents = By.xpath("//span[@class='text-info']");
 
   public LKParentRecordHelper(WebDriver wd) {
     super(wd);
@@ -70,6 +74,10 @@ public class LKParentRecordHelper extends HelperBase {
 
   public By getBtnAssignInWindowWorkingOff() {
     return btnAssignInWindowWorkingOff;
+  }
+
+  public By getLabelWithoutStudents() {
+    return labelWithoutStudents;
   }
 
   public void btnRecordOnTrail() {
@@ -289,13 +297,16 @@ public class LKParentRecordHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void selfRegistration(StudentData student) {
+  public void selfRegistration(StudentData student) throws IOException {
+    if (!"".equals(properties.getProperty("selenium.server"))) {
+      click(By.xpath("(//div[contains(@class,'locale-switcher')]//button)[1]"));
+    }
     fillStudentForm(student);
     btnNextOnForm();
   }
 
   public void goHref() {
-    wd.get("localhost:3000/registerFromLead?leadId=selfRegistration");
+    wd.get(address() + "/registerFromLead?leadId=selfRegistration");
   }
 
   public void cancelLessonInSingleSchedule() {
@@ -382,7 +393,7 @@ public class LKParentRecordHelper extends HelperBase {
   }
 
   public void goHrefActiveLK(String token) {
-    wd.get("http://localhost:3000/enrollAccount/" + token + "?locale=ru");
+    wd.get(address() + "/enrollAccount/" + token + "?locale=ru");
     noErrorMessage();
   }
 

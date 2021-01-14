@@ -56,7 +56,11 @@ public class FinishedChildLessonData {
   @Property("endTime")
   private Double endTime;
 
-  public FinishedChildLessonData() {}
+  @Property("lessonFormat")
+  private int lessonFormat;
+
+  public FinishedChildLessonData() {
+  }
 
   public FinishedChildLessonData withId(String id) {
     this.id = id;
@@ -135,6 +139,11 @@ public class FinishedChildLessonData {
 
   public FinishedChildLessonData withEndTime(Double endTime) {
     this.endTime = endTime;
+    return this;
+  }
+
+  public FinishedChildLessonData withLessonFormat(int lessonFormat) {
+    this.lessonFormat = lessonFormat;
     return this;
   }
 
@@ -248,46 +257,24 @@ public class FinishedChildLessonData {
 
   @Override
   public String toString() {
-    return "FinishedChildLessonData{"
-        + "id='"
-        + id
-        + '\''
-        + ", scheduleId='"
-        + scheduleId
-        + '\''
-        + ", week="
-        + week
-        + ", type="
-        + type
-        + ", trainerId='"
-        + trainerId
-        + '\''
-        + ", childId='"
-        + childId
-        + '\''
-        + ", status='"
-        + status
-        + '\''
-        + ", score="
-        + score
-        + ", duration="
-        + duration
-        + ", skillId='"
-        + skillId
-        + '\''
-        + ", lang='"
-        + lang
-        + '\''
-        + ", rating="
-        + rating
-        + ", isTrail="
-        + isTrail
-        + ", p="
-        + p
-        + ", startTime="
-        + startTime
-        + ", endTime="
-        + endTime
-        + '}';
+    return "FinishedChildLessonData{" +
+        "id='" + id + '\'' +
+        ", scheduleId='" + scheduleId + '\'' +
+        ", week=" + week +
+        ", type=" + type +
+        ", trainerId='" + trainerId + '\'' +
+        ", childId='" + childId + '\'' +
+        ", status='" + status + '\'' +
+        ", score=" + score +
+        ", duration=" + duration +
+        ", skillId='" + skillId + '\'' +
+        ", lang='" + lang + '\'' +
+        ", rating=" + rating +
+        ", isTrail=" + isTrail +
+        ", p=" + p +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        ", lessonFormat=" + lessonFormat +
+        '}';
   }
 }

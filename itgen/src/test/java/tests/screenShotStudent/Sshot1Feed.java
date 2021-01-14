@@ -207,8 +207,8 @@ public class Sshot1Feed extends TestBase {
   @Test
   public void testSshot1Feed() throws AWTException, IOException {
     String name = "Student_FeedPage_RU_Chrome";
-    app.student().skipHelper();
-    app.student().goToFeed();
+    app.lkStudent().skipHelper();
+    app.lkStudent().goToFeed();
     app.sshot().changeTopBarInLKParent();
 
     Set<By> locatorIgnor = new HashSet<>();

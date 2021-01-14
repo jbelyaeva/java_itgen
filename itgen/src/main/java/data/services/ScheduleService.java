@@ -28,4 +28,8 @@ public class ScheduleService {
   public void drop() {
     scheduleDao.drop();
   }
+
+  public <E> void updateField(String idSchedule, String nameFiled, E data) {
+    scheduleDao.updateField(idSchedule, nameFiled, data);
+  }
 }

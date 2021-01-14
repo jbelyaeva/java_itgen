@@ -35,9 +35,9 @@ public class StudentPageScheduleTest extends TestBase {
   /*тест проверяет, что кнопка Все расписание нажимается и ведет на расписание*/
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentPageSchedule() {
-    app.student().refresh();
-    app.student().goToFeed();
-    assertThat(app.student().goOnSchedule(), equalTo(true));
+    app.base().refresh();
+    app.lkStudent().goToFeed();
+    assertThat(app.lkStudent().goOnSchedule(), equalTo(true));
   }
 
   @AfterMethod(alwaysRun = true)

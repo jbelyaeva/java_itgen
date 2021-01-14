@@ -10,7 +10,7 @@ public class OpenProfile extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testOpenProfile() {
-    app.student().goInProfile();
+    app.lkStudent().goInProfile();
     app.check().textElement(By.xpath("//h4[@class='name-age']"), "Дефолтный Ребенок, 11 лет");
   }
 

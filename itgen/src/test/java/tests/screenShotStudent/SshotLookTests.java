@@ -91,7 +91,7 @@ public class SshotLookTests extends TestBase {
   @Test
   public void testSshotLookTests() throws AWTException, IOException {
     String name = "Student_Tests_RU_Chrome";
-    app.student().goToStudentProfileTabTests();
+    app.lkStudent().goToStudentProfileTabTests();
     String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
     app.base().deleteElements(deleteElements);
 

@@ -56,7 +56,7 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   public void testWindowRecordStudentOnSingle2h() {
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.windowSchedule().recordStudentOn2hSingle(name, "14"); // имя ученика для поиска, id тренера
+    app.windowSchedule().recordStudentOn2hSingle(name); // имя ученика для поиска, id тренера
     Schedules after = app.dbschedules().schedules();
     assertThat(after.size(), equalTo(before.size()));
     check(before, after);

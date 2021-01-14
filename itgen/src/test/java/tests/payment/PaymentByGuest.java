@@ -14,7 +14,17 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/*T-258
+ * оплатить пакетом под гостем:
+ * 1 сначала зайти под родителем,
+ * 2 перейти в пакеты,
+ * 3 скопировать ссылку
+ * 4 разлогиниться
+ * 5 открыть ссылку
+ * 6 оплатить
+ */
 public class PaymentByGuest extends TestBase {
+
   TaskService taskService = new TaskService();
   ScheduleService scheduleService = new ScheduleService();
   StudentService studentService = new StudentService();

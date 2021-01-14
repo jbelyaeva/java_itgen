@@ -1,18 +1,13 @@
 package app.appmanager;
 
-import static app.appmanager.ApplicationManager.properties;
-
 import data.model.users.StudentData;
 import data.model.users.Students;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,10 +23,6 @@ public class StudentHelper extends HelperBase {
 
   public void btnFamily() {
     click(By.xpath("//a[contains(@href, 'family')]"));
-  }
-
-  public void select() {
-    click(By.cssSelector("a.btn-link"));
   }
 
   public void btnDeleteStudent() {
@@ -70,7 +61,7 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name='profile-lastName']"), studentData.getLastname());
     dropDownList_Integer(By.cssSelector("#profile-gender"), studentData.getGender());
     //01.01.2000 - флаг, при этой дате не заполняем ui поле
-    if (! DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
+    if (!DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
       enterADate(By.cssSelector("input[name='profile-birthday']"),
           DateISOToUsualDataString(studentData.getBirthday()));
     }
@@ -101,7 +92,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("input[name='profile-contact-instagram']"),
         studentData.getContacts().get(10).getVal());
   }
-
 
   public void ModifyStudentForm(StudentData studentData) {
     type(By.cssSelector("input[name='profile-firstName']"), studentData.getFirstname());
@@ -141,10 +131,6 @@ public class StudentHelper extends HelperBase {
     type(By.cssSelector("textarea[name='profile-note']"), studentData.getNote());
   }
 
-  public int getStudentCount() {
-    return countingWithPaginated();
-  }
-
   // студенты с пагинацией
   public List<StudentData> list() {
     List<StudentData> students = new ArrayList<>();
@@ -155,8 +141,8 @@ public class StudentHelper extends HelperBase {
     String next =
         wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     List<WebElement> elements = wd.findElements(By.cssSelector("a.btn-link"));
-    if (! next.equals("disabled")) {
-      while (! next.equals("disabled")) {
+    if (!next.equals("disabled")) {
+      while (!next.equals("disabled")) {
         includeInListBaseWebElement(students, elements);
         wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         elements.removeAll(elements);
@@ -211,10 +197,6 @@ public class StudentHelper extends HelperBase {
     btnCreationBad();
   }
 
-  public void selectedStudentAfterCreate() {
-    click(By.xpath("(//div[@class='gena-panel-body'])[1]//a"));
-  }
-
   public void modify(StudentData student) {
     selectModifyStudent();
     ModifyStudentForm(student);
@@ -224,7 +206,7 @@ public class StudentHelper extends HelperBase {
   public StudentData getNewStudentDB(Students before, Students after) {
     StudentData studentNew = null;
     for (StudentData studentListAfter : after) {
-      if (! before.contains(studentListAfter)) {
+      if (!before.contains(studentListAfter)) {
         studentNew = studentListAfter;
         break;
       }
@@ -247,7 +229,7 @@ public class StudentHelper extends HelperBase {
       wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
     } else {
       // если студент не на первой странице, надо нажать пагинатор, пока не найдем
-      while (! next.equals("disabled")) {
+      while (!next.equals("disabled")) {
         List<WebElement> list_pagin =
             wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
         if (list_pagin.size() > 0) {
@@ -266,49 +248,6 @@ public class StudentHelper extends HelperBase {
     click(By.xpath("//ul[contains(@class,'list')]/li[4]"));
   }
 
-  public void goOnLesson() {
-    maxBrowser();
-    if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
-      btnCloseTutorial();
-    }
-    btnGoToLesson();
-    btnImReady();
-  }
-
-  private void btnImReady() {
-    if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
-      btnCloseTutorial();
-    }
-    click(By.xpath("//div[contains(@class,'preview')]//button"));
-  }
-
-  private void btnGoToLesson() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[@tutorialtarget-id='child-go-to-lesson']"));
-  }
-
-  public void btnLogo() {
-    click(By.xpath("//img[contains(@src,'logo')]"));
-    noErrorMessage();
-  }
-
-  public String getMessageTrainer() {
-    String message = wd.findElement(By.xpath("//div[contains(@class,'preview')]//span")).getText();
-    btnLogo();
-    return message;
-  }
-
-  public void goToStudentProfileTabTests() {
-    btnCloseTutorial();
-    click(By.xpath("//button[@id-qa='testing']"));
-  }
-
-  public void skipHelper() {
-    maxBrowser();
-    deleteAlerts();
-    goInAccountStudentAfterChanged();
-    btnCloseTutorial();
-  }
-
   public void btnCloseTutorial() {
     try {
       clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='cancel']"));
@@ -316,136 +255,4 @@ public class StudentHelper extends HelperBase {
       System.out.println("Исключение:" + e);
     }
   }
-
-  public void goToHistory() {
-    btnHistory();
-    openDropDown();
-    deleteAlerts();
-  }
-
-  private void openDropDown() {
-    clickWithMoveToElementAndWait(5, By.xpath("//div[contains(@class,'dropdown')]"));
-  }
-
-  public void btnHistory() {
-    clickWaitElementToBeClicable(5, By.xpath("//button[@id-qa='view-all']"));
-  }
-
-  public void closeHistory() {
-    clickWithMoveToElementAndWait(7, By.xpath("(//button)[9]"));
-  }
-
-  public void goToCheckConnection() {
-    clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='settings']"));
-  }
-
-  public void openChat() {
-    if (isElementPresent(By.xpath("//button[@id-qa='cancel']"))) {
-      btnCloseTutorial();
-    }
-    clickWithMoveToElementAndWait(5, By.xpath("//div[@class='chat-button']"));
-  }
-
-  public void goToLesson() {
-    btnGoToLesson();
-    btnImReady();
-  }
-
-  public Boolean findTutorials() {
-    return isElementPresent(By.xpath("//div[contains(@class,'tutorials')]"));
-  }
-
-  public void goInAccountStudentAfterChanged() {
-    refresh();
-    wd.get(address() + "/login");
-    login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
-  }
-
-  public boolean openCheckConnection() {
-    return isElementPresent(By.xpath("//h2"));
-  }
-
-  public void goToFeed() {
-    click(By.xpath("//button[@id-qa='feed']"));
-  }
-
-  public boolean goOnSchedule() {
-    maxBrowser();
-    btnSchedule();
-    assert (wd.findElement(By.xpath("//h2")).getText().equals("Мое расписание"));
-    return isElementPresent(By.xpath("//h2"));
-  }
-
-  private void btnSchedule() {
-    click(By.xpath("//button[@id-qa='schedule']"));
-  }
-
-  public void btnCommunities() {
-    click(By.xpath("//button[@id-qa='communities']"));
-  }
-
-  public void subscribeOnCommunity() {
-    btnCommunities();
-    btnSubscribe();
-  }
-
-  private void btnSubscribe() {
-    click(By.xpath("//button[@id-qa='subscribe']"));
-  }
-
-  public void unsubscribeOnCommunity() {
-    btnCommunities();
-    btnUnsubscribe();
-  }
-
-  private void btnUnsubscribe() {
-    click(By.xpath("//button[@id-qa='unsubscribe']"));
-  }
-
-  public void addLike() {
-    click(By.xpath("//span[@id-qa='like']"));
-  }
-
-  public void addCommentInFeed(String comment) {
-    refresh();
-    goToFeed();
-    fillNewComment(comment);
-    btnCreateComment();
-  }
-
-  private void btnCreateComment() {
-    click(By.xpath("//button[@id='pick-attachments-application']/../following-sibling::button"));
-  }
-
-  private void fillNewComment(String comment) {
-    clickWaitElementToBeClicable(5, By.xpath("//div[@id-qa='wrap']"));
-    clear(50, By.xpath("//div[@id-qa='comment-text']"));
-    clickWithMoveToElementAndWait(1, By.xpath("//div[@id-qa='comment-text']"));
-    JavascriptExecutor exe = (JavascriptExecutor) wd;
-    WebElement element = wd.findElement(By.xpath("//div[@id-qa='comment-text']"));
-    exe.executeScript("arguments[0].innerHTML='" + comment + "';", element);
-    Actions action = new Actions(wd);
-    action.sendKeys(Keys.ENTER).build().perform();
-  }
-
-  public void tabAll() {
-    click(By.xpath("//div[@role='tablist']//button[@id-qa='all']"));
-  }
-
-  public void btnPoint() {
-    click(By.xpath("//div[@class='right']//button"));
-  }
-
-  public void goInProfile() {
-    click(By.xpath("//div[@class='head']"));
-    clickWithMoveToElementAndWait(5, By.xpath("//li[2]//button"));
-  }
-
-  public void tabAdministration() {
-    click(By.xpath("//div[@role='tablist']//button[@id-qa='administration']"));
-  }
-
-  public void tabFeed() {
-    click(By.xpath("//div[@role='tablist']//button[@id-qa='feed']"));
-  }
-  }
+}

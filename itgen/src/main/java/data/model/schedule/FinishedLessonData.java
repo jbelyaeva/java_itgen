@@ -41,7 +41,11 @@ public class FinishedLessonData {
   @Property("finishedAt")
   private Double fibishedAt;
 
-  public FinishedLessonData() {}
+  @Property("lessonFormat")
+  private int lessonFormat;
+
+  public FinishedLessonData() {
+  }
 
   public FinishedLessonData withId(String id) {
     this.id = id;
@@ -90,6 +94,11 @@ public class FinishedLessonData {
 
   public FinishedLessonData withFinishedAt(Double fibishedAt) {
     this.fibishedAt = fibishedAt;
+    return this;
+  }
+
+  public FinishedLessonData withLessonFormat(int lessonFormat) {
+    this.lessonFormat = lessonFormat;
     return this;
   }
 
@@ -162,30 +171,18 @@ public class FinishedLessonData {
 
   @Override
   public String toString() {
-    return "FinishedChildLessonData{"
-        + "id='"
-        + id
-        + '\''
-        + ", scheduleId='"
-        + scheduleId
-        + '\''
-        + ", week="
-        + week
-        + ", trainerId='"
-        + trainerId
-        + '\''
-        + ", startTime="
-        + startTime
-        + ", endTime="
-        + endTime
-        + ", type="
-        + type
-        + ", childs="
-        + childs
-        + ", startedAt="
-        + startedAt
-        + ", fibishedAt="
-        + fibishedAt
-        + '}';
+    return "FinishedLessonData{" +
+        "id='" + id + '\'' +
+        ", scheduleId='" + scheduleId + '\'' +
+        ", week=" + week +
+        ", trainerId='" + trainerId + '\'' +
+        ", startTime=" + startTime +
+        ", endTime=" + endTime +
+        ", type=" + type +
+        ", childs=" + childs +
+        ", startedAt=" + startedAt +
+        ", fibishedAt=" + fibishedAt +
+        ", lessonFormat=" + lessonFormat +
+        '}';
   }
 }
