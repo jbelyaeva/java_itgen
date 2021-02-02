@@ -31,8 +31,7 @@ public class ScheduleRegularBlockAllTests extends TestBase {
     data.schedules().set21_TodayRegularScheduleWithoutStudentsWithBlockedAll(period, note);
     Schedules afterNew = app.dbschedules().schedules();
     app.check().equalityOfTwoElements(after, afterNew);
-    app.check()
-        .textElement(app.schedule().getLabelBlockSchedule(), "Заблокировано");
+    app.check().findElement(app.schedule().getLabelBlockSchedule());
     app.goTo().menuTasks();
   }
 

@@ -79,31 +79,7 @@ public class Sshot5LessonStart extends TestBase {
     finishedLessonService.drop();
     taskService.drop();
     commentService.drop();
-    app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
-            new String[]{"child"},
-            "beginner",
-            "BY",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "ru",
-            "1",
-            "+9875645311",
-            2,
-            "noTrial",
-            0,
-            null,
-            null,
-            0);
-    studentService.deleteField("21", "finishedLessonsCount");
-    studentService.deleteField("21", "lastSubjs");
-    studentService.deleteField("21", "usedSubjs");
-    studentService.deleteField("21", "lessonCount");
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     commentService.drop();
     testService.drop();
     testResultsService.drop();

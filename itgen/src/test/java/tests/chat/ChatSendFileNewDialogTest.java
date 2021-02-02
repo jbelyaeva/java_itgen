@@ -3,22 +3,16 @@ package tests.chat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.chat.ChatMessages;
 import data.model.chat.ChatRooms;
 import data.model.chat.ChatSubscriptions;
-import data.services.ChatMessageService;
-import data.services.ChatRoomService;
-import data.services.ChatSubscriptionService;
-import app.testbase.TestBase;
 import java.io.IOException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class ChatSendFileNewDialogTest extends TestBase {
-  ChatRoomService chatRoomService = new ChatRoomService();
-  ChatMessageService chatMessageService = new ChatMessageService();
-  ChatSubscriptionService chatSubscriptionService = new ChatSubscriptionService();
   String fileName = "file.jpg";
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -30,7 +24,7 @@ public class ChatSendFileNewDialogTest extends TestBase {
 
     String path = "/src/test/resources/testdata/file.jpg";
     app.chat().sendFileByAdmin("Тренер", path);
-    Thread.sleep(4000); // не успевает сохраниться информация о файле в бд
+    Thread.sleep(5000); // не успевает сохраниться информация о файле в бд
     Boolean getFile = app.chat().fileGetTrainerFromAdmin("trainer", "111111", fileName);
     ChatMessages afterMessage = app.dbchat().chatMessages();
     ChatRooms afterRooms = app.dbchat().chatRooms();
@@ -44,8 +38,6 @@ public class ChatSendFileNewDialogTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    chatRoomService.drop();
-    chatMessageService.drop();
-    chatSubscriptionService.drop();
+    data.postClean().chat();
   }
 }

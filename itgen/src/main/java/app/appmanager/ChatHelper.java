@@ -1,6 +1,8 @@
 package app.appmanager;
 
 import static app.appmanager.ApplicationManager.properties;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import core.general.FileHelper;
 import java.io.IOException;
@@ -43,7 +45,17 @@ public class ChatHelper extends HelperBase {
   }
 
   public void btnOpenChat() {
+    if (isElementPresent(By.xpath("//button[contains(@class,'close-chat')]"))) {
+      click(By.xpath("//button[contains(@class,'close-chat')]"));
+    }
     clickWithMoveToElementAndWait(7, By.xpath("//div[@class='right']//div[@class='chat-button']"));
+  }
+
+  public void btnOpenChatBeforeLogin() {
+    if (isElementPresent(By.xpath("//button[contains(@class,'close-chat')]"))) {
+      click(By.xpath("//button[contains(@class,'close-chat')]"));
+    }
+    clickWithMoveToElementAndWait(5, By.xpath(" //div[@id-qa='chat']"));
   }
 
   public void sendMessage(String userName, String text) {
@@ -66,7 +78,11 @@ public class ChatHelper extends HelperBase {
   public void search(String userName) {
     click(By.xpath("//input[@name='search-by-user']"));
     type(By.xpath("//input[@name='search-by-user']"), userName);
-    click(By.xpath("//div[contains(@class,'result')]//a"));
+    if (isElementPresent(By.xpath("//div[contains(@class,'result')]//a"))) {
+      click(By.xpath("//div[contains(@class,'result')]//a"));
+    } else {
+      click(By.xpath("//div[contains(@class,'room-item empty')]"));
+    }
   }
 
   public String getByTrainerMessageFromAdmin(String login, String password) {
@@ -77,6 +93,30 @@ public class ChatHelper extends HelperBase {
   public String getByTrainerMessageFromStudent(String login, String password) {
     logoutByStudent();
     return getByTrainerText(login, password);
+  }
+
+  public String getByTrainerDeletionMessageFromStudent(String login, String password) {
+    logoutByStudent();
+    return getByTrainerDeletionText(login, password);
+  }
+
+  private String getByTrainerDeletionText(String login, String password) {
+    deleteAlerts();
+    login(login, password);
+    String text = "";
+    btnOpenChatBeforeLogin();
+    try {
+      if (isElementPresent(By.xpath("//div[@class='last-message']//span"))) {
+        assertThat(isElementPresent(By.xpath("//div[@class='last-message']//span")), is(false));
+      }
+      btnCloseChat();
+    } catch (TimeoutException e) {
+      System.out.println("Исключение:" + e);
+    } finally {
+      logout();
+      login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+    }
+    return text;
   }
 
   public String getByTrainerText(String login, String password) {
@@ -99,8 +139,8 @@ public class ChatHelper extends HelperBase {
     return text;
   }
 
-
-  public Boolean fileGetTrainerFromAdmin(String login, String password, String fileName) {
+  public Boolean fileGetTrainerFromAdmin(String login, String password, String fileName)
+      throws InterruptedException {
     logout();
     login(login, password);
     btnOpenChat();
@@ -155,7 +195,7 @@ public class ChatHelper extends HelperBase {
     return deleted;
   }
 
-  private Boolean getByTrainerFile(String fileName) {
+  private Boolean getByTrainerFile(String fileName) throws InterruptedException {
     deleteAlerts();
     Boolean getFile = false;
     try {
@@ -170,6 +210,12 @@ public class ChatHelper extends HelperBase {
     } finally {
       logout();
       login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+      Thread.sleep(2000);
+      if (isElementPresent(By.name("username"))) {
+        clear(10, By.name("username"));
+        clear(10, By.name("password"));
+        login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+      }
     }
     return getFile;
   }
@@ -275,7 +321,6 @@ public class ChatHelper extends HelperBase {
     deleteAlerts();
     deleteAlerts();
     wd.findElement(By.xpath("//input[@type='file']")).sendKeys(FileHelper.getAbsolutePath(path));
-
   }
 
   public void unhide(WebDriver driver, WebElement element) {
@@ -352,6 +397,17 @@ public class ChatHelper extends HelperBase {
     btnCloseChat();
   }
 
+  public void sendFileByStudentInChatOnLesson(String userName, String path)
+      throws IOException, InterruptedException {
+    fillFile(path);
+    btnSendMessageInChatOnLesson();
+  }
+
+  private void btnSendMessageInChatOnLesson() throws InterruptedException {
+    Thread.sleep(2000);
+    click(By.xpath("//button[@id-qa='send']"));
+  }
+
   private void searchByStudent(String userName) {
     click(By.xpath("//input[@name='search-by-user']"));
     type(By.xpath("//input[@name='search-by-user']"), userName);
@@ -367,7 +423,22 @@ public class ChatHelper extends HelperBase {
     btnCloseChat();
   }
 
-  private void chooseFirstWithUser() {
+  public void chooseFirstWithUser() {
     click(By.xpath("//div[@class='room-item']"));
+  }
+
+  public boolean getNameFile(String fileName) {
+    deleteAlerts();//удалить алерт на две вкладки и по алерту на микрофон и камеру
+    deleteAlerts();
+    deleteAlerts();
+    boolean getFile = isElementPresent(By.xpath("//img[@alt='" + fileName + "']"));
+    btnCloseChat();
+    return getFile;
+  }
+
+  public Boolean getNameFileInChatOnLesson(String fileName) {
+    boolean getFile = isElementPresent(
+        By.xpath("//div[contains(@class,'history-container')]//img[@alt='" + fileName + "']"));
+    return getFile;
   }
 }

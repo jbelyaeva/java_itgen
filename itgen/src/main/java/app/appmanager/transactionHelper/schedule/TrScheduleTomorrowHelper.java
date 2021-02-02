@@ -268,6 +268,28 @@ public class TrScheduleTomorrowHelper {
     scheduleService.save(schedule);
   }
 
+  // Завтра разовое занятие без учеников
+  public void SingleIFScheduleWithoutStudent(String period, String idSchedule, String idTrainer) {
+    ArrayList<List<C>> listsC = new ArrayList<>(4);
+    for (int i = 0; i < 1; i++) {
+      listsC.add(new ArrayList<>());
+    }
+    ArrayList<FinishedSlots> listFSlots = new ArrayList<>();
+    ScheduleData schedule =
+        new ScheduleData()
+            .withId(idSchedule)
+            .withVer(0)
+            .withFromDate(time.dateTomorrow())
+            .withSlots(this.generateSlots(period, idTrainer, listsC))
+            .withFinishedSlots(listFSlots)
+            .withTimes(new Times().withStart(time.start(period)).withEnd(time.finish(period)))
+            .withDuration(60)
+            .withWholeness(true)
+            .withLessonFormat(1)
+            .withOneTime(true);
+    scheduleService.save(schedule);
+  }
+
   // завтра регулярное занятие без ученика
   public void RegularScheduleWithoutStudents(String period, String idSchedule, String idTrainer) {
     ArrayList<List<C>> listsC = new ArrayList<>(4);

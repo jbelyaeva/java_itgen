@@ -21,6 +21,13 @@ public class SkillsDao {
     datastore.update(query, (UpdateOperations<SkillsData>) ops);
   }
 
+  public void updateField(String idSkill, String nameFiled, Boolean data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<SkillsData> query = datastore.createQuery(SkillsData.class).filter("id", idSkill);
+    UpdateOperations ops = datastore.createUpdateOperations(SkillsData.class).set(nameFiled, data);
+    datastore.update(query, (UpdateOperations<SkillsData>) ops);
+  }
+
   public void drop() {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<SkillsData> query = datastore.createQuery(SkillsData.class);

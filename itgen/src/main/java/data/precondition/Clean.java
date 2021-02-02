@@ -41,6 +41,7 @@ public class Clean {
 
   public Clean parent() {
     data.parentService().DeleteById("newParent");
+    data.parentService().DeleteById("parent");
     return this;
   }
 
@@ -49,8 +50,14 @@ public class Clean {
     return this;
   }
 
+  public Clean trainer() {
+    data.trainerService().DeleteById("newTrainer");
+    return this;
+  }
+
   public Clean family() {
     data.familyService().DeleteById("newFamily");
+    data.familyService().DeleteById("family");
     return this;
   }
 
@@ -71,6 +78,16 @@ public class Clean {
     data.communitiesService().dropCommunity();
     data.communitiesService().dropCommPost();
     data.communitiesService().dropCommPostComment();
+    return this;
+  }
+
+  public Clean achievements() {
+    data.achievementsService().drop();
+    return this;
+  }
+
+  public Clean requests() {
+    data.requestService().drop();
     return this;
   }
 }

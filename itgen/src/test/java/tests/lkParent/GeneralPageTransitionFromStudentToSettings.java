@@ -10,7 +10,7 @@ public class GeneralPageTransitionFromStudentToSettings extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testGeneralPageTransitionFromStudentToSettings() {
-    app.base().refresh();
+    app.lkParent().resetWithoutLogo();
     app.lkParent().clickByNameFirstStudent();
     app.student().btnCloseTutorial();
     app.base().waitVisibilityOfElementLocated(5, app.lkParent().getLabelPersonalInformation());

@@ -240,7 +240,7 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnModify() {
-    click(By.xpath("//a[contains(@class,'edit')]"));
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@class,'edit')]"));
     noErrorMessage();
   }
 
@@ -534,5 +534,9 @@ public class TrainerHelper extends HelperBase {
   public void goToLesson(String idLesson) {
     gotoSchedule();
     selectLesson(idLesson);
+  }
+
+  public void btnGoLesson(String idSchedule) {
+    click(By.xpath("(//a[contains(@href,'" + idSchedule + "')])[1]"));
   }
 }

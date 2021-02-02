@@ -18,9 +18,9 @@ public class Schedules extends TransactionManager {
   }
 
   //завтра разовое занятие буз учеников (Бокша, руск яз, Scratch)
-  public void set3_SingleScheduleWithoutStudent(String period) {
+  public void set3_SingleScheduleWithoutStudent(String period, String idTrainer) {
     trScheduleTomorrow()
-        .SingleScheduleWithoutStudent(period, "newSchedule", "14");
+        .SingleScheduleWithoutStudent(period, "newSchedule", idTrainer);
   }
 
   // завтра регулярное занятие, на которое записали ученика (Бокша, Scratch, рус)
@@ -121,7 +121,7 @@ public class Schedules extends TransactionManager {
             period, "newSchedule", "14", "newStudent", "1", "ru");
   }
 
-  //сегодня разовое занятие без учеников (Бокша, руск яз, Scratch)
+  //сегодня разовое занятие без учеников (Бокша, руск яз, Scratch) (ниже есть с до id)
   public void set18_SingleScheduleWithoutStudent(String period, String idTrainer) {
     trScheduleToday()
         .SingleScheduleWithoutStudents(period, "newSchedule", idTrainer);
@@ -183,6 +183,51 @@ public class Schedules extends TransactionManager {
             "21",
             "1",
             "ru");
-    ;
+  }
+
+  //сегодня разовое занятие c дефолтным тренером, на нем дефолтный ученик с пробным
+  public void set26_TodayStartSingleScheduleWithOneStudentOnTrial(String period) {
+    long alreadyRun = 7200000;//2ч
+    trScheduleToday()
+        .StartSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "newSchedule",
+            "23",
+            "21",
+            "1",
+            "ru");
+  }
+
+  // сегодня разовое занятие, на которое записали ученика (Бокша, Scratch, рус)
+  public void set27_TodaySingleScheduleWithDefaulStudent(String period, String id) {
+    trScheduleToday()
+        .SingleScheduleWithOneStudent(
+            period, id, "14", "21", "1", "ru");
+  }
+
+  // вчера дефолтный ребенок прошел пробное (Бокша, Scratch, рус)
+  public void set28_YesterdayDefaulStudentFinshedTrialLesson(String period) {
+    trScheduleYesterday()
+        .finishingFirstTrialLesson(
+            period, "newSchedule", "14", "21", "1");
+  }
+
+  //сегодня разовое занятие буз учеников (Бокша, руск яз, Scratch)
+  public void se29_SingleScheduleWithoutStudent(String period) {
+    trScheduleToday()
+        .SingleScheduleWithoutStudents(period, "schedule", "14");
+  }
+
+  //сегодня разовое занятие буз учеников (Дефолтный тренер, руск яз, Scratch)
+  public void set30_SingleScheduleWithoutStudent(String period) {
+    trScheduleToday()
+        .SingleScheduleWithoutStudents(period, "schedule", "23");
+  }
+
+  //завтра регулярное занятие без учеников (Бокша, руск яз, Scratch)
+  public void set31_SingleIFScheduleWithoutStudents(String period) {
+    trScheduleTomorrow()
+        .SingleIFScheduleWithoutStudent(period, "newSchedule", "14");
   }
 }

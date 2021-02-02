@@ -12,6 +12,10 @@
       <class name="tests.screenShotStudent.SshotLearningWithoutSubscribersAndHistory"/>
       <class name="tests.screenShotStudent.SshotLearningWithSubscriberHistory"/>
       <class name="tests.screenShotStudent.SshotLookTests"/>
+      <class name="tests.screenShotStudent.SshotOpenProfile"/>
+      <class name="tests.screenShotStudent.SshotCalendarSchedule"/>
+      <class name="tests.screenShotStudent.SshotProgressBar1Skill"/>
+      <class name="tests.screenShotStudent.SshotProgressBar2Skills"/>
     </classes>
   </test>
 </suite>

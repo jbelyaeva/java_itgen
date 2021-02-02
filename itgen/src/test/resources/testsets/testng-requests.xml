@@ -3,7 +3,26 @@
 <suite name="Suite1" verbose="1" >
     <test name="Requests">
         <classes>
-            <class name="tests.requests.RequestOnTrial2hScratchTests" />
+            <class name="tests.requests.RequestOnTrial2hScratchTests"/>
+            <class name="tests.requests.RequestOnTrial1hScratchTests"/>
+            <class name="tests.requests.RequestOnRegular2hScratchTests"/>
+            <class name="tests.requests.RequestOnSingle2hScratch"/>
+            <class name="tests.requests.RequestRegularNotGreenIfGroupSingle"/>
+            <class name="tests.requests.RequestRegularGreenIfGroupRegular"/>
+            <class name="tests.requests.RequestDoneInPopupFoundInProfile"/>
+            <class name="tests.requests.RequestGreenTransitionInRecordOnLesson"/>
+            <class name="tests.requests.RequestDeleteInStack"/>
+            <class name="tests.requests.RequestIndicator"/>
+            <class name="tests.requests.RequestToTrainer"/>
+            <class name="tests.requests.RequestGreenNotDoneIfRecordInOtherGroup"/>
+            <class name="tests.requests.RequestNotDoneIfRecordInOtherGroup"/>
+            <class name="tests.requests.RequestGreenDoneIfRecordInGroup"/>
+            <class name="tests.requests.RequestFilter"/>
+            <class name="tests.requests.RequestOnIF"/>
+            <class name="tests.requests.RequestIFGreenIfGroupIF"/>
+            <class name="tests.requests.RequestISkillNotAvailable"/>
+            <class name="tests.requests.RequestForFrenchStudent"/>
+            <class name="tests.requests.RequestFrenchLessonOnlyToFrenchTrainer"/>
         </classes>
     </test>
 </suite>

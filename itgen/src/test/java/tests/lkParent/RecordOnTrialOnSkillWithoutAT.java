@@ -18,6 +18,9 @@ public class RecordOnTrialOnSkillWithoutAT extends TestBase {
   public void ensurePreconditions() {
     data.defFamily().set6_SingleLessonTomorrowWithoutStudent_StudentAddInDefaultFamily(period);
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
+    data.skillsService()
+        .updateField(data.skillsService().findBySkillId("1", "ru").getId(), "needRemindAboutLesson",
+            false);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

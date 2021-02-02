@@ -1,5 +1,6 @@
 package data.precondition;
 
+import data.services.AchievementsService;
 import data.services.ChatMessageService;
 import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
@@ -14,6 +15,7 @@ import data.services.MaterialNewService;
 import data.services.MaterialService;
 import data.services.ParentService;
 import data.services.PaymentService;
+import data.services.RequestService;
 import data.services.ScheduleService;
 import data.services.SkillsService;
 import data.services.StudentService;
@@ -42,10 +44,12 @@ public class DataManager {
   private final ParentService parentService = new ParentService();
   private final TrainerService trainerService = new TrainerService();
   private final WorkerService workerService = new WorkerService();
+  private final RequestService requestService = new RequestService();
   private final FamilyService familyService = new FamilyService();
   private final SkillsService skillsService = new SkillsService();
   private final TestService testService = new TestService();
   private final TestResultsService testResultsService = new TestResultsService();
+  private final AchievementsService achievementsService = new AchievementsService();
   private final Clean clean = new Clean();
   private final DefaultFamilyStudentsAndSchedules defFamily = new DefaultFamilyStudentsAndSchedules();
   private final DefaultFamilyChat defFamilyChat = new DefaultFamilyChat();
@@ -58,6 +62,7 @@ public class DataManager {
   private final Skills skills = new Skills();
   private final Chat chat = new Chat();
   private final Tests tests = new Tests();
+  private final Requests requests = new Requests();
   private final Schedules schedules = new Schedules();
   private final CommunitiesService communitiesService = new CommunitiesService();
   private final DefaultFamilyAndFinishedLessonWithProjects finishedLessonWithProject = new DefaultFamilyAndFinishedLessonWithProjects();
@@ -80,6 +85,7 @@ public class DataManager {
   public TaskService taskService() {
     return taskService;
   }
+
 
   public PaymentService paymentService() {
     return paymentService;
@@ -149,8 +155,16 @@ public class DataManager {
     return testService;
   }
 
+  public RequestService requestService() {
+    return requestService;
+  }
+
   public TestResultsService resultsService() {
     return testResultsService;
+  }
+
+  public AchievementsService achievementsService() {
+    return achievementsService;
   }
 
   public DefaultFamilyStudentsAndSchedules defFamily() {
@@ -203,6 +217,10 @@ public class DataManager {
 
   public NewWorker newWorker() {
     return newWorker;
+  }
+
+  public Requests requests() {
+    return requests;
   }
 
   public DefaultFamilyAndFinishedLessonWithProjects finishedLessonWithProject() {

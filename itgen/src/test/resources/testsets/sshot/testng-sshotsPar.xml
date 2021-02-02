@@ -17,6 +17,7 @@
       <class name="tests.screenShotPar.SshotStudentSettingsWithoutPassword"/>
       <class name="tests.screenShotPar.SshotStudentSettingsWithPassword"/>
       <class name="tests.screenShotPar.SshotStudentSettingsChangePassword"/>
+      <class name="tests.screenShotPar.SshotHistoryProgressBar"/>
     </classes>
   </test>
 </suite>

@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import data.model.users.StudentData;
 import data.model.users.Students;
 import data.services.FamilyService;
@@ -38,12 +39,13 @@ public class StudentDeletionTests extends TestBase {
             "noTrial");
   }
 
-  @Test
-  public void testStudentDeletion() {
+  @Test(retryAnalyzer = RunTestAgain.class)
+  public void testStudentDeletion() throws InterruptedException {
     app.goTo().menuStudents();
     Students before = app.dbstudents().students();
     app.student().selectStudentInListUIById("studentDelete");
     app.student().delete();
+    Thread.sleep(2000);
     Students after = app.dbstudents().students();
     assertThat(after.size(), equalTo(before.size() - 1));
 

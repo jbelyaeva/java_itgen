@@ -24,7 +24,9 @@ public class StudentLabelNewSubject extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testStudentLessonStart() {
+  public void testStudentLabelNewSubject() {
+    app.lkStudent().btnCloseTutorial();
+    app.lkStudent().goToFeed();
     app.lkStudent().goOnLesson();
     app.check().findElement(By.xpath("//div[@class='lesson-label new-skill']"));
     app.lkStudent().goToFeed();

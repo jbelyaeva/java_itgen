@@ -1,6 +1,7 @@
 package app.appmanager.transactionHelper;
 
 import data.model.skills.Advanced;
+import data.model.skills.AmountOfProjects;
 import data.model.skills.Beginner;
 import data.model.skills.Expert;
 import data.model.skills.Requirements;
@@ -8,6 +9,7 @@ import data.model.skills.SkillsData;
 import data.model.skills.Usual;
 import data.services.SkillsService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TrSkillHelper {
@@ -49,6 +51,44 @@ public class TrSkillHelper {
         .withNeedRemindAboutLesson(needRemind)
         .withPayCoefficient(payCoefficient)
         .withtTrialDuration(duration);
+    skillsService.save(skill);
+  }
+
+  public void updateSkillWithFormatLessons(
+      String idSkill,
+      String lang,
+      String title,
+      String visibility,
+      String desc,
+      int minAge,
+      int[] age,
+      String[] state,
+      String skillId,
+      String link,
+      Boolean needRemind,
+      int payCoefficient,
+      int duration,
+      Integer[] lessonFormat
+  ) {
+    SkillsData skill = new SkillsData()
+        .withId(idSkill)
+        .withLang(lang)
+        .withTitle(title)
+        .withVisibility(visibility)
+        .withDesc(desc)
+        .withMinAge(minAge)
+        .withRequirements(new Requirements()
+            .withtBeginner(getBeginner(age, state))
+            .withAdvanced(getAdvanced(age, state))
+            .withUsual(getUsual(age, state))
+            .withExpert(getExpert(age, state)))
+        .withSkillId(skillId)
+        .withDownloadLink(link)
+        .withNeedRemindAboutLesson(needRemind)
+        .withPayCoefficient(payCoefficient)
+        .withtTrialDuration(duration)
+        .withLessonsFormats(Arrays.asList(lessonFormat))
+        .withAmountOfProjects(new AmountOfProjects().withP25(90).withP50(50).withP75(15));
     skillsService.save(skill);
   }
 

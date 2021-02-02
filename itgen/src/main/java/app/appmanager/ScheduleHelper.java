@@ -14,9 +14,9 @@ public class ScheduleHelper extends HelperBase {
       "//div[@class='busy-childs']//a[contains(@href,'newStudent')]");
   private final By btnMoveInPopup = By.xpath("//div[@class='modal-footer']//button");
   private final By btnCreateSchedule = By.xpath("//a[contains(@href,'/createSchoolSchedule')]");
-//  private final By labelBlockSchedule = By.xpath(
- //     "(//div[@class='text-muted header-labels']//span)[3]");
-  private final By labelBlockSchedule = By.xpath("//div[@class='text-muted header-labels']");
+  private final By labelBlockSchedule = By.xpath("//label[text()='Заблокировано']");
+  private final By labelInformationAboutSchedule = By.xpath(
+      "//div[@class='text-muted header-labels']");
   private final By labelCancelSchedule = By.xpath(
       "(//div[@class='text-muted header-labels']//span)[2]");
   private final By checkBoxConst = By.xpath("//div[@class='permanent-form-group']//div");
@@ -31,8 +31,10 @@ public class ScheduleHelper extends HelperBase {
   private final By selectDataToday = By.xpath("//button[contains(@class,'daySelect')]");
   private final By btnCalendar = By.xpath("//div[@id='date-from']//button");
   private final By selectListTrainer = By.id("trainer");
+  private final By selectListTrainerInCreate = By.xpath("//input[@id-qa='trainers']");
   private final By selectListTime = By.xpath("//select[contains(@id,'tp')]");
   private final By selectTrainerWithId7 = By.xpath("//select[@id='trainer']//option[@value='7']");
+  private final By selectFirstTrainerInCreate = By.xpath("");
   private final By selectTrainerWithId18 = By.xpath("//select[@id='trainer']//option[@value='18']");
   private final By studentOnLessonInSchedule = By.xpath("//a[@class='text-capitalize title-name']");
   private final By btnMove = By.xpath("//button[contains(@class,'accept')]");
@@ -66,6 +68,10 @@ public class ScheduleHelper extends HelperBase {
 
   public By getLabelBlockSchedule() {
     return labelBlockSchedule;
+  }
+
+  public By getLabelInformationAboutSchedule() {
+    return labelInformationAboutSchedule;
   }
 
   public By getLabelCancelSchedule() {
@@ -125,7 +131,19 @@ public class ScheduleHelper extends HelperBase {
     btnCreateSchedule();
     checkBoxConst();
     selectTime();
+    selectAnyTrainer();
     btnCreate();
+  }
+
+  private void selectAnyTrainer() {
+    type(selectListTrainerInCreate, "Бокша");
+    JSClickByXY(217, 417);
+    /*ввести в консоль для определения координат в подсказках
+    document.onmousemove = function(e){
+      var x = e.pageX;
+      var y = e.pageY;
+      e.target.title = "X is "+x+" and Y is "+y;
+    };*/
   }
 
   public void createSingleScheduleTest() {
@@ -138,6 +156,7 @@ public class ScheduleHelper extends HelperBase {
   public void createRegularSchedule() {
     btnCreateSchedule();
     selectTime();
+    selectAnyTrainer();
     btnCreate();
     noErrorMessage();
     refresh();

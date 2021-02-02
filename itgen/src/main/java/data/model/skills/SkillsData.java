@@ -5,6 +5,8 @@ import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity("skills")
@@ -65,6 +67,12 @@ public class SkillsData {
 
   @Embedded
   private Requirements requirements;
+
+  @Property("lessonsFormats")
+  private List<Integer> lessonsFormats = new ArrayList<Integer>();
+
+  @Embedded("amountOfProjects")
+  private AmountOfProjects amountOfProjects;
 
   public SkillsData() {
   }
@@ -139,6 +147,16 @@ public class SkillsData {
     return this;
   }
 
+  public SkillsData withLessonsFormats(List<Integer> lessonsFormats) {
+    this.lessonsFormats = lessonsFormats;
+    return this;
+  }
+
+  public SkillsData withAmountOfProjects(AmountOfProjects amountOfProjects) {
+    this.amountOfProjects = amountOfProjects;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -193,6 +211,14 @@ public class SkillsData {
 
   public int getTrialDuration() {
     return trialDuration;
+  }
+
+  public List<Integer> getLessonsFormats() {
+    return lessonsFormats;
+  }
+
+  public AmountOfProjects getAmountOfProjects() {
+    return amountOfProjects;
   }
 
   @Override

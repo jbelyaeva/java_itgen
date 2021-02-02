@@ -195,10 +195,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
             text);
 
     app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
+        .changeDefaultStudent_finishLessonBy1Skill(
             new String[]{"child"},
             "beginner",
             "BY",
@@ -207,14 +204,15 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
             "ru",
             "ru",
             "ru",
-            "1",
+            new String[]{"1"},
             "+9875645311",
             2,
-            "learning",
+            "trialFinished",
             1,
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
 
     String[] tags = {};
     String[] idManagers = {"666"};
@@ -290,31 +288,7 @@ public class SshotLearningWithSubscriberHistory extends TestBase {
     finishedLessonService.drop();
     taskService.drop();
     commentService.drop();
-    app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
-            new String[]{"child"},
-            "beginner",
-            "BY",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "ru",
-            "1",
-            "+9875645311",
-            2,
-            "noTrial",
-            0,
-            null,
-            null,
-            0);
-    studentService.deleteField("21", "finishedLessonsCount");
-    studentService.deleteField("21", "lastSubjs");
-    studentService.deleteField("21", "usedSubjs");
-    studentService.deleteField("21", "lessonCount");
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     communitiesService.dropCommunity();
     communitiesService.dropCommPost();
   }

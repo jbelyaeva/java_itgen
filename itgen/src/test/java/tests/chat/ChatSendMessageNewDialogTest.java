@@ -3,6 +3,7 @@ package tests.chat;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.chat.ChatMessages;
 import data.model.chat.ChatRooms;
@@ -10,11 +11,11 @@ import data.model.chat.ChatSubscriptions;
 import data.services.ChatMessageService;
 import data.services.ChatRoomService;
 import data.services.ChatSubscriptionService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class ChatSendMessageNewDialogTest extends TestBase {
+
   ChatRoomService chatRoomService = new ChatRoomService();
   ChatMessageService chatMessageService = new ChatMessageService();
   ChatSubscriptionService chatSubscriptionService = new ChatSubscriptionService();

@@ -69,12 +69,11 @@ public class TrainerFinishedLessonWithStudentWas extends TestBase {
 
   @Test
   public void testTrainerFinishedLessonWithStudentWas() {
-    app.trainer().maxBrowser();
     Schedules before = app.dbschedules().schedules();
     FinishedChildLessons finishChildBefore = app.dbschedules().finishedChildLessons();
     FinishedLessons finishBefore = app.dbschedules().finishedLessons();
     Comments commentsBefore = app.dbschedules().comments();
-
+    app.trainer().gotoSchedule();
     app.trainer().finishedLessonWithWas("finishLessonByTrainer");
 
     Schedules after = app.dbschedules().schedules();

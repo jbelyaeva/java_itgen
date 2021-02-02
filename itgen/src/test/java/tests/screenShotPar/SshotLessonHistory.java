@@ -47,7 +47,7 @@ public class SshotLessonHistory extends TestBase {
                 locatorIgnor,
                 1.25f);
 
-    if (diff.getDiffSize() > 250) { // погрешность
+    if (diff.getDiffSize() > 100) { // погрешность
       Assert.assertEquals(diff.getDiffSize(), 0);
     }
     app.lkParent().btnLogo();

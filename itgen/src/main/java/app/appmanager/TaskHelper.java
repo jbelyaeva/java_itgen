@@ -321,30 +321,17 @@ public class TaskHelper extends HelperBase {
     btnClosePopup();
   }
 
+
   private void changeDateNextDay() {
     click(By.xpath("//div[@class='input-group']//button"));
-    if (isElementPresent(
+    if (!isElementPresent(
         By.xpath("//button[contains(@class,'daySelected')]/../following-sibling::div[1]"))) {
-      // последний день месяца, проверяем, что нельзя выбрать следующую день без щелчка по пагинатору (переходу в следующий месяц)
-      if (!getText("//button[contains(@class,'daySelected')]/../following-sibling::div[1]")
-          .equals("")) {
-        click(By.xpath("//button[contains(@class,'daySelected')]/../following-sibling::div[1]"));
-      } else {
-        click(By.xpath("//div[contains(@class,'switch')]//button[2]"));
-        int i = 1;
-        while (wd.findElement(
-            By.xpath("(//div[contains(@class,'Calendar-week')]//button//span)[" + i + "]"))
-            .getText()
-            .equals("")) {
-          i = i + 1;
-        }
-        click(By.xpath("(//div[contains(@class,'Calendar-week')]//button//span)[" + i + "]"));
-      }
-    } else {
-      click(
-          By.xpath(
-              "(//button[contains(@class,'daySelected')]/../../following-sibling::div[1]//button)[1]"));
+      click(By.xpath("(//div[contains(@class,'switch')]//button)[2]"));//пагинатор
+      click(By.xpath("(//p[text()='1'])[1]")); //1 число нового месяца
     }
+    click(
+        By.xpath(
+            "//button[contains(@class,'daySelected')]/../../following-sibling::div[1]"));
   }
 
   private void selectChangeDateByManualTask() {

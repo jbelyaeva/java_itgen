@@ -7,13 +7,9 @@ package tests.lkStudent;
  * Проверить: под тренером стоит Готов
  */
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import core.general.TimeGeneral;
-import data.services.ScheduleService;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,23 +17,12 @@ import org.testng.annotations.Test;
 
 public class StudentLessonStartTest extends TestBase {
 
-  private final TimeGeneral time = new TimeGeneral();
-  private final long alreadyRun = 7200000; // 2 часа идет занятие
-  ScheduleService scheduleService = new ScheduleService();
-  private String period = "";
-
   @BeforeMethod
   public void ensurePreconditions() {
-    period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday()
-        .StartSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "ScheduleFinishLessonByTrainer",
-            "23",
-            "21",
-            "1",
-            "ru");
+    long alreadyRun = 7200000;//2ч
+    TimeGeneral time = new TimeGeneral();
+    String period = time.getPeriod(time.getTimeNow() - alreadyRun);
+    data.schedules().set26_TodayStartSingleScheduleWithOneStudentOnTrial(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -49,11 +34,11 @@ public class StudentLessonStartTest extends TestBase {
     app.check().findElement(By.xpath("//div[@class='lesson-label trial']"));
     app.check().notFindElement(By.xpath("//div[contains(@class,'preview')]//button"));
     String message = app.lkStudent().getMessageTrainer();
-    assertThat(message, equalTo("Принял! Идет подготовка к звонку \uD83D\uDE0E"));
+    app.check().equalityOfTwoElements(message, "Принял! Идет подготовка к звонку \uD83D\uDE0E");
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("ScheduleFinishLessonByTrainer");
+    data.postClean().taskAndSchedule();
   }
 }

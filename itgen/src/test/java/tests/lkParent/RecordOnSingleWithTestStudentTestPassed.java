@@ -24,7 +24,7 @@ public class RecordOnSingleWithTestStudentTestPassed extends TestBase {
     data.skills()
         .set2_MinecraftWithTest(data.skillsService().findBySkillId("21", "ru").getId(),
             "test");
-    data.schedules().set3_SingleScheduleWithoutStudent(period);
+    data.schedules().set3_SingleScheduleWithoutStudent(period, "14");
     data.trainerService().updateField("14", "skills", new String[]{"1", "2", "5", "21"});
   }
 

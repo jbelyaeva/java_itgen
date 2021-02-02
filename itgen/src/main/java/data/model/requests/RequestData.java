@@ -1,11 +1,11 @@
 package data.model.requests;
 
+import data.model.general.Activity;
+import data.model.general.Comments;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import data.model.general.Activity;
-import data.model.general.Comments;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.Objects;
 
 @Entity("requests")
 public class RequestData {
+
   @Id
   @Property("_id")
   private String id;
@@ -20,8 +21,8 @@ public class RequestData {
   @Property("creator")
   private String creator;
 
-  @Property("creatorAt")
-  private Date creatorAt;
+  @Property("createdAt")
+  private Date createdAt;
 
   @Property("status")
   private String status;
@@ -29,7 +30,7 @@ public class RequestData {
   @Property("childId")
   private String childId;
 
-  @Embedded("comment")
+  @Embedded("comments")
   private List<Comments> comments = new ArrayList<Comments>();
 
   @Embedded("activity")
@@ -42,13 +43,22 @@ public class RequestData {
   private int duration;
 
   @Property("permanent")
-  private Boolean permanent;
+  private boolean permanent;
 
   @Property("trial")
-  private Boolean trial;
+  private boolean trial;
 
   @Embedded("times")
   private List<Times> times = new ArrayList<Times>();
+
+  @Property("lessonFormat")
+  private int lessonFormat;
+
+  @Property("trainerId")
+  private String trainerId;
+
+  @Property("trainerGender")
+  private int trainerGender;
 
   // getters and setters
 
@@ -62,8 +72,8 @@ public class RequestData {
     return this;
   }
 
-  public RequestData withCreatorAt(Date creatorAt) {
-    this.creatorAt = creatorAt;
+  public RequestData withCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
@@ -97,7 +107,7 @@ public class RequestData {
     return this;
   }
 
-  public RequestData withPermanent(Boolean permanent) {
+  public RequestData withPermanent(boolean permanent) {
     this.permanent = permanent;
     return this;
   }
@@ -112,6 +122,21 @@ public class RequestData {
     return this;
   }
 
+  public RequestData withLessonFormat(int lessonFormat) {
+    this.lessonFormat = lessonFormat;
+    return this;
+  }
+
+  public RequestData withTrainerId(String trainerId) {
+    this.trainerId = trainerId;
+    return this;
+  }
+
+  public RequestData withTrainerGender(int trainerGender) {
+    this.trainerGender = trainerGender;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -120,8 +145,8 @@ public class RequestData {
     return creator;
   }
 
-  public Date getCreatorAt() {
-    return creatorAt;
+  public Date getCreatedAt() {
+    return createdAt;
   }
 
   public String getStatus() {
@@ -160,48 +185,44 @@ public class RequestData {
     return times;
   }
 
+  public int getLessonFormat() {
+    return lessonFormat;
+  }
+
+  public String getTrainerId() {
+    return trainerId;
+  }
+
   @Override
   public String toString() {
-    return "RequestsData{"
-        + "id='"
-        + id
-        + '\''
-        + ", creator='"
-        + creator
-        + '\''
-        + ", creatorAt="
-        + creatorAt
-        + ", status='"
-        + status
-        + '\''
-        + ", childId='"
-        + childId
-        + '\''
-        + ", comments="
-        + comments
-        + ", activity="
-        + activity
-        + ", skill='"
-        + skill
-        + '\''
-        + ", duration="
-        + duration
-        + ", permanent="
-        + permanent
-        + ", trial="
-        + trial
-        + ", times="
-        + times
-        + '}';
+    return "RequestData{" +
+        "id='" + id + '\'' +
+        ", creator='" + creator + '\'' +
+        ", createdAt=" + createdAt +
+        ", status='" + status + '\'' +
+        ", childId='" + childId + '\'' +
+        ", comments=" + comments +
+        ", activity=" + activity +
+        ", skill='" + skill + '\'' +
+        ", duration=" + duration +
+        ", permanent=" + permanent +
+        ", trial=" + trial +
+        ", times=" + times +
+        ", lessonFormat=" + lessonFormat +
+        ", trainerId=" + trainerId +
+        '}';
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     RequestData that = (RequestData) o;
     return duration == that.duration
-        && Objects.equals(id, that.id)
         && Objects.equals(creator, that.creator)
         && Objects.equals(status, that.status)
         && Objects.equals(childId, that.childId)
@@ -212,6 +233,6 @@ public class RequestData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, creator, status, childId, skill, duration, permanent, trial);
+    return Objects.hash(creator, status, childId, skill, duration, permanent, trial);
   }
 }

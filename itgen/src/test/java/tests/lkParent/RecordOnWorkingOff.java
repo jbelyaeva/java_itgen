@@ -2,7 +2,8 @@ package tests.lkParent;
 /* T-102 */
 /* К дефолтной семье добавлен ученик старше 7 лет. Вчера было завершено пробное, а затем так же
  * вчера им было пропущено занятие. Перейти в отработку нажав на кнопку Отработка, проверить:
- * Записаться на отработку -нет алертов, перекинуло в расписание, отображается лейбл Отработка
+ * Записаться на отработку -нет алертов, перекинуло в расписание, нет кнопки Отработать,
+ * отображается лейбл Отработка
  */
 
 import app.testbase.TestBase;
@@ -28,7 +29,7 @@ public class RecordOnWorkingOff extends TestBase {
             app.base().address() + "/profile/newStudent?tab=schedule");
     app.check().notFindElement(app.lkParent().getBtnAssignWorking());
     app.check()
-        .textElement(app.lkParent().getLabelWorkingOffOnThirdLessonInSchedule(), "отработка");
+        .textElement(app.lkParent().labelWorkingOffOnThirdLessonInSchedule(), "отработка");
   }
 
   @AfterMethod(alwaysRun = true)

@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1">
+  <test name="ScreenShots">
+    <classes>
+      <class name="tests.screenShot.SshotFamily"/>
+      <class name="tests.screenShot.SshotListStudents"/>
+      <class name="tests.screenShot.SshotMainSchedule"/>
+      <class name="tests.screenShot.SshotLessonWithStudent"/>
+      <class name="tests.screenShot.SshotListLeads"/>
+      <class name="tests.screenShot.SshotListTrainers"/>
+      <class name="tests.screenShot.SshotListWorkers"/>
+      <class name="tests.screenShot.SshotWindowSchedule"/>
+      <class name="tests.screenShot.SshotPayByAdminCard"/>
+      <class name="tests.screenShot.SshotPayByAdminShop"/>
+      <class name="tests.screenShot.SshotMaterialTabInProcess"/>
+      <class name="tests.screenShot.SshotMaterialTabAll"/>
+      <class name="tests.screenShot.SshotMainTasks"/>
+      <class name="tests.screenShot.SshotPopupTasks"/>
+      <class name="tests.screenShot.SshotRequests"/>
+      <class name="tests.screenShot.SshotPopupRequests"/>
+      <class name="tests.screenShot.SshotTypeformPassLookingResult"/>
+      <class name="tests.screenShot.SshotHistoryStudentProgressBar"/>
+    </classes>
+  </test>
+</suite>
+

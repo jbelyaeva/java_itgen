@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertNotNull;
 
 import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import core.general.TimeGeneral;
 import data.model.schedule.Schedules;
 import data.services.FamilyService;
@@ -51,7 +52,7 @@ public class TrainerStartLesson extends TestBase {
             "noTrial");
   }
 
-  @Test
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testTrainerStartLesson() {
     app.trainer().gotoSchedule();
     Schedules before = app.dbschedules().schedules();

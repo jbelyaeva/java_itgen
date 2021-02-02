@@ -1,5 +1,7 @@
 package app.appmanager.transactionHelper;
 
+import static app.appmanager.HelperBase.DateWithCorrectionDays;
+
 import data.model.users.StudentData;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.FinishedLessonsCountBySkill;
@@ -53,6 +55,7 @@ public class TrStudentHelper {
             .withBirthday(birthday)
             .withLangs(Arrays.asList(lang))
             .withSkills(Arrays.asList(skill))
+            .withMaterialsLang("ru")
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
             .withDuration(duration)
@@ -61,8 +64,9 @@ public class TrStudentHelper {
             .withUsedSubjs(Arrays.asList(usedSubj))
             .withFinishedLessonsCount(finishLessens)
             .withFinishedLessonsCountBySkill(
-                new FinishedLessonsCountBySkill().withCount(countSkill[0])
-                    .withMinutes(countSkill[1]));
+                new FinishedLessonsCountBySkill()
+                    .withOnes(
+                        new One().withCount(countSkill[1]).withMinutes(120)));
     studentService.save(student);
   }
 
@@ -104,6 +108,7 @@ public class TrStudentHelper {
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
             .withDuration(duration)
+            .withMaterialsLang("ru")
             .withStatus(new Status().withState(status))
             .withLastSubjs(Arrays.asList(lastSubj))
             .withUsedSubjs(Arrays.asList(usedSubj))
@@ -158,6 +163,7 @@ public class TrStudentHelper {
                 .withPassword(new Password().withBcrypt(
                     "$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
             .withDuration(duration)
+            .withMaterialsLang("ru")
             .withStatus(new Status().withState(status));
     studentService.save(student);
   }
@@ -173,7 +179,6 @@ public class TrStudentHelper {
       String studyLang,
       String locate,
       String idFamily) {
-
     StudentData student =
         new StudentData()
             .withId(idStudent)
@@ -193,21 +198,69 @@ public class TrStudentHelper {
             .withContacts(
                 Collections.singletonList(new Contacts().withType("phone").withVal("1234567899")))
             .withDuration(2)
+            .withMaterialsLang("ru")
             .withStatus(new Status().withState("noTrial"));
     studentService.save(student);
   }
 
-  public void changeDefaultStudent(String idStudent, String name, String surname, String[] roles,
+  public void changeDefaultStudent_finishLessonBy1Skill(String[] roles,
       String pclevel, String country, String tz, int gender, String studyLang, String locate,
-      String langs, String skills, String phone, int duration,
-      String status, int finishLessens, String lastSubj, String usedSubj, int countSkill) {
+      String langs, String[] skills, String phone, int duration,
+      String status, int finishLessens, String[] lastSubj, String[] usedSubj, int countSkill,
+      int minutesSkill) {
 
     StudentData oldStudent = studentService.findById("21");
     StudentData newStudent =
         new StudentData()
             .withId("21")
-            .withFirstName(name)
-            .withLastName(surname)
+            .withFirstName("Ребенок")
+            .withLastName("Дефолтный")
+            .withRoles(Arrays.asList(roles))
+            .withPclevel(pclevel)
+            .withCountry(country)
+            .withTimeZone(tz)
+            .withGender(gender)
+            .withFamilyId("111")
+            .withStudyLang(studyLang)
+            .withLocate(locate)
+            .withBirthday(oldStudent.getBirthday())
+            .withLangs(Arrays.asList(langs))
+            .withStudyLang("ru")
+            .withSkills(Arrays.asList(skills))
+            .withServices(oldStudent.getServices())
+            .withUsername(oldStudent.getUsername())
+            .withContacts(
+                Collections.singletonList(new Contacts().withType("phone").withVal(phone)))
+            .withDuration(duration)
+            .withMaterialsLang("ru")
+            .withStatus(new Status().withState(status))
+            .withServices(new Services().withPassword(
+                new Password().withBcrypt(
+                    "$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
+            .withLastSubjs(Arrays.asList(lastSubj))
+            .withUsedSubjs(Arrays.asList(usedSubj))
+            .withFinishedLessonsCountBySkill(
+                new FinishedLessonsCountBySkill()
+                    .withOnes(
+                        new One().withCount(countSkill).withMinutes(minutesSkill)))
+            .withFinishedLessonsCount(finishLessens)
+            .withLastSeen(new Date())
+            .withStartStudyAt(DateWithCorrectionDays(-1));
+    studentService.save(newStudent);
+  }
+
+  public void changeDefaultStudent_finishLessonBy2Skills(String[] roles,
+      String pclevel, String country, String tz, int gender, String studyLang, String locate,
+      String langs, String[] skills, String phone, int duration,
+      String status, int finishLessens, String[] lastSubj, String[] usedSubj, int countSkill,
+      int minutesSkill) {
+
+    StudentData oldStudent = studentService.findById("21");
+    StudentData newStudent =
+        new StudentData()
+            .withId("21")
+            .withFirstName("Ребенок")
+            .withLastName("Дефолтный")
             .withRoles(Arrays.asList(roles))
             .withPclevel(pclevel)
             .withCountry(country)
@@ -231,10 +284,12 @@ public class TrStudentHelper {
                     "$2b$10$tA7gJVhEt/NPcfldqC1AD.JQMPvXFt.zaK7y82y2uIUoB4PJWaon6")))
             .withLastSubjs(Arrays.asList(lastSubj))
             .withUsedSubjs(Arrays.asList(usedSubj))
-            .withFinishedLessonsCountBySkill(
-                new FinishedLessonsCountBySkill().withOne(countSkill))
+            .withFinishedLessonsCountBySkill(new FinishedLessonsCountBySkill()
+                .withOnes(new One().withCount(countSkill).withMinutes(minutesSkill))
+                .withTwentyOnes(new TwentyOne().withCount(countSkill).withMinutes(minutesSkill)))
             .withFinishedLessonsCount(finishLessens)
-            .withLastSeen(new Date());
+            .withLastSeen(new Date())
+            .withStartStudyAt(DateWithCorrectionDays(-1));
     studentService.save(newStudent);
   }
 }

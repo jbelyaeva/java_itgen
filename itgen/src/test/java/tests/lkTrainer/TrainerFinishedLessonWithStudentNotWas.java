@@ -71,7 +71,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     Schedules before = app.dbschedules().schedules();
     FinishedChildLessons finishChildBefore = app.dbschedules().finishedChildLessons();
     FinishedLessons finishBefore = app.dbschedules().finishedLessons();
-
+    app.trainer().gotoSchedule();
     app.trainer().finishedLessonWithNotWas("finishLessonByTrainer");
     app.trainer().gotoTask();
     Schedules after = app.dbschedules().schedules();

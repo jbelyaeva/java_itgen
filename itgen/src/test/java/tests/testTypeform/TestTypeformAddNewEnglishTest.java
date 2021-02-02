@@ -3,13 +3,13 @@ package tests.testTypeform;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import core.general.RunTestAgain;
 import data.model.typeform.TestData;
 import data.model.typeform.Tests;
 import data.services.TestService;
-import app.testbase.TestBase;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -70,6 +70,7 @@ public class TestTypeformAddNewEnglishTest extends TestBase {
     app.goTo().urlTests();
     Tests before = app.dbtest().tests();
     app.test().addEnglishTest(test);
+    app.trainer().refresh();
     Tests after = app.dbtest().trySeveralTimeGetNewDateFromDB(before);
     testClean = app.dbtest().lastTest();
     assertThat(after.size(), equalTo(before.size() + 1));

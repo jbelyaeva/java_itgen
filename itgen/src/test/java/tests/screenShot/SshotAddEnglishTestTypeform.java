@@ -66,15 +66,18 @@ public class SshotAddEnglishTestTypeform extends TestBase {
   }
 
   @Test(dataProvider = "validAddTestFromJson")
-  public void testSshotAddEnglishTestTypeform(TestData test)
-      throws AWTException, IOException, InterruptedException {
+  public void testSshotAddEnglishTestTypeform(TestData test) throws AWTException, IOException {
     app.goTo().menuTests();
     app.sshot().changeTopBar();
     app.test().addEnglishTest(test);
     String name = "Admin_TypeformAddEnglishTest_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    Thread.sleep(4000);
-    app.base().deleteAlerts();
+    /*  locatorIgnor.add(By.xpath("//td[@class='dueDate']"));
+    locatorIgnor.add(By.xpath("(//div[contains(@class,'editable')])[3]"));
+    locatorIgnor.add(By.xpath("//div[contains(@class,'client-time')]"));
+    locatorIgnor.add(By.xpath("//div[contains(@class,'task-lesson')]"));
+    locatorIgnor.add(By.xpath("//span[@class='text-muted']"));*/
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

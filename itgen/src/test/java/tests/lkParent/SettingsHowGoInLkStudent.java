@@ -19,7 +19,7 @@ public class SettingsHowGoInLkStudent extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testSettingsHowGoInLkStudent() {
-    app.lkParent().reset();
+    app.lkParent().resetWithoutLogo();
     app.lkParent().clickByNameSecondStudent();
     app.lkParent().clickByFirstTutorial();
     app.check().findElement(app.lkParent().getImageInstructionGif());
