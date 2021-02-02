@@ -25,7 +25,7 @@ public class SshotFamily extends TestBase {
     }
 
     @Test(retryAnalyzer = RunTestAgain.class)
-    public void testSshotFamilies() throws AWTException, IOException {
+    public void testSshotFamilies() throws AWTException, IOException, InterruptedException {
         String name = "Admin_Family_RU_Chrome";
         Set<By> locatorIgnor = new HashSet<>();
         locatorIgnor.add(By.xpath("//span[@class='user-time']"));
@@ -34,7 +34,7 @@ public class SshotFamily extends TestBase {
         app.student().selectStudentInListUIById("21");
         app.family().btnFamily();
         app.sshot().changeTopBar();
-
+        Thread.sleep(4000);
         ImageDiff diff =
                 app.sshot()
                         .getImageDiff(

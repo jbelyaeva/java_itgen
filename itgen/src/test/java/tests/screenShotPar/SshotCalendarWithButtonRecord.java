@@ -28,13 +28,15 @@ public class SshotCalendarWithButtonRecord extends TestBase {
   }
 
   @Test
-  public void testSshotCalendarWithButtonRecorde() throws AWTException, IOException {
+  public void testSshotCalendarWithButtonRecorde()
+      throws AWTException, IOException, InterruptedException {
     app.lkParent().btnShowSchedule();
     String name = "Parent_CalendarWithBurronRecord_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     locatorIgnor.add(By.xpath("//div[@class='calendar']"));
     app.sshot().changeTopBar();
     app.lkParent().skipHelper();
+    Thread.sleep(4000);
     ImageDiff diff =
             app.sshot()
                     .getImageDiff(

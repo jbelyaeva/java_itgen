@@ -216,7 +216,8 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
   }
 
   @Test
-  public void testLearningWithSubscribersAndHistory() throws AWTException, IOException {
+  public void testLearningWithSubscribersAndHistory()
+      throws AWTException, IOException, InterruptedException {
     app.student().btnCloseTutorial();
     String name = "Student_LearningWithHistoryWithoutSubscribers_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -225,6 +226,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='date today']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
     app.sshot().changeTopBarInLKParent();
+    Thread.sleep(4000);
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

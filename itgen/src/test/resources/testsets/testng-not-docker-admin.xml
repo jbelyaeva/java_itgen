@@ -3,7 +3,6 @@
 <suite name="Suite1" verbose="1">
   <test name="NotDockerAdmin">
     <classes>
-      <class name="tests.selfRegistration.SelfRegistration"/>
       <class name="tests.schedule.ScheduleSingleMoveTests"/>
       <class name="tests.schedule.ScheduleRegularMoveTests"/>
       <class name="tests.materials.MaterialsLink"/>

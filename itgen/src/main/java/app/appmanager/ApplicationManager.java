@@ -175,8 +175,8 @@ public class ApplicationManager {
     }
     wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
-    wd.manage().window().maximize();
-
+   // wd.manage().window().maximize();
+    wd.manage().window().setSize(new Dimension(1920, 1080));
     workerHelper = new WorkerHelper(wd);
     sessionHelper = new SessionHelper(wd);
     navigationHelper = new NavigationHelper(wd);

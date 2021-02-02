@@ -29,7 +29,7 @@ public class SshotEntryOnTrial extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testEntryOnTrial() throws AWTException, IOException {
+  public void testEntryOnTrial() throws AWTException, IOException, InterruptedException {
     app.lkParent().recordOnTrail(1);
 
     String name = "Parent_EntryOnTrial_RU_Chrome";
@@ -39,7 +39,7 @@ public class SshotEntryOnTrial extends TestBase {
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
 
     app.sshot().changeTopBarInLKParent();
-
+    Thread.sleep(4000);
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

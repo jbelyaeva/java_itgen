@@ -53,12 +53,14 @@ public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
   }
 
   @Test
-  public void testLearningWithoutSubscribersAndHistory() throws AWTException, IOException {
+  public void testLearningWithoutSubscribersAndHistory()
+      throws AWTException, IOException, InterruptedException {
     String name = "Student_LearningWithoutSubscribersAndHistory_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.sshot().changeTopBarInLKParent();
     String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
     app.base().deleteElements(deleteElements);
+    Thread.sleep(4000);
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

@@ -14,8 +14,9 @@ public class ScheduleHelper extends HelperBase {
       "//div[@class='busy-childs']//a[contains(@href,'newStudent')]");
   private final By btnMoveInPopup = By.xpath("//div[@class='modal-footer']//button");
   private final By btnCreateSchedule = By.xpath("//a[contains(@href,'/createSchoolSchedule')]");
-  private final By labelBlockSchedule = By.xpath(
-      "(//div[@class='text-muted header-labels']//span)[3]");
+//  private final By labelBlockSchedule = By.xpath(
+ //     "(//div[@class='text-muted header-labels']//span)[3]");
+  private final By labelBlockSchedule = By.xpath("//div[@class='text-muted header-labels']");
   private final By labelCancelSchedule = By.xpath(
       "(//div[@class='text-muted header-labels']//span)[2]");
   private final By checkBoxConst = By.xpath("//div[@class='permanent-form-group']//div");
