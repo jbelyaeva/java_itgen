@@ -20,4 +20,18 @@ public class RequestService {
   public void save(RequestData request) {
     requestDao.save(request);
   }
+
+  public void drop() {
+    requestDao.drop();
+  }
+
+  public <E> void updateFieldClass(String idRequest, String nameFiled, E data) {
+    requestDao.updateFieldClass(idRequest, nameFiled, data);
+  }
+
+  public void deleteField(String idRequest, String nameField) {
+    requestDao.deleteField(idRequest, nameField);
+  }
 }
+
+

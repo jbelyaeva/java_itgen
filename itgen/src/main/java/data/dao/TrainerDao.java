@@ -33,4 +33,11 @@ public class TrainerDao {
     UpdateOperations ops = datastore.createUpdateOperations(TrainerData.class).set(nameFiled, data);
     datastore.update(query, (UpdateOperations<TrainerData>) ops);
   }
+
+  public <E> void updateField(String idTrainer, String nameFiled, E data) {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<TrainerData> query = datastore.createQuery(TrainerData.class).filter("id", idTrainer);
+    UpdateOperations ops = datastore.createUpdateOperations(TrainerData.class).set(nameFiled, data);
+    datastore.update(query, (UpdateOperations<TrainerData>) ops);
+  }
 }

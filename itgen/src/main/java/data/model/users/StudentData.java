@@ -113,6 +113,12 @@ public class StudentData {
   @Embedded("finishedLessonsCountBySkill")
   private FinishedLessonsCountBySkill finishedLessonsCountBySkill;
 
+  @Property("startStudyAt")
+  private Date startStudyAt;
+
+  @Property("materialsLang")
+  private String materialsLang;
+
   public StudentData() {
   }
 
@@ -247,6 +253,16 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withStartStudyAt(Date startStudyAt) {
+    this.startStudyAt = startStudyAt;
+    return this;
+  }
+
+  public StudentData withMaterialsLang(String materialsLang) {
+    this.materialsLang = materialsLang;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -357,6 +373,14 @@ public class StudentData {
 
   public List<Emails> getEmails() {
     return emails;
+  }
+
+  public Date getStartStudyAt() {
+    return startStudyAt;
+  }
+
+  public String getMaterialsLang() {
+    return materialsLang;
   }
 
   @Override

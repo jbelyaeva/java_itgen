@@ -8,6 +8,7 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,11 +17,12 @@ public class SettingsSaveValidPassword extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    data.postClean().student();
     data.defFamily().set13_addNewStudentOlder7Years();
   }
   private final String newPassword = "123456";
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
   public void testSettingsSaveValidPassword() {
     String oldBcrypt = data.studentService().findById("newStudent").getServices().getBcrypt();
     app.lkParent().reset();
@@ -38,10 +40,13 @@ public class SettingsSaveValidPassword extends TestBase {
   }
 
   @AfterMethod(alwaysRun = true)
-  public void clean() {
-    if (app.base().getText(app.lkParent().getSelectParent()).equals("родитель")) {
+  public void clean() throws InterruptedException {
+    app.base().refresh();
+    if (app.base().isElementPresent(By.xpath(app.lkParent().getSelectParent()))) {
       app.lkParent().selectParent();
     } else {
+      app.base().refresh();
+      Thread.sleep(2000);
       app.base().goByHref(app.base().address() + "/login");
       app.base().login("parent", "111111");
     }

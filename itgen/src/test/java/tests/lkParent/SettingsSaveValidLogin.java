@@ -8,7 +8,6 @@ package tests.lkParent;
  */
 
 import app.testbase.TestBase;
-import core.general.RunTestAgain;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,7 +21,7 @@ public class SettingsSaveValidLogin extends TestBase {
     data.defFamily().set13_addNewStudentOlder7Years();
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test()
   public void testSettingsSaveValidLogin() {
     app.lkParent().reset();
     app.lkParent().saveNewLogin(loginNew);
@@ -38,12 +37,14 @@ public class SettingsSaveValidLogin extends TestBase {
     app.check().findElement(app.lkParent().getWinTutorialsInSettings());
     app.base().btnCloseTutorial();
     app.base().logoutByStudent();
-    app.base().goByHref(app.base().address() + "/login");
-    app.base().login("parent", "111111");
   }
 
   @AfterMethod(alwaysRun = true)
-  public void clean() {
+  public void clean() throws InterruptedException {
     data.postClean().student();
+    app.base().goByHref(app.base().address() + "/login");
+    app.base().refresh();
+    app.base().goByHref(app.base().address() + "/login");
+    app.base().login("parent", "111111");
   }
 }

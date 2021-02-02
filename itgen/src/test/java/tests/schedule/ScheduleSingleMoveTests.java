@@ -24,12 +24,15 @@ public class ScheduleSingleMoveTests extends TestBase {
   public void testScheduleSingleMove() {
     String periodMove = "23:00 - 01:00";
     app.goTo().menuSchedule();
+    app.base().refresh();
     Schedules before = app.dbschedules().schedules();
     app.schedule().move(periodMove, "newSchedule");
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size() + 1);
-    app.check().textElement(app.schedule().getLabelBlockSchedule(), "23:00 - 01:00,\nНе начато");
+    app.check()
+        .textElement(app.schedule().getLabelInformationAboutSchedule(),
+            "23:00 - 01:00,\nНе начато");
     app.goTo().menuTasks();
   }
 

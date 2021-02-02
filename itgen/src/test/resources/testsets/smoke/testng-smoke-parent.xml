@@ -36,7 +36,7 @@
      <class name="tests.lkParent.RecordOnTrialOnSkillWithoutAT"/>
      <class name="tests.lkParent.RecordOnTrialOnSkillWithAT"/>
      <class name="tests.lkParent.PageConfirmTransitionToPageInstall"/>
-     <class name="tests.lkParent.RecordOnNewSkillWithAT"/>
+    <class name="tests.lkParent.RecordOnNewSkillWithAT"/>
      <class name="tests.lkParent.RecordOnOldSkillWithAT"/>
      <class name="tests.lkParent.ScheduleStudentWithButtonInstall"/>
      <class name="tests.lkParent.TrainerInListWhenRecordOnPaidAndLessonWithWas"/>
@@ -46,28 +46,28 @@
      <class name="tests.lkParent.WorkingOffWithLessons"/>
      <class name="tests.lkParent.RecordOnWorkingOff"/>
      <class name="tests.lkParent.SettingsErrorPassword"/>
-     <class name="tests.lkParent.SettingsSaveValidLogin"/>
-     <class name="tests.lkParent.SettingsSaveValidPassword"/>
      <class name="tests.lkParent.SettingsCancelPassword"/>
      <class name="tests.lkParent.SettingsCancelLogin"/>
      <class name="tests.lkParent.SettingsNewStudentAddInAccauntAfterSavePassword"/>
-     <class name="tests.lkParent.SettingsHowGoInLkStudent"/>
      <class name="tests.lkParent.SettingsHowGoInLkStudent"/>
      <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOff"/>
      <class name="tests.lkParent.CancelOnSingleAndAssignWorkingOffLater"/>
      <class name="tests.lkParent.RecordOnTrailWithTest"/>
      <class name="tests.lkParent.RecordOnSingleWithTest"/>
      <class name="tests.lkParent.RecordOnTrailWithTestStudentTestPassed"/>
-     <class name="tests.lkParent.RecordOnTrailWithTestStudentTestFailed"/>
-     <class name="tests.lkParent.RecordOnSingleWithTestStudentTestPassed"/>
-     <class name="tests.lkParent.RecordOnSingleWithTestStudentTestFailed"/>
-     <class name="tests.lkParent.RecordOnTrailWithTestStudent7YearsTestPassed"/>
-     <class name="tests.lkParent.RecordOnSingleWithTestStudent7YearsTestPassed"/>
-     <class name="tests.lkParent.HistoryAllSkill"/>
-     <class name="tests.lkParent.HistoryLessonWithSkipAndDiscruptWithoutHW"/>
-     <class name="tests.lkParent.GeneralPageBtnPayAfterTrial"/>
-     <!--  <class name="tests.payment.PaymentByGuest"/>
-        <class name="tests.payment.PaymentByParent"/> -->
+      <class name="tests.lkParent.RecordOnTrailWithTestStudentTestFailed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudentTestPassed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudentTestFailed"/>
+      <class name="tests.lkParent.RecordOnTrailWithTestStudent7YearsTestPassed"/>
+      <class name="tests.lkParent.RecordOnSingleWithTestStudent7YearsTestPassed"/>
+      <class name="tests.lkParent.HistoryAllSkill"/>
+      <class name="tests.lkParent.HistoryLessonWithSkipAndDiscruptWithoutHW"/>
+      <class name="tests.lkParent.HistoryProgressBar"/>
+      <class name="tests.lkParent.GeneralPageBtnPayAfterTrial"/>
+      <!--  <class name="tests.payment.PaymentByGuest"/>
+         <class name="tests.payment.PaymentByParent"/> -->
+      <class name="tests.lkParent.SettingsSaveValidLogin"/>
+      <class name="tests.lkParent.SettingsSaveValidPassword"/>
     </classes>
   </test>
 </suite>

@@ -1,5 +1,7 @@
 package data.precondition;
 
+import static app.appmanager.HelperBase.DateWithCorrectionDays;
+
 import app.appmanager.HelperBase;
 import core.general.TimeGeneral;
 import data.model.materials.MaterialData;
@@ -16,23 +18,26 @@ public class DefaultFamilyAndFinishedLessonWithProjects extends TransactionManag
   public void set1_LessonYesterdayFinishedWithProject_StudentAddInDefaultFamily(
       String period) {
     trStudent()
-        .newStudent(
+        .studentAddDefaultFamilyAfterLesson(
             "newStudent",
             "Маша",
             "Машина",
             "expert",
             "BL",
-            "111",
             "Europe/Minsk",
             2,
-            base.DateWithCorrectionDays(-1460),
+            base.DateWithCorrectionDays(-3650),
             "ru",
             "ru",
             "12345678i",
             "ru",
             new String[]{"1"},
             2,
-            "learning"
+            1,
+            "trialFinished",
+            new String[]{"1"},
+            new String[]{"1"},
+            new int[]{1, 120}
         );
 
     trScheduleYesterday()
@@ -502,5 +507,410 @@ public class DefaultFamilyAndFinishedLessonWithProjects extends TransactionManag
             "21",
             "abort",
             text);
+  }
+
+  /* Дефолтый ученик c данными необходимыми для отображения прогресс бара. 1проект по скрейч.*/
+  public void set5_ProgressBarFOrDefaultStudent_1ProjectScratch() {
+
+    trStudent()
+        .changeDefaultStudent_finishLessonBy1Skill(
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            new String[]{"1"},
+            "+9875645311",
+            2,
+            "trialFinished",
+            1,
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
+
+    trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialOnLesson",
+            "14",
+            "Лабиринт",
+            "published",
+            "1",
+            "CreateNewMaterial",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .materialsOnLesson(
+            "02",
+            "21",
+            "MaterialOnLesson",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trAchievement().newAchievement(
+        "21_0",
+        "21",
+        0,
+        true,
+        DateWithCorrectionDays(-2),
+        DateWithCorrectionDays(-1)
+    );
+  }
+
+  /* Дефолтый ученик c данными необходимыми для отображения прогресс бара. 1проект по скрейч.*/
+  public void set6_ProgressBarFOrDefaultStudent_2ProjecsScratchMinecraft() {
+
+    trStudent()
+        .changeDefaultStudent_finishLessonBy2Skills(
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            new String[]{"1", "21"},
+            "+9875645311",
+            2,
+            "trialFinished",
+            2,
+            new String[]{"1", "21"},
+            new String[]{"1", "21"},
+            1,
+            120);
+
+    trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
+    trMaterial().newMaterialBranch("2", "MaterialMinecraft", "Minecraft");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialOnLesson",
+            "14",
+            "Лабиринт",
+            "published",
+            "1",
+            "CreateNewMaterial",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialMinecraft",
+            "14",
+            "Minecraft",
+            "published",
+            "21",
+            "MaterialMinecraft",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .materialsOnLesson(
+            "02",
+            "21",
+            "MaterialOnLesson",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trMaterial()
+        .materialsOnLesson(
+            "01",
+            "21",
+            "MaterialMinecraft",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trAchievement().newAchievement(
+        "21_0",
+        "21",
+        0,
+        true,
+        DateWithCorrectionDays(-2),
+        DateWithCorrectionDays(-1)
+    );
+
+    trAchievement().newAchievement(
+        "21_1",
+        "21",
+        1,
+        true,
+        DateWithCorrectionDays(-2),
+        DateWithCorrectionDays(-1)
+    );
+  }
+
+  /* Дефолтый ученик c данными необходимыми для отображения прогресс бара. 1проект по скрейч.*/
+  public void set7_ProgressBarFOrDefaultStudent_3ProjecsScratchMinecraftPython() {
+
+    trStudent()
+        .changeDefaultStudent_finishLessonBy2Skills(//для прогресс-бара это неважно
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            new String[]{"1", "21", "2"},
+            "+9875645311",
+            2,
+            "trialFinished",
+            3,
+            new String[]{"1", "21", "2"},
+            new String[]{"1", "21", "2"},
+            1,
+            120);
+
+    trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
+    trMaterial().newMaterialBranch("2", "MaterialMinecraft", "Minecraft");
+    trMaterial().newMaterialBranch("3", "MaterialPython", "Python");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialOnLesson",
+            "14",
+            "Лабиринт",
+            "published",
+            "1",
+            "CreateNewMaterial",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialMinecraft",
+            "14",
+            "Minecraft",
+            "published",
+            "21",
+            "MaterialMinecraft",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .publishedMaterial(
+            "MaterialPython",
+            "14",
+            "Python",
+            "published",
+            "2",
+            "MaterialPython",
+            "video",
+            "easy",
+            "ru",
+            "original",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "https://docs.google.com",
+            "Развивает внимательность",
+            "666");
+
+    trMaterial()
+        .materialsOnLesson(
+            "02",
+            "21",
+            "MaterialOnLesson",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trMaterial()
+        .materialsOnLesson(
+            "01",
+            "21",
+            "MaterialMinecraft",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trMaterial()
+        .materialsOnLesson(
+            "03",
+            "21",
+            "MaterialPython",
+            false,
+            "done",
+            "14",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            "changeStatus",
+            true,
+            null,
+            null,
+            "notStarted",
+            "done");
+
+    trAchievement().newAchievement(
+        "21_0",
+        "21",
+        0,
+        true,
+        DateWithCorrectionDays(-2),
+        DateWithCorrectionDays(-1)
+    );
+
+    trAchievement().newAchievement(
+        "21_1",
+        "21",
+        1,
+        true,
+        DateWithCorrectionDays(-2),
+        DateWithCorrectionDays(-1)
+    );
+  }
+
+  /***********************/
+  /*У дефолтного ученика есть вчера завершенное занятие с Был (без материалов, без дз) по scratch.
+   */
+  public void set8_YesterdaScratchWasWithoutProjects_StudentDefault() {
+    String period = "18:00 - 20:00";
+    trScheduleYesterday()
+        .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "21", "1");
+
+    trFinishedLesson()
+        .finishedChildLesson(
+            "ScheduleYesterday1856921",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            0,
+            "14",
+            "21",
+            "finished",
+            0,
+            3,
+            "1",
+            "ru",
+            4,
+            true,
+            false,
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period));
+
+    trFinishedLesson()
+        .finishedLessonWithOneStudent(
+            "ScheduleYesterday18569",
+            "ScheduleYesterday",
+            time.dateYesterday(),
+            0,
+            "14",
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period),
+            time.StimeYesterday(period),
+            time.EtimeYesterday(period),
+            "21",
+            "finished",
+            0,
+            3,
+            "1",
+            "ru",
+            4,
+            true,
+            false);
+
+    trStudent()
+        .changeDefaultStudent_finishLessonBy1Skill(//для прогресс-бара это неважно
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            new String[]{"1"},
+            "+9875645311",
+            2,
+            "trialFinished",
+            1,
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
   }
 }

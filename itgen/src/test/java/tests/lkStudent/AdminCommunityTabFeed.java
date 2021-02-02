@@ -41,7 +41,7 @@ public class AdminCommunityTabFeed extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.defFamily().set21_StartDefaultStudent();
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     data.postClean().communities();
   }
 }

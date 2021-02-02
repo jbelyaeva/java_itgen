@@ -5,7 +5,6 @@ import static app.appmanager.ApplicationManager.properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,6 +14,7 @@ public class LkStudentHelper extends HelperBase {
   private final By header = By.xpath("//div[@class='arrow']");
   private final By goOutFromAccount = By.xpath("//ul[contains(@class,'list')]/li[4]");
   private final By btnCloseTutorial = By.xpath("//button[@id-qa='cancel']");
+  private final By btnCloseTutorialTips = By.xpath("//div[@class='button-close']");
   private final By btnImReady = By.xpath("//div[contains(@class,'preview')]//button");
   private final By btnGotoLesson = By.xpath("//button[@tutorialtarget-id='child-go-to-lesson']");
   private final By messageReadyFromTrainer = By.xpath("//div[contains(@class,'preview')]//span");
@@ -46,6 +46,30 @@ public class LkStudentHelper extends HelperBase {
   private final By btnEditPost = By.xpath("//span[@id-qa='menu-edit']");
   private final By btnDeletePost = By.xpath("//span[@id-qa='menu-delete']");
   private final By btnAllSchedule = By.xpath("//button[@id-qa='schedule']");
+  private final By monthUI = By.xpath("//span[contains(@class,'capitalize')]");
+  private final By menuInPostCommunity = By.xpath("//button[@id-q='menu']");
+  private final By counterPosts = By.xpath("//span[@class='count']");
+  private final By textFirstPost = By.xpath(
+      "//div[@class='post-comments']//span[@class='multiline-text']");
+  private final By titleCommunity = By.xpath("//h4[@id-qa='title']");
+  private final By rightPaginatorInsSchedule = By.xpath("//button[contains(@class,'btn-next')]");
+  private final By leftPaginatorInSchedule = By.xpath("//button[contains(@class,'btn-prev')]");
+  private final By alongLessonInCalendar = By.xpath("//div[contains(@class,'lesson-container')]");
+  private final By chatOnLesson = By.xpath("//div[@class='child-lesson-chat']");
+  private final By alongMessageInChatOnLesson = By.xpath("//div[@class='message-text']//div");
+  private final By alongMessageInChatPrewiev = By.xpath(
+      "//div[@class='room-item']//div[@class='last-message']//span");
+  private final By labelNotPosts = By.xpath("//div[@class='posts-not-exist-item']");
+  private final By labelNotTests = By.xpath("//div[@class='childTesting-page']//span");
+  private final By progressBar = By.xpath(
+      "//div[@class='child-progress']//div[@class='progress-bar']");
+  private final By btnShowAllProgressBar = By.xpath("//button[@id-qa='show-all']");
+  private final By editTextMessageInChatOnLesson = By.xpath("//textarea[@id-qa='message']");
+  private final By btnSendMessageInChatOnLesson = By.xpath("//button[@id-qa='send']");
+  private final By dropdownInOldMessageInChatOnLesson = By.xpath("//span[@id-qa='dropdown']");
+  private final By btnEditMessageInChatOnLesson = By.xpath("//a[@id-qa='edit']");
+  private final By btnDeleteMessageInChatOnLesson = By.xpath("//a[@id-qa='remove']");
+  private final By indicatorChat = By.xpath("//div[@class='chat-alert circle']");
 
   public LkStudentHelper(WebDriver wd) {
     super(wd);
@@ -79,6 +103,74 @@ public class LkStudentHelper extends HelperBase {
     return btnDeletePost;
   }
 
+  public By getBtnImReady() {
+    return btnImReady;
+  }
+
+  public By getMenuInPostCommunity() {
+    return menuInPostCommunity;
+  }
+
+  public By getCounterPosts() {
+    return counterPosts;
+  }
+
+  public By getTextFirstPost() {
+    return textFirstPost;
+  }
+
+  public By getTitleCommunity() {
+    return titleCommunity;
+  }
+
+  public By getChatOnLesson() {
+    return chatOnLesson;
+  }
+
+  public By getAlongMessageInChatOnLesson() {
+    return alongMessageInChatOnLesson;
+  }
+
+  public By getAlongMessageInChatPrewiev() {
+    return alongMessageInChatPrewiev;
+  }
+
+  public By getTabAll() {
+    return tabAll;
+  }
+
+  public By getTabFeedInCommunity() {
+    return tabFeedInCommunity;
+  }
+
+  public By getLabelNotPosts() {
+    return labelNotPosts;
+  }
+
+  public By getBtnSubscribe() {
+    return btnSubscribe;
+  }
+
+  public By getBtnUnsubscribe() {
+    return btnUnsubscribe;
+  }
+
+  public By getLabelNotTests() {
+    return labelNotTests;
+  }
+
+  public By getProgressBar() {
+    return progressBar;
+  }
+
+  public By getBtnShowAllProgressBar() {
+    return btnShowAllProgressBar;
+  }
+
+  public By getIndicatorChat() {
+    return indicatorChat;
+  }
+
   public void logout() {
     click(header);
     click(goOutFromAccount);
@@ -88,6 +180,7 @@ public class LkStudentHelper extends HelperBase {
     if (isElementPresent(btnCloseTutorial)) {
       btnCloseTutorial();
     }
+    refresh();
     btnGoToLesson();
   }
 
@@ -135,10 +228,14 @@ public class LkStudentHelper extends HelperBase {
   }
 
   public void btnCloseTutorial() {
-    try {
+    if (isElementPresent(btnCloseTutorial)) {
       clickWithMoveToElementAndWait(5, btnCloseTutorial);
-    } catch (TimeoutException e) {
-      System.out.println("Исключение:" + e);
+    }
+  }
+
+  public void btnCloseTutorialTips() {
+    if (isElementPresent(btnCloseTutorialTips)) {
+      clickWithMoveToElementAndWait(5, btnCloseTutorialTips);
     }
   }
 
@@ -238,6 +335,7 @@ public class LkStudentHelper extends HelperBase {
     goToFeed();
     fillNewComment(comment);
     btnCreateComment();
+    waitVisibilityOfElementLocated(5, counterPosts);
   }
 
   private void btnCreateComment() {
@@ -274,5 +372,48 @@ public class LkStudentHelper extends HelperBase {
 
   public void tabFeedInCommunity() {
     click(tabFeedInCommunity);
+  }
+
+  public String monthUI() {
+    String data = wd.findElement(monthUI).getText();
+    return data.split(" ")[0]; // достали id
+  }
+
+  public void clickByRightPaginator() {
+    click(rightPaginatorInsSchedule);
+  }
+
+  public void clickByLeftPaginator() {
+    click(leftPaginatorInSchedule);
+  }
+
+  public void selectLessonInSchedule() {
+    if (!isElementPresent(alongLessonInCalendar)) {
+      click(leftPaginatorInSchedule);
+    }
+    click(alongLessonInCalendar);
+  }
+
+  public void sendMessageToTrainer(String message) {
+    clear(10, editTextMessageInChatOnLesson);
+    clickWithMoveToElementAndWait(1, editTextMessageInChatOnLesson);
+    wd.findElement(editTextMessageInChatOnLesson).sendKeys(message);
+    click(btnSendMessageInChatOnLesson);
+  }
+
+  public void modifyMessage(String message) {
+    click(dropdownInOldMessageInChatOnLesson);
+    click(btnEditMessageInChatOnLesson);
+    sendMessageToTrainer(message);
+  }
+
+  public void deleteMessage() {
+    click(dropdownInOldMessageInChatOnLesson);
+    click(btnDeleteMessageInChatOnLesson);
+  }
+
+  public void btnShowAllInProgressBar() {
+    deleteAlerts();
+    click(btnShowAllProgressBar);
   }
 }

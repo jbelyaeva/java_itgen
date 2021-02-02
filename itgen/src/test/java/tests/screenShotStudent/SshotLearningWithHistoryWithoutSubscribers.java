@@ -190,10 +190,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
             text);
 
     app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
+        .changeDefaultStudent_finishLessonBy1Skill(
             new String[]{"child"},
             "beginner",
             "BY",
@@ -202,22 +199,22 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
             "ru",
             "ru",
             "ru",
-            "1",
+            new String[]{"1"},
             "+9875645311",
             2,
-            "learning",
+            "trialFinished",
             1,
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
     app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 
   @Test
-  public void testLearningWithSubscribersAndHistory()
-      throws AWTException, IOException, InterruptedException {
+  public void testLearningWithSubscribersAndHistory() throws AWTException, IOException {
     app.student().btnCloseTutorial();
     String name = "Student_LearningWithHistoryWithoutSubscribers_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -226,7 +223,6 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
     locatorIgnor.add(By.xpath("//div[@class='date today']"));
     locatorIgnor.add(By.xpath("//div[contains(@id,'MeteorToys')]"));
     app.sshot().changeTopBarInLKParent();
-    Thread.sleep(4000);
     ImageDiff diff =
         app.sshot()
             .getImageDiff(
@@ -253,31 +249,7 @@ public class SshotLearningWithHistoryWithoutSubscribers extends TestBase {
     finishedLessonService.drop();
     taskService.drop();
     commentService.drop();
-    app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
-            new String[]{"child"},
-            "beginner",
-            "BY",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "ru",
-            "1",
-            "+9875645311",
-            2,
-            "noTrial",
-            0,
-            null,
-            null,
-            0);
-    studentService.deleteField("21", "finishedLessonsCount");
-    studentService.deleteField("21", "lastSubjs");
-    studentService.deleteField("21", "usedSubjs");
-    studentService.deleteField("21", "lessonCount");
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     commentService.drop();
   }
 }

@@ -19,12 +19,12 @@ import java.util.Set;
 public class SshotListStudents extends TestBase {
 
   @Test
-  public void testSshotListStudents() throws AWTException, IOException, InterruptedException {
+  public void testSshotListStudents() throws AWTException, IOException {
     String name = "Admin_ListStudents_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
-    Thread.sleep(4000);
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

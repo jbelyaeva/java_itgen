@@ -74,4 +74,54 @@ public class Skills extends TransactionManager {
             2,
             testId);
   }
+
+  //В админке направлений у Scratch пробное 1 ч
+  public void set3_ChangeDurationTrialScratch(String id, int duration) {
+    String descrition =
+        "Визуальный язык программирования для начинающих. Идеально подходит, чтобы создать свои "
+            + "первые проекты и освоить базовые понятия: ввод-вывод, переменные, циклы, условия, списки";
+    int[] age = {7};
+    String[] state = {"visible"};
+    trSkill()
+        .updateSkillWithFormatLessons(
+            id,
+            "ru",
+            "Scratch",
+            "visible",
+            descrition,
+            7,
+            age,
+            state,
+            "1",
+            "https://drive.google.com/open?id=1LK8XLAFw-sEF_7d2cqQ08NUgufWCs5LC",
+            true,
+            1,
+            duration,
+            new Integer[]{0, 1});
+  }
+
+  //В админке направлений у Scratch пробное 1 ч
+  public void set4_ChangeDurationTrialPython(String id, int duration) {
+    String descrition =
+        "Визуальный язык программирования для начинающих. Идеально подходит, чтобы создать свои "
+            + "первые проекты и освоить базовые понятия: ввод-вывод, переменные, циклы, условия, списки";
+    int[] age = {7};
+    String[] state = {"visible"};
+    trSkill()
+        .updateSkillWithFormatLessons(
+            id,
+            "ru",
+            "Python",
+            "visible",
+            descrition,
+            7,
+            age,
+            state,
+            "2",
+            "https://drive.google.com/open?id=1LK8XLAFw-sEF_7d2cqQ08NUgufWCs5LC",
+            true,
+            1,
+            duration,
+            new Integer[]{0, 1});
+  }
 }

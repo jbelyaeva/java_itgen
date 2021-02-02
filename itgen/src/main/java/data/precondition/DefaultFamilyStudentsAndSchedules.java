@@ -1,7 +1,6 @@
 package data.precondition;
 
 import app.appmanager.HelperBase;
-import data.services.StudentService;
 
 public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
 
@@ -664,10 +663,7 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
 
   public void set19_ChangeDefaultStudentInStart() {
     trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
+        .changeDefaultStudent_finishLessonBy1Skill(
             new String[]{"child"},
             "beginner",
             "BY",
@@ -676,23 +672,27 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
             "ru",
             "ru",
             "ru",
-            "1",
+            new String[]{},
             "+9875645311",
             2,
             "noTrial",
+            1,
+            new String[]{},
+            new String[]{},
             0,
-            null,
-            null,
             0);
+    data.studentService().deleteField("21", "lastSubjs");
+    data.studentService().deleteField("21", "skills");
+    data.studentService().deleteField("21", "usedSubjs");
+    data.studentService().deleteField("21", "finishedLessonsCount");
+    data.studentService().deleteField("21", "finishedLessonsCountBySkill");
+    data.studentService().deleteField("21", "lastSeen");
   }
 
   //дефолтный ребенок - админ сообщества
   public void set20_DefaultStudentAdminCommunity() {
     trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
+        .changeDefaultStudent_finishLessonBy1Skill(
             new String[]{"child", "createCommunities"},
             "beginner",
             "BY",
@@ -701,44 +701,20 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
             "ru",
             "ru",
             "ru",
-            "1",
+            new String[]{},
             "+9875645311",
             2,
             "noTrial",
+            1,
+            new String[]{},
+            new String[]{},
             0,
-            null,
-            null,
             0);
-  }
-
-  public void set21_StartDefaultStudent() {
-    StudentService studentService = new StudentService();
-    trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
-            new String[]{"child"},
-            "beginner",
-            "BY",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "ru",
-            "1",
-            "+9875645311",
-            2,
-            "noTrial",
-            0,
-            null,
-            null,
-            0);
-    studentService.deleteField("21", "lastSubjs");
-    studentService.deleteField("21", "usedSubjs");
-    studentService.deleteField("21", "finishedLessonsCount");
-    studentService.deleteField("21", "finishedLessonsCountBySkill");
-    studentService.deleteField("21", "lastSeen");
+    data.studentService().deleteField("21", "lastSubjs");
+    data.studentService().deleteField("21", "usedSubjs");
+    data.studentService().deleteField("21", "finishedLessonsCount");
+    data.studentService().deleteField("21", "finishedLessonsCountBySkill");
+    data.studentService().deleteField("21", "lastSeen");
   }
 }
 

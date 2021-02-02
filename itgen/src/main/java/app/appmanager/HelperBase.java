@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
@@ -176,8 +175,6 @@ public class HelperBase {
     type(By.name("username"), login);
     type(By.name("password"), password);
     clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'btn-login')]"));
-    // ждать появления иконки чата
-    waitVisibilityOfElementLocated(5, By.xpath("//div[@class='right']//div[@class='chat-button']"));
   }
 
   public void goByHref(String Url) {
@@ -257,7 +254,7 @@ public class HelperBase {
     return wd.findElement(locator).getAttribute("disabled");
   }
 
-  public Date DateWithCorrectionDays(int days) {
+  public static Date DateWithCorrectionDays(int days) {
     Date data = new Date();
     Calendar c = Calendar.getInstance();
     c.setTime(data);
@@ -330,6 +327,21 @@ public class HelperBase {
     }
   }
 
+  public void invisibleElements(String[] invisibleElements) {
+    if (invisibleElements != null) {
+      for (int i = 0; i <= invisibleElements.length - 1; i++) {
+        List<WebElement> elementsList = wd.findElements(By.xpath(invisibleElements[i]));
+        for (WebElement element : elementsList) {
+          String script =
+              "arguments[0].style.opacity=1;"
+                  + "arguments[0].style['visibility']='hidden';"
+                  + "return true;";
+          ((JavascriptExecutor) wd).executeScript(script, element);
+        }
+      }
+    }
+  }
+
   public boolean checkMatchTZServerUTC() {
     SimpleDateFormat sdf = new SimpleDateFormat("hh X");
     String dateWithTz = sdf.format(new Date());
@@ -344,7 +356,6 @@ public class HelperBase {
   //метод для удаления предупреждения об открытых двух вкладках, дать разрешение на микрофон  и камеру
   public void deleteAlerts() {
     if (isElementPresent(By.xpath("//div[@id-qa='notification-audio-video-screen-permissions']")) ||
-        isElementPresent(By.xpath("//div[@id-qa='notification-two-tabs-are-opened']")) ||
         isElementPresent(By.xpath("//div[@id-qa='notification-two-tabs-are-opened']"))) {
       String[] deleteElements = {"//div[contains(@class,'alert-success')]"};
       deleteElements(deleteElements);
@@ -376,21 +387,16 @@ public class HelperBase {
     return url;
   }
 
-  public boolean tryDoAction(By locator) {
-    boolean error = false;
-    try {
-      moveToElement(locator);
-    } catch (JavascriptException e) {
-      error = true;
-    }
-    return error;
-  }
-
   public void btnCloseTutorial() {
     try {
       clickWithMoveToElementAndWait(5, By.xpath("//button[@id-qa='cancel']"));
     } catch (TimeoutException e) {
       System.out.println("Исключение:" + e);
     }
+  }
+
+  public void searchMain(String text) {
+    type(By.xpath("//input"), text);
+    click(By.xpath("//ul[contains(@class,'result')]"));
   }
 }

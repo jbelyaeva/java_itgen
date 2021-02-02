@@ -3,6 +3,11 @@
 <suite name="Suite1" verbose="1">
   <test name="NotDockerAdmin">
     <classes>
+      <!-- <class name="tests.candidates.CandidateCreateEmployeer"/> -->
+      <class name="tests.task.TaskFiltrByPriorityInStack"/>
+      <class name="tests.taskPopup.TaskManualWaitAnswerInPopup"/>
+      <class name="tests.taskPopup.TaskManualOnTomorrowInPopup"/>
+      <class name="tests.taskPopup.TaskManuaGetControlInPopup"/>
       <class name="tests.schedule.ScheduleSingleMoveTests"/>
       <class name="tests.schedule.ScheduleRegularMoveTests"/>
       <class name="tests.materials.MaterialsLink"/>

@@ -35,14 +35,22 @@ public class SettingsNewStudentAddInAccauntAfterSavePassword extends TestBase {
   }
 
   @AfterMethod(alwaysRun = true)
-  public void clean() {
+  public void clean() throws InterruptedException {
     String id = app.dbstudents().lastStudent().getId();
     if (!id.equals("21")) {
       data.studentService().DeleteById(app.dbstudents().lastStudent().getId());
     }
     //удалить нового ребенка из быстрых переходов
+    app.base().refresh();
+    app.lkParent().btnLogo();
     app.lkParent().clickByHeader();
     app.lkParent().clickByOleg();
     app.base().login("parent", "111111");
+    Thread.sleep(2000);
+    if (app.base().isElementPresent(By.name("username"))) {
+      app.base().clear(10, By.name("username"));
+      app.base().clear(10, By.name("password"));
+      app.base().login("parent", "111111");
+    }
   }
 }

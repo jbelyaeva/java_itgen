@@ -26,7 +26,7 @@ public class ScheduleStudentWithSkip extends TestBase {
     app.lkParent().clickByShowHistorySecondChild();
     app.lkParent().clickByTabSchedule();
     app.check().findElement(app.lkParent().getBtnAssignWorking());
-    app.check().findElement(app.lkParent().getScheduleLabelSkipped());
+    app.check().findElement(app.lkParent().scheduleLabelSkipped());
     app.check().findElement(app.lkParent().getScheduleLabelFinished());
     app.base().refresh();
   }

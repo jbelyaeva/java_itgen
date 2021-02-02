@@ -36,15 +36,16 @@ public class AdminCommunityTabFeedDeleteAndModifyPost extends TestBase {
     app.lkStudent().btnPoint();
     app.check().findElement(app.lkStudent().getBtnEditPost());
     app.check().findElement(app.lkStudent().getBtnDeletePost());
+    app.base().refresh();
+    app.lkStudent().logout();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.defFamily().set21_StartDefaultStudent();
     data.postClean().communities();
-    app.base().refresh();
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     app.base().goByHref(app.base().address() + "/login");
     app.lkStudent()
-        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+        .login("student", "111111");
   }
 }

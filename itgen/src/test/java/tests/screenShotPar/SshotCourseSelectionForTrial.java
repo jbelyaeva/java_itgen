@@ -22,8 +22,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testSshotCourseSelectionForTrial()
-      throws AWTException, IOException, InterruptedException {
+  public void testSshotCourseSelectionForTrial() throws AWTException, IOException {
     app.lkParent().btnRecordOnTrail();
 
     String name = "Parent_CourseSelectionForTrial_RU_Chrome";
@@ -33,7 +32,7 @@ public class SshotCourseSelectionForTrial extends TestBase {
 
     app.sshot().changeTopBar();
     app.lkParentRecord().clickByFullArea();
-    Thread.sleep(4000);
+
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

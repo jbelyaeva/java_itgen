@@ -110,6 +110,7 @@ public class LKParentHelper extends HelperBase {
   private final By monthUI = By.xpath("//span[@class='date']");
   private final By labelWorkingOffOnThirdLessonInSchedule = By.xpath(
       "((//div[@class='lesson-content-client'])[3]//div[@class='lesson-label working-off'])[1]");
+  private final By labelWorkingOff = By.xpath("(//div[@class='lesson-label working-off'])[1]");
   private final By clickByFirstStudent = By.xpath("//a[contains(@href,'21')]");
   private final By clickBySecondStudent = By.xpath("//a[contains(@href,'newStudent')]");
   private final By btnChangePassword = By.xpath("//div[@class='password']//button");
@@ -144,7 +145,7 @@ public class LKParentHelper extends HelperBase {
       "//div[@class='lesson-comment']//span[text()='Scratch']");
   private final By btnCloseWinWorkingOffWithoutLesson = By.xpath(
       "//div[@class='modal-body']//button");
-  private final String selectParent = "(//div[@class='account-item'])[1]//div[@class='profile-short-info']//span[@class='role']";
+  private final String selectParent = "//span[text()='Parent']";
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
@@ -304,6 +305,10 @@ public class LKParentHelper extends HelperBase {
 
   public By getLabelWorkingOffOnThirdLessonInSchedule() {
     return labelWorkingOffOnThirdLessonInSchedule;
+  }
+
+  public By getLabelWorkingOff() {
+    return labelWorkingOff;
   }
 
   public By getLabelLoginInSettings() {
@@ -566,6 +571,12 @@ public class LKParentHelper extends HelperBase {
     btnLogo();
   }
 
+  public void resetWithoutLogo() {
+    refresh();
+    click(btnFreeLessons);
+    btnLogo();
+  }
+
   public void btnSchedule() {
     click(btnSchedule);
   }
@@ -721,6 +732,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void saveNewLogin(String loginNew) {
+    refresh();
     clickByNameSecondStudent();
     btnCloseTutorial();
     clickByChangeLogin();
@@ -791,5 +803,20 @@ public class LKParentHelper extends HelperBase {
 
   public void selectParent() {
     click(By.xpath(selectParent));
+  }
+
+  public By scheduleLabelSkipped() {
+    if (!isElementPresent(scheduleLabelSkipped)) {
+      click(btnPaginatorLeft);
+    }
+    return getScheduleLabelSkipped();
+  }
+
+  public By labelWorkingOffOnThirdLessonInSchedule() {
+    if (!isElementPresent(scheduleLabelFinished)) {
+      return getLabelWorkingOff();
+    } else {
+      return getLabelWorkingOffOnThirdLessonInSchedule();
+    }
   }
 }

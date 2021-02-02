@@ -19,14 +19,13 @@ import java.util.Set;
 public class SshotStudentSettingsChangePassword extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testSshotStudentSettingsChangePassword()
-      throws AWTException, IOException, InterruptedException {
+  public void testSshotStudentSettingsChangePassword() throws AWTException, IOException {
     app.lkParent().reset();
     app.lkParent().clickByNameFirstStudent();
     app.student().btnCloseTutorial();
     app.lkParent().clickByChangePassword();
     app.sshot().changeTopBarInLKParent();
-    Thread.sleep(4000);
+
     String name = "Parent_SettingsChangePassword_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
 

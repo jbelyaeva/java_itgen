@@ -3,6 +3,8 @@ package tests.students;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import data.model.family.FamilyData;
 import data.model.users.StudentData;
 import data.model.users.Students;
@@ -10,7 +12,6 @@ import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Status;
 import data.services.FamilyService;
 import data.services.StudentService;
-import app.testbase.TestBase;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -75,7 +76,7 @@ public class StudentFiltrPolTests extends TestBase {
     studentService.save(student2);
   }
 
-  @Test(enabled = false)
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testStudentFiltrPol() {
     app.goTo().menuStudents();
     app.student().openFiltr();

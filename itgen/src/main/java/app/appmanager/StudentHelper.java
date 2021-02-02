@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class StudentHelper extends HelperBase {
+  private final By tabRequests = By.xpath("//div[@class='content']//a[contains(@href,'requests')]");
 
   public StudentHelper(WebDriver wd) {
     super(wd);
@@ -219,21 +220,21 @@ public class StudentHelper extends HelperBase {
     assertDeleteSelectedStudent();
   }
 
-  public void selectStudentInListUIById(String id) {
+  public void selectStudentInListUIById(String idStudent) {
     // находим пагинатор
     String next =
         wd.findElement(By.xpath("//ul[@class='pagination']//li[2]")).getAttribute("class");
     // есть ли на первой странице наш студент
-    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+    List<WebElement> list = wd.findElements(By.cssSelector("a[href='/profile/" + idStudent + "'"));
     if (list.size() > 0) {
-      wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
+      wd.findElement(By.cssSelector("a[href='/profile/" + idStudent + "'")).click();
     } else {
       // если студент не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin =
-            wd.findElements(By.cssSelector("a[href='/profile/" + id + "'"));
+            wd.findElements(By.cssSelector("a[href='/profile/" + idStudent + "'"));
         if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/profile/" + id + "'")).click();
+          wd.findElement(By.cssSelector("a[href='/profile/" + idStudent + "'")).click();
           break;
         } else {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
@@ -254,5 +255,13 @@ public class StudentHelper extends HelperBase {
     } catch (TimeoutException e) {
       System.out.println("Исключение:" + e);
     }
+  }
+
+  public void tabHistory() {
+    click(By.xpath("//a[contains(@href,'history')]"));
+  }
+
+  public void tabRequests() {
+    click(tabRequests);
   }
 }

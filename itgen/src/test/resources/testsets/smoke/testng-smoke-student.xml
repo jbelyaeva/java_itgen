@@ -7,6 +7,7 @@
       <class name="tests.lkStudent.StudentWithoutTrailDisplayTest"/>
       <class name="tests.lkStudent.StudentLessonStartTest"/>
       <class name="tests.lkStudent.TestTypeformAvailableToStudent"/>
+      <class name="tests.lkStudent.StudentWithoutTestTypeform"/>
       <class name="tests.lkStudent.ChatDialogWithTrainerTest"/>
       <class name="tests.lkStudent.ChatSearchDialogWithOldTrainerTest"/>
       <class name="tests.lkStudent.ChatSearchDialogWithRandomAdminTest"/>
@@ -27,6 +28,17 @@
       <class name="tests.lkStudent.OpenProfile"/>
       <class name="tests.lkStudent.ManagerCommunityTabAllWithoutCommunity"/>
       <class name="tests.lkStudent.StudentLabelNewSubject"/>
+      <class name="tests.lkStudent.ScheduleMonths"/>
+      <class name="tests.lkStudent.ChatOnLessonScheduleNotStarted"/>
+      <class name="tests.lkStudent.ChatOnLessonScheduleWasYesterday"/>
+      <class name="tests.lkStudent.ChatOnLessonSendMessageTrainer"/>
+      <class name="tests.lkStudent.ChatOnLessonNotWasIndicator"/>
+      <class name="tests.lkStudent.ChatOnLessonSendFileTrainer"/>
+      <class name="tests.lkStudent.ChatOnLessonModifyMessage"/>
+      <class name="tests.lkStudent.ChatOnLessonDeleteMessage"/>
+      <class name="tests.lkStudent.ChatOnLessonMessageInBothChats"/>
+      <class name="tests.lkStudent.ProgressBarFinishedThreeProjects"/>
+      <class name="tests.lkStudent.ProgressBarFinishedWithoutProjects"/>
     </classes>
   </test>
 </suite>

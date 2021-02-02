@@ -16,16 +16,20 @@ import data.services.FamilyService;
 import data.services.RequestService;
 import data.services.StudentService;
 import data.services.TaskService;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.*;
 
 public class SshotRequests extends TestBase {
   ArrayList<Comments> listcomment = new ArrayList<>();
@@ -34,11 +38,11 @@ public class SshotRequests extends TestBase {
   public void ensurePreconditions() {
     RequestService requestService = new RequestService();
     RequestData request =
-            new RequestData()
-                    .withId("sshotRequests")
+        new RequestData()
+            .withId("sshotRequests")
             .withCreator(
                 "666") // суперадмин создал заявку (может быть привязаться к тому, кто залогинен)
-            .withCreatorAt(new Date())
+            .withCreatedAt(new Date())
             .withStatus("open")
             .withChildId("sshotRequests")
             .withComments(listcomment)
@@ -85,11 +89,11 @@ public class SshotRequests extends TestBase {
   }
 
   @Test
-  public void testSshotRequests() throws AWTException, IOException {
+  public void testSshotRequests() throws AWTException, IOException, InterruptedException {
     String name = "Admin_Requests_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.goTo().menuRequests();
-
+    Thread.sleep(3000);
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

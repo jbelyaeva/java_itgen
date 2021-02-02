@@ -24,4 +24,8 @@ public class TrainerService {
   public <E> void updateField(String idTrainer, String nameFiled, E[] data) {
     trainerDao.updateField(idTrainer, nameFiled, data);
   }
+
+  public <E> void updateField(String idTrainer, String nameFiled, E data) {
+    trainerDao.updateField(idTrainer, nameFiled, data);
+  }
 }

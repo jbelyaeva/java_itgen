@@ -13,11 +13,12 @@
       <class name="tests.lkTrainer.TrainerMakeReview"/>
       <class name="tests.lkTrainer.TrainerTakeForReview"/>
       <class name="tests.lkTrainer.TrainerNewMessageInChatOnLesson"/>
-      <class name="tests.lkTrainer.TrainerChatWithAdminByDefoltTest"/>
+      <class name="tests.lkTrainer.TrainerChatWithAdminByDefaultTest"/>
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithEmployeersTest"/>
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithNewFamilyTest"/>
       <class name="tests.lkTrainer.TrainerChatSearchDialogWithOldFamilyTest"/>
       <class name="tests.lkTrainer.TrainerOpenNewCommunity"/>
+      <class name="tests.lkTrainer.StudentTabHistoryProgressBar"/>
     </classes>
   </test>
 </suite>

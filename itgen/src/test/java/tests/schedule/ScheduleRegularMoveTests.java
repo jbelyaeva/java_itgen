@@ -29,7 +29,9 @@ public class ScheduleRegularMoveTests extends TestBase {
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size() + 1);
-    app.check().textElement(app.schedule().getLabelBlockSchedule(), "23:00 - 01:00,\nНе начато");
+    app.check()
+        .textElement(app.schedule().getLabelInformationAboutSchedule(),
+            "23:00 - 01:00,\nНе начато");
     app.goTo().menuTasks();
   }
 

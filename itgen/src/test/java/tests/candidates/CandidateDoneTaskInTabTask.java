@@ -3,12 +3,12 @@ package tests.candidates;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.CandidateService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -89,6 +89,7 @@ public class CandidateDoneTaskInTabTask extends TestBase {
     Tasks beforeTask = app.dbtasks().tasks();
 
     app.cantidate().doneTask("DoneTask");
+    app.goTo().menuTasks();
 
     Tasks afterTask = app.dbtasks().tasks();
 

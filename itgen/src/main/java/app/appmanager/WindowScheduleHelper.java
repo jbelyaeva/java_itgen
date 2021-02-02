@@ -1,12 +1,16 @@
 package app.appmanager;
 
 import data.services.TrainerService;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WindowScheduleHelper extends HelperBase {
+  private final By selectTrainer = By.xpath("(//div[contains(@class,'select')])[3]");
+  private final By btnIF = By.xpath("(//div[@class='lesson-formats']//button)[2]");
 
   TrainerService trainerService = new TrainerService();
   public WindowScheduleHelper(WebDriver wd) {
@@ -17,6 +21,19 @@ public class WindowScheduleHelper extends HelperBase {
     btnRecordOnLesson();
     selectStudent(name);
     selectRegular();
+    selectLesson();
+    btnRecord();
+    noErrorMessage();
+  }
+
+  public void recordStudentOn2hRegularFromRequest() {
+    selectRegular();
+    selectLesson();
+    btnRecord();
+    noErrorMessage();
+  }
+
+  public void recordStudentOnIFFromRequest() {
     selectLesson();
     btnRecord();
     noErrorMessage();
@@ -134,7 +151,7 @@ public class WindowScheduleHelper extends HelperBase {
     noErrorMessage();
   }
 
-  public void makeRequestOnTrial2hScratch(String name) {
+  public void makeRequestOnTrialScratch(String name) {
     btnRecordOnLesson();
     selectStudent(name);
     btnRequest();
@@ -148,5 +165,87 @@ public class WindowScheduleHelper extends HelperBase {
   public void selectStudentForSshot(String name) {
     btnRecordOnLesson();
     selectStudent(name);
+  }
+
+  public void makeRequestOnRegular2hScratch(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    selectRegular();
+    btnRequest();
+    noErrorMessage();
+  }
+
+  public void makeRequestOnSingle2hScratch(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    selectSingle();
+    btnRequest();
+    noErrorMessage();
+  }
+
+  public void makeRequestToTrainer(String name, String idTrainer) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    selectSingle();
+    selectDropdownTrainer();
+    selectTrainer(idTrainer);
+    btnRequest();
+    noErrorMessage();
+  }
+
+  private void selectTrainer(String idTrainer) {
+    click(By.xpath("//li[@data-value='" + idTrainer + "']"));
+
+    TrainerService trainerService = new TrainerService();
+    String surname = trainerService.findById(idTrainer).getLastName();
+    String name = trainerService.findById(idTrainer).getFirstName();
+    String[] split = wd.findElement(By.xpath("//div[@class='trainer-name']//div//div"))
+        .getText()
+        .split("\n");
+    if (!(surname + " " + name).equals(split[0])) {
+      selectDropdownTrainer();
+      click(By.xpath("//li[@data-value='" + idTrainer + "']")); //попробовать еще раз
+    }
+  }
+
+  private void selectDropdownTrainer() {
+    click(selectTrainer);
+  }
+
+  public void makeRequestOnIF(String name) {
+    btnRecordOnLesson();
+    refresh();
+    selectStudent(name);
+    btnIF();
+    btnRequest();
+    noErrorMessage();
+  }
+
+  private void btnIF() {
+    click(btnIF);
+  }
+
+  public void requestOnFrenchPython(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    waitVisibleElement(3, selectTrainer);
+    selectDropdownTrainer();
+  }
+
+  public void makeRequestOnFrenchPython(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    waitVisibleElement(3, selectTrainer);
+    btnRequest();
+    noErrorMessage();
+  }
+
+  public String[] getListTrainer() {
+    List<WebElement> list = wd.findElements(By.xpath("//div[@id='menu-']//div//li"));
+    String[] listUI = new String[list.size()];
+    for (int i = 0; i < list.size(); i++) {
+      listUI[i] = list.get(i).getText();
+    }
+    return listUI;
   }
 }

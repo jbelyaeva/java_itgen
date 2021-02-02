@@ -1,8 +1,9 @@
 package tests.lkStudent;
+/*T-243
+ * если у ученика не было пробного и не было никаких диалогов, то диалог тоько с айтигеником
+ */
 
 import static app.appmanager.ApplicationManager.properties;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
@@ -14,7 +15,7 @@ public class ChatDialogOnlyWithGenaTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     data.postClean().chat();
-    data.defFamily().set21_StartDefaultStudent();
+    data.defFamily().set19_ChangeDefaultStudentInStart();
     app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
@@ -23,8 +24,8 @@ public class ChatDialogOnlyWithGenaTest extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatDialogOnlyWithGena() {
     String[] dialogs = app.chat().getDialogs();
-    assertThat(dialogs.length, equalTo(1));
-    assertThat(dialogs[0], equalTo("Айтигеник"));
+    app.check().equalityOfTwoElements(dialogs.length, 1);
+    app.check().equalityOfTwoElements(dialogs[0], "Айтигеник");
     app.chat().btnCloseChat();
   }
 }

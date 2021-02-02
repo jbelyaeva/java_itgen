@@ -21,6 +21,10 @@ public class SkillsService {
     skillsDao.updateField(idSkill, nameFiled, data);
   }
 
+  public void updateField(String idSkill, String nameFiled, Boolean data) {
+    skillsDao.updateField(idSkill, nameFiled, data);
+  }
+
   public void deleteField(String idSkills, String nameField) {
     skillsDao.deleteField(idSkills, nameField);
   }

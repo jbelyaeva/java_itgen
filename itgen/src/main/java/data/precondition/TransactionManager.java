@@ -1,5 +1,6 @@
 package data.precondition;
 
+import app.appmanager.transactionHelper.TrAchievementHelper;
 import app.appmanager.transactionHelper.TrChatHelper;
 import app.appmanager.transactionHelper.TrCommunityHelper;
 import app.appmanager.transactionHelper.TrFamilyHelper;
@@ -7,6 +8,7 @@ import app.appmanager.transactionHelper.TrFinishedLessonHelper;
 import app.appmanager.transactionHelper.TrMaterialHelper;
 import app.appmanager.transactionHelper.TrParentHelper;
 import app.appmanager.transactionHelper.TrPaymentHelper;
+import app.appmanager.transactionHelper.TrRequestHelper;
 import app.appmanager.transactionHelper.TrSkillHelper;
 import app.appmanager.transactionHelper.TrStudentHelper;
 import app.appmanager.transactionHelper.TrTestHelper;
@@ -32,6 +34,8 @@ public class TransactionManager {
   private final TrSkillHelper transactionSkillHelper = new TrSkillHelper();
   private final TrTestHelper transactionTestHelper = new TrTestHelper();
   private final TrCommunityHelper transactionCommunityHelper = new TrCommunityHelper();
+  private final TrAchievementHelper transactionAchievementHelper = new TrAchievementHelper();
+  private final TrRequestHelper transactionRequestHelper = new TrRequestHelper();
   private final TimeGeneral time = new TimeGeneral();
 
   public TransactionManager() {
@@ -91,6 +95,14 @@ public class TransactionManager {
 
   public TrTestHelper trTest() {
     return transactionTestHelper;
+  }
+
+  public TrAchievementHelper trAchievement() {
+    return transactionAchievementHelper;
+  }
+
+  public TrRequestHelper trRequest() {
+    return transactionRequestHelper;
   }
 
   public TimeGeneral time() {

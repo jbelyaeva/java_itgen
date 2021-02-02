@@ -8,7 +8,7 @@
             <class name="tests.candidates.CandidateDeletionTest" />
             <class name="tests.candidates.CandidateStatusNewToDifferentStatuses" />
             <class name="tests.candidates.CandidateStatusTest1ToDifferentStatuses" />
-            <!--<class name="CandidateCreateEmployeer" /> в нестабильных-->
+            <class name="tests.candidates.CandidateCreateEmployeer"/>
             <class name="tests.candidates.CandidateCreateTask" />
             <class name="tests.candidates.CandidateDoneTaskInTabTask" />
         </classes>

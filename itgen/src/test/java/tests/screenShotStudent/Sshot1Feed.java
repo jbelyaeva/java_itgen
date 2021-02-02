@@ -176,10 +176,7 @@ public class Sshot1Feed extends TestBase {
             text);
 
     app.trStudent()
-        .changeDefaultStudent(
-            "21",
-            "Ребенок",
-            "Дефолтный",
+        .changeDefaultStudent_finishLessonBy1Skill(
             new String[]{"child"},
             "beginner",
             "BY",
@@ -188,14 +185,15 @@ public class Sshot1Feed extends TestBase {
             "ru",
             "ru",
             "ru",
-            "1",
+            new String[]{"1"},
             "+9875645311",
             2,
             "trialFinished",
             1,
-            "1",
-            "1",
-            1);
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
 
     long alreadyRun = 7200000; // 2 часа идет занятие
     String periodLesson = time.getPeriod(time.getTimeNow() - alreadyRun);

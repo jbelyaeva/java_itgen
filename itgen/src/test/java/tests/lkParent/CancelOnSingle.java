@@ -30,7 +30,7 @@ public class CancelOnSingle extends TestBase {
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());
-    data.schedules().set3_SingleScheduleWithoutStudent(period);
+    data.schedules().set3_SingleScheduleWithoutStudent(period, "14");
     Schedules afterNew = app.dbschedules().schedules();
     app.check().equalityOfTwoElements(after, afterNew);
     app.lkParent().btnLogo();

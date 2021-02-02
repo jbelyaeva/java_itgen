@@ -30,18 +30,20 @@ public class SshotPayByAdminShop extends TestBase {
   }
 
   @Test
-  public void testSshotPayByAdminShop() throws AWTException, IOException, InterruptedException {
+  public void testSshotPayByAdminShop() throws AWTException, IOException {
     String name = "Admin_PayShop_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
     app.goTo().menuTasks();
     app.goTo().menuStudents();
     app.payment().paymentAdminShop("21");
     app.sshot().changeTopBar();
-    Thread.sleep(4000);
+
     ImageDiff diff = this.getDiff(name, locatorIgnor);
-    if (diff.getDiffSize() > 290) { // погрешность
-      Assert.assertEquals(diff.getDiffSize(), 0);
+    if (diff.getDiffSize() > 0) {
+      diff = this.getDiff(name, locatorIgnor);
     }
+
+    Assert.assertEquals(diff.getDiffSize(), 0);
 
     app.payment().goToFamily("paymentAdmin");
   }
