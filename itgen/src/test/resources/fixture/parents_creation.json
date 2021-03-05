@@ -1,0 +1,34 @@
+[
+  {
+    "id": "22",
+    "username": "parent",
+    "firstName": "Родитель",
+    "lastName": "Дефолтный",
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "32132132132",
+        "preferred": false
+      }
+    ],
+    "timeZone": "Europe/Minsk",
+    "city": "Минск",
+    "country": "BY",
+    "roles": [
+      "parent"
+    ],
+    "locate": "ru",
+    "emails": [
+      {
+        "address": "parent@list.ru",
+        "verified": true
+      }
+    ],
+    "familyId": "111",
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$BQQL0SmngTBte0ESk9iE2uWSpVKb4QCLOokS0h1m1jtujACritoC."
+      }
+    }
+  }
+]

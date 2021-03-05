@@ -35,6 +35,6 @@ public class RecordOnRegular extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student();
+    data.clean().taskAndSchedule().student();
   }
 }

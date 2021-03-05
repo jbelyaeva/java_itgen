@@ -19,7 +19,7 @@ public class AdminCommunityTabFeedDeleteAndModifyPost extends TestBase {
     String title = "Scratch";
     String text = "Новый пост, новый пост";
     app.base().refresh();
-    data.community().set3_CommunityWithPostAndComment("666", text, title);
+    data.community().set3_CommunityWithPostAndCommentFromStudent("666", text, title);
     data.defFamily().set20_DefaultStudentAdminCommunity();
     app.base().refresh();
     app.base().goByHref(app.base().address() + "/login");
@@ -42,7 +42,7 @@ public class AdminCommunityTabFeedDeleteAndModifyPost extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().communities();
+    data.clean().communities();
     data.defFamily().set19_ChangeDefaultStudentInStart();
     app.base().goByHref(app.base().address() + "/login");
     app.lkStudent()

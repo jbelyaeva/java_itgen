@@ -1,22 +1,25 @@
 package data.precondition;
 
-import app.appmanager.transactionHelper.TrAchievementHelper;
-import app.appmanager.transactionHelper.TrChatHelper;
-import app.appmanager.transactionHelper.TrCommunityHelper;
-import app.appmanager.transactionHelper.TrFamilyHelper;
-import app.appmanager.transactionHelper.TrFinishedLessonHelper;
-import app.appmanager.transactionHelper.TrMaterialHelper;
-import app.appmanager.transactionHelper.TrParentHelper;
-import app.appmanager.transactionHelper.TrPaymentHelper;
-import app.appmanager.transactionHelper.TrRequestHelper;
-import app.appmanager.transactionHelper.TrSkillHelper;
-import app.appmanager.transactionHelper.TrStudentHelper;
-import app.appmanager.transactionHelper.TrTestHelper;
-import app.appmanager.transactionHelper.TrWorkerHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import core.general.TimeGeneral;
+import data.precondition.transactionHelper.TrAchievementHelper;
+import data.precondition.transactionHelper.TrCandidateHelper;
+import data.precondition.transactionHelper.TrChatHelper;
+import data.precondition.transactionHelper.TrCommunityHelper;
+import data.precondition.transactionHelper.TrFamilyHelper;
+import data.precondition.transactionHelper.TrFinishedLessonHelper;
+import data.precondition.transactionHelper.TrLeadHelper;
+import data.precondition.transactionHelper.TrMaterialHelper;
+import data.precondition.transactionHelper.TrParentHelper;
+import data.precondition.transactionHelper.TrPaymentHelper;
+import data.precondition.transactionHelper.TrRequestHelper;
+import data.precondition.transactionHelper.TrSkillHelper;
+import data.precondition.transactionHelper.TrStudentHelper;
+import data.precondition.transactionHelper.TrTaskHelper;
+import data.precondition.transactionHelper.TrTestHelper;
+import data.precondition.transactionHelper.TrWorkerHelper;
+import data.precondition.transactionHelper.schedule.TrScheduleTodayHelper;
+import data.precondition.transactionHelper.schedule.TrScheduleTomorrowHelper;
+import data.precondition.transactionHelper.schedule.TrScheduleYesterdayHelper;
 
 public class TransactionManager {
 
@@ -25,8 +28,10 @@ public class TransactionManager {
   private final TrScheduleTomorrowHelper trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
   private final TrStudentHelper trStudentHelper = new TrStudentHelper();
   private final TrChatHelper transactionChatHelper = new TrChatHelper();
+  private final TrLeadHelper transactionLeadHelper = new TrLeadHelper();
   private final TrFamilyHelper transactionFamilyHelper = new TrFamilyHelper();
   private final TrParentHelper transactionParentHelper = new TrParentHelper();
+  private final TrTaskHelper transactionTaskHelper = new TrTaskHelper();
   private final TrWorkerHelper transactionWorkerHelper = new TrWorkerHelper();
   private final TrPaymentHelper transactionPaymentHelper = new TrPaymentHelper();
   private final TrMaterialHelper transactionMaterialHelper = new TrMaterialHelper();
@@ -36,6 +41,7 @@ public class TransactionManager {
   private final TrCommunityHelper transactionCommunityHelper = new TrCommunityHelper();
   private final TrAchievementHelper transactionAchievementHelper = new TrAchievementHelper();
   private final TrRequestHelper transactionRequestHelper = new TrRequestHelper();
+  private final TrCandidateHelper trCandidateHelper = new TrCandidateHelper();
   private final TimeGeneral time = new TimeGeneral();
 
   public TransactionManager() {
@@ -69,6 +75,10 @@ public class TransactionManager {
     return transactionFamilyHelper;
   }
 
+  public TrCandidateHelper trCandidate() {
+    return trCandidateHelper;
+  }
+
   public TrParentHelper trParent() {
     return transactionParentHelper;
   }
@@ -93,8 +103,16 @@ public class TransactionManager {
     return transactionSkillHelper;
   }
 
+  public TrLeadHelper trLead() {
+    return transactionLeadHelper;
+  }
+
   public TrTestHelper trTest() {
     return transactionTestHelper;
+  }
+
+  public TrTaskHelper trTask() {
+    return transactionTaskHelper;
   }
 
   public TrAchievementHelper trAchievement() {

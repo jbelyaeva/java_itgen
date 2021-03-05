@@ -288,13 +288,13 @@ public class CandidateHelper extends HelperBase {
     waitElementWithText(5, By.xpath("//tr//td[5]"), "Тренер");
     btnPoints();
     btnCreateEmployee();
-    btnAddEmpolyee(name);
+    btnAddEmployee(name);
     waitVisibleElement(5, By.xpath("//div[@class='info']//a[contains(@href,'candidates')]"));
   }
 
-  private void btnAddEmpolyee(String name) {
-    waitElementWithValue(5, By.xpath("//input[@name='user-firstName']"), name);
-    click(By.xpath("//button[contains(@class,'create')]"));
+  private void btnAddEmployee(String name) {
+    waitElementWithValue(5, By.xpath("//input[@id-qa='firstName']"), name);
+    click(By.xpath("//button[@id-qa='addBtn']"));
   }
 
   private void btnCreateEmployee() {

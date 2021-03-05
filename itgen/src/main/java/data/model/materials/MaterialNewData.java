@@ -67,15 +67,10 @@ public class MaterialNewData {
 
   @Override
   public String toString() {
-    return "MaterialNew{"
-        + "id='"
-        + id
-        + '\''
-        + ", trainerId='"
-        + trainerId
-        + '\''
-        + ", newMaterials="
-        + newMaterials
-        + '}';
+    return "MaterialNewData{" +
+        "id='" + id + '\'' +
+        ", trainerId='" + trainerId + '\'' +
+        ", newMaterials=" + newMaterials +
+        '}';
   }
 }

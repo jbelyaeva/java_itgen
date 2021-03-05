@@ -23,7 +23,7 @@ public class CreateMaterial extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
+    data.materials().newBranchScratch();
   }
 
   @Test(dataProvider = "validMaterialFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -38,22 +38,7 @@ public class CreateMaterial extends TestBase {
   }
 
   private void check(Materials after, String id, MaterialData material) {
-    app.trMaterial()
-        .newMaterial(
-            id,
-            "666",
-            material.getTitle().trim(),
-            "checking",
-            material.getSkill(),
-            "CreateNewMaterial",
-            material.getType(),
-            material.getLevel(),
-            material.getLang(),
-            material.getOriginality(),
-            material.getMaterialLink(),
-            material.getProjectLink(),
-            material.getSourceLink(),
-            material.getDesc().trim());
+    data.materials().set11_checkingMaterialFromObject(id, material);
 
     MaterialData materialAdd = materialService.findById(id);
 
@@ -67,6 +52,6 @@ public class CreateMaterial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().payment();
+    data.clean().material().payment();
   }
 }

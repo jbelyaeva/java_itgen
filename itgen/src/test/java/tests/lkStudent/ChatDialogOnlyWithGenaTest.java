@@ -3,8 +3,6 @@ package tests.lkStudent;
  * если у ученика не было пробного и не было никаких диалогов, то диалог тоько с айтигеником
  */
 
-import static app.appmanager.ApplicationManager.properties;
-
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import org.testng.annotations.BeforeMethod;
@@ -14,11 +12,11 @@ public class ChatDialogOnlyWithGenaTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().chat();
+    data.clean().chat().taskAndSchedule().finishedLesson();
     data.defFamily().set19_ChangeDefaultStudentInStart();
     app.base().goByHref(app.base().address() + "/login");
     app.student()
-        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+        .login("student", "111111");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

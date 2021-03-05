@@ -23,13 +23,12 @@ public class RequestRegularNotGreenIfGroupSingle extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRequestRegularNotGreenIfGroupSingle() {
-    //   app.base().refresh();
     app.goTo().menuRequests();
     app.check().findElement(app.request().getRequestInStack());
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
   }
 }

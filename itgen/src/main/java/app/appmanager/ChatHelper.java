@@ -1,8 +1,6 @@
 package app.appmanager;
 
 import static app.appmanager.ApplicationManager.properties;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 import core.general.FileHelper;
 import java.io.IOException;
@@ -21,6 +19,7 @@ public class ChatHelper extends HelperBase {
 
   private final By btnCall = By.xpath("//div[@class='btn-container']/*");
   private final By btnCreateTalk = By.xpath("(//div[@class='chat-header'])[1]/*[2]");
+  private final By textMessageAlong = By.xpath("//div[@class='message multiline-text']");
 
   public ChatHelper(WebDriver wd) {
     super(wd);
@@ -32,6 +31,10 @@ public class ChatHelper extends HelperBase {
 
   public By getBtnCreateTalk() {
     return btnCreateTalk;
+  }
+
+  public By getTextMessageAlong() {
+    return textMessageAlong;
   }
 
   public void openCloseChat() {
@@ -59,6 +62,7 @@ public class ChatHelper extends HelperBase {
   }
 
   public void sendMessage(String userName, String text) {
+    refresh();
     btnOpenChat();
     search(userName);
     fillMessage(text);
@@ -67,7 +71,8 @@ public class ChatHelper extends HelperBase {
   }
 
   private void btnSendMessage() {
-    click(By.xpath("//div[contains(@class,'chat-message')]//button[2]"));
+    clickWithMoveToElementAndWait(3, By.xpath("//div[contains(@class,'chat-message')]//button[2]"));
+    noErrorMessage();
   }
 
   private void fillMessage(String text) {
@@ -85,41 +90,13 @@ public class ChatHelper extends HelperBase {
     }
   }
 
-  public String getByTrainerMessageFromAdmin(String login, String password) {
-    logout();
-    return getByTrainerText(login, password);
-  }
-
-  public String getByTrainerMessageFromStudent(String login, String password) {
+  public String getByTrainerMessageFromStudent(String login, String password)
+      throws InterruptedException {
     logoutByStudent();
     return getByTrainerText(login, password);
   }
 
-  public String getByTrainerDeletionMessageFromStudent(String login, String password) {
-    logoutByStudent();
-    return getByTrainerDeletionText(login, password);
-  }
-
-  private String getByTrainerDeletionText(String login, String password) {
-    deleteAlerts();
-    login(login, password);
-    String text = "";
-    btnOpenChatBeforeLogin();
-    try {
-      if (isElementPresent(By.xpath("//div[@class='last-message']//span"))) {
-        assertThat(isElementPresent(By.xpath("//div[@class='last-message']//span")), is(false));
-      }
-      btnCloseChat();
-    } catch (TimeoutException e) {
-      System.out.println("Исключение:" + e);
-    } finally {
-      logout();
-      login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
-    }
-    return text;
-  }
-
-  public String getByTrainerText(String login, String password) {
+  public String getByTrainerText(String login, String password) throws InterruptedException {
     deleteAlerts();
     login(login, password);
     String text = "";
@@ -134,18 +111,11 @@ public class ChatHelper extends HelperBase {
       System.out.println("Исключение:" + e);
     } finally {
       logout();
-      login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
+      goByHref(address() + "/login");
+      login(properties.getProperty("web.Login"),
+          properties.getProperty("web.Password"));
     }
     return text;
-  }
-
-  public Boolean fileGetTrainerFromAdmin(String login, String password, String fileName)
-      throws InterruptedException {
-    logout();
-    login(login, password);
-    btnOpenChat();
-    clickByMessageFromItigenik();
-    return getByTrainerFile(fileName);
   }
 
   public Boolean fileGetTrainerFromStudent(String login, String password, String fileName,
@@ -165,23 +135,8 @@ public class ChatHelper extends HelperBase {
     click(By.xpath("//a[contains(@href, '" + idStudent + "')]"));
   }
 
-  private void clickByMessageFromItigenik() {
-    click(By.xpath("//div[@class='avatar']"));
-  }
-
   public void clickByFirstMessage() {
     click(By.xpath("//div[contains(@class,'room-item')]"));
-  }
-
-  public Boolean getByTrainerDeletedMessageFromAdmin(String login, String password) {
-    logout();
-    return getByTrainerDeleteMessage(login, password);
-  }
-
-  public Boolean getByTrainerDeletedMessageFromStudent(String login, String password) {
-    deleteAlerts();
-    logoutByStudent();
-    return getByTrainerDeleteMessage(login, password);
   }
 
   private Boolean getByTrainerDeleteMessage(String login, String password) {
@@ -230,10 +185,10 @@ public class ChatHelper extends HelperBase {
     btnCloseChat();
   }
 
-  public void modifyMessageByStudent(String messageNew) {
+  public void modifyMessageByStudentForTrainer(String messageNew) {
     deleteAlerts();
     btnOpenChat();
-    chooseFirstWithUser();
+    chooseSecondWithUser();
     deleteAlerts();//удалить алерт на две вкладки и по алерту на микрофон и камеру
     deleteAlerts();
     deleteAlerts();
@@ -241,10 +196,9 @@ public class ChatHelper extends HelperBase {
     btnCorrect();
     correctMessage(messageNew);
     btnSendMessage();
-    btnCloseChat();
   }
 
-  private void chooseDialog(String idUser) {
+  public void chooseDialog(String idUser) {
     click(By.xpath("//a[@href='/profile/" + idUser + "']"));
   }
 
@@ -272,9 +226,11 @@ public class ChatHelper extends HelperBase {
 
   private void btnDelete() {
     click(By.xpath("//a[contains(@class,'remove-message')]"));
+    noErrorMessage();
   }
 
-  public Boolean deleteForegnMessage(String idUser) {
+  public Boolean deleteForeignMessage(String idUser) {
+    refresh();
     btnOpenChat();
     chooseDialog(idUser);
     return isElementPresent(By.xpath("//div[contains(@class,'dropdown')]//span"));
@@ -304,11 +260,13 @@ public class ChatHelper extends HelperBase {
     return isElementPresent(By.xpath("//div[contains(@class,'dropdown')]//span"));
   }
 
-  public void sendFileByAdmin(String userName, String path) throws IOException {
+  public void sendFileByAdmin(String userName, String path)
+      throws IOException, InterruptedException {
     btnOpenChat();
     search(userName);
     fillFile(path);
     btnSendMessage();
+    Thread.sleep(4000);
     btnCloseChat();
   }
 
@@ -389,11 +347,13 @@ public class ChatHelper extends HelperBase {
     return wd.findElement(By.xpath("//p[@class='text-center']")).getText();
   }
 
-  public void sendFileByStudent(String userName, String path) throws IOException {
+  public void sendFileByStudent(String userName, String path)
+      throws IOException, InterruptedException {
     btnOpenChat();
     searchByStudent(userName);
     fillFile(path);
     btnSendMessage();
+    Thread.sleep(4000);
     btnCloseChat();
   }
 
@@ -424,7 +384,11 @@ public class ChatHelper extends HelperBase {
   }
 
   public void chooseFirstWithUser() {
-    click(By.xpath("//div[@class='room-item']"));
+    click(By.xpath("//div[contains(@class,'room-item')]"));
+  }
+
+  public void chooseSecondWithUser() {
+    click(By.xpath("(//div[contains(@class,'room-item')])[2]"));
   }
 
   public boolean getNameFile(String fileName) {

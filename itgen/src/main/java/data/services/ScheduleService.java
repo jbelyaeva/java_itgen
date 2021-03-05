@@ -10,7 +10,7 @@ public class ScheduleService {
   public ScheduleService() {}
 
   public ScheduleData DeleteById(String id) {
-    return scheduleDao.findByIdAndDelete(id);
+    return scheduleDao.deleteById(id);
   }
 
   public void delete(ScheduleData schedule) {

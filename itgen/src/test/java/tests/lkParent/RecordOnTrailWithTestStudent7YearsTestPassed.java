@@ -36,7 +36,7 @@ public class RecordOnTrailWithTestStudent7YearsTestPassed extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().tests();
+    data.clean().student().tests();
     data.skills().set2_MinecraftWithTest(data.skillsService().findBySkillId("21", "ru").getId(),
         "test");
   }

@@ -16,7 +16,7 @@ public class ChatOnLessonScheduleWasYesterday extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     String period = "21:00 - 23:00";
-    data.schedules().set28_YesterdayDefaulStudentFinshedTrialLesson(period);
+    data.schedules().set28_YesterdayStudentFinishedTrialLesson(period, "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -29,6 +29,6 @@ public class ChatOnLessonScheduleWasYesterday extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

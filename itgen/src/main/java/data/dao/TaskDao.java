@@ -2,53 +2,51 @@ package data.dao;
 
 import static data.connection.MFSessionFactory.morphiaSessionFactoryUtil;
 
+import data.model.tasks.TaskData;
 import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
-import data.model.lead.LeadData;
-import data.model.users.StudentData;
-import data.model.tasks.TaskData;
 
-public class TaskDao {
+public class TaskDao implements Dao<TaskData> {
 
+  @Override
   public void save(TaskData task) {
     Datastore datastore = morphiaSessionFactoryUtil();
     datastore.save(task);
   }
 
-  public TaskData findByIdAndDeleteTask(String id) {
+  @Override
+  public <T> void updateField(String id, String nameField, T data) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class).filter("id", id);
-    TaskData task = datastore.findAndDelete(query);
-    return task;
+    UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).set(nameField, data);
+    datastore.update(query, (UpdateOperations<TaskData>) ops);
   }
 
-  public TaskData findByIdAndDeleteTask(StudentData student) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query =
-        datastore.createQuery(TaskData.class).filter("linkUser", student.getId());
-    TaskData task = datastore.findAndDelete(query);
-    return task;
+  @Override
+  public <T> void updateArrayField(String id, String nameField, T[] data) {
+
   }
 
-  public TaskData findByIdAndDeleteTask(LeadData lead) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("linkLead", lead.getId());
-    TaskData task = datastore.findAndDelete(query);
-    return task;
+  @Override
+  public void delete(TaskData taskData) {
+
   }
 
+  @Override
   public void drop() {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class);
     datastore.delete(query);
   }
 
+  @Override
   public TaskData findById(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
     return datastore.find(TaskData.class).field("id").equal(id).first();
   }
 
+  @Override
   public void deleteField(String id, String name) {
     Datastore datastore = morphiaSessionFactoryUtil();
     Query<TaskData> query = datastore.createQuery(TaskData.class).field("id").equal(id);
@@ -56,10 +54,11 @@ public class TaskDao {
     datastore.update(query, (UpdateOperations<TaskData>) ops);
   }
 
-  public void updateField(String idTask, String nameFiled, String data) {
+  @Override
+  public TaskData deleteById(String id) {
     Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("id", idTask);
-    UpdateOperations ops = datastore.createUpdateOperations(TaskData.class).set(nameFiled, data);
-    datastore.update(query, (UpdateOperations<TaskData>) ops);
+    Query<TaskData> query = datastore.createQuery(TaskData.class).filter("id", id);
+    TaskData task = datastore.findAndDelete(query);
+    return task;
   }
 }

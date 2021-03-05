@@ -1,11 +1,11 @@
 package data.model.materials;
 
+import data.model.general.Activity;
+import data.model.general.Comments;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import data.model.general.Activity;
-import data.model.general.Comments;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -131,8 +131,8 @@ public class MaterialData {
     return this;
   }
 
-  public MaterialData withLimkedMaterials(List<LinkedMaterials> materialLink) {
-    this.linkedMaterials = linkedMaterials;
+  public MaterialData withLinkedMaterials(List<LinkedMaterials> materialLink) {
+    this.linkedMaterials = materialLink;
     return this;
   }
 
@@ -282,8 +282,6 @@ public class MaterialData {
         && Objects.equals(lang, that.lang)
         && Objects.equals(materialLink, that.materialLink)
         && Objects.equals(tags, that.tags)
-        && Objects.equals(comments, that.comments)
-        && Objects.equals(activity, that.activity)
         && Objects.equals(originality, that.originality)
         && Objects.equals(level, that.level)
         && Objects.equals(sourceLink, that.sourceLink)
@@ -305,8 +303,6 @@ public class MaterialData {
         lang,
         materialLink,
         tags,
-        comments,
-        activity,
         originality,
         level,
         sourceLink,
@@ -317,60 +313,28 @@ public class MaterialData {
 
   @Override
   public String toString() {
-    return "MaterialData{"
-        + "id='"
-        + id
-        + '\''
-        + ", createAt="
-        + createAt
-        + ", creator='"
-        + creator
-        + '\''
-        + ", title='"
-        + title
-        + '\''
-        + ", status='"
-        + status
-        + '\''
-        + ", skill='"
-        + skill
-        + '\''
-        + ", branch='"
-        + branch
-        + '\''
-        + ", type='"
-        + type
-        + '\''
-        + ", lang='"
-        + lang
-        + '\''
-        + ", materialLink='"
-        + materialLink
-        + '\''
-        + ", tags="
-        + tags
-        + ", comments="
-        + comments
-        + ", activity="
-        + activity
-        + ", originality='"
-        + originality
-        + '\''
-        + ", level='"
-        + level
-        + '\''
-        + ", sourceLink='"
-        + sourceLink
-        + '\''
-        + ", projectLink='"
-        + projectLink
-        + '\''
-        + ", desc='"
-        + desc
-        + '\''
-        + ", verifier='"
-        + verifier
-        + '\''
-        + '}';
+    return "MaterialData{" +
+        "id='" + id + '\'' +
+        ", createAt=" + createAt +
+        ", creator='" + creator + '\'' +
+        ", title='" + title + '\'' +
+        ", status='" + status + '\'' +
+        ", skill='" + skill + '\'' +
+        ", branch='" + branch + '\'' +
+        ", type='" + type + '\'' +
+        ", lang='" + lang + '\'' +
+        ", materialLink='" + materialLink + '\'' +
+        ", tags=" + tags +
+        ", comments=" + comments +
+        ", activity=" + activity +
+        ", linkedMaterials=" + linkedMaterials +
+        ", originality='" + originality + '\'' +
+        ", level='" + level + '\'' +
+        ", sourceLink='" + sourceLink + '\'' +
+        ", projectLink='" + projectLink + '\'' +
+        ", desc='" + desc + '\'' +
+        ", verifier='" + verifier + '\'' +
+        ", removed=" + removed +
+        '}';
   }
 }

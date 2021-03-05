@@ -38,6 +38,7 @@ public class SshotPopupRequests extends TestBase {
     app.sshot().invisibleElements(invisibleElements);
     Thread.sleep(3000);
     Set<By> locatorIgnor = new HashSet<>();
+    locatorIgnor.add(By.xpath("//span[@class='text-muted']"));
     ImageDiff diff =
         app.sshot()
             .getImageDiff(
@@ -54,6 +55,6 @@ public class SshotPopupRequests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
   }
 }

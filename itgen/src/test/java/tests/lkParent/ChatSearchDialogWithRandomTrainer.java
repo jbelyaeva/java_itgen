@@ -31,6 +31,6 @@ public class ChatSearchDialogWithRandomTrainer extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat().taskAndSchedule().student();
+    data.clean().chat().taskAndSchedule().student();
   }
 }

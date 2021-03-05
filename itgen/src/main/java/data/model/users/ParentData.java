@@ -1,24 +1,28 @@
 package data.model.users;
 
 import com.google.gson.annotations.Expose;
+import data.model.usersGeneral.Contacts;
+import data.model.usersGeneral.Emails;
+import data.model.usersGeneral.Services;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import dev.morphia.annotations.Transient;
-import data.model.usersGeneral.Contacts;
-import data.model.usersGeneral.Emails;
-import data.model.usersGeneral.Services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity("users")
 public class ParentData {
+
   @Expose
   @Id
   @Property("_id")
   private String id;
+
+  @Property("className")
+  private String className;
 
   @Expose
   @Property("firstName")
@@ -64,14 +68,23 @@ public class ParentData {
 
   @Expose @Transient private String fb;
 
-  @Expose @Transient private String vk;
+  @Expose
+  @Transient
+  private String vk;
 
-  @Expose @Transient private String ok;
+  @Expose
+  @Transient
+  private String ok;
 
-  @Expose @Transient private String inst;
+  @Expose
+  @Transient
+  private String inst;
 
   @Property("familyId")
   private String familyId;
+
+  @Property("username")
+  private String username;
 
   @Expose
   @Property("note")

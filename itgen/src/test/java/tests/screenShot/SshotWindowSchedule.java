@@ -4,7 +4,11 @@ import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
 import core.general.TimeGeneral;
 import data.model.family.FamilyData;
-import data.model.schedule.*;
+import data.model.schedule.C;
+import data.model.schedule.ST;
+import data.model.schedule.ScheduleData;
+import data.model.schedule.Slots;
+import data.model.schedule.Times;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.model.users.StudentData;
@@ -14,16 +18,20 @@ import data.services.FamilyService;
 import data.services.ScheduleService;
 import data.services.StudentService;
 import data.services.TaskService;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.*;
 
 public class SshotWindowSchedule extends TestBase {
   ArrayList<C> list = new ArrayList<>();
@@ -112,7 +120,7 @@ public class SshotWindowSchedule extends TestBase {
     scheduleService.DeleteById("sshotWindowSchedule");
 
     StudentService studentService = new StudentService();
-    studentService.DeleteById("sshotWindowSchedule");
+    studentService.deleteById("sshotWindowSchedule");
 
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("sshotWindowSchedule");

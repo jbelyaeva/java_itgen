@@ -114,7 +114,7 @@ public class SshotRequests extends TestBase {
     requestService.DeleteById("sshotRequests");
 
     StudentService studentService = new StudentService();
-    studentService.DeleteById("sshotRequests");
+    studentService.deleteById("sshotRequests");
 
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("sshotRequests");

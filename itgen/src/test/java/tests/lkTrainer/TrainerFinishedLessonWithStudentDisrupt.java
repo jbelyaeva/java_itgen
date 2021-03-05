@@ -10,62 +10,22 @@ import data.model.schedule.Comments;
 import data.model.schedule.FinishedChildLessons;
 import data.model.schedule.FinishedLessons;
 import data.model.schedule.Schedules;
-import data.services.CommentService;
-import data.services.FamilyService;
-import data.services.FinishedChildLessonService;
-import data.services.FinishedLessonService;
-import data.services.PaymentService;
 import data.services.ScheduleService;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TrainerFinishedLessonWithStudentDisrupt extends TestBase {
   ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  PaymentService paymentService = new PaymentService();
-  CommentService commentService = new CommentService();
   private final TimeGeneral time = new TimeGeneral();
-  FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
-  FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private final long alreadyRun = 7200000; // 2 часа идет занятие
+  private final long alreadyRun = 7200000;
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday()
-        .StartSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "finishLessonByTrainer",
-            "23",
-            "finishLessonByTrainer",
-            "1",
-            "ru");
-
-    app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
-
-    app.trStudent()
-        .newStudent(
-            "finishLessonByTrainer",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "finishLessonByTrainer",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
+    data.schedules().set26_TodayStartSingleScheduleWithOneStudentOnTrial(period);
+    data.newFamily().set1_FamilyWithStudentAndParent();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -76,7 +36,7 @@ public class TrainerFinishedLessonWithStudentDisrupt extends TestBase {
     FinishedLessons finishBefore = app.dbschedules().finishedLessons();
     Comments commentsBefore = app.dbschedules().comments();
 
-    app.trainer().finishedLessonWithDiscrupt("finishLessonByTrainer");
+    app.trainer().finishedLessonWithDiscrupt("newSchedule");
     app.trainer().gotoTask();
 
     Schedules after = app.dbschedules().schedules();
@@ -93,27 +53,12 @@ public class TrainerFinishedLessonWithStudentDisrupt extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("finishLessonByTrainer");
-    studentService.DeleteById("finishLessonByTrainer");
-    familyService.DeleteById("finishLessonByTrainer");
-    finishedChildLessonService.drop();
-    finishedLessonService.drop();
-    paymentService.drop();
-    commentService.drop();
+    data.clean().taskAndSchedule().student().family().finishedLesson().payment();
   }
 
   private void check(Schedules after) {
-    scheduleService.DeleteById("finishLessonByTrainer");
-    app.trScheduleToday()
-        .FinishedSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "finishLessonByTrainer",
-            "14",
-            "finishLessonByTrainer",
-            "1",
-            "ru",
-            "abort");
+    scheduleService.DeleteById("newSchedule");
+    data.schedules().set39_AbortSingleScheduleWithOneStudentOnTrail(period, "23");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

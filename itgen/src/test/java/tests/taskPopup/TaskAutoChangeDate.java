@@ -8,7 +8,6 @@ import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,33 +16,10 @@ public class TaskAutoChangeDate extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
-  private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime() + 86400000; // на завтра
-  private final Date duoDateWithTime = new Date(duoDateSort);
-  private Date[] dates = null;
-  private final String[] texts = null;
-  private final String[] clients = null;
-  private final String[] commentaries = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trTask()
-        .saveAutoTask(
-            "AutoTaskChangeAssignee",
-            "contactForPayment",
-            createAt,
-            "inProgress",
-            new Date(),
-            new Date().getTime(),
-            "666",
-            "21",
-            "21",
-            "21.00 : 23.00",
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newAutoTask_takeAutoTask");
+    data.tasksAuto().set1_newAutoTaskToday("task", "contactForPayment", "inProgress", "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -60,24 +36,7 @@ public class TaskAutoChangeDate extends TestBase {
 
   private void check(Tasks after) {
     // автозадача перешла опять в стек (нет исполнителя и статус опять open)
-    dates = new Date[] {createAt, duoDateWithTime};
-    app.trTask()
-        .saveAutoTask(
-            "AutoTaskChangeAssignee",
-            "contactForPayment",
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            null,
-            "21",
-            "666",
-            "21.00 : 23.00",
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "takeAutoTask_changeDateAutoTask");
+    data.tasksAuto().set8_AutoTaskСhangeDate("contactForPayment", "open", "21");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
@@ -91,6 +50,6 @@ public class TaskAutoChangeDate extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    data.clean().taskAndSchedule();
   }
 }

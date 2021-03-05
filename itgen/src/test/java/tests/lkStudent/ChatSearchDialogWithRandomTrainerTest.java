@@ -14,6 +14,7 @@ public class ChatSearchDialogWithRandomTrainerTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
+    data.clean().taskAndSchedule().finishedLesson();
     String messageOld = "Привет";
     data.chat().set1_DialogStudentTrainer(messageOld, "21", "23");
   }
@@ -28,6 +29,6 @@ public class ChatSearchDialogWithRandomTrainerTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat();
+    data.clean().chat();
   }
 }

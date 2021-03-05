@@ -40,6 +40,6 @@ public class ScheduleBadMoveTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().taskAndSchedule().family().parent();
+    data.clean().student().taskAndSchedule().family().parent();
   }
 }

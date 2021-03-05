@@ -36,7 +36,7 @@ public class ProgressBarFinishedThreeProjects extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().achievements();
+    data.clean().material().achievements();
     data.defFamily().set19_ChangeDefaultStudentInStart();
   }
 }

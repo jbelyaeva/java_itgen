@@ -16,30 +16,14 @@ public class MaterialTakeForReview extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
-    app.trMaterial()
-        .newMaterial(
-            "MaterialTakeOnCheck",
-            "14",
-            "Жуки",
-            "checking",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность");
+    data.materials().set1_newMaterial("14");
   }
 
   @Test()
   public void testMaterialTakeForReview() {
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
-    app.material().TakeOnCheck("MaterialTakeOnCheck");
+    app.material().TakeOnCheck("material");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
@@ -47,28 +31,12 @@ public class MaterialTakeForReview extends TestBase {
   }
 
   private void check(Materials after) {
-    app.trMaterial()
-        .checkingMaterial(
-            "MaterialTakeOnCheck",
-            "14",
-            "Жуки",
-            "checking",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
+    data.materials().set2_MaterialTakeChecking("666", "14");
 
-    MaterialData materialAdd = materialService.findById("MaterialTakeOnCheck");
+    MaterialData materialAdd = materialService.findById("material");
 
     for (MaterialData materialAfter : after) {
-      if (materialAfter.getId().equals("MaterialTakeOnCheck")) {
+      if (materialAfter.getId().equals("material")) {
         assertThat(after, equalTo(after.without(materialAfter).withAdded(materialAdd)));
         return;
       }
@@ -77,6 +45,6 @@ public class MaterialTakeForReview extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().payment();
+    data.clean().material().payment();
   }
 }

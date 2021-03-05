@@ -11,106 +11,18 @@ import data.model.schedule.Comments;
 import data.model.schedule.FinishedChildLessons;
 import data.model.schedule.FinishedLessons;
 import data.model.schedule.Schedules;
-import data.services.CommentService;
-import data.services.FamilyService;
-import data.services.FinishedChildLessonService;
-import data.services.FinishedLessonService;
-import data.services.MaterialBranchService;
-import data.services.MaterialChildsService;
-import data.services.MaterialService;
 import data.services.ScheduleService;
-import data.services.StudentService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
   ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  TaskService taskService = new TaskService();
-  CommentService commentService = new CommentService();
-  MaterialService materialService = new MaterialService();
-  MaterialChildsService materialChildsService = new MaterialChildsService();
-  MaterialBranchService materialBranchService = new MaterialBranchService();
-  private final TimeGeneral time = new TimeGeneral();
-  FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
-  FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
-  private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
-    period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday()
-        .StartSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "ScheduleFinishLessonByTrainer",
-            "23",
-            "StudentFinishLessonByTrainer",
-            "1",
-            "ru");
-
-    app.trFamily().newFamily("FamilyFinishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
-
-    app.trStudent()
-        .newStudent(
-            "StudentFinishLessonByTrainer",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "FamilyFinishLessonByTrainer",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
-
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
-
-    app.trMaterial()
-        .publishedMaterial(
-            "MaterialOnLessonFirst",
-            "14",
-            "Жуки",
-            "published",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
-
-    app.trMaterial()
-        .publishedMaterial(
-            "MaterialOnLessonSecond",
-            "14",
-            "Лабиринт",
-            "published",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
+    data.newFamilyOnLesson().set1_StudentOnLessonWithMaterials("newSchedule");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -121,7 +33,7 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
     Comments commentsBefore = app.dbschedules().comments();
     MaterialChilds materialChildsBefore = app.dbmaterial().materialChilds();
 
-    app.trainer().finishedLessonWithWas_giveProject("ScheduleFinishLessonByTrainer", "Жуки", "Лабиринт");
+    app.trainer().finishedLessonWithWas_giveProject("newSchedule", "Жуки", "Лабиринт");
     app.trainer().gotoTask();
 
     Schedules after = app.dbschedules().schedules();
@@ -140,30 +52,15 @@ public class TrainerFinishedLessonWithStudentWas_Project extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("ScheduleFinishLessonByTrainer");
-    familyService.DeleteById("FamilyFinishLessonByTrainer");
-    finishedChildLessonService.drop();
-    finishedLessonService.drop();
-    taskService.drop();
-    commentService.drop();
-    materialService.drop();
-    materialChildsService.drop();
-    materialBranchService.drop();
-    studentService.DeleteById("StudentFinishLessonByTrainer");
+    data.clean().taskAndSchedule().family().student().finishedLesson().material();
   }
 
   private void check(Schedules after) {
+    TimeGeneral time = new TimeGeneral();
+    long alreadyRun = 7200000;
+    period = time.getPeriod(time.getTimeNow() - alreadyRun);
     scheduleService.DeleteById("ScheduleFinishLessonByTrainer");
-    app.trScheduleToday()
-        .FinishedSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "ScheduleFinishLessonByTrainer",
-            "23",
-            "StudentFinishLessonByTrainer",
-            "1",
-            "ru",
-            "finished");
+    data.schedules().set38_FinishedSingleScheduleWithOneStudentOnTrail(period, "23");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

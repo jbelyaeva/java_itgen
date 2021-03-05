@@ -40,7 +40,7 @@ public class RequestIFGreenDoneIfRecordInIFGroup extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
     data.skills()
         .set4_ChangeDurationTrialPython(data.skillsService().findBySkillId("2", "ru").getId(), 2);
   }

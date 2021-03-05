@@ -1,18 +1,15 @@
 package app.appmanager;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -44,15 +41,6 @@ public class HelperBase {
     if (text != null) {
       wd.findElement(locator).clear();
       wd.findElement(locator).sendKeys(text);
-    }
-  }
-
-  public boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException ex) {
-      return false;
     }
   }
 
@@ -150,25 +138,7 @@ public class HelperBase {
 
   public void logoutByStudent() {
     click(By.xpath("//div[@class='head']"));
-
-    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"))) {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"));
-    } else {
-      if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"))) {
-        click(By.xpath("(//ul[contains(@class,'Menu')])//li[4]"));
-      } else {
-        click(By.xpath("(//ul[contains(@class,'Menu')])//li[3]"));
-      }
-    }
-  }
-
-  public void logoutByParent() {
-    click(By.xpath("//div[@class='head']"));
-    if (isElementPresent(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"))) {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[6]"));
-    } else {
-      click(By.xpath("(//ul[contains(@class,'Menu')])//li[5]"));
-    }
+    click(By.xpath("//li[text()='Выйти']"));
   }
 
   public void login(String login, String password) {
@@ -243,17 +213,6 @@ public class HelperBase {
     wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
-  public Date stringToDate(String stringDate) throws ParseException {
-    String startDate = stringDate; // "Tue May 15 00:00:01 MSK 2012";
-    SimpleDateFormat parser = new SimpleDateFormat("EEE MMM d HH:mm:ss zzz yyyy", Locale.US);
-    return parser.parse(startDate);
-  }
-
-  public String elementAtributAvailable(By locator) {
-    // из документации: атрибут disabled возвращает либо true, либо null
-    return wd.findElement(locator).getAttribute("disabled");
-  }
-
   public static Date DateWithCorrectionDays(int days) {
     Date data = new Date();
     Calendar c = Calendar.getInstance();
@@ -270,7 +229,7 @@ public class HelperBase {
     return c.getTime();
   }
 
-  public String DateISOToUsualDataString(Date dateISO) {
+  public static String DateISOToUsualDataString(Date dateISO) {
     SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
     return formatForDateNow.format(dateISO);
   }
@@ -285,6 +244,12 @@ public class HelperBase {
     WebElement element = wd.findElement(locator);
     JavascriptExecutor executor = (JavascriptExecutor) wd;
     executor.executeScript("arguments[0].click();", element);
+    /*ввести в консоль для определения координат в подсказках
+    document.onmousemove = function(e){
+      var x = e.pageX;
+      var y = e.pageY;
+      e.target.title = "X is "+x+" and Y is "+y;
+    };*/
   }
 
   public void maxBrowser() {
@@ -293,11 +258,6 @@ public class HelperBase {
 
   public void explicitWait(int ms) {
     wd.manage().timeouts().implicitlyWait(ms, TimeUnit.MICROSECONDS);
-  }
-
-  public void waitUntilRefreshElement(WebElement element) {
-    WebDriverWait waitRefreshElement = new WebDriverWait(wd, 10);
-    waitRefreshElement.until(ExpectedConditions.stalenessOf(element));
   }
 
   public String address() {
@@ -366,6 +326,12 @@ public class HelperBase {
     JavascriptExecutor exe = (JavascriptExecutor) wd;
     exe.executeScript("$(document.elementFromPoint(" + x + "," + y + ")).click();");
   }
+  /*ввести в консоль для определения координат в подсказках
+    document.onmousemove = function(e){
+      var x = e.pageX;
+      var y = e.pageY;
+      e.target.title = "X is "+x+" and Y is "+y;
+    };*/
 
   public String goToNewWindowAndGoToBack(By locatorHref) throws InterruptedException {
     String originalWindow = wd.getWindowHandle();
@@ -374,8 +340,8 @@ public class HelperBase {
     String newWindow = (new WebDriverWait(wd, 10))
         .until((ExpectedCondition<String>) driver -> {
           Set<String> newWindowsSet = Objects.requireNonNull(driver).getWindowHandles();
-              newWindowsSet.removeAll(existingWindows);
-              return newWindowsSet.size() > 0 ?
+          newWindowsSet.removeAll(existingWindows);
+          return newWindowsSet.size() > 0 ?
                   newWindowsSet.iterator().next() : null;
             }
         );

@@ -3,33 +3,19 @@ package tests.task;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.Tasks;
-import data.services.TaskService;
-import app.testbase.TestBase;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TaskManualDeleteInStack extends TestBase {
 
-  TaskService taskService = new TaskService();
-
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trTask()
-        .newManualTask(
-            "DeleteInStack",
-            "777",
-            "666",
-            "Записать на пробное",
-            0,
-            new Date(),
-            "open",
-            new Date(),
-            new Date().getTime(),
-            "21");
+    data.tasksManual()
+        .set6_1_ManualTaskCreatorAdminAssigneeSuperPr0("task", "Записать на пробное", "open", "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -44,6 +30,6 @@ public class TaskManualDeleteInStack extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    data.clean().taskAndSchedule();
   }
 }

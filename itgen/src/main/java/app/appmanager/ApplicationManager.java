@@ -11,26 +11,7 @@ import app.appmanager.dbHelpers.DbHelperSchedule;
 import app.appmanager.dbHelpers.DbHelperStudents;
 import app.appmanager.dbHelpers.DbHelperTasks;
 import app.appmanager.dbHelpers.DbHelperTest;
-import app.appmanager.transactionHelper.TrCandidateHelper;
-import app.appmanager.transactionHelper.TrChatHelper;
-import app.appmanager.transactionHelper.TrCommunityHelper;
-import app.appmanager.transactionHelper.TrFamilyHelper;
-import app.appmanager.transactionHelper.TrFinishedLessonHelper;
-import app.appmanager.transactionHelper.TrLeadHelper;
-import app.appmanager.transactionHelper.TrMaterialHelper;
-import app.appmanager.transactionHelper.TrParentHelper;
-import app.appmanager.transactionHelper.TrPaymentHelper;
-import app.appmanager.transactionHelper.TrSkillHelper;
-import app.appmanager.transactionHelper.TrStudentHelper;
-import app.appmanager.transactionHelper.TrTaskHelper;
-import app.appmanager.transactionHelper.TrTestHelper;
-import app.appmanager.transactionHelper.TrWorkerHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleTodayHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleTomorrowHelper;
-import app.appmanager.transactionHelper.schedule.TrScheduleYesterdayHelper;
 import core.general.Assertions;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -80,6 +61,7 @@ public class ApplicationManager {
   private TaskHelper taskHelper;
   private CandidateHelper candidateHelper;
   private CommunityHelper communityHelper;
+  private SkillHelper skillHelper;
   private Assertions assertions;
   private DbHelper dbHelper;
   private DbHelperBase dbHelperBase;
@@ -92,24 +74,6 @@ public class ApplicationManager {
   private DbHelperChat dbHelperChat;
   private DbHelperCandidaies dbHelperCandidaies;
   private DbHelperCommunity dbHelperCommunity;
-  private TrScheduleTomorrowHelper trScheduleTomorrowHelper;
-  private TrScheduleYesterdayHelper trScheduleYesterdayHelper;
-  private TrScheduleTodayHelper trScheduleTodayHelper;
-  private TrScheduleHelper trScheduleHelper;
-  private TrStudentHelper transactionStudentHelper;
-  private TrLeadHelper transactionLeadHelper;
-  private TrParentHelper transactionParentHelper;
-  private TrPaymentHelper transactionPaymentHelper;
-  private TrFamilyHelper transactionFamilyHelper;
-  private TrMaterialHelper transactionMaterialHelper;
-  private TrTaskHelper transactionTaskHelper;
-  private TrTestHelper transactionTestHelper;
-  private TrChatHelper transactionChatHelper;
-  private TrCandidateHelper transactionCandidateHelper;
-  private TrWorkerHelper transactionWorkerHelper;
-  private TrFinishedLessonHelper transactionFinishedLessonHelper;
-  private TrCommunityHelper transactionCommunityHelper;
-  private TrSkillHelper transactionSkillHelper;
 
 
   public ApplicationManager(String browser) {
@@ -120,8 +84,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(
-        new FileReader(
-            new File(String.format("src/test/resources/properties/%s.properties", target))));
+        new FileReader((String.format("src/test/resources/properties/%s.properties", target))));
 
     dbHelper = new DbHelper();
     dbHelperBase = new DbHelperBase();
@@ -134,25 +97,6 @@ public class ApplicationManager {
     dbHelperChat = new DbHelperChat();
     dbHelperCandidaies = new DbHelperCandidaies();
     dbHelperCommunity = new DbHelperCommunity();
-
-    trScheduleTomorrowHelper = new TrScheduleTomorrowHelper();
-    trScheduleYesterdayHelper = new TrScheduleYesterdayHelper();
-    trScheduleTodayHelper = new TrScheduleTodayHelper();
-    trScheduleHelper = new TrScheduleHelper();
-    transactionStudentHelper = new TrStudentHelper();
-    transactionLeadHelper = new TrLeadHelper();
-    transactionParentHelper = new TrParentHelper();
-    transactionPaymentHelper = new TrPaymentHelper();
-    transactionFamilyHelper = new TrFamilyHelper();
-    transactionMaterialHelper = new TrMaterialHelper();
-    transactionTaskHelper = new TrTaskHelper();
-    transactionTestHelper = new TrTestHelper();
-    transactionChatHelper = new TrChatHelper();
-    transactionCandidateHelper = new TrCandidateHelper();
-    transactionWorkerHelper = new TrWorkerHelper();
-    transactionFinishedLessonHelper = new TrFinishedLessonHelper();
-    transactionCommunityHelper = new TrCommunityHelper();
-    transactionSkillHelper = new TrSkillHelper();
 
     if ("".equals(properties.getProperty("selenium.server"))) {
       if (browser.equals(BrowserType.FIREFOX)) {
@@ -198,12 +142,10 @@ public class ApplicationManager {
     taskHelper = new TaskHelper(wd);
     testHelper = new TestHelper(wd);
     chatHelper = new ChatHelper(wd);
+    skillHelper = new SkillHelper(wd);
     candidateHelper = new CandidateHelper(wd);
     communityHelper = new CommunityHelper(wd);
     assertions = new Assertions(wd);
-
-    sessionHelper.login(
-        properties.getProperty("web.Login"), properties.getProperty("web.Password"));
     // проверить, есть ли папки для скриншотов, если нет - создать
     Path requiredMainDir = Paths.get(properties.getProperty("testsScreenshot"));
     if (!Files.exists(requiredMainDir)) {
@@ -221,6 +163,11 @@ public class ApplicationManager {
       }
       Files.createDirectory(dir);
     }
+  }
+
+  public void login() {
+    sessionHelper.login(
+        properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 
   public void stop() {
@@ -311,6 +258,10 @@ public class ApplicationManager {
     return leadHelper;
   }
 
+  public SkillHelper skill() {
+    return skillHelper;
+  }
+
   public WindowScheduleHelper windowSchedule() {
     return windowScheduleHelper;
   }
@@ -365,78 +316,6 @@ public class ApplicationManager {
 
   public Assertions check() {
     return assertions;
-  }
-
-  public TrScheduleTomorrowHelper trScheduleTomorrow() {
-    return trScheduleTomorrowHelper;
-  }
-
-  public TrScheduleYesterdayHelper trScheduleYesterday() {
-    return trScheduleYesterdayHelper;
-  }
-
-  public TrScheduleTodayHelper trScheduleToday() {
-    return trScheduleTodayHelper;
-  }
-
-  public TrScheduleHelper trSchedule() {
-    return trScheduleHelper;
-  }
-
-  public TrStudentHelper trStudent() {
-    return transactionStudentHelper;
-  }
-
-  public TrLeadHelper trLead() {
-    return transactionLeadHelper;
-  }
-
-  public TrParentHelper trParent() {
-    return transactionParentHelper;
-  }
-
-  public TrPaymentHelper trPayment() {
-    return transactionPaymentHelper;
-  }
-
-  public TrFamilyHelper trFamily() {
-    return transactionFamilyHelper;
-  }
-
-  public TrMaterialHelper trMaterial() {
-    return transactionMaterialHelper;
-  }
-
-  public TrTaskHelper trTask() {
-    return transactionTaskHelper;
-  }
-
-  public TrTestHelper trTest() {
-    return transactionTestHelper;
-  }
-
-  public TrChatHelper trChat() {
-    return transactionChatHelper;
-  }
-
-  public TrCandidateHelper trCandidate() {
-    return transactionCandidateHelper;
-  }
-
-  public TrWorkerHelper trWorker() {
-    return transactionWorkerHelper;
-  }
-
-  public TrFinishedLessonHelper trFinishedLesson() {
-    return transactionFinishedLessonHelper;
-  }
-
-  public TrCommunityHelper trCommunity() {
-    return transactionCommunityHelper;
-  }
-
-  public TrSkillHelper trSkill() {
-    return transactionSkillHelper;
   }
 
   public byte[] takeScreenshot() {

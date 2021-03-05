@@ -22,7 +22,7 @@ public class RequestOnTrial2hScratchTests extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRequestOnTrial2hScratch() {
     String name = "Олег Олегов";
-    app.base().refresh();
+    app.goTo().menuTasks();
     app.goTo().menuSchedule();
     Requests before = app.dbrequest().allList();
     app.windowSchedule().makeRequestOnTrialScratch(name);
@@ -39,7 +39,7 @@ public class RequestOnTrial2hScratchTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
   }
 
 }

@@ -36,7 +36,7 @@ public class WorkingOffWithLessons extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.studentService().DeleteById("newStudent");
-    data.postClean().taskAndSchedule();
+    data.studentService().deleteById("newStudent");
+    data.clean().taskAndSchedule();
   }
 }

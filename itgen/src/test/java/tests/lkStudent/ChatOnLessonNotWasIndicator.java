@@ -25,8 +25,9 @@ public class ChatOnLessonNotWasIndicator extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testChatOnLessonSendMessageTrainer() throws InterruptedException {
+  public void testChatOnLessonNotWasIndicator() throws InterruptedException {
     app.lkStudent().btnCloseTutorial();
+    app.base().refresh();
     app.lkStudent().goOnLesson();
     Thread.sleep(1000);
     app.check().notFindElement(app.lkStudent().getIndicatorChat());
@@ -35,6 +36,6 @@ public class ChatOnLessonNotWasIndicator extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

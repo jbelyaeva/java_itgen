@@ -17,7 +17,7 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
   public void ensurePreconditions() {
     String period = "18:00 - 20:00";
     data.schedules().set12_TodaySingleScheduleWithStudent(period, "schedule");
-    data.newFamilyWithSingleLessons().set2_FamilyAndSingleLesson(periodMove);
+    data.newFamilyWithSingleLessons().set2_FamilyAndSingleLesson(periodMove, "14");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -37,6 +37,6 @@ public class ScheduleBadMoveOnOccupiedLessonTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().taskAndSchedule().family().parent();
+    data.clean().student().taskAndSchedule().family().parent();
   }
 }

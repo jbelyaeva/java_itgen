@@ -41,9 +41,10 @@ public class TaskHelper extends HelperBase {
     type(By.xpath("//div[@class='form-group']//input"), task.getText());
 
     type(By.xpath("//div[@class='input-group']//input[@name='user-name']"), "Admin");
-    click(By.xpath("(//span[contains(@class,'result')])[1]"));
+    click(By.xpath("(//span[contains(@class,'result')])[2]"));
 
     dropDownList_Integer(By.xpath("//select[@id='task-priority']"), task.getPriority());
+
     enterADate(By.name("task-date"), task.getDateUi());
     type(By.xpath("//input[contains(@class,'task-time')]"), task.getTimeUi());
 
@@ -321,17 +322,26 @@ public class TaskHelper extends HelperBase {
     btnClosePopup();
   }
 
-
   private void changeDateNextDay() {
     click(By.xpath("//div[@class='input-group']//button"));
+    //если не найден следующий день в текущей недели (например сегодня воскресенье)
     if (!isElementPresent(
         By.xpath("//button[contains(@class,'daySelected')]/../following-sibling::div[1]"))) {
-      click(By.xpath("(//div[contains(@class,'switch')]//button)[2]"));//пагинатор
-      click(By.xpath("(//p[text()='1'])[1]")); //1 число нового месяца
+      //если не найдена последняя неделя месяца (например сегодня воскрсенье и это 31 число)
+      if (!isElementPresent(By.xpath(
+          "(//button[contains(@class,'daySelected')]/../../following-sibling::div//div)[1]"))) {
+        click(By.xpath("(//div[contains(@class,'switch')]//button)[2]"));//пагинатор
+        click(By.xpath("(//p[text()='1'])[1]")); //1 число нового месяца
+      } else {
+        //кликнуть на понедельник следующей недели
+        click(By.xpath(
+            "(//button[contains(@class,'daySelected')]/../../following-sibling::div//div)[1]"));
+      }
+    } else {
+      click(
+          By.xpath(
+              "//button[contains(@class,'daySelected')]/../following-sibling::div[1]"));
     }
-    click(
-        By.xpath(
-            "//button[contains(@class,'daySelected')]/../../following-sibling::div[1]"));
   }
 
   private void selectChangeDateByManualTask() {
@@ -509,9 +519,5 @@ public class TaskHelper extends HelperBase {
     WebElement element = wd.findElement(By.xpath("//div[contains(@class,'new-comment')]"));
     ((JavascriptExecutor) wd)
         .executeScript("var ele=arguments[0]; ele.innerHTML = '" + comment + "';", element);
-  }
-
-  public void selectStatusNotDone() {
-    click(By.xpath("div//[@role='group']//button[1]"));
   }
 }

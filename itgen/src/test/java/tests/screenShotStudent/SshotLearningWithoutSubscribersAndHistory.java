@@ -8,7 +8,6 @@ import static app.appmanager.ApplicationManager.properties;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import data.services.StudentService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -22,29 +21,9 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotLearningWithoutSubscribersAndHistory extends TestBase {
 
-  private final StudentService studentService = new StudentService();
-
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trStudent()
-        .changeDefaultStudent_finishLessonBy1Skill(
-            new String[]{"child"},
-            "beginner",
-            "BY",
-            "Europe/Minsk",
-            2,
-            "ru",
-            "ru",
-            "ru",
-            new String[]{"1"},
-            "+9875645311",
-            2,
-            "trialFinished",
-            1,
-            new String[]{"1"},
-            new String[]{"1"},
-            1,
-            120);
+    data.defFamily().set21_DefaultStudent_finishLessonBy1Skil();
     app.base().goByHref(app.base().address() + "/login");
     app.student()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));

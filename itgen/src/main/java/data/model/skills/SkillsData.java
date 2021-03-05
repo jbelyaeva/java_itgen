@@ -17,6 +17,9 @@ public class SkillsData {
   @Property("_id")
   private String id;
 
+  @Property("className")
+  private String className;
+
   @Expose
   @Property("lang")
   private String lang;

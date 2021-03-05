@@ -2,10 +2,6 @@ package tests.payment;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import core.general.TimeGeneral;
-import data.model.materials.MaterialData;
-import data.services.MaterialService;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,14 +12,13 @@ import org.testng.annotations.Test;
 
 public class PaymentByParent extends TestBase {
 
-  StudentService studentService = new StudentService();
-  private final TimeGeneral time = new TimeGeneral();
-  MaterialService materialService = new MaterialService();
-
   @BeforeMethod
   public void ensurePreconditions() {
     String period = "18:00 - 20:00";
-    app.trScheduleYesterday()
+    data.finishedLessonWithProject()
+        .set1_LessonYesterdayFinishedWithProject_StudentAddInDefaultFamily(
+            period);
+ /*   app.trScheduleYesterday()
         .finishingFirstTrialLesson(period, "ScheduleYesterday", "14", "paymentByParent", "1");
 
     app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
@@ -188,7 +183,7 @@ public class PaymentByParent extends TestBase {
             "trialFinished",
             new String[]{"1"},
             new String[]{"1"},
-            new int[]{1, 120});
+            new int[]{1, 120});*/
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -205,7 +200,6 @@ public class PaymentByParent extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().payment().material().finishedLesson();
-    studentService.DeleteById("paymentByParent");
+    data.clean().taskAndSchedule().payment().material().finishedLesson().student();
   }
 }

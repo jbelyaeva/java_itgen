@@ -4,10 +4,11 @@ package tests.lkParent;
  * Перейти в настройки у этого ребенка. Изменить логин и сохранить.
  * 1.Проверить, что в бд изменился username,
  * 2.что изменился логин в ui
- * 3.что можно авторизоваться с новым логином
+ * 3.что можно авторизоваться с новым логином - отказалась от этой проверки, тк она избыточна для ui-тестов
  */
 
 import app.testbase.TestBase;
+import core.general.RunTestAgain;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -21,7 +22,7 @@ public class SettingsSaveValidLogin extends TestBase {
     data.defFamily().set13_addNewStudentOlder7Years();
   }
 
-  @Test()
+  @Test(retryAnalyzer = RunTestAgain.class)
   public void testSettingsSaveValidLogin() {
     app.lkParent().reset();
     app.lkParent().saveNewLogin(loginNew);
@@ -30,21 +31,10 @@ public class SettingsSaveValidLogin extends TestBase {
             loginNew);
     app.check()
         .textElement(app.lkParent().getLabelLoginInSettings(), loginNew);
-    //проверки на аворизацию
-    app.base().logoutByParent();
-    app.base().goByHref(app.base().address() + "/login");
-    app.base().login(loginNew, "111111");
-    app.check().findElement(app.lkParent().getWinTutorialsInSettings());
-    app.base().btnCloseTutorial();
-    app.base().logoutByStudent();
   }
 
   @AfterMethod(alwaysRun = true)
-  public void clean() throws InterruptedException {
-    data.postClean().student();
-    app.base().goByHref(app.base().address() + "/login");
-    app.base().refresh();
-    app.base().goByHref(app.base().address() + "/login");
-    app.base().login("parent", "111111");
+  public void clean() {
+    data.clean().student();
   }
 }

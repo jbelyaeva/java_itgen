@@ -22,5 +22,6 @@ public class StudentWithoutTrailDisplayTest extends TestBase {
     app.check().equalityOfTwoElements(app.lkStudent().findTutorials(), true);
     app.check().equalityOfTwoElements(app.lkStudent().openCheckConnection(), true);
     app.lkStudent().btnCloseTutorial();
+    app.lkStudent().btnLogo();
   }
 }

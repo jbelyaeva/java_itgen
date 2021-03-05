@@ -29,6 +29,23 @@
             <class name="tests.schedule.RemoveStudentOnTrialSingleLessonTests"/>
             <!--     <class name="ScheduleBadMoveTests" />
                  <class name="ScheduleBadMoveOnOccupiedLessonTests" /> -->
+            <class name="tests.schedule.Record1hTrialVisualization"/>
+            <class name="tests.schedule.Record1hTrialSecondHour"/>
+            <class name="tests.schedule.Record1hTrialFirstHour"/>
+            <class name="tests.schedule.Record1hTrialChangeDuration"/>
+            <class name="tests.schedule.RecordFreeStudentOnRegularLesson"/>
+            <class name="tests.schedule.RecordFreeStudentOnSingleLesson"/>
+            <class name="tests.schedule.RecordStudentWithFrenchOnlyToFrenchTrainer"/>
+            <class name="tests.schedule.ArchivingSingleSchedule"/>
+            <class name="tests.schedule.ArchivingRegularSchedule"/>
+            <!-- <class name="tests.schedule.ScheduleRegularRestoreCanceledLesson"/>-->
+            <class name="tests.schedule.ScheduleRegularDontMoveSecondLesson"/>
+            <class name="tests.skills.SkillVisibleCreationFormWithBothFormat"/>
+            <class name="tests.schedule.ScheduleIFVisualPopupCreationTests"/>
+            <class name="tests.schedule.ScheduleIFVisualPeriodsInPopupCreation"/>
+            <class name="tests.schedule.RecordInIFOnRegularSchedule"/>
+            <class name="tests.schedule.RecordInIFOnWorkingOff"/>
+            <class name="tests.skills.SkillCreationWithIF"/>
         </classes>
     </test>
 </suite>

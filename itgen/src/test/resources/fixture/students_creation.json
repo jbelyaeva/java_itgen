@@ -1,0 +1,35 @@
+[
+  {
+    "id": "21",
+    "username": "student",
+    "firstname": "Ребенок",
+    "lastname": "Дефолтный",
+    "skills": [
+      "1"
+    ],
+    "gender": 1,
+    "birthday": "2010-01-01T00:00:00.000Z",
+    "pclevel": "beginner",
+    "country": "BY",
+    "timezone": "Europe/Minsk",
+    "locate": "ru",
+    "langs": [
+      "ru"
+    ],
+    "duration": 2,
+    "contacts": [],
+    "familyId": "111",
+    "roles": [
+      "child"
+    ],
+    "status": {
+      "state": "noTrial"
+    },
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$6O9CTkYDWLQCYaKZR34JfOhWWhHLSljodVEJlsdAUmDIoxsf/beka"
+      }
+    },
+    "materialsLang": "ru"
+  }
+]

@@ -21,20 +21,24 @@ public class SshotFamily extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        data.familyService().updateFieldBoolean("111", "isTrialBonusOff", false);
+        data.familyService().updateField("111", "isTrialBonusOff", false);
     }
 
     @Test(retryAnalyzer = RunTestAgain.class)
-    public void testSshotFamilies() throws AWTException, IOException {
+    public void testSshotFamilies() throws AWTException, IOException, InterruptedException {
         String name = "Admin_Family_RU_Chrome";
         Set<By> locatorIgnor = new HashSet<>();
-        locatorIgnor.add(By.xpath("//span[@class='user-time']"));
+        //   locatorIgnor.add(By.xpath("//span[@class='user-time']"));
 
         app.goTo().menuStudents();
         app.student().selectStudentInListUIById("21");
         app.family().btnFamily();
         app.sshot().changeTopBar();
 
+        String[] deleteElements = {"//span[@class='user-time']"};
+        app.sshot().deleteElements(deleteElements);
+
+        Thread.sleep(3000);
         ImageDiff diff =
                 app.sshot()
                         .getImageDiff(

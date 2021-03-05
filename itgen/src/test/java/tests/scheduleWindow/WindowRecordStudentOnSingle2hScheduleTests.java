@@ -7,12 +7,7 @@ import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.schedule.ScheduleData;
 import data.model.schedule.Schedules;
-import data.model.tasks.TaskData;
-import data.model.tasks.Tasks;
-import data.services.FamilyService;
 import data.services.ScheduleService;
-import data.services.StudentService;
-import data.services.TaskService;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,13 +18,11 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
   String period = "18:00 - 20:00";
   String name = "Маша Машина";
   ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  TaskService taskService = new TaskService();
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "recordOnSchedule", "14");
+    data.newFamilyWithSingleLessons().set6_FamilyAndTomorrowSingleLesson(period);
+   /* app.trScheduleTomorrow().SingleScheduleWithoutStudent(period, "recordOnSchedule", "14");
     app.trFamily().newFamily("recordStudent", false, "txc");
 
     app.trStudent()
@@ -49,7 +42,7 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
             "ru",
             new String[]{"1"},
             2,
-            "noTrial");
+            "noTrial");*/
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -66,19 +59,11 @@ public class WindowRecordStudentOnSingle2hScheduleTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.DeleteById("recordOnSchedule");
-    studentService.DeleteById("recordStudent");
-    familyService.DeleteById("recordStudent");
-    Tasks tasks = app.dbschedules().tasksComposition("recordStudent");
-    for (TaskData taskClean : tasks) {
-      taskService.DeleteById(taskClean.getId());
-    }
+    data.clean().student().family().parent().taskAndSchedule();
   }
 
   private void check(Schedules before, Schedules after) {
-    app.trScheduleTomorrow()
-        .SingleScheduleWithOneNewStudent(
-            period, "recordOnSchedule", "14", "recordStudent", "1", "ru");
+    data.schedules().set7_1_SingleScheduleWithOneStudentRecordOnSingleOnScratch(period);
     ScheduleData scheduleAdd = scheduleService.findById("recordOnSchedule");
     for (ScheduleData scheduleBefore : before) {
       if (scheduleBefore.getId().equals("recordOnSchedule")) {

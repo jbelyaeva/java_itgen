@@ -4,10 +4,12 @@
     <test name="Students">
         <classes>
             <class name="tests.selfRegistration.SelfRegistration"/>
-            <class name="tests.students.StudentCreationTests" />
-            <class name="tests.students.StudentModificationTests" />
-            <class name="tests.students.StudentDeletionTests" />
-            <class name="tests.students.StudentFiltrPolTests" />
+            <class name="tests.selfRegistration.SelfRegistrationStudent3Years"/>
+            <class name="tests.selfRegistration.SelfRegistrationStudent4Years"/>
+            <class name="tests.students.StudentCreationTests"/>
+            <class name="tests.students.StudentModificationTests"/>
+            <class name="tests.students.StudentDeletionTests"/>
+            <class name="tests.students.StudentFiltrPolTests"/>
             <class name="tests.students.StudentTabHistoryProgressBar"/>
         </classes>
     </test>

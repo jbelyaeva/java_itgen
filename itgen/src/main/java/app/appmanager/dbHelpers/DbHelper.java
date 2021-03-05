@@ -129,6 +129,15 @@ public class DbHelper {
     return datastore.createQuery(SkillsData.class).find().toList().get(0);
   }
 
+  public SkillsData lastSkill() {
+    Datastore datastore = morphiaSessionFactoryUtil();
+    Query<SkillsData> q = datastore.createQuery(SkillsData.class);
+    long count = q.count();
+    List<SkillsData> skills = q.find().toList();
+    SkillsData lastSkill = skills.get(Math.toIntExact(count - 1));
+    return lastSkill;
+  }
+
   public List<String> roles(String idWorker) {
     if (idWorker.equals("666")) {
       ArrayList<String> roles;

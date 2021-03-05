@@ -2,6 +2,7 @@ package app.appmanager;
 
 import static app.appmanager.ApplicationManager.properties;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -62,7 +63,7 @@ public class LkStudentHelper extends HelperBase {
   private final By labelNotPosts = By.xpath("//div[@class='posts-not-exist-item']");
   private final By labelNotTests = By.xpath("//div[@class='childTesting-page']//span");
   private final By progressBar = By.xpath(
-      "//div[@class='child-progress']//div[@class='progress-bar']");
+      "//div[@class='child-progress']//div[@class='progress-bar-item']");
   private final By btnShowAllProgressBar = By.xpath("//button[@id-qa='show-all']");
   private final By editTextMessageInChatOnLesson = By.xpath("//textarea[@id-qa='message']");
   private final By btnSendMessageInChatOnLesson = By.xpath("//button[@id-qa='send']");
@@ -70,6 +71,23 @@ public class LkStudentHelper extends HelperBase {
   private final By btnEditMessageInChatOnLesson = By.xpath("//a[@id-qa='edit']");
   private final By btnDeleteMessageInChatOnLesson = By.xpath("//a[@id-qa='remove']");
   private final By indicatorChat = By.xpath("//div[@class='chat-alert circle']");
+  private final By editInformationAboutMyself = By.xpath("//textarea[1]");
+  private final By fullAreaInoProfile = By.xpath("//div[@class='main-layout']");
+  private final By alongCommunityScratch = By.xpath("//a[text()='Scratch']");
+  private final By tabSubscribers = By.xpath("//button[@id-qa='subscribers']");
+  private final By achievements = By.xpath("//div[@class='achievements-item no-progress']");
+  private final By achievementsAll = By.xpath("//div[contains(@class,'achievements-item')]");
+  private final By finishedHours = By.xpath("//div[@class='finished-hours']");
+  private final By informationAboutMyselfInProfile = By.xpath(
+      "//div[@class='about multiline-text']");
+  private final By btnShowAllAchievement = By.xpath("//button[@id-qa='see-all']");
+  private final By btnSaveComment = By.xpath("//button[@id-qa='save']");
+  private final By textComment = By.xpath("//div[@class='text']//span[@class='multiline-text']");
+  private final By dropdownLang = By.xpath("//div[@id-qa='langs']");
+  private final By rusLang = By.xpath("//div[text()='Русский']");
+  private final By enLang = By.xpath("//div[text()='Английский']");
+  private final By allLang = By.xpath("//div[text()='Все']");
+  private final By greenHeart = By.xpath("//span[contains(@class,'checked')]");
 
   public LkStudentHelper(WebDriver wd) {
     super(wd);
@@ -171,6 +189,38 @@ public class LkStudentHelper extends HelperBase {
     return indicatorChat;
   }
 
+  public By getEditInformationAboutMyself() {
+    return editInformationAboutMyself;
+  }
+
+  public By getAchievements() {
+    return achievements;
+  }
+
+  public By getAchievementsAll() {
+    return achievementsAll;
+  }
+
+  public By getFinishedHours() {
+    return finishedHours;
+  }
+
+  public By getInformationAboutMyselfInProfile() {
+    return informationAboutMyselfInProfile;
+  }
+
+  public By getBtnShowAllAchievement() {
+    return btnShowAllAchievement;
+  }
+
+  public By getTextComment() {
+    return textComment;
+  }
+
+  public By getBtnPoint() {
+    return btnPoint;
+  }
+
   public void logout() {
     click(header);
     click(goOutFromAccount);
@@ -212,6 +262,7 @@ public class LkStudentHelper extends HelperBase {
 
   public String getMessageTrainer() {
     String message = wd.findElement(messageReadyFromTrainer).getText();
+    btnCloseTutorial();
     btnLogo();
     return message;
   }
@@ -305,7 +356,8 @@ public class LkStudentHelper extends HelperBase {
   }
 
   public void btnCommunities() {
-    click(tabCommunities);
+    btnCloseTutorial();
+    clickWithMoveToElementAndWait(2, tabCommunities);
   }
 
   public void subscribeOnCommunity() {
@@ -328,6 +380,7 @@ public class LkStudentHelper extends HelperBase {
 
   public void addLike() {
     click(btnLike);
+    waitVisibleElement(5, greenHeart);
   }
 
   public void addCommentInFeed(String comment) {
@@ -342,8 +395,18 @@ public class LkStudentHelper extends HelperBase {
     click(btnCreateComment);
   }
 
-  private void fillNewComment(String comment) {
+  public void fillNewComment(String comment) {
     clickWaitElementToBeClicable(5, By.xpath("//div[@id-qa='wrap']"));
+    clear(50, typeCommentText);
+    clickWithMoveToElementAndWait(1, typeCommentText);
+    JavascriptExecutor exe = (JavascriptExecutor) wd;
+    WebElement element = wd.findElement(typeCommentText);
+    exe.executeScript("arguments[0].innerHTML='" + comment + "';", element);
+    Actions action = new Actions(wd);
+    action.sendKeys(Keys.ENTER).build().perform();
+  }
+
+  public void fillEditComment(String comment) {
     clear(50, typeCommentText);
     clickWithMoveToElementAndWait(1, typeCommentText);
     JavascriptExecutor exe = (JavascriptExecutor) wd;
@@ -362,7 +425,7 @@ public class LkStudentHelper extends HelperBase {
   }
 
   public void goInProfile() {
-    click(By.xpath("//div[@class='head']"));
+    clickWithMoveToElementAndWait(5, By.xpath("//div[@class='head']"));
     clickWithMoveToElementAndWait(5, By.xpath("//li[2]//button"));
   }
 
@@ -402,18 +465,87 @@ public class LkStudentHelper extends HelperBase {
   }
 
   public void modifyMessage(String message) {
-    click(dropdownInOldMessageInChatOnLesson);
-    click(btnEditMessageInChatOnLesson);
+    clickWithMoveToElementAndWait(2, dropdownInOldMessageInChatOnLesson);
+    clickWithMoveToElementAndWait(2, btnEditMessageInChatOnLesson);
     sendMessageToTrainer(message);
   }
 
   public void deleteMessage() {
-    click(dropdownInOldMessageInChatOnLesson);
-    click(btnDeleteMessageInChatOnLesson);
+    clickWithMoveToElementAndWait(2, dropdownInOldMessageInChatOnLesson);
+    clickWithMoveToElementAndWait(2, btnDeleteMessageInChatOnLesson);
   }
 
   public void btnShowAllInProgressBar() {
     deleteAlerts();
     click(btnShowAllProgressBar);
+  }
+
+  public void editInformationAboutMyself(String text) {
+    clear(20, editInformationAboutMyself);
+    clickWithMoveToElementAndWait(1, editInformationAboutMyself);
+    wd.findElement(editInformationAboutMyself).sendKeys(text);
+    doubleClick(fullAreaInoProfile);
+  }
+
+  public void selectCommunityScratch() {
+    click(alongCommunityScratch);
+  }
+
+  public void selectTitleCommunity() {
+    click(titleCommunity);
+  }
+
+  public void tabSubscrimers() {
+    click(tabSubscribers);
+  }
+
+  public void selectDifferentStudent(String idStudent) {
+    click(By.xpath("//a[contains(@href,'" + idStudent + "')]"));
+  }
+
+  public void btnShowAllAchievements() {
+    click(btnShowAllAchievement);
+  }
+
+  public void btnEditPost() {
+    click(btnEditPost);
+  }
+
+  public void modifyComment(String text) {
+    fillEditComment(text);
+    btnSaveComment();
+  }
+
+  private void btnSaveComment() {
+    click(btnSaveComment);
+  }
+
+  public void btnDeletePost() {
+    click(btnDeletePost);
+  }
+
+  public String[] getCommunities() {
+    waitVisibilityOfElementLocated(5, By.xpath("//h4"));
+    List<WebElement> dialog = wd.findElements(By.xpath("//h4"));
+    String[] communuiesList = new String[3];
+    for (int i = 0; i < dialog.size(); i++) {
+      communuiesList[i] = dialog.get(i).getText();
+    }
+    return communuiesList;
+  }
+
+  public void selectRusLanguage() {
+    click(dropdownLang);
+    click(rusLang);
+  }
+
+  public void selectAllLanguage() {
+    click(dropdownLang);
+    click(allLang);
+  }
+
+  public void selectEnLanguage() {
+    click(dropdownLang);
+    click(enLang);
   }
 }

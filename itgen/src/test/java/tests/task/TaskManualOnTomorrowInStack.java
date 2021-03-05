@@ -8,7 +8,6 @@ import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,29 +15,12 @@ import org.testng.annotations.Test;
 public class TaskManualOnTomorrowInStack extends TestBase {
 
   private final TaskService taskService = new TaskService();
-  private final Date createAt = new Date();
-  private final long duoDateSort = new Date().getTime() + 86400000;
-  private final Date duoDateWithTime = new Date(duoDateSort);
-  private final String[] texts = null;
-  private final String[] clients = null;
-  private final String[] commentaries = null;
   private TaskData taskClean = null;
-  private Date[] dates = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trTask()
-        .newManualTask(
-            "TomorrowInStack",
-            "777",
-            "666",
-            "Записать на пробное",
-            0,
-            new Date(),
-            "open",
-            new Date(),
-            new Date().getTime(),
-            "21");
+    data.tasksManual()
+        .set6_1_ManualTaskCreatorAdminAssigneeSuperPr0("task", "Записать на пробное", "open", "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -54,26 +36,8 @@ public class TaskManualOnTomorrowInStack extends TestBase {
   }
 
   private void check(Tasks after) {
-    dates = new Date[] {createAt, duoDateWithTime};
-    app.trTask()
-        .saveManualTask(
-            "TomorrowInStack",
-            "Записать на пробное",
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            "666",
-            "21",
-            "777",
-            "666",
-            0,
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newTask_changeDateTask");
-
+    data.tasksManual()
+        .set13_1_ManualTaskChangeDateTaskPr0("task", "Записать на пробное", "open", "21");
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
     for (TaskData taskAfter : after) {
@@ -86,6 +50,6 @@ public class TaskManualOnTomorrowInStack extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    data.clean().taskAndSchedule();
   }
 }

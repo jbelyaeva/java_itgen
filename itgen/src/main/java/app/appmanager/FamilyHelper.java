@@ -91,10 +91,6 @@ public class FamilyHelper extends HelperBase {
     click(By.xpath("//button[@class='close btn-add-parent']"));
   }
 
-  public void bntModifyFamily() {
-    click(By.xpath("//a[contains(@href, 'family')]"));
-  }
-
   public void bntDeleteFamily() {
     clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class, 'btn-remove-family')]"));
   }
@@ -110,12 +106,6 @@ public class FamilyHelper extends HelperBase {
     Actions actions1 = new Actions(wd);
     actions1.moveToElement(dynamicElement1).build().perform();
     dynamicElement1.click();
-    Assert.assertFalse(
-        isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
-  }
-
-  public void alertDeleteFamily() {
-    click(By.cssSelector("div.modal-footer > button.btn.btn-danger"));
     Assert.assertFalse(
         isElementPresent(By.cssSelector("[id^=alert]"))); // проверка появления сообщения об ошибке
   }

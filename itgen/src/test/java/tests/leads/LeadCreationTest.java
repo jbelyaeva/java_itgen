@@ -8,15 +8,11 @@ import core.general.RunTestAgain;
 import data.model.lead.LeadData;
 import data.model.lead.Leads;
 import data.provides.LocaleUtilsTestData;
-import data.services.LeadService;
-import data.services.TaskService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class LeadCreationTest extends TestBase {
 
-  LeadService leadService = new LeadService();
-  TaskService taskService = new TaskService();
   LeadData leadClean = null;
 
   @Test(dataProvider = "validLeadsFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -36,7 +32,6 @@ public class LeadCreationTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    leadService.DeleteById(leadClean);
-    taskService.DeleteById(leadClean);
+    data.clean().finishedLesson().leads();
   }
 }

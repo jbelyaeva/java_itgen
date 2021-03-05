@@ -7,9 +7,13 @@ import java.util.List;
 
 @dev.morphia.annotations.Entity("families")
 public class FamilyData {
+
   @Id
   @Property("_id")
   private String id;
+
+  @Property("className")
+  private String className;
 
   @Property("isTrialBonusOff")
   private Boolean isTrialBonusOff;
@@ -18,6 +22,7 @@ public class FamilyData {
   private List<String> tierHistory = new ArrayList<String>();
 
   public static class TierHistory {
+
     private String tierHistory;
 
     public FamilyData.TierHistory withTierHistory(String type) {

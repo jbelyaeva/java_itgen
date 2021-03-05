@@ -138,7 +138,7 @@ public class LKParentHelper extends HelperBase {
       .xpath("(//footer[@class='test-not-successful']//span)[2]");
   private final By labelNotAllowedRecordOnTestingSkillWithoutTest = By.xpath(
       "//div[@class='test-not-successful']//span");
-  private final By dropDownSkillMinecraftInRecord = By.xpath("//div[text()='21']");
+  private final By dropDownSkillMinecraftInRecord = By.xpath("//div[text()='Minecraft']");
   private final By labelInHistoryMinecraft = By.xpath(
       "//div[@class='lesson-comment']//span[text()='Minecraft']");
   private final By labelInHistoryScratch = By.xpath(
@@ -149,6 +149,10 @@ public class LKParentHelper extends HelperBase {
 
   public LKParentHelper(WebDriver wd) {
     super(wd);
+  }
+
+  public By getBtnLogo() {
+    return btnLogo;
   }
 
   public By getShowHistorySecondChild() {
@@ -373,7 +377,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnLogo() {
-    click(btnLogo);
+    clickWithMoveToElementAndWait(3, btnLogo);
     noErrorMessage();
   }
 
@@ -504,6 +508,7 @@ public class LKParentHelper extends HelperBase {
     btnShowSchedule();
     btnRecordOnLesson();
     btnTomorrowForRegular();
+    btnCloseTutorial();
     changeScrollTime();
     changeStyleDayOfTheWeek();
   }
@@ -514,9 +519,11 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void confirmRecordOnRegular() {
+    btnCloseTutorial();
     btnShowSchedule();
     btnRecordOnLesson();
     btnTomorrowForRegular();
+    btnCloseTutorial();
     changeScrollTime();
     btnNext();
     selectCheckBox();
@@ -551,6 +558,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void btnShowSchedule() {
+    btnCloseTutorial();
     clickWithMoveToElementAndWait(10, btnShowScheduleChild);
     noErrorMessage();
   }
@@ -573,6 +581,7 @@ public class LKParentHelper extends HelperBase {
 
   public void resetWithoutLogo() {
     refresh();
+    btnCloseTutorial();
     click(btnFreeLessons);
     btnLogo();
   }
@@ -586,6 +595,7 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void clickByNameSecondStudent() {
+    btnCloseTutorial();
     click(clickBySecondStudent);
   }
 
@@ -738,6 +748,7 @@ public class LKParentHelper extends HelperBase {
     clickByChangeLogin();
     type(editLogin, loginNew);
     clickBySaveLogin();
+    noErrorMessage();
   }
 
   public void saveLoginAndPassword(String loginNew) {
@@ -781,7 +792,8 @@ public class LKParentHelper extends HelperBase {
   }
 
   public void clickByFirstTutorial() {
-    click(closeFirstTitorialInSettings);
+    btnCloseTutorial();
+    clickWithMoveToElementAndWait(2, closeFirstTitorialInSettings);
   }
 
   public void clickBySecondTutorial() {
@@ -817,6 +829,13 @@ public class LKParentHelper extends HelperBase {
       return getLabelWorkingOff();
     } else {
       return getLabelWorkingOffOnThirdLessonInSchedule();
+    }
+  }
+
+  //если конец месяца - воскресенье
+  public void foundSchedule() {
+    if (!isElementPresent(labelSchedulePeriodLesson)) {
+      click(btnPaginatorRight);
     }
   }
 }

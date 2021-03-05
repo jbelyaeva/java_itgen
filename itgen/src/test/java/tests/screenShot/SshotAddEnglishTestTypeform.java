@@ -1,10 +1,22 @@
 package tests.screenShot;
 
+import static app.appmanager.ApplicationManager.properties;
+
 import app.testbase.TestBase;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import data.model.typeform.TestData;
 import data.services.TestService;
+import java.awt.AWTException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -12,17 +24,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.List;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static app.appmanager.ApplicationManager.properties;
 
 public class SshotAddEnglishTestTypeform extends TestBase {
 
@@ -32,7 +33,8 @@ public class SshotAddEnglishTestTypeform extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
+    data.tests().set7_TestInProcess();
+   /* skills = new String[]{"1"};
     app.trTest()
         .saveTest(
             "addEnglishTest",
@@ -45,14 +47,14 @@ public class SshotAddEnglishTestTypeform extends TestBase {
             10,
             skills,
             createAt,
-            null);
+            null);*/
   }
 
   @DataProvider
   public Iterator<Object[]> validAddTestFromJson() throws IOException {
     try (BufferedReader reader =
         new BufferedReader(
-            new FileReader(new File("src/test/resources/testdata/tests_whichAdd.json")))) {
+            new FileReader("src/test/resources/testdata/tests_whichAdd.json"))) {
       String json = "";
       String line = reader.readLine();
       while (line != null) {
@@ -60,24 +62,22 @@ public class SshotAddEnglishTestTypeform extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {}.getType());
-      return tests.stream().map((p) -> new Object[] {p}).collect(Collectors.toList()).iterator();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
+      }.getType());
+      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validAddTestFromJson")
-  public void testSshotAddEnglishTestTypeform(TestData test) throws AWTException, IOException {
+  public void testSshotAddEnglishTestTypeform(TestData test)
+      throws AWTException, IOException, InterruptedException {
     app.goTo().menuTests();
     app.sshot().changeTopBar();
     app.test().addEnglishTest(test);
     String name = "Admin_TypeformAddEnglishTest_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
-    /*  locatorIgnor.add(By.xpath("//td[@class='dueDate']"));
-    locatorIgnor.add(By.xpath("(//div[contains(@class,'editable')])[3]"));
-    locatorIgnor.add(By.xpath("//div[contains(@class,'client-time')]"));
-    locatorIgnor.add(By.xpath("//div[contains(@class,'task-lesson')]"));
-    locatorIgnor.add(By.xpath("//span[@class='text-muted']"));*/
-
+    Thread.sleep(3000);
+    app.base().deleteAlerts();
     ImageDiff diff =
         app.sshot()
             .getImageDiff(

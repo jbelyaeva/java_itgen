@@ -11,7 +11,7 @@ public class AchievementsService {
   }
 
   public AchievementsUsersData DeleteById(String id) {
-    return achievementDao.findByIdAndDelete(id);
+    return achievementDao.deleteById(id);
   }
 
   public void create(AchievementsUsersData achievement) {

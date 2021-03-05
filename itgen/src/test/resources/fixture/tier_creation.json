@@ -1,0 +1,819 @@
+[
+  {
+    "id": "EuxjfWpTMbxtGMb2j",
+    "description": "1-3 BYNx2",
+    "shopId": "8",
+    "products": [
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 5000,
+        "currency": "BYN"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 10000,
+        "currency": "BYN"
+      },
+      {
+        "id": "PgnnByTnKfNRWryau",
+        "price": 15000,
+        "currency": "BYN"
+      },
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 3500,
+        "currency": "BYN"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 7000,
+        "currency": "BYN"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 10500,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "HseKLp6muYbZQ3cZA",
+    "description": "1-3 BYNx1.25",
+    "shopId": "8",
+    "products": [
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 1750,
+        "currency": "BYN"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 3500,
+        "currency": "BYN"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 5250,
+        "currency": "BYN"
+      },
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 2500,
+        "currency": "BYN"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 5000,
+        "currency": "BYN"
+      },
+      {
+        "id": "PgnnByTnKfNRWryau",
+        "price": 7500,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "Lo5gCPg6jhsZCmMtX",
+    "description": "UAHx1.5",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p24",
+        "price": 150000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p28",
+        "price": 280000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p216",
+        "price": 520000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p232",
+        "price": 960000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p14",
+        "price": 100000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p18",
+        "price": 184000,
+        "currency": "UAH"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 344000,
+        "currency": "UAH"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 640000,
+        "currency": "UAH"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "RHCtjnpq5oTfhKPQs",
+    "description": "BYNx1.25",
+    "shopId": "5",
+    "products": [
+      {
+        "id": "p24",
+        "price": 9500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p28",
+        "price": 17500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p216",
+        "price": 32500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p232",
+        "price": 60000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p14",
+        "price": 6500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p18",
+        "price": 11500,
+        "currency": "BYN"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 21500,
+        "currency": "BYN"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 40000,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "RhvvsYB9buEusWhBt",
+    "description": "BYNx2",
+    "shopId": "7",
+    "products": [
+      {
+        "id": "p14",
+        "price": 13000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p18",
+        "price": 23000,
+        "currency": "BYN"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 43000,
+        "currency": "BYN"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 77000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p24",
+        "price": 18500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p28",
+        "price": 34000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p216",
+        "price": 62500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p232",
+        "price": 114000,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "ShHLTEaTfuh84dhR3",
+    "description": "1-3 BYNx1.5",
+    "shopId": "8",
+    "products": [
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 3500,
+        "currency": "BYN"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 7000,
+        "currency": "BYN"
+      },
+      {
+        "id": "PgnnByTnKfNRWryau",
+        "price": 10500,
+        "currency": "BYN"
+      },
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 2500,
+        "currency": "BYN"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 5000,
+        "currency": "BYN"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 7500,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "TtdiRYYuwLkQH7fWA",
+    "description": "RUBx1.5",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p24",
+        "price": 400000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p28",
+        "price": 750000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p216",
+        "price": 1400000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p232",
+        "price": 2600000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p14",
+        "price": 265000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p18",
+        "price": 500000,
+        "currency": "RUB"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 940000,
+        "currency": "RUB"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 1740000,
+        "currency": "RUB"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "WH8X24zmtYkDF7CWz",
+    "description": "EURx2",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p14",
+        "price": 4500,
+        "currency": "EUR"
+      },
+      {
+        "id": "p18",
+        "price": 8000,
+        "currency": "EUR"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 15000,
+        "currency": "EUR"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 27000,
+        "currency": "EUR"
+      },
+      {
+        "id": "p24",
+        "price": 6500,
+        "currency": "EUR"
+      },
+      {
+        "id": "p28",
+        "price": 12000,
+        "currency": "EUR"
+      },
+      {
+        "id": "p216",
+        "price": 22000,
+        "currency": "EUR"
+      },
+      {
+        "id": "p232",
+        "price": 40000,
+        "currency": "EUR"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "YkPZ8yWda8EkDixRZ",
+    "description": "Корпоративный",
+    "shopId": "8",
+    "products": [
+      {
+        "id": "p14",
+        "price": 5000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p18",
+        "price": 10000,
+        "currency": "BYN"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 20000,
+        "currency": "BYN"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 40000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p24",
+        "price": 7500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p28",
+        "price": 15000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p216",
+        "price": 30000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p232",
+        "price": 60000,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "duXkRowMQWBBcF9YK",
+    "description": "RUBx2",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p24",
+        "price": 570000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p28",
+        "price": 1060000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p216",
+        "price": 1960000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p232",
+        "price": 3600000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p14",
+        "price": 390000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p18",
+        "price": 720000,
+        "currency": "RUB"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 1320000,
+        "currency": "RUB"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 2400000,
+        "currency": "RUB"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "nL82AwWkJsuSmkn8w",
+    "description": "RUBx1.25",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p24",
+        "price": 280000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p28",
+        "price": 520000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p216",
+        "price": 960000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p232",
+        "price": 1760000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p14",
+        "price": 180000,
+        "currency": "RUB"
+      },
+      {
+        "id": "p18",
+        "price": 340000,
+        "currency": "RUB"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 640000,
+        "currency": "RUB"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 1200000,
+        "currency": "RUB"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "omo67apQQ5w7zrFis",
+    "description": "UAHx1.25",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "p24",
+        "price": 104000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p28",
+        "price": 192000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p216",
+        "price": 352000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p232",
+        "price": 640000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p14",
+        "price": 68000,
+        "currency": "UAH"
+      },
+      {
+        "id": "p18",
+        "price": 128000,
+        "currency": "UAH"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 232000,
+        "currency": "UAH"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 416000,
+        "currency": "UAH"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "oqfSpMRbMakwf4oiz",
+    "description": "1-3 USDx2",
+    "shopId": "1",
+    "products": [
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 2000,
+        "currency": "USD"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 4000,
+        "currency": "USD"
+      },
+      {
+        "id": "PgnnByTnKfNRWryau",
+        "price": 6000,
+        "currency": "USD"
+      },
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 1500,
+        "currency": "USD"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 3000,
+        "currency": "USD"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 4500,
+        "currency": "USD"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "sTAZBz6Qp5dPwhBJW",
+    "description": "Learning Without Borders",
+    "shopId": "1",
+    "products": [
+      {
+        "id": "CrAQjpnBhTv5RZq3e",
+        "price": 100000,
+        "currency": "USD"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "txb",
+    "shopId": "5",
+    "description": "BYNx1.5",
+    "products": [
+      {
+        "id": "p14",
+        "price": 9000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p18",
+        "price": 16500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p24",
+        "price": 13500,
+        "currency": "BYN"
+      },
+      {
+        "id": "p28",
+        "price": 25000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p216",
+        "price": 45000,
+        "currency": "BYN"
+      },
+      {
+        "id": "p232",
+        "price": 84000,
+        "currency": "BYN"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 30000,
+        "currency": "BYN"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 56000,
+        "currency": "BYN"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.883Z"
+  },
+  {
+    "id": "txba",
+    "shopId": "cp1",
+    "description": "EURx1.5",
+    "products": [
+      {
+        "id": "p14",
+        "price": 3000,
+        "currency": "EUR"
+      },
+      {
+        "id": "p18",
+        "price": 5500,
+        "currency": "EUR"
+      },
+      {
+        "id": "p24",
+        "price": 4500,
+        "currency": "EUR"
+      },
+      {
+        "id": "p28",
+        "price": 8500,
+        "currency": "EUR"
+      },
+      {
+        "id": "p216",
+        "price": 16000,
+        "currency": "EUR"
+      },
+      {
+        "id": "p232",
+        "price": 29500,
+        "currency": "EUR"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 10500,
+        "currency": "EUR"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 19500,
+        "currency": "EUR"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.884Z"
+  },
+  {
+    "id": "txc",
+    "shopId": "1",
+    "description": "USDx2",
+    "products": [
+      {
+        "id": "p14",
+        "price": 5000,
+        "currency": "USD"
+      },
+      {
+        "id": "p18",
+        "price": 9000,
+        "currency": "USD"
+      },
+      {
+        "id": "p24",
+        "price": 7500,
+        "currency": "USD"
+      },
+      {
+        "id": "p28",
+        "price": 14000,
+        "currency": "USD"
+      },
+      {
+        "id": "p216",
+        "price": 26000,
+        "currency": "USD"
+      },
+      {
+        "id": "p232",
+        "price": 48000,
+        "currency": "USD"
+      },
+      {
+        "id": "msFjaDstk5yjGTbP7",
+        "price": 17000,
+        "currency": "USD"
+      },
+      {
+        "id": "bgpQexzgFvtMFbpKQ",
+        "price": 32000,
+        "currency": "USD"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.884Z"
+  },
+  {
+    "id": "wJco9cECSRiWgpezZ",
+    "description": "1-3 EURx1.5",
+    "shopId": "cp1",
+    "products": [
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 1200,
+        "currency": "EUR"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 2400,
+        "currency": "EUR"
+      },
+      {
+        "id": "PgnnByTnKfNRWryau",
+        "price": 3600,
+        "currency": "EUR"
+      },
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 800,
+        "currency": "EUR"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 1600,
+        "currency": "EUR"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 2400,
+        "currency": "EUR"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.884Z"
+  },
+  {
+    "id": "y8WhxbA343spJdbpB",
+    "description": "1-3 EURx2",
+    "shopId": "1",
+    "products": [
+      {
+        "id": "ydsF8oumTys8vERor",
+        "price": 1200,
+        "currency": "EUR"
+      },
+      {
+        "id": "bJjKo5eMPfCYowQTp",
+        "price": 2400,
+        "currency": "EUR"
+      },
+      {
+        "id": "eZWoYKihLQ8PZjqEf",
+        "price": 3600,
+        "currency": "EUR"
+      },
+      {
+        "id": "B6u66J8yZpp4Q8M7B",
+        "price": 1800,
+        "currency": "EUR"
+      },
+      {
+        "id": "j9RN9mfGBhXd3wHeK",
+        "price": 3800,
+        "currency": "EUR"
+      },
+      {
+        "_id": "PgnnByTnKfNRWryau",
+        "price": 5400,
+        "currency": "EUR"
+      }
+    ],
+    "createdAt": "2021-02-18T08:26:33.884Z"
+  }
+]

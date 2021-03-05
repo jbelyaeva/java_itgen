@@ -6,15 +6,14 @@ package tests.screenShot;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
-
-import java.awt.*;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class SshotPayByAdminShop extends TestBase {
 
@@ -39,8 +38,8 @@ public class SshotPayByAdminShop extends TestBase {
     app.sshot().changeTopBar();
 
     ImageDiff diff = this.getDiff(name, locatorIgnor);
-    if (diff.getDiffSize() > 0) {
-      diff = this.getDiff(name, locatorIgnor);
+    if (diff.getDiffSize() > 200) { // погрешность
+      Assert.assertEquals(diff.getDiffSize(), 0);
     }
 
     Assert.assertEquals(diff.getDiffSize(), 0);

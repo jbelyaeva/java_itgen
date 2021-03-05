@@ -186,6 +186,7 @@ public class TestHelper extends HelperBase {
     btnModifyTest();
     fillFormModify(test);
     btnSave();
+    waitVisibilityOfElementLocated(5, By.xpath("//button[@id-qa='create']"));
   }
 
   private void btnModifyTest() {
@@ -240,7 +241,6 @@ public class TestHelper extends HelperBase {
   public void deleteTestConnectionWithSkills() {
     btnDeleteTest();
     bntConfirmDelete();
-    thereAreErrorMessages();
   }
 
   public Boolean findLableInProcess() {

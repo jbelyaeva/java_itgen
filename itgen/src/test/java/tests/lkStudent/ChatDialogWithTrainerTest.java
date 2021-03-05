@@ -14,7 +14,7 @@ public class ChatDialogWithTrainerTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().chat();
+    data.clean().chat().taskAndSchedule();
     String messageOld = "Привет";
     data.chat().set1_DialogStudentTrainer(messageOld, "21", "23");
   }
@@ -31,6 +31,7 @@ public class ChatDialogWithTrainerTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat();
+    data.clean().chat();
+    app.base().refresh();
   }
 }

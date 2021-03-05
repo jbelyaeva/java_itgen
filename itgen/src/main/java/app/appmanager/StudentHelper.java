@@ -240,13 +240,13 @@ public class StudentHelper extends HelperBase {
           wd.findElement(By.xpath("//span[contains(text(),'»')]")).click();
         }
       }
-      waitVisibilityOfElementLocated(5, By.cssSelector("input[name=profile-firstName])"));
+      waitVisibilityOfElementLocated(5, By.cssSelector("input[name=profile-firstName]"));
     }
   }
 
   public void logout() {
     click(By.xpath("//div[@class='arrow']"));
-    click(By.xpath("//ul[contains(@class,'list')]/li[4]"));
+    click(By.xpath("//li[text()='Выйти']"));
   }
 
   public void btnCloseTutorial() {

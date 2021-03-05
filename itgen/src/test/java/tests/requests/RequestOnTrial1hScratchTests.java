@@ -29,8 +29,9 @@ public class RequestOnTrial1hScratchTests extends TestBase {
     Requests after = app.dbrequest().allList();
 
     app.check().equalityOfTwoElements(after.size(), before.size() + 1);
-    data.requestService().DeleteById(app.dbrequest().findFirst().getId());
-    data.requests().set2_requestOnScratch1hTrial();
+    String id = app.dbrequest().findFirst().getId();
+    data.requestService().DeleteById(id);
+    data.requests().set2_requestOnScratch1hTrial(id);
     Requests afterNew = app.dbrequest().allList();
     app.check().equalityOfTwoElements(after, afterNew);
     app.check().findElement(app.request().getRequestInStack());
@@ -40,6 +41,6 @@ public class RequestOnTrial1hScratchTests extends TestBase {
   public void clean() {
     data.skills()
         .set3_ChangeDurationTrialScratch(data.skillsService().findBySkillId("1", "ru").getId(), 2);
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
   }
 }

@@ -78,8 +78,8 @@
       <class name="tests.task.TaskAutoGetControlInStack"/>
       <class name="tests.task.TaskManualOnTomorrowInStack"/>
       <class name="tests.task.TaskManualGetControlInStack"/>
-      <class name="tests.task.TaskFiltrByUserInStack"/> <!--нет CI-->
-      <class name="tests.task.TaskFiltrByPriorityInStack"/>
+      <class name="tests.task.TaskFilterByUserInStack"/> <!--нет CI-->
+      <class name="tests.task.TaskFilterByPriorityInStack"/>
       <class name="tests.taskPopup.TaskManualChangeTitle"/>
       <class name="tests.taskPopup.TaskManualChangeAssignee"/>
       <class name="tests.taskPopup.TaskManualChangePriority"/>

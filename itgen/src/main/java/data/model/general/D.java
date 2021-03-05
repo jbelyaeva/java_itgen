@@ -32,7 +32,11 @@ public class D {
   @Property("to")
   public String toString;
 
-  public D() {}
+  @Property("cId")
+  public String cId;
+
+  public D() {
+  }
 
   public D withNewData(String newData) {
     this.newData = newData;
@@ -75,6 +79,11 @@ public class D {
 
   public D withOldChangeData(Old oldChangeData) {
     this.oldChangeData = oldChangeData;
+    return this;
+  }
+
+  public D withCId(String cId) {
+    this.cId = cId;
     return this;
   }
 

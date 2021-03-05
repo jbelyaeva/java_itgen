@@ -9,7 +9,6 @@ import data.model.typeform.TestData;
 import data.model.typeform.Tests;
 import data.provides.LocaleUtilsTestData;
 import data.services.TestService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,25 +18,10 @@ public class TestTypeformModification extends TestBase {
 
   private final TestService testService = new TestService();
   TestData testClean = null;
-  private final Date createAt = new Date();
-  private String[] skills = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[]{"1"};
-    app.trTest()
-        .saveTest(
-            "addEnglishTest",
-            "Тест",
-            "111111",
-            "ru",
-            "Test на переход на новое направление",
-            5,
-            5,
-            10,
-            skills,
-            createAt,
-            null);
+    data.tests().set1_1_NewTestForRusScratch();
   }
 
   @Test(dataProvider = "validDataModifyTestFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -56,21 +40,7 @@ public class TestTypeformModification extends TestBase {
   }
 
   private void check(Tests after, TestData test) {
-    skills = new String[]{"26"};
-    app.trTest()
-        .saveTest(
-            testClean.getId(),
-            test.getTitle(),
-            test.getRootFormId(),
-            "ru",
-            test.getDescription(),
-            test.getMinScore(),
-            test.getMaxScore(),
-            test.getTimeForPassing(),
-            skills,
-            createAt,
-            null);
-
+    data.tests().set1_4_RuTestRusPC(testClean.getId(), test);
     TestData testAdd = testService.findById(testClean.getId());
 
     for (TestData testAfter : after) {
@@ -83,6 +53,6 @@ public class TestTypeformModification extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    testService.drop();
+    data.clean().tests();
   }
 }

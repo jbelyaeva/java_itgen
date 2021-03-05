@@ -10,7 +10,7 @@ public class MaterialService {
   public MaterialService() {}
 
   public MaterialData DeleteById(String id) {
-    return materialDao.findByIdAndDelete(id);
+    return materialDao.deleteById(id);
   }
 
   public void create(MaterialData material) {

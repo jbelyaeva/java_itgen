@@ -17,48 +17,14 @@ public class MaterialMakeReview extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
-    app.trMaterial()
-        .checkingMaterial(
-            "MaterialMakeReview",
-            "14",
-            "Жуки",
-            "checking",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
-    app.trMaterial()
-        .checkingMaterial(
-            "MaterialMakeReviewSecond",
-            "23",
-            "Бабочки",
-            "checking",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает усидчивость",
-            "666");
+    data.materials().set10_TwoMaterialTakeChecking("666");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testMaterialMakeReview() {
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
-    app.material().makeReview("MaterialMakeReview");
+    app.material().makeReview("material");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
@@ -66,28 +32,12 @@ public class MaterialMakeReview extends TestBase {
   }
 
   private void check(Materials after) {
-    app.trMaterial()
-        .publishedMaterial(
-            "MaterialMakeReview",
-            "14",
-            "Жуки",
-            "published",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
+    data.materials().set3_MaterialPublished("666");
 
-    MaterialData materialAdd = materialService.findById("MaterialMakeReview");
+    MaterialData materialAdd = materialService.findById("material");
 
     for (MaterialData materialAfter : after) {
-      if (materialAfter.getId().equals("MaterialMakeReview")) {
+      if (materialAfter.getId().equals("material")) {
         assertThat(after, equalTo(after.without(materialAfter).withAdded(materialAdd)));
         return;
       }
@@ -96,6 +46,6 @@ public class MaterialMakeReview extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().payment();
+    data.clean().material().payment();
   }
 }

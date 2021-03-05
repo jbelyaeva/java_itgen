@@ -5,6 +5,8 @@ package tests.lkStudent;
  * Написать в чате (который на занятии) сообщение тренеру
  * Проверить: сообщение отображается в этом чате и в обычном чате под учеником, в
  * обычном чате под тренером
+ *  * по информации от разработчика: метод получения одинаковый для всех, следовательно проверкой, что не отображается
+ * под тренером можно принебречь и проверить только руками один раз (+ есть такая проверка по отслылке файла в чате на уроке)
  */
 
 import app.testbase.TestBase;
@@ -26,18 +28,19 @@ public class ChatOnLessonSendMessageTrainer extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testChatOnLessonSendMessageTrainer() {
+    app.lkStudent().btnLogo();
     app.lkStudent().btnCloseTutorial();
     app.lkStudent().goOnLesson();
+    app.base().refresh();
     app.lkStudent().sendMessageToTrainer("Привет");
     app.check().textElement(app.lkStudent().getAlongMessageInChatOnLesson(), "Привет");
     app.chat().btnOpenChat();
     app.check().textElement(app.lkStudent().getAlongMessageInChatPrewiev(), "Привет");
-    String message = app.chat().getByTrainerMessageFromStudent("trainer", "111111");
-    app.check().equalityOfTwoElements(message, "Привет");
+    app.lkStudent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

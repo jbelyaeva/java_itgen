@@ -63,7 +63,7 @@ public class StudentCreationTests extends TestBase {
       TaskService taskService = new TaskService();
       taskService.drop();
       StudentService studentService = new StudentService();
-      studentService.DeleteById(studentClean);
+      studentService.deleteById(studentClean.getId());
     }
   }
 }

@@ -1,62 +1,56 @@
 package data.services;
 
 import data.dao.CommunitiesDao;
+import data.dao.CommunitiesPostCommentDao;
+import data.dao.CommunitiesPostDao;
+import data.dao.CommunitiesTagDao;
 import data.model.communities.CommunitiesPostCommentData;
 import data.model.communities.CommunitiesPostData;
-import data.model.communities.CommunitiesTagData;
 import data.model.communities.CommunityData;
 
 public class CommunitiesService {
 
   private final CommunitiesDao communitiesDao = new CommunitiesDao();
+  private final CommunitiesTagDao communitiesTagDao = new CommunitiesTagDao();
+  private final CommunitiesPostDao communitiesPostDao = new CommunitiesPostDao();
+  private final CommunitiesPostCommentDao communitiesPostCommentDao = new CommunitiesPostCommentDao();
 
-  public CommunitiesService() {}
+  public CommunitiesService() {
+  }
 
   public void saveCommunity(CommunityData community) {
-    communitiesDao.saveCommunity(community);
+    communitiesDao.save(community);
   }
 
   public CommunityData findByIdCommunity(String id) {
-    return communitiesDao.findByIdCommunity(id);
+    return communitiesDao.findById(id);
   }
 
-  public void dropCommunity(){
-    communitiesDao.dropCommunity();
-  }
-
-  public void saveCommunityTag(CommunitiesTagData communitiesTag) {
-    communitiesDao.saveCommunityTag(communitiesTag);
-  }
-
-  public CommunitiesTagData findByIdCommTag(String id) {
-    return communitiesDao.findByIdCommTag(id);
+  public void dropCommunity() {
+    communitiesDao.drop();
   }
 
   public void dropCommTag(){
-    communitiesDao.dropCommTag();
+    communitiesTagDao.drop();
   }
 
   public void saveCommunityPost(CommunitiesPostData communitiesPost) {
-    communitiesDao.saveCommunityPost(communitiesPost);
+    communitiesPostDao.save(communitiesPost);
   }
 
   public CommunitiesPostData findByIdCommPost(String id) {
-    return communitiesDao.findByIdCommPost(id);
+    return communitiesPostDao.findById(id);
   }
 
   public void dropCommPost(){
-    communitiesDao.dropCommPost();
+    communitiesPostDao.drop();
   }
 
   public void saveCommunityPostComment(CommunitiesPostCommentData  communitiesPostComment) {
-    communitiesDao.saveCommunityPostComment(communitiesPostComment);
-  }
-
-  public CommunitiesPostCommentData findByIdCommPostComment(String id) {
-    return communitiesDao.findByIdCommPostComment(id);
+    communitiesPostCommentDao.save(communitiesPostComment);
   }
 
   public void dropCommPostComment(){
-    communitiesDao.dropCommPostComment();
+    communitiesPostCommentDao.drop();
   }
 }

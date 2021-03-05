@@ -11,7 +11,6 @@ import data.model.communities.Communities;
 import data.model.communities.CommunityData;
 import data.provides.LocaleUtilsTestData;
 import data.services.CommunitiesService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,25 +22,7 @@ public class ModificationCommunity extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "modifyCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            "Scratch",
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
   }
 
   @Test(dataProvider = "validModifyCommunityFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -61,28 +42,12 @@ public class ModificationCommunity extends TestBase {
   private void check(Communities after, CommunityData community) {
     //коллекция с тегами пустая, поэтому берем весь список новых тэгов
     String[] tags = (app.dbcommunity().tags());
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "modifyCommunity",
-            new Date(),
-            "666",
-            community.getDescription().trim(),
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            community.getTitle(),
-            tags,
-            "ru",
-            skills);
-    CommunityData communityAdd = communitiesService.findByIdCommunity("modifyCommunity");
+    data.community()
+        .set14_CommunityWithTags(tags, community.getDescription().trim(), community.getTitle());
+    CommunityData communityAdd = communitiesService.findByIdCommunity("newCommunity");
 
     for (CommunityData communityAfter : after) {
-      if (communityAfter.getId().equals("modifyCommunity")) {
+      if (communityAfter.getId().equals("newCommunity")) {
         assertThat(after, equalTo(after.without(communityAfter).withAdded(communityAdd)));
         return;
       }
@@ -91,7 +56,6 @@ public class ModificationCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommTag();
+    data.clean().communities();
   }
 }

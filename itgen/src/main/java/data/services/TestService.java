@@ -10,7 +10,7 @@ public class TestService {
   public TestService() {}
 
   public TestData DeleteById(String id) {
-    return testDao.findByIdAndDelete(id);
+    return testDao.deleteById(id);
   }
 
   public void create(TestData test) {

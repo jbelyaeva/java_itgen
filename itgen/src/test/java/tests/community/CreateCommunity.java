@@ -11,7 +11,6 @@ import data.model.communities.Communities;
 import data.model.communities.CommunityData;
 import data.provides.LocaleUtilsTestData;
 import data.services.CommunitiesService;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -35,25 +34,7 @@ public class CreateCommunity extends TestBase {
 
   private void check(Communities after, String id, CommunityData community) {
     //коллекция с тегами пустая, поэтому берем весь список новых тэгов
-    String[] tags = (app.dbcommunity().tags());
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            communityNew.getId(),
-            new Date(),
-            "666",
-            community.getDescription().trim(),
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            community.getTitle(),
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
     CommunityData communityAdd = communitiesService.findByIdCommunity(id);
 
     for (CommunityData communityAfter : after) {
@@ -70,7 +51,6 @@ public class CreateCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommTag();
+    data.clean().communities();
   }
 }

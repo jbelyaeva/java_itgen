@@ -20,7 +20,7 @@ public class ManagerCommunityTabAllWithoutCommunity extends TestBase {
   public void ensurePreconditions() {
     app.student().btnCloseTutorial();
     app.student().logoutByStudent();
-    data.community().set5_CommunityScratchWithPostAndComment_StudentSubscriberAndManager();
+    data.community().set5_CommunityScratchWithPostAndComment_StudentSubscriberAndManager("21");
     data.defFamily().set20_DefaultStudentAdminCommunity();
     app.lkStudent()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
@@ -46,7 +46,7 @@ public class ManagerCommunityTabAllWithoutCommunity extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     data.defFamily().set19_ChangeDefaultStudentInStart();
-    data.postClean().communities();
+    data.clean().communities();
     app.base().refresh();
     app.base().goByHref(app.base().address() + "/login");
     app.lkStudent()

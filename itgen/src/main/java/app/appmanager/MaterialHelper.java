@@ -11,29 +11,112 @@ import org.openqa.selenium.WebDriver;
 
 public class MaterialHelper extends HelperBase {
 
+  private final By materialInTabNew = By.xpath(
+      "//div[contains(@class,'new-material-item-content')]");
+  private final By counterInTabNew = By.xpath("//li[@role='new']//span");
+  private final By tabInProgress = By.xpath("//a[@href='#inProgress']");
+  private final By tabAll = By.xpath("//a[@href='#all']");
+  private final By dropdownOriginality = By.id("material-originality");
+  private final By dropdownLang = By.id("material-lang");
+  private final By dropdownSkill = By.id("material-skill");
+  private final By materialTitle = By.name("material-title");
+  private final By materialType = By.id("material-type");
+  private final By materialLink = By.name("material-materialLink");
+  private final By materialSourceLink = By.name("material-sourceLink");
+  private final By materialProjectLink = By.name("material-projectLink");
+  private final By materialDesc = By.name("material-desc");
+  private final By materialLevel = By.id("material-level");
+  private final By btnRemoveLink = By.xpath("//button[contains(@class,'remove-link')]");
+  private final By errorFieldProject = By.xpath("//span[contains(@class,'error')]");
+  private final By tabRussian = By.xpath("//li[text()='Русский']");
+  private final By tabEng = By.xpath("//li[text()='Английский']");
+  private final By projectsInBranch = By.xpath("//ul[@data-branch='CreateNewMaterial']//li");
+  private final By btnLink = By.xpath("//button[contains(@class,'create-link')]");
+  private final By selectOriginalityInCheckingMaterial = By.xpath(
+      "(//div[contains(@class,'select')][5]//div)[2]");
+  private final By dropdownOriginalityInCheckingMaterial = By.xpath(
+      "//div[contains(@class,'select')][5]//select");
+  private final By selectTranslationInList = By.xpath("//option[@value='translation']");
+  private final By inputLinkingMaterial = By.xpath("(//div[@class='dropdown']//input)[2]");
+  private final By searchResult = By.xpath("//li[@class='search-result']");
+  private final By btnAdd = By.xpath("//a[contains(@class,'publish-material')]");
+  private final By btnAddMaterial = By.xpath("//button[@id-qa='send-material']");
+  private final By btnEditComment = By.xpath("//a[@class='btn-edit-comment']");
+  private final By btnRemoveComment = By.xpath("//a[@class='btn-remove-comment']");
+  private final By textComment = By.xpath("(//div[contains(@class,'comment-text')])[2]");
+  private final By btnSaveComment = By.xpath("//button[contains(@class,'save-comment')]");
+  private final By textCommentInMaterial = By.xpath("//div[@class='panel panel-default']//span");
+  private final By materialsOnBranchTakenForReview = By.xpath(
+      "//li[@data-id='takenForReview']//div");
+  private final By tabChecking = By.xpath("//button[@id-qa='approval']");
+
+  public By getMaterialsOnBranchTakenForReview() {
+    return materialsOnBranchTakenForReview;
+  }
+
+  public By getTextCommentInMaterial() {
+    return textCommentInMaterial;
+  }
+
   public MaterialHelper(WebDriver wd) {
     super(wd);
   }
 
+  public By getMaterialInTabNew() {
+    return materialInTabNew;
+  }
+
+  public By getCounterInTabNew() {
+    return counterInTabNew;
+  }
+
+  public By getBtnRemoveLink() {
+    return btnRemoveLink;
+  }
+
+  public By getErrorFieldProject() {
+    return errorFieldProject;
+  }
+
+  public By getTabRussian() {
+    return tabRussian;
+  }
+
+  public By getTabEng() {
+    return tabEng;
+  }
+
+  public By getProjectsInBranch() {
+    return projectsInBranch;
+  }
+
+  public By getBtnLink() {
+    return btnLink;
+  }
+
+  public By getTabChecking() {
+    return tabChecking;
+  }
+
   public void tabInProgress() {
-    if (!isElementPresent(By.xpath("//a[@href='#inProgress']"))) {
+    if (!isElementPresent(tabInProgress)) {
       refresh();
     }
-    click(By.xpath("//a[@href='#inProgress']"));
+    click(tabInProgress);
     noErrorMessage();
   }
 
   public void fillForm(MaterialData materialData) {
-    dropDownList(By.id("material-originality"), materialData.getOriginality());
-    dropDownList(By.id("material-lang"), materialData.getLang());
-    dropDownList(By.id("material-skill"), materialData.getSkill());
-    type(By.name("material-title"), materialData.getTitle());
-    dropDownList(By.id("material-type"), materialData.getType());
-    type(By.name("material-materialLink"), materialData.getMaterialLink());
-    type(By.name("material-sourceLink"), materialData.getSourceLink());
-    type(By.name("material-projectLink"), materialData.getProjectLink());
-    type(By.name("material-desc"), materialData.getDesc());
-    dropDownList(By.id("material-level"), materialData.getLevel());
+    dropDownList(dropdownOriginality, materialData.getOriginality());
+    dropDownList(dropdownLang, materialData.getLang());
+    dropDownList(dropdownSkill, materialData.getSkill());
+    type(materialTitle, materialData.getTitle());
+    dropDownList(materialType, materialData.getType());
+    type(materialLink, materialData.getMaterialLink());
+    type(materialSourceLink, materialData.getSourceLink());
+    type(materialProjectLink, materialData.getProjectLink());
+    type(materialDesc, materialData.getDesc());
+    dropDownList(materialLevel, materialData.getLevel());
   }
 
   public void btnSendToCheck() {
@@ -177,12 +260,27 @@ public class MaterialHelper extends HelperBase {
     noErrorMessage();
   }
 
+  private void selectRevision(String text) {
+    dropDownList(By.id("material-status"), "rework");
+    noErrorMessage();
+    clickWithMoveToElementAndWait(1, By.xpath("//textarea[contains(@class,'rework-comment')]"));
+    wd.findElement(By.xpath("//textarea[contains(@class,'rework-comment')]")).sendKeys(text);
+    click(By.xpath("//button[contains(@class,'btn-send')]"));
+  }
+
   public void linkMaterials(String idRU, String name) {
+    click(tabAll);
     clickByBranch();
     selectMaterial(idRU);
     selectLinkMaterial(name);
     btnLink();
     tabEng();
+  }
+
+  public void goInLinkedMaterials(String idRU) {
+    click(tabAll);
+    clickByBranch();
+    selectMaterial(idRU);
   }
 
   private void tabEng() {
@@ -191,18 +289,18 @@ public class MaterialHelper extends HelperBase {
   }
 
   private void btnLink() {
-    click(By.xpath("//button[contains(@class,'create-link')]"));
+    click(btnLink);
     noErrorMessage();
   }
 
   private void selectLinkMaterial(String name) {
     type(By.id("searchLinkedMaterialsInput"), name);
-    if (isElementPresent(By.xpath("//li[@class='search-result']"))) {
-      click(By.xpath("//li[@class='search-result']"));
+    if (isElementPresent(searchResult)) {
+      click(searchResult);
     } else {
       wd.findElement(By.id("id(searchLinkedMaterialsInput)")).clear();
       type(By.id("id(searchLinkedMaterialsInput)"), name);
-      click(By.xpath("//li[@class='search-result']"));
+      click(searchResult);
     }
   }
 
@@ -227,5 +325,158 @@ public class MaterialHelper extends HelperBase {
   private void writeComment(String text) {
     click(By.xpath("//div[contains(@class,'text')]"));
     type(By.xpath("//div[contains(@class,'text')]"), text);
+  }
+
+  public void makeSendRevision(String id, String text) {
+    tabInProgress();
+    tabCheck();
+    branchTookForReview();
+    selectMaterial(id);
+    selectRevision(text);
+  }
+
+  public void checkNew() {
+    click(By.xpath("//div[contains(@class,'wrap-checkbox')]"));
+  }
+
+  public void btnRemoveFromNew() {
+    click(By.xpath("//div[@class='button-wrap']//button"));
+    waitVisibleElement(5, By.xpath("//div[contains(@class,'new-material-doesnt-exist')]"));
+    refresh();
+  }
+
+  public void addNewLinkMaterial(MaterialData material) {
+    tabInProgress();
+    tabSend();
+    btnSend();
+    fillFormLinkMaterial(material);
+    btnSendToCheck();
+  }
+
+  public void addNewLinkMaterialBad(MaterialData material) {
+    tabInProgress();
+    tabSend();
+    btnSend();
+    fillFormLinkMaterialBad(material);
+    btnSendToCheck();
+  }
+
+  private void fillFormLinkMaterialBad(MaterialData material) {
+    dropDownList(dropdownOriginality, material.getOriginality());
+    type(materialTitle, material.getTitle());
+    type(materialLink, material.getMaterialLink());
+    type(materialSourceLink, material.getSourceLink());
+    type(materialProjectLink, material.getProjectLink());
+    type(materialDesc, material.getDesc());
+    dropDownList(materialLevel, material.getLevel());
+  }
+
+  private void fillFormLinkMaterial(MaterialData material) {
+    dropDownList(dropdownOriginality, material.getOriginality());
+    type(inputLinkingMaterial, "Beetles");
+    click(searchResult);
+    type(materialTitle, material.getTitle());
+    type(materialLink, material.getMaterialLink());
+    type(materialSourceLink, material.getSourceLink());
+    type(materialProjectLink, material.getProjectLink());
+    type(materialDesc, material.getDesc());
+    dropDownList(materialLevel, material.getLevel());
+  }
+
+  public void goInPublishedMaterial(String idBranch, String idMaterial) {
+    click(tabAll);
+    click(By.xpath("//li[@data-id='" + idBranch + "']//span"));
+    click(By.xpath("//a[@href='#" + idMaterial + "']"));
+  }
+
+  public void btnRemoveLink() {
+    click(btnRemoveLink);
+    waitVisibilityOfElementLocated(3, btnLink);
+  }
+
+  public void trainerLinkedMaterialWhenChecking(String material, String name) {
+    tabInProgress();
+    tabCheck();
+    branchTookForReview();
+    selectMaterial(material);
+    fillFormLinkMaterialWhichOnReview(name);
+    btnLink();
+  }
+
+  private void fillFormLinkMaterialWhichOnReview(String name) {
+    click(selectOriginalityInCheckingMaterial);
+    click(dropdownOriginalityInCheckingMaterial);
+    click(selectTranslationInList);
+    type(inputLinkingMaterial, name);
+    click(searchResult);
+  }
+
+  public void findPublishedMaterial(String idMaterial) {
+    tabAll();
+    clickByBranch();
+    selectMaterial(idMaterial);
+  }
+
+  public void trainerRemoveLinkMaterialWhenChecking(String material) {
+    tabInProgress();
+    tabCheck();
+    branchTookForReview();
+    selectMaterial(material);
+    btnRemoveLink();
+  }
+
+  public void addNewMaterialInTabAll(MaterialData material) {
+    tabAll();
+    btnAdd();
+    fillFormForPublishing(material);
+    btnAddMaterial();
+  }
+
+  private void btnAddMaterial() {
+    click(btnAddMaterial);
+  }
+
+  private void fillFormForPublishing(MaterialData materialData) {
+    type(materialTitle, materialData.getTitle());
+    type(materialLink, materialData.getMaterialLink());
+    type(materialSourceLink, materialData.getSourceLink());
+    type(materialProjectLink, materialData.getProjectLink());
+    type(materialDesc, materialData.getDesc());
+  }
+
+  private void btnAdd() {
+    click(btnAdd);
+  }
+
+  private void tabAll() {
+    click(tabAll);
+  }
+
+  public void modifyComment(String material, String newComment) {
+    tabInProgress();
+    tabCheck();
+    branchTookForReview();
+    selectMaterial(material);
+    btnEditComment();
+    clear(15, textComment);
+    type(textComment, newComment);
+    btnSaveComment();
+  }
+
+  private void btnSaveComment() {
+    click(btnSaveComment);
+  }
+
+  private void btnEditComment() {
+    click(btnEditComment);
+  }
+
+  public void btnRemoveComment() {
+    click(btnRemoveComment);
+  }
+
+  public void trainerTakeSecondMaterialOnCheck(String id) {
+    selectMaterial(id);
+    btnTakeForReview();
   }
 }

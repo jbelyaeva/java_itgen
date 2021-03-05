@@ -5,22 +5,68 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WindowScheduleHelper extends HelperBase {
+
   private final By selectTrainer = By.xpath("(//div[contains(@class,'select')])[3]");
   private final By btnIF = By.xpath("(//div[@class='lesson-formats']//button)[2]");
+  private final By listTrainersInDropdown = By.xpath("//div[@id='menu-']//div//li");
+  private final By trainerInInput = By.xpath("//div[@class='trainer-name']//div//div");
+  private final By btnCreateRequests = By.xpath("//button[contains(@class,'create-request')]");
+  private final By singleLesson = By.xpath("(//div[@class='lesson-types']//button)[2]");
+  private final By btnRecord = By.xpath("(//div[@class='schedule-menu']//button)[1]");
+  private final By selectLesson = By.xpath("//div[@class='group']//div[@class='trainer-name']");
+  private final By selectRegular = By.xpath("(//div[@class='lesson-types']//button)[1]");
+  private final By selectIF = By.xpath("(//div[@class='lesson-formats']//div//button)[2]");
+  private final By createLessonInSchedule = By.xpath("//a[@href='/createSchedule']");
+  private final By inputNameStudent = By.xpath("//div[@class='child-search dropdown']//input");
+  private final By searchResultNameStudent = By.xpath("//span[contains(@class,'result')]");
+  private final By skillInFilter = By.xpath("(//div[@class='filter']//div)[16]//div");
+  private final By durationDisabledInFilter = By.xpath(
+      "(//div[@class='filter']//div)[19]//div//div[contains(@class,'disabled')]");
+  private final By groupLesson = By.xpath("//div[@class='group']");
 
   TrainerService trainerService = new TrainerService();
+
   public WindowScheduleHelper(WebDriver wd) {
     super(wd);
+  }
+
+  public By getSkillInFilter() {
+    return skillInFilter;
+  }
+
+  public By getDurationDisabledInFilter() {
+    return durationDisabledInFilter;
+  }
+
+  public By getGroupLesson() {
+    return groupLesson;
   }
 
   public void recordStudentOn2hRegular(String name) {
     btnRecordOnLesson();
     selectStudent(name);
     selectRegular();
+    selectLesson();
+    btnRecord();
+    noErrorMessage();
+  }
+
+  public void showWindowForStudentOn1hTrial(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+  }
+
+  public void recordOn1hTrialOnFirstHour(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    selectLesson();
+    btnRecord();
+    noErrorMessage();
+  }
+
+  public void recordStudentFromRequest() {
     selectLesson();
     btnRecord();
     noErrorMessage();
@@ -40,37 +86,30 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void btnRecord() {
-    click(By.xpath("(//div[@class='schedule-menu']//button)[1]"));
+    click(btnRecord);
   }
 
   private void selectLesson() {
-    click(By.xpath("//div[@class='group']//div[@class='trainer-name']"));
+    click(selectLesson);
   }
 
   private void selectRegular() {
-    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-types']//button)[1]"));
+    clickWithMoveToElementAndWait(10, selectRegular);
   }
 
   private void btnRecordOnLesson() {
-    click(By.xpath("//a[@href='/createSchedule']"));
+    click(createLessonInSchedule);
   }
 
   private void selectStudent(String name) {
-    type(By.xpath("//div[@class='child-search dropdown']//input"), name);
-    if (isElementPresent(By.xpath("//span[contains(@class,'result')]"))) {
-      click(By.xpath("//span[contains(@class,'result')]"));
+    type(inputNameStudent, name);
+    if (isElementPresent(searchResultNameStudent)) {
+      click(searchResultNameStudent);
     } else {
-      wd.findElement(By.xpath("//div[@class='child-search dropdown']//input")).clear();
-      type(By.xpath("//div[@class='child-search dropdown']//input"), name);
-      click(By.xpath("//span[contains(@class,'result')]"));
+      wd.findElement(inputNameStudent).clear();
+      type(inputNameStudent, name);
+      click(searchResultNameStudent);
     }
-  }
-
-  public void waitVisibleSchedule(String idTrainer) {
-    WebDriverWait wait = new WebDriverWait(wd, 10);
-    wait.until(
-        ExpectedConditions.visibilityOf(
-            wd.findElement(By.xpath("//div[@data-trainer-id='" + idTrainer + "']"))));
   }
 
   public void recordStudentOnRegularFirst1h(String name, String id) {
@@ -120,7 +159,7 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void selectSingle() {
-    clickWithMoveToElementAndWait(10, By.xpath("(//div[@class='lesson-types']//button)[2]"));
+    clickWithMoveToElementAndWait(10, singleLesson);
   }
 
   public void recordStudentOnSingleFirst1h(String name, String id) {
@@ -159,7 +198,7 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void btnRequest() {
-    click(By.xpath("//button[contains(@class,'create-request')]"));
+    click(btnCreateRequests);
   }
 
   public void selectStudentForSshot(String name) {
@@ -199,7 +238,7 @@ public class WindowScheduleHelper extends HelperBase {
     TrainerService trainerService = new TrainerService();
     String surname = trainerService.findById(idTrainer).getLastName();
     String name = trainerService.findById(idTrainer).getFirstName();
-    String[] split = wd.findElement(By.xpath("//div[@class='trainer-name']//div//div"))
+    String[] split = wd.findElement(trainerInInput)
         .getText()
         .split("\n");
     if (!(surname + " " + name).equals(split[0])) {
@@ -209,6 +248,7 @@ public class WindowScheduleHelper extends HelperBase {
   }
 
   private void selectDropdownTrainer() {
+    waitVisibleElement(3, By.xpath("//label[text()='Тренер']"));
     click(selectTrainer);
   }
 
@@ -235,17 +275,34 @@ public class WindowScheduleHelper extends HelperBase {
   public void makeRequestOnFrenchPython(String name) {
     btnRecordOnLesson();
     selectStudent(name);
-    waitVisibleElement(3, selectTrainer);
+    if (!isElementPresent(selectTrainer)) {
+      refresh();
+      selectStudent(name);
+    }
     btnRequest();
     noErrorMessage();
   }
 
   public String[] getListTrainer() {
-    List<WebElement> list = wd.findElements(By.xpath("//div[@id='menu-']//div//li"));
+    List<WebElement> list = wd.findElements(listTrainersInDropdown);
     String[] listUI = new String[list.size()];
     for (int i = 0; i < list.size(); i++) {
       listUI[i] = list.get(i).getText();
     }
     return listUI;
+  }
+
+  public void recordOnIFRegular1h(String name) {
+    btnRecordOnLesson();
+    selectStudent(name);
+    selectIF();
+    selectRegular();
+    selectLesson();
+    btnRecord();
+    noErrorMessage();
+  }
+
+  private void selectIF() {
+    click(selectIF);
   }
 }

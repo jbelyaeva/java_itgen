@@ -17,31 +17,14 @@ public class MaterialLeaveComment extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
-    app.trMaterial()
-        .publishedMaterial(
-            "MaterialLeaveComment",
-            "14",
-            "Жуки",
-            "published",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666");
+    data.materials().set3_1_MaterialPublishedCreatorTrainer("666");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testMaterialLeaveComment() {
     app.goTo().menuMaterials();
     Materials before = app.dbmaterial().materials();
-    app.material().leaveComment("MaterialLeaveComment", "Комментарий");
+    app.material().leaveComment("material", "Комментарий");
     Materials after = app.dbmaterial().materials();
     assertThat(after.size(), equalTo(before.size()));
     check(after);
@@ -49,29 +32,12 @@ public class MaterialLeaveComment extends TestBase {
   }
 
   private void check(Materials after) {
-    app.trMaterial()
-        .publishedMaterialWithComment(
-            "MaterialLeaveComment",
-            "14",
-            "Жуки",
-            "published",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "original",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность",
-            "666",
-            "Комментарий");
+    data.materials().set13_publishedMaterialWithComment("Комментарий");
 
-    MaterialData materialAdd = materialService.findById("MaterialLeaveComment");
+    MaterialData materialAdd = materialService.findById("material");
 
     for (MaterialData materialAfter : after) {
-      if (materialAfter.getId().equals("MaterialLeaveComment")) {
+      if (materialAfter.getId().equals("material")) {
         assertThat(after, equalTo(after.without(materialAfter).withAdded(materialAdd)));
         return;
       }
@@ -80,6 +46,6 @@ public class MaterialLeaveComment extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material();
+    data.clean().material();
   }
 }

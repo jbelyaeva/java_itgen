@@ -26,6 +26,7 @@ public class ScheduleStudentWithButtonInstall extends TestBase {
   public void testScheduleStudentWithButtonInstall() {
     app.lkParent().reset();
     app.lkParent().btnSchedule();
+    app.lkParent().foundSchedule();
     app.base().moveToElement(app.lkParent().getCellLightCalendar());
     app.check().findElement(app.lkParent().getBtnInstallInScheduleTomorrow());
     app.base().refresh();
@@ -33,6 +34,6 @@ public class ScheduleStudentWithButtonInstall extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student();
+    data.clean().taskAndSchedule().student();
   }
 }

@@ -20,7 +20,7 @@ public class AdminCommunityTabFeed extends TestBase {
     String title = "Scratch";
     app.lkStudent().btnCloseTutorial();
     app.lkStudent().logoutByStudent();
-    data.community().set3_CommunityWithPostAndComment("666", text, title);
+    data.community().set3_CommunityWithPostAndCommentFromStudent("666", text, title);
     data.defFamily().set20_DefaultStudentAdminCommunity();
     app.base().refresh();
     app.base().goByHref(app.base().address() + "/login");
@@ -42,6 +42,6 @@ public class AdminCommunityTabFeed extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     data.defFamily().set19_ChangeDefaultStudentInStart();
-    data.postClean().communities();
+    data.clean().communities();
   }
 }

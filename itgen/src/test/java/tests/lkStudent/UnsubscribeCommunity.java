@@ -14,8 +14,8 @@ public class UnsubscribeCommunity extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().communities();
-    data.community().set4_CommunityScratchWithPost_StudentSubscriber();
+    data.clean().communities();
+    data.community().set4_CommunityScratchWithPost_StudentSubscriber("21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -28,6 +28,6 @@ public class UnsubscribeCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().communities();
+    data.clean().communities();
   }
 }

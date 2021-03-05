@@ -9,12 +9,7 @@ import core.general.TimeGeneral;
 import data.model.schedule.FinishedChildLessons;
 import data.model.schedule.FinishedLessons;
 import data.model.schedule.Schedules;
-import data.services.FamilyService;
-import data.services.FinishedChildLessonService;
-import data.services.FinishedLessonService;
-import data.services.PaymentService;
 import data.services.ScheduleService;
-import data.services.StudentService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,48 +17,15 @@ import org.testng.annotations.Test;
 public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
 
   ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  PaymentService paymentService = new PaymentService();
   private final TimeGeneral time = new TimeGeneral();
-  FinishedChildLessonService finishedChildLessonService = new FinishedChildLessonService();
-  FinishedLessonService finishedLessonService = new FinishedLessonService();
   private String period = "";
   private final long alreadyRun = 7200000; // 2 часа идет занятие
 
   @BeforeMethod
   public void ensurePreconditions() {
     period = time.getPeriod(time.getTimeNow() - alreadyRun);
-    app.trScheduleToday()
-        .StartSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "finishLessonByTrainer",
-            "23",
-            "finishLessonByTrainer",
-            "1",
-            "ru");
-
-    app.trFamily().newFamily("finishLessonByTrainer", false, "RHCtjnpq5oTfhKPQs");
-
-    app.trStudent()
-        .newStudent(
-            "finishLessonByTrainer",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "finishLessonByTrainer",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
+    data.schedules().set26_TodayStartSingleScheduleWithOneStudentOnTrial(period);
+    data.newFamily().set1_FamilyWithStudentAndParent();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -72,7 +34,7 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
     FinishedChildLessons finishChildBefore = app.dbschedules().finishedChildLessons();
     FinishedLessons finishBefore = app.dbschedules().finishedLessons();
     app.trainer().gotoSchedule();
-    app.trainer().finishedLessonWithNotWas("finishLessonByTrainer");
+    app.trainer().finishedLessonWithNotWas("newSchedule");
     app.trainer().gotoTask();
     Schedules after = app.dbschedules().schedules();
     FinishedChildLessons finishChildAfter = app.dbschedules().finishedChildLessons();
@@ -87,26 +49,12 @@ public class TrainerFinishedLessonWithStudentNotWas extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() throws InterruptedException {
     Thread.sleep(10000);
-    scheduleService.DeleteById("finishLessonByTrainer");
-    studentService.DeleteById("finishLessonByTrainer");
-    familyService.DeleteById("finishLessonByTrainer");
-    finishedChildLessonService.drop();
-    finishedLessonService.drop();
-    paymentService.drop();
+    data.clean().taskAndSchedule().student().family().finishedLesson().payment();
   }
 
   private void check(Schedules after) {
-    scheduleService.DeleteById("finishLessonByTrainer");
-    app.trScheduleToday()
-        .FinishedSingleScheduleWithOneStudentOnTrail(
-            (double) alreadyRun,
-            period,
-            "finishLessonByTrainer",
-            "14",
-            "finishLessonByTrainer",
-            "1",
-            "ru",
-            "skipped");
+    scheduleService.DeleteById("newSchedule");
+    data.schedules().set40_SkippedSingleScheduleWithOneStudentOnTrail(period, "23");
     Schedules afterNew = app.dbschedules().schedules();
     assertThat(after, equalTo(afterNew));
   }

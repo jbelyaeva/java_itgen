@@ -25,22 +25,24 @@ public class ChatOnLessonDeleteMessage extends TestBase {
   }
 
   @Test()
-  public void testChatOnLessonSendMessageTrainer() throws InterruptedException {
+  public void testChatOnLessonDeleteMessage() throws InterruptedException {
     app.lkStudent().btnCloseTutorial();
+    app.base().refresh();
     app.lkStudent().goOnLesson();
+    app.lkStudent().btnCloseTutorial();
     app.lkStudent().btnCloseTutorialTips();
     app.lkStudent().sendMessageToTrainer("Привет");
     app.lkStudent().deleteMessage();
-    Thread.sleep(2000);
+    Thread.sleep(3000);
     app.check().notFindElement(app.lkStudent().getAlongMessageInChatOnLesson());
     app.chat().btnOpenChat();
-    app.check().notFindElement(app.lkStudent().getAlongMessageInChatPrewiev());
-    String message = app.chat().getByTrainerDeletionMessageFromStudent("trainer", "111111");
-    app.check().equalityOfTwoElements(message, "");
+    app.check().fieldNotNull(app.dbchat().lastMessage().getRemovedAt());
+    app.lkStudent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
+    app.base().refresh();
   }
 }

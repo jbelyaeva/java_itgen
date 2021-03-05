@@ -3,12 +3,12 @@ package tests.candidates;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.candidate.CandidateData;
 import data.model.candidate.Candidates;
 import data.services.CandidateService;
 import data.services.TaskService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,43 +22,7 @@ public class CandidateStatusTest1ToDifferentStatuses extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-
-    app.trCandidate()
-        .saveCandidate(
-            "ChangeStatus",
-            "Света",
-            "Светина",
-            "Sveta",
-            "Svetina",
-            app.base().DateWithCorrectionDays(-7300),
-            1,
-            oldStatus,
-            "trainer",
-            "AM",
-            "City",
-            "Europe/Monaco",
-            "ru",
-            "Хороший кандидат, плохой кандидат",
-            "Очень много говорит",
-            "14",
-            "http://www.yandex.ru",
-            "http://www.yandex.ru",
-            "1111111111",
-            "mail@mail.com",
-            "+56756756756",
-            "+79896667845",
-            "111111111111111",
-            "+5674545453",
-            "+9998764534",
-            "+00078566664",
-            "+890000066432",
-            "0000000000000",
-            "010101010101",
-            "cat",
-            "key",
-            null,
-            "good",
-            "mother");
+    data.candidates().set1_newCandidate("trainer", oldStatus);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -98,46 +62,11 @@ public class CandidateStatusTest1ToDifferentStatuses extends TestBase {
   }
 
   private void check(Candidates after, String newStatus) {
-    app.trCandidate()
-        .saveCandidate(
-            "ChangeStatus",
-            "Света",
-            "Светина",
-            "Sveta",
-            "Svetina",
-            app.base().DateWithCorrectionDays(-7300),
-            1,
-            newStatus,
-            "trainer",
-            "AM",
-            "City",
-            "Europe/Monaco",
-            "ru",
-            "Хороший кандидат, плохой кандидат",
-            "Очень много говорит",
-            "14",
-            "http://www.yandex.ru",
-            "http://www.yandex.ru",
-            "1111111111",
-            "mail@mail.com",
-            "+56756756756",
-            "+79896667845",
-            "111111111111111",
-            "+5674545453",
-            "+9998764534",
-            "+00078566664",
-            "+890000066432",
-            "0000000000000",
-            "010101010101",
-            "cat",
-            "key",
-            null,
-            "good",
-            "mother");
-    CandidateData candidateAdd = candidateService.findById("ChangeStatus");
+    data.candidates().set1_newCandidate("trainer", newStatus);
+    CandidateData candidateAdd = candidateService.findById("candidate");
 
     for (CandidateData candidateAfter : after) {
-      if (candidateAfter.getId().equals("ChangeStatus")) {
+      if (candidateAfter.getId().equals("candidate")) {
         assertThat(after, equalTo(after.without(candidateAfter).withAdded(candidateAdd)));
         return;
       }

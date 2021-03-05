@@ -27,18 +27,29 @@
       <class name="tests.lkStudent.AdminCommunityTabFeedDeleteAndModifyPost"/>
       <class name="tests.lkStudent.OpenProfile"/>
       <class name="tests.lkStudent.ManagerCommunityTabAllWithoutCommunity"/>
+      <class name="tests.lkStudent.CommunityEditCommentIfStudentOwner"/>
+      <class name="tests.lkStudent.CommunityDeleteCommentIfStudentOwner"/>
+      <class name="tests.lkStudent.CommunityDontEditAndDeleteCommentIfStudentNotOwner"/>
+      <class name="tests.lkStudent.CommunitySortDifferentSkills"/>
+      <class name="tests.lkStudent.CommunitySortWithPrioritySkillStudent"/>
+      <class name="tests.lkStudent.CommunitySortByLanguage"/>
       <class name="tests.lkStudent.StudentLabelNewSubject"/>
       <class name="tests.lkStudent.ScheduleMonths"/>
       <class name="tests.lkStudent.ChatOnLessonScheduleNotStarted"/>
       <class name="tests.lkStudent.ChatOnLessonScheduleWasYesterday"/>
-      <class name="tests.lkStudent.ChatOnLessonSendMessageTrainer"/>
+     <!-- <class name="tests.lkStudent.ChatOnLessonSendMessageTrainer"/>-->
       <class name="tests.lkStudent.ChatOnLessonNotWasIndicator"/>
       <class name="tests.lkStudent.ChatOnLessonSendFileTrainer"/>
-      <class name="tests.lkStudent.ChatOnLessonModifyMessage"/>
-      <class name="tests.lkStudent.ChatOnLessonDeleteMessage"/>
-      <class name="tests.lkStudent.ChatOnLessonMessageInBothChats"/>
+      <!--   <class name="tests.lkStudent.ChatOnLessonModifyMessage"/>
+         <class name="tests.lkStudent.ChatOnLessonDeleteMessage"/>
+         <class name="tests.lkStudent.ChatOnLessonMessageInBothChats"/>-->
       <class name="tests.lkStudent.ProgressBarFinishedThreeProjects"/>
       <class name="tests.lkStudent.ProgressBarFinishedWithoutProjects"/>
+    <!--  <class name="tests.lkStudent.ProfileAboutMyself"/>-->
+      <class name="tests.lkStudent.ProfileDifferentStudent"/>
+      <class name="tests.lkStudent.ProfileDifferentStudentWith4Achiv"/>
+      <class name="tests.lkStudent.ProfileDifferentStudentShowOnlyDoneAchiv"/>
+      <class name="tests.lkStudent.ProfileShowAllAchiv"/>
     </classes>
   </test>
 </suite>

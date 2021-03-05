@@ -8,7 +8,6 @@ import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,28 +16,11 @@ public class TaskManualChangePriority extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
-  private final Date createAt = new Date();
-  private final Date duoDateWithTime = new Date();
-  private final long duoDateSort = new Date().getTime();
-  private final Date[] dates = null;
-  private final String[] texts = null;
-  private final String[] clients = null;
-  private final String[] commentaries = null;
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trTask()
-        .newManualTask(
-            "PopupChangePriorityTask",
-            "777",
-            "666",
-            "Записать на пробное",
-            1,
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            "21");
+    data.tasksManual()
+        .set6_newManualTaskCreatorAdminAssigneeSuper("task", "Записать на пробное", "open", "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -54,25 +36,7 @@ public class TaskManualChangePriority extends TestBase {
   }
 
   private void check(Tasks after) {
-    app.trTask()
-        .saveManualTask(
-            "PopupChangePriorityTask",
-            "Записать на пробное",
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            "666",
-            "21",
-            "777",
-            "666",
-            2,
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newTask_changePriority");
-
+    data.tasksManual().set15_ManualTaskChangePriority("Записать на пробное", "open", "21", 2);
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
     for (TaskData taskAfter : after) {
@@ -85,6 +49,6 @@ public class TaskManualChangePriority extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    data.clean().taskAndSchedule();
   }
 }

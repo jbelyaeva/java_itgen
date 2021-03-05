@@ -125,6 +125,7 @@ public class CommunityHelper extends HelperBase {
     btnAddPost();
     fillPost(text);
     btnCreatePost();
+    refresh();
   }
 
   public void addFilePost(String path) throws IOException {
@@ -242,6 +243,8 @@ public class CommunityHelper extends HelperBase {
     goInCommunity();
     btnPointPost();
     btnDeletePost();
+    refresh();
+    waitVisibleElement(5, By.xpath("//div[@class='posts-not-exist']"));
   }
 
   private void btnDeletePost() {
@@ -284,7 +287,7 @@ public class CommunityHelper extends HelperBase {
   }
 
   private void deleteStudentFromAdmins() {
-    click(
-        By.xpath("(//div[@class='actions-buttons-wrap']//*[name()='svg' and @id-qa='trash'])[2]"));
+    clickWithMoveToElementAndWait(2,
+        By.xpath("(//div[@class='actions-buttons-wrap']//*[name()='svg' and @id-qa='trash'])[1]"));
   }
 }

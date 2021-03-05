@@ -80,8 +80,8 @@ public class Skills extends TransactionManager {
     String descrition =
         "Визуальный язык программирования для начинающих. Идеально подходит, чтобы создать свои "
             + "первые проекты и освоить базовые понятия: ввод-вывод, переменные, циклы, условия, списки";
-    int[] age = {7};
-    String[] state = {"visible"};
+    int[] age = {5, 7};
+    String[] state = {"hidden", "visible"};
     trSkill()
         .updateSkillWithFormatLessons(
             id,
@@ -98,6 +98,7 @@ public class Skills extends TransactionManager {
             1,
             duration,
             new Integer[]{0, 1});
+    data.skillsService().deleteField(id, "className");
   }
 
   //В админке направлений у Scratch пробное 1 ч

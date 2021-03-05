@@ -1,6 +1,7 @@
 package core.general;
 
 import static core.general.DateFormat.formatMMMM;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -37,6 +38,11 @@ public class Assertions extends HelperBase {
    * @locator - локатор элемента
    * */
   public void findElement(By locator) {
+    try {
+      waitVisibleElement(3, locator);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     assertTrue(isElementPresent(locator));
   }
 
@@ -45,6 +51,13 @@ public class Assertions extends HelperBase {
    * */
   public void notFindElement(By locator) {
     assertFalse(isElementPresent(locator));
+  }
+
+  /* проверяет, что поле в документе не равно null
+   * @field - поле из документа, может иметь различные типы данных
+   * */
+  public <E> void fieldNotNull(E field) {
+    assertThat(field, notNullValue());
   }
 
   /* проверяет, что с данным локатором найдено количество элементов равное ОР
@@ -106,5 +119,26 @@ public class Assertions extends HelperBase {
   public void onDisabled(By locator) {
     assertThat(
         wd.findElement(locator).getAttribute("disabled"), equalTo("true"));
+  }
+
+  /* проверяет, что вэбэлемент выбран
+   *locator - локатор проверяемого элмента
+   * */
+  public void onChecked(By locator) {
+    assertThat(
+        wd.findElement(locator).getAttribute("checked"), equalTo("true"));
+  }
+
+  /* проверяет, что вэбэлемент не выбран
+   *locator - локатор проверяемого элмента
+   * */
+  public void notChecked(By locator) {
+    assertThat(
+        wd.findElement(locator).getAttribute("checked"), equalTo(null));
+  }
+
+  public void textContent(By locator, String text) {
+    assertThat(
+        wd.findElement(locator).getAttribute("textContent"), equalTo(text));
   }
 }

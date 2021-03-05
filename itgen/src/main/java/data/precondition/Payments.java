@@ -10,4 +10,11 @@ public class Payments extends TransactionManager {
   public void set1_addPaymentInDefaultFamily() {
     trPayment().newPayment("newPayment", "111", "666", 1, 2, "Корректировка", true, 100);
   }
+
+  /**
+   * пополнен баланс админом у семьи
+   */
+  public void set2_addPaymentInFamily(String idFamily) {
+    trPayment().newPayment("newPayment", idFamily, "666", 1, 2, "Корректировка", true, 100);
+  }
 }

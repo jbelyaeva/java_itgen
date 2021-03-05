@@ -22,19 +22,8 @@ public class WorkerModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trWorker()
-        .saveNewWorker(
-            "workerModify",
-            "Маша",
-            "Машина",
-            "employee",
-            "AL",
-            "Europe/Minsk",
-            "ru",
-            "ru",
-            "1234567899",
-            "julja83@list.ru");
-    modifydWorker = workerService.findById("workerModify");
+    data.newWorker().set1_NewWorker();
+    modifydWorker = workerService.findById("newWorker");
   }
 
   @Test(dataProvider = "validWorkersFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -43,7 +32,7 @@ public class WorkerModificationTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    app.worker().modificationWorker(worker, "workerModify");
+    app.worker().modificationWorker(worker, "newWorker");
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size()));
     WorkerData workerAdd = worker.withId(modifydWorker.getId());
@@ -54,6 +43,6 @@ public class WorkerModificationTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    workerService.DeleteById("workerModify");
+    data.clean().worker();
   }
 }

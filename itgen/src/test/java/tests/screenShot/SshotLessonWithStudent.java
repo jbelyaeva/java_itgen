@@ -140,7 +140,7 @@ public class SshotLessonWithStudent extends TestBase {
     scheduleService.DeleteById("SshotOnLessonWithStudent");
 
     StudentService studentService = new StudentService();
-    studentService.DeleteById("SshotOnLessonWithStudent");
+    studentService.deleteById("SshotOnLessonWithStudent");
 
     FamilyService familyService = new FamilyService();
     familyService.DeleteById("SshotOnLessonWithStudent");

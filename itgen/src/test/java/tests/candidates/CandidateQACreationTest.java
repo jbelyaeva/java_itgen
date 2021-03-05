@@ -31,42 +31,7 @@ public class CandidateQACreationTest extends TestBase {
   }
 
   private void check(Candidates after, String id, CandidateData candidate, String vacancy) {
-    app.trCandidate()
-        .saveCandidate(
-            id,
-            candidate.getFirstName(),
-            candidate.getLastName(),
-            candidate.getEngFirstName(),
-            candidate.getEngLastName(),
-            candidate.getBirthday(),
-            candidate.getGender(),
-            "new",
-            vacancy,
-            candidate.getCountry(),
-            candidate.getCity(),
-            candidate.getTimezone(),
-            candidate.getLocale(),
-            candidate.getNote(),
-            candidate.getInfo(),
-            candidate.getReferId(),
-            candidate.getResume(),
-            candidate.getTestTask(),
-            candidate.getContacts().get(0).getVal(),
-            candidate.getContacts().get(1).getVal(),
-            candidate.getContacts().get(2).getVal(),
-            candidate.getContacts().get(3).getVal(),
-            candidate.getContacts().get(4).getVal(),
-            candidate.getContacts().get(5).getVal(),
-            candidate.getContacts().get(6).getVal(),
-            candidate.getContacts().get(7).getVal(),
-            candidate.getContacts().get(8).getVal(),
-            candidate.getContacts().get(9).getVal(),
-            candidate.getContacts().get(10).getVal(),
-            candidate.getUtm().getSource(),
-            candidate.getUtm().getMedium(),
-            candidate.getUtm().getCampaing(),
-            candidate.getUtm().getTerm(),
-            candidate.getUtm().getContent());
+    data.candidates().set2_newCandidateFromObject(vacancy, "new", candidate);
 
     CandidateData candidateAdd = candidateService.findById(candidateClean.getId());
 

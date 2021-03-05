@@ -30,6 +30,6 @@ public class ScheduleStudentOlder7YearsWithoutTrial extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student();
+    data.clean().student();
   }
 }

@@ -34,8 +34,8 @@ public class Clean {
   }
 
   public Clean student() {
-    data.studentService().DeleteById("newStudent");
-    data.studentService().DeleteById("student");
+    data.studentService().deleteById("newStudent");
+    data.studentService().deleteById("student");
     return this;
   }
 
@@ -74,6 +74,11 @@ public class Clean {
     return this;
   }
 
+  public Clean leads() {
+    data.leadService().drop();
+    return this;
+  }
+
   public Clean communities() {
     data.communitiesService().dropCommunity();
     data.communitiesService().dropCommPost();
@@ -89,5 +94,9 @@ public class Clean {
   public Clean requests() {
     data.requestService().drop();
     return this;
+  }
+
+  public void skill(String id) {
+    data.skillsService().DeleteById(id);
   }
 }

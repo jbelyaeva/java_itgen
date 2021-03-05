@@ -2,8 +2,6 @@ package tests.testTypeform;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.TestService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -11,27 +9,9 @@ import org.testng.annotations.Test;
 
 public class TestTypeformAvailableToStudent extends TestBase {
 
-  private final TestService testService = new TestService();
-  private final Date createAt = new Date();
-  private String[] skills = null;
-
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[] {"1"};
-    app.trTest()
-        .saveTest(
-            "newTest",
-            "Тест",
-            "111111",
-            "ru",
-            "Test на переход на новое направление",
-            5,
-            5,
-            10,
-            skills,
-            createAt,
-            null);
-    testService.deleteField("deleteTest", "removedAt");
+    data.tests().set1_1_NewTestForRusScratch();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -46,6 +26,6 @@ public class TestTypeformAvailableToStudent extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    testService.drop();
+    data.clean().tests();
   }
 }

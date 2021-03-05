@@ -22,14 +22,34 @@ public class NewWorker extends TransactionManager {
         "newTrainer",
         "Sem",
         "Semov",
-        "trainer",
+        "Sem",
+        "Semov",
+        new String[]{"trainer", "employee"},
         "BL",
         "Europe/Minsk",
         "fr",
         "fr",
         "+7123455667",
         "email@email.ru",
-        "2"
+        new String[]{"2"}
+    );
+  }
+
+  public void set3_Trainer() {
+    trWorker().saveNewTrainer(
+        "newTrainer",
+        "Маша",
+        "Машина",
+        "Sem",
+        "Semov",
+        new String[]{"trainer", "employee"},
+        "AL",
+        "Europe/Minsk",
+        "ru",
+        "ru",
+        "+7123455667",
+        "email@email.ru",
+        new String[]{"2"}
     );
   }
 }
