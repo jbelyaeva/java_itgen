@@ -84,6 +84,11 @@ public class TimeGeneral {
     return (nowTime + diffTz() + finish(period)) * 1.0;
   }
 
+  public Double Etime1h(String period) {
+    long nowTime = getMsLocalTime();
+    return (nowTime + diffTz() + finish1h(period)) * 1.0;
+  }
+
   public Double StimeYesterday(String period) {
     long nowTime = getMsLocalTimeYesterday();
     return (nowTime + diffTz() + start(period)) * 1.0;
@@ -151,6 +156,27 @@ public class TimeGeneral {
     }
     if ((hours >= 3) && (minutes == 30)) {
       finishValue -= 1800000;
+    }
+
+    return finishValue;
+  }
+
+  public int finish1h(String period) {
+    int hours = Integer.parseInt(period.substring(0, 2));
+    int minutes = Integer.parseInt(period.substring(3, 5));
+    int finishValue = hours * 3600000;
+
+    if ((hours < 3) && (minutes != 30)) {
+      finishValue += 79200000;
+    }
+    if ((hours < 3) && (minutes == 30)) {
+      finishValue -= 87800000;
+    }
+    if ((hours >= 3) && (minutes != 30)) {
+      finishValue -= 7200000;
+    }
+    if ((hours >= 3) && (minutes == 30)) {
+      finishValue -= 5400000;
     }
 
     return finishValue;

@@ -30,6 +30,7 @@ public class ChatOnLessonModifyMessage extends TestBase {
     app.lkStudent().btnCloseTutorial();
     app.lkStudent().goOnLesson();
     app.lkStudent().btnCloseTutorialTips();
+    app.base().refresh();
     app.lkStudent().sendMessageToTrainer("Привет");
     app.lkStudent().modifyMessage("Пока");
     Thread.sleep(3000);
@@ -43,6 +44,6 @@ public class ChatOnLessonModifyMessage extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

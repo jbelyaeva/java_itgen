@@ -1,11 +1,11 @@
 package data.model.tasks;
 
+import data.model.general.Activity;
+import data.model.general.Comments;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
-import data.model.general.Activity;
-import data.model.general.Comments;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -259,38 +259,30 @@ public class TaskData {
 
   @Override
   public String toString() {
-    return "TaskData{"
-        + "id='"
-        + id
-        + ", creator="
-        + creator
-        + ", assignee="
-        + assignee
-        + ", text='"
-        + text
-        + ", priority='"
-        + priority
-        + ", t='"
-        + t
-        + ", createAt="
-        + createAt
-        + ", status='"
-        + status
-        + ", watchers="
-        + watchers
-        + ", comments="
-        + comments
-        + ", activity="
-        + activity
-        + ", linkUser='"
-        + linkUser
-        + ", dueDate="
-        + dueDate
-        + ", dueDateSort="
-        + dueDateSort
-        + ", dueDateWithTime="
-        + dueDateWithTime
-        + '}';
+    return "TaskData{" +
+        "id='" + id + '\'' +
+        ", t='" + t + '\'' +
+        ", createAt=" + createAt +
+        ", status='" + status + '\'' +
+        ", watchers=" + watchers +
+        ", comments=" + comments +
+        ", activity=" + activity +
+        ", linkUser='" + linkUser + '\'' +
+        ", linkCandidate='" + linkCandidate + '\'' +
+        ", linkLead='" + linkLead + '\'' +
+        ", dueDate=" + dueDate +
+        ", dueDateSort=" + dueDateSort +
+        ", dueDateWithTime=" + dueDateWithTime +
+        ", lesson=" + lesson +
+        ", creator='" + creator + '\'' +
+        ", assignee='" + assignee + '\'' +
+        ", text='" + text + '\'' +
+        ", priority=" + priority +
+        ", dateUi='" + dateUi + '\'' +
+        ", timeUi='" + timeUi + '\'' +
+        ", userUi='" + userUi + '\'' +
+        ", dueDateTimeUi='" + dueDateTimeUi + '\'' +
+        '}';
   }
 
   @Override

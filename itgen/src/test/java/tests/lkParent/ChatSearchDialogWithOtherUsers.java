@@ -64,6 +64,6 @@ public class ChatSearchDialogWithOtherUsers extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat().taskAndSchedule().student().parent().worker().family();
+    data.clean().chat().taskAndSchedule().student().parent().worker().family();
   }
 }

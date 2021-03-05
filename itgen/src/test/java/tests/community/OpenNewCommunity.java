@@ -4,8 +4,6 @@ package tests.community;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.CommunitiesService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,30 +11,11 @@ import org.testng.annotations.Test;
 
 public class OpenNewCommunity extends TestBase {
 
-  CommunitiesService communitiesService = new CommunitiesService();
   String title = "Scratch";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+   data.community().set6_NewCommunity();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -52,6 +31,6 @@ public class OpenNewCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
+    data.clean().communities();
   }
 }

@@ -22,7 +22,7 @@ public class CreateMaterialBad extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
+    data.materials().newBranchScratch();
   }
 
   @Test(dataProvider = "noValidMaterialFromJson", dataProviderClass = LocaleUtilsTestData.class,

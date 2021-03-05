@@ -1,5 +1,8 @@
 package app.appmanager;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +27,9 @@ public class ScheduleHelper extends HelperBase {
   private final By selectBlock = By.xpath("//a[contains(@class,'block')]");
   private final By selectAssign = By.xpath("//a[contains(@class,'assign')]");
   private final By selectCancel = By.xpath("//a[contains(@class,'cancel')]");
+  private final By selectArchive = By.xpath("//a[contains(@class,'archive')]");
+  private final By selectRestore = By.xpath("//a[contains(@class,'restore')]");
+  private final By btnArchive = By.xpath("//button[contains(@class,'btn-archive')]");
   private final By typeDesc = By.name("block-desc");
   private final By radioButtonAll = By.xpath("//input[@value='1']");
   private final By btnCreate = By.xpath("//div[contains(@class,'footer')]//button");
@@ -34,7 +40,6 @@ public class ScheduleHelper extends HelperBase {
   private final By selectListTrainerInCreate = By.xpath("//input[@id-qa='trainers']");
   private final By selectListTime = By.xpath("//select[contains(@id,'tp')]");
   private final By selectTrainerWithId7 = By.xpath("//select[@id='trainer']//option[@value='7']");
-  private final By selectFirstTrainerInCreate = By.xpath("");
   private final By selectTrainerWithId18 = By.xpath("//select[@id='trainer']//option[@value='18']");
   private final By studentOnLessonInSchedule = By.xpath("//a[@class='text-capitalize title-name']");
   private final By btnMove = By.xpath("//button[contains(@class,'accept')]");
@@ -42,6 +47,7 @@ public class ScheduleHelper extends HelperBase {
   private final By btnAssign = By.xpath(" //button[contains(@class,'assign')]");
   private final By btnCancel = By.xpath("//button[contains(@class,'cancel')]");
   private final By btnNextInPaginator = By.xpath("//button[contains(@class,'next')]");
+  private final By btnPrevInPaginator = By.xpath("//button[contains(@class,'prev')]");
   private final By btnRemove = By.xpath("//button[contains(@class,'remove')]");
   private final By selectFirst1h = By.xpath("//button[contains(@data-itemid,'1')]");
   private final By selectSecond1h = By.xpath("//button[contains(@data-itemid,'2')]");
@@ -49,6 +55,35 @@ public class ScheduleHelper extends HelperBase {
   private final By typeChildName = By.id("child-name");
   private final By searchResult = By.xpath("//span[contains(@class,'result')]");
   private final By selectNo = By.xpath("//button[contains(@class,'change')][2]");
+  private final By labelTrialOnLesson = By.xpath(
+      "//div[@class='skill editable']/../following-sibling::span");
+  private final By duration2h = By.xpath("//button[@data-itemid='3']");
+  private final By typeLessonTrialSelected = By.xpath(
+      "//button[@class='btn btn-primary btn-trial-change']");
+  private final By typeLessonTrialDefault = By.xpath(
+      "//button[@class='btn btn-default btn-trial-change']");
+  private final By hours = By.xpath("(//div[@class='change-panel']//span)[1]");
+  private final By dropdownDurationInPopup = By.xpath("//select[@id='durations']");
+  private final By duration2hInPopup = By.xpath("//select[@id='durations']//option[@value='2']");
+  private final By btnSaveDurationInPopup = By.xpath("//button[contains(@class,'save')]");
+  private final By labelPeriodLessonInStudent = By.xpath("//span[@class='text-muted small']");
+  private final By labelPeriodLesson = By.xpath(
+      "(//div[@class='text-muted header-labels']//span)[1]");
+  private final By clickAroundChildInLesson = By.xpath("//div[contains(@class,'ist-group-item')]");
+  private final By btnClosePopup = By.xpath("//button[@class='close']");
+  private final By checkboxIF = By.xpath("//input[@id-qa='isIndividual-checkbox']");
+  private final By elementWithCalendar = By.xpath("//div[contains(@class,'child-schedule')]");
+  private final By btnScheduleInProfile = By.xpath("(//div[@class='links']//a)[2]");
+  private final By labelIFInCalendar = By.xpath("//span[text()='ИФ']");
+  private final By btnWorkingOff = By.xpath("//button[contains(@class,'working-off')]");
+  private final By lessonsForWorkingOff = By.xpath(
+      "//div[@class='modal-content']//div[contains(@class,'tem-cell')]");
+  private final By btnRecordOnWorkingOffInPopup = By.xpath(
+      "//div[@class='modal-footer']//button[contains(@class,'assign')]");
+  private final By trainerInWorkingOffPopup = By.xpath(
+      "//li[@class='list-group-item list-group-item-warning']//label//span");
+  private final By labelWorkingOffInCalendar = By.xpath(
+      "//span[contains(@class,'label-danger')][text()='Отработка']");
 
   public ScheduleHelper(WebDriver wd) {
     super(wd);
@@ -80,6 +115,58 @@ public class ScheduleHelper extends HelperBase {
 
   public By getStudentOnLessonInSchedule() {
     return studentOnLessonInSchedule;
+  }
+
+  public By getLabelTrialOnLesson() {
+    return labelTrialOnLesson;
+  }
+
+  public By getDuration2h() {
+    return duration2h;
+  }
+
+  public By getSelectFirst1h() {
+    return selectFirst1h;
+  }
+
+  public By getSelectSecond1h() {
+    return selectSecond1h;
+  }
+
+  public By getTypeLessonTrialSelected() {
+    return typeLessonTrialSelected;
+  }
+
+  public By getSelectMove() {
+    return selectMove;
+  }
+
+  public By getCheckboxIF() {
+    return checkboxIF;
+  }
+
+  public By getTypeLessonTrialDefault() {
+    return typeLessonTrialDefault;
+  }
+
+  public By getElementWithCalendar() {
+    return elementWithCalendar;
+  }
+
+  public By getLabelIFInCalendar() {
+    return labelIFInCalendar;
+  }
+
+  public By getLessonsForWorkingOff() {
+    return lessonsForWorkingOff;
+  }
+
+  public By getTrainerInWorkingOffPopup() {
+    return trainerInWorkingOffPopup;
+  }
+
+  public By getLabelWorkingOffInCalendar() {
+    return labelWorkingOffInCalendar;
   }
 
   public void btnCreateSchedule() {
@@ -138,12 +225,6 @@ public class ScheduleHelper extends HelperBase {
   private void selectAnyTrainer() {
     type(selectListTrainerInCreate, "Бокша");
     JSClickByXY(217, 417);
-    /*ввести в консоль для определения координат в подсказках
-    document.onmousemove = function(e){
-      var x = e.pageX;
-      var y = e.pageY;
-      e.target.title = "X is "+x+" and Y is "+y;
-    };*/
   }
 
   public void createSingleScheduleTest() {
@@ -311,9 +392,9 @@ public class ScheduleHelper extends HelperBase {
       // если занятие не на первой странице, надо нажать пагинатор, пока не найдем
       while (!next.equals("disabled")) {
         List<WebElement> list_pagin =
-            wd.findElements(By.cssSelector("a[href='/lesson/" + id + "'"));
+            wd.findElements(By.xpath("//a[contains(@href,'" + id + "')]"));
         if (list_pagin.size() > 0) {
-          wd.findElement(By.cssSelector("a[href='/lesson/" + id + "'")).click();
+          wd.findElement(By.xpath("//a[contains(@href,'" + id + "')]")).click();
           break;
         } else {
           wd.findElement(btnNextInPaginator).click();
@@ -399,6 +480,25 @@ public class ScheduleHelper extends HelperBase {
     refresh();
   }
 
+  public void recordStudentOnTrialSecond1h(String name, String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    bntRecordStudent();
+    selectStudent(name);
+    selectSecond();
+    btnRecord();
+    noErrorMessage();
+    refresh();
+  }
+
+  public void recordStudentOnTrialFirst1h(String name, String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    bntRecordStudent();
+    selectStudent(name);
+    btnRecord();
+    noErrorMessage();
+    refresh();
+  }
+
   private void selectSecond() {
     click(selectSecond1h);
   }
@@ -442,8 +542,153 @@ public class ScheduleHelper extends HelperBase {
     waitElementWithAttribute(5, By.xpath("//div[@class='name-block']//a"), "text", name);
   }
 
+  public void tryChangeDurationInUsualTrial(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    clickEmptyArea();
+  }
+
+  public void openRecordOnTrial(String name, String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    bntRecordStudent();
+    selectStudent(name);
+  }
+
+  public void recordOnRegularIF(String name, String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    bntRecordStudent();
+    selectStudent(name);
+    btnRecord();
+    noErrorMessage();
+  }
+
   public void waitForLoadTextCenterOnMainSchedule() {
     new WebDriverWait(wd, 10)
         .until(ExpectedConditions.elementToBeClickable(By.xpath("//h4[@class='text-center']")));
+  }
+
+  public void btnClosePopup() {
+    click(btnClosePopup);
+  }
+
+  public void clickOnLessonWithChild() {
+    click(clickAroundChildInLesson);
+  }
+
+  public int getDuration() {
+    String[] period = wd.findElement(labelPeriodLessonInStudent).getText().split(" ");
+    String[] timeFirst = period[0].split(":");
+    String[] timeSecond = period[2].split(":");
+    return Integer.parseInt(timeSecond[0]) - Integer.parseInt(timeFirst[0]);
+  }
+
+  public int getDiffHoursStart() {
+    String[] periodLessonStudent = wd.findElement(labelPeriodLessonInStudent).getText().split(" ");
+    String[] timeFirst = periodLessonStudent[0].split(":");
+    String[] periodLesson = wd.findElement(labelPeriodLesson).getText().split(" ");
+    String[] timeFirstLesson = periodLesson[0].split(":");
+    return Integer.parseInt(timeFirst[0]) - Integer.parseInt(timeFirstLesson[0]);
+  }
+
+  public void changeDuration() {
+    click(hours);//часики
+    click(dropdownDurationInPopup);//дропдаун
+    click(duration2hInPopup);//значение
+    click(btnSaveDurationInPopup);
+  }
+
+  public void archivingSingleSchedule(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    click(btnPoints);
+    click(selectArchive);
+    btnBlock();
+    click(btnArchive);
+    noErrorMessage();
+  }
+
+  public void restore() {
+    bntPoints();
+    selectRestore();
+  }
+
+  private void selectRestore() {
+    JSclick(selectRestore);
+  }
+
+  public void restoreSecondRegularLesson(String idSchedule) {
+    for (int i = 1; i <= 7; i++) {
+      click(btnNextInPaginator);
+    }
+    selectScheduleInListUIById(idSchedule);
+    bntPoints();
+  }
+
+  public void selectCheckboxIF() {
+    JSclick(checkboxIF);
+  }
+
+  public void dropdownTime() {
+    click(By.xpath("(//div[@class='createSchoolSchedule-body']//div)[14]"));
+  }
+
+  public void checkPeriods() {
+    List<WebElement> list = wd.findElements(By.xpath("//div[contains(@class,'item')]"));
+    for (int i = 0; i < list.size() - 2; i++) {
+      String period = list.get(i).getText();
+      String[] periodParse = period.split(" ");
+      String[] periodFirst = periodParse[0].split(":");
+      String[] periodSecond = periodParse[2].split(":");
+      assertThat(Integer.parseInt(periodSecond[0]) - Integer.parseInt(periodFirst[0]), equalTo(1));
+    }
+  }
+
+  public void createSingleIFSchedule() {
+    btnCreateSchedule();
+    checkBoxConst();
+    checkboxIF();
+    selectTime();
+    selectAnyTrainer();
+    btnCreate();
+  }
+
+  private void checkboxIF() {
+    JSclick(checkboxIF);
+  }
+
+  public void chooseDefaultStudentFoRecordOnIF(String idSchedule) {
+    selectScheduleInListUIById(idSchedule);
+    bntRecordStudent();
+    selectStudent("Дефолтный");
+  }
+
+  public void goInCalendar(String name) {
+    clickByHrefStudent(name);
+    btnSchedule();
+  }
+
+  public void btnSchedule() {
+    click(btnScheduleInProfile);
+  }
+
+  private void clickByHrefStudent(String name) {
+    click(By.xpath("//a[text()='" + name + "']"));
+  }
+
+  public void btnWorkingOff() {
+    if (!isElementPresent(btnWorkingOff)) {
+      click(btnPrevInPaginator);
+    }
+    click(btnWorkingOff);
+  }
+
+  public void recordOnWorkingOff() {
+    clickWithMoveToElementAndWait(3, trainerInWorkingOffPopup);
+    clickWithMoveToElementAndWait(3, btnRecordOnWorkingOffInPopup);
+    noErrorMessage();
+  }
+
+  public void checkShowWorkingOff() {
+    if (!isElementPresent(labelWorkingOffInCalendar)) {
+      click(btnNextInPaginator);
+    }
   }
 }

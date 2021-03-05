@@ -14,7 +14,7 @@ public class FinishedChildLessonService {
   }
 
   public FinishedChildLessonData DeleteByIdStudent(String idStudent) {
-    return finishedChildLessonDao.FindByIdStudent(idStudent);
+    return finishedChildLessonDao.deleteById(idStudent);
   }
 
   public void drop() {

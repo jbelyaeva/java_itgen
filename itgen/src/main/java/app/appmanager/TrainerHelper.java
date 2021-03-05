@@ -42,7 +42,7 @@ public class TrainerHelper extends HelperBase {
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
-  public void modifiTrainerForm(TrainerData trainerData) {
+  public void modifyTrainerForm(TrainerData trainerData) {
     type(By.name("profile-firstName"), trainerData.getFirstName());
     type(By.name("profile-lastName"), trainerData.getLastName());
     type(By.name("profile-english-firstName"), trainerData.getEngFirstName());
@@ -55,14 +55,8 @@ public class TrainerHelper extends HelperBase {
     click(By.cssSelector("button.btn.btn-default.dropdown-toggle"));
     click(By.name("skill_1"));
     click(By.name("skill_2"));
-    click(By.name("skill_3"));
-    click(By.name("skill_17"));
     click(By.name("skill_21"));
-    click(By.name("skill_19"));
-    click(By.name("skill_4"));
-    click(By.name("skill_5"));
-    click(By.name("skill_6"));
-    click(By.name("skill_7"));
+    click(By.name("skill_26"));
 
     // закрывает выпадающий список с чек-боксами
     Actions builder = new Actions(wd);
@@ -147,18 +141,20 @@ public class TrainerHelper extends HelperBase {
   }
 
   public void fillTrainerForm(TrainerData trainerData) {
-    type(By.name("user-firstName"), trainerData.getFirstName());
-    type(By.name("user-lastName"), trainerData.getLastName());
-    type(By.name("user-engFirstName"), trainerData.getEngFirstName());
-    type(By.name("user-engLastName"), trainerData.getEngLastName());
-    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.name("user-phone"), trainerData.getPhone());
-    type(By.name("user-slackId"), trainerData.getSlack());
-    dropDownList(By.name("role"), trainerData.getRoleUi());
+    type(By.xpath("//input[@id-qa='firstName']"), trainerData.getFirstName());
+    type(By.xpath("//input[@id-qa='lastName']"), trainerData.getLastName());
+    type(By.xpath("//input[@id-qa='engFirstName']"), trainerData.getEngFirstName());
+    type(By.xpath("//input[@id-qa='engLastName']"), trainerData.getEngLastName());
+    type(By.xpath("//input[@id-qa='email']"),
+        "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(By.xpath("//input[@id-qa='phone']"), trainerData.getPhone());
+    type(By.xpath("//input[@id-qa='slackId']"), trainerData.getSlack());
+    click(By.xpath("//input[@id-qa='selectRole']/..//div"));
+    click(By.xpath("//li[@data-value='trainer']"));
   }
 
   public void bntCreation() {
-    click(By.xpath("//button[@class='btn btn-primary btn-create']"));
+    click(By.xpath("//button[@id-qa='addBtn']"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
@@ -208,8 +204,8 @@ public class TrainerHelper extends HelperBase {
     }
   }
 
-  public void delete(TrainerData deletedTrainer) {
-    goUrlTrainer(deletedTrainer.getId());
+  public void delete(String idTrainer) {
+    goUrlTrainer(idTrainer);
     btnDeleteTrainer();
     alertDeleteSelectedTrainer();
     noErrorMessage();
@@ -217,7 +213,7 @@ public class TrainerHelper extends HelperBase {
 
   public void modify(TrainerData trainer) {
     bntModifyTrainer();
-    modifiTrainerForm(trainer);
+    modifyTrainerForm(trainer);
     btnSaveModify();
     noErrorMessage();
     refresh();
@@ -263,7 +259,6 @@ public class TrainerHelper extends HelperBase {
 
   private void selectLesson(String id) {
     clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href,'" + id + "')]"));
-    //  click(By.xpath("//a[contains(@href,'" + id + "')]"));
     noErrorMessage();
   }
 
@@ -280,6 +275,8 @@ public class TrainerHelper extends HelperBase {
   }
 
   private void btnFinishLesson() {
+    refresh();
+    deleteAlerts();
     clickWithMoveToElementAndWait(5, By.xpath("//button[contains(@class,'finish-lesson')]"));
     noErrorMessage();
   }
@@ -456,7 +453,7 @@ public class TrainerHelper extends HelperBase {
     click(By.xpath("//div[@data-value='1']"));
   }
 
-  private void openBranch() {
+  public void openBranch() {
     click(By.xpath("//span[@class='title-branch']"));
     if (!isElementPresent(By.xpath("//div[@class='materials-tab-item']"))) {
       click(By.xpath("//span[@class='title-branch']"));
@@ -538,5 +535,13 @@ public class TrainerHelper extends HelperBase {
 
   public void btnGoLesson(String idSchedule) {
     click(By.xpath("(//a[contains(@href,'" + idSchedule + "')])[1]"));
+  }
+
+  public void tabNew() {
+    click(By.xpath("//li[@role='new']"));
+  }
+
+  public void openBranchInTabNew() {
+    click(By.xpath("//div[contains(@class,'item-header')]"));
   }
 }

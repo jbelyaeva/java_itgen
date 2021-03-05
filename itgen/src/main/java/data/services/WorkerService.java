@@ -10,7 +10,7 @@ public class WorkerService {
   public WorkerService() {}
 
   public WorkerData DeleteById(String id) {
-    return workerDao.findByIdAndDelete(id);
+    return workerDao.deleteById(id);
   }
 
   public void save(WorkerData worker) {

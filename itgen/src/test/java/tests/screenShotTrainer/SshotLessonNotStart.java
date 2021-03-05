@@ -2,10 +2,6 @@ package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import core.general.TimeGeneral;
-import data.services.FamilyService;
-import data.services.ScheduleService;
-import data.services.StudentService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,45 +15,15 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotLessonNotStart extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  private final TimeGeneral time = new TimeGeneral();
-  private String period = "";
-
   @BeforeMethod
   public void ensurePreconditions() {
-    period = time.getPeriod(time.getTimeNow());
-    app.trScheduleToday()
-        .SingleScheduleWithOneStudentOnTrail(
-            period, "startLessonByTrainer", "23", "startLessonByTrainer", "1", "ru");
-
-    app.trFamily().newFamily("startLessonByTrainer", false, "txc");
-
-    app.trStudent()
-        .newStudent(
-            "startLessonByTrainer",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "startLessonByTrainer",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
+    data.newFamilyOnLesson().set3_StudentBeforeLesson();
   }
 
   @Test
   public void testSshotNotLessonStart() throws AWTException, IOException {
     app.trainer().gotoSchedule();
-    app.trainer().notStartLesson("startLessonByTrainer");
+    app.trainer().notStartLesson("schedule");
 
     String name = "Trainer_NotStartLesson_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -88,8 +54,6 @@ public class SshotLessonNotStart extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.drop();
-    studentService.DeleteById("startLessonByTrainer");
-    familyService.DeleteById("startLessonByTrainer");
+    data.clean().family().student().taskAndSchedule();
   }
 }

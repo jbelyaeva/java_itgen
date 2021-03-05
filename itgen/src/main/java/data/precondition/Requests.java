@@ -13,10 +13,10 @@ public class Requests extends TransactionManager {
   }
 
   //заявка на пробное скретч на 1ч
-  public void set2_requestOnScratch1hTrial() {
+  public void set2_requestOnScratch1hTrial(String id) {
     trRequest()
         .newRequest(
-            "newRequest", "666", "open", "student", "1", 1, false, true);
+            id, "666", "open", "student", "1", 1, false, true);
   }
 
   //заявка на постоянку скретч на 2ч

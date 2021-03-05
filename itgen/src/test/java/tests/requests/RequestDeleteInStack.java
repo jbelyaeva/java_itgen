@@ -32,6 +32,6 @@ public class RequestDeleteInStack extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
   }
 }

@@ -25,7 +25,7 @@ public class StudentLessonStartTest extends TestBase {
     data.schedules().set26_TodayStartSingleScheduleWithOneStudentOnTrial(period);
   }
 
-  @Test(retryAnalyzer = RunTestAgain.class)
+  @Test(retryAnalyzer = RunTestAgain.class, enabled = false)
   public void testStudentLessonStart() {
     app.check().textElement(By.xpath("//h2"), "Проверка звука и видео");
     app.lkStudent().btnCloseTutorial();
@@ -39,6 +39,6 @@ public class StudentLessonStartTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule();
+    data.clean().taskAndSchedule();
   }
 }

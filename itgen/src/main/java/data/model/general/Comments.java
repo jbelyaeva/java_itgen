@@ -1,15 +1,19 @@
 package data.model.general;
 
+import dev.morphia.annotations.Property;
 import java.util.Date;
 import java.util.Objects;
 
 public class Comments {
+
+  @Property("_id")
   private String id;
   private String owner;
   private String text;
   private Date createAt;
 
-  public Comments() {}
+  public Comments() {
+  }
 
   public Comments withId(String id) {
     this.id = id;

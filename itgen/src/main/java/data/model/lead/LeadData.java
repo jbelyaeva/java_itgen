@@ -1,13 +1,13 @@
 package data.model.lead;
 
 import com.google.gson.annotations.Expose;
+import data.model.usersGeneral.Contacts;
+import data.model.usersGeneral.Utm;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
 import dev.morphia.annotations.Property;
 import dev.morphia.annotations.Transient;
-import data.model.usersGeneral.Contacts;
-import data.model.usersGeneral.Utm;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,15 +43,26 @@ public class LeadData {
   @Property("locale")
   private String locate;
 
-  @Embedded private Utm utm;
+  @Property("note")
+  private String note;
 
-  @Embedded private List<Contacts> contacts = new ArrayList<Contacts>();
+  @Embedded
+  private Utm utm;
 
-  @Expose @Transient private String phone;
+  @Embedded
+  private List<Contacts> contacts = new ArrayList<Contacts>();
 
-  @Expose @Transient private String skype;
+  @Expose
+  @Transient
+  private String phone;
 
-  @Expose @Transient private String c2d;
+  @Expose
+  @Transient
+  private String skype;
+
+  @Expose
+  @Transient
+  private String c2d;
 
   @Expose @Transient private String viber;
 
@@ -185,6 +196,11 @@ public class LeadData {
     return this;
   }
 
+  public LeadData withNote(String note) {
+    this.note = note;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -273,10 +289,18 @@ public class LeadData {
     return utm;
   }
 
+  public String getNote() {
+    return note;
+  }
+
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     LeadData leadData = (LeadData) o;
     return Objects.equals(id, leadData.id)
         && Objects.equals(firstname, leadData.firstname)

@@ -16,7 +16,7 @@ public class RemoveStudentFromSingle2hSchedule extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.newFamilyWithSingleLessons().set2_FamilyAndSingleLesson(period);
+    data.newFamilyWithSingleLessons().set2_FamilyAndSingleLesson(period, "14");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -37,6 +37,6 @@ public class RemoveStudentFromSingle2hSchedule extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().taskAndSchedule().family().parent();
+    data.clean().student().taskAndSchedule().family().parent();
   }
 }

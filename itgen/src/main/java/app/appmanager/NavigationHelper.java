@@ -30,6 +30,10 @@ public class NavigationHelper extends HelperBase {
     clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href, '/tests')]"));
   }
 
+  public void menuSkills() {
+    clickWithMoveToElementAndWait(5, By.xpath("//a[contains(@href, '/skills')]"));
+  }
+
   public void menuLeads() {
     click(By.xpath("//a[contains(@href, '/leads')]"));
   }
@@ -62,11 +66,6 @@ public class NavigationHelper extends HelperBase {
   public void urlTasks() {
     wd.get(address() + "/tasks");
     waitVisibleElement(5, By.xpath("//div[@class='panel-footer']"));
-  }
-
-  public void urlMaterials() {
-    wd.get(address() + "/materials");
-    waitVisibleElement(5, By.xpath("//h1"));
   }
 
   public void urlCandidates() {

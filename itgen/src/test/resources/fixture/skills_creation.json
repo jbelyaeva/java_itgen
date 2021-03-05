@@ -1,0 +1,408 @@
+[
+  {
+    "id": "masvWdGAhXhmdCxCz",
+    "skillId": "1",
+    "lang": "ru",
+    "title": "Scratch",
+    "visibility": "visible",
+    "desc": "Визуальный язык программирования для начинающих. Идеально подходит, чтобы создать свои первые проекты и освоить базовые понятия: ввод-вывод, переменные, циклы, условия, списки",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    },
+    "downloadLink": "https://drive.google.com/open?id=1LK8XLAFw-sEF_7d2cqQ08NUgufWCs5LC"
+  },
+  {
+    "id": "oaArXHpwRtqFWp8xj",
+    "skillId": "1",
+    "lang": "en",
+    "title": "Scratch",
+    "visibility": "visible",
+    "desc": "Visual programming language for beginners. Ideal for creating your first projects and games and learning basic theories",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 5,
+          "state": "hidden"
+        },
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    },
+    "downloadLink": "https://drive.google.com/open?id=1LK8XLAFw-sEF_7d2cqQ08NUgufWCs5LC"
+  },
+  {
+    "id": "HXWJ2AAWqvCQEjfEr",
+    "skillId": "2",
+    "lang": "ru",
+    "title": "Python",
+    "visibility": "onlyAdmin",
+    "desc": "Язык с простым синтаксисом. Рекомендуется как первый взрослый язык для учеников, уже знакомых с базовыми понятиями программирования.",
+    "minAge": 8,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    }
+  },
+  {
+    "id": "cHTQ37pZT9TuWBmBa",
+    "skillId": "2",
+    "lang": "en",
+    "title": "Python",
+    "visibility": "onlyAdmin",
+    "desc": "A language with an easy syntax. Recommended as the first serious language for students already familiar with basic programming concepts",
+    "minAge": 8,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 8,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    }
+  },
+  {
+    "id": "Wd3XyQ6EoL9qNK7a5",
+    "skillId": "21",
+    "lang": "ru",
+    "title": "Minecraft",
+    "visibility": "visible",
+    "desc": "Ученик будет конструировать 3D миры, строить логические цепочки, получит базовые знание по решению задач на программирование и разработке проектов",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    },
+    "downloadLink": "https://drive.google.com/drive/u/0/folders/1FntRoW1PkC_Qay4pGj_NNZ55KmDv00zy",
+    "needRemindAboutLesson": true
+  },
+  {
+    "id": "7JXrk8w9sxF3hfkjW",
+    "skillId": "21",
+    "lang": "en",
+    "title": "Minecraft",
+    "visibility": "visible",
+    "desc": "The student will construct 3D worlds, build logical chains, gain basic knowledge about project development and ways to solve programming problems",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    },
+    "downloadLink": "https://drive.google.com/drive/u/0/folders/1FntRoW1PkC_Qay4pGj_NNZ55KmDv00zy",
+    "needRemindAboutLesson": true
+  },
+  {
+    "id": "bM4SGrThzEJPSR7ne",
+    "skillId": "26",
+    "lang": "ru",
+    "title": "Компьютерная грамотность",
+    "visibility": "onlyAdmin",
+    "desc": "Ученик разовьет базовые навыки, научится пользоваться мышкой и клавиатурой, переключаться между вкладками в браузере, копировать и вставлять ссылки и т.д.",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    }
+  },
+  {
+    "id": "y8sbF9MZPH9CPKudx",
+    "skillId": "26",
+    "lang": "en",
+    "title": "Computer literacy",
+    "visibility": "onlyAdmin",
+    "desc": "The student will develop basic skills, learn to use the mouse and keyboard, switch between tabs in the browser, copy and paste links, etc.",
+    "minAge": 7,
+    "requirements": {
+      "beginner": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "usual": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "advanced": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ],
+      "expert": [
+        {
+          "age": 7,
+          "state": "visible"
+        }
+      ]
+    },
+    "trialDuration": 2,
+    "payCoefficient": 1,
+    "lessonsFormats": [
+      1,
+      0
+    ],
+    "amountOfProjects": {
+      "p25": 90,
+      "p50": 50,
+      "p75": 15
+    }
+  }
+]

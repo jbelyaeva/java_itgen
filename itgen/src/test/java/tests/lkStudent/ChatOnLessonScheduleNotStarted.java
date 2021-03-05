@@ -33,6 +33,6 @@ public class ChatOnLessonScheduleNotStarted extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

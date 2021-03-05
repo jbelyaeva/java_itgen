@@ -120,10 +120,11 @@ public class RequestHelper extends HelperBase {
   }
 
   public void btnAcceptInFilter() {
-    clickWithMoveToElementAndWait(2, btnAcceptInFilter);
+    clickWithMoveToElementAndWait(3, btnAcceptInFilter);
   }
 
-  public String[] getListStudents() {
+  public String[] getListStudents() throws InterruptedException {
+    Thread.sleep(4000);
     List<WebElement> list = wd.findElements(By.xpath("//td[@class='request-child']//a"));
     String[] listUI = new String[list.size()];
     for (int i = 0; i < list.size(); i++) {

@@ -29,12 +29,13 @@ public class RequestISkillNotAvailable extends TestBase {
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testRequestRegularNotGreenIfGroupSingle() throws InterruptedException {
+  public void testRequestISkillNotAvailable() {
     app.goTo().menuStudents();
     app.student().selectStudentInListUIById("student");
     app.student().tabRequests();
     app.request().btnApply();
-    app.base().waitElementWithText(3, By.xpath("(//div[@class='filter']//div)[17]"), "Scratch");
+    app.base().refresh();
+    app.base().waitElementWithText(5, By.xpath("(//div[@class='filter']//div)[17]"), "Scratch");
     app.check().textElement(By.xpath("(//div[@class='filter']//div)[25]"), "Все");
     app.check().findElement(By.xpath("//div[@class='group-item best']"));
     //добавить проверку алерта
@@ -42,7 +43,7 @@ public class RequestISkillNotAvailable extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
+    data.clean().taskAndSchedule().student().family().parent().requests();
     data.skillsService()
         .updateField(data.skillsService().findBySkillId("2", "ru").getId(), "visibility",
             "visible");

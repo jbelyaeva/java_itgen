@@ -27,6 +27,7 @@ public class GeneralPageTransitionFromCalendarToSchedule extends TestBase {
     app.lkParent().reset();
     app.lkParent().btnSchedule();
     app.check().findElement(app.lkParent().getTabSchedule());
+    app.lkParent().foundSchedule();
     app.check().textElement(app.lkParent().getSchedulePeriodLesson(), period);
     app.check().textElement(app.lkParent().getScheduleTrainerOnLesson(),
         trainer.getLastName() + " " + trainer.getFirstName());
@@ -38,6 +39,6 @@ public class GeneralPageTransitionFromCalendarToSchedule extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student();
+    data.clean().taskAndSchedule().student();
   }
 }

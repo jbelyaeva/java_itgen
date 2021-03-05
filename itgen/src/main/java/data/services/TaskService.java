@@ -1,8 +1,6 @@
 package data.services;
 
 import data.dao.TaskDao;
-import data.model.lead.LeadData;
-import data.model.users.StudentData;
 import data.model.tasks.TaskData;
 
 public class TaskService {
@@ -12,15 +10,7 @@ public class TaskService {
   public TaskService() {}
 
   public TaskData DeleteById(String id) {
-    return taskDao.findByIdAndDeleteTask(id);
-  }
-
-  public TaskData DeleteById(StudentData student) {
-    return taskDao.findByIdAndDeleteTask(student);
-  }
-
-  public TaskData DeleteById(LeadData leadNew) {
-    return taskDao.findByIdAndDeleteTask(leadNew);
+    return taskDao.deleteById(id);
   }
 
   public void drop() {

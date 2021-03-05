@@ -44,6 +44,6 @@ public class RecordOnSingleWithTestStudentTestPassed extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().tests().taskAndSchedule();
+    data.clean().student().tests().taskAndSchedule();
   }
 }

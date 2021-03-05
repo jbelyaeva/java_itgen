@@ -10,6 +10,7 @@
             <class name="tests.materials.MaterialDelete"/>
             <class name="tests.materials.MaterialMakeReview"/>
             <class name="tests.materials.MaterialLeaveComment"/>
+            <class name="tests.materials.MaterialsLink"/>
         </classes>
     </test>
 </suite>

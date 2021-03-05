@@ -1,0 +1,83 @@
+[
+  {
+    "id": "trainer",
+    "statuses": [
+      "new",
+      "wait",
+      "process",
+      "test1",
+      "test2",
+      "analysis",
+      "interview",
+      "academy",
+      "suspend",
+      "decline",
+      "leave",
+      "success"
+    ]
+  },
+  {
+    "id": "admin",
+    "statuses": [
+      "new",
+      "wait",
+      "process",
+      "test1",
+      "analysis",
+      "interview",
+      "academy",
+      "suspend",
+      "decline",
+      "leave",
+      "success"
+    ]
+  },
+  {
+    "id": "qa",
+    "statuses": [
+      "new",
+      "wait",
+      "process",
+      "test1",
+      "analysis",
+      "interview",
+      "academy",
+      "suspend",
+      "decline",
+      "leave",
+      "success"
+    ]
+  },
+  {
+    "id": "developer",
+    "statuses": [
+      "new",
+      "wait",
+      "process",
+      "test1",
+      "analysis",
+      "interview",
+      "academy",
+      "suspend",
+      "decline",
+      "leave",
+      "success"
+    ]
+  },
+  {
+    "id": "analyst",
+    "statuses": [
+      "new",
+      "wait",
+      "process",
+      "test1",
+      "analysis",
+      "interview",
+      "academy",
+      "suspend",
+      "decline",
+      "leave",
+      "success"
+    ]
+  }
+]

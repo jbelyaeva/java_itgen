@@ -23,6 +23,7 @@
             <class name="tests.requests.RequestISkillNotAvailable"/>
             <class name="tests.requests.RequestForFrenchStudent"/>
             <class name="tests.requests.RequestFrenchLessonOnlyToFrenchTrainer"/>
+            <class name="tests.requests.RequestGreenOnTrial1hDone"/>
         </classes>
     </test>
 </suite>

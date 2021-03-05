@@ -16,7 +16,7 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void bntCreation() {
-    click(By.xpath("//button[@class='btn btn-primary btn-create']"));
+    click(By.xpath("//button[@id-qa='addBtn']"));
     noErrorMessage(); // проверка отсутствия сообщения об ошибке
   }
 
@@ -26,12 +26,14 @@ public class WorkerHelper extends HelperBase {
   }
 
   public void fillWorkerForm(WorkerData workerData) {
-    type(By.name("user-firstName"), workerData.getFirstName());
-    type(By.name("user-lastName"), workerData.getLastName());
-    type(By.name("user-email"), "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
-    type(By.name("user-phone"), workerData.getPhone());
-    type(By.name("user-slackId"), workerData.getSlack());
-    dropDownList(By.name("role"), workerData.getRoleUi());
+    type(By.xpath("//input[@id-qa='firstName']"), workerData.getFirstName());
+    type(By.xpath("//input[@id-qa='lastName']"), workerData.getLastName());
+    type(By.xpath("//input[@id-qa='email']"),
+        "eee+" + Math.round(Math.random() * 10000) + "@gmail.com");
+    type(By.xpath("//input[@id-qa='phone']"), workerData.getPhone());
+    type(By.xpath("//input[@id-qa='slackId']"), workerData.getSlack());
+    click(By.xpath("//input[@id-qa='selectRole']/..//div"));
+    click(By.xpath("//li[@data-value='employee']"));
   }
 
   public void btnAddWorker() {

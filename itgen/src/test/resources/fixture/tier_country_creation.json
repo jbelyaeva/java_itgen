@@ -1,0 +1,107 @@
+[
+  {
+    "id": "5M52SBL9cZWwakjcP",
+    "defaultTierId": "nL82AwWkJsuSmkn8w",
+    "defaultEngTierId": "RhvvsYB9buEusWhBt",
+    "groups": [
+      {
+        "countries": [
+          "GR",
+          "IL",
+          "CY",
+          "LV",
+          "LT",
+          "MT",
+          "PL",
+          "PT",
+          "SK",
+          "SI",
+          "HR",
+          "CZ",
+          "EE",
+          "EC",
+          "AR",
+          "BR",
+          "CR",
+          "CU",
+          "IN",
+          "ID",
+          "JM",
+          "LA",
+          "MY",
+          "MX",
+          "NI",
+          "PA",
+          "BO",
+          "PE",
+          "PH",
+          "PR",
+          "ZA",
+          "LK",
+          "TH",
+          "UY",
+          "VN",
+          "DO",
+          "ME"
+        ],
+        "tierId": "txb",
+        "engTierId": "RhvvsYB9buEusWhBt"
+      },
+      {
+        "countries": [
+          "ES",
+          "IT",
+          "DE",
+          "FR"
+        ],
+        "tierId": "WH8X24zmtYkDF7CWz",
+        "engTierId": "WH8X24zmtYkDF7CWz"
+      },
+      {
+        "countries": [
+          "US",
+          "CA",
+          "AU",
+          "NZ"
+        ],
+        "tierId": "txc",
+        "engTierId": "txc"
+      },
+      {
+        "tierId": "RhvvsYB9buEusWhBt",
+        "countries": [
+          "JP",
+          "KR",
+          "HK",
+          "MO",
+          "MC",
+          "QA",
+          "AE",
+          "SG",
+          "AT",
+          "AD",
+          "GB",
+          "CH",
+          "SE",
+          "DK",
+          "NO",
+          "FI",
+          "IS",
+          "IE",
+          "BE",
+          "NL",
+          "LI",
+          "LU"
+        ],
+        "engTierId": "RhvvsYB9buEusWhBt"
+      },
+      {
+        "tierId": "RHCtjnpq5oTfhKPQs",
+        "engTierId": "RhvvsYB9buEusWhBt",
+        "countries": [
+          "BY"
+        ]
+      }
+    ]
+  }
+]

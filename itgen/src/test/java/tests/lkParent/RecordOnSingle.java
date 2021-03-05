@@ -24,6 +24,7 @@ public class RecordOnSingle extends TestBase {
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testRecordOnSingle() {
+    app.lkParent().btnCloseTutorial();
     app.lkParent().btnLogo();
     Schedules before = app.dbschedules().schedules();
     app.lkParentRecord().recordOnSingle();
@@ -37,6 +38,8 @@ public class RecordOnSingle extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student();
+    data.clean()
+        .taskAndSchedule()
+        .student();
   }
 }

@@ -63,6 +63,20 @@ public class LKParentRecordHelper extends HelperBase {
       "//input[@name='assign-working-off-group']");
   private final By btnReturnFromWorkingOff = By.xpath("//button[@id-qa='return']");
   private final By labelWithoutStudents = By.xpath("//span[@class='text-info']");
+  private final By timeLessonOnConfirmTrialLesson = By.xpath("//span[@class='time']");
+  private final By checkBoxGeneralInCancelSchedule = By.xpath(
+      "//input[@id='checkbox-id-newSchedule']/following-sibling::label");
+  private final By labelNotFoundLessonsForTrial = By.xpath("//h4");
+  private final By labelNotFoundLessonsForSingle = By.xpath(
+      "//p[contains(text(),'Извините, для заданных параметров')]");
+  private final By labelNotFoundLessonsForWorkingOff = By.xpath(
+      "//p[contains(text(),'В течение недели нет свободных групп. Пожалуйста, свяжитесь с Айтигеником.')]");
+  private final By btnClosePopupWorkingOff = By.xpath("//button[contains(@class,'close')]");
+  private final By btnWorkingOffLater = By.xpath(
+      "//button[contains(@class,'btn-cancel-and-working-off')]/following-sibling::button");
+  private final By btnWorkingOffNow = By.xpath(
+      "//button[contains(@class,'btn-cancel-and-working-off')]");
+  private final By switcher = By.xpath("(//div[contains(@class,'locale-switcher')]//button)[1]");
 
   public LKParentRecordHelper(WebDriver wd) {
     super(wd);
@@ -80,6 +94,18 @@ public class LKParentRecordHelper extends HelperBase {
     return labelWithoutStudents;
   }
 
+  public By getLabelNotFoundLessonsForTrial() {
+    return labelNotFoundLessonsForTrial;
+  }
+
+  public By getLabelNotFoundLessonsForSingle() {
+    return labelNotFoundLessonsForSingle;
+  }
+
+  public By getLabelNotFoundLessonsForWorkingOff() {
+    return labelNotFoundLessonsForWorkingOff;
+  }
+
   public void btnRecordOnTrail() {
     if (!isElementPresent(btnRecordOnTrail)) {
       refresh(); // для докера
@@ -95,6 +121,23 @@ public class LKParentRecordHelper extends HelperBase {
     btnSelectSkill(idSkill);
     selectLesson();
     btnSignUp();
+  }
+
+  public int getDuration() {
+    String[] period = wd.findElement(timeLessonOnConfirmTrialLesson).getText().split(" ");
+    String[] timeFirst = period[0].split(":");
+    String[] timeSecond = period[2].split(":");
+    return Integer.parseInt(timeSecond[0]) - Integer.parseInt(timeFirst[0]);
+  }
+
+  public int getDiffHoursStart(String period) {
+    String[] periodLessonStudent = wd.findElement(timeLessonOnConfirmTrialLesson)
+        .getText()
+        .split(" ");
+    String[] timeFirst = periodLessonStudent[0].split(":");
+    String[] periodLesson = period.split(" ");
+    String[] timeFirstLesson = periodLesson[0].split(":");
+    return Integer.parseInt(timeFirst[0]) - Integer.parseInt(timeFirstLesson[0]);
   }
 
   public String goToPageInstall(int idSkill) throws InterruptedException {
@@ -140,6 +183,7 @@ public class LKParentRecordHelper extends HelperBase {
   }
 
   public void createSShotFirstForm(StudentData student) {
+    btnCloseTutorial();
     btnAddNewStudent();
     fillStudentForm(student);
   }
@@ -149,10 +193,65 @@ public class LKParentRecordHelper extends HelperBase {
   }
 
   public void fillStudentForm(StudentData studentData) {
+    waitVisibilityOfElementLocated(2, editNewStudent_firstName);
     type(editNewStudent_firstName, studentData.getFirstname());
     type(editNewStudent_lastName, studentData.getLastname());
     if (!DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
       type(editNewStudent_birthday, DateISOToUsualDataString(studentData.getBirthday()));
+    }
+    WebDriverWait wait = new WebDriverWait(wd, 3);
+    click(editNewStudent_gender);
+    String gender = "//li[@data-value='" + studentData.getGender() + "']";
+    wait.until(this.expectVisible(gender));
+    click(By.xpath(gender));
+
+    click(editNewStudent_lang);
+    String lang = "//li[@data-value='" + studentData.getStudyLang() + "']";
+    click(By.xpath(lang));
+
+    // pclevel может быть пустым, т.к. тест параметризован, в тестовых данных встречается вариант с
+    // pclaval=""
+    if (!studentData.getPclevel().equals("")) {
+      click(editNewStudent_pcLevel);
+      String pcLevel = "//li[@data-value='" + studentData.getPclevel() + "']";
+      wait.until(this.expectVisible(pcLevel));
+      clickWithMoveToElementAndWait(3, By.xpath(pcLevel));
+    }
+  }
+
+  public void fillStudent4YearsForm(StudentData studentData, String dataBirthday) {
+    waitVisibilityOfElementLocated(2, editNewStudent_firstName);
+    type(editNewStudent_firstName, studentData.getFirstname());
+    type(editNewStudent_lastName, studentData.getLastname());
+    if (!DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
+      type(editNewStudent_birthday, dataBirthday);
+    }
+    WebDriverWait wait = new WebDriverWait(wd, 3);
+    click(editNewStudent_gender);
+    String gender = "//li[@data-value='" + studentData.getGender() + "']";
+    wait.until(this.expectVisible(gender));
+    click(By.xpath(gender));
+
+    click(editNewStudent_lang);
+    String lang = "//li[@data-value='" + studentData.getStudyLang() + "']";
+    click(By.xpath(lang));
+
+    // pclevel может быть пустым, т.к. тест параметризован, в тестовых данных встречается вариант с
+    // pclaval=""
+    if (!studentData.getPclevel().equals("")) {
+      click(editNewStudent_pcLevel);
+      String pcLevel = "//li[@data-value='" + studentData.getPclevel() + "']";
+      wait.until(this.expectVisible(pcLevel));
+      clickWithMoveToElementAndWait(3, By.xpath(pcLevel));
+    }
+  }
+
+  public void fillStudent3YearsForm(StudentData studentData) {
+    waitVisibilityOfElementLocated(2, editNewStudent_firstName);
+    type(editNewStudent_firstName, studentData.getFirstname());
+    type(editNewStudent_lastName, studentData.getLastname());
+    if (!DateISOToUsualDataString(studentData.getBirthday()).equals("01.01.2000")) {
+      type(editNewStudent_birthday, DateISOToUsualDataString(DateWithCorrectionDays(-1095)));
     }
     WebDriverWait wait = new WebDriverWait(wd, 3);
     click(editNewStudent_gender);
@@ -240,7 +339,18 @@ public class LKParentRecordHelper extends HelperBase {
     btnRecord();
   }
 
+  public void recordOnIFSingle() {
+    btnCloseTutorial();
+    btnShowSchedule();
+    btnRecordOnLesson();
+    btnSingleSchedule();
+    // btnTomorrowForSingle();
+    changeScrollTime();
+    btnNext();
+  }
+
   private void changeScrollTime() {
+    btnCloseTutorial();
     type(editLeftFiltrTime, "00:00");
     type(editRightFiltrTime, "24:00");
     click(emptyAreaFiltrTime); // щелкнуть на пустое место, чтоб обновился скролл
@@ -259,6 +369,7 @@ public class LKParentRecordHelper extends HelperBase {
     btnRecordOnLesson();
     btnSingleSchedule();
     btnTomorrowForSingleSshot();
+    btnCloseTutorial();
     changeScrollTime();
   }
 
@@ -299,14 +410,34 @@ public class LKParentRecordHelper extends HelperBase {
 
   public void selfRegistration(StudentData student) throws IOException {
     if (!"".equals(properties.getProperty("selenium.server"))) {
-      click(By.xpath("(//div[contains(@class,'locale-switcher')]//button)[1]"));
+      clickWithMoveToElementAndWait(2, switcher);
     }
     fillStudentForm(student);
     btnNextOnForm();
   }
 
-  public void goHref() {
-    wd.get(address() + "/registerFromLead?leadId=selfRegistration");
+  public void selfRegistrationForStudent3Years(StudentData student) throws IOException {
+    if (!"".equals(properties.getProperty("selenium.server"))) {
+      clickWithMoveToElementAndWait(2, switcher);
+    }
+    fillStudent3YearsForm(student);
+    btnNextOnForm();
+  }
+
+  public void selfRegistrationForStudent4Years(StudentData student, String dataBirthday) {
+    if (!"".equals(properties.getProperty("selenium.server"))) {
+      clickWithMoveToElementAndWait(2, switcher);
+    }
+    fillStudent4YearsForm(student, dataBirthday);
+    btnNextOnForm();
+  }
+
+  public void goHref(String idLead) {
+    wd.get(address() + "/registerFromLead?leadId=" + idLead);
+    if (isElementPresent(By.name("username"))) {
+      refresh();
+      wd.get(address() + "/registerFromLead?leadId=" + idLead);
+    }
   }
 
   public void cancelLessonInSingleSchedule() {
@@ -337,12 +468,11 @@ public class LKParentRecordHelper extends HelperBase {
   }
 
   private void btnWorkingOffLater() {
-    click(By.xpath(
-        "//button[contains(@class,'btn-cancel-and-working-off')]/following-sibling::button"));
+    click(btnWorkingOffLater);
   }
 
   private void btnWorkingOffNow() {
-    click(By.xpath("//button[contains(@class,'btn-cancel-and-working-off')]"));
+    click(btnWorkingOffNow);
   }
 
   public void cancelLessonsInRegularSchedule() {
@@ -352,6 +482,20 @@ public class LKParentRecordHelper extends HelperBase {
     clickCheckBoxAll();
     btnDropdown();
     btnCancel();
+  }
+
+  public void cancelLessonsInRegularScheduleByCheckBox() {
+    btnShowSchedule();
+    btnCancelSchedule();
+    btnDropdown();
+    clickCheckBoxOneLessonInRegular();
+    btnDropdown();
+    clickGeneralCheckBox();
+    btnCancel();
+  }
+
+  private void clickGeneralCheckBox() {
+    click(checkBoxGeneralInCancelSchedule);
   }
 
   public void cancelOneLessonInRegularSchedule() {
@@ -531,5 +675,16 @@ public class LKParentRecordHelper extends HelperBase {
     btnRecordOnLesson();
     btnSingleSchedule();
     click(dropdownSkill);
+  }
+
+  public void recordOnIFTrail(int idSkill) {
+    skipHelper();
+    btnLogo();
+    btnRecordOnTrail();
+    btnSelectSkill(idSkill);
+  }
+
+  public void closePopupWorkingOff() {
+    click(btnClosePopupWorkingOff);
   }
 }

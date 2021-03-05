@@ -22,6 +22,9 @@ public class StudentData {
   @Property("_id")
   private String id;
 
+  @Property("className")
+  private String className;
+
   @Property("username")
   private String username;
 
@@ -115,6 +118,9 @@ public class StudentData {
 
   @Property("startStudyAt")
   private Date startStudyAt;
+
+  @Property("about")
+  private String about;
 
   @Property("materialsLang")
   private String materialsLang;
@@ -258,6 +264,11 @@ public class StudentData {
     return this;
   }
 
+  public StudentData withAbout(String about) {
+    this.about = about;
+    return this;
+  }
+
   public StudentData withMaterialsLang(String materialsLang) {
     this.materialsLang = materialsLang;
     return this;
@@ -377,6 +388,10 @@ public class StudentData {
 
   public Date getStartStudyAt() {
     return startStudyAt;
+  }
+
+  public String getAbout() {
+    return about;
   }
 
   public String getMaterialsLang() {

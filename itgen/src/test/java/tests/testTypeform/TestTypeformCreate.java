@@ -27,6 +27,7 @@ public class TestTypeformCreate extends TestBase {
     app.test().createTest(test);
     Tests after = app.dbtest().tests();
     assertThat(after.size(), equalTo(before.size() + 1));
+    app.goTo().menuTasks();
   }
 
   @AfterMethod(alwaysRun = true)

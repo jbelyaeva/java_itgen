@@ -20,7 +20,7 @@ private final String period = "19:00 - 21:00";
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testChatDialogWithTrainerWithOutBtnCall() {
+  public void testChatDialogWithTrainerWithoutBtnCall() {
     app.student().refresh();
     app.chat().btnOpenChat();
     app.chat().searchPerson("Тренер");
@@ -31,6 +31,6 @@ private final String period = "19:00 - 21:00";
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat().taskAndSchedule().student();
+    data.clean().chat().taskAndSchedule().student();
   }
 }

@@ -40,6 +40,12 @@ public class ScheduleData {
   @Property("lessonFormat")
   private int lessonFormat;
 
+  @Property("archiveReason")
+  private String archiveReason;
+
+  @Property("archived")
+  private boolean archived;
+
   public ScheduleData() {
   }
 
@@ -93,6 +99,16 @@ public class ScheduleData {
     return this;
   }
 
+  public ScheduleData withArchiveReason(String archiveReason) {
+    this.archiveReason = archiveReason;
+    return this;
+  }
+
+  public ScheduleData withArchived(boolean archived) {
+    this.archived = archived;
+    return this;
+  }
+
   public String getId() {
     return id;
   }
@@ -133,6 +149,14 @@ public class ScheduleData {
     return lessonFormat;
   }
 
+  public String getArchiveReason() {
+    return archiveReason;
+  }
+
+  public boolean isArchived() {
+    return archived;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -148,12 +172,13 @@ public class ScheduleData {
         && Objects.equals(times, that.times)
         && Objects.equals(duration, that.duration)
         && Objects.equals(wholeness, that.wholeness)
-        && Objects.equals(oneTime, that.oneTime);
+        && Objects.equals(oneTime, that.oneTime)
+        && Objects.equals(archived, that.archived);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, fromDate, slots, times, duration, wholeness, oneTime);
+    return Objects.hash(id, fromDate, slots, times, duration, wholeness, oneTime, archived);
   }
 
   @Override
@@ -169,6 +194,8 @@ public class ScheduleData {
         ", duration=" + duration +
         ", wholeness=" + wholeness +
         ", lessonFormat=" + lessonFormat +
+        ", archiveReason='" + archiveReason + '\'' +
+        ", archived=" + archived +
         '}';
   }
 }

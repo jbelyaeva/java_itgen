@@ -24,19 +24,5 @@ public class DbHelperRequest {
     RequestData request = query.find().toList().get(0);
     return request;
   }
-/*
-  public Schedules findByIdList(String id) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<ScheduleData> query = datastore.createQuery(ScheduleData.class).filter("id", id);
-    List<ScheduleData> schedules = query.find().toList();
-    return new Schedules(schedules);
-  }
-
-  public Tasks tasksComposition(String id) {
-    Datastore datastore = morphiaSessionFactoryUtil();
-    Query<TaskData> q = datastore.createQuery(TaskData.class).filter("linkUser", id);
-    List<TaskData> tasks = q.find().toList();
-    return new Tasks(tasks);
-  }*/
 
 }

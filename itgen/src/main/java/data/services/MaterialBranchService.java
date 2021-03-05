@@ -10,7 +10,7 @@ public class MaterialBranchService {
   public MaterialBranchService() {}
 
   public MaterialBranchData DeleteById(String id) {
-    return materialBranchDao.findByIdAndDelete(id);
+    return materialBranchDao.deleteById(id);
   }
 
   public void create(MaterialBranchData materialBranch) {

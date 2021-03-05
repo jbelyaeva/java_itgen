@@ -55,10 +55,23 @@ public class Schedules extends TransactionManager {
         period, "newSchedule", "14", "newStudent", "21", "ru");
   }
 
-  // сегодня разовое занятие, на которое записали ученика (Бокша, Scratch, рус)
-  public void set8_TodaySingleScheduleWithStudent(String period) {
-    trScheduleToday().SingleScheduleWithOneStudentOnTrail(
+  public void set7_1_SingleScheduleWithOneStudentRecordOnSingleOnScratch(String period) {
+    trScheduleTomorrow().SingleScheduleWithOneNewStudent(
         period, "newSchedule", "14", "newStudent", "1", "ru");
+  }
+
+  // сегодня разовое занятие, на которое записали ученика на пробное (Бокша, Scratch, рус)
+  public void set8_TodaySingleScheduleWithStudentOnTrial(String period, String idSchedule,
+      String idTrainer) {
+    trScheduleToday().SingleScheduleWithOneStudentOnTrail(
+        period, idSchedule, idTrainer, "newStudent", "1", "ru");
+  }
+
+  // сегодня разовое занятие, на которое записали ученика на пробное (Дефолтный, Scratch, рус)
+  public void set8_1_TodaySingleScheduleWithStudentOnTrial(String period, String idSchedule,
+      String idStudent) {
+    trScheduleToday().SingleScheduleWithOneStudentOnTrail(
+        period, idSchedule, "23", idStudent, "1", "ru");
   }
 
   // сегодня постоянное занятие, на которое записали нового ученика (Бокша, Scratch, рус)
@@ -207,10 +220,10 @@ public class Schedules extends TransactionManager {
   }
 
   // вчера дефолтный ребенок прошел пробное (Бокша, Scratch, рус)
-  public void set28_YesterdayDefaulStudentFinshedTrialLesson(String period) {
+  public void set28_YesterdayStudentFinishedTrialLesson(String period, String idStudent) {
     trScheduleYesterday()
         .finishingFirstTrialLesson(
-            period, "newSchedule", "14", "21", "1");
+            period, "newSchedule", "14", idStudent, "1");
   }
 
   //сегодня разовое занятие буз учеников (Бокша, руск яз, Scratch)
@@ -229,5 +242,140 @@ public class Schedules extends TransactionManager {
   public void set31_SingleIFScheduleWithoutStudents(String period) {
     trScheduleTomorrow()
         .SingleIFScheduleWithoutStudent(period, "newSchedule", "14");
+  }
+
+  // сегодня разовое занятие, на которое записали ученика (Бокша, Scratch, ФРАНЦУЗСКИЙ)
+  public void set33_TodaySingleScheduleWithFrenchStudent(String period, String id) {
+    trScheduleToday()
+        .SingleScheduleWithOneStudent(
+            period, id, "14", "newStudent", "1", "fr");
+  }
+
+  // заархивированное сегодня разовое занятие
+  public void set34_ArchivedTodaySingleSchedule(String period, String id) {
+    trScheduleToday()
+        .archivedSingleSchedule(period, id);
+  }
+
+  // заархивированное сегодня постоянное занятие
+  public void set35_ArchivedTodayRegularSchedule(String period, String id) {
+    trScheduleToday()
+        .archivedRegularSchedule(period, id);
+  }
+
+  // сегодня постоянное ИФ занят ие, на которое записали нового ученика  (1 час) (Бокша, Scratch, рус)
+  public void set36_TodayRegularScheduleWithStudentOnAllLessonsOnIF1h(String period) {
+    trScheduleToday().RegularIFScheduleWithOneNewStudentOn1h(
+        period, "newSchedule", "14", "newStudent", "1", "ru");
+  }
+
+  //завтра разовое ИФ занятие буз учеников (Бокша, руск яз, Scratch)
+  public void set37_SingleIFScheduleWithoutStudent(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .SingleIFScheduleWithoutStudent(period, "schedule", idTrainer);
+  }
+
+  //сегодня разовое
+  public void set38_FinishedSingleScheduleWithOneStudentOnTrail(String period, String idTrainer) {
+    long alreadyRun = 7200000;
+    trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "newSchedule",
+            idTrainer,
+            "student",
+            "1",
+            "ru",
+            "finished");
+    ;
+  }
+
+  public void set39_AbortSingleScheduleWithOneStudentOnTrail(String period, String idTrainer) {
+    long alreadyRun = 7200000;
+    trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "newSchedule",
+            idTrainer,
+            "student",
+            "1",
+            "ru",
+            "abort");
+    ;
+  }
+
+  public void set40_SkippedSingleScheduleWithOneStudentOnTrail(String period, String idTrainer) {
+    long alreadyRun = 7200000;
+    trScheduleToday()
+        .FinishedSingleScheduleWithOneStudentOnTrail(
+            (double) alreadyRun,
+            period,
+            "newSchedule",
+            idTrainer,
+            "student",
+            "1",
+            "ru",
+            "skipped");
+  }
+
+  //ноая семья, вчера закончено разовое занятие
+  public void set41_YesterdayFinishedSingleLesson(String period, String idTrainer, String status) {
+    trScheduleYesterday().finishedLesson(
+        period,
+        "newSchedule",
+        idTrainer,
+        "student",
+        "1",
+        1,
+        status,
+        false,
+        "oneTime",
+        false,
+        "ru",
+        120);
+  }
+
+  // Завтра разовое занятие, на которое записан новый ученик на первый час
+  public void set42_TomorrowSingleLessonWithStudentOnFirstH(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .CombinationWithOneStudentOnSingleScredule_1(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
+  }
+
+  // Завтра разовое занятие, на которое записан новый ученик на второй час
+  public void set43_TomorrowRegularLessonWithStudentOnSecondH(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .CombinationWithOneStudentOnRegularSchedule_3(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
+  }
+
+  // Завтра постоянное занятие, на которое записан новый ученик на первый час
+  public void set44_TomorrowRegularLessonWithStudentOnFirstH(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .CombinationWithOneStudentOnRegularSchedule_2(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
+  }
+
+  // Завтра постоянное занятие, на которое записан новый ученик на два часа
+  public void set45_TomorrowRegularLessonWithStudent(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .RegularScheduleWithOneNewStudent(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
+  }
+
+  // Завтра разовое занятие, на которое записан новый ученик на второй час
+  public void set46_TomorrowSingleLessonWithStudentOnSecondH(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .CombinationWithOneStudentOnSingleScredule_2(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
+  }
+
+  // Завтра пробное занятие в постоянном расписании у ученика
+  public void set47_TomorrowTrialLessonWithStudentOnRegular(String period, String idTrainer) {
+    trScheduleTomorrow()
+        .CombinationWithOneStudentOnRegularScredule_1(
+            period, "newSchedule", idTrainer, "newStudent", "1", "ru");
   }
 }

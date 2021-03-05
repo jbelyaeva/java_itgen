@@ -3,33 +3,19 @@ package tests.lkTrainer;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import data.model.users.ParentData;
-import data.model.users.StudentData;
-import data.model.users.TrainerData;
-import data.services.ChatMessageService;
-import data.services.ChatRoomService;
-import data.services.ChatSubscriptionService;
-import data.services.ParentService;
-import data.services.StudentService;
-import data.services.TrainerService;
 import app.testbase.TestBase;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TrainerChatSearchDialogWithOldFamilyTest extends TestBase {
-  StudentService studentService = new StudentService();
-  ParentService parentService = new ParentService();
-  TrainerService trainerService = new TrainerService();
-  ChatRoomService chatRoomService = new ChatRoomService();
-  ChatMessageService chatMessageService = new ChatMessageService();
-  ChatSubscriptionService chatSubscriptionService = new ChatSubscriptionService();
   String messageOld = "Привет";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    StudentData student = studentService.findById("21");
+    data.chat().set1_DialogStudentTrainer(messageOld, "21", "23");
+    data.chat().set5_DialogTrainerParent(messageOld);
+    /*StudentData student = studentService.findById("21");
     ParentData parent = parentService.findById("22");
     TrainerData trainer = trainerService.findById("23");
     Object[] usersDialog1 = new Object[2];
@@ -57,7 +43,7 @@ public class TrainerChatSearchDialogWithOldFamilyTest extends TestBase {
             "subsc1Par", new Date(), "d", "RoomParent", "22", 1, 0, "22", messageOld);
     app.trChat()
         .saveChatSubscription(
-            "subsc2Par", new Date(), "d", "RoomParent", "23", 1, 1, "22", messageOld);
+            "subsc2Par", new Date(), "d", "RoomParent", "23", 1, 1, "22", messageOld);*/
   }
 
   @Test
@@ -76,8 +62,6 @@ public class TrainerChatSearchDialogWithOldFamilyTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    chatRoomService.drop();
-    chatMessageService.drop();
-    chatSubscriptionService.drop();
+    data.clean().chat();
   }
 }

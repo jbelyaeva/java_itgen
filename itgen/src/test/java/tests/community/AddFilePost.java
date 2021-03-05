@@ -11,7 +11,6 @@ import data.model.communities.CommunitiesPosts;
 import data.model.communities.CommunityData;
 import data.services.CommunitiesService;
 import java.io.IOException;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -19,29 +18,10 @@ import org.testng.annotations.Test;
 public class AddFilePost extends TestBase {
 
   CommunitiesService communitiesService = new CommunitiesService();
-  String title = "Scratch";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -66,25 +46,7 @@ public class AddFilePost extends TestBase {
 
   private void check(Communities afterComm) {
     //проверим запись в коллекцию Communities (не изменилась)
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
     CommunityData communityAdd = communitiesService.findByIdCommunity("newCommunity");
 
     for (CommunityData communityAfter : afterComm) {
@@ -97,7 +59,6 @@ public class AddFilePost extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommPost();
+    data.clean().communities();
   }
 }

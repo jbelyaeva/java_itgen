@@ -39,6 +39,6 @@ public class GeneralPageTransitionToHistoryLesson extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().material().finishedLesson().student();
+    data.clean().taskAndSchedule().material().finishedLesson().student();
   }
 }

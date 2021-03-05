@@ -1,0 +1,318 @@
+[
+  {
+    "id": "4",
+    "username": "veronika",
+    "skills": [
+      "1"
+    ],
+    "firstName": "Вероника",
+    "startWorkAt": "2020-02-03T00:00:00.000Z",
+    "createdAt": "2021-02-17T10:05:43.692Z",
+    "langs": [
+      "ru"
+    ],
+    "contacts": [],
+    "maxSlots": 6,
+    "payBase": 2.5,
+    "timeZone": "Europe/Minsk",
+    "city": "Минск",
+    "country": "BY",
+    "roles": [
+      "employee",
+      "trainer"
+    ],
+    "locate": "ru",
+    "birthday": "1999-06-21T00:00:00.000Z",
+    "workloadLevel": "hard",
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$zpnBeVhKbQK4GT0qwyY.3O7wwRjip.Kk66rRZjkVrN/tPYKFwaPn2"
+      }
+    }
+  },
+  {
+    "id": "7",
+    "username": "yura",
+    "skills": [
+      "1",
+      "4",
+      "6"
+    ],
+    "firstName": "Юра",
+    "startWorkAt": "2020-02-03T00:00:00.000Z",
+    "createdAt": "2021-02-17T10:05:43.692Z",
+    "langs": [
+      "ru"
+    ],
+    "contacts": [],
+    "maxSlots": 6,
+    "payBase": 2.5,
+    "timeZone": "Europe/Minsk",
+    "city": "Минск",
+    "country": "BY",
+    "roles": [
+      "employee",
+      "trainer"
+    ],
+    "locate": "ru",
+    "birthday": "1999-06-21T00:00:00.000Z",
+    "workloadLevel": "hard",
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$B6dbktrsa/CtN9t30hdZMuo95zHj4r2IBzdPbGO3LlJ.5aRc.s7Ca"
+      }
+    }
+  },
+  {
+    "id": "14",
+    "username": "nboksha",
+    "skills": [
+      "1",
+      "2"
+    ],
+    "firstName": "Настя",
+    "lastName": "Бокша",
+    "startWorkAt": "2020-02-03T00:00:00.000Z",
+    "createdAt": "2021-02-17T10:05:43.692Z",
+    "langs": [
+      "ru"
+    ],
+    "contacts": [],
+    "maxSlots": 6,
+    "payBase": 2.5,
+    "timeZone": "Europe/Minsk",
+    "city": "Минск",
+    "country": "BY",
+    "roles": [
+      "employee",
+      "trainer"
+    ],
+    "locate": "ru",
+    "birthday": "1999-06-21T00:00:00.000Z",
+    "workloadLevel": "hard",
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$C5ayKAqRx/LvXHtUovTRBOR571aCpNdl0v36lrfzKjxy2KLO0Hdgy"
+      }
+    }
+  },
+  {
+    "id": "23",
+    "username": "trainer",
+    "skills": [
+      "1"
+    ],
+    "firstName": "Тренер",
+    "lastName": "Дефолтный",
+    "startWorkAt": "2020-02-03T00:00:00.000Z",
+    "createdAt": "2020-08-18T11:58:22.000Z",
+    "langs": [
+      "ru"
+    ],
+    "contacts": [
+      {
+        "type": "phone",
+        "val": "89292568795",
+        "preferred": false
+      }
+    ],
+    "maxSlots": 6,
+    "payBase": 2.5,
+    "timeZone": "Europe/Minsk",
+    "city": "Раубичи",
+    "country": "BY",
+    "roles": [
+      "employee",
+      "trainer",
+      "trainerManager",
+      "payouts.create",
+      "materials.publishMaterialsFromJson",
+      "skillsView",
+      "skillsEdit",
+      "childsTestsManagement",
+      "reports.getFavoriteTrainers"
+    ],
+    "locate": "ru",
+    "birthday": "2000-01-16T00:00:00.000Z",
+    "gender": 2,
+    "info": "",
+    "note": "",
+    "workloadLevel": "medium",
+    "lastSeen": "2020-09-07T12:15:56.000Z",
+    "lessonsCount": 0,
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$dC/F55KVdej0fT9Y20MKzevVsDAGpsEU7SQPqL99/rk8V3eKBCFQ2"
+      }
+    }
+  },
+  {
+    "id": "18",
+    "username": "astashkevich",
+    "skills": [
+      "1"
+    ],
+    "firstName": "Саша",
+    "lastName": "Сташкевич",
+    "startWorkAt": "2020-02-02T21:00:00.000Z",
+    "createdAt": "2021-01-26T08:09:41.703Z",
+    "langs": [
+      "ru"
+    ],
+    "contacts": [],
+    "maxSlots": 6,
+    "payBase": 2.5,
+    "timeZone": "Europe/Minsk",
+    "city": "Минск",
+    "country": "BY",
+    "roles": [
+      "employee",
+      "trainer"
+    ],
+    "locate": "ru",
+    "birthday": "1999-06-20T20:00:00.000Z",
+    "workloadLevel": "hard",
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$11L9glZS3jln3XmHTdNUV.PzI6Mc0ll3qV6TlJJo6KJlwUiGQguxO"
+      }
+    }
+  },
+  {
+    "id": "666",
+    "username": "superadmin",
+    "firstName": "SuperF",
+    "lastName": "AdminL",
+    "createdAt": "2021-02-17T10:05:43.479Z",
+    "contacts": [
+      {
+        "type": "viber",
+        "val": "adminViber"
+      }
+    ],
+    "roles": [
+      "employee",
+      "admin",
+      "superAdmin",
+      "trainerManager",
+      "autoTasksManagement",
+      "callAfterTrial",
+      "schedule.cancelLesson",
+      "family.changeTier",
+      "schedule.changeScheduleTime",
+      "checkPauseStatus",
+      "childsTestsManagement",
+      "createCommunities",
+      "connectWithLead",
+      "contactForPayment",
+      "create.employee",
+      "schedule.createSchedule",
+      "createTrialLesson",
+      "editTrainersInfo",
+      "payments.employeePaymentsManagement",
+      "reports.getCandidatesReport",
+      "reports.getChildIndependenceReport",
+      "reports.getChildLessonsPerWeekReport",
+      "reports.getChildSkillsCountReport",
+      "reports.getChildsLessonsReport",
+      "reports.getCompletedAutoTasksReport",
+      "reports.getDebtorFamiliesReport",
+      "reports.getFavoriteTrainers",
+      "reports.getGroupFillingReport",
+      "reports.getInsurancesReport",
+      "reports.getLeavedChildsReport",
+      "reports.getLessonsOnBalanceReport",
+      "reports.getLogsReport",
+      "reports.getMaterialsReport",
+      "reports.getNewPaidFamiliesReport",
+      "reports.getOverpaymentForNightReport",
+      "reports.getReferralSystemReport",
+      "reports.getReturnedChildsReport",
+      "reports.getRevenueReport",
+      "reports.getTrainersReport",
+      "reports.getTrialsReport",
+      "createSchedule.ignoreLimits",
+      "leaveReviewAfterNewSkill",
+      "leaveReviewAfterTrial",
+      "shop.manage",
+      "materials.publishMaterialsFromJson",
+      "referralLinkChange",
+      "remindAboutNewSkill",
+      "remindAboutTrial",
+      "remindAboutUs",
+      "remindAboutUsToCandidate",
+      "kickCandidate",
+      "remove.autoTask",
+      "remove.childparent",
+      "remove.family",
+      "remove.trainer",
+      "schedule.restoreCancelledLessons",
+      "skillsEdit",
+      "skillsView",
+      "reports.leads",
+      "whenNextLesson",
+      "whySkipsLessons",
+      "candidates.workWith",
+      "payouts.createAny",
+      "payouts.create",
+      "blockEmployee",
+      "schedule.editTrainerScheduleDST",
+      "manageBanners"
+    ],
+    "birthday": "1990-06-21T00:00:00.000Z",
+    "city": "Minsk",
+    "country": "BY",
+    "emails": [
+      {
+        "address": "superadmin@itgen.io",
+        "verified": true
+      }
+    ],
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$a7ukB790S8tQkArY9I063.0lJT0WsCDeRp/Wy7uM2Jt4qRk0Y2ZJG"
+      },
+      "resume": {
+        "loginTokens": []
+      }
+    },
+    "locate": "ru",
+    "timeZone": "Europe/Minsk",
+    "startWorkAt": "2019-05-03T00:00:00.000Z"
+  },
+  {
+    "id": "777",
+    "username": "admin",
+    "firstName": "AdminFirst",
+    "lastName": "AdminLAST",
+    "gender": 1,
+    "roles": [
+      "employee",
+      "admin"
+    ],
+    "createdAt": "2021-02-17T10:05:43.401Z",
+    "birthday": "1990-06-21T00:00:00.000Z",
+    "startWorkAt": "2019-05-03T00:00:00.000Z",
+    "city": "Minsk",
+    "country": "BY",
+    "locate": "ru",
+    "contacts": [
+      {
+        "type": "viber",
+        "val": "adminViber"
+      }
+    ],
+    "emails": [
+      {
+        "address": "admin@itgen.io",
+        "verified": true
+      }
+    ],
+    "services": {
+      "password": {
+        "bcrypt": "$2b$10$i2qRN4PE/xcaTRmGyI05FONqdFtFMOK1psTSnFwck.6vqEdDTZ5Y."
+      }
+    },
+    "timeZone": "Europe/Minsk"
+  }
+]

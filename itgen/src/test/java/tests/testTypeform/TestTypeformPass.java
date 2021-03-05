@@ -1,13 +1,7 @@
 package tests.testTypeform;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import core.general.RunTestAgain;
-import data.services.TestResultsService;
-import data.services.TestService;
 import app.testbase.TestBase;
-import java.util.Date;
+import core.general.RunTestAgain;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,33 +9,9 @@ import org.testng.annotations.Test;
 
 public class TestTypeformPass extends TestBase {
 
-  private final TestService testService = new TestService();
-  private final TestResultsService testResultsService = new TestResultsService();
-  private final Date createAt = new Date();
-  private String[] skills = null;
-
   @BeforeMethod
   public void ensurePreconditions() {
-    skills = new String[] {"1"};
-    app.trTest()
-        .saveTest(
-            "Pass",
-            "Тест",
-            "111111",
-            "ru",
-            "Test на переход на новое направление",
-            5,
-            5,
-            10,
-            skills,
-            createAt,
-            null);
-
-    testService.deleteField("Pass", "removedAt");
-
-    app.trTest()
-        .saveResultTest(
-            "TestPass", "21", "Pass", "Тест", "111111", skills, "ru", 5, 5, createAt, "", true);
+    data.tests().set8_TestPassed();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -55,9 +25,7 @@ public class TestTypeformPass extends TestBase {
     app.base().waitVisibleElement(2, By.xpath("//span[@class='score success']"));
 
     // есть кнопка Удалить и она не задизейблена
-    assertThat(
-        app.test().elementAtributAvailable(By.xpath("//button[@id-qa='delete-test']")),
-        equalTo(null));
+    app.check().onNotDisabled(By.xpath("//button[@id-qa='delete-test']"));
 
     // проверить, что есть ссылка Посмотреть ответы и она кликабельна
     app.base().waitVisibleElement(2, By.xpath("//a[@class='answers']"));
@@ -66,7 +34,6 @@ public class TestTypeformPass extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    testService.drop();
-    testResultsService.drop();
+    data.clean().tests();
   }
 }

@@ -21,13 +21,13 @@ public class TestTypeformAvailableToStudent extends TestBase {
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testTypeformAvailableToStudent() {
     app.lkStudent().goToStudentProfileTabTests();
-    app.check().elementAtributAvailable(By.xpath("//button[@id-qa='start']"));
+    app.check().onNotDisabled(By.xpath("//button[@id-qa='start']"));
     app.check().findElement(By.xpath("//span[@class='in-process']"));
     app.lkParent().btnLogo();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().tests();
+    data.clean().tests();
   }
 }

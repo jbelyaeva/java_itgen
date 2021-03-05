@@ -22,6 +22,7 @@ package tests.requests;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,7 +32,7 @@ public class RequestFilter extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     data.newFamily().set1_FamilyWithStudentAndParent();
-    data.studentService().updateFieldClass("student", "username", "user");
+    data.studentService().updateField("student", "username", "user");
     data.newFamily().set2_EngFamilyWithStudentAndParent();
     data.requests().set3_requestOnScratch2hRegular();
     data.requests().set7_requestOnPython2hSingle(2);
@@ -148,7 +149,6 @@ public class RequestFilter extends TestBase {
     app.request().btnDropdownDuration();
     app.request().select1h();
     app.request().btnAcceptInFilter();
-    Thread.sleep(3000);
     String[] etalonStudent = new String[]{"Олегов Олег"};
     String[] etalonTypeLesson = new String[]{"Разовое"};
     app.check().equalityOfTwoElements(etalonStudent, app.request().getListStudents());
@@ -173,7 +173,7 @@ public class RequestFilter extends TestBase {
     app.request().btnDropdownGender();
     app.request().selectMale();
     app.request().btnAcceptInFilter();
-    Thread.sleep(3000);
+    app.base().waitElementWithText(4, By.xpath("//p[@class='text']"), "Найдено: 1");
     String[] etalonStudent = new String[]{"Олегов Олег"};
     String[] etalonTypeLesson = new String[]{"Разовое"};
     app.check().equalityOfTwoElements(etalonStudent, app.request().getListStudents());
@@ -192,7 +192,7 @@ public class RequestFilter extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().student().family().parent().requests();
-    data.studentService().updateFieldClass("student", "username", "userName");
+    data.clean().taskAndSchedule().student().family().parent().requests();
+    data.studentService().updateField("student", "username", "userName");
   }
 }

@@ -6,7 +6,7 @@ package tests.lkStudent;
  * Проверить:
  * 1.сообщение отображается в этом чате
  * 2.и в обычном чате
- * 3.в обычном чате под тренером
+ * дошло ли сообщение с файлом до тренера проверяется в пересылке файла в обычном чате
  */
 
 import app.testbase.TestBase;
@@ -34,21 +34,19 @@ public class ChatOnLessonSendFileTrainer extends TestBase {
     app.lkStudent().btnCloseTutorialTips();
     String path = "/src/test/resources/testdata/file.jpg";
     String fileName = "file.jpg";
+    app.base().refresh();
     app.chat().sendFileByStudentInChatOnLesson("Тренер", path);
     //1
     app.check().assertTrue(app.chat().getNameFileInChatOnLesson(fileName));
     app.chat().btnOpenChat();
-    app.chat().chooseFirstWithUser();
+    app.chat().chooseSecondWithUser();
     //2
     app.check().assertTrue(app.chat().getNameFile(fileName));
-    Boolean getFile = app.chat().fileGetTrainerFromStudent("trainer", "111111", fileName, "21");
-    //3
-    app.check().equalityOfTwoElements(getFile, true);
     app.lkStudent().goToFeed();
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule().chat();
+    data.clean().taskAndSchedule().chat();
   }
 }

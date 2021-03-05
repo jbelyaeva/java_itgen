@@ -38,6 +38,6 @@ public class AddLikeToPostCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().communities();
+    data.clean().communities();
   }
 }

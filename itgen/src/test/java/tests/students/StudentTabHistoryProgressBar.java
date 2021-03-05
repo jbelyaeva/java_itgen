@@ -34,6 +34,6 @@ public class StudentTabHistoryProgressBar extends TestBase {
   @AfterMethod(alwaysRun = true)
   public void clean() {
     data.defFamily().set19_ChangeDefaultStudentInStart();
-    data.postClean().material().achievements();
+    data.clean().material().achievements();
   }
 }

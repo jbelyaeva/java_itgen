@@ -27,6 +27,6 @@ public class GeneralPageStudentYounger7years extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student();
+    data.clean().student();
   }
 }

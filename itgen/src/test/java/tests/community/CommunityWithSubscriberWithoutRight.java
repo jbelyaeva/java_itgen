@@ -4,9 +4,7 @@ package tests.community;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
-import data.services.CommunitiesService;
 import data.services.StudentService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -15,52 +13,12 @@ import org.testng.annotations.Test;
 public class CommunityWithSubscriberWithoutRight extends TestBase {
 
   StudentService studentService = new StudentService();
-  CommunitiesService communitiesService = new CommunitiesService();
-  String title = "Scratch";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trFamily().newFamily("newStudent", false, "EuxjfWpTMbxtGMb2j");
-
-    app.trStudent()
-        .newStudent(
-            "newStudent",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "recordStudent",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
-    studentService.updateField("newStudent", "roles", new String[]{"child"});
-
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666", "newStudent"};
-    Date[] dateSubsc = {new Date(), new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            2,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.newFamily().set1_FamilyWithStudentAndParent();
+    studentService.updateArrayField("student", "roles", new String[]{"child"});
+    data.community().set13_CommunityWithSubscriber("student");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -72,6 +30,6 @@ public class CommunityWithSubscriberWithoutRight extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
+    data.clean().communities();
   }
 }

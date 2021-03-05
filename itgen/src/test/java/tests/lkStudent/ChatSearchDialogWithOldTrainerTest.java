@@ -31,6 +31,6 @@ public class ChatSearchDialogWithOldTrainerTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat();
+    data.clean().chat();
   }
 }

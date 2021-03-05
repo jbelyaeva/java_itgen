@@ -16,7 +16,8 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-  data.newFamilyWithRegularLessons().set1_FamilyAndRegularLesson(period);
+    data.clean().parent();
+    data.newFamilyWithRegularLessons().set1_FamilyAndRegularLesson(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -37,6 +38,6 @@ public class RecordStudentOnRegular2hScheduleTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-   data.postClean().student().parent().taskAndSchedule();
+   data.clean().student().parent().taskAndSchedule();
   }
 }

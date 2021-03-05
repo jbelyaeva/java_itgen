@@ -14,7 +14,7 @@ public class LeadService {
   }
 
   public void DeleteById(String id) {
-    leadDao.findByIdAndDelete(id);
+    leadDao.deleteById(id);
   }
 
   public LeadData DeleteById(LeadData lead) {
@@ -27,5 +27,8 @@ public class LeadService {
 
   public LeadData findById(String id) {
     return leadDao.findById(id);
+  }
+
+  public void drop() {
   }
 }

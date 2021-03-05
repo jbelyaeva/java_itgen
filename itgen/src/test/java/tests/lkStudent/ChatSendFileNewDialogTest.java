@@ -34,6 +34,7 @@ public class ChatSendFileNewDialogTest extends TestBase {
 
     String path = "/src/test/resources/testdata/file.jpg";
     String fileName = "file.jpg";
+    app.base().refresh();
     app.chat().sendFileByStudent("Тренер", path);
     Thread.sleep(4000); // не успевает сохраниться информация о файле в бд
     Boolean getFile = app.chat().fileGetTrainerFromStudent("trainer", "111111", fileName, "21");
@@ -49,6 +50,6 @@ public class ChatSendFileNewDialogTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat().taskAndSchedule();
+    data.clean().chat().taskAndSchedule();
   }
 }

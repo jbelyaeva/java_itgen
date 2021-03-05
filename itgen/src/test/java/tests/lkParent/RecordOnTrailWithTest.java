@@ -32,6 +32,6 @@ public class RecordOnTrailWithTest extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().tests();
+    data.clean().student().tests();
   }
 }

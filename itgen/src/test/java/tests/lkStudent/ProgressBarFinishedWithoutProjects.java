@@ -30,7 +30,10 @@ public class ProgressBarFinishedWithoutProjects extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().achievements();
+    data.clean().material().achievements();
     data.defFamily().set19_ChangeDefaultStudentInStart();
+    app.base().goByHref(app.base().address() + "/login");
+    app.student()
+        .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
   }
 }

@@ -7,6 +7,8 @@ import data.model.communities.CommunityData;
 import data.model.family.FamilyDataUI;
 import data.model.lead.LeadData;
 import data.model.materials.MaterialData;
+import data.model.skills.SkillsData;
+import data.model.tasks.TaskData;
 import data.model.typeform.TestData;
 import data.model.users.ParentData;
 import data.model.users.StudentData;
@@ -66,6 +68,69 @@ public class LocaleUtilsTestData {
           gson.fromJson(json, new TypeToken<List<CandidateData>>() {
           }.getType());
       return candidate.stream()
+          .map((s) -> new Object[]{s})
+          .collect(Collectors.toList())
+          .iterator();
+    }
+  }
+
+  @DataProvider(name = "validAddTestFromJson")
+  public Iterator<Object[]> validAddTestFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader("src/test/resources/testdata/tests_whichAdd.json"))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
+      }.getType());
+      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider(name = "validTaskFromJson")
+  public static Iterator<Object[]> validTaskFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader("src/test/resources/testdata/task_creation.json"))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<TaskData> task =
+          gson.fromJson(json, new TypeToken<List<TaskData>>() {
+          }.getType());
+      return task.stream()
+          .map((t) -> new Object[]{t})
+          .collect(Collectors.toList())
+          .iterator();
+    }
+  }
+
+  @DataProvider(name = "validPictureCommunityFromJson")
+  public Iterator<Object[]> validPictureCommunityFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/community_creation_picture.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<CommunityData> community =
+          gson.fromJson(json, new TypeToken<List<CommunityData>>() {
+          }.getType());
+      return community.stream()
           .map((s) -> new Object[]{s})
           .collect(Collectors.toList())
           .iterator();
@@ -197,6 +262,67 @@ public class LocaleUtilsTestData {
               json, new TypeToken<List<WorkerData>>() {
               }.getType()); // List<WorkerData>.class
       return workers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider(name = "validWorkersCreateFromJson")
+  public Iterator<Object[]> validWorkersCreateFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/workers_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers =
+          gson.fromJson(
+              json, new TypeToken<List<WorkerData>>() {
+              }.getType()); // List<WorkerData>.class
+      return workers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validWorkersAdminsFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/workers_admins_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<WorkerData> workers =
+          gson.fromJson(
+              json, new TypeToken<List<WorkerData>>() {
+              }.getType()); // List<WorkerData>.class
+      return workers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider
+  public Iterator<Object[]> validTrainersCreateFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/workers_trainers_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<TrainerData> trainers =
+          gson.fromJson(
+              json, new TypeToken<List<TrainerData>>() {
+              }.getType()); // List<TrainerData>.class
+      return trainers.stream().map((w) -> new Object[]{w}).collect(Collectors.toList()).iterator();
     }
   }
 
@@ -360,6 +486,29 @@ public class LocaleUtilsTestData {
     }
   }
 
+  @DataProvider(name = "validCreateLinkMaterialLkTrainerFromJson")
+  public Iterator<Object[]> validCreateLinkMaterialLkTrainerFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(
+                new File("src/test/resources/testdata/trainer_materiallink_creation_lk.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<MaterialData> materials =
+          gson.fromJson(json, new TypeToken<List<MaterialData>>() {
+          }.getType());
+      return materials.stream()
+          .map((s) -> new Object[]{s})
+          .collect(Collectors.toList())
+          .iterator();
+    }
+  }
+
   @DataProvider(name = "validMaterialFromJson")
   public Iterator<Object[]> validMaterialFromJson() throws IOException {
     try (BufferedReader reader =
@@ -494,6 +643,24 @@ public class LocaleUtilsTestData {
       }
       Gson gson = new Gson();
       List<TestData> tests = gson.fromJson(json, new TypeToken<List<TestData>>() {
+      }.getType());
+      return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @DataProvider(name = "validDataCreateSkillFromJson")
+  public Iterator<Object[]> validDataCreateSkillFromJson() throws IOException {
+    try (BufferedReader reader =
+        new BufferedReader(
+            new FileReader(new File("src/test/resources/testdata/skill_creation.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<SkillsData> tests = gson.fromJson(json, new TypeToken<List<SkillsData>>() {
       }.getType());
       return tests.stream().map((p) -> new Object[]{p}).collect(Collectors.toList()).iterator();
     }

@@ -33,6 +33,6 @@ public class HistoryAllSkill extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().finishedLesson().finishedLesson().taskAndSchedule().student();
+    data.clean().finishedLesson().finishedLesson().taskAndSchedule().student();
   }
 }

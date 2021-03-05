@@ -9,9 +9,13 @@ import java.util.Objects;
 
 @Entity("materials-perms")
 public class MaterialPermsData {
+
   @Id
   @Property("_id")
   private String id;
+
+  @Property("className")
+  private String className;
 
   @Property("perms")
   private List<String> perms = new ArrayList<>();

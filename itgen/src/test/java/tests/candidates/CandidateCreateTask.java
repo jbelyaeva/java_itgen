@@ -11,7 +11,6 @@ import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.CandidateService;
 import data.services.TaskService;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -25,124 +24,36 @@ public class CandidateCreateTask extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-
-    app.trCandidate()
-        .saveCandidate(
-            "CreateTask",
-            "Света",
-            "Светина",
-            "Sveta",
-            "Svetina",
-            app.base().DateWithCorrectionDays(-7300),
-            1,
-            "test1",
-            "trainer",
-            "AM",
-            "City",
-            "Europe/Monaco",
-            "ru",
-            "Хороший кандидат, плохой кандидат",
-            "Очень много говорит",
-            "14",
-            "http://www.yandex.ru",
-            "http://www.yandex.ru",
-            "1111111111",
-            "mail@mail.com",
-            "+56756756756",
-            "+79896667845",
-            "111111111111111",
-            "+5674545453",
-            "+9998764534",
-            "+00078566664",
-            "+890000066432",
-            "0000000000000",
-            "010101010101",
-            "cat",
-            "key",
-            null,
-            "good",
-            "mother");
+  data.candidates().set1_newCandidate("trainer", "test1");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
   public void testCandidateCreateTask() {
     app.goTo().menuCandidates();
-
     Candidates before = app.dbcandidates().candidates();
     Tasks beforeTask = app.dbtasks().tasks();
-
     app.cantidate().createTask(title);
     app.goTo().menuTasks();
-
     Candidates after = app.dbcandidates().candidates();
     Tasks afterTask = app.dbtasks().tasks();
-
     assertThat(after.size(), equalTo(before.size()));
     newTask = app.dbtasks().lastTask();
-
     assertThat(afterTask.size(), equalTo(beforeTask.size() + 1));
     check(after, afterTask);
   }
 
   private void check(Candidates after, Tasks afterTask) {
-    app.trCandidate()
-        .saveCandidate(
-            "CreateTask",
-            "Света",
-            "Светина",
-            "Sveta",
-            "Svetina",
-            app.base().DateWithCorrectionDays(-7300),
-            1,
-            "test1",
-            "trainer",
-            "AM",
-            "City",
-            "Europe/Monaco",
-            "ru",
-            "Хороший кандидат, плохой кандидат",
-            "Очень много говорит",
-            "14",
-            "http://www.yandex.ru",
-            "http://www.yandex.ru",
-            "1111111111",
-            "mail@mail.com",
-            "+56756756756",
-            "+79896667845",
-            "111111111111111",
-            "+5674545453",
-            "+9998764534",
-            "+00078566664",
-            "+890000066432",
-            "0000000000000",
-            "010101010101",
-            "cat",
-            "key",
-            null,
-            "good",
-            "mother");
-    CandidateData candidateAdd = candidateService.findById("CreateTask");
+    data.candidates().set1_newCandidate("trainer", "test1");
+    CandidateData candidateAdd = candidateService.findById("candidate");
 
     for (CandidateData candidateAfter : after) {
-      if (candidateAfter.getId().equals("CreateTask")) {
+      if (candidateAfter.getId().equals("candidate")) {
         assertThat(after, equalTo(after.without(candidateAfter).withAdded(candidateAdd)));
         return;
       }
     }
-
-    app.trTask()
-        .newManualTask(
-            newTask.getId(),
-            "666",
-            "666",
-            title,
-            1,
-            new Date(),
-            "open",
-            new Date(),
-            new Date().getTime(),
-            null);
-    taskService.updateField(newTask.getId(), "linkCandidate", "CreateTask");
+    data.tasksManual().set1_newManualTaskCandidate("Связаться с кандидатом", "open");
+    taskService.updateField(newTask.getId(), "linkCandidate", "candidate");
     TaskData taskAdd = taskService.findById(newTask.getId());
 
     for (TaskData task : afterTask) {

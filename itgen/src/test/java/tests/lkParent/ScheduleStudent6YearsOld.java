@@ -28,6 +28,6 @@ public class ScheduleStudent6YearsOld extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.studentService().DeleteById("newStudent");
+    data.studentService().deleteById("newStudent");
   }
 }

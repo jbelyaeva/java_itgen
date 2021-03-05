@@ -3,12 +3,11 @@ package tests.taskPopup;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.model.tasks.TaskData;
 import data.model.tasks.Tasks;
 import data.services.TaskService;
-import app.testbase.TestBase;
-import java.util.Date;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,29 +16,11 @@ public class TaskManualChangeAssignee extends TestBase {
 
   private final TaskService taskService = new TaskService();
   private TaskData taskClean = null;
-  private final Date createAt = new Date();
-  private final Date duoDateWithTime = new Date();
-  private final long duoDateSort = new Date().getTime();
-  private final Date[] dates = null;
-  private final String[] texts = null;
-  private final String[] clients = null;
-  private final String[] commentaries = null;
-
   @BeforeMethod
   public void ensurePreconditions() {
-    taskService.drop();
-    app.trTask()
-        .newManualTask(
-            "PopupChangeAssigneeTask",
-            "777",
-            "666",
-            "Записать на пробное",
-            1,
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            "21");
+    data.clean().taskAndSchedule();
+    data.tasksManual()
+        .set6_newManualTaskCreatorAdminAssigneeSuper("task", "Записать на пробное", "open", "21");
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -55,24 +36,7 @@ public class TaskManualChangeAssignee extends TestBase {
   }
 
   private void check(Tasks after) {
-    app.trTask()
-        .saveManualTask(
-            "PopupChangeAssigneeTask",
-            "Записать на пробное",
-            createAt,
-            "open",
-            duoDateWithTime,
-            duoDateSort,
-            "23",
-            "21",
-            "777",
-            "666",
-            1,
-            dates,
-            texts,
-            clients,
-            commentaries,
-            "newTask_changeAssignee");
+    data.tasksManual().set14_ManualTaskChangeAssignee("Записать на пробное", "open", "21", "23");
 
     TaskData taskAdd = taskService.findById(taskClean.getId());
 
@@ -86,6 +50,6 @@ public class TaskManualChangeAssignee extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    taskService.drop();
+    data.clean().taskAndSchedule();
   }
 }

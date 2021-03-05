@@ -44,7 +44,7 @@ public class AddNewStudent extends TestBase {
     if (studentClean == null) {
       return;
     }
-    data.studentService().DeleteById(studentClean);
-    data.postClean().taskAndSchedule();
+    data.studentService().deleteById(studentClean.getId());
+    data.clean().taskAndSchedule();
   }
 }

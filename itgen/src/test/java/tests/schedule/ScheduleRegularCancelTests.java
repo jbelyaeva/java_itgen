@@ -36,6 +36,6 @@ public class ScheduleRegularCancelTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().taskAndSchedule();
+    data.clean().taskAndSchedule();
   }
 }

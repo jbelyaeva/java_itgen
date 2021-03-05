@@ -13,7 +13,6 @@ import data.model.communities.CommunitiesPostData;
 import data.model.communities.CommunitiesPosts;
 import data.model.communities.CommunityData;
 import data.services.CommunitiesService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,45 +22,11 @@ public class ModificationTextPost extends TestBase {
 
   CommunitiesPostData newPost = null;
   CommunitiesService communitiesService = new CommunitiesService();
-  String title = "Scratch";
-  String text = "Ученик созванивается с преподавателем";
   String newText = "Новый текст";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "ModifyPost",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
-
-    String[] idLikes = {};
-    String[] idAttachments = {};
-    app.trCommunity()
-        .newCommunityPost(
-            "ModifyPost",
-            text,
-            "ModifyPost",
-            true,
-            new Date(),
-            idLikes,
-            0,
-            "666",
-            idAttachments);
+    data.community().set14_CommunityWithPost();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -83,48 +48,19 @@ public class ModificationTextPost extends TestBase {
 
   private void check(Communities afterComm, CommunitiesPosts afterPost) {
     //проверим запись в коллекцию Communities (не изменилась)
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "ModifyPost",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
-    CommunityData communityAdd = communitiesService.findByIdCommunity("ModifyPost");
+    //супером создано новое сообщестов без тегов
+    data.community().set6_NewCommunity();
+    CommunityData communityAdd = communitiesService.findByIdCommunity("newCommunity");
 
     for (CommunityData communityAfter : afterComm) {
-      if (communityAfter.getId().equals("ModifyPost")) {
+      if (communityAfter.getId().equals("newCommunity")) {
         assertThat(afterComm, equalTo(afterComm.without(communityAfter).withAdded(communityAdd)));
         return;
       }
     }
-    //проверим запись в коллекцию CommunitiesPosts (добавилась)
-    String[] idLikes = {};
-    String[] idAttachments = {};
-    app.trCommunity()
-        .newCommunityPost(
-            "ModifyPost",
-            newText,
-            "ModifyPost",
-            true,
-            new Date(),
-            idLikes,
-            0,
-            "666",
-            idAttachments);
-    CommunitiesPostData communityPostAdd = communitiesService.findByIdCommPost("ModifyPost");
+
+    data.community().set6_NewPost("newPost", newText);
+    CommunitiesPostData communityPostAdd = communitiesService.findByIdCommPost("newPost");
 
     for (CommunitiesPostData communityPostAfter : afterPost) {
       if (communityPostAfter.getId().equals(newPost.getId())) {
@@ -137,7 +73,6 @@ public class ModificationTextPost extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommPost();
+    data.clean().communities();
   }
 }

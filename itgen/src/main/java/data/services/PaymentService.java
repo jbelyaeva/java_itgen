@@ -10,7 +10,7 @@ public class PaymentService {
   public PaymentService() {}
 
   public PaymentData DeleteById(String id) {
-    return paymentDao.findByIdAndDelete(id);
+    return paymentDao.deleteById(id);
   }
 
   public void create(PaymentData payment) {

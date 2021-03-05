@@ -9,6 +9,9 @@
     "sourceLink": "https://docs.google.com",
     "projectLink": "https://docs.google.com",
     "desc": "Развивает внимательность",
-    "level": "easy"
+    "level": "easy",
+    "creator": "23",
+    "status": "checking",
+    "branch": "CreateNewMaterial"
   }
 ]

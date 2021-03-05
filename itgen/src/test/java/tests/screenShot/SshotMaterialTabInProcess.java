@@ -26,23 +26,7 @@ public class SshotMaterialTabInProcess extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trMaterial().newMaterialBranch("1", "CreateNewMaterial", "Scratch");
-    app.trMaterial()
-        .newMaterial(
-            "MaterialTabInProcess",
-            "666",
-            "Жуки",
-            "checking",
-            "1",
-            "CreateNewMaterial",
-            "video",
-            "easy",
-            "ru",
-            "adaptation",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "https://docs.google.com",
-            "Развивает внимательность");
+    data.materials().set1_newMaterial("14");
   }
 
   @Test()

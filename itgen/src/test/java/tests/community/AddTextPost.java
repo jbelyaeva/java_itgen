@@ -11,7 +11,6 @@ import data.model.communities.CommunitiesPostData;
 import data.model.communities.CommunitiesPosts;
 import data.model.communities.CommunityData;
 import data.services.CommunitiesService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,31 +20,12 @@ public class AddTextPost extends TestBase {
 
   CommunitiesPostData newPost = null;
   CommunitiesService communitiesService = new CommunitiesService();
-  String title = "Scratch";
   String text = "Ученик созванивается с преподавателем в своем "
       + "личном кабинете в оговоренное время и транслирует ему свой экран.";
 
   @BeforeMethod
   public void ensurePreconditions() {
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -68,27 +48,8 @@ public class AddTextPost extends TestBase {
 
   private void check(Communities afterComm, CommunitiesPosts afterPost) {
     //проверим запись в коллекцию Communities (не изменилась)
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills = {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.community().set6_NewCommunity();
     CommunityData communityAdd = communitiesService.findByIdCommunity("newCommunity");
-
     for (CommunityData communityAfter : afterComm) {
       if (communityAfter.getId().equals("newCommunity")) {
         assertThat(afterComm, equalTo(afterComm.without(communityAfter).withAdded(communityAdd)));
@@ -96,19 +57,7 @@ public class AddTextPost extends TestBase {
       }
     }
     //проверим запись в коллекцию CommunitiesPosts (добавилась)
-    String[] idLikes = {};
-    String[] idAttachments = {};
-    app.trCommunity()
-        .newCommunityPost(
-            newPost.getId(),
-            text,
-            "newCommunity",
-            true,
-            new Date(),
-            idLikes,
-            0,
-            "666",
-            idAttachments);
+    data.community().set6_NewPost(newPost.getId(), text);
     CommunitiesPostData communityPostAdd = communitiesService.findByIdCommPost(newPost.getId());
 
     for (CommunitiesPostData communityPostAfter : afterPost) {
@@ -122,7 +71,6 @@ public class AddTextPost extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    communitiesService.dropCommunity();
-    communitiesService.dropCommPost();
+    data.clean().communities();
   }
 }

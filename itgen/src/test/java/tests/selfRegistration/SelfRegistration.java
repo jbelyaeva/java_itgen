@@ -1,5 +1,5 @@
 package tests.selfRegistration;
-/*кейс:
+/*Т-330 кейс:
 1. Нужно добавить родителя лида под суперадмином
 2. Взять его id
 3. Вставить в ссылку на саморегистрацию
@@ -38,7 +38,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SelfRegistration extends TestBase {
-
+  private String id = "selfRegistration";
   LeadService leadService = new LeadService();
   TaskService taskService = new TaskService();
   ParentService parentService = new ParentService();
@@ -51,21 +51,7 @@ public class SelfRegistration extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-
-    app.trLead()
-        .leadParent(
-            "selfRegistration",
-            "Лид",
-            "Лидов",
-            "parent",
-            "BY",
-            "Europe/Minsk",
-            "ru",
-            "+7859561122",
-            "mail@list.ru",
-            "new",
-            "site",
-            "manual");
+   data.leads().set1_leadParent(id);
   }
 
   @Test(dataProvider = "validSelfRegistrationFromJson", dataProviderClass = LocaleUtilsTestData.class,
@@ -78,7 +64,7 @@ public class SelfRegistration extends TestBase {
     Parents parentsBefore = app.db().parents();
     Families familyBefore = app.db().families();
 
-    app.lkParentRecord().goHref();
+    app.lkParentRecord().goHref(id);
     app.lkParentRecord().selfRegistration(student);
 
     Thread.sleep(5000); // необходимо, т.к. не успевает сформироваться токен в бд
@@ -86,6 +72,7 @@ public class SelfRegistration extends TestBase {
     ParentData parent = app.db().getTokenParent("Лид", "Лидов", "parent");
     String token = parent.getServices().getPassword().getReset().getToken();
     app.lkParentRecord().activation(token);
+    app.base().goByHref(app.base().address() + "/login");
     app.session()
         .login(properties.getProperty("web.Login"), properties.getProperty("web.Password"));
 
@@ -109,33 +96,15 @@ public class SelfRegistration extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    leadService.DeleteById(leadService.findById("selfRegistration"));
-    studentService.DeleteById(studentClean.getId());
+    leadService.DeleteById(leadService.findById(id));
+    studentService.deleteById(studentClean.getId());
     parentService.DeleteById(parentClean.getId());
     familyService.DeleteById(familyClean.getId());
     taskService.drop();
   }
 
   private void checkStudent(Students before, Students after, StudentData student) {
-    app.trStudent()
-        .newStudent(
-            studentClean.getId(),
-            student.getFirstname(),
-            student.getLastname(),
-            "expert",
-            "BL",
-            familyClean.getId(),
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
-
+    data.newFamily().set5_NewStudentFromObject(studentClean.getId(), familyClean.getId(), student);
     StudentData studentAdd = studentService.findById(studentClean.getId());
     for (StudentData studentBefore : before) {
       if (studentBefore.getId().equals(studentClean.getId())) {
@@ -146,18 +115,7 @@ public class SelfRegistration extends TestBase {
   }
 
   private void checkParent(Parents before, Parents after) {
-    app.trParent()
-        .newParent(
-            parentClean.getId(),
-            "Лид",
-            "Лидов",
-            "BY",
-            "Europe/Minsk",
-            "ru",
-            familyClean.getId(),
-            "123456789",
-            "mail@list.ru",
-            true);
+    data.newFamily().set6_NewParent(parentClean.getId(), familyClean.getId());
     ParentData parentAdd = parentService.findById(parentClean.getId());
     for (ParentData parentBefore : before) {
       if (parentBefore.getId().equals(parentClean.getId())) {
@@ -168,24 +126,10 @@ public class SelfRegistration extends TestBase {
   }
 
   private void checkLead(Leads before, Leads after) {
-    app.trLead()
-        .leadParent(
-            "selfRegistration",
-            "Лид",
-            "Лидов",
-            "parent",
-            "BY",
-            "Europe/Minsk",
-            "ru",
-            "+7859561122",
-            "mail@list.ru",
-            "success",
-            "site",
-            "manual");
-
-    LeadData leadAdd = leadService.findById("selfRegistration");
+    data.leads().set1_leadParent(id);
+    LeadData leadAdd = leadService.findById(id);
     for (LeadData leadBefore : before) {
-      if (leadBefore.getId().equals("selfRegistration")) {
+      if (leadBefore.getId().equals(id)) {
         assertThat(after, equalTo(before.without(leadBefore).withAdded(leadAdd)));
         return;
       }

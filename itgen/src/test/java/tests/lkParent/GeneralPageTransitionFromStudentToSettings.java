@@ -4,6 +4,7 @@ package tests.lkParent;
 
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class GeneralPageTransitionFromStudentToSettings extends TestBase {
@@ -20,6 +21,10 @@ public class GeneralPageTransitionFromStudentToSettings extends TestBase {
     app.check().textElement(app.lkParent().getLabelLoginAndPassword(), "Логин и пароль ученика");
     app.check().textElement(app.lkParent().getLabelHowToJoinInstruction(),
         "Как зайти в личный кабинет ученика:");
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void clean() {
     app.lkParent().btnLogo();
   }
 }

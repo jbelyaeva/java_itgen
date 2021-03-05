@@ -32,6 +32,6 @@ public class HistoryProgressBar extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().material().achievements().student().taskAndSchedule().finishedLesson();
+    data.clean().material().achievements().student().taskAndSchedule().finishedLesson();
   }
 }

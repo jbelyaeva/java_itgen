@@ -78,29 +78,12 @@ public class ParentHelper extends HelperBase {
     submitParentCreation();
   }
 
-  public String createWithUrl(ParentData parent) {
-    selectStudent();
-    btnSelectFamily();
-    addParentInFamily();
-    fillParentForm(parent);
-    submitParentCreation();
-    selectParentInFamily();
-    String url = getURL();
-    return url;
-  }
-
   public void delete() {
     btnFamily();
     selectParentInFamily();
     btnDeleteParent();
     alertDeleteSelectedParent();
     noErrorMessage();
-  }
-
-  public void modifyNewParent(ParentData parent) {
-    btnModificationParent();
-    ModifyParentForm(parent);
-    btnSaveModify();
   }
 
   public void modify(ParentData parent) {

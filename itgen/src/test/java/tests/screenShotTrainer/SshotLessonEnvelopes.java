@@ -2,10 +2,6 @@ package tests.screenShotTrainer;
 
 import app.appmanager.ApplicationManager;
 import app.testbase.TestBase;
-import core.general.TimeGeneral;
-import data.services.FamilyService;
-import data.services.ScheduleService;
-import data.services.StudentService;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,44 +15,15 @@ import ru.yandex.qatools.ashot.comparison.ImageDiff;
 
 public class SshotLessonEnvelopes extends TestBase {
 
-  ScheduleService scheduleService = new ScheduleService();
-  StudentService studentService = new StudentService();
-  FamilyService familyService = new FamilyService();
-  private final TimeGeneral time = new TimeGeneral();
-  private String period = "";
-
   @BeforeMethod
   public void ensurePreconditions() {
-    period = time.getPeriod(time.getTimeNow());
-    app.trScheduleToday()
-        .SingleScheduleWithOneStudentOnTrail(period, "envelope", "23", "envelop", "1", "ru");
-
-    app.trFamily().newFamily("envelop", false, "txc");
-
-    app.trStudent()
-        .newStudent(
-            "envelop",
-            "Маша",
-            "Машина",
-            "expert",
-            "BL",
-            "envelop",
-            "Europe/Minsk",
-            2,
-            app.base().DateWithCorrectionDays(-3650),
-            "ru",
-            "ru",
-            "12345678i",
-            "ru",
-            new String[]{"1"},
-            2,
-            "noTrial");
+   data.newFamilyOnLesson().set3_StudentBeforeLesson();
   }
 
   @Test
   public void testSshotLessonEnvelopes() throws AWTException, IOException {
     app.trainer().gotoSchedule();
-    app.trainer().envelopes("envelop");
+    app.trainer().envelopes("schedule");
 
     String name = "Trainer_LessonEnvelopes_RU_Chrome";
     Set<By> locatorIgnor = new HashSet<>();
@@ -89,8 +56,6 @@ public class SshotLessonEnvelopes extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    scheduleService.drop();
-    studentService.DeleteById("envelop");
-    familyService.DeleteById("envelop");
+    data.clean().family().student().taskAndSchedule();
   }
 }

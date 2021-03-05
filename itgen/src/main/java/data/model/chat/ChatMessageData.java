@@ -23,6 +23,9 @@ public class ChatMessageData {
   @Property("text")
   private String text;
 
+  @Property("removedAt")
+  private Date removedAt;
+
   @Embedded
   private User user;
 
@@ -72,6 +75,10 @@ public class ChatMessageData {
 
   public User getUser() {
     return user;
+  }
+
+  public Date getRemovedAt() {
+    return removedAt;
   }
 
   @Override

@@ -3,15 +3,17 @@
 <suite name="Suite1" verbose="1" >
     <test name="WindowsSchedule">
         <classes>
-            <class name="tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests" />
-            <class name="tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests" />
+            <class name="tests.scheduleWindow.WindowRecordStudentOnRegular2hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnRegularFirst1hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnRegularSecond1hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnSingle2hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnSingleFirst1hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnSingleSecond1hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordFreeStudentOnRegular2hScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordStudentOnTrialInRegularScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecordFreeStudentOnTrialScheduleTests"/>
+            <class name="tests.scheduleWindow.WindowRecord1hTrialVisualization"/>
+            <class name="tests.scheduleWindow.WindowRecord1hTrialFirstHour"/>
         </classes>
     </test>
 </suite>

@@ -14,7 +14,7 @@ public class ParentService {
   }
 
   public ParentData DeleteById(String id) {
-    return parentDao.findByIdAndDelete(id);
+    return parentDao.deleteById(id);
   }
 
   public ParentData findById(String id) {

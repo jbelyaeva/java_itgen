@@ -16,33 +16,38 @@ public class ChatModifyMessageTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().chat();
-    String messageOld = "Привет";
-    data.chat().set1_DialogStudentTrainer(messageOld, "21", "23");
+    String period = "21.00 : 23.00";
+    data.clean().chat().taskAndSchedule();
+    data.defFamily().set22_SingleLessonTomorrowWithDefaultStudent(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testChatModifyMessage() {
+  public void testChatModifyMessage() throws InterruptedException {
+    String messageOld = "Привет";
     String messageNew = "Пока";
     ChatMessages beforeMessage = app.dbchat().chatMessages();
     ChatRooms beforeRooms = app.dbchat().chatRooms();
     ChatSubscriptions beforeSubscription = app.dbchat().chatSubscriptions();
 
-    app.chat().modifyMessageByStudent(messageNew);
-    String messageGetTrainer = app.chat().getByTrainerMessageFromStudent("trainer", "111111");
-
+    app.chat().btnOpenChat();
+    app.chat().chooseSecondWithUser();
+    app.lkStudent().sendMessageToTrainer(messageOld);
+    app.chat().btnCloseChat();
+    app.chat().modifyMessageByStudentForTrainer(messageNew);
+    app.check().textElement(app.chat().getTextMessageAlong(), "Пока");
+    app.chat().btnCloseChat();
     ChatMessages afterMessage = app.dbchat().chatMessages();
     ChatRooms afterRooms = app.dbchat().chatRooms();
     ChatSubscriptions afterSubscription = app.dbchat().chatSubscriptions();
 
-    app.check().equalityOfTwoElements(afterMessage.size(), beforeMessage.size());
-    app.check().equalityOfTwoElements(afterRooms.size(), beforeRooms.size());
-    app.check().equalityOfTwoElements(afterSubscription.size(), beforeSubscription.size());
-    app.check().equalityOfTwoElements(messageNew, messageGetTrainer);
+    app.check().equalityOfTwoElements(afterMessage.size(), beforeMessage.size() + 1);
+    app.check().equalityOfTwoElements(afterRooms.size(), beforeRooms.size() + 1);
+    app.check().equalityOfTwoElements(afterSubscription.size(), beforeSubscription.size() + 2);
   }
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().chat();
+    data.clean().chat();
+    app.base().refresh();
   }
 }

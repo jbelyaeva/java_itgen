@@ -5,7 +5,6 @@ package tests.lkTrainer;
 import app.testbase.TestBase;
 import core.general.RunTestAgain;
 import data.services.CommunitiesService;
-import java.util.Date;
 import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -18,28 +17,8 @@ public class TrainerOpenNewCommunity extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    communitiesService.dropCommPostComment();
-    communitiesService.dropCommPost();
-    communitiesService.dropCommunity();
-    String[] tags = {};
-    String[] idManagers = {"666"};
-    String[] idSubscUser = {"666"};
-    Date[] dateSubsc = {new Date()};
-    String[] skills= {"1"};
-    app.trCommunity()
-        .newCommunity(
-            "newCommunity",
-            new Date(),
-            "666",
-            "Сообщество по направлению Scratch. Лучшие проекты.",
-            idManagers,
-            idSubscUser,
-            dateSubsc,
-            1,
-            title,
-            tags,
-            "ru",
-            skills);
+    data.clean().communities();
+    data.community().set6_NewCommunity();
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)

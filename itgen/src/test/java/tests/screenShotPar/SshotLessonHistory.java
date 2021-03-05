@@ -55,6 +55,6 @@ public class SshotLessonHistory extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().taskAndSchedule().finishedLesson();
+    data.clean().student().taskAndSchedule().finishedLesson();
   }
 }

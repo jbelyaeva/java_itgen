@@ -22,14 +22,14 @@ public class ChatSendMessageNewDialogTest extends TestBase {
   String message = "Привет";
 
   @Test(retryAnalyzer = RunTestAgain.class)
-  public void testChatSendMessageNewDialog() {
+  public void testChatSendMessageNewDialog() throws InterruptedException {
 
     ChatMessages beforeMessage = app.dbchat().chatMessages();
     ChatRooms beforeRooms = app.dbchat().chatRooms();
     ChatSubscriptions beforeSubscription = app.dbchat().chatSubscriptions();
 
     app.chat().sendMessage("Тренер", message);
-    String messageGetTrainer = app.chat().getByTrainerMessageFromAdmin("trainer", "111111");
+    //String messageGetTrainer = app.chat().getByTrainerMessageFromAdmin("trainer", "111111");
 
     ChatMessages afterMessage = app.dbchat().chatMessages();
     ChatRooms afterRooms = app.dbchat().chatRooms();
@@ -38,7 +38,7 @@ public class ChatSendMessageNewDialogTest extends TestBase {
     assertThat(afterMessage.size(), equalTo(beforeMessage.size() + 1));
     assertThat(afterRooms.size(), equalTo(beforeRooms.size() + 1));
     assertThat(afterSubscription.size(), equalTo(beforeSubscription.size() + 2));
-    assertThat(message, equalTo(messageGetTrainer));
+    // assertThat(message, equalTo(messageGetTrainer));
   }
 
   @AfterMethod(alwaysRun = true)

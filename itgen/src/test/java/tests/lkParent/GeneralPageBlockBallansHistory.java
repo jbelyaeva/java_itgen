@@ -29,6 +29,6 @@ public class GeneralPageBlockBallansHistory extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().payment();
+    data.clean().payment();
   }
 }

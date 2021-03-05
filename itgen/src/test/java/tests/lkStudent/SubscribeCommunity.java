@@ -13,7 +13,7 @@ public class SubscribeCommunity extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().communities();
+    data.clean().communities();
     data.community().set6_NewCommunity();
   }
 
@@ -27,6 +27,6 @@ public class SubscribeCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().communities();
+    data.clean().communities();
   }
 }

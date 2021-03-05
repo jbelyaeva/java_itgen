@@ -16,7 +16,8 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.newFamilyWithSingleLessons().set1_FamilyAndSingleLesson(period);
+    data.newFamily().set4_FamilyWithFreeStudentAndParent();
+    data.schedules().se29_SingleScheduleWithoutStudent(period);
   }
 
   @Test(retryAnalyzer = RunTestAgain.class)
@@ -24,11 +25,11 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
     String name = "Машина Маша";
     app.goTo().menuSchedule();
     Schedules before = app.dbschedules().schedules();
-    app.schedule().recordStudentOnTrial(name, "newSchedule");
+    app.schedule().recordStudentOnTrial(name, "schedule");
     Schedules after = app.dbschedules().schedules();
 
     app.check().equalityOfTwoElements(after.size(), before.size());
-    data.schedules().set8_TodaySingleScheduleWithStudent(period);
+    data.schedules().set8_TodaySingleScheduleWithStudentOnTrial(period, "schedule", "14");
     Schedules afterNew = app.dbschedules().schedules();
     app.check().equalityOfTwoElements(after, afterNew);
     app.check().findElement(app.schedule().getStudentOnLessonInSchedule());
@@ -37,6 +38,6 @@ public class RecordFreeStudentOnTrialSingleLessonTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().taskAndSchedule().family().parent();
+    data.clean().student().taskAndSchedule().family().parent();
   }
 }

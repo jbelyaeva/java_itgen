@@ -5,10 +5,10 @@ package tests.employers;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import app.testbase.TestBase;
 import data.model.users.WorkerData;
 import data.model.users.Workers;
 import data.services.WorkerService;
-import app.testbase.TestBase;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,19 +20,8 @@ public class WorkerDeletionTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    app.trWorker()
-        .saveNewWorker(
-            "workerDelete",
-            "Маша",
-            "Машина",
-            "employee",
-            "AL",
-            "Europe/Minsk",
-            "ru",
-            "ru",
-            "1234567899",
-            "julja83@list.ru");
-    deletedWorker = workerService.findById("workerDelete");
+    data.newWorker().set1_NewWorker();
+    deletedWorker = workerService.findById("newWorker");
   }
 
   @Test
@@ -40,7 +29,7 @@ public class WorkerDeletionTests extends TestBase {
     app.goTo().menuTasks();
     app.goTo().menuWorkers();
     Workers before = app.db().workers();
-    app.worker().deletionWorker("workerDelete");
+    app.worker().deletionWorker("newWorker");
     Workers after = app.db().workers();
     assertThat(after.size(), equalTo(before.size() - 1));
     assertThat(after, equalTo(before.without(deletedWorker)));
@@ -49,6 +38,6 @@ public class WorkerDeletionTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    workerService.DeleteById("workerDelete");
+    data.clean().worker();
   }
 }

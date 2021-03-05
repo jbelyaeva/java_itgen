@@ -3,6 +3,7 @@ package data.model.users;
 import com.google.gson.annotations.Expose;
 import data.model.usersGeneral.Contacts;
 import data.model.usersGeneral.Emails;
+import data.model.usersGeneral.Services;
 import dev.morphia.annotations.Embedded;
 import dev.morphia.annotations.Entity;
 import dev.morphia.annotations.Id;
@@ -14,9 +15,16 @@ import java.util.Objects;
 
 @Entity("users")
 public class TrainerData {
+
   @Id
   @Property("_id")
   private String id;
+
+  @Property("className")
+  private String className;
+
+  @Property("username")
+  private String username;
 
   @Expose
   @Property("firstName")
@@ -124,6 +132,9 @@ public class TrainerData {
 
   @Property("engLastName")
   private String engLastName;
+
+  @Embedded("services")
+  private Services services;
 
   /* setters */
 

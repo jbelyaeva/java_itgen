@@ -10,7 +10,7 @@ public class RequestService {
   public RequestService() {}
 
   public RequestData DeleteById(String id) {
-    return requestDao.findByIdAndDelete(id);
+    return requestDao.deleteById(id);
   }
 
   public void delete(RequestData request) {
@@ -23,10 +23,6 @@ public class RequestService {
 
   public void drop() {
     requestDao.drop();
-  }
-
-  public <E> void updateFieldClass(String idRequest, String nameFiled, E data) {
-    requestDao.updateFieldClass(idRequest, nameFiled, data);
   }
 
   public void deleteField(String idRequest, String nameField) {

@@ -238,6 +238,10 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
             "noTrial"
         );
     data.studentService().deleteField("newStudent", "services");
+    data.studentService().deleteField("newStudent", "lessonCount");
+    data.studentService().deleteField("newStudent", "lastSubjs");
+    data.studentService().deleteField("newStudent", "usedSubjs");
+    data.studentService().deleteField("newStudent", "finishedLessonsCount");
   }
 
   /**
@@ -571,7 +575,7 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
 
   /**
    * В дефолтную семью добавлен ученик с завершенным пробным вчера занятием c тренером Настей и с
-   * завершенным платным разовым с Небыл тоже с тренером Настей
+   * завершенным платным разовым с Не был тоже с тренером Настей
    */
   public void set16_YesterdayTwoLessonsWasAndAbort_StudentAddInDefaultFamily() {
     String periodFirst = "16:00 - 18:00";
@@ -591,7 +595,7 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
             1,
             "skipped",
             false,
-            "trial",
+            "oneTime",
             false,
             "ru",
             120);
@@ -715,6 +719,45 @@ public class DefaultFamilyStudentsAndSchedules extends TransactionManager {
     data.studentService().deleteField("21", "finishedLessonsCount");
     data.studentService().deleteField("21", "finishedLessonsCountBySkill");
     data.studentService().deleteField("21", "lastSeen");
+  }
+
+  //дефолтный ребенок - после пробного
+  public void set21_DefaultStudent_finishLessonBy1Skil() {
+    trStudent()
+        .changeDefaultStudent_finishLessonBy1Skill(
+            new String[]{"child"},
+            "beginner",
+            "BY",
+            "Europe/Minsk",
+            2,
+            "ru",
+            "ru",
+            "ru",
+            new String[]{"1"},
+            "+9875645311",
+            2,
+            "finishedTrial",//"trialFinished",
+            1,
+            new String[]{"1"},
+            new String[]{"1"},
+            1,
+            120);
+  }
+
+  /**
+   * Есть дефолтная семья дефолтный ученик записан на разовое расписание на завтра к Дефолтномц
+   * тренеру на Scratch
+   *
+   * @period время расписания
+   */
+  public void set22_SingleLessonTomorrowWithDefaultStudent(String period) {
+    trScheduleTomorrow().SingleScheduleWithOneNewStudent(
+        period,
+        "newSchedule",
+        "23",
+        "21",
+        "1",
+        "ru");
   }
 }
 

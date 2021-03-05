@@ -1,6 +1,6 @@
 package tests.lkStudent;
 /* T-262
- * Кейс: создано новое сообщестов (в ensurePreconditions()) без тегов, убедиться, что озданное сообщество отображается
+ * Кейс: создано новое сообщестов (в ensurePreconditions()) без тегов, убедиться, что созданное сообщество отображается
  * в табе Все и его (сообщество) можно открыть. Нет табов Лента и Управление */
 
 import app.testbase.TestBase;
@@ -13,7 +13,7 @@ public class StudentOpenNewCommunity extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    data.postClean().communities();
+    data.clean().communities();
     data.community().set6_NewCommunity();
   }
 
@@ -32,6 +32,6 @@ public class StudentOpenNewCommunity extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().communities();
+    data.clean().communities();
   }
 }

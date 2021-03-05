@@ -37,6 +37,6 @@ public class RecordStudentOnRegularFirst1hScheduleTests extends TestBase {
 
   @AfterMethod(alwaysRun = true)
   public void clean() {
-    data.postClean().student().parent().taskAndSchedule();
+    data.clean().student().parent().taskAndSchedule();
   }
 }

@@ -13,7 +13,7 @@
             <class name="tests.task.TaskAutoGetControlInStack"/>
             <class name="tests.task.TaskManualOnTomorrowInStack"/>
             <class name="tests.task.TaskManualGetControlInStack"/>
-            <class name="tests.task.TaskFiltrByUserInStack"/>
+            <class name="tests.task.TaskFilterByUserInStack"/>
             <!--<class name="TaskFiltrByPriorityInStack"/> -->
             <class name="tests.taskPopup.TaskManualChangeTitle"/>
             <class name="tests.taskPopup.TaskManualChangeAssignee"/>
